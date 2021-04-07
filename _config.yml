@@ -2,16 +2,15 @@
 #   Main Configs   #
 # ---------------- #
 baseurl:
-url: https://mazhuang.org
+url: https://winsoft666.github.io/
 date_format: "ordinal"
-title: 码志
+title: Windows Software 666
 subtitle: ""
 description: "winsoft666博客"
 keywords: winsoft666, cpp
 timezone: Asia/Shanghai
 encoding: "utf-8"
 side_bar_repo_limit: 5
-repository: mzlogin/mzlogin.github.io
 
 # 对 css 和 js 资源的 cdn 加速配置
 cdn:
@@ -26,7 +25,7 @@ components:
     # 不蒜子访问统计
     busuanzi:
         enabled: true
-        start_date: 2020-05-03
+        start_date: 2021-04-06
     # My Popular Repositories
     side_bar_repo:
         enabled: true
