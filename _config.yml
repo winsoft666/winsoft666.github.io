@@ -1,13 +1,24 @@
-title: winsoft666
-description: Keep Simple
-show_downloads: false
-google_analytics:
-theme: jekyll-theme-cayman
+# ---------------- #
+#   Main Configs   #
+# ---------------- #
+baseurl:
+url: https://mazhuang.org
+date_format: "ordinal"
+title: 码志
+subtitle: ""
+description: "winsoft666博客"
+keywords: winsoft666, cpp
+timezone: Asia/Shanghai
+encoding: "utf-8"
+side_bar_repo_limit: 5
+repository: mzlogin/mzlogin.github.io
 
+# 对 css 和 js 资源的 cdn 加速配置
 cdn:
     jsdelivr:
         enabled: true
-
+        
+# 可选组件配置
 components:
     # 分享
     share:
@@ -23,13 +34,22 @@ components:
     # 文章字数统计
     word_count:
         enabled: true
-
+# 压缩页面内容
 compress_html:
   clippings: all
   comments: ["<!--", "-->"]
-  
 # 代码高亮风格，支持的 theme 列表见 https://github.com/mzlogin/rouge-themes
 highlight_theme: github
+
+# ---------------- #
+#      Author      #
+# ---------------- #
+author: Jeffery Jiang
+organization: 
+organization_url: 
+github_username: winsoft666
+location: Wuhan, China
+email: winsoft666@outlook.com
 
 # ---------------- #
 #    Navigation    #
@@ -62,3 +82,60 @@ navs:
   -
     href: /about/
     label: 关于
+
+# ---------------- #
+#       RSS        #
+# ---------------- #
+subscribe_rss: /feed.xml
+
+# ---------------- #
+#      Jekyll      #
+# ---------------- #
+markdown: kramdown
+kramdown:
+    input: GFM
+highlighter: rouge
+paginate: 10
+lsi: false
+quiet: false
+excerpt_separator: "\n\n"
+permalink: /:year/:month/:day/:title/
+plugins:
+    - jekyll-github-metadata
+    - rouge
+#     - jekyll-html-pipeline
+    - jekyll-paginate
+    - jekyll-sitemap
+    - jekyll-feed
+    - jemoji
+#     - jekyll-mentions
+collections:
+    wiki:
+        output: true
+        permalink: /wiki/:path/
+
+# ---------------- #
+#      Comments    #
+# ---------------- #
+# support provider: disqus, gitment, gitalk
+comments_provider: gitalk
+# !!!重要!!! 请修改下面这些信息为你自己申请的
+# !!!Important!!! Please modify infos below to yours
+
+# https://imsun.net/posts/gitment-introduction/
+gitment:
+    owner: winsoft666
+    repo: blog-comments
+    oauth:
+        client_id: 7cea849ef6bf5c86af3f
+        client_secret: cdedb6f3e63f0ce1896045bed651b4d713f165c2
+
+# ---------------- #
+#      Search      #
+# ---------------- #
+simple_jekyll_search:
+    # 是否支持全文搜索
+    fulltext: false
+    # 最多显示多少条搜索结果
+    limit: 10
+
