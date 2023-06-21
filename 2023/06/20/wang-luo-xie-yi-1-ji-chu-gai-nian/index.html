@@ -508,7 +508,7 @@
 <p>文章图片带有“CSDN”水印的说明：<br>由于该文章和图片最初发表在我的<a target="_blank" rel="noopener" href="https://blog.csdn.net/china_jeffery">CSDN博客</a>中，因此图片被CSDN自动添加了水印。</p>
 </blockquote>
 <hr>
-<h1 id="一、TCP-x2F-IP协议栈"><a href="#一、TCP-x2F-IP协议栈" class="headerlink" title="一、TCP/IP协议栈"></a>一、TCP/IP协议栈</h1><p><img src="https://static.1key.run/blog/wangluoxieyi-jichugailian-1.jpg"></p>
+<h1 id="一、TCP-x2F-IP协议栈"><a href="#一、TCP-x2F-IP协议栈" class="headerlink" title="一、TCP/IP协议栈"></a>一、TCP/IP协议栈</h1><p><img src="https://static.1key.run/blog/img/wangluoxieyi-jichugailian-1.jpg"></p>
 <h1 id="二、IP地址、子网掩码、网关"><a href="#二、IP地址、子网掩码、网关" class="headerlink" title="二、IP地址、子网掩码、网关"></a>二、IP地址、子网掩码、网关</h1><h2 id="2-1-IP地址及分类"><a href="#2-1-IP地址及分类" class="headerlink" title="2.1 IP地址及分类"></a>2.1 IP地址及分类</h2><p>IP地址相当于互联网上的门牌号, 计算机在启动的时候可以从磁盘（无盘系统例外）上读取该主机的IP配置。IP地址由4个字节（也就是32位）的二进制码组成，包含了<code>网络号( net-id )</code>和<code>主机号( host-id )</code>。但现实中，我们经常还需要再继续划分<code>“子网”</code>，这时就需要借用主机号的一部分充任子网号，这样IP地址也就可以看成由<code>标准网络号、子网号、主机号</code>3部分组成的了，即<code>IP地址=标准网络号+子网号+主机号</code>。</p>
 <blockquote>
 <p>网络号、子网号、主机号三者间的关系，形象的描述如下：假设你的住址IP是<code>武汉市文治街16号</code>，那么，<br>IP地址 = 武汉市文治街16号<br>网络号 = 武汉市<br>子网号 = 文治街<br>主机号 = 16号</p>
@@ -592,7 +592,7 @@
 <h2 id="2-3-子网掩码"><a href="#2-3-子网掩码" class="headerlink" title="2.3 子网掩码"></a>2.3 子网掩码</h2><p><code>IP地址=标准网络号+子网号+主机号</code>。从IP分类可以很容易确定“标准网络号”，<code>32bit</code>的IP地址除去前面的“标准网络号”之后，剩下的就是“子网号”和“主机号”，那么怎么确定“子网号”和“主机号”了？ 这就需要借助<code>“子网掩码”</code>了。子网掩码也是一个32bit(<code>xxx.xxx.xxx.xxx</code>)的值，其中值为1的bit留给“标准网络号”和“子网号”，为0的bit留给“主机号”。我们可以将子网掩码和IP地址进行二进制<code>“与运算”</code>，通过得到的结果来确定“子网号”。</p>
 <p>以C类IP地址为例，对于规范的C类IP地址来说，规范子网掩码为<code>255.255.255.0</code>，即用32比特IP地址的前24比特标识网络号，后8比特标识主机号。因而，每个C类网络下共可容纳254台主机($2^8-2$)。 如今，我们先思索借用2比特的主机号来充任子网络号的情形。</p>
 <p>C类网络地址<code>210.31.233.0</code>，我们借用2bit的主机号来充当子网号，子网的数目为$2^2-2$(子网号无法全为0或1，所以减2).</p>
-<p><img src="https://static.1key.run/blog/wangluoxieyi-jichugailian-2.jpg"></p>
+<p><img src="https://static.1key.run/blog/img/wangluoxieyi-jichugailian-2.jpg"></p>
 <p>为了借用原来8位主机号中的前2位充任子网络号，采用了新的非规范子网掩255.255.255.192。<br>采用了新的子网掩码后，借用的2位子网号可以用来标识两个子网：01子网和10子网(子网号无法全为0或1，因而00、11子网无法用)。 </p>
 <p><strong>对于上图的01子网来说</strong>，其网络号的点分十进制的方式为：<code>210.31.233.64</code>，该子网的最小IP地址为：<code>210.31.233.65</code>，最大IP地址为：<code>210.31.233.126</code>（主机号全为1位广播地址），共可容纳62台主机。对该子网的直接广播地址为：<code>210.31.233.127</code>（主机号全为1）。</p>
 <blockquote>
@@ -602,9 +602,9 @@
 <h1 id="三、包的封装与解封装"><a href="#三、包的封装与解封装" class="headerlink" title="三、包的封装与解封装"></a>三、包的封装与解封装</h1><blockquote>
 <p>封装英文：Encapsulation<br>解封装英文：Demultiplexing</p>
 </blockquote>
-<p>当应用程序使用网络传送数据时，数据按照协议栈从上到下的顺序，逐次通过每一层。其中每一层对收到的数据都要增加一些首部信息（有时还增加尾部信息）。最终生成一串比特流通过以太网来传输，我们称这串比特流叫帧。<br>如图：<br><img src="https://static.1key.run/blog/wangluoxieyi-jichugailian-3.jpg"></p>
-<p><strong>当数据报到达链路层时</strong>，链路层也要对IP数据包封装进行包装。链路层也要对IP数据包封装的方式主要有<code>以太网IP数据包封装</code>（RFC894）、<code>IEEE 802 IP数据报封装</code>（RFC1042）两种，最常使用的封装格式是以太网IP数据包封装（RFC894）。下图显示了这两种不同形式的封装格式：<br><img src="https://static.1key.run/blog/wangluoxieyi-jichugailian-4.jpg"><br>从图中可以看到<code>以太网封装</code>限制了数据帧的最大长度为1500字节，这个限制叫做MTU，最大传输单元（详见第四节）。</p>
-<p>接收端收到帧之后，按照和上面相反的顺序（协议栈从下到上）来解包，依次解析每一层加入的头部（或尾部），最终将原始数据传给最上层应用程序。<br>如图：<br><img src="https://static.1key.run/blog/wangluoxieyi-jichugailian-5.jpg"></p>
+<p>当应用程序使用网络传送数据时，数据按照协议栈从上到下的顺序，逐次通过每一层。其中每一层对收到的数据都要增加一些首部信息（有时还增加尾部信息）。最终生成一串比特流通过以太网来传输，我们称这串比特流叫帧。<br>如图：<br><img src="https://static.1key.run/blog/img/wangluoxieyi-jichugailian-3.jpg"></p>
+<p><strong>当数据报到达链路层时</strong>，链路层也要对IP数据包封装进行包装。链路层也要对IP数据包封装的方式主要有<code>以太网IP数据包封装</code>（RFC894）、<code>IEEE 802 IP数据报封装</code>（RFC1042）两种，最常使用的封装格式是以太网IP数据包封装（RFC894）。下图显示了这两种不同形式的封装格式：<br><img src="https://static.1key.run/blog/img/wangluoxieyi-jichugailian-4.jpg"><br>从图中可以看到<code>以太网封装</code>限制了数据帧的最大长度为1500字节，这个限制叫做MTU，最大传输单元（详见第四节）。</p>
+<p>接收端收到帧之后，按照和上面相反的顺序（协议栈从下到上）来解包，依次解析每一层加入的头部（或尾部），最终将原始数据传给最上层应用程序。<br>如图：<br><img src="https://static.1key.run/blog/img/wangluoxieyi-jichugailian-5.jpg"></p>
 <p>因为传输层的TCP、UDP、ICMP等都有可能向网络层IP协议传送数据，这样在IP协议层解包的时候，需要知道这个包对应的上层协议是哪一个，因此IP协议必须在生成的IP首部加入某种标识，以表明数据的上一层的具体协议。为此，IP在首部中存入了一个长度为8bit的数值，称作协议域。常见的IP协议号有：<br>1表示ICMP协议，2表示IGMP协议，6表示TCP协议，17表示UDP协议。</p>
 <blockquote>
 <p>完整的IP协议号见：<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/IP%E5%8D%8F%E8%AE%AE%E5%8F%B7%E5%88%97%E8%A1%A8">IP协议号列表</a></p>
@@ -613,7 +613,7 @@
 <h3 id="windows系统修改MTU值"><a href="#windows系统修改MTU值" class="headerlink" title="windows系统修改MTU值"></a>windows系统修改MTU值</h3><ul>
 <li><p>查询当前MTU值</p>
 <pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">netsh interface ipv4 show subinterfaces<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-<p><img src="https://static.1key.run/blog/wangluoxieyi-jichugailian-6.jpg"></p>
+<p><img src="https://static.1key.run/blog/img/wangluoxieyi-jichugailian-6.jpg"></p>
 </li>
 <li><p>修改MTU值</p>
 <pre class="line-numbers language-none"><code class="language-none">netsh interface ipv4 set subinterface "本地连接" mtu=1480 store=persistent<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>

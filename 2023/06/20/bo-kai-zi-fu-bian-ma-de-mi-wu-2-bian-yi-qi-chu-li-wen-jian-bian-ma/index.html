@@ -500,7 +500,7 @@
 <p>文章图片带有“CSDN”水印的说明：<br>由于该文章和图片最初发表在我的<a target="_blank" rel="noopener" href="https://blog.csdn.net/china_jeffery">CSDN博客</a>中，因此图片被CSDN自动添加了水印。</p>
 </blockquote>
 <hr>
-<h1 id="一-Visual-Studio字符集"><a href="#一-Visual-Studio字符集" class="headerlink" title="一. Visual Studio字符集"></a>一. Visual Studio字符集</h1><p>使用Visual Studio创建的C++工程可以在工程属性<code>配置属性--&gt;常规</code>中配置字符集：<code>使用Unicode字符集</code>（默认）、<code>使用多字节字符集</code>。<br>如图：<br><img src="https://static.1key.run/blog/byqrhclzfbm-1.jpg"></p>
+<h1 id="一-Visual-Studio字符集"><a href="#一-Visual-Studio字符集" class="headerlink" title="一. Visual Studio字符集"></a>一. Visual Studio字符集</h1><p>使用Visual Studio创建的C++工程可以在工程属性<code>配置属性--&gt;常规</code>中配置字符集：<code>使用Unicode字符集</code>（默认）、<code>使用多字节字符集</code>。<br>如图：<br><img src="https://static.1key.run/blog/img/byqrhclzfbm-1.jpg"></p>
 <p>但<strong>这个设置项不会对编译器处理字符编码产生直接的影响</strong>（注意这里的“直接”二字，第3节会说到），只会在工程属性<code>配置属性--&gt;C/C++--&gt;预处理器</code>加入相应的宏：</p>
 <pre class="line-numbers language-none"><code class="language-none">使用Unicode字符集 --&gt; _UNICODE和UNICODE宏
 使用多字节字符集   --&gt; _MBCS宏<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
@@ -526,7 +526,7 @@
 <li>对于宽字符串（即C/C++中以<code>L</code>标记的串，如<code>L"abc"</code>, <code>L'中'</code>），<code>执行字符集</code>为UTF-16编码。</li>
 <li>对于窄字符串（和宽字符串对应，即不以<code>L</code>标记的串），<code>执行字符集</code>为系统当前的代码页。</li>
 </ul>
-<p><img src="https://static.1key.run/blog/byqrhclzfbm-2.jpg"></p>
+<p><img src="https://static.1key.run/blog/img/byqrhclzfbm-2.jpg"></p>
 <p>现在我们就可以说清楚Visual Studio字符集设置、char、wchar_t是如何<em><strong>间接</strong></em>影响到编译器对字符编码的处理了：</p>
 <pre class="line-numbers language-none"><code class="language-none">Visual Studio字符集设置
       |

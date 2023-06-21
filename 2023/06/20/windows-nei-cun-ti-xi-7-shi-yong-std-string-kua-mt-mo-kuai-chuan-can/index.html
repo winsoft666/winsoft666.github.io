@@ -505,7 +505,7 @@
 </blockquote>
 <hr>
 <p>前面的<a href="/2023/06/20/windows-nei-cun-ti-xi-6-kua-mo-kuai-nei-cun-fen-pei-shi-fang/" title="Windows内存体系(6)--跨模块内存分配释放">Windows内存体系(6)--跨模块内存分配释放</a>文章解释了跨MT模块分配的内存相互释放为什么会崩溃的问题。</p>
-<h2 id="一、问题描述"><a href="#一、问题描述" class="headerlink" title="一、问题描述"></a>一、问题描述</h2><p>这篇文章主要介绍我们在实际开发中经常遇到的一个问题：针对MT模块定义接口函数时，接口参数使用<code>std::string</code>类型，在程序运行时遇到<code>"Debug Assertioni Failed"</code>错误的问题。<br><img src="https://static.1key.run/blog/windows-nctx-stdstring-mt-1.jpg"></p>
+<h2 id="一、问题描述"><a href="#一、问题描述" class="headerlink" title="一、问题描述"></a>一、问题描述</h2><p>这篇文章主要介绍我们在实际开发中经常遇到的一个问题：针对MT模块定义接口函数时，接口参数使用<code>std::string</code>类型，在程序运行时遇到<code>"Debug Assertioni Failed"</code>错误的问题。<br><img src="https://static.1key.run/blog/img/windows-nctx-stdstring-mt-1.jpg"></p>
 <p>上面的错误提示是<code>debug_heap.cpp</code>文件中的一个调试断言（<code>release模式</code>下调用的是<code>heap.cpp</code>中的分配函数），用于判断指针是否指向堆分配的内存块的第一块。在release模式下不会弹出这样的断言错误，程序可能会直接崩溃（崩溃相对来说还比较好排查），或者出现其他不可预料的、难以排查的错误。</p>
 <h2 id="二、实例"><a href="#二、实例" class="headerlink" title="二、实例"></a>二、实例</h2><p>现有<code>DLLUser.exe</code>调用<code>DLL.dll</code>中的<code>TestFun</code>函数，代码量非常小：</p>
 <h4 id="DLL-dll中TestFun函数定义："><a href="#DLL-dll中TestFun函数定义：" class="headerlink" title="DLL.dll中TestFun函数定义："></a><code>DLL.dll</code>中<code>TestFun</code>函数定义：</h4><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">DLL_API void TestFun( std::string str)
@@ -524,7 +524,7 @@
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>上面的代码运行之后程序就会弹出错误断言。原因是<code>std::string</code>在进行<code>值传参</code>的过程中会执行一次深拷贝，即：在堆上分配内存块，拷贝“test”到内存块中，然后将临时形参<code>std::string</code>对象传递到dll中，dll中的<code>TestFun</code>函数在作用域结束后对临时形参进行释放时就出现了错误，因为尝试在<code>dll的crt堆</code>中释放由在<code>exe的crt堆</code>中分配的内存块。</p>
-<p><img src="https://static.1key.run/blog/windows-nctx-stdstring-mt-2.jpg"></p>
+<p><img src="https://static.1key.run/blog/img/windows-nctx-stdstring-mt-2.jpg"></p>
 <h2 id="三、自定义std-allocator解决崩溃"><a href="#三、自定义std-allocator解决崩溃" class="headerlink" title="三、自定义std::allocator解决崩溃"></a>三、自定义<code>std::allocator</code>解决崩溃</h2><p>通过上面问题的分析，加上前面几篇文章对Windows内存体系的介绍，我们不难想出解决方案，其中一种方案就是让<code>std::string</code>统一在进程的默认堆上分配内存块，而不是在各个模块的<code>crt堆</code>上分配。</p>
 <pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;windows.h&gt;
 #include &lt;string&gt;

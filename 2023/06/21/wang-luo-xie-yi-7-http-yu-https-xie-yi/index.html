@@ -524,15 +524,15 @@
 <pre class="line-numbers language-TXT" data-language="TXT"><code class="language-TXT">URI = Uniform Resource Identifier 统一资源标识符
 URL = Uniform Resource Locator    统一资源定位符
 URN = Universal Resource Name     统一资源名称<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-<p>三者关系如下图：<br><img src="https://static.1key.run/blog/wangluoxieyi-http-1.png"></p>
+<p>三者关系如下图：<br><img src="https://static.1key.run/blog/img/wangluoxieyi-http-1.png"></p>
 <p><code>URI</code>用来唯一标识符来标识一个资源，是一个通用的概念，<code>URI</code>由<code>URL</code>和<code>URN</code>两个子集组成。</p>
 <p><code>URL</code>通过描述资源的位置来标识资源。</p>
 <p><code>URN</code>通过资源的名字来标识资源，与其所处的位置无关，这样即使资源的位置发生变动，其<code>URN</code>也不会变化。</p>
 <p>HTTP规范将更通用的概念URI作为其资源标识符，但是实际上，HTTP应用程序处理的只是URI的URL子集.</p>
-<h2 id="2-2-消息请求格式"><a href="#2-2-消息请求格式" class="headerlink" title="2.2 消息请求格式"></a>2.2 消息请求格式</h2><p><img src="https://static.1key.run/blog/wangluoxieyi-http-2.png"></p>
+<h2 id="2-2-消息请求格式"><a href="#2-2-消息请求格式" class="headerlink" title="2.2 消息请求格式"></a>2.2 消息请求格式</h2><p><img src="https://static.1key.run/blog/img/wangluoxieyi-http-2.png"></p>
 <h2 id="2-3-HTTP常见的请求方法"><a href="#2-3-HTTP常见的请求方法" class="headerlink" title="2.3 HTTP常见的请求方法"></a>2.3 HTTP常见的请求方法</h2><p>HTTP消息请求的第一个字段就是“请求方法”，HTTP 1.1 中定义的几种常见的请求方法如下（<strong>只列出了常用的</strong>）：</p>
 <ul>
-<li>GET<br>向服务器获取数据。使用GET请求方法时，消息Body中没有“请求数据”（见上面消息格式的图）部分，所以将需要提交到服务器的数据放在URL中，因此能够提交到服务器的数据会受到URL长度的限制。<br><img src="https://static.1key.run/blog/wangluoxieyi-http-3.png"></li>
+<li>GET<br>向服务器获取数据。使用GET请求方法时，消息Body中没有“请求数据”（见上面消息格式的图）部分，所以将需要提交到服务器的数据放在URL中，因此能够提交到服务器的数据会受到URL长度的限制。<br><img src="https://static.1key.run/blog/img/wangluoxieyi-http-3.png"></li>
 </ul>
 <pre class="line-numbers language-TXT" data-language="TXT"><code class="language-TXT"> 各个浏览器对URL长度的限制如下（这些限制值可能随着浏览器的版本的更新而发生改变，仅供参考）：
 1. IE浏览器（Microsoft Internet Explorer） 对URL长度限制是2083（2K+53），超过这个限制，则自动截断（若是form提交则提交按钮不起作用）。
@@ -545,10 +545,10 @@ Safari对URL长度限制是80000字符。
 5. Opera
 Opera浏览器对URL长度限制是190000 字符。<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
-<li>POST<br>向服务器提交数据（例如提交表单或者上传文件）。提交的数据包含在Body中。<br><img src="https://static.1key.run/blog/wangluoxieyi-http-4.png"></li>
+<li>POST<br>向服务器提交数据（例如提交表单或者上传文件）。提交的数据包含在Body中。<br><img src="https://static.1key.run/blog/img/wangluoxieyi-http-4.png"></li>
 </ul>
-<h1 id="三、HTTP消息响应"><a href="#三、HTTP消息响应" class="headerlink" title="三、HTTP消息响应"></a>三、HTTP消息响应</h1><h2 id="3-1-消息响应格式"><a href="#3-1-消息响应格式" class="headerlink" title="3.1 消息响应格式"></a>3.1 消息响应格式</h2><p><img src="https://static.1key.run/blog/wangluoxieyi-http-5.png"></p>
-<p><img src="https://static.1key.run/blog/wangluoxieyi-http-6.png"></p>
+<h1 id="三、HTTP消息响应"><a href="#三、HTTP消息响应" class="headerlink" title="三、HTTP消息响应"></a>三、HTTP消息响应</h1><h2 id="3-1-消息响应格式"><a href="#3-1-消息响应格式" class="headerlink" title="3.1 消息响应格式"></a>3.1 消息响应格式</h2><p><img src="https://static.1key.run/blog/img/wangluoxieyi-http-5.png"></p>
+<p><img src="https://static.1key.run/blog/img/wangluoxieyi-http-6.png"></p>
 <h2 id="3-2-HTTP状态码"><a href="#3-2-HTTP状态码" class="headerlink" title="3.2 HTTP状态码"></a>3.2 HTTP状态码</h2><p>状态代码由三位数字组成，第一个数字定义了响应的类别，共分五种类别:</p>
 <pre class="line-numbers language-TXT" data-language="TXT"><code class="language-TXT">1xx消息—— 请求已被服务器接收，继续处理
 2xx成功 —— 请求已成功被服务器接收、理解、并接受
@@ -569,7 +569,7 @@ Opera浏览器对URL长度限制是190000 字符。<span aria-hidden="true" clas
 <p>关于HTTP状态码的完整定义见：<a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc2616#page-39">https://tools.ietf.org/html/rfc2616#page-39</a></p>
 </blockquote>
 <h1 id="四、HTTPS之密码学基础"><a href="#四、HTTPS之密码学基础" class="headerlink" title="四、HTTPS之密码学基础"></a>四、HTTPS之密码学基础</h1><h2 id="4-1-对称加密算法"><a href="#4-1-对称加密算法" class="headerlink" title="4.1 对称加密算法"></a>4.1 对称加密算法</h2><p>对称加密算法（英文：<code>Symmetric-key algorithm</code>）是指密码学中的一类加密算法，又称为：私钥加密、共享密钥加密。这类算法在加密和解密时使用相同的<strong>密钥</strong>（或者这2个密钥可以通过简单的规则相互推算）。<br>“对称加密算法”比“非对称加密算法”速度更快，但对称加密算法的主要缺点在于要求加密和解密的双方获取相同的密钥，这样只要密钥被泄漏，则密文将不再安全。</p>
-<p><img src="https://static.1key.run/blog/wangluoxieyi-http-7.png"></p>
+<p><img src="https://static.1key.run/blog/img/wangluoxieyi-http-7.png"></p>
 <p>常见的对称加密算法有：</p>
 <ul>
 <li>DES: <code>Data Encryption Standard</code>, 数据加密标准，速度较快，适用于加密大量数据的场合。</li>
@@ -584,7 +584,7 @@ Opera浏览器对URL长度限制是190000 字符。<span aria-hidden="true" clas
 <p>“私钥”一般都是自己保留，不透露给他人；而“公钥”可以公开给他人。</p>
 <p>“非对称加密算法”比“对称加密算法”安全性更高，不用担心加密密钥的泄漏，因为“公钥”是公开的，不存在泄漏。但“私钥”还是要保存妥当，不能泄露给他人，因为我们不需要在网络上传输“私钥”，所以“私钥”泄露的可能性会小很多。</p>
 <p>但是“非对称加密算法”比“对称加密算法”的运算速度慢很多，一般在数据量比较少的时候采用“非对称加密算法”。</p>
-<p><img src="https://static.1key.run/blog/wangluoxieyi-http-8.jpg"></p>
+<p><img src="https://static.1key.run/blog/img/wangluoxieyi-http-8.jpg"></p>
 <p>如上图，因为李四的“公钥”是公开的，所以张三要给李四发送信息，可以使用李四的“公钥”来加密信息。李四收到密文信息之后就可以使用自己的“私钥”来解密信息。因为其他人没有李四的“私钥”，所以就算密文信息被他人截获也无法解密。</p>
 <p>常见的非对称加密算法有：</p>
 <ul>
@@ -621,7 +621,7 @@ openssl rsa -in d:\rsa_private.pem -pubout -out d:\ca_public.pem<span aria-hidde
 <li>证明该文件（或信息）没有被他人篡改过。</li>
 </ol>
 <p>其实，我们生活中手写签名的纸质合同也是通过各种形式达到上面2个效果（如：合同一式多份，每份合同都有双方签名等）。</p>
-<p>数字签名利用了“非对称加密算法”，签名和验证签名的过程如下图（图中的“认证”部分不是数字签名必须的，在“数字证书”部分会介绍）：<br><img src="https://static.1key.run/blog/wangluoxieyi-http-9.jpg"></p>
+<p>数字签名利用了“非对称加密算法”，签名和验证签名的过程如下图（图中的“认证”部分不是数字签名必须的，在“数字证书”部分会介绍）：<br><img src="https://static.1key.run/blog/img/wangluoxieyi-http-9.jpg"></p>
 <p>假设“李四”要发送一份数据给“张三”：<br>发送者“李四”对数据生成摘要信息（<code>摘要明文A</code>），然后使用<code>“李四”的“私钥”</code>加密摘要信息；接收者“张三”收到加密的摘要信息之后：</p>
 <ol>
 <li><p>使用<code>“李四”的“公钥”</code>对加密的摘要信息进行解密。若能解密则证明签名是由“李四”所签，这是因为只有<code>“李四”的“私钥”</code>加密的数据才能由<code>“李四”的“公钥”</code>解密，而又只有“李四”才有<code>“李四”的“私钥”</code>。</p>
@@ -645,7 +645,7 @@ openssl rsa -in d:\rsa_private.pem -pubout -out d:\ca_public.pem<span aria-hidde
 </ul>
 <p>公钥基础设施（<code>public key infrastructure</code>, 简称<code>KPI</code>）就是为了解决这个问题而建立的。<code>PKI</code>的目标就是为了实现不同成员在不见面的情况下进行安全通信的，我们当前采用的PKI模型是基于可信的第三方机构，也就是“证书颁发机构”（<code>certification authority</code>，简称<code>CA</code>）签发的证书。证书中存储了使用“证书颁发机构”的私钥加密之后的申请者的公钥信息。</p>
 <h2 id="5-2-1-数字证书的申请"><a href="#5-2-1-数字证书的申请" class="headerlink" title="5.2.1 数字证书的申请"></a>5.2.1 数字证书的申请</h2><p>数字证书需要向“证书颁发机构”提交申请，并通过审核之后才能颁发。因为数字证书中存储的是申请者的公钥，所以如果申请者的私钥丢失或泄漏，就需要向“证书颁发机构”申请注销该证书。</p>
-<p><code>Web服务器</code>向<code>CA</code>申请证书的流程大致如图：<br><img src="https://static.1key.run/blog/wangluoxieyi-http-10.jpg"></p>
+<p><code>Web服务器</code>向<code>CA</code>申请证书的流程大致如图：<br><img src="https://static.1key.run/blog/img/wangluoxieyi-http-10.jpg"></p>
 <p>“证书”中主要包含了经过<code>“证书颁发机构”的私钥</code>加密过后的<code>申请者的“公钥”</code>、<code>“证书有效期”</code>、<code>“申请者信息（如域名等）”</code>。更详细的信息，可以参考《HTTPS权威指南》第3.3.1章节。</p>
 <h2 id="5-2-2-数字证书的验证"><a href="#5-2-2-数字证书的验证" class="headerlink" title="5.2.2 数字证书的验证"></a>5.2.2 数字证书的验证</h2><p>以“Chrome浏览器”为例：<br>浏览器会内置各大著名的“证书颁发机构”的<code>“公钥”</code>，当收到Web服务器返回的<code>“服务器证书”</code>后，Chrome会尝试使用内置的该“证书颁发机构”的<code>“公钥”</code>来解密该证书，如果能解密则说明该证书是“证书颁发机构”颁发的，且没有被篡改过的。然后通过解密所得的“域名”、“证书有效期”来校验该证书是否为该网站所有，是否过期等。</p>
 <blockquote>
@@ -653,15 +653,15 @@ openssl rsa -in d:\rsa_private.pem -pubout -out d:\ca_public.pem<span aria-hidde
 </blockquote>
 <h1 id="六、HTTPS"><a href="#六、HTTPS" class="headerlink" title="六、HTTPS"></a>六、HTTPS</h1><p>在HTTP请求过程中，客户端与服务端之前没有进行身份确认，而且传输的数据都没有加密处理，所以很容易被劫持和篡改。</p>
 <p>基于HTTP协议的这些弊端，后面就出现了<code>HTTPS</code>（<strong>严格的说，HTTPS并不是一个协议，所以前面文章都没有使用“HTTPS协议”</strong>），HTTPS是基于<code>SSL/TSL</code>协议的，说白了就是<code>HTTP+SSL/TSL</code>，可以把HTTPS大致理解为<code>“HTTP Over SSL”</code>或者<code>“HTTP Over TSL”</code>。</p>
-<p>HTTP, SSL/TSL, HTTPS的关系如下图：<br><img src="https://static.1key.run/blog/wangluoxieyi-http-11.jpg"></p>
-<h2 id="6-1-SSL-x2F-TSL协议"><a href="#6-1-SSL-x2F-TSL协议" class="headerlink" title="6.1 SSL/TSL协议"></a>6.1 SSL/TSL协议</h2><h3 id="6-1-1-SSL"><a href="#6-1-1-SSL" class="headerlink" title="6.1.1 SSL"></a>6.1.1 SSL</h3><p>SSL（英文：<code>Secure Sockets Layer</code>的缩写）中文叫“安全套接层”。最开始由NetScape公司研发，用以保障互联网上数据传输的安全，利用数据加密技术确保数据在网络上之传输过程中不会被截取及窃听。<br>SSL协议在TCP/IP协议栈中位于<code>传输层</code>和<code>应用层</code>之间。以<code>HTTPS</code>为例，SSL协议就位于TCP和HTTP之间：<br><img src="https://static.1key.run/blog/wangluoxieyi-http-12.gif"></p>
+<p>HTTP, SSL/TSL, HTTPS的关系如下图：<br><img src="https://static.1key.run/blog/img/wangluoxieyi-http-11.jpg"></p>
+<h2 id="6-1-SSL-x2F-TSL协议"><a href="#6-1-SSL-x2F-TSL协议" class="headerlink" title="6.1 SSL/TSL协议"></a>6.1 SSL/TSL协议</h2><h3 id="6-1-1-SSL"><a href="#6-1-1-SSL" class="headerlink" title="6.1.1 SSL"></a>6.1.1 SSL</h3><p>SSL（英文：<code>Secure Sockets Layer</code>的缩写）中文叫“安全套接层”。最开始由NetScape公司研发，用以保障互联网上数据传输的安全，利用数据加密技术确保数据在网络上之传输过程中不会被截取及窃听。<br>SSL协议在TCP/IP协议栈中位于<code>传输层</code>和<code>应用层</code>之间。以<code>HTTPS</code>为例，SSL协议就位于TCP和HTTP之间：<br><img src="https://static.1key.run/blog/img/wangluoxieyi-http-12.gif"></p>
 <h3 id="6-1-2-TLS"><a href="#6-1-2-TLS" class="headerlink" title="6.1.2 TLS"></a>6.1.2 TLS</h3><p>TLS（英文：<code>Transport Layer Security</code>的缩写）中文叫“传输层安全协议”，<code>TLS 1.0</code>是IETF（Internet Engineering Task Force，Internet工程任务组）制定的一种新的协议，它建立在<code>SSL 3.0协议</code>规范之上，是<code>SSL 3.0</code>的后续版本，可以理解为SSL 3.1，它定义在<a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc5246">RFC5246</a>中。</p>
 <p>因为TLS是基于SSL 3.0的，所以也可以认为TLS是SSL的加强版。</p>
 <p><strong>我们一般将二者并称为<code>SSL/TSL协议</code>，因为这二者可以视为同一个产品的不同阶段。</strong></p>
 <h2 id="6-2-SSL-x2F-TSL协议的握手过程"><a href="#6-2-SSL-x2F-TSL协议的握手过程" class="headerlink" title="6.2 SSL/TSL协议的握手过程"></a>6.2 SSL/TSL协议的握手过程</h2><blockquote>
 <p>在了解SSL/TSL协议的握手过程之前，需要先阅读关于HTTPS的前几篇文章，对相关预备知识有所了解。</p>
 </blockquote>
-<p><img src="https://static.1key.run/blog/wangluoxieyi-http-13.jpg"></p>
+<p><img src="https://static.1key.run/blog/img/wangluoxieyi-http-13.jpg"></p>
 <p>参考上面的流程图，握手过程可以分为4个步骤：</p>
 <p>1).  客户端发送Client Hello请求到服务端，包含如下内容：</p>
 <ul>

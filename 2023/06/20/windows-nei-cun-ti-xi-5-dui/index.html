@@ -586,7 +586,7 @@ int __cdecl _heap_init (void)
 <li><code>HeapLock</code>或<code>HeapUnLock</code> — 控制堆操作的内存访问</li>
 <li><code>HeapWalk</code> — 列举一个堆内部的内存项和区域。</li>
 </ul>
-<h2 id="五、Windows内存管理API分层结构"><a href="#五、Windows内存管理API分层结构" class="headerlink" title="五、Windows内存管理API分层结构"></a>五、Windows内存管理API分层结构</h2><p><img src="https://static.1key.run/blog/windows-nctx-dui-1.gif"></p>
+<h2 id="五、Windows内存管理API分层结构"><a href="#五、Windows内存管理API分层结构" class="headerlink" title="五、Windows内存管理API分层结构"></a>五、Windows内存管理API分层结构</h2><p><img src="https://static.1key.run/blog/img/windows-nctx-dui-1.gif"></p>
 <p>从上图可以看到，虚拟内存机制（<code>Virtual Memory</code>）是windows内存体系的基础，无论你是使用<code>堆</code>，还是使用<code>内存映射文件</code>，它们的底层都是基于虚拟内存来实现的。</p>
 <p>从上往下，每一层的API在内部会依次调用下一层的API。下图中列举了每层API中经常使用的函数：</p>
 <ul>

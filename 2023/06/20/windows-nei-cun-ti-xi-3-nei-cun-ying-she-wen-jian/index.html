@@ -499,10 +499,10 @@
 <h1 id="一、为什么需要内存映射"><a href="#一、为什么需要内存映射" class="headerlink" title="一、为什么需要内存映射"></a>一、为什么需要内存映射</h1><p><code>“内存映射文件”</code>可以将硬盘上的文件映射到<code>虚拟地址空间</code>，这样就不需要将所有东西都放入到页交换文件中，比如系统有许多程序同时运行时，如果将这些程序文件都加载到页交换文件中，<code>页交换文件</code>将会变得非常大。事实上，Windows也并没有将硬盘上的程序文件复制到<code>页交换文件</code>中，因为这样不仅会让<code>页交换文件</code>将会变得非常大，也会浪费很多时间，特别是可执行程序非常大的时候。</p>
 <p>当用户要求执行一个应用程序时，系统会打开该应用程序的<code>.exe</code>文件，并计算出应用程序的代码和数据的大小，然后系统会在进程的虚拟地址空间预定一块地址空间，并注明与该区域相关联的物理存储器就是<code>.exe</code>文件本身。</p>
 <p>当把一个位于硬盘上的文件（可以是<code>.exe</code>，<code>.dll</code>也可以是普通文件）映像用作地址空间区域对应的物理存储器时，我们称这个文件映像为<code>“内存映射文件”</code>。</p>
-<p>现在我们可以对<a href="/2023/06/20/windows-nei-cun-ti-xi-2-xu-ni-nei-cun/" title="Windows内存体系(2)--虚拟内存">Windows内存体系(2)--虚拟内存</a>第2节的图进行完善了，加入“内存映射文件”部分：<br><img src="https://static.1key.run/blog/windows-nctx-ncys-1.png"></p>
+<p>现在我们可以对<a href="/2023/06/20/windows-nei-cun-ti-xi-2-xu-ni-nei-cun/" title="Windows内存体系(2)--虚拟内存">Windows内存体系(2)--虚拟内存</a>第2节的图进行完善了，加入“内存映射文件”部分：<br><img src="https://static.1key.run/blog/img/windows-nctx-ncys-1.png"></p>
 <h1 id="二、内存映射文件技术介绍"><a href="#二、内存映射文件技术介绍" class="headerlink" title="二、内存映射文件技术介绍"></a>二、内存映射文件技术介绍</h1><p>常用的有Win32 API的<code>CreateFile()</code>、<code>WriteFile()</code>、<code>ReadFile()</code>和MFC提供的<code>CFile</code>类都可以实现文件的读写操作。一般来说，以上这些函数可以满足大多数场合的要求，但是对于某些特殊应用领域所需要的动辄几十GB、几百GB、乃至几TB的海量存储，此时在以平常的文件处理方法进行处理显然是行不通的（效率低下，而且内存没那么大）。目前，对于这种大文件的操作一般是以内存映射文件的方式来加以处理的。</p>
 <p>内存映射文件也是Windows的一种内存管理方法，提供了一个统一的内存管理特征，使应用程序可以通过内存指针对磁盘上的文件进行访问。通过文件映射将磁盘文件内容（全部或者部分）与进程虚拟地址空间的某个区域建立映射关联，可以直接对被映射的文件进行访问，而不必执行文件I/O操作也无需对文件内容进行缓冲处理。内存文件映射的这种特性是非常适合于用来管理大尺寸文件的。</p>
-<h1 id="三、大文件读写实例"><a href="#三、大文件读写实例" class="headerlink" title="三、大文件读写实例"></a>三、大文件读写实例</h1><p>通过C++调用系统API实现文件映射的步骤大致如下：<br><img src="https://static.1key.run/blog/windows-nctx-ncys-2.jpg"></p>
+<h1 id="三、大文件读写实例"><a href="#三、大文件读写实例" class="headerlink" title="三、大文件读写实例"></a>三、大文件读写实例</h1><p>通过C++调用系统API实现文件映射的步骤大致如下：<br><img src="https://static.1key.run/blog/img/windows-nctx-ncys-2.jpg"></p>
 <p>本示例首先在<code>D:\</code>生成一个大小为1GB的<code>BigFile.data</code>文件，然后使用内存映射技术将该文件内全部填充字符A，随后读取其中的<code>第20000~20100字节</code>，并将这些字节修改为字符B，然后再次读取已验证是否修改成功。</p>
 <pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;windows.h&gt;
 

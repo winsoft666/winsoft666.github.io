@@ -513,10 +513,10 @@
 <hr>
 <h2 id="二、虚拟地址空间介绍"><a href="#二、虚拟地址空间介绍" class="headerlink" title="二、虚拟地址空间介绍"></a>二、虚拟地址空间介绍</h2><p>操作系统让每个进程都有自己的虚拟地址空间（<code>Virtual Address Space</code>，简称<code>VAS</code>）。以32位进程为例，每个进程都有<code>0x00000000 ~ 0xFFFFFFFF</code>(4GB)的虚拟地址空间，所以每个进程都可能分配到<code>0x123456</code>地址的内存，但这个地址不能在进程间相互访问。 </p>
 <p>因为这些都是“虚拟”的地址空间，这些“地址”都不能直接使用，CPU在寻址的时候虽然是按照虚拟地址来寻址的，但是还要通过<code>MMU</code>(内存管理单元)来将虚拟地址转换为物理存储器（如内存等）上的物理地址：</p>
-<p><img src="https://static.1key.run/blog/windows-nctx-1.jpg"></p>
+<p><img src="https://static.1key.run/blog/img/windows-nctx-1.jpg"></p>
 <p>从图上可以看出，进程A和B虽然都有地址<code>0x123456</code>，但它们分别对应的物理地址不一样。</p>
 <hr>
-<p>##三、虚拟地址空间分区<br>进程的虚拟地址空间虽然很大，但是它被划分成了很多分区，供Ring3层应用程序使用的用户模式分区并不大（一半不到），如图：<br><img src="https://static.1key.run/blog/windows-nctx-2.jpg"></p>
+<p>##三、虚拟地址空间分区<br>进程的虚拟地址空间虽然很大，但是它被划分成了很多分区，供Ring3层应用程序使用的用户模式分区并不大（一半不到），如图：<br><img src="https://static.1key.run/blog/img/windows-nctx-2.jpg"></p>
 <h4 id="3-1-空指针赋值分区"><a href="#3-1-空指针赋值分区" class="headerlink" title="3.1 空指针赋值分区"></a>3.1 空指针赋值分区</h4><p>这一分区的进程地址空间的范围为：[<code>0x00000000</code>, <code>0x0000FFFF</code>]，总大小为<code>64K</code>，保留该分区的目的是为了帮助应用程序员捕获对空指针的赋值。如<code>malloc</code>分配内存失败，就会返回<code>NULL</code>。</p>
 <p>如果进程中的线程试图访问该分区内的内存地址，就会引发访问违规。</p>
 <h4 id="3-2-用户模式分区"><a href="#3-2-用户模式分区" class="headerlink" title="3.2 用户模式分区"></a>3.2 用户模式分区</h4><p>在Windows中，所有的exe和动态链接库都载入到这一区域。系统同时会把该进程可以访问的所有内存映射文件（后面会介绍）映射到这一分区。</p>

@@ -540,7 +540,7 @@ int main()
 }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>按照第二节所讲的内存对齐规则，分析如下：<br>因为结构体中最大的数据成员长度为int（即4字节），而且<code>#pragma pack(8)</code>指令指定按照8字节对齐，所以<code>min(4,8) = 4</code>，故我们可以知道结构体A按照4字节对齐。</p>
-<p>下图是结构体A按照4字节对齐的内存布局（需要注意的是“内存不是填充在s5后面，而是填充在c后面”）：<br><img src="https://static.1key.run/blog/windows-nctx-ncdq-1.jpg"></p>
+<p>下图是结构体A按照4字节对齐的内存布局（需要注意的是“内存不是填充在s5后面，而是填充在c后面”）：<br><img src="https://static.1key.run/blog/img/windows-nctx-ncdq-1.jpg"></p>
 <p>从图我们很容易知道<code>sizeof(A) = 12</code>.</p>
 
                 

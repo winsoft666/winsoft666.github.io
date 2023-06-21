@@ -508,7 +508,7 @@
 <li><p><code>无连接</code>表示IP协议不维护任何关于后续数据报的状态信息，每个数据报都是相互独立的。这也说明，IP数据报可能不是按照发送顺序被接收到的，很有可能后发送的数据被先收到。</p>
 </li>
 </ul>
-<h2 id="一、IP首部"><a href="#一、IP首部" class="headerlink" title="一、IP首部"></a>一、IP首部</h2><p>IP数据报的格式如图：<br><img src="https://static.1key.run/blog/wangluoxieyi-ip-1.jpg"></p>
+<h2 id="一、IP首部"><a href="#一、IP首部" class="headerlink" title="一、IP首部"></a>一、IP首部</h2><p>IP数据报的格式如图：<br><img src="https://static.1key.run/blog/img/wangluoxieyi-ip-1.jpg"></p>
 <ul>
 <li><p>4位版本：标识目前采用的IP协议的版本号。IPv4为0100, IPv6为0110</p>
 </li>
@@ -559,7 +559,7 @@
 <li>把求和得到的结果取反码。</li>
 <li>如果结果为0，则表示检验和校验通过，IP报文没有被修改过。</li>
 </ol>
-<h2 id="三、使用代码计算校验和"><a href="#三、使用代码计算校验和" class="headerlink" title="三、使用代码计算校验和"></a>三、使用代码计算校验和</h2><p>通过wireshark抓取一帧数据报，如图：<br><img src="https://static.1key.run/blog/wangluoxieyi-ip-2.jpg"></p>
+<h2 id="三、使用代码计算校验和"><a href="#三、使用代码计算校验和" class="headerlink" title="三、使用代码计算校验和"></a>三、使用代码计算校验和</h2><p>通过wireshark抓取一帧数据报，如图：<br><img src="https://static.1key.run/blog/img/wangluoxieyi-ip-2.jpg"></p>
 <p>以该数据报的IP首部为基础，使用C++代码来验证IP首部校验和的计算步骤和校验步骤：</p>
 <pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;assert.h&gt;
 
@@ -662,9 +662,9 @@ int main()
 }
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="四、IP校验和的设计原理"><a href="#四、IP校验和的设计原理" class="headerlink" title="四、IP校验和的设计原理"></a>四、IP校验和的设计原理</h2><p>我们将IP首部进行简化来讲解IP校验和的设计原理，假设IP首部只有6个字节，第5,6字节存放校验和：<br><img src="https://static.1key.run/blog/wangluoxieyi-ip-3.jpg"></p>
-<p>计算校验和时第5,6字节置为0，校验和等于：A+B+0，然后取反，即：<br><img src="https://static.1key.run/blog/wangluoxieyi-ip-4.jpg"></p>
-<p>接收端收到之后校验步骤为：求校验和（不同的是：校验和位不置0），若此时求得校验和为0，则校验通过。即：<br><img src="https://static.1key.run/blog/wangluoxieyi-ip-5.jpg"></p>
+<h2 id="四、IP校验和的设计原理"><a href="#四、IP校验和的设计原理" class="headerlink" title="四、IP校验和的设计原理"></a>四、IP校验和的设计原理</h2><p>我们将IP首部进行简化来讲解IP校验和的设计原理，假设IP首部只有6个字节，第5,6字节存放校验和：<br><img src="https://static.1key.run/blog/img/wangluoxieyi-ip-3.jpg"></p>
+<p>计算校验和时第5,6字节置为0，校验和等于：A+B+0，然后取反，即：<br><img src="https://static.1key.run/blog/img/wangluoxieyi-ip-4.jpg"></p>
+<p>接收端收到之后校验步骤为：求校验和（不同的是：校验和位不置0），若此时求得校验和为0，则校验通过。即：<br><img src="https://static.1key.run/blog/img/wangluoxieyi-ip-5.jpg"></p>
 <h2 id="五、IP地址相关操作"><a href="#五、IP地址相关操作" class="headerlink" title="五、IP地址相关操作"></a>五、IP地址相关操作</h2><p>本节介绍在网络编程中涉及到的与IP地址相关的操作</p>
 <h3 id="struct-in-addr"><a href="#struct-in-addr" class="headerlink" title="struct in_addr"></a>struct in_addr</h3><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">// sizeof(in_addr) == sizeof(ULONG) == 4
 //

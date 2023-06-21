@@ -500,7 +500,7 @@
 <p>C/C++运行时库从形式上来讲和我们自己开发的静态库、动态库没什么两样，只是它们由微软开发和维护，并提供了一些常用的功能支持（如<code>malloc</code>,<code> free</code>, <code>printf</code>等等），如果我们的程序需要使用这些功能（事实上，只要是C/C++程序就一定会用到运行时库提供的功能），就要链接C/C++运行时库。我们可以自主选择是链接“静态库”还是“动态库”，是链接“debug版本”的还是“release版本”的。</p>
 <h2 id="二、如何链接运行时库"><a href="#二、如何链接运行时库" class="headerlink" title="二、如何链接运行时库"></a>二、如何链接运行时库</h2><p>大家可能注意到我们在平时开发中从来没有显式的来链接这些库，这是为什么了？<br>因为我们的编译器为我们提供了便利，我们只需要向编译器指定特定的编译选项（如<code>MT、MD、MTd、MDd</code>），编译器就会自动链接对应的库。</p>
 <p>同时，编译器会根据<code>MT</code>和<code>MD</code>来定义相应的预处理宏：<code>MT</code> 对应 <code>_MT宏</code>，<code>MD</code>对应<code>_MD宏</code>。</p>
-<p>例如，我们通过<code>Visual Studio</code>开发C/C++程序时，在工程属性中配置“运行库”为<code>MT、MD、MTd、MDd</code>中的一个：<br><img src="https://static.1key.run/blog/windows-hxbc-ljynsk-1.jpg"><br>就相当于间接的向编译器指定编译选项和定义相应的宏。</p>
+<p>例如，我们通过<code>Visual Studio</code>开发C/C++程序时，在工程属性中配置“运行库”为<code>MT、MD、MTd、MDd</code>中的一个：<br><img src="https://static.1key.run/blog/img/windows-hxbc-ljynsk-1.jpg"><br>就相当于间接的向编译器指定编译选项和定义相应的宏。</p>
 <h2 id="三、不同版本和形态的运行时库"><a href="#三、不同版本和形态的运行时库" class="headerlink" title="三、不同版本和形态的运行时库"></a>三、不同版本和形态的运行时库</h2><h3 id="3-1-运行时库对应的文件"><a href="#3-1-运行时库对应的文件" class="headerlink" title="3.1 运行时库对应的文件"></a>3.1 运行时库对应的文件</h3><p>下表列出各种编译选项的含义以及对应的库文件：</p>
 <table>
 <thead>
@@ -555,7 +555,7 @@
 <td></td>
 </tr>
 </tbody></table>
-<p>如果计算机上安装了多个版本的VC++运行环境（或者多个版本的Visual Studio），则相同名称的lib或dll就会存在多份。如<code>msvcrt.lib</code>文件：<br><img src="https://static.1key.run/blog/windows-hxbc-ljynsk-2.jpg"></p>
+<p>如果计算机上安装了多个版本的VC++运行环境（或者多个版本的Visual Studio），则相同名称的lib或dll就会存在多份。如<code>msvcrt.lib</code>文件：<br><img src="https://static.1key.run/blog/img/windows-hxbc-ljynsk-2.jpg"></p>
 <h3 id="3-2-运行时库文件命名规则"><a href="#3-2-运行时库文件命名规则" class="headerlink" title="3.2 运行时库文件命名规则"></a>3.2 运行时库文件命名规则</h3><p><code>msvcr100d.dll</code>为例：</p>
 <pre class="line-numbers language-none"><code class="language-none">ms = Microsoft
 v = Visual

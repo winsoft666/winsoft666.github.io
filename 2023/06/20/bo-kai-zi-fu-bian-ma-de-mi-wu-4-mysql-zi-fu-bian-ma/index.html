@@ -537,7 +537,7 @@
 <li>my.cnf配置文件设置character-set-server</li>
 <li>mysqld服务启动命令行中指定字符集</li>
 </ul>
-<p>影响数据存储的字符集之间的关系：<br><img src="https://static.1key.run/blog/mysql-zfbm-1.jpg"></p>
+<p>影响数据存储的字符集之间的关系：<br><img src="https://static.1key.run/blog/img/mysql-zfbm-1.jpg"></p>
 <p><strong>查看当前数据库的字符集设置：</strong></p>
 <pre class="line-numbers language-sql" data-language="sql"><code class="language-sql"><span class="token comment"># 方法1：</span>
 <span class="token keyword">SHOW</span> VARIABLES <span class="token operator">LIKE</span> <span class="token string">'%character%'</span><span class="token punctuation">;</span>
@@ -546,7 +546,7 @@
 <span class="token keyword">USE</span> information_schema<span class="token punctuation">;</span>
 <span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> GLOBAL_VARIABLES <span class="token keyword">WHERE</span> VARIABLE_NAME <span class="token operator">LIKE</span> <span class="token string">'%character%'</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h1 id="3-utf8与utf8mb4区别"><a href="#3-utf8与utf8mb4区别" class="headerlink" title="3. utf8与utf8mb4区别"></a>3. utf8与utf8mb4区别</h1><p>UTF-8是多字节编码方案，采用1~4个字节来存储一个字符，但在MySQL设计之初，一个字符最多采用3个字节的就可以存储，所以Mysql的设计者将MySQL中的UTF-8字符集（UTF-8其实不是字符集，是字符编码方案，但在MySQL中一直这么叫）设计成了最大长度只能为3. 如图：<br><img src="https://static.1key.run/blog/mysql-zfbm-2.jpg"></p>
+<h1 id="3-utf8与utf8mb4区别"><a href="#3-utf8与utf8mb4区别" class="headerlink" title="3. utf8与utf8mb4区别"></a>3. utf8与utf8mb4区别</h1><p>UTF-8是多字节编码方案，采用1~4个字节来存储一个字符，但在MySQL设计之初，一个字符最多采用3个字节的就可以存储，所以Mysql的设计者将MySQL中的UTF-8字符集（UTF-8其实不是字符集，是字符编码方案，但在MySQL中一直这么叫）设计成了最大长度只能为3. 如图：<br><img src="https://static.1key.run/blog/img/mysql-zfbm-2.jpg"></p>
 <p>但随着Unicode字符集的扩张，出现了需要4个字节才能存储的字符，如果这时仍然使用utf-8（指mysql中的3字节utf-8）来存储这些字符就会出现错误，<br>如执行<code>INSERT INTO member(memberName)VALUES('𤭢')</code>报错如下：</p>
 <pre class="line-numbers language-none"><code class="language-none">Warning Code : 1366
 Incorrect string value: '\xF0\xA4\xAD\xA2' for column 'memberName' at row 1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>

@@ -499,7 +499,7 @@
                 <blockquote>
 <p>LLVM-Obfuscator只能用于混淆代码逻辑.</p>
 </blockquote>
-<h1 id="1-安装VS-Clang组件"><a href="#1-安装VS-Clang组件" class="headerlink" title="1. 安装VS Clang组件"></a>1. 安装VS Clang组件</h1><p><img src="https://static.1key.run/blog/LLVM-Obfuscator-1.png"></p>
+<h1 id="1-安装VS-Clang组件"><a href="#1-安装VS-Clang组件" class="headerlink" title="1. 安装VS Clang组件"></a>1. 安装VS Clang组件</h1><p><img src="https://static.1key.run/blog/img/LLVM-Obfuscator-1.png"></p>
 <h1 id="2-编译LLVM-Obfuscator"><a href="#2-编译LLVM-Obfuscator" class="headerlink" title="2. 编译LLVM-Obfuscator"></a>2. 编译LLVM-Obfuscator</h1><p>使用heroims的Fork版本：</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/heroims/obfuscator">heroims/obfuscator</a></p>
 <h2 id="2-1-Clone最新13-x分支"><a href="#2-1-Clone最新13-x分支" class="headerlink" title="2.1 Clone最新13.x分支"></a>2.1 Clone最新13.x分支</h2><pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">git clone -b llvm-13.x https://github.com/obfuscator-llvm/obfuscator.git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -539,8 +539,8 @@ mingw32-make.exe -j8<span aria-hidden="true" class="line-numbers-rows"><span></s
 <h1 id="3-用编译输出覆盖到VS-Clang"><a href="#3-用编译输出覆盖到VS-Clang" class="headerlink" title="3. 用编译输出覆盖到VS Clang"></a>3. 用编译输出覆盖到VS Clang</h1><p>Visual Studio的Clang位于<code>C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\Llvm</code>目录，分别将编译的32位和64位<code>bin</code>目录中的文件覆盖到VS Clang的<code>bin</code>目录中。</p>
 <p>覆盖之前，备份目录</p>
 <h1 id="4-设置环境变量"><a href="#4-设置环境变量" class="headerlink" title="4. 设置环境变量"></a>4. 设置环境变量</h1><p>在编译完之后，将32位和64位MingW的<code>bin</code>目录路径都添加到PATH环境变量中。因为VS编译时会启动clang.exe，而clang.exe需要依赖MingW。</p>
-<h1 id="5-VS工程配置"><a href="#5-VS工程配置" class="headerlink" title="5. VS工程配置"></a>5. VS工程配置</h1><p><img src="https://static.1key.run/blog/LLVM-Obfuscator-2.png"></p>
-<p><img src="https://static.1key.run/blog/LLVM-Obfuscator-3.png"></p>
+<h1 id="5-VS工程配置"><a href="#5-VS工程配置" class="headerlink" title="5. VS工程配置"></a>5. VS工程配置</h1><p><img src="https://static.1key.run/blog/img/LLVM-Obfuscator-2.png"></p>
+<p><img src="https://static.1key.run/blog/img/LLVM-Obfuscator-3.png"></p>
 <p>命令行其他选项如下：</p>
 <pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">-D__CUDACC__ -D_ALLOW_COMPILER_AND_STL_VERSION_MISMATCH -mllvm -bcf -mllvm -bcf_prob=73 -mllvm -bcf_loop=1 -mllvm -sub -mllvm -sub_loop=5 -mllvm -fla -mllvm -split_num=5 -mllvm -aesSeed=DEADBEEFDEADCODEDEADBEEFDEADCODE <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
