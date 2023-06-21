@@ -489,11 +489,11 @@
       
         <tags>
             
-            <tag> std::string </tag>
-            
             <tag> MT </tag>
             
             <tag> DLL </tag>
+            
+            <tag> std::string </tag>
             
         </tags>
       

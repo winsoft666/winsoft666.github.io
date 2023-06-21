@@ -349,7 +349,7 @@
 
 <script>
     // 每天切换 banner 图.  Switch banner image every day.
-    var bannerUrl = "/medias/banner/" + new Date().getDay() + '.jpg';
+    var bannerUrl = "https://static.1key.run/blog/matery-theme/banner/" + new Date().getDay() + '.jpg';
     $('.bg-cover').css('background-image', 'url(' + bannerUrl + ')');
 </script>
 
@@ -588,7 +588,7 @@
                 type: 'pie',
                 radius: '50%',
                 color: ['#6772e5', '#ff9e0f', '#fa755a', '#3ecf8e', '#82d3f4', '#ab47bc', '#525f7f', '#f51c47', '#26A69A'],
-                data: [{"name":"C++","value":6},{"name":"Windows内存体系","value":7},{"name":"Windows","value":1},{"name":"拨开字符编码的迷雾","value":6},{"name":"网络协议","value":8},{"name":"C++","value":1},{"name":"Windows核心编程","value":1},{"name":"计划任务","value":1}],
+                data: [{"name":"C++","value":6},{"name":"Windows内存体系","value":7},{"name":"Windows","value":1},{"name":"网络协议","value":8},{"name":"拨开字符编码的迷雾","value":6},{"name":"C++","value":1},{"name":"Windows核心编程","value":1},{"name":"计划任务","value":1}],
                 itemStyle: {
                     emphasis: {
                         shadowBlur: 10,
@@ -820,14 +820,14 @@
             
             
             
-            <a href="/tags/%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/">
-                <span class="chip center-align waves-effect waves-light chip-default">内存对齐</span>
+            <a href="/tags/%E5%86%85%E5%AD%98%E6%98%A0%E5%B0%84/">
+                <span class="chip center-align waves-effect waves-light chip-default">内存映射</span>
             </a>
             
             
             
-            <a href="/tags/%E5%86%85%E5%AD%98%E6%98%A0%E5%B0%84/">
-                <span class="chip center-align waves-effect waves-light chip-default">内存映射</span>
+            <a href="/tags/%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/">
+                <span class="chip center-align waves-effect waves-light chip-default">内存对齐</span>
             </a>
             
             
@@ -850,12 +850,6 @@
             
             
             
-            <a href="/tags/std-string/">
-                <span class="chip center-align waves-effect waves-light chip-default">std::string</span>
-            </a>
-            
-            
-            
             <a href="/tags/MT/">
                 <span class="chip center-align waves-effect waves-light chip-default">MT</span>
             </a>
@@ -868,8 +862,8 @@
             
             
             
-            <a href="/tags/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81/">
-                <span class="chip center-align waves-effect waves-light chip-default">字符编码</span>
+            <a href="/tags/std-string/">
+                <span class="chip center-align waves-effect waves-light chip-default">std::string</span>
             </a>
             
             
@@ -904,14 +898,20 @@
             
             
             
-            <a href="/tags/%E7%BC%96%E7%A0%81%E8%BD%AC%E6%8D%A2/">
-                <span class="chip center-align waves-effect waves-light chip-default">编码转换</span>
+            <a href="/tags/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81/">
+                <span class="chip center-align waves-effect waves-light chip-default">字符编码</span>
             </a>
             
             
             
             <a href="/tags/%E7%BC%96%E8%AF%91%E5%99%A8/">
                 <span class="chip center-align waves-effect waves-light chip-default">编译器</span>
+            </a>
+            
+            
+            
+            <a href="/tags/%E7%BC%96%E7%A0%81%E8%BD%AC%E6%8D%A2/">
+                <span class="chip center-align waves-effect waves-light chip-default">编码转换</span>
             </a>
             
             
@@ -930,8 +930,62 @@
             
             
             
+            <a href="/tags/ARP/">
+                <span class="chip center-align waves-effect waves-light chip-default">ARP</span>
+            </a>
+            
+            
+            
+            <a href="/tags/RARP/">
+                <span class="chip center-align waves-effect waves-light chip-default">RARP</span>
+            </a>
+            
+            
+            
+            <a href="/tags/%E6%A0%A1%E9%AA%8C%E5%92%8C/">
+                <span class="chip center-align waves-effect waves-light chip-default">校验和</span>
+            </a>
+            
+            
+            
             <a href="/tags/GCC/">
                 <span class="chip center-align waves-effect waves-light chip-default">GCC</span>
+            </a>
+            
+            
+            
+            <a href="/tags/Ping/">
+                <span class="chip center-align waves-effect waves-light chip-default">Ping</span>
+            </a>
+            
+            
+            
+            <a href="/tags/Tracert/">
+                <span class="chip center-align waves-effect waves-light chip-default">Tracert</span>
+            </a>
+            
+            
+            
+            <a href="/tags/%E5%8D%95%E6%92%AD/">
+                <span class="chip center-align waves-effect waves-light chip-default">单播</span>
+            </a>
+            
+            
+            
+            <a href="/tags/%E5%A4%9A%E6%92%AD/">
+                <span class="chip center-align waves-effect waves-light chip-default">多播</span>
+            </a>
+            
+            
+            
+            <a href="/tags/%E5%B9%BF%E6%92%AD/">
+                <span class="chip center-align waves-effect waves-light chip-default">广播</span>
+            </a>
+            
+            
+            
+            <a href="/tags/%E7%BB%84%E6%92%AD/">
+                <span class="chip center-align waves-effect waves-light chip-default">组播</span>
             </a>
             
             
@@ -960,32 +1014,20 @@
             
             
             
-            <a href="/tags/ARP/">
-                <span class="chip center-align waves-effect waves-light chip-default">ARP</span>
+            <a href="/tags/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B/">
+                <span class="chip center-align waves-effect waves-light chip-default">三次握手</span>
             </a>
             
             
             
-            <a href="/tags/RARP/">
-                <span class="chip center-align waves-effect waves-light chip-default">RARP</span>
+            <a href="/tags/%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/">
+                <span class="chip center-align waves-effect waves-light chip-default">四次挥手</span>
             </a>
             
             
             
-            <a href="/tags/%E6%A0%A1%E9%AA%8C%E5%92%8C/">
-                <span class="chip center-align waves-effect waves-light chip-default">校验和</span>
-            </a>
-            
-            
-            
-            <a href="/tags/Ping/">
-                <span class="chip center-align waves-effect waves-light chip-default">Ping</span>
-            </a>
-            
-            
-            
-            <a href="/tags/Tracert/">
-                <span class="chip center-align waves-effect waves-light chip-default">Tracert</span>
+            <a href="/tags/Wireshark/">
+                <span class="chip center-align waves-effect waves-light chip-default">Wireshark</span>
             </a>
             
             
@@ -1010,48 +1052,6 @@
             
             <a href="/tags/%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6/">
                 <span class="chip center-align waves-effect waves-light chip-default">数字证书</span>
-            </a>
-            
-            
-            
-            <a href="/tags/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B/">
-                <span class="chip center-align waves-effect waves-light chip-default">三次握手</span>
-            </a>
-            
-            
-            
-            <a href="/tags/%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/">
-                <span class="chip center-align waves-effect waves-light chip-default">四次挥手</span>
-            </a>
-            
-            
-            
-            <a href="/tags/Wireshark/">
-                <span class="chip center-align waves-effect waves-light chip-default">Wireshark</span>
-            </a>
-            
-            
-            
-            <a href="/tags/%E5%8D%95%E6%92%AD/">
-                <span class="chip center-align waves-effect waves-light chip-default">单播</span>
-            </a>
-            
-            
-            
-            <a href="/tags/%E5%A4%9A%E6%92%AD/">
-                <span class="chip center-align waves-effect waves-light chip-default">多播</span>
-            </a>
-            
-            
-            
-            <a href="/tags/%E5%B9%BF%E6%92%AD/">
-                <span class="chip center-align waves-effect waves-light chip-default">广播</span>
-            </a>
-            
-            
-            
-            <a href="/tags/%E7%BB%84%E6%92%AD/">
-                <span class="chip center-align waves-effect waves-light chip-default">组播</span>
             </a>
             
             
