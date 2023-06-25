@@ -4,6 +4,58 @@
   
     
     <entry>
+      <title>NPM和Yarn设置国内源</title>
+      <link href="/2023/06/25/npm-he-yarn-she-zhi-guo-nei-yuan/"/>
+      <url>/2023/06/25/npm-he-yarn-she-zhi-guo-nei-yuan/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-Yarn设置"><a href="#1-Yarn设置" class="headerlink" title="1. Yarn设置"></a>1. Yarn设置</h1><p>查看当前使用的镜像源：</p><pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">yarn config get registry<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>全局修改：</p><pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">yarn config set registry https://registry.npm.taobao.org -gyarn config set disturl https://npm.taobao.org/dist -gyarn config set electron_mirror https://npm.taobao.org/mirrors/electron/ -gyarn config set sass_binary_site https://npm.taobao.org/mirrors/node-sass/ -gyarn config set phantomjs_cdnurl https://npm.taobao.org/mirrors/phantomjs/ -gyarn config set chromedriver_cdnurl https://cdn.npm.taobao.org/dist/chromedriver -gyarn config set operadriver_cdnurl https://cdn.npm.taobao.org/dist/operadriver -gyarn config set fse_binary_host_mirror https://npm.taobao.org/mirrors/fsevents -g<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>临时修改：</p><pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">yarn save 软件名 --registry https://registry.npm.taobao.org/<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><h1 id="2-NPM设置"><a href="#2-NPM设置" class="headerlink" title="2. NPM设置"></a>2. NPM设置</h1><p>查看当前使用的镜像源：</p><pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">npm get registry<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>全局设置：</p><pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">npm config set registry https://registry.npm.taobao.orgnpm config set disturl https://npm.taobao.org/distnpm config set electron_mirror https://npm.taobao.org/mirrors/electron/npm config set sass_binary_site https://npm.taobao.org/mirrors/node-sass/npm config set phantomjs_cdnurl https://npm.taobao.org/mirrors/phantomjs/<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre><p>npm v9版本会报错：<code>ELECTRON_MIRROR</code> is not a valid npm option。<br>需要切换为npm v8版本：<code>npm install -g npm@^8</code></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Node.js </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> NPM </tag>
+            
+            <tag> Yarn </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>移除Qt控件虚线框</title>
+      <link href="/2023/06/25/yi-chu-qt-kong-jian-xu-xian-kuang/"/>
+      <url>/2023/06/25/yi-chu-qt-kong-jian-xu-xian-kuang/</url>
+      
+        <content type="html"><![CDATA[<h1 id="方式一：使用-StyleSheet"><a href="#方式一：使用-StyleSheet" class="headerlink" title="方式一：使用 StyleSheet"></a>方式一：使用 StyleSheet</h1><pre class="line-numbers language-CSS" data-language="CSS"><code class="language-CSS">QWidget:focus {   outline: none; /* 去掉得到焦点时的虚线框 */ }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><h1 id="方式二：继承-QProxyStyle"><a href="#方式二：继承-QProxyStyle" class="headerlink" title="方式二：继承 QProxyStyle"></a>方式二：继承 QProxyStyle</h1><p>继承 QProxyStyle，PrimitiveElement为QStyle::PE_FrameFocusRect 时不绘制虚线框，然后在main() 函数里调用 QApplication::setStyle() 使用新的样式。</p><pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">// 文件名: NoFocusRectStyle.h#ifndef NOFOCUSRECTSTYLE_H#define NOFOCUSRECTSTYLE_H#include &lt;QProxyStyle&gt;class NoFocusRectStyle : public QProxyStyle{public:    NoFocusRectStyle(QStyle *baseStyle) : QProxyStyle(baseStyle) {}    void drawPrimitive(PrimitiveElement element,                       const QStyleOption *option,                       QPainter *painter,                       const QWidget *widget = 0) const{        if (element == QStyle::PE_FrameFocusRect)        {            return;        }        QProxyStyle::drawPrimitive(element, option, painter, widget);    }};#endif // NOFOCUSRECTSTYLE_H<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre><pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">// 文件名: main.cpp#include "Widget.h"#include "NoFocusRectStyle.h"#include &lt;QApplication&gt;int main(int argc, char *argv[]){    QApplication app(argc, argv);    NoFocusRectStyle *style = new NoFocusRectStyle(app.style());    app.setStyle(style); // Ownership of the style object is transferred to QApplication    Widget w;    w.show();    return app.exec();}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> Qt </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> QProxyStyle </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>QSS基本使用方法</title>
       <link href="/2023/06/25/qss-ji-ben-shi-yong-fang-fa/"/>
       <url>/2023/06/25/qss-ji-ben-shi-yong-fang-fa/</url>

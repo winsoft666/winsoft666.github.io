@@ -354,6 +354,13 @@
 
 <div class="carousel carousel-slider center index-cover" data-indicators="true" style="margin-top: -64px;">
     
+        <div id="prev-cover" class="left waves-effect carousel-control">
+            <i class="icon fa fa-angle-left"></i>
+        </div>
+        <div id="next-cover" class="right waves-effect carousel-control">
+            <i class="icon fa fa-angle-right"></i>
+        </div>
+    
 
     <div class="carousel-item red white-text bg-cover about-cover">
         <div class="container">
@@ -437,6 +444,56 @@
         </div>
     </div>
 
+    
+        
+
+        
+            
+            <div class="carousel-item amber white-text carousel-post bg-cover"
+                 style="background-image: url('https://static.1key.run/blog/matery-theme/featureimages/8.jpg');">
+                <div class="container">
+                    <div class="row">
+                        <div class="col s10 offset-s1">
+                            <div class="title center-align">《拨开字符编码的迷雾》专栏</div>
+                            <div class="description center-align">
+                                
+                                    本专栏从字符编码的基础概念开始，一步步理清在开发过程中遇到的各种编码问题，从此告别编码、乱码的烦恼。
+                                
+                            </div>
+                            <div class="cover-btns">
+                                <a href="/2023/06/21/bo-kai-zi-fu-bian-ma-de-mi-wu-zhuan-lan/" class="waves-effect waves-light btn"
+                                   target="_blank">
+                                    <i class="icon fa fa-eye fa-fw"></i>阅读更多
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            
+            <div class="carousel-item amber white-text carousel-post bg-cover"
+                 style="background-image: url('https://static.1key.run/blog/matery-theme/featureimages/13.jpg');">
+                <div class="container">
+                    <div class="row">
+                        <div class="col s10 offset-s1">
+                            <div class="title center-align">《网络协议》专栏</div>
+                            <div class="description center-align">
+                                
+                                    本栏目系统性的介绍了常用网络协议（如ARP, IP, TCP, UDP, HTTP等）。让读者不仅可以知其然，而且可以知其所以然。同时也覆盖面试中的一些常见问题。
+                                
+                            </div>
+                            <div class="cover-btns">
+                                <a href="/2023/06/21/wang-luo-xie-yi-zhuan-lan/" class="waves-effect waves-light btn"
+                                   target="_blank">
+                                    <i class="icon fa fa-eye fa-fw"></i>阅读更多
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
     
 </div>
 
@@ -603,6 +660,117 @@
     <!-- 所有文章卡片 -->
     <article id="articles" class="container articles">
         <div class="row article-row">
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2023/06/25/npm-he-yarn-she-zhi-guo-nei-yuan/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="https://static.1key.run/blog/matery-theme/featureimages/21.jpg" class="responsive-img" alt="NPM和Yarn设置国内源">
+                            
+                            <span class="card-title">NPM和Yarn设置国内源</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                1. Yarn设置查看当前使用的镜像源：
+yarn config get registry
+
+
+
+全局修改：
+yarn config set registry https://registry.npm.taobao.org -g
+yarn 
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-25
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/Node-js/" class="post-category">
+                                    Node.js
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/NPM/">
+                            <span class="chip bg-color">NPM</span>
+                        </a>
+                        
+                        <a href="/tags/Yarn/">
+                            <span class="chip bg-color">Yarn</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2023/06/25/yi-chu-qt-kong-jian-xu-xian-kuang/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="https://static.1key.run/blog/matery-theme/featureimages/22.jpg" class="responsive-img" alt="移除Qt控件虚线框">
+                            
+                            <span class="card-title">移除Qt控件虚线框</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                方式一：使用 StyleSheetQWidget:focus { 
+  outline: none; /* 去掉得到焦点时的虚线框 */ 
+}
+
+
+
+方式二：继承 QProxyStyle继承 QProxyStyle，PrimitiveEle
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-25
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/Qt/" class="post-category">
+                                    Qt
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/QProxyStyle/">
+                            <span class="chip bg-color">QProxyStyle</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
             
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
@@ -1139,132 +1307,6 @@ int main()
                 </div>
             </div>
             
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2023/06/21/wang-luo-xie-yi-7-http-yu-https-xie-yi/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="https://static.1key.run/blog/matery-theme/featureimages/12.jpg" class="responsive-img" alt="网络协议(7)--HTTP与HTTPS协议">
-                            
-                            <span class="card-title">网络协议(7)--HTTP与HTTPS协议</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                
-文章图片带有“CSDN”水印的说明：由于该文章和图片最初发表在我的CSDN博客中，因此图片被CSDN自动添加了水印。
-
-
-一、HTTP协议介绍1.1 什么是HTTPHTTP是Hyper Text Transfer Protocol（超文本
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-21
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/" class="post-category">
-                                    网络协议
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/HTTP/">
-                            <span class="chip bg-color">HTTP</span>
-                        </a>
-                        
-                        <a href="/tags/HTTPS/">
-                            <span class="chip bg-color">HTTPS</span>
-                        </a>
-                        
-                        <a href="/tags/TLS-SSL/">
-                            <span class="chip bg-color">TLS/SSL</span>
-                        </a>
-                        
-                        <a href="/tags/%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6/">
-                            <span class="chip bg-color">数字证书</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2023/06/21/wang-luo-xie-yi-6-tcp-xie-yi/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="https://static.1key.run/blog/matery-theme/featureimages/9.jpg" class="responsive-img" alt="网络协议(6)--TCP协议">
-                            
-                            <span class="card-title">网络协议(6)--TCP协议</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                
-文章图片带有“CSDN”水印的说明：由于该文章和图片最初发表在我的CSDN博客中，因此图片被CSDN自动添加了水印。
-
-
-一、TCP特性尽管TCP和UDP都是用IP协议作为网络层，但TCP却提供和UDP完全不同的网络服务。TCP是面向连接
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-21
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/" class="post-category">
-                                    网络协议
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/TCP/">
-                            <span class="chip bg-color">TCP</span>
-                        </a>
-                        
-                        <a href="/tags/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B/">
-                            <span class="chip bg-color">三次握手</span>
-                        </a>
-                        
-                        <a href="/tags/%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/">
-                            <span class="chip bg-color">四次挥手</span>
-                        </a>
-                        
-                        <a href="/tags/Wireshark/">
-                            <span class="chip bg-color">Wireshark</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
         </div>
     </article>
 
@@ -1309,7 +1351,7 @@ int main()
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">48.7k</span>&nbsp;字
+                class="white-color">49k</span>&nbsp;字
             
             
             
