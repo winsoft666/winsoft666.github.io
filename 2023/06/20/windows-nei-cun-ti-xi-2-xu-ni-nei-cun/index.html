@@ -521,14 +521,14 @@
 ); <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>当预定或者调拨的空间我们不在需要时，我们需要调用<code>VirtualFree</code>来释放该地址空间：</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">BOOL VirtualFree(
+<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">BOOL VirtualFree(
   LPVOID lpAddress, 
   DWORD dwSize, 
   DWORD dwFreeType 
 ); <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>下面是的示例演示了在预定、调拨、使用等操作前后，进程的各项内存的占用情况：</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;windows.h&gt;
+<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">#include &lt;windows.h&gt;
 
 int main()
 {
@@ -976,7 +976,7 @@ int main()
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">49k</span>&nbsp;字
+                class="white-color">57.3k</span>&nbsp;字
             
             
             
