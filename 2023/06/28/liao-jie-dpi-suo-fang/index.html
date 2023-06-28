@@ -4,8 +4,9 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="分类: C++, Windows,Linux,C++,Qt,Node.js,Electron,WebRTC">
-    <meta name="description" content="学习、沉淀、总结和分享知识">
+    <meta name="keywords" content="了解DPI缩放, Windows,Linux,C++,Qt,Node.js,Electron,WebRTC">
+    <meta name="description" content="一、DPI介绍dpi是“Dots Per Inch”的缩写，表示每英寸的像素点个数，也就是像素点的密集度。dpi = 总像素点 / 总面积
+比如一个32寸的显示，但分辨率只有1920*1440，而一个24寸的显示器，分辨率却达到3840*2">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +18,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>分类: C++ | 🅹🅸🅰🅽🅶</title>
+    <title>了解DPI缩放 | 🅹🅸🅰🅽🅶</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -267,296 +268,486 @@
 
 </header>
 
-    <div class="bg-cover pd-header about-cover">
-    <div class="container">
-    <div class="row">
-    <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
-        <div class="brand">
-            <div class="title center-align">
-                
-                🅹🅸🅰🅽🅶&#39;s BLOG
-                
-            </div>
+    
 
-            <div class="description center-align">
-                
-                <span id="subtitle"></span>
-                <script src="/libs/typed/typed.js"></script>
-                <script>
-                    var typed = new Typed("#subtitle", {
-                        strings: [ 
-                            
-                                "学习、沉淀、总结和分享知识",
-                            
-                        ],
-                        startDelay: 300,
-                        typeSpeed: 100,
-                        loop: true,
-                        backSpeed: 50,
-                        showCursor: true
-                    });
-                </script>
-                
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://static.1key.run/blog/matery-theme/featureimages/21.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">了解DPI缩放</h1>
+                </div>
             </div>
         </div>
     </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/DPI/">
+                                <span class="chip bg-color">DPI</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/Windows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B/" class="post-category">
+                                Windows核心编程
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-06-28
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    622
+                </div>
+                
+
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="一、DPI介绍"><a href="#一、DPI介绍" class="headerlink" title="一、DPI介绍"></a>一、DPI介绍</h1><p>dpi是“Dots Per Inch”的缩写，表示每英寸的像素点个数，也就是像素点的密集度。<br><code>dpi = 总像素点 / 总面积</code></p>
+<p>比如一个32寸的显示，但分辨率只有<code>1920*1440</code>，而一个24寸的显示器，分辨率却达到<code>3840*2160</code>，很明显后面这个显示器的每英寸的像素点的个数多，显示的画面更加细腻。<br>所以：高分辨率不等于高dpi。</p>
+<p>苹果的视网膜屏幕的核心就是高dpi：屏幕面积小，却分辨率高达5k，每英寸的像素点（dpi）固然多，画面自然细腻。</p>
+<h1 id="二、软件显示异常"><a href="#二、软件显示异常" class="headerlink" title="二、软件显示异常"></a>二、软件显示异常</h1><p>为什么高DPI显示器为什么会导致某些软件显示异常了？</p>
+<p>随着2K、4K显示器的普及，在使用这些高DPI显示器时，为了保证系统软件界面看起来不至于太小，导致视觉疲劳，一般会在系统中设置缩放比例。</p>
+<p>Windows操作系统对高dpi显示器缩放支持最好的是windows 10+，建议使用高DPI显示器时使用Windows 10+操作系统。<br><img src="https://static.1key.run/blog/img/dpi-1.png"></p>
+<p>假设现在有一个软件界面（宽为950像素，高为700像素），该软件在24寸、分辨率为<code>1900*1400</code>的显示器上显示正常，但放到高dpi显示器（同样是24寸，但分辨率为<code>3800*2800</code>）上显示效果会如何？</p>
+<p><img src="https://static.1key.run/blog/img/dpi-2.png"></p>
+<p>从上图可以看到，同样尺寸的软件界面，在高dpi显示器上会显得非常小，会造成严重的视觉疲劳。</p>
+<p>所以我们的软件需要针对高dpi进行缩放。</p>
+<h1 id="三、Windows-10-DPI缩放规则"><a href="#三、Windows-10-DPI缩放规则" class="headerlink" title="三、Windows 10 DPI缩放规则"></a>三、Windows 10 DPI缩放规则</h1><p>Windows 10+操作系统针对dpi缩放制定了3种规则，每个进程都必须匹配下面的一种规则，默认为<code>PROCESS_DPI_UNAWARE</code>：</p>
+<ol>
+<li><p>PROCESS_DPI_UNAWARE<br>  在软件启动时， 操作系统会自动将软件进行缩放拉伸；在系统dpi缩放改变时，系统也会将软件自动进行缩放拉伸，但软件不会收到WM_DPICHANGED消息。</p>
+</li>
+<li><p>PROCESS_SYSTEM_DPI_AWARE<br>在软件启动时，系统不会将软件进行缩放拉伸；但在系统dpi缩放改变时，系统会将软件进行缩放拉伸，但软件仍然不会收到WM_DPICHANGED消息。</p>
+</li>
+<li><p>PROCESS_PER_MONITOR_DPI_AWARE<br>在软件启动时，系统不会将软件进行缩放拉伸；同样，在系统dpi缩放改变时，系统也不会将软件进行缩放拉伸，但软件会收到WM_DPICHANGED消息。</p>
+</li>
+</ol>
+<blockquote>
+<p>详见：<a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/windows/desktop/api/windef/ne-windef-dpi_awareness">dpi_awareness</a></p>
+</blockquote>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">JiangXueqiao</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://jiangxueqiao.com/2023/06/28/liao-jie-dpi-suo-fang/">https://jiangxueqiao.com/2023/06/28/liao-jie-dpi-suo-fang/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">JiangXueqiao</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/DPI/">
+                                    <span class="chip bg-color">DPI</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/06/28/zai-c-zhong-shi-yong-lamada-biao-da-shi/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://static.1key.run/blog/matery-theme/featureimages/8.jpg" class="responsive-img" alt="在C++中使用Lamada表达式">
+                        
+                        <span class="card-title">在C++中使用Lamada表达式</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-06-28
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/C/" class="post-category">
+                                    C++
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/C-11/">
+                        <span class="chip bg-color">C++11</span>
+                    </a>
+                    
+                    <a href="/tags/Lamada/">
+                        <span class="chip bg-color">Lamada</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/06/28/centos7-shen-qing-mian-fei-letsencrypt-zheng-shu-bing-xu-qi/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://static.1key.run/blog/matery-theme/featureimages/9.jpg" class="responsive-img" alt="CentOS7申请免费LetsEncrypt证书并续期">
+                        
+                        <span class="card-title">CentOS7申请免费LetsEncrypt证书并续期</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-28
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/CentOS/" class="post-category">
+                                    CentOS
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/LetsEncrypt/">
+                        <span class="chip bg-color">LetsEncrypt</span>
+                    </a>
+                    
+                    <a href="/tags/SSL/">
+                        <span class="chip bg-color">SSL</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
 </div>
 
 
 <script>
-    // 每天切换 banner 图.  Switch banner image every day.
-    var bannerUrl = "https://static.1key.run/blog/matery-theme/medias/banner/" + new Date().getDay() + '.jpg';
-    $('.bg-cover').css('background-image', 'url(' + bannerUrl + ')');
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: 🅹🅸🅰🅽🅶<br />'
+            + '文章作者: JiangXueqiao<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
 </script>
 
 
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
     </div>
-</div>
-
-<main class="content">
-
-    
-
-<div id="category-cloud" class="container chip-container">
-    <div class="card">
-        <div class="card-content">
-            <div class="tag-title center-align">
-                <i class="fas fa-bookmark"></i>&nbsp;&nbsp;文章分类
-            </div>
-            <div class="tag-chips">
-                
-                
-                
-                <a href="/categories/C/" title="C++: 8">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-active "
-                            style="background-color: #F9EBEA;">C++
-                        <span class="tag-length">8</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/Node-js/" title="Node.js: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F5EEF8;">Node.js
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/Qt/" title="Qt: 3">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #D5F5E3;">Qt
-                        <span class="tag-length">3</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/Windows%E5%86%85%E5%AD%98%E4%BD%93%E7%B3%BB/" title="Windows内存体系: 8">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #E8F8F5;">Windows内存体系
-                        <span class="tag-length">8</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/Windows%E6%B3%A8%E5%85%A5%E4%B8%8E%E6%8B%A6%E6%88%AA/" title="Windows注入与拦截: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #FEF9E7;">Windows注入与拦截
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/Windows/" title="Windows: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F8F9F9;">Windows
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E6%8B%A8%E5%BC%80%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E7%9A%84%E8%BF%B7%E9%9B%BE/" title="拨开字符编码的迷雾: 6">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #82E0AA;">拨开字符编码的迷雾
-                        <span class="tag-length">6</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/Docker/" title="Docker: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #D7BDE2;">Docker
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E6%89%B9%E5%A4%84%E7%90%86/" title="批处理: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #A3E4D7;">批处理
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/" title="网络协议: 8">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #85C1E9;">网络协议
-                        <span class="tag-length">8</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/Windows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B/" title="Windows核心编程: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #F8C471;">Windows核心编程
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/Windows/C/" title="C++: 2">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-active "
-                            style="background-color: #F9E79F;">C++
-                        <span class="tag-length">2</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/Windows/C/%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1/" title="计划任务: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default "
-                            style="background-color: #82E0AA;">计划任务
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-            </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
         </div>
     </div>
 </div>
 
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('2'),
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
 
     
 
-    <article id="articles" class="container articles">
-        <div class="row tags-posts">
-            
-            <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2023/06/25/windows-zhu-ce-url-xie-yi/">
-                        <div class="card-image tag-image">
-                            
-                            
-                            <img src="https://static.1key.run/blog/matery-theme/featureimages/9.jpg" class="responsive-img" alt="Windows注册URL协议">
-                            
-                            <span class="card-title">Windows注册URL协议</span>
-                        </div>
-                    </a>
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                当电脑安装完Steam后，在浏览器中输入steam://run/123链接，浏览器会自动提示打开Steam程序。
-类似的功能在迅雷、QQ等产品上都有使用。
-实现上述功能只需要在注册表HKEY_CLASSES_ROOT项下添加对应的子项即可，
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-25
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/Windows/" class="post-category">
-                                    Windows
-                                </a>
-                                
-                                <a href="/categories/Windows/C/" class="post-category">
-                                    C++
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/URL%E5%8D%8F%E8%AE%AE/">
-                            <span class="chip bg-color">URL协议</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-            
-            <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2023/06/21/windows-cheng-xu-ru-he-shan-chu-zi-shen/">
-                        <div class="card-image tag-image">
-                            
-                            
-                            <img src="https://static.1key.run/blog/matery-theme/featureimages/1.jpg" class="responsive-img" alt="Windows程序如何删除自身">
-                            
-                            <span class="card-title">Windows程序如何删除自身</span>
-                        </div>
-                    </a>
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                本文介绍几种实现在程序退出后，从磁盘删除自身exe文件的方式。该技术通常应用于安装包卸载程序中。
-一、借用choice命令实现Windows提供了choice命令，允许用户从选择列表选择一个项目并返回所选项目的索引。
-C:\Users\ak
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-21
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/Windows/" class="post-category">
-                                    Windows
-                                </a>
-                                
-                                <a href="/categories/Windows/C/" class="post-category">
-                                    C++
-                                </a>
-                                
-                                <a href="/categories/Windows/C/%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1/" class="post-category">
-                                    计划任务
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                </div>
-            </div>
-            
-        </div>
-    </article>
 </main>
 
 
@@ -581,7 +772,7 @@ C:\Users\ak
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">57.3k</span>
+                        class="white-color">76.9k</span>
             
             
             

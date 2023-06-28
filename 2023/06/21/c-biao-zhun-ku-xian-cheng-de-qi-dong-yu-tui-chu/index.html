@@ -373,7 +373,7 @@
             <div id="articleContent">
                 <h1 id="一、std-thread"><a href="#一、std-thread" class="headerlink" title="一、std::thread"></a>一、std::thread</h1><p>std::thread未提供判断线程是否结束的方法。</p>
 <p>如果线程未进行detach且此时该线程处理joinable状态，析构该线程对象会触发异常。</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">
+<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">
 #include &lt;iostream&gt;
 #include &lt;thread&gt;
 
@@ -406,7 +406,7 @@ int main()
 
 
 <h1 id="二、std-async"><a href="#二、std-async" class="headerlink" title="二、std::async"></a>二、std::async</h1><p>通过<code>std::async</code>可以判断线程是否结束运行。</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">#include &lt;iostream&gt;
+<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">#include &lt;iostream&gt;
 #include &lt;future&gt;
 
 int main()
@@ -428,11 +428,11 @@ int main()
     return 0;
 }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="2-1-判断std-future是否结束"><a href="#2-1-判断std-future是否结束" class="headerlink" title="2.1 判断std::future是否结束"></a>2.1 判断std::future是否结束</h2><pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">bool isRunning = f.valid() &amp;&amp; 
+<h2 id="2-1-判断std-future是否结束"><a href="#2-1-判断std-future是否结束" class="headerlink" title="2.1 判断std::future是否结束"></a>2.1 判断std::future是否结束</h2><pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">bool isRunning = f.valid() &amp;&amp; 
                  f.wait_for(std::chrono::milliseconds(0)) == std::future_status::timeout;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <h2 id="2-2-std-shared-future"><a href="#2-2-std-shared-future" class="headerlink" title="2.2 std::shared_future"></a>2.2 std::shared_future</h2><p><code>std::future</code>不支持赋值构造，需要使用<code>std::shared_future</code>。</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">std::shared_future&lt;void&gt; f1 = std::async(std::launch::async, []() {
+<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">std::shared_future&lt;void&gt; f1 = std::async(std::launch::async, []() {
        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
  });
 
@@ -584,21 +584,25 @@ std::shared_future&lt;void&gt; f2 = f1;<span aria-hidden="true" class="line-numb
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Windows/" class="post-category">
-                                    Windows
-                                </a>
-                            
-                            <a href="/categories/Windows/C/" class="post-category">
-                                    C++
-                                </a>
-                            
-                            <a href="/categories/Windows/C/%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1/" class="post-category">
-                                    计划任务
+                            <a href="/categories/Windows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B/" class="post-category">
+                                    Windows核心编程
                                 </a>
                             
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/choice/">
+                        <span class="chip bg-color">choice</span>
+                    </a>
+                    
+                    <a href="/tags/%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1/">
+                        <span class="chip bg-color">计划任务</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -648,8 +652,8 @@ std::shared_future&lt;void&gt; f2 = f1;<span aria-hidden="true" class="line-numb
                         <span class="chip bg-color">代码混淆</span>
                     </a>
                     
-                    <a href="/tags/LLVM/">
-                        <span class="chip bg-color">LLVM</span>
+                    <a href="/tags/LLVM-Obfuscator/">
+                        <span class="chip bg-color">LLVM-Obfuscator</span>
                     </a>
                     
                 </div>
@@ -750,7 +754,7 @@ std::shared_future&lt;void&gt; f2 = f1;<span aria-hidden="true" class="line-numb
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
             headingsOffset: -($(window).height() * 0.4 - 45),
-            collapseDepth: Number('5'),
+            collapseDepth: Number('2'),
             headingSelector: 'h1, h2, h3, h4'
         });
 
@@ -832,7 +836,7 @@ std::shared_future&lt;void&gt; f2 = f1;<span aria-hidden="true" class="line-numb
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">57.3k</span>
+                        class="white-color">76.9k</span>
             
             
             

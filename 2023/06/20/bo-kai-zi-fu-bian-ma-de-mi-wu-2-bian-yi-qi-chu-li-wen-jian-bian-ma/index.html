@@ -419,7 +419,7 @@ UTF-8      E4 B8 AD<span aria-hidden="true" class="line-numbers-rows"><span></sp
 <ul>
 <li>函数<code>DumpCharacterCode</code>用于按字节打印内存中的数据：</li>
 </ul>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">void DumpCharacterCode(const char* pChar, int iSize) {
+<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">void DumpCharacterCode(const char* pChar, int iSize) {
 	for(int i = 0; i &lt; iSize; i++) {
 		char a = *pChar++;
 		printf("%02X ", a &amp; 0xff);
@@ -434,7 +434,7 @@ UTF-8      E4 B8 AD<span aria-hidden="true" class="line-numbers-rows"><span></sp
 </li>
 </ul>
 <h2 id="4-1-测试编译器处理窄字符编码"><a href="#4-1-测试编译器处理窄字符编码" class="headerlink" title="4.1 测试编译器处理窄字符编码"></a>4.1 测试编译器处理窄字符编码</h2><p>测试代码如下：</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int _tmain(int argc, _TCHAR* argv[])
+<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">int _tmain(int argc, _TCHAR* argv[])
 {
 	char buf[100] = {"中"};   // char
 
@@ -505,7 +505,7 @@ UTF-8      E4 B8 AD<span aria-hidden="true" class="line-numbers-rows"><span></sp
 <p>表格中列4~6依次对应编译处理源文件的几个步骤。<br><code>3F</code>对应的ASCII字符为<code>?</code>，编译器遇到不能识别的字符时，就会用<code>?</code>来替代。 出现<code>?</code>的情况会伴随着编译警告<code>C4566</code>。<br>上面出现了1次<code>3F</code>（用例5），导致乱码的原因是<code>UTF-8 --&gt; 西欧 CP1252</code>. <code>西欧 CP1252</code>也就是ASCII的扩展，不支持汉字，所以用<code>3F</code>替代。</p>
 <h4 id="用例3为什么会编译错误？"><a href="#用例3为什么会编译错误？" class="headerlink" title="用例3为什么会编译错误？"></a>用例3为什么会编译错误？</h4><p>微软的编译器只能识别带BOM的UTF-8，用例3的UTF-8没带BOM，编译器会判定源文件编码为系统当前代码页CP936。“中”的UTF-8编码为<code>E4 B8 AD</code>，列5执行从CP936到UTF-8转换之后变成了<code>E6 B6 93 3F</code>，列6再要将<code>E6 B6 93 3F</code>转换为CP936肯定是转换不回去的，相当于 UTF-8（1） –&gt; UTF-8 （2），再将UTF-8（2）转换回CP936，这时肯定得到的字符不是原来的字符了。</p>
 <h4 id="用例4为什么输出的D6-D0，而不是3F？"><a href="#用例4为什么输出的D6-D0，而不是3F？" class="headerlink" title="用例4为什么输出的D6 D0，而不是3F？"></a>用例4为什么输出的<code>D6 D0</code>，而不是<code>3F</code>？</h4><p>对着用例4的各个顺序来看，源文件通过CP936保存着，但编译器通过CP1252来读取的，CP1252就是ASCII扩展，单字节的，虽然此时显示为乱码，但各字节仍然是D6 D0；然后将读取到的文件内容从CP1252转成UTF-8编码，转码后为C3 96 C3 90；然后再将UTF-8编码转回为CP1251，转码就又变成了D6 D0。 但这个<code>D6 D0</code>在CP1252中是无法显示的，如果我们在用例4加入<code>MessageBoxA(NULL, "中", "test", MB_OK);</code> 会发现弹出的对话框中显示仍然是乱码。<br>可以使用下面的代码进行测试：</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int _tmain(int argc, _TCHAR* argv[])
+<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">int _tmain(int argc, _TCHAR* argv[])
 {
 	char buf[3] = { 0 };    // 模拟CP936编码的“中”
 	buf[0] = 0xD6;
@@ -521,7 +521,7 @@ UTF-8      E4 B8 AD<span aria-hidden="true" class="line-numbers-rows"><span></sp
 }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h2 id="4-2-测试编译器处理宽字符编码"><a href="#4-2-测试编译器处理宽字符编码" class="headerlink" title="4.2 测试编译器处理宽字符编码"></a>4.2 测试编译器处理宽字符编码</h2><p>测试代码如下：</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int _tmain(int argc, _TCHAR* argv[])
+<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">int _tmain(int argc, _TCHAR* argv[])
 {
 	wchar_t buf[100] = {L"中"};   // wchar_t
 
@@ -906,7 +906,7 @@ UTF-8      E4 B8 AD<span aria-hidden="true" class="line-numbers-rows"><span></sp
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
             headingsOffset: -($(window).height() * 0.4 - 45),
-            collapseDepth: Number('5'),
+            collapseDepth: Number('2'),
             headingSelector: 'h1, h2, h3, h4'
         });
 
@@ -988,7 +988,7 @@ UTF-8      E4 B8 AD<span aria-hidden="true" class="line-numbers-rows"><span></sp
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">57.3k</span>
+                        class="white-color">76.9k</span>
             
             
             

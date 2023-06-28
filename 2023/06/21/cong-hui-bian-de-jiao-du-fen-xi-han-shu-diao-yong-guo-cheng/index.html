@@ -416,7 +416,7 @@ call add   ;函数自己内部平衡堆栈，调用者不需要平衡堆栈<span
 <pre class="line-numbers language-TXT" data-language="TXT"><code class="language-TXT">参数a = EBP + 0x8
 参数b = EBP + 0xC<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
-<h2 id="三、调用过程分析"><a href="#三、调用过程分析" class="headerlink" title="三、调用过程分析"></a>三、调用过程分析</h2><pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">#include &lt;stdio.h&gt;
+<h2 id="三、调用过程分析"><a href="#三、调用过程分析" class="headerlink" title="三、调用过程分析"></a>三、调用过程分析</h2><pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">#include &lt;stdio.h&gt;
 
 int add(int a, int b) {
 	int c = 0;
@@ -435,7 +435,7 @@ int main()
 <p>我们使用<code>Visual Studio 2017</code>编译上面代码，并在在工程配置中将函数调用约定设置为<code>__cdecl</code>。</p>
 <p>在程序调试过程中，可以在<code>Visual Studio</code>的<code>反汇编窗口</code>中看到C++代码对应的汇编代码，以及<code>寄存器</code>窗口中看到各个寄存器的值。</p>
 <p><code>main</code>函数的反汇编代码如下：</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">int main()
+<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">int main()
 {
 00DD1720  push        ebp          // 参见add函数中关于这一部分的解析
 00DD1721  mov         ebp,esp  
@@ -459,7 +459,7 @@ int main()
 
 
 <p>执行进入<code>add</code>函数后，<code>add</code>函数内的汇编代码如下：</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">int add(int a, int b) {
+<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">int add(int a, int b) {
 00DD16D0  push        ebp      // ebp入栈，相当于暂存ebp的值
 00DD16D1  mov         ebp,esp  // 将esp赋值给ebp，在该函数之后的执行过程中不会再改变ebp的值。
 00DD16D3  sub         esp,0CCh // 在栈上分配0xCC大小的局部变量存储区域
@@ -680,21 +680,25 @@ int main()
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Windows/" class="post-category">
-                                    Windows
-                                </a>
-                            
-                            <a href="/categories/Windows/C/" class="post-category">
-                                    C++
-                                </a>
-                            
-                            <a href="/categories/Windows/C/%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1/" class="post-category">
-                                    计划任务
+                            <a href="/categories/Windows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B/" class="post-category">
+                                    Windows核心编程
                                 </a>
                             
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/choice/">
+                        <span class="chip bg-color">choice</span>
+                    </a>
+                    
+                    <a href="/tags/%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1/">
+                        <span class="chip bg-color">计划任务</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -793,7 +797,7 @@ int main()
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
             headingsOffset: -($(window).height() * 0.4 - 45),
-            collapseDepth: Number('5'),
+            collapseDepth: Number('2'),
             headingSelector: 'h1, h2, h3, h4'
         });
 
@@ -875,7 +879,7 @@ int main()
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">57.3k</span>
+                        class="white-color">76.9k</span>
             
             
             

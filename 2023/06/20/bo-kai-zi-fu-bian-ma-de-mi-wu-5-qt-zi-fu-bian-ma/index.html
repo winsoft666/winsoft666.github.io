@@ -377,7 +377,7 @@
 <p><strong>QString中存储的字符串的编码格式就是“编译器执行字符集编码格式”。</strong> 这一句话很关键。</p>
 <p>在MSVC中我们可以使用<code>#pragma execution_character_set("utf-8")</code>来指定该源文件的执行字符集编码格式为UTF8格式，这样QString中存储的字符串格式就是utf8编码了。</p>
 <p>下面是完整的测试用例：</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">
+<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">
 void Demo01::qStringUseCase() {
 	/*
 	该源文件使用Utf8-BOM格式保存.
@@ -448,7 +448,7 @@ If this string contains any characters that cannot be encoded in the locale, the
 
 <p>简单来说，我们可以理解这个函数将字符串转换为的ANSI编码的字符串，通过<a href="/2023/06/20/bo-kai-zi-fu-bian-ma-de-mi-wu-1-zi-fu-bian-ma-gai-shu/" title="拨开字符编码的迷雾(1)--字符编码概述">拨开字符编码的迷雾(1)--字符编码概述</a>介绍，我们应该知道<code>ANSI</code>是和具体的代码页相关联的（在Windows中文环境下默认是代码页936）。Qt不是根据系统代码页来做判断的，而是通过<code>QTextCodec</code>来做判断的，所以文档中会提到这个函数需要结合<code>QTextCodec::codecForLocale()</code>来使用，<code>toLocal8Bit</code>根据对应的<code>QTextCodec</code>来做相应的转换。</p>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>所以要想在使用Qt时，不遇到中文乱码问题，只需要在预编译头文件中加入：</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#pragma execution_character_set("utf-8") <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">#pragma execution_character_set("utf-8") <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>由于部分韩文、日文等其他国家的字符不在Visual Studio默认的中文GB2312编码中，所以如果遇到Visual Studio提示“此文件的某些Unicode字符未能保存到当前代码页中”时，这时选择”<code>Utf8-带签名</code>“格式来保存即可。</p>
 <p>综上所述，源文件保存为<code>Utf8-带签名</code>，且设置<code>#pragma execution_character_set("utf-8") </code>就可以解决所有乱码。</p>
@@ -764,7 +764,7 @@ If this string contains any characters that cannot be encoded in the locale, the
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
             headingsOffset: -($(window).height() * 0.4 - 45),
-            collapseDepth: Number('5'),
+            collapseDepth: Number('2'),
             headingSelector: 'h1, h2, h3, h4'
         });
 
@@ -846,7 +846,7 @@ If this string contains any characters that cannot be encoded in the locale, the
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">57.3k</span>
+                        class="white-color">76.9k</span>
             
             
             

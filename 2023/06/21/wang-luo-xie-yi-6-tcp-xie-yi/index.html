@@ -441,7 +441,7 @@ FIN 标记发送端已经完成了发送任务。<span aria-hidden="true" class=
 </li>
 </ul>
 <p>那么遇到上面的问题如何解决了？<br>我们在网络编程中经常设置的<code>SO_REUSEADDR</code>选项就可以解决这个问题，</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">int flag = 1;
+<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">int flag = 1;
 setsockopt(socket, SOL_SOCKET, SO_REUSEADDR, reinterpret_cast&lt;const char*&gt;(&amp;flag), sizeof(flag));<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 
@@ -833,7 +833,7 @@ setsockopt(socket, SOL_SOCKET, SO_REUSEADDR, reinterpret_cast&lt;const char*&gt;
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
             headingsOffset: -($(window).height() * 0.4 - 45),
-            collapseDepth: Number('5'),
+            collapseDepth: Number('2'),
             headingSelector: 'h1, h2, h3, h4'
         });
 
@@ -915,7 +915,7 @@ setsockopt(socket, SOL_SOCKET, SO_REUSEADDR, reinterpret_cast&lt;const char*&gt;
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">57.3k</span>
+                        class="white-color">76.9k</span>
             
             
             

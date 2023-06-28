@@ -381,7 +381,7 @@
 <blockquote>
 <p>如果没有使用<code>#pragma pack</code>指令来显式的指定内存对齐的字节数，则按照默认字节数来对齐，各个平台的默认对齐规则如下：<code>32位CPU默认按照4字节对齐；64位CPU默认按照8字节对齐。</code></p>
 </blockquote>
-<h2 id="三、-pragma-pack命令"><a href="#三、-pragma-pack命令" class="headerlink" title="三、#pragma pack命令"></a>三、#pragma pack命令</h2><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#pragma pack(n) // 使用自定义n字节对齐  n可以为1，2，4，8，16
+<h2 id="三、-pragma-pack命令"><a href="#三、-pragma-pack命令" class="headerlink" title="三、#pragma pack命令"></a>三、#pragma pack命令</h2><pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">#pragma pack(n) // 使用自定义n字节对齐  n可以为1，2，4，8，16
 #pragma pack()  // 使用缺省字节对齐
 #pragma pack(show) // 在编译输出窗口以警告的形式显示出当前的内存以几个字节对齐<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
@@ -394,7 +394,7 @@ double   8字节
 long long 8字节<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>示例代码如下：</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#pragma pack(8)
+<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">#pragma pack(8)
 
 struct A {
 	char s[5];
@@ -721,7 +721,7 @@ int main()
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
             headingsOffset: -($(window).height() * 0.4 - 45),
-            collapseDepth: Number('5'),
+            collapseDepth: Number('2'),
             headingSelector: 'h1, h2, h3, h4'
         });
 
@@ -803,7 +803,7 @@ int main()
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">57.3k</span>
+                        class="white-color">76.9k</span>
             
             
             

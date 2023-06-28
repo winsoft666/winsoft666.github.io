@@ -1,0 +1,1230 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Windbg基本使用方法, Windows,Linux,C++,Qt,Node.js,Electron,WebRTC">
+    <meta name="description" content="一、安装从下面的链接或其他链接下载安装：Download Debugging tools for Windows
+二、配置常用的配置包含符号文件搜索路径、可执行文件搜索路径、源码文件搜索路径配置。
+
+符号文件搜索路径配置（Symbol Fi">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Windbg基本使用方法 | 🅹🅸🅰🅽🅶</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+    
+
+
+    <!-- bg-cover style     -->
+
+
+
+<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+<link rel="stylesheet" type="text/css" href="/css/matery.css">
+<link rel="stylesheet" type="text/css" href="/css/my.css">
+<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
+
+
+
+
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+    <link rel="stylesheet" href="/css/post.css">
+
+
+
+
+    
+
+
+
+    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="https://static.1key.run/modelarts_white.svg" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">🅹🅸🅰🅽🅶</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+  <li>
+    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
+      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="https://static.1key.run/modelarts_white.svg" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">🅹🅸🅰🅽🅶</div>
+        <div class="logo-desc">
+            
+            学习、沉淀、总结和分享知识
+            
+        </div>
+    </div>
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+    </ul>
+</div>
+
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://static.1key.run/blog/matery-theme/featureimages/20.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Windbg基本使用方法</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Windbg/">
+                                <span class="chip bg-color">Windbg</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E8%BD%AF%E4%BB%B6%E8%B0%83%E8%AF%95/" class="post-category">
+                                软件调试
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-06-28
+                </div>
+                
+
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    2k
+                </div>
+                
+
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h2 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h2><p>从下面的链接或其他链接下载安装：<br><a target="_blank" rel="noopener" href="https://developer.microsoft.com/en-us/windows/hardware/download-windbg">Download Debugging tools for Windows</a></p>
+<h2 id="二、配置"><a href="#二、配置" class="headerlink" title="二、配置"></a>二、配置</h2><p>常用的配置包含符号文件搜索路径、可执行文件搜索路径、源码文件搜索路径配置。</p>
+<ul>
+<li><p>符号文件搜索路径配置（Symbol File Path）<br>在菜单项<code>File-&gt; Symbol File Path</code>中设置，如<code>D:\symbol_path;SRV*D:\symbolslocal*http://msdl.microsoft.com/download/symbols</code>意思是先从<code>D:\symbol_path</code>中找符号文件；如果没找到，就去服务器中下载并保存到<code>D:\symbolslocal</code>目录中。<br>可以使用<code>.sympath+ </code>命令来添加其他目录到搜索路径中，如<code>.sympath+ D:\other_symbol_dir</code>。 然后使用<code>.reload</code>来根据新的路径重新搜索并加载符号文件。</p>
+</li>
+<li><p>Image File Path配置<br>此项是在加载dump时，设置可执行文件exe、dll的路径的。</p>
+</li>
+<li><p>Source File Path配置<br>设置源代码目录。如果当前指令指针在源代码范围内，就会自动跳出源文件窗口。源文件窗口中的操作和vs类似。如果没有跳出，可以单机菜单项Open Source File手动选择源文件</p>
+</li>
+<li><p>启动命令<br>可以使用对windbg加入启动参数，通过启动参数指定符号文件路径和源码路径等等。</p>
+<pre class="line-numbers language-Bash" data-language="Bash"><code class="language-Bash">start "" "%~dp0/Debuggers_x86/windbg.exe" -Q -y "D:\symbolslocal*http://msdl.microsoft.com/download/symbols" -srcpath "srv*C:\CodeCache"<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ul>
+<h2 id="三、开始调试"><a href="#三、开始调试" class="headerlink" title="三、开始调试"></a>三、开始调试</h2><p>可以通过菜单项<code>File -&gt; Open Executable</code>来加载本地的一个exe来进行调试，也可以通过菜单项<code>File -&gt; Attache to a Process</code>来加载一个已经运行的exe来进行调试。 </p>
+<p>具体调试指令可以参考：<br><code>Help -&gt; Contents -&gt; Debugging Tools for Windows -&gt; Debuggers -&gt; Debugger Reference</code></p>
+<h2 id="四、工作空间"><a href="#四、工作空间" class="headerlink" title="四、工作空间"></a>四、工作空间</h2><p>Windbg会保存每个你调试的工程的信息，这些信息包括调试项目的属性、参数、会话状态、调试器设置、及图形界面信息，类似于ide的项目文件。<br>每个调试的工作空间信息默认保存在<br><code>HKEY_CURRENT_USER\Software\Microsoft\Windbg\Workspaces</code>中，在这个键下一般有4个子键User、Kernel、Dump、Explicit, 他们分别保存用户态调试，内核态调试、转储文件调试、以及手动保存（Save Workspace As）的工作空间信息。</p>
+<h1 id="五、窗口界面介绍"><a href="#五、窗口界面介绍" class="headerlink" title="五、窗口界面介绍"></a>五、窗口界面介绍</h1><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>热键</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Command</td>
+<td>Atl+1</td>
+<td>输入命令、显示命令结果和调试信息输出</td>
+</tr>
+<tr>
+<td>Watch</td>
+<td>Atl+2</td>
+<td>观察指令全局变量、局部变量和寄存器的信息</td>
+</tr>
+<tr>
+<td>Locals</td>
+<td>Atl+3</td>
+<td>自动显示当前函数的所有局部变量</td>
+</tr>
+<tr>
+<td>Registers</td>
+<td>Atl+4</td>
+<td>观察和修改寄存器的值</td>
+</tr>
+<tr>
+<td>Memory</td>
+<td>Atl+5</td>
+<td>观察和修改内存数据</td>
+</tr>
+<tr>
+<td>Call Stack</td>
+<td>Atl+6</td>
+<td>栈中记录的函数调用序列</td>
+</tr>
+<tr>
+<td>Disassembly</td>
+<td>Atl+7</td>
+<td>反汇编</td>
+</tr>
+<tr>
+<td>Scratch Pad</td>
+<td>Atl+8</td>
+<td>白板，可以用来做调试笔记等</td>
+</tr>
+<tr>
+<td>Processes and Threads</td>
+<td>Atl+9</td>
+<td>显示所有调试目标的列表，包括进程和线程等</td>
+</tr>
+<tr>
+<td>Command Browser</td>
+<td>Ctrl+N</td>
+<td>执行和浏览命令</td>
+</tr>
+</tbody></table>
+<h1 id="六、常用命令"><a href="#六、常用命令" class="headerlink" title="六、常用命令"></a>六、常用命令</h1><p>windbg命令分为<code>标准命令</code>，<code>元命令</code>和<code>扩展命令</code>。<br>以<code>.</code>开头的元命令提供标准命令没有提供的功能，也内建在调试引擎中。<br>以<code>!</code>开头的扩展命令用于扩展某一方面的调试功能，实现在动态加载的扩展模块中。</p>
+<pre class="line-numbers language-TXT" data-language="TXT"><code class="language-TXT">tab键       自动完成命令
+.hh         查看指定命令的帮助手册
+.reload     重新加载符号文件 
+.restart    重新启动调试目标 
+
+bp $exentry 在程序入口点设置断点，$exentry是一个伪寄存器 
+bp 0x00401030              在地址0x00401030处设置断点 
+bp MyTestModule!MyTestFunc 在MyTestModule模块中的MyTestFunc函数处设置断点，前提是该模块符号已经加载 
+bp MyTestModule!MyTestClass::SetValue        在模块MyTestModule的MyTestClass类成员函数SetValue处设置断点 
+bp @@C++(MyTestModule!MyTestClass::SetValue) 与上面一样，语法不同，C++语法，上面的为MASM语法 
+bl 查看设置的断点 
+be 激活断点 
+bd 禁用断点 
+bc 删除某个断点 
+ba              设置访问断点 
+ba r 1 0044108c 在内存0044108c的位置开始的下一个字节的读断点 
+ba w4@@C++(&amp;i)  给变量i地址下4个字节的写断点 
+
+g               运行程序，相当于F5 
+gu              返回函数调用处，相当于shift+F11 
+
+
+u               查看当前正要执行的代码 
+k               查看当前调用堆栈 
+~*kb	        显示所有进程调用堆栈
+
+~           查看调试进程中的线程信息 
+!teb        线程环境块
+~.          当前线程信息
+~#          导致当前异常或调试事件的线程信息
+~[Number]s  线程切换
+
+a                                修改当前指令，输入修改的指令按Enter结束 
+s –a 00400000 L53000 “Wrong”     以ASCII码的形式从00400000处开始往后53000个字节搜索字符串“Wrong” 
+db 400000       以二进制的方式显示内存地位为400000开始的内容 
+dd 400000       以DWORD类型查看 
+d               按上一次的d命令的方式来显示，如果不带参数，则从上一次显示结束的地方继续显示 
+?i              查看局部变量i的值，会以10进制和16进制同时显示 
+eb 0012ff78 'a' 'b'      从内存地址0012ff78开始依次写入后面的值 
+r                        用于查看或者修改寄存器或伪寄存器 
+r $peb                   $peb是一个伪寄存器，调试器将它定义为当前进程的进程环境块地址 
+dt                       用于查看结构体内容 
+!address 400000          查看指定内存地址的信息 
+dv                       查看当前作用域下局部变量的类型和值
+
+.ecxr	                 当前异常的上下文信息
+!analyze -v              详细显示当前异常信息，常用于分析dmp文件
+
+|             所有进程列表
+|.	          当前进程信息
+|#	          导致当前异常或调试事件的进程信息
+|[Number]s	  进程切换
+!peb	      进程环境块
+
+!locks              查看进程中有些锁处于锁定状态
+!cs -l              查看处于锁定状态的关键区
+!handle 000000c0 f  查看句柄000000c0的信息<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h1 id="七、常用调试方法"><a href="#七、常用调试方法" class="headerlink" title="七、常用调试方法"></a>七、常用调试方法</h1><h2 id="7-1、附加进程调试"><a href="#7-1、附加进程调试" class="headerlink" title="7.1、附加进程调试"></a>7.1、附加进程调试</h2><p>使用File菜单中的Attach to a Process选项来选择要附加调试的进程.</p>
+<h2 id="7-2、启动调试新进程"><a href="#7-2、启动调试新进程" class="headerlink" title="7.2、启动调试新进程"></a>7.2、启动调试新进程</h2><ol>
+<li>使用菜单<code>File-&gt; Open Executable</code>选项来选择要启动调试的进程。</li>
+<li>启动windbg时将待调试的程序的文件路径作为参数传递给windbg。</li>
+<li>在注册表<code>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options</code>下新建一个以程序名命名的子项，然后在这个子项中新建一个名为<code>Debugger</code>的<code>REG_SZ</code>类型的值，将值设置为windbg的全路径，比如C:\Program Files (x86)\Windows Kits\8.1\Debuggers\x86\windbg.exe。这样，再运行待调试的程序时，操作系统就会先启动windbg，并把要调试程序的路径传递给他。</li>
+</ol>
+<h2 id="7-3、调试转储文件"><a href="#7-3、调试转储文件" class="headerlink" title="7.3、调试转储文件"></a>7.3、调试转储文件</h2><p>使用File菜单中的Open Crash Dump选项来加载dump文件。</p>
+<h2 id="7-4、远程调试"><a href="#7-4、远程调试" class="headerlink" title="7.4、远程调试"></a>7.4、远程调试</h2><p>服务器（被调试程序的机器）和客户端（发出远程请求的机器）都应该安装版本相同的windbg，应该有网络连接或者串行口连接。 </p>
+<ul>
+<li><p>以tcp端口方式：<br>以命令行的方式启动服务器中的windbg，如：windbg.exe -server tcp:port=5005<br>以命令行的方式启动客户端中的windbg，如：windbg.exe -remote tcp:port=5005,server=192.168.1.180</p>
+</li>
+<li><p>以管道方式：<br>以命令行的方式启动服务器中的windbg，如：windbg -server npipe:pipe=advdbg （adbdbg为命名管道名称）。<br>在客户端中以命令行的方式启动windbg，如：windbg -remote npipe:server=REMOTEHOSTNAME,pipe=advdbg （REMOTEHOSTNAME为远程主机名，dbvdbg为远程主机创建的命名管道名，也可以选择File菜单中的Connect to Remote Session,在弹出来的编辑框中输入远程参数npipe:server=REMOTEHOSTNAME,pipe=advdbg）</p>
+</li>
+</ul>
+<p>成功连接后，命令行信息区会显示类似如下信息：<br>…(npipe advdbg) connected at Thu Jul 11 14:22:02 2017<br>之后可以在客户端或者服务器的windbg中执行各种调试命令，执行结果会同时显示在两个调试器中。</p>
+<p>其它的远程调试方案，可以参考:<br><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/remode-debugging-using-windbg">https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/remode-debugging-using-windbg</a></p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">JiangXueqiao</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://jiangxueqiao.com/2023/06/28/windbg-ji-ben-shi-yong-fang-fa/">https://jiangxueqiao.com/2023/06/28/windbg-ji-ben-shi-yong-fang-fa/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">JiangXueqiao</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Windbg/">
+                                    <span class="chip bg-color">Windbg</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2023/06/28/windows-ping-tai-sheng-cheng-dump-wen-jian/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://static.1key.run/blog/matery-theme/featureimages/12.jpg" class="responsive-img" alt="Windows平台生成Dump文件">
+                        
+                        <span class="card-title">Windows平台生成Dump文件</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-06-28
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%BD%AF%E4%BB%B6%E8%B0%83%E8%AF%95/" class="post-category">
+                                    软件调试
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Dump/">
+                        <span class="chip bg-color">Dump</span>
+                    </a>
+                    
+                    <a href="/tags/Windows/">
+                        <span class="chip bg-color">Windows</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/06/28/zai-c-zhong-shi-yong-lamada-biao-da-shi/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="https://static.1key.run/blog/matery-theme/featureimages/8.jpg" class="responsive-img" alt="在C++中使用Lamada表达式">
+                        
+                        <span class="card-title">在C++中使用Lamada表达式</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-28
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/C/" class="post-category">
+                                    C++
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/C-11/">
+                        <span class="chip bg-color">C++11</span>
+                    </a>
+                    
+                    <a href="/tags/Lamada/">
+                        <span class="chip bg-color">Lamada</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: 🅹🅸🅰🅽🅶<br />'
+            + '文章作者: JiangXueqiao<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('2'),
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+
+
+    <footer class="page-footer bg-color">
+    
+
+    <div class="container row center-align"
+         style="margin-bottom: 15px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            
+                <span id="year">2022-2023</span>
+            
+            <a href="/about" target="_blank">JiangXueqiao</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            
+                <span id="translate">|&nbsp;繁/简：</span><a id="translateLink" href="javascript:translatePage();">繁</a>
+            
+            <br>
+            
+                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                        class="white-color">76.9k</span>
+            
+            
+            
+                
+            
+            
+                <span id="busuanzi_container_site_pv">
+                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
+                    <span id="busuanzi_value_site_pv" class="white-color"></span>
+            </span>
+            
+            
+                <span id="busuanzi_container_site_uv">
+                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
+                    <span id="busuanzi_value_site_uv" class="white-color"></span>
+            </span>
+            
+            <br>
+
+            <!-- 运行天数提醒. -->
+            
+                <span id="sitetime"> Loading ...</span>
+                <script>
+                    var calcSiteTime = function () {
+                        var seconds = 1000;
+                        var minutes = seconds * 60;
+                        var hours = minutes * 60;
+                        var days = hours * 24;
+                        var years = days * 365;
+                        var today = new Date();
+                        var startYear = "2022";
+                        var startMonth = "6";
+                        var startDate = "20";
+                        var startHour = "0";
+                        var startMinute = "0";
+                        var startSecond = "0";
+                        var todayYear = today.getFullYear();
+                        var todayMonth = today.getMonth() + 1;
+                        var todayDate = today.getDate();
+                        var todayHour = today.getHours();
+                        var todayMinute = today.getMinutes();
+                        var todaySecond = today.getSeconds();
+                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
+                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
+                        var diff = t2 - t1;
+                        var diffYears = Math.floor(diff / years);
+                        var diffDays = Math.floor((diff / days) - diffYears * 365);
+
+                        // 区分是否有年份.
+                        var language = 'zh-CN';
+                        if (startYear === String(todayYear)) {
+                            document.getElementById("year").innerHTML = todayYear;
+                            var daysTip = 'This site has been running for ' + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                daysTip = '本站已运行 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                daysTip = '本站已運行 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = daysTip;
+                        } else {
+                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
+                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
+                                + diffDays + ' days';
+                            if (language === 'zh-CN') {
+                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            } else if (language === 'zh-HK') {
+                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
+                            }
+                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
+                        }
+                    }
+
+                    calcSiteTime();
+                </script>
+            
+            <br>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/winsoft666" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:smart7178@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=295429457" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 295429457" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 白天和黑夜主题 -->
+<div class="stars-con">
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>  
+</div>
+
+<script>
+    function switchNightMode() {
+        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
+        setTimeout(function () {
+            $('body').hasClass('DarkMode') 
+            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
+            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
+            
+            setTimeout(function () {
+            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
+                $(this).remove()
+            })
+            }, 2e3)
+        })
+    }
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    
+
+    
+        <script type="text/javascript" src="/js/tw_cn.js"></script>
+        <script type="text/javascript">
+          var defaultEncoding = 2; //网站编写字体是否繁体，1-繁体，2-简体
+          var translateDelay = 0; //延迟时间,若不在前, 要设定延迟翻译时间, 如100表示100ms,默认为0
+          var cookieDomain = "https://jiangxueqiao.com"; //Cookie地址, 一定要设定, 通常为你的网址
+          var msgToTraditionalChinese = "繁"; //此处可以更改为你想要显示的文字
+          var msgToSimplifiedChinese = "简"; //同上，但两处均不建议更改
+          var translateButtonId = "translateLink"; //默认互换id
+          translateInitilization();
+        </script>
+    
+    
+    
+
+    <!-- 雪花特效 -->
+    
+
+    <!-- 鼠标星星特效 -->
+    
+
+     
+        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
+        <script src="/libs/others/TencentCaptcha.js"></script>
+        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
+    
+
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    <!--腾讯兔小巢-->
+    
+    
+
+    
+
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

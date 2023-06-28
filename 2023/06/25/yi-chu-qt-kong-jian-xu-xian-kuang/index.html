@@ -372,7 +372,7 @@
 
 
 <h1 id="方式二：继承-QProxyStyle"><a href="#方式二：继承-QProxyStyle" class="headerlink" title="方式二：继承 QProxyStyle"></a>方式二：继承 QProxyStyle</h1><p>继承 QProxyStyle，PrimitiveElement为QStyle::PE_FrameFocusRect 时不绘制虚线框，然后在main() 函数里调用 QApplication::setStyle() 使用新的样式。</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">// 文件名: NoFocusRectStyle.h
+<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">// 文件名: NoFocusRectStyle.h
 #ifndef NOFOCUSRECTSTYLE_H
 #define NOFOCUSRECTSTYLE_H
 #include &lt;QProxyStyle&gt;
@@ -396,7 +396,7 @@ public:
 
 
 
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">// 文件名: main.cpp
+<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">// 文件名: main.cpp
 #include "Widget.h"
 #include "NoFocusRectStyle.h"
 #include &lt;QApplication&gt;
@@ -547,8 +547,8 @@ int main(int argc, char *argv[])
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Node-js/" class="post-category">
-                                    Node.js
+                            <a href="/categories/Web/" class="post-category">
+                                    Web
                                 </a>
                             
                             
@@ -713,7 +713,7 @@ int main(int argc, char *argv[])
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
             headingsOffset: -($(window).height() * 0.4 - 45),
-            collapseDepth: Number('5'),
+            collapseDepth: Number('2'),
             headingSelector: 'h1, h2, h3, h4'
         });
 
@@ -795,7 +795,7 @@ int main(int argc, char *argv[])
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">57.3k</span>
+                        class="white-color">76.9k</span>
             
             
             

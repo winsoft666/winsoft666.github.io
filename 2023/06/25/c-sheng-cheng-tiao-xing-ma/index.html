@@ -373,7 +373,7 @@
 <li>CodeI2of5码 —— 只能表示数字0 -9 可变长度，连续性条形码，所有条与空都表示代码，第一个数字由条开始，第二个数字由空组成，空白区比窄条宽10倍，应用于商品批发、仓库、机场、生产/包装识别、工业中，条形码的识读率高，可适用于固定扫描器可靠扫描，在所有一维条形码中的密度最高。</li>
 </ul>
 <h1 id="二、C-方式实现"><a href="#二、C-方式实现" class="headerlink" title="二、C++方式实现"></a>二、C++方式实现</h1><p><strong><code>barcode.h</code></strong> 中实现了Code39、Code93、Code128、CodeI2of5等4种格式的条形码的生成。<br>具体使用方法：调用对应类的<code>DrawBarcode</code>函数将条形码绘制到HDC上，绘制到HDC上之后可以保存为图片或者显示到界面。</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">#ifndef BARCODE_H_
+<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">#ifndef BARCODE_H_
 #define BARCODE_H_
 #pragma once
 
@@ -1803,12 +1803,8 @@ private:
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Windows/" class="post-category">
-                                    Windows
-                                </a>
-                            
-                            <a href="/categories/Windows/C/" class="post-category">
-                                    C++
+                            <a href="/categories/Windows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B/" class="post-category">
+                                    Windows核心编程
                                 </a>
                             
                             
@@ -1920,7 +1916,7 @@ private:
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
             headingsOffset: -($(window).height() * 0.4 - 45),
-            collapseDepth: Number('5'),
+            collapseDepth: Number('2'),
             headingSelector: 'h1, h2, h3, h4'
         });
 
@@ -2002,7 +1998,7 @@ private:
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">57.3k</span>
+                        class="white-color">76.9k</span>
             
             
             

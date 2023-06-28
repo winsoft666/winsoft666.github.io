@@ -433,7 +433,7 @@ IP协议是TCP/IP协议族中最核心的协议。所有的TCP、UDP、ICMP、IG
 </ol>
 <h2 id="三、使用代码计算校验和"><a href="#三、使用代码计算校验和" class="headerlink" title="三、使用代码计算校验和"></a>三、使用代码计算校验和</h2><p>通过wireshark抓取一帧数据报，如图：<br><img src="https://static.1key.run/blog/img/wangluoxieyi-ip-2.jpg"></p>
 <p>以该数据报的IP首部为基础，使用C++代码来验证IP首部校验和的计算步骤和校验步骤：</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;assert.h&gt;
+<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">#include &lt;assert.h&gt;
 
 
 // GetChecksum函数用于实现上面所说的计算步骤中的第2步、第3步：
@@ -538,7 +538,7 @@ int main()
 <p>计算校验和时第5,6字节置为0，校验和等于：A+B+0，然后取反，即：<br><img src="https://static.1key.run/blog/img/wangluoxieyi-ip-4.jpg"></p>
 <p>接收端收到之后校验步骤为：求校验和（不同的是：校验和位不置0），若此时求得校验和为0，则校验通过。即：<br><img src="https://static.1key.run/blog/img/wangluoxieyi-ip-5.jpg"></p>
 <h2 id="五、IP地址相关操作"><a href="#五、IP地址相关操作" class="headerlink" title="五、IP地址相关操作"></a>五、IP地址相关操作</h2><p>本节介绍在网络编程中涉及到的与IP地址相关的操作</p>
-<h3 id="struct-in-addr"><a href="#struct-in-addr" class="headerlink" title="struct in_addr"></a>struct in_addr</h3><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">// sizeof(in_addr) == sizeof(ULONG) == 4
+<h3 id="struct-in-addr"><a href="#struct-in-addr" class="headerlink" title="struct in_addr"></a>struct in_addr</h3><pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">// sizeof(in_addr) == sizeof(ULONG) == 4
 //
 typedef struct in_addr {
         union {
@@ -556,7 +556,7 @@ typedef struct in_addr {
 #define s_lh    S_un.S_un_b.s_b3    // logical host
 } IN_ADDR, *PIN_ADDR, FAR *LPIN_ADDR;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h3 id="struct-sockaddr-in"><a href="#struct-sockaddr-in" class="headerlink" title="struct sockaddr_in"></a>struct sockaddr_in</h3><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">// sizeof(sockaddr_in) == 16
+<h3 id="struct-sockaddr-in"><a href="#struct-sockaddr-in" class="headerlink" title="struct sockaddr_in"></a>struct sockaddr_in</h3><pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">// sizeof(sockaddr_in) == 16
 struct sockaddr_in {
         short   sin_family;
         u_short sin_port;
@@ -565,7 +565,7 @@ struct sockaddr_in {
 };<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
-<h3 id="struct-sockaddr"><a href="#struct-sockaddr" class="headerlink" title="struct sockaddr"></a>struct sockaddr</h3><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">// sizeof(sockaddr) == 16
+<h3 id="struct-sockaddr"><a href="#struct-sockaddr" class="headerlink" title="struct sockaddr"></a>struct sockaddr</h3><pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">// sizeof(sockaddr) == 16
 //
 struct sockaddr {
         u_short sa_family;              /* address family */
@@ -575,11 +575,11 @@ struct sockaddr {
 <h3 id="5-1-转换函数"><a href="#5-1-转换函数" class="headerlink" title="5.1 转换函数"></a>5.1 转换函数</h3><blockquote>
 <p>webrtc中的<code>IPAddress</code>类和<code>SocketAddress</code>类，对网络地址的操作进行了很好的封装，值得参考。</p>
 </blockquote>
-<h4 id="5-1-1-IP字符串-gt-整数"><a href="#5-1-1-IP字符串-gt-整数" class="headerlink" title="5.1.1 IP字符串 -> 整数"></a>5.1.1 IP字符串 -&gt; 整数</h4><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">unsigned long inet_addr(
+<h4 id="5-1-1-IP字符串-gt-整数"><a href="#5-1-1-IP字符串-gt-整数" class="headerlink" title="5.1.1 IP字符串 -> 整数"></a>5.1.1 IP字符串 -&gt; 整数</h4><pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">unsigned long inet_addr(
   _In_ const char *cp
 );<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>将类似<code>127.0.0.1</code>这样的IP字符串转换为网络字节序列的整数</p>
-<h4 id="5-1-2-整数-gt-IP字符串"><a href="#5-1-2-整数-gt-IP字符串" class="headerlink" title="5.1.2 整数 -> IP字符串"></a>5.1.2 整数 -&gt; IP字符串</h4><pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">char* FAR inet_ntoa(
+<h4 id="5-1-2-整数-gt-IP字符串"><a href="#5-1-2-整数-gt-IP字符串" class="headerlink" title="5.1.2 整数 -> IP字符串"></a>5.1.2 整数 -&gt; IP字符串</h4><pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">char* FAR inet_ntoa(
   _In_ struct   in_addr in
 );<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>将in_addr（也可以理解为网络字节序列整数）转换为IP字符串。</p>
@@ -594,7 +594,7 @@ ntohll<span aria-hidden="true" class="line-numbers-rows"><span></span><span></sp
 <p>字节序列可以参考：<a target="_blank" rel="noopener" href="http://blog.csdn.net/china_jeffery/article/details/78401731">http://blog.csdn.net/china_jeffery/article/details/78401731</a></p>
 </blockquote>
 <h3 id="5-3-获取本机IP地址"><a href="#5-3-获取本机IP地址" class="headerlink" title="5.3 获取本机IP地址"></a>5.3 获取本机IP地址</h3><h4 id="5-3-1-使用gethostbyname"><a href="#5-3-1-使用gethostbyname" class="headerlink" title="5.3.1 使用gethostbyname"></a>5.3.1 使用gethostbyname</h4><p>这种方式有一个弊端：只能获取一个网卡的IP地址。</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">unsigned long GetLocalIPv4Address() {
+<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">unsigned long GetLocalIPv4Address() {
 	char hostname[MAX_PATH] = { 0 };
 	gethostname(hostname, MAX_PATH);
 	struct hostent FAR* lpHostEnt = gethostbyname(hostname);
@@ -611,7 +611,7 @@ ntohll<span aria-hidden="true" class="line-numbers-rows"><span></span><span></sp
 }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="5-3-2-使用GetAdaptersInfo"><a href="#5-3-2-使用GetAdaptersInfo" class="headerlink" title="5.3.2 使用GetAdaptersInfo"></a>5.3.2 使用GetAdaptersInfo</h4><p>该方式可以获取本机多块网卡的信息（不限于IP地址）。</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;windows.h&gt;
+<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">#include &lt;windows.h&gt;
 #include &lt;Iphlpapi.h&gt;
 #include &lt;string&gt;
 #include &lt;vector&gt;
@@ -975,7 +975,7 @@ bool GetLocalAddress(std::vector&lt;std::string&gt; &amp;ip_list) {
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
             headingsOffset: -($(window).height() * 0.4 - 45),
-            collapseDepth: Number('5'),
+            collapseDepth: Number('2'),
             headingSelector: 'h1, h2, h3, h4'
         });
 
@@ -1057,7 +1057,7 @@ bool GetLocalAddress(std::vector&lt;std::string&gt; &amp;ip_list) {
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">57.3k</span>
+                        class="white-color">76.9k</span>
             
             
             

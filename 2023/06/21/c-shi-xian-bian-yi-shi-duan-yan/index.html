@@ -362,10 +362,10 @@ static_assert ( bool_constexpr )">
 static_assert ( bool_constexpr )		(C++17 起)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>若编译器不支持C++11（经测试VS2010已经支持<code>static_assert</code>），可以使用下面方式来实现编译断言：</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">#define COMPILE_ASSERT(expression) switch (0) {case 0: case expression:;}<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">#define COMPILE_ASSERT(expression) switch (0) {case 0: case expression:;}<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>使用方法：</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">COMPILE_ASSERT(1 != 1);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">COMPILE_ASSERT(1 != 1);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
                 
             </div>
@@ -675,7 +675,7 @@ static_assert ( bool_constexpr )		(C++17 起)<span aria-hidden="true" class="lin
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">57.3k</span>
+                        class="white-color">76.9k</span>
             
             
             

@@ -373,7 +373,7 @@
 </ol>
 <h2 id="一-什么是默认构造函数？"><a href="#一-什么是默认构造函数？" class="headerlink" title="一. 什么是默认构造函数？"></a>一. 什么是默认构造函数？</h2><p>我们一般会认为默认构造函数就是编译器自动生成的那个构造函数，其实这种理解不全面。<br><strong>准确的说，默认构造函数就是在调用时不需要显示地传入实参的构造函数。</strong></p>
 <p>根据这个原则，下面2种构造函数都是默认构造函数：</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Sample {
+<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">class Sample {
 public:
 	// 默认构造函数。
 	Sample() {
@@ -381,7 +381,7 @@ public:
 	}
 };<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">class Sample {
+<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">class Sample {
 public:
 	// 默认构造函数。虽然有形参，但有默认值，调用的时候可以不显示的传入实参。
 	Sample(int m = 10) {
@@ -392,7 +392,7 @@ public:
 
 
 <h2 id="二-默认构造函数什么时候被调用？"><a href="#二-默认构造函数什么时候被调用？" class="headerlink" title="二. 默认构造函数什么时候被调用？"></a>二. 默认构造函数什么时候被调用？</h2><p>如果定义一个对象时没有使用初始化式，编译器就会使用默认构造函数。如：</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">Sample s;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">Sample s;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <h2 id="三-编译器在什么情况下会生成默认构造函数？"><a href="#三-编译器在什么情况下会生成默认构造函数？" class="headerlink" title="三. 编译器在什么情况下会生成默认构造函数？"></a>三. 编译器在什么情况下会生成默认构造函数？</h2><p>有一句很经典的话可以用来回答这个问题：<strong>惟有默认构造函数被编译器需要的时候，编译器才会生成默认构造函数。</strong></p>
 <p>那我们只需知道什么时候“被编译器需要”，就可以知道什么情况下会生成默认构造函数了。</p>
@@ -404,7 +404,7 @@ public:
 <li>当该类有虚函数时。</li>
 </ol>
 <h2 id="四-注意事项"><a href="#四-注意事项" class="headerlink" title="四. 注意事项"></a>四. 注意事项</h2><h3 id="4-1-避免“无参数的默认构造函数”和“带缺省参数的默认构造函数”同时存在"><a href="#4-1-避免“无参数的默认构造函数”和“带缺省参数的默认构造函数”同时存在" class="headerlink" title="4.1 避免“无参数的默认构造函数”和“带缺省参数的默认构造函数”同时存在"></a>4.1 避免“无参数的默认构造函数”和“带缺省参数的默认构造函数”同时存在</h3><p><code>无参数的默认构造函数</code>和<code>带缺省参数的默认构造函数</code>同时存在时，编译器会产生二义性，从而生成编译错误。</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Sample {
+<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">class Sample {
 public:
 	// 默认构造函数
 	Sample() {
@@ -431,7 +431,7 @@ int main()
 <pre class="line-numbers language-TXT" data-language="TXT"><code class="language-TXT">warning C4930: “Sample s(void)”: 未调用原型函数(是否是有意用变量定义的?)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>因为编译器误认为<code>Sample s();</code>语句时要声明返回值为<code>Sample</code>对象的函数<code>s</code>，而又没找到函数<code>s</code>的定义，所以产生了警告。</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">class Sample {
+<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">class Sample {
 public:
 	// 默认构造函数
 	Sample() {
@@ -739,7 +739,7 @@ int main()
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
             headingsOffset: -($(window).height() * 0.4 - 45),
-            collapseDepth: Number('5'),
+            collapseDepth: Number('2'),
             headingSelector: 'h1, h2, h3, h4'
         });
 
@@ -821,7 +821,7 @@ int main()
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">57.3k</span>
+                        class="white-color">76.9k</span>
             
             
             

@@ -300,9 +300,17 @@ C:\Users\ak">
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/choice/">
+                                <span class="chip bg-color">choice</span>
+                            </a>
+                        
+                            <a href="/tags/%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1/">
+                                <span class="chip bg-color">计划任务</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -310,16 +318,8 @@ C:\Users\ak">
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Windows/" class="post-category">
-                                Windows
-                            </a>
-                        
-                            <a href="/categories/Windows/C/" class="post-category">
-                                C++
-                            </a>
-                        
-                            <a href="/categories/Windows/C/%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1/" class="post-category">
-                                计划任务
+                            <a href="/categories/Windows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B/" class="post-category">
+                                Windows核心编程
                             </a>
                         
                     </div>
@@ -401,7 +401,7 @@ CHOICE [/C choices] [/N] [/CS] [/T timeout /D choice] [/M text]
    CHOICE /C ab /N /M "选项 1 请选择 a，选项 2 请选择 b。"<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>实现方式如下：</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">bool DeleteSelf {
+<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">bool DeleteSelf {
     wchar_t szSystemDir[MAX_PATH] = {0};
     if (GetSystemDirectoryW(szSystemDir, MAX_PATH) &gt; 0) {
         PathAddBackslashW(szSystemDir);
@@ -495,7 +495,15 @@ int main() {
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/choice/">
+                                    <span class="chip bg-color">choice</span>
+                                </a>
+                            
+                                <a href="/tags/%E8%AE%A1%E5%88%92%E4%BB%BB%E5%8A%A1/">
+                                    <span class="chip bg-color">计划任务</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -728,7 +736,7 @@ int main() {
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
             headingsOffset: -($(window).height() * 0.4 - 45),
-            collapseDepth: Number('5'),
+            collapseDepth: Number('2'),
             headingSelector: 'h1, h2, h3, h4'
         });
 
@@ -810,7 +818,7 @@ int main() {
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">57.3k</span>
+                        class="white-color">76.9k</span>
             
             
             

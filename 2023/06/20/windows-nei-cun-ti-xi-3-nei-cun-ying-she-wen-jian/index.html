@@ -375,7 +375,7 @@
 <p>内存映射文件也是Windows的一种内存管理方法，提供了一个统一的内存管理特征，使应用程序可以通过内存指针对磁盘上的文件进行访问。通过文件映射将磁盘文件内容（全部或者部分）与进程虚拟地址空间的某个区域建立映射关联，可以直接对被映射的文件进行访问，而不必执行文件I/O操作也无需对文件内容进行缓冲处理。内存文件映射的这种特性是非常适合于用来管理大尺寸文件的。</p>
 <h1 id="三、大文件读写实例"><a href="#三、大文件读写实例" class="headerlink" title="三、大文件读写实例"></a>三、大文件读写实例</h1><p>通过C++调用系统API实现文件映射的步骤大致如下：<br><img src="https://static.1key.run/blog/img/windows-nctx-ncys-2.jpg"></p>
 <p>本示例首先在<code>D:\</code>生成一个大小为1GB的<code>BigFile.data</code>文件，然后使用内存映射技术将该文件内全部填充字符A，随后读取其中的<code>第20000~20100字节</code>，并将这些字节修改为字符B，然后再次读取已验证是否修改成功。</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;windows.h&gt;
+<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">#include &lt;windows.h&gt;
 
 void Test() {
 	HANDLE file_ = CreateFile(TEXT("D:\\BigFile.data"), 
@@ -760,7 +760,7 @@ int main()
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
             headingsOffset: -($(window).height() * 0.4 - 45),
-            collapseDepth: Number('5'),
+            collapseDepth: Number('2'),
             headingSelector: 'h1, h2, h3, h4'
         });
 
@@ -842,7 +842,7 @@ int main()
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">57.3k</span>
+                        class="white-color">76.9k</span>
             
             
             

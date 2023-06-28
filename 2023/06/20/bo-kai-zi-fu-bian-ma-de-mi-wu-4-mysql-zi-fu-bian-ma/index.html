@@ -427,7 +427,7 @@ Incorrect string value: '\xF0\xA4\xAD\xA2' for column 'memberName' at row 1<span
 <pre class="line-numbers language-none"><code class="language-none">set names utf8mb4;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>编程开发中，一般使用MySQL API进行数据连接、查询等操作，可以使用<code>mysql_set_character_set</code>对每个连接进行设置，这个API会将客户端字符集、连接字符集，结果字符集都设置为指定字符集，代码大致如下：</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">MYSQL* pMysql = NULL;
+<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">MYSQL* pMysql = NULL;
 mysql_real_connect(pMysql, szHost, szUser, szPwd, szDatabase, iPort, NULL, CLIENT_MULTI_STATEMENTS);
 mysql_set_character_set(pMysql, "utf8mb4");<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
@@ -739,7 +739,7 @@ mysql_set_character_set(pMysql, "utf8mb4");<span aria-hidden="true" class="line-
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
             headingsOffset: -($(window).height() * 0.4 - 45),
-            collapseDepth: Number('5'),
+            collapseDepth: Number('2'),
             headingSelector: 'h1, h2, h3, h4'
         });
 
@@ -821,7 +821,7 @@ mysql_set_character_set(pMysql, "utf8mb4");<span aria-hidden="true" class="line-
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">57.3k</span>
+                        class="white-color">76.9k</span>
             
             
             

@@ -444,7 +444,7 @@
 <p>多播包括组播和广播，组播、广播都是多播的一种表现形式。</p>
 <h3 id="5-1-单播"><a href="#5-1-单播" class="headerlink" title="5.1 单播"></a>5.1 单播</h3><p>单播是主机之间“一对一”的通讯模式。发送方需要指定一个接收方的IP和端口，只有这个接收方会收到数据报。不会对子网内的其他机器产生影响。<br>在单播模式下，服务器针对每个客户机都要发送数据流，<code>服务器流量=客户机数量×客户机流量</code>，在客户机数量大、每个客户机流量大的应用（如流媒体）中，服务器将不堪重负。</p>
 <h4 id="5-1-1-单播发送端"><a href="#5-1-1-单播发送端" class="headerlink" title="5.1.1 单播发送端"></a>5.1.1 单播发送端</h4><p>因为UDP不是面向连接的，且不可靠的，所以发送端在调用<code>sendto</code>之后，就算<code>sendto</code>返回成功，也不代表接收端一定收到了数据，可能接收端压根都没启动，也是有可能的。不能根据<code>sendto</code>的返回值来确保接收端一定收到了数据。如果需要数据传输的可靠性得到保证，可以使用TCP或者通过业务逻辑来保证。</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">#include &lt;WinSock2.h&gt;
+<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">#include &lt;WinSock2.h&gt;
 #pragma comment(lib, "Ws2_32.lib")
 
 void SendLogic() {
@@ -485,7 +485,7 @@ int main()
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <h4 id="5-1-2-单播接收端"><a href="#5-1-2-单播接收端" class="headerlink" title="5.1.2 单播接收端"></a>5.1.2 单播接收端</h4><p>因为UDP不是面向连接的，所以接收端不用listen，也不用accept，只需要绑定到指定的端口和地址即可。<br><code>recvfrom</code>是同步的，会阻塞住等待数据的到来。如果要使用异步方式，可以使用<code>WSARecvFrom</code>结合ICOP的方式来实现。</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">#include &lt;WinSock2.h&gt;
+<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">#include &lt;WinSock2.h&gt;
 #pragma comment(lib, "Ws2_32.lib")
 
 void RecvLogic() {
@@ -544,7 +544,7 @@ int main()
 <blockquote>
 <p>需要说明的是广播地址不仅仅只有<code>255.255.255.255</code>一个。广播地址分为受限的广播、指向网络的广播、指向子网的广播、指向所有子网的网广播。<code>255.255.255.255</code>只是受限的广播地址。</p>
 </blockquote>
-<h4 id="5-2-1-广播发送端"><a href="#5-2-1-广播发送端" class="headerlink" title="5.2.1 广播发送端"></a>5.2.1 广播发送端</h4><pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">#include &lt;WinSock2.h&gt;
+<h4 id="5-2-1-广播发送端"><a href="#5-2-1-广播发送端" class="headerlink" title="5.2.1 广播发送端"></a>5.2.1 广播发送端</h4><pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">#include &lt;WinSock2.h&gt;
 #pragma comment(lib, "Ws2_32.lib")
 
 void SendLogic() {
@@ -592,7 +592,7 @@ int main()
 }
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="5-2-2-广播接收端-和单播一样"><a href="#5-2-2-广播接收端-和单播一样" class="headerlink" title="5.2.2 广播接收端(和单播一样)"></a>5.2.2 广播接收端(和单播一样)</h4><pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">#include &lt;WinSock2.h&gt;
+<h4 id="5-2-2-广播接收端-和单播一样"><a href="#5-2-2-广播接收端-和单播一样" class="headerlink" title="5.2.2 广播接收端(和单播一样)"></a>5.2.2 广播接收端(和单播一样)</h4><pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">#include &lt;WinSock2.h&gt;
 
 #pragma comment(lib, "Ws2_32.lib")
 
@@ -646,7 +646,7 @@ int main()
 <p>预留组播地址：<code>224.0.1.0～238.255.255.255</code>，用于全球范围或网络协议。</p>
 <p>管理权限地址：<code>239.0.0.0～239.255.255.255</code>，组织内部使用，用于限制组播范围。</p>
 <p>组播就是将数据发送到一组主机。接收端如果要接收消息，则需要加入到该分组，分组是用IP来标识的。<br>从<a href="/2023/06/20/wang-luo-xie-yi-3-ip-xie-yi/" title="网络协议(3)--IP协议">网络协议(3)--IP协议</a>可以知道，适用于分组的IP有<code>224.0.0.0 ~ 239.255.255.255</code>。<br>同样，发送端就需要将数据发送到该分组IP。</p>
-<h4 id="5-3-1-组播发送端"><a href="#5-3-1-组播发送端" class="headerlink" title="5.3.1 组播发送端"></a>5.3.1 组播发送端</h4><pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">#include &lt;WinSock2.h&gt;
+<h4 id="5-3-1-组播发送端"><a href="#5-3-1-组播发送端" class="headerlink" title="5.3.1 组播发送端"></a>5.3.1 组播发送端</h4><pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">#include &lt;WinSock2.h&gt;
 #pragma comment(lib, "Ws2_32.lib")
 
 
@@ -694,7 +694,7 @@ int main()
     return 0;
 }<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h4 id="5-3-2-组播接收端"><a href="#5-3-2-组播接收端" class="headerlink" title="5.3.2 组播接收端"></a>5.3.2 组播接收端</h4><pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">#include &lt;WinSock2.h&gt;
+<h4 id="5-3-2-组播接收端"><a href="#5-3-2-组播接收端" class="headerlink" title="5.3.2 组播接收端"></a>5.3.2 组播接收端</h4><pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">#include &lt;WinSock2.h&gt;
 #include &lt;Ws2ipdef.h&gt;
 
 
@@ -1098,7 +1098,7 @@ int main()
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
             headingsOffset: -($(window).height() * 0.4 - 45),
-            collapseDepth: Number('5'),
+            collapseDepth: Number('2'),
             headingSelector: 'h1, h2, h3, h4'
         });
 
@@ -1180,7 +1180,7 @@ int main()
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">57.3k</span>
+                        class="white-color">76.9k</span>
             
             
             

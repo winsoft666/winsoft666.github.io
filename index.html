@@ -660,32 +660,75 @@
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2023/06/25/windows-zhu-ru-yu-lan-jie-1-dll-zhu-ru-ji-chu/">
+                    <a href="/2023/06/28/windows-shi-xian-wen-jian-qiang-zhi-zhan-yong/">
                         <div class="card-image">
                             
                             
-                            <img src="https://static.1key.run/blog/matery-theme/featureimages/7.jpg" class="responsive-img" alt="Windows注入与拦截(1)--DLL注入基础">
+                            <img src="https://static.1key.run/blog/matery-theme/featureimages/16.jpg" class="responsive-img" alt="Windows实现文件强制占用">
                             
-                            <span class="card-title">Windows注入与拦截(1)--DLL注入基础</span>
+                            <span class="card-title">Windows实现文件强制占用</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                一. DLL注入技术的用途从Windows内存体系(1)--虚拟地址空间文章中我们可以知道，在Windows系统中，每个进程都有自己私有的地址空间。当我们用指针来引用内存的时候，指针的值表示的是进程自己的地址空间的一个虚拟的内存地址。进程不
+                                实现的原理大致如下：
+通过DuplicateHandle拷贝文件句柄给另外一个进程（一般是系统进程），因为系统进程不会被关闭，所以达到了占用某个文件，不让其他进程删除、读取、写入等。
+DuplicateHandle的用法参考：- Windo
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-25
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-28
                             </span>
                             <span class="publish-author">
                                 
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/Windows%E6%B3%A8%E5%85%A5%E4%B8%8E%E6%8B%A6%E6%88%AA/" class="post-category">
-                                    Windows注入与拦截
+                                <a href="/categories/Windows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B/" class="post-category">
+                                    Windows核心编程
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2023/06/28/windows-nei-he-dui-xiang/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="https://static.1key.run/blog/matery-theme/featureimages/18.jpg" class="responsive-img" alt="Windows内核对象">
+                            
+                            <span class="card-title">Windows内核对象</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                一、什么是内核对象我们在windows开发中经常会遇到内核对象，如事件(Event)，管道(Pipe)，互斥量(Mutex)，完成端口(IOCP)，进程(Process)，线程(Thread)等，他们都是内核对象。这些内核对象虽然通过不同的
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-28
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/Windows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B/" class="post-category">
+                                    Windows核心编程
                                 </a>
                                 
                                 
@@ -696,8 +739,16 @@
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/DLL%E6%B3%A8%E5%85%A5/">
-                            <span class="chip bg-color">DLL注入</span>
+                        <a href="/tags/%E5%86%85%E6%A0%B8%E5%AF%B9%E8%B1%A1/">
+                            <span class="chip bg-color">内核对象</span>
+                        </a>
+                        
+                        <a href="/tags/%E5%8F%A5%E6%9F%84/">
+                            <span class="chip bg-color">句柄</span>
+                        </a>
+                        
+                        <a href="/tags/HANDLE/">
+                            <span class="chip bg-color">HANDLE</span>
                         </a>
                         
                     </div>
@@ -709,26 +760,276 @@
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2023/06/25/c-nei-cun-chi-shi-xian/">
+                    <a href="/2023/06/28/typescript-ji-chu-yu-fa/">
                         <div class="card-image">
                             
                             
-                            <img src="https://static.1key.run/blog/matery-theme/featureimages/4.jpg" class="responsive-img" alt="C++内存池实现">
+                            <img src="https://static.1key.run/blog/matery-theme/featureimages/21.jpg" class="responsive-img" alt="Typescript基础语法">
                             
-                            <span class="card-title">C++内存池实现</span>
+                            <span class="card-title">Typescript基础语法</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                一、为什么需要使用内存池在C/C++中我们通常使用malloc,free或new,delete来动态分配内存。一方面，因为这些函数涉及到了系统调用，所以频繁的调用必然会导致程序性能的损耗；
-另一方面，频繁的分配和释放小块内存会导致大量的内存
+                                
+如果你还不了解TypeScript是什么，或者其与JavaScript之前的关系，可以参考：- 前后端常用概念扫盲
+
+TypeScript是JavaScript的一个超集，支持ES6的语法规范，并在此基础上进行了增强，二者最大的不同在于：
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-25
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-28
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/Web/" class="post-category">
+                                    Web
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/Typescript/">
+                            <span class="chip bg-color">Typescript</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2023/06/28/qian-hou-duan-chang-yong-gai-nian-sao-mang/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="https://static.1key.run/blog/matery-theme/featureimages/16.jpg" class="responsive-img" alt="前后端常用概念扫盲">
+                            
+                            <span class="card-title">前后端常用概念扫盲</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                1. 浏览器内核在Web大行其道的时代，网民需要上网浏览网页就需要依赖浏览器这个软件，掌握了浏览器就掌握了流量的入口，于是各大软件公司开始研发自己品牌的浏览器，不同品牌的浏览器其实现原理当然是有区别的，这个实现原理就是浏览器的核心，我们称其
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-28
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/Web/" class="post-category">
+                                    Web
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2023/06/28/ecmascript6-ji-chu-yu-fa/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="https://static.1key.run/blog/matery-theme/featureimages/23.jpg" class="responsive-img" alt="ECMAScript6基础语法">
+                            
+                            <span class="card-title">ECMAScript6基础语法</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                【写在前面】ECMAScript标准的发展经历了一个漫长的过程，从1997年发布的ECMAScript 1.0，到2011年的ECMAScript 5.1，再到2015年的ECMAScript 2015，以及后面每年都会发布的一个新的ECM
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-28
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/Web/" class="post-category">
+                                    Web
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/ECMAScript6/">
+                            <span class="chip bg-color">ECMAScript6</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2023/06/28/windows-ping-tai-sheng-cheng-dump-wen-jian/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="https://static.1key.run/blog/matery-theme/featureimages/12.jpg" class="responsive-img" alt="Windows平台生成Dump文件">
+                            
+                            <span class="card-title">Windows平台生成Dump文件</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                ​转储文件也就是我们常说的dump文件。可以把转储文件看成软件的某个时刻的一个快照。转储文件一般都是在软件出现问题时手动生成或者程序自动生成。
+一、工具篇下面我们介绍几种借助第三方工具生成转储文件的方法。
+1.1 任务管理器任务管理器可以说
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-28
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/%E8%BD%AF%E4%BB%B6%E8%B0%83%E8%AF%95/" class="post-category">
+                                    软件调试
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/Dump/">
+                            <span class="chip bg-color">Dump</span>
+                        </a>
+                        
+                        <a href="/tags/Windows/">
+                            <span class="chip bg-color">Windows</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2023/06/28/windbg-ji-ben-shi-yong-fang-fa/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="https://static.1key.run/blog/matery-theme/featureimages/20.jpg" class="responsive-img" alt="Windbg基本使用方法">
+                            
+                            <span class="card-title">Windbg基本使用方法</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                一、安装从下面的链接或其他链接下载安装：Download Debugging tools for Windows
+二、配置常用的配置包含符号文件搜索路径、可执行文件搜索路径、源码文件搜索路径配置。
+
+符号文件搜索路径配置（Symbol Fi
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-28
+                            </span>
+                            <span class="publish-author">
+                                
+                                <i class="fas fa-bookmark fa-fw icon-category"></i>
+                                
+                                <a href="/categories/%E8%BD%AF%E4%BB%B6%E8%B0%83%E8%AF%95/" class="post-category">
+                                    软件调试
+                                </a>
+                                
+                                
+                            </span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="card-action article-tags">
+                        
+                        <a href="/tags/Windbg/">
+                            <span class="chip bg-color">Windbg</span>
+                        </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+              <!-- 隐藏某个文章 -->
+            
+             <!-- 隐藏某个文章 -->
+            <div class="article col s12 m6 l4" data-aos="zoom-in">
+                <div class="card">
+                    <a href="/2023/06/28/zai-c-zhong-shi-yong-lamada-biao-da-shi/">
+                        <div class="card-image">
+                            
+                            
+                            <img src="https://static.1key.run/blog/matery-theme/featureimages/8.jpg" class="responsive-img" alt="在C++中使用Lamada表达式">
+                            
+                            <span class="card-title">在C++中使用Lamada表达式</span>
+                        </div>
+                    </a>
+
+                    <div class="card-content article-content">
+                        <div class="summary block-with-text">
+                            
+                                Lamada表达式是C++11最重要也是最常用的特性之一。Lamada来源于函数式编程的概念，也是现代编程语言的一个特点。
+一、Lamada表达式定义下图展示出了C++ Lamada表示的组成部分：
+其中：① 指明捕获列表。② 指明参数列表
+                            
+                        </div>
+                        <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-28
                             </span>
                             <span class="publish-author">
                                 
@@ -746,8 +1047,12 @@
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/%E5%86%85%E5%AD%98%E6%B1%A0/">
-                            <span class="chip bg-color">内存池</span>
+                        <a href="/tags/C-11/">
+                            <span class="chip bg-color">C++11</span>
+                        </a>
+                        
+                        <a href="/tags/Lamada/">
+                            <span class="chip bg-color">Lamada</span>
                         </a>
                         
                     </div>
@@ -759,33 +1064,33 @@
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2023/06/25/c-sheng-cheng-tiao-xing-ma/">
+                    <a href="/2023/06/28/liao-jie-dpi-suo-fang/">
                         <div class="card-image">
                             
                             
-                            <img src="https://static.1key.run/blog/matery-theme/featureimages/20.jpg" class="responsive-img" alt="C++生成条形码">
+                            <img src="https://static.1key.run/blog/matery-theme/featureimages/21.jpg" class="responsive-img" alt="了解DPI缩放">
                             
-                            <span class="card-title">C++生成条形码</span>
+                            <span class="card-title">了解DPI缩放</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                一、条形码介绍条形码(barcode)是将宽度不等的多个黑条和空白，按照一定的编码规则排列，用以表达一组信息的图形标识符。常见的条形码是由反射率相差很大的黑条（简称条）和白条（简称空）排成的平行线图案。
-条码种类很多，常见的大概有二十多种码
+                                一、DPI介绍dpi是“Dots Per Inch”的缩写，表示每英寸的像素点个数，也就是像素点的密集度。dpi = 总像素点 / 总面积
+比如一个32寸的显示，但分辨率只有1920*1440，而一个24寸的显示器，分辨率却达到3840*2
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-25
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-28
                             </span>
                             <span class="publish-author">
                                 
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/C/" class="post-category">
-                                    C++
+                                <a href="/categories/Windows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B/" class="post-category">
+                                    Windows核心编程
                                 </a>
                                 
                                 
@@ -796,8 +1101,8 @@
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/%E6%9D%A1%E5%BD%A2%E7%A0%81/">
-                            <span class="chip bg-color">条形码</span>
+                        <a href="/tags/DPI/">
+                            <span class="chip bg-color">DPI</span>
                         </a>
                         
                     </div>
@@ -809,38 +1114,38 @@
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2023/06/25/windows-zhu-ce-url-xie-yi/">
+                    <a href="/2023/06/28/centos7-shen-qing-mian-fei-letsencrypt-zheng-shu-bing-xu-qi/">
                         <div class="card-image">
                             
                             
-                            <img src="https://static.1key.run/blog/matery-theme/featureimages/9.jpg" class="responsive-img" alt="Windows注册URL协议">
+                            <img src="https://static.1key.run/blog/matery-theme/featureimages/9.jpg" class="responsive-img" alt="CentOS7申请免费LetsEncrypt证书并续期">
                             
-                            <span class="card-title">Windows注册URL协议</span>
+                            <span class="card-title">CentOS7申请免费LetsEncrypt证书并续期</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                当电脑安装完Steam后，在浏览器中输入steam://run/123链接，浏览器会自动提示打开Steam程序。
-类似的功能在迅雷、QQ等产品上都有使用。
-实现上述功能只需要在注册表HKEY_CLASSES_ROOT项下添加对应的子项即可，
+                                本文介绍在CentOS7环境下，使用Certbot申请免费的Lets Encrypt SSL证书，并自动续期。
+1. 环境准备安装Python3：
+yum install python3
+
+
+安装Certbot和Python虚拟环境：
+# 
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-25
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-28
                             </span>
                             <span class="publish-author">
                                 
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/Windows/" class="post-category">
-                                    Windows
-                                </a>
-                                
-                                <a href="/categories/Windows/C/" class="post-category">
-                                    C++
+                                <a href="/categories/CentOS/" class="post-category">
+                                    CentOS
                                 </a>
                                 
                                 
@@ -851,8 +1156,12 @@
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/URL%E5%8D%8F%E8%AE%AE/">
-                            <span class="chip bg-color">URL协议</span>
+                        <a href="/tags/LetsEncrypt/">
+                            <span class="chip bg-color">LetsEncrypt</span>
+                        </a>
+                        
+                        <a href="/tags/SSL/">
+                            <span class="chip bg-color">SSL</span>
                         </a>
                         
                     </div>
@@ -864,37 +1173,36 @@
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2023/06/25/yi-ge-dockerfile-tong-shi-yun-xing-duo-ge-jin-cheng/">
+                    <a href="/2023/06/28/centos7-geng-xin-guo-nei-a-li-yuan/">
                         <div class="card-image">
                             
                             
-                            <img src="https://static.1key.run/blog/matery-theme/featureimages/4.jpg" class="responsive-img" alt="一个Dockerfile同时运行多个进程">
+                            <img src="https://static.1key.run/blog/matery-theme/featureimages/4.jpg" class="responsive-img" alt="CentOS7更新国内阿里源">
                             
-                            <span class="card-title">一个Dockerfile同时运行多个进程</span>
+                            <span class="card-title">CentOS7更新国内阿里源</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                Docker容器的哲学是一个Docker容器只运行一个进程。
-但如果需要在一个容器内运行多个进程或服务，可以采取将入口文件设置为Bash Shell脚本，在脚本内运行多个程序的方式。
-#!/bin/bash
- 
-# start 1
-star
+                                依次执行如下命令：
+yum install -y wget
+
+# 备份并下载阿里云的base和epel源
+mv -f /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Bas
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-25
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-28
                             </span>
                             <span class="publish-author">
                                 
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/Docker/" class="post-category">
-                                    Docker
+                                <a href="/categories/CentOS/" class="post-category">
+                                    CentOS
                                 </a>
                                 
                                 
@@ -902,14 +1210,6 @@ star
                         </div>
                     </div>
 
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/Dockerfile/">
-                            <span class="chip bg-color">Dockerfile</span>
-                        </a>
-                        
-                    </div>
                     
                 </div>
             </div>
@@ -918,35 +1218,34 @@ star
              <!-- 隐藏某个文章 -->
             <div class="article col s12 m6 l4" data-aos="zoom-in">
                 <div class="card">
-                    <a href="/2023/06/25/yi-guan-li-yuan-quan-xian-yun-xing-pi-chu-li-jiao-ben/">
+                    <a href="/2023/06/28/cmake-yi-lai-ku-cha-zhao-xiang-guan-wen-ti/">
                         <div class="card-image">
                             
                             
-                            <img src="https://static.1key.run/blog/matery-theme/featureimages/14.jpg" class="responsive-img" alt="以管理员权限运行批处理脚本">
+                            <img src="https://static.1key.run/blog/matery-theme/featureimages/15.jpg" class="responsive-img" alt="CMake依赖库查找相关问题">
                             
-                            <span class="card-title">以管理员权限运行批处理脚本</span>
+                            <span class="card-title">CMake依赖库查找相关问题</span>
                         </div>
                     </a>
 
                     <div class="card-content article-content">
                         <div class="summary block-with-text">
                             
-                                基本原理：
-
-根据cacls.exe是否能够访问”%SystemDrive%\System Volume Information”文件，来判断当前批处理进程是否具有管理员权限。
-创建vbs脚本到临时目录，并运用该脚本提权执行当前bat文件。
+                                1. 如何查找Vcpkg安装的依赖库在CMake工具中指定跨平台工具链，如图：
+指定Toolchain文件D:/sourcecode/vcpkg/scripts/buildsystems/vcpkg.cmake。
+2. 如何查找本机安装的Q
                             
                         </div>
                         <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-25
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-28
                             </span>
                             <span class="publish-author">
                                 
                                 <i class="fas fa-bookmark fa-fw icon-category"></i>
                                 
-                                <a href="/categories/%E6%89%B9%E5%A4%84%E7%90%86/" class="post-category">
-                                    批处理
+                                <a href="/categories/CMake/" class="post-category">
+                                    CMake
                                 </a>
                                 
                                 
@@ -957,332 +1256,12 @@ star
                     
                     <div class="card-action article-tags">
                         
-                        <a href="/tags/%E7%AE%A1%E7%90%86%E5%91%98%E6%9D%83%E9%99%90/">
-                            <span class="chip bg-color">管理员权限</span>
+                        <a href="/tags/Qt/">
+                            <span class="chip bg-color">Qt</span>
                         </a>
                         
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2023/06/25/npm-he-yarn-she-zhi-guo-nei-yuan/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="https://static.1key.run/blog/matery-theme/featureimages/21.jpg" class="responsive-img" alt="NPM和Yarn设置国内源">
-                            
-                            <span class="card-title">NPM和Yarn设置国内源</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                1. Yarn设置查看当前使用的镜像源：
-yarn config get registry
-
-
-
-全局修改：
-yarn config set registry https://registry.npm.taobao.org -g
-yarn 
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-25
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/Node-js/" class="post-category">
-                                    Node.js
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/NPM/">
-                            <span class="chip bg-color">NPM</span>
-                        </a>
-                        
-                        <a href="/tags/Yarn/">
-                            <span class="chip bg-color">Yarn</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2023/06/25/yi-chu-qt-kong-jian-xu-xian-kuang/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="https://static.1key.run/blog/matery-theme/featureimages/22.jpg" class="responsive-img" alt="移除Qt控件虚线框">
-                            
-                            <span class="card-title">移除Qt控件虚线框</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                方式一：使用 StyleSheetQWidget:focus { 
-  outline: none; /* 去掉得到焦点时的虚线框 */ 
-}
-
-
-
-方式二：继承 QProxyStyle继承 QProxyStyle，PrimitiveEle
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-25
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/Qt/" class="post-category">
-                                    Qt
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/QProxyStyle/">
-                            <span class="chip bg-color">QProxyStyle</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2023/06/25/qss-ji-ben-shi-yong-fang-fa/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="https://static.1key.run/blog/matery-theme/featureimages/8.jpg" class="responsive-img" alt="QSS基本使用方法">
-                            
-                            <span class="card-title">QSS基本使用方法</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                一、选择器类型Qt QSS选择器和CSS2、CSS3的选择器类似，建议先学习或者复习CSS选择器的语法。QSS虽然和CSS类型，但有也稍许不同，而且支持的语法也没那么多，具体如下。
-1.1 类选择器/*
-匹配QPushButton的实例及其
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-25
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/Qt/" class="post-category">
-                                    Qt
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/QSS/">
-                            <span class="chip bg-color">QSS</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2023/06/25/qss-de-ji-chong-tu-pian-she-zhi-fang-fa/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="https://static.1key.run/blog/matery-theme/featureimages/21.jpg" class="responsive-img" alt="QSS的几种图片设置方法">
-                            
-                            <span class="card-title">QSS的几种图片设置方法</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                大家在使用QSS进行图片设置时，也许被image, border-image, background-image这几个属性困扰过。比如他们之间有什么区别，什么时候该用哪个属性来设置等等。本文就来讲解一下这个几个属性的异同点。
-一、backg
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-25
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/Qt/" class="post-category">
-                                    Qt
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/QSS/">
-                            <span class="chip bg-color">QSS</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2023/06/25/windows-nei-cun-ti-xi-zhuan-lan/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="https://static.1key.run/blog/matery-theme/featureimages/3.jpg" class="responsive-img" alt="《Windows内存体系》专栏">
-                            
-                            <span class="card-title">《Windows内存体系》专栏</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                力求全面的介绍在Ring3层开发过程中需要了解的Windows内存体系方面的知识。
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-25
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/Windows%E5%86%85%E5%AD%98%E4%BD%93%E7%B3%BB/" class="post-category">
-                                    Windows内存体系
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98/">
-                            <span class="chip bg-color">虚拟内存</span>
-                        </a>
-                        
-                        <a href="/tags/%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90/">
-                            <span class="chip bg-color">内存对齐</span>
-                        </a>
-                        
-                        <a href="/tags/%E5%A0%86/">
-                            <span class="chip bg-color">堆</span>
-                        </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
-              <!-- 隐藏某个文章 -->
-            
-             <!-- 隐藏某个文章 -->
-            <div class="article col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2023/06/21/c-shi-xian-bian-yi-shi-duan-yan/">
-                        <div class="card-image">
-                            
-                            
-                            <img src="https://static.1key.run/blog/matery-theme/featureimages/9.jpg" class="responsive-img" alt="C++实现编译时断言">
-                            
-                            <span class="card-title">C++实现编译时断言</span>
-                        </div>
-                    </a>
-
-                    <div class="card-content article-content">
-                        <div class="summary block-with-text">
-                            
-                                C++自C++11起支持static_assert编译时断言，如：
-static_assert ( bool_constexpr , message )		(C++11 起)
-static_assert ( bool_constexpr )
-                            
-                        </div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-21
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fas fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/C/" class="post-category">
-                                    C++
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
-
-                    
-                    <div class="card-action article-tags">
-                        
-                        <a href="/tags/%E7%BC%96%E8%AF%91%E6%96%AD%E8%A8%80/">
-                            <span class="chip bg-color">编译断言</span>
+                        <a href="/tags/Vcpkg/">
+                            <span class="chip bg-color">Vcpkg</span>
                         </a>
                         
                     </div>
@@ -1307,7 +1286,7 @@ static_assert ( bool_constexpr )
             
         </div>
         <div class="page-info col m4 l4 hide-on-small-only">
-            <div class="center-align b-text-gray">1 / 4</div>
+            <div class="center-align b-text-gray">1 / 5</div>
         </div>
         <div class="col s6 m4 l4">
             
@@ -1342,7 +1321,7 @@ static_assert ( bool_constexpr )
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">57.3k</span>
+                        class="white-color">76.9k</span>
             
             
             

@@ -376,7 +376,7 @@
 <p><img src="https://static.1key.run/blog/img/windows-nctx-kmkncsf-1.png"></p>
 <p>如上图，通过<code>malloc</code>函数从“堆A”中分配100字节内存块，内存块地址为<code>0x123456</code>；从“堆B”中分配100字节内存块，内存块地址为<code>0x345678</code>.<br>如果将<code>0x123456</code>这个地址拿到“堆B”中去释放，势必会导致异常，因为“堆B”中没有这地址。</p>
 <p>那么我们是不是可以使用<code>HeapFree</code>函数来释放<code>hHeap</code>参数指定的“堆”中的任何内存块了。答案是：不能。<br>回忆前面介绍的<code>HeapFree</code>函数，</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">BOOL HeapFree(
+<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">BOOL HeapFree(
   HANDLE hHeap,
   DWORD dwFlags,
   LPVOID lpMem
@@ -712,7 +712,7 @@
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
             headingsOffset: -($(window).height() * 0.4 - 45),
-            collapseDepth: Number('5'),
+            collapseDepth: Number('2'),
             headingSelector: 'h1, h2, h3, h4'
         });
 
@@ -794,7 +794,7 @@
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">57.3k</span>
+                        class="white-color">76.9k</span>
             
             
             

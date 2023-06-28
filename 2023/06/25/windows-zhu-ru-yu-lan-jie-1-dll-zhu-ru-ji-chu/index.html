@@ -372,7 +372,7 @@
 <h2 id="二-什么样的DLL可以被注入？"><a href="#二-什么样的DLL可以被注入？" class="headerlink" title="二. 什么样的DLL可以被注入？"></a>二. 什么样的DLL可以被注入？</h2><p>理论上任何DLL都可以被注入到其他进程之中，但是大多数情况下，我们注入到其他进程之中是为了实现某些功能、做某些事情的，所以我们需要在我们的DLL被注入之后，DLL中的功能代码能够被调用执行。</p>
 <p>我们知道DLL被<strong>首次</strong>载入到进程中时，会收到<code>DLL_PROCESS_ATTACH</code>的通知，即调用<code>DllMain</code>函数，并且参数<code>fdwReason</code>的值被设为<code>DLL_PROCESS_ATTACH</code>。我们可以在收到<code>DLL_PROCESS_ATTACH</code>通知时开始我们的业务逻辑。</p>
 <p>下面是一个最简单的dll的源码，在被注入成功后（即收到<code>DLL_PROCESS_ATTACH</code>通知时）弹出消息提示框：</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">BOOL APIENTRY DllMain(HMODULE hModule, DWORD fdwReason, LPVOID lpReserved ) {
+<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">BOOL APIENTRY DllMain(HMODULE hModule, DWORD fdwReason, LPVOID lpReserved ) {
     switch(fdwReason) {
         case DLL_PROCESS_ATTACH:
         {
@@ -397,7 +397,7 @@
 
 
 <p>但是，如果<code>DLL_PROCESS_ATTACH</code>通知处理过程中的操作被挂起（如消息提示框）或者被阻塞（如用户创建了一个消息循环），这样就会导致目标进程中的<code>LoadLibrary(Ex)</code>函数一直无法返回（dll都是通过<code>LoadLibrary(Ex)</code>函数来加载的），所以我们一般会在<code>DLL_PROCESS_ATTACH</code>通知处理过程中创建一个子线程，将业务逻辑放置到该子线程中执行，代码如下：</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">#include &lt;windows.h&gt;
+<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">#include &lt;windows.h&gt;
 #include &lt;tchar.h&gt;
 #include &lt;process.h&gt;
 
@@ -547,18 +547,17 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  fdwReason, LPVOID lpReserved) {
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2023/06/25/windows-zhu-ru-yu-lan-jie-1-dll-zhu-ru-ji-chu/">
+                <a href="/2023/06/28/windows-yong-hu-jie-mian-te-quan-ge-chi-uipi/">
                     <div class="card-image">
                         
                         
-                        <img src="https://static.1key.run/blog/matery-theme/featureimages/7.jpg" class="responsive-img" alt="Windows注入与拦截(1)--DLL注入基础">
+                        <img src="https://static.1key.run/blog/matery-theme/featureimages/21.jpg" class="responsive-img" alt="Windows用户界面特权隔离(UIPI)">
                         
-                        <span class="card-title">Windows注入与拦截(1)--DLL注入基础</span>
+                        <span class="card-title">Windows用户界面特权隔离(UIPI)</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -568,27 +567,30 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  fdwReason, LPVOID lpReserved) {
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-25
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-06-28
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Windows%E6%B3%A8%E5%85%A5%E4%B8%8E%E6%8B%A6%E6%88%AA/" class="post-category">
-                                    Windows注入与拦截
+                            <a href="/categories/Windows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B/" class="post-category">
+                                    Windows核心编程
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/DLL%E6%B3%A8%E5%85%A5/">
-                        <span class="chip bg-color">DLL注入</span>
+                    <a href="/tags/UIPI/">
+                        <span class="chip bg-color">UIPI</span>
+                    </a>
+                    
+                    <a href="/tags/Process-Explorer/">
+                        <span class="chip bg-color">Process Explorer</span>
                     </a>
                     
                 </div>
@@ -738,7 +740,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  fdwReason, LPVOID lpReserved) {
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
             headingsOffset: -($(window).height() * 0.4 - 45),
-            collapseDepth: Number('5'),
+            collapseDepth: Number('2'),
             headingSelector: 'h1, h2, h3, h4'
         });
 
@@ -820,7 +822,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  fdwReason, LPVOID lpReserved) {
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">57.3k</span>
+                        class="white-color">76.9k</span>
             
             
             

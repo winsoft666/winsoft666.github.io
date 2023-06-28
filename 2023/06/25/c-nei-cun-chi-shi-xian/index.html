@@ -398,7 +398,7 @@
 <li><code>free_element_</code> 记录未被分配出去的内存片。</li>
 </ol>
 <h2 id="3-1-MemoryPool实现代码"><a href="#3-1-MemoryPool实现代码" class="headerlink" title="3.1 MemoryPool实现代码"></a>3.1 <code>MemoryPool</code>实现代码</h2><p>下面是完整的内存池实现的代码，代码中使用了std::mutex等C++11才支持的特性，所以需要编译器最低支持C++11。</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">/* MemoryPool.hpp */
+<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">/* MemoryPool.hpp */
 #ifndef MEMORY_POOL_H_
 #define MEMORY_POOL_H_
 
@@ -701,7 +701,7 @@ inline void
 
 #endif<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<h2 id="3-2-使用示例"><a href="#3-2-使用示例" class="headerlink" title="3.2 使用示例"></a>3.2 使用示例</h2><pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">#include "MemoryPool.hpp"
+<h2 id="3-2-使用示例"><a href="#3-2-使用示例" class="headerlink" title="3.2 使用示例"></a>3.2 使用示例</h2><pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">#include "MemoryPool.hpp"
 #include &lt;iostream&gt;
 #include &lt;thread&gt;
 #include &lt;assert.h&gt;
@@ -1090,7 +1090,7 @@ int main()
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
             headingsOffset: -($(window).height() * 0.4 - 45),
-            collapseDepth: Number('5'),
+            collapseDepth: Number('2'),
             headingSelector: 'h1, h2, h3, h4'
         });
 
@@ -1172,7 +1172,7 @@ int main()
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">57.3k</span>
+                        class="white-color">76.9k</span>
             
             
             

@@ -384,7 +384,7 @@
 <p>需要注意的是，锁定页面时系统会根据当前可用实际物理内存情况，以及进程工作集配额判定当前最大可锁定的页面的实际数量，超过此数量会引起一个错误。我们可以调用<code>SetProcessWorkingSetSize</code>可以改变一个进程工作集大小的配额，从而可以锁定更多的物理页面。</p>
 <h2 id="四、虚拟内存使用实例"><a href="#四、虚拟内存使用实例" class="headerlink" title="四、虚拟内存使用实例"></a>四、虚拟内存使用实例</h2><p>虚拟内存方面的API属于页面粒度API，通过这些API分配的内存的最小粒度是<code>64KB</code>。这些API分配（调拨）的内存区域最初都是位于<code>“页交换文件”</code>上面，当程序对该区域的某些“页面”（<strong>对虚拟内存的管理以页面为单位进行的</strong>）进行读写时，才会将这些页面交换到物理内存上面。</p>
 <p>从<a href="/2023/06/20/windows-nei-cun-ti-xi-1-xu-ni-di-zhi-kong-jian/" title="Windows内存体系(1)--虚拟地址空间">Windows内存体系(1)--虚拟地址空间</a>中我们知道虚拟地址空间要经过<code>预定</code>和<code>调拨</code>2个步骤之后才能使用，这2个步骤都可以通过<code>VirtualAlloc</code>函数实现：</p>
-<pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">LPVOID VirtualAlloc(
+<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">LPVOID VirtualAlloc(
   LPVOID lpAddress, 
   DWORD dwSize, 
   DWORD flAllocationType, 
@@ -392,14 +392,14 @@
 ); <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>当预定或者调拨的空间我们不在需要时，我们需要调用<code>VirtualFree</code>来释放该地址空间：</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">BOOL VirtualFree(
+<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">BOOL VirtualFree(
   LPVOID lpAddress, 
   DWORD dwSize, 
   DWORD dwFreeType 
 ); <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>下面是的示例演示了在预定、调拨、使用等操作前后，进程的各项内存的占用情况：</p>
-<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">#include &lt;windows.h&gt;
+<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">#include &lt;windows.h&gt;
 
 int main()
 {
@@ -752,7 +752,7 @@ int main()
             tocSelector: '#toc-content',
             contentSelector: '#articleContent',
             headingsOffset: -($(window).height() * 0.4 - 45),
-            collapseDepth: Number('5'),
+            collapseDepth: Number('2'),
             headingSelector: 'h1, h2, h3, h4'
         });
 
@@ -834,7 +834,7 @@ int main()
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">57.3k</span>
+                        class="white-color">76.9k</span>
             
             
             
