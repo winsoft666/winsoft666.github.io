@@ -5,8 +5,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="Windows用户界面特权隔离(UIPI), Windows,Linux,C++,Qt,Node.js,Electron,WebRTC">
-    <meta name="description" content="一、用户界面特权隔离(UIPI)在早期的Windows操作系统中，在同一用户下运行的所有进程有着相同的安全等级，拥有相同的权限。例如，一个进程可以自由地发送一个Windows消息到另外一个进程的窗口。
-从Windows Vista开始，对于">
+    <meta name="description" content="
+文章图片带有“CSDN”水印的说明：由于该文章和图片最初发表在我的CSDN博客中，因此图片被CSDN自动添加了水印。
+
+
+一、用户界面特权隔离(UIPI)在早期的Windows操作系统中，在同一用户下运行的所有进程有着相同的安全等级，拥有">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -18,7 +21,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Windows用户界面特权隔离(UIPI) | 🅹🅸🅰🅽🅶</title>
+    <title>Windows用户界面特权隔离(UIPI) | 🅹🅸🅰🅽🅶&#39;s Site</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -65,7 +68,7 @@
                     
                     <img src="https://static.1key.run/modelarts_white.svg" class="logo-img" alt="LOGO">
                     
-                    <span class="logo-span">🅹🅸🅰🅽🅶</span>
+                    <span class="logo-span">🅹🅸🅰🅽🅶&#39;s Site</span>
                 </a>
             </div>
             
@@ -130,7 +133,7 @@
   
   <li class="hide-on-med-and-down nav-item">
     
-    <a href="/contact" class="waves-effect waves-light">
+    <a target="_blank" rel="noopener" href="https://support.qq.com/products/597551" class="waves-effect waves-light">
       
       <i class="fas fa-comments" style="zoom: 0.6;"></i>
       
@@ -169,10 +172,10 @@
         
         <img src="https://static.1key.run/modelarts_white.svg" class="logo-img circle responsive-img">
         
-        <div class="logo-name">🅹🅸🅰🅽🅶</div>
+        <div class="logo-name">🅹🅸🅰🅽🅶&#39;s Site</div>
         <div class="logo-desc">
             
-            学习、沉淀、总结和分享知识
+            学习、沉淀、总结与分享
             
         </div>
     </div>
@@ -236,7 +239,7 @@
         
         <li class="m-nav-item">
 	  
-		<a href="/contact" class="waves-effect waves-light">
+		<a target="_blank" rel="noopener" href="https://support.qq.com/products/597551" class="waves-effect waves-light">
 			
 			    <i class="fa-fw fas fa-comments"></i>
 			
@@ -272,7 +275,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://static.1key.run/blog/matery-theme/featureimages/21.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://static.1key.run/blog/matery-theme/medias/featureimages/21.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -335,6 +338,11 @@
                 
 
                 
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2023-06-29
+                </div>
+                
 
                 
                 <div class="info-break-policy">
@@ -364,7 +372,11 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="一、用户界面特权隔离-UIPI"><a href="#一、用户界面特权隔离-UIPI" class="headerlink" title="一、用户界面特权隔离(UIPI)"></a>一、用户界面特权隔离(UIPI)</h1><p>在早期的Windows操作系统中，在同一用户下运行的所有进程有着相同的安全等级，拥有相同的权限。例如，一个进程可以自由地发送一个Windows消息到另外一个进程的窗口。</p>
+                <blockquote>
+<p>文章图片带有“CSDN”水印的说明：<br>由于该文章和图片最初发表在我的<a target="_blank" rel="noopener" href="https://blog.csdn.net/china_jeffery">CSDN博客</a>中，因此图片被CSDN自动添加了水印。</p>
+</blockquote>
+<hr>
+<h1 id="一、用户界面特权隔离-UIPI"><a href="#一、用户界面特权隔离-UIPI" class="headerlink" title="一、用户界面特权隔离(UIPI)"></a>一、用户界面特权隔离(UIPI)</h1><p>在早期的Windows操作系统中，在同一用户下运行的所有进程有着相同的安全等级，拥有相同的权限。例如，一个进程可以自由地发送一个Windows消息到另外一个进程的窗口。</p>
 <p>从Windows Vista开始，对于某些Windows消息，这一方式再也行不通了。进程（或者其他的对象）开始拥有一个新的属性–特权等级(Privilege Level)。</p>
 <p>一个特权等级较低的进程不再可以向一个特权等级较高的进程发送消息，虽然他们在相同的用户权限下运行。这就是所谓的用户界面特权隔离(User Interface Privilege Isolation ，UIPI)。</p>
 <p>引入UIPI的目的是为了防止恶意程序发送消息给那些拥有较高权限的窗口，从而利用该进程的高权限达到某种目的等等。</p>
@@ -564,7 +576,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="https://static.1key.run/blog/matery-theme/featureimages/23.jpg" class="responsive-img" alt="Vcpkg访问Github私有仓库">
+                        <img src="https://static.1key.run/blog/matery-theme/medias/featureimages/23.jpg" class="responsive-img" alt="Vcpkg访问Github私有仓库">
                         
                         <span class="card-title">Vcpkg访问Github私有仓库</span>
                     </div>
@@ -613,7 +625,7 @@
                     <div class="card-image">
                         
                         
-                        <img src="https://static.1key.run/blog/matery-theme/featureimages/7.jpg" class="responsive-img" alt="Windows注入与拦截(1)--DLL注入基础">
+                        <img src="https://static.1key.run/blog/matery-theme/medias/featureimages/7.jpg" class="responsive-img" alt="Windows注入与拦截(1)--DLL注入基础">
                         
                         <span class="card-title">Windows注入与拦截(1)--DLL注入基础</span>
                     </div>
@@ -685,7 +697,7 @@
 
         var url = document.location.href;
         newdiv.innerHTML += '<br />'
-            + '来源: 🅹🅸🅰🅽🅶<br />'
+            + '来源: 🅹🅸🅰🅽🅶&#39;s Site<br />'
             + '文章作者: JiangXueqiao<br />'
             + '文章链接: <a href="' + url + '">' + url + '</a><br />'
             + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
@@ -819,8 +831,6 @@
                 <span id="year">2022-2023</span>
             
             <a href="/about" target="_blank">JiangXueqiao</a>
-            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
-            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
             
                 <span id="translate">|&nbsp;繁/简：</span><a id="translateLink" href="javascript:translatePage();">繁</a>
             
@@ -1140,6 +1150,10 @@ $(function () {
     
 
     <!--腾讯兔小巢-->
+    
+        <div style="position:fixed;bottom:125px;right:16px;cursor: pointer;">
+            <a title="兔小巢" target="_blank" rel="noopener" href="https://support.qq.com/products/597551"><i class="fa fa-comments fa-3x"  aria-hidden="true"></i></a>
+        </div>
     
     
 
