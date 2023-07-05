@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>《Windows核心编程》专栏</title>
+      <link href="/2023/07/05/windows-he-xin-bian-cheng-zhuan-lan/"/>
+      <url>/2023/07/05/windows-he-xin-bian-cheng-zhuan-lan/</url>
+      
+        <content type="html"><![CDATA[<p>文章列表：</p><ul><li><a href="/2023/06/28/liao-jie-dpi-suo-fang/" title="了解DPI缩放">了解DPI缩放</a></li><li><a href="/2023/06/20/li-jie-c-c-yun-xing-shi-ku/" title="理解C/C++运行时库">理解C/C++运行时库</a></li><li><a href="/2023/06/28/windows-yong-hu-jie-mian-te-quan-ge-chi-uipi/" title="Windows用户界面特权隔离(UIPI)">Windows用户界面特权隔离(UIPI)</a></li><li><a href="/2023/06/28/windows-nei-he-dui-xiang/" title="Windows内核对象">Windows内核对象</a></li><li><a href="/2023/06/28/windows-ping-tai-sheng-cheng-dump-wen-jian/" title="Windows平台生成Dump文件">Windows平台生成Dump文件</a></li><li><a href="/2023/06/25/windows-zhu-ce-url-xie-yi/" title="Windows注册URL协议">Windows注册URL协议</a></li><li><a href="/2023/06/21/windows-cheng-xu-ru-he-shan-chu-zi-shen/" title="Windows程序如何删除自身">Windows程序如何删除自身</a></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Windows核心编程 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>一键启动神器之1key.run</title>
       <link href="/2023/07/03/yi-jian-qi-dong-shen-qi-zhi-1key-run/"/>
       <url>/2023/07/03/yi-jian-qi-dong-shen-qi-zhi-1key-run/</url>
@@ -105,9 +124,9 @@
       
         <tags>
             
-            <tag> HTTP </tag>
-            
             <tag> C++ </tag>
+            
+            <tag> HTTP </tag>
             
             <tag> libcurl </tag>
             
@@ -244,7 +263,7 @@
       
       <categories>
           
-          <category> 软件调试 </category>
+          <category> Windows核心编程 </category>
           
       </categories>
       

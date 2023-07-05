@@ -4,11 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Typescript基础语法, Windows,Linux,C++,Qt,Node.js,Electron,WebRTC">
-    <meta name="description" content="
-如果你还不了解TypeScript是什么，或者其与JavaScript之前的关系，可以参考：- 前后端常用概念扫盲
-
-TypeScript是JavaScript的一个超集，支持ES6的语法规范，并在此基础上进行了增强，二者最大的不同在于：">
+    <meta name="keywords" content="《Windows核心编程》专栏, Windows,Linux,C++,Qt,Node.js,Electron,WebRTC">
+    <meta name="description" content="本栏目主要介绍与Windows系统编程相关的技术。">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -20,7 +17,7 @@ TypeScript是JavaScript的一个超集，支持ES6的语法规范，并在此基
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Typescript基础语法 | 🅹🅸🅰🅽🅶&#39;s Site</title>
+    <title>《Windows核心编程》专栏 | 🅹🅸🅰🅽🅶&#39;s Site</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -41,9 +38,7 @@ TypeScript是JavaScript的一个超集，支持ES6的语法规范，并在此基
 
 
 
-    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
     <link rel="stylesheet" href="/css/post.css">
-
 
 
 
@@ -274,12 +269,12 @@ TypeScript是JavaScript的一个超集，支持ES6的语法规范，并在此基
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://static.1key.run/blog/matery-theme/medias/featureimages/21.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://static.1key.run/blog/img/windows1.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Typescript基础语法</h1>
+                    <h1 class="description center-align post-title">《Windows核心编程》专栏</h1>
                 </div>
             </div>
         </div>
@@ -289,25 +284,19 @@ TypeScript是JavaScript的一个超集，支持ES6的语法规范，并在此基
 
 
 
-<main class="post-container content">
+<main class="container content">
 
     
-    <div class="row">
-    <div id="main-content" class="col s12 m12 l9">
-        <!-- 文章内容详情 -->
+    <!-- 文章内容详情 -->
 <div id="artDetail">
     <div class="card">
         <div class="card-content article-info">
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="/tags/Typescript/">
-                                <span class="chip bg-color">Typescript</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -315,8 +304,8 @@ TypeScript是JavaScript的一个超集，支持ES6的语法规范，并在此基
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Web/" class="post-category">
-                                Web
+                            <a href="/categories/Windows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B/" class="post-category">
+                                Windows核心编程
                             </a>
                         
                     </div>
@@ -328,21 +317,21 @@ TypeScript是JavaScript的一个超集，支持ES6的语法规范，并在此基
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-06-28
+                    2023-07-05
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-06-28
+                    2023-07-05
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    843
+                    53
                 </div>
                 
 
@@ -362,143 +351,17 @@ TypeScript是JavaScript的一个超集，支持ES6的语法规范，并在此基
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <blockquote>
-<p>如果你还不了解TypeScript是什么，或者其与JavaScript之前的关系，可以参考：- <a href="/2023/06/28/qian-hou-duan-chang-yong-gai-nian-sao-mang/" title="前后端常用概念扫盲">前后端常用概念扫盲</a></p>
-</blockquote>
-<p>TypeScript是JavaScript的一个超集，支持ES6的语法规范，并在此基础上进行了增强，二者最大的不同在于：TypeScript是强类型语言，而JavaScript是弱类型的语言。</p>
-<p>下面着重介绍二者的不同之处。</p>
-<h1 id="一、变量声明"><a href="#一、变量声明" class="headerlink" title="一、变量声明"></a>一、变量声明</h1><p>TypeScript支持使用<code>var</code>、<code>let</code>、<code>const</code>进行变量声明，但建议不要使用<code>var</code>。<br>TypeScript声明变量时，可以强制指定变量类型或者由编译器自动从“值”推导出变量类型，但无论哪种情况，一旦确定了类型，后面不能再次被赋值为其他类型：</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-a <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
-a <span class="token operator">=</span> <span class="token string">"x"</span><span class="token punctuation">;</span> ❌
+                <p>文章列表：</p>
+<ul>
+<li><a href="/2023/06/28/liao-jie-dpi-suo-fang/" title="了解DPI缩放">了解DPI缩放</a></li>
+<li><a href="/2023/06/20/li-jie-c-c-yun-xing-shi-ku/" title="理解C/C++运行时库">理解C/C++运行时库</a></li>
+<li><a href="/2023/06/28/windows-yong-hu-jie-mian-te-quan-ge-chi-uipi/" title="Windows用户界面特权隔离(UIPI)">Windows用户界面特权隔离(UIPI)</a></li>
+<li><a href="/2023/06/28/windows-nei-he-dui-xiang/" title="Windows内核对象">Windows内核对象</a></li>
+<li><a href="/2023/06/28/windows-ping-tai-sheng-cheng-dump-wen-jian/" title="Windows平台生成Dump文件">Windows平台生成Dump文件</a></li>
+<li><a href="/2023/06/25/windows-zhu-ce-url-xie-yi/" title="Windows注册URL协议">Windows注册URL协议</a></li>
+<li><a href="/2023/06/21/windows-cheng-xu-ru-he-shan-chu-zi-shen/" title="Windows程序如何删除自身">Windows程序如何删除自身</a></li>
+</ul>
 
-<span class="token keyword">let</span> <span class="token literal-property property">b</span> <span class="token operator">:</span> number <span class="token operator">=</span> <span class="token number">12</span><span class="token punctuation">;</span>
-<span class="token keyword">let</span> <span class="token literal-property property">c</span> <span class="token operator">:</span> number <span class="token operator">=</span> <span class="token string">"x"</span><span class="token punctuation">;</span> ❌
-
-<span class="token keyword">let</span> <span class="token literal-property property">fibonacci</span><span class="token operator">:</span> number<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token keyword">let</span> <span class="token literal-property property">fibonacci</span><span class="token operator">:</span> number<span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">'1'</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">;</span>❌<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h1 id="二、函数参数"><a href="#二、函数参数" class="headerlink" title="二、函数参数"></a>二、函数参数</h1><p>TypeScript要求：调用函数时传入的参数必须与函数声明的参数一致（个数及类型），如：</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">sum</span><span class="token punctuation">(</span><span class="token parameter"><span class="token literal-property property">x</span><span class="token operator">:</span> number<span class="token punctuation">,</span> <span class="token literal-property property">y</span><span class="token operator">:</span> number</span><span class="token punctuation">)</span><span class="token operator">:</span> number <span class="token punctuation">{</span>
-    <span class="token keyword">return</span> x <span class="token operator">+</span> y<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-<span class="token function">sum</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span> ❌
-<span class="token function">sum</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>❌
-<span class="token function">sum</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">"x"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> ❌<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>TypeScript要求：可选参数必须在参数列表的最后，如：</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">function</span> <span class="token function">buildName</span><span class="token punctuation">(</span><span class="token parameter">firstName<span class="token operator">?</span><span class="token operator">:</span> string<span class="token punctuation">,</span> <span class="token literal-property property">lastName</span><span class="token operator">:</span> string</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>❌
-    <span class="token keyword">if</span> <span class="token punctuation">(</span>firstName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> firstName <span class="token operator">+</span> <span class="token string">' '</span> <span class="token operator">+</span> lastName<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> lastName<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h1 id="三、枚举"><a href="#三、枚举" class="headerlink" title="三、枚举"></a>三、枚举</h1><p>枚举是TypeScript特有的：<br>第一个元素没有赋值，则默认为0，后面的元素的值依此递增：</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">enum</span> Days <span class="token punctuation">{</span>
-    Sun<span class="token punctuation">,</span>   <span class="token comment">// 0</span>
-    Mon<span class="token punctuation">,</span>  <span class="token comment">// 1</span>
-    Tue<span class="token punctuation">,</span>  <span class="token comment">// 2</span>
-    Wed<span class="token punctuation">,</span> 
-    Thu<span class="token punctuation">,</span>
-    Fri<span class="token punctuation">,</span>
-    Sat
-<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>也支持：</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">enum</span> Days <span class="token punctuation">{</span>
-    Sun <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span>   <span class="token comment">// 1</span>
-    Mon<span class="token punctuation">,</span>  <span class="token comment">// 2</span>
-    Tue<span class="token punctuation">,</span>  <span class="token comment">// 3</span>
-    Wed <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">,</span>  <span class="token comment">// 10</span>
-    Thu<span class="token punctuation">,</span>  <span class="token comment">// 11</span>
-    Fri<span class="token punctuation">,</span>  <span class="token comment">// 12</span>
-    Sat   <span class="token comment">// 13</span>
-<span class="token punctuation">}</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>枚举元素可以是常量值或是可以通过编译期计算得出的值：</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">enum</span> FileAccess <span class="token punctuation">{</span>
-    <span class="token comment">// 常量值</span>
-    None<span class="token punctuation">,</span>   <span class="token comment">// 0</span>
-    Read    <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token number">1</span><span class="token punctuation">,</span>
-    Write   <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token number">2</span><span class="token punctuation">,</span>
-    ReadWrite  <span class="token operator">=</span> Read <span class="token operator">|</span> Write<span class="token punctuation">,</span>
-    <span class="token comment">// 计算得出的值</span>
-    <span class="token constant">G</span> <span class="token operator">=</span> <span class="token string">"123"</span><span class="token punctuation">.</span>length
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h1 id="四、类"><a href="#四、类" class="headerlink" title="四、类"></a>四、类</h1><p>相比<code>ES6</code>，<code>TypeScript</code>新增了继承、成员访问控制修饰符。越来越有Java、C++的味道了。</p>
-<h2 id="4-1-继承、成员访问控制修饰符"><a href="#4-1-继承、成员访问控制修饰符" class="headerlink" title="4.1 继承、成员访问控制修饰符"></a>4.1 继承、成员访问控制修饰符</h2><p>TypeScript继承需要使用<code>extends</code>关键字，只支持单继承，这点不同于C++。<br>类继承后，子类可以重写父类的方法。</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">
-<span class="token keyword">class</span> <span class="token class-name">Person</span> <span class="token punctuation">{</span>
-    <span class="token keyword">private</span> <span class="token literal-property property">id</span><span class="token operator">:</span> string<span class="token punctuation">;</span>  <span class="token comment">// 私有的，只能被自身访问</span>
-
-    <span class="token keyword">protected</span> <span class="token literal-property property">name</span><span class="token operator">:</span> string<span class="token punctuation">;</span>  <span class="token comment">// 受保护，可以被其自身以及其子类和父类访问</span>
-    <span class="token keyword">protected</span> <span class="token literal-property property">age</span><span class="token operator">:</span> number<span class="token punctuation">;</span>   <span class="token comment">// 公开的</span>
-
-    <span class="token keyword">public</span> <span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> string <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>id<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token keyword">public</span> <span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> string <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>name<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token keyword">public</span> <span class="token function">getAge</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> number <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>age<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token keyword">public</span> <span class="token function">print</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token keyword">void</span> <span class="token punctuation">{</span>
-        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"name:"</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">+</span> <span class="token string">", age:"</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span>age<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">class</span> <span class="token class-name">Student</span> <span class="token keyword">extends</span> <span class="token class-name">Person</span> <span class="token punctuation">{</span>
-    <span class="token keyword">private</span> <span class="token literal-property property">grade</span> <span class="token operator">:</span> number<span class="token punctuation">;</span>
-
-    <span class="token keyword">public</span> <span class="token function">getGrade</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> number <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>grade<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token keyword">public</span> <span class="token function">print</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token keyword">void</span> <span class="token punctuation">{</span> <span class="token comment">// 重写了父类的方法</span>
-        <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 使用super直接调用父类方法</span>
-        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"grade:"</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token punctuation">.</span>grade<span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="4-2-instanceof"><a href="#4-2-instanceof" class="headerlink" title="4.2 instanceof"></a>4.2 instanceof</h2><p><code>instanceof</code> 运算符用于判断对象是否是指定的类型，如果是返回<code>true</code>，否则返回<code>false</code>。</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">class</span> <span class="token class-name">Person</span> <span class="token punctuation">{</span> <span class="token punctuation">}</span>
-<span class="token keyword">let</span> obj <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Person</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token keyword">let</span> <span class="token literal-property property">isPerson</span> <span class="token operator">:</span> boolean <span class="token operator">=</span> obj <span class="token keyword">instanceof</span> <span class="token class-name">Person</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="4-3-interface接口"><a href="#4-3-interface接口" class="headerlink" title="4.3 interface接口"></a>4.3 interface接口</h2><p>TypeScript新增interface接口的概念，这个接口的概念和Java中的interface类似，即：只有定义没有实现。</p>
-<p>同时，接口也支持继承。</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">interface</span> <span class="token class-name">IPerson</span> <span class="token punctuation">{</span>
-    <span class="token literal-property property">name</span><span class="token operator">:</span> string<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">interface</span> <span class="token class-name">IStudent</span> <span class="token keyword">extends</span> <span class="token class-name">IPerson</span> <span class="token punctuation">{</span>  <span class="token comment">// 接口的继承</span>
-    <span class="token literal-property property">grade</span> <span class="token operator">:</span> number<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-
-<span class="token keyword">class</span> <span class="token class-name">Student</span> <span class="token keyword">implements</span> <span class="token class-name">IStudent</span> <span class="token punctuation">{</span>  <span class="token comment">// 实现接口的类</span>
-    <span class="token literal-property property">name</span><span class="token operator">:</span> string<span class="token punctuation">;</span>
-    <span class="token literal-property property">grade</span> <span class="token operator">:</span> number<span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h1 id="五、命名空间"><a href="#五、命名空间" class="headerlink" title="五、命名空间"></a>五、命名空间</h1><p>TypeScript中的命名空间的概念和C++中的命名空间的概念一样，而且关键字也都是<code>namespace</code>。</p>
-<p>稍有不同的是，C++不需要将命名空间中的内容暴露出来，C++默认就是全部暴露的，而TypeScript需要手动添加export关键字将命名空间的中的内容暴露出来：</p>
-<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript">namespace <span class="token constant">XYZ</span> <span class="token punctuation">{</span>
-    <span class="token keyword">export</span> <span class="token keyword">let</span> <span class="token literal-property property">name</span> <span class="token operator">:</span> string<span class="token punctuation">;</span>
-    <span class="token keyword">export</span> <span class="token keyword">class</span> <span class="token class-name">Person</span> <span class="token punctuation">{</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token keyword">export</span> <span class="token keyword">interface</span> <span class="token class-name">IPerson</span> <span class="token punctuation">{</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-
-<span class="token constant">XYZ</span><span class="token punctuation">.</span>name <span class="token operator">=</span> <span class="token string">"jeff"</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>
@@ -524,7 +387,7 @@ a <span class="token operator">=</span> <span class="token string">"x"</span><sp
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://jiangxueqiao.com/2023/06/28/typescript-ji-chu-yu-fa/">https://jiangxueqiao.com/2023/06/28/typescript-ji-chu-yu-fa/</a>
+                    <a href="https://jiangxueqiao.com/2023/07/05/windows-he-xin-bian-cheng-zhuan-lan/">https://jiangxueqiao.com/2023/07/05/windows-he-xin-bian-cheng-zhuan-lan/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -561,11 +424,7 @@ a <span class="token operator">=</span> <span class="token string">"x"</span><sp
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            
-                                <a href="/tags/Typescript/">
-                                    <span class="chip bg-color">Typescript</span>
-                                </a>
-                            
+                            <span class="chip bg-color">无标签</span>
                         </div>
                     
                 </div>
@@ -609,28 +468,29 @@ a <span class="token operator">=</span> <span class="token string">"x"</span><sp
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2023/06/28/windows-nei-he-dui-xiang/">
+                <a href="/2023/07/05/windows-he-xin-bian-cheng-zhuan-lan/">
                     <div class="card-image">
                         
-                        <img src="https://static.1key.run/blog/img/windows1.jpg" class="responsive-img" alt="Windows内核对象">
+                        <img src="https://static.1key.run/blog/img/windows1.jpg" class="responsive-img" alt="《Windows核心编程》专栏">
                         
-                        <span class="card-title">Windows内核对象</span>
+                        <span class="card-title">《Windows核心编程》专栏</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            
+                            本栏目主要介绍与Windows系统编程相关的技术。
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-06-28
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-07-05
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -643,22 +503,7 @@ a <span class="token operator">=</span> <span class="token string">"x"</span><sp
                         </span>
                     </div>
                 </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E5%86%85%E6%A0%B8%E5%AF%B9%E8%B1%A1/">
-                        <span class="chip bg-color">内核对象</span>
-                    </a>
-                    
-                    <a href="/tags/%E5%8F%A5%E6%9F%84/">
-                        <span class="chip bg-color">句柄</span>
-                    </a>
-                    
-                    <a href="/tags/HANDLE/">
-                        <span class="chip bg-color">HANDLE</span>
-                    </a>
-                    
-                </div>
+
                 
             </div>
         </div>
@@ -669,13 +514,12 @@ a <span class="token operator">=</span> <span class="token string">"x"</span><sp
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2023/06/28/qian-hou-duan-chang-yong-gai-nian-sao-mang/">
+                <a href="/2023/07/03/yi-jian-qi-dong-shen-qi-zhi-1key-run/">
                     <div class="card-image">
                         
+                        <img src="https://static.1key.run/blog/img/1keyrun_logo.png" class="responsive-img" alt="一键启动神器之1key.run">
                         
-                        <img src="https://static.1key.run/blog/matery-theme/medias/featureimages/16.jpg" class="responsive-img" alt="前后端常用概念扫盲">
-                        
-                        <span class="card-title">前后端常用概念扫盲</span>
+                        <span class="card-title">一键启动神器之1key.run</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -686,19 +530,43 @@ a <span class="token operator">=</span> <span class="token string">"x"</span><sp
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-28
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-07-03
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Web/" class="post-category">
-                                    Web
+                            <a href="/categories/%E6%88%91%E7%9A%84%E4%BA%A7%E5%93%81/" class="post-category">
+                                    我的产品
                                 </a>
                             
                             
                         </span>
                     </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/1key-run/">
+                        <span class="chip bg-color">1key.run</span>
+                    </a>
+                    
+                    <a href="/tags/%E4%B8%80%E9%94%AE%E5%90%AF%E5%8A%A8/">
+                        <span class="chip bg-color">一键启动</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%88%AA%E5%9B%BE/">
+                        <span class="chip bg-color">截图</span>
+                    </a>
+                    
+                    <a href="/tags/%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97%E5%99%A8/">
+                        <span class="chip bg-color">科学计算器</span>
+                    </a>
+                    
+                    <a href="/tags/%E7%BD%91%E9%A1%B5%E6%90%9C%E7%B4%A2/">
+                        <span class="chip bg-color">网页搜索</span>
+                    </a>
+                    
                 </div>
                 
             </div>
@@ -771,87 +639,6 @@ a <span class="token operator">=</span> <span class="token string">"x"</span><sp
 <script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
 
 
-
-    </div>
-    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
-        <div class="toc-widget card" style="background-color: white;">
-            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
-            <div id="toc-content"></div>
-        </div>
-    </div>
-</div>
-
-<!-- TOC 悬浮按钮. -->
-
-<div id="floating-toc-btn" class="hide-on-med-and-down">
-    <a class="btn-floating btn-large bg-color">
-        <i class="fas fa-list-ul"></i>
-    </a>
-</div>
-
-
-<script src="/libs/tocbot/tocbot.min.js"></script>
-<script>
-    $(function () {
-        tocbot.init({
-            tocSelector: '#toc-content',
-            contentSelector: '#articleContent',
-            headingsOffset: -($(window).height() * 0.4 - 45),
-            collapseDepth: Number('2'),
-            headingSelector: 'h1, h2, h3, h4'
-        });
-
-        // Set scroll toc fixed.
-        let tocHeight = parseInt($(window).height() * 0.4 - 64);
-        let $tocWidget = $('.toc-widget');
-        $(window).scroll(function () {
-            let scroll = $(window).scrollTop();
-            /* add post toc fixed. */
-            if (scroll > tocHeight) {
-                $tocWidget.addClass('toc-fixed');
-            } else {
-                $tocWidget.removeClass('toc-fixed');
-            }
-        });
-
-        
-        /* 修复文章卡片 div 的宽度. */
-        let fixPostCardWidth = function (srcId, targetId) {
-            let srcDiv = $('#' + srcId);
-            if (srcDiv.length === 0) {
-                return;
-            }
-
-            let w = srcDiv.width();
-            if (w >= 450) {
-                w = w + 21;
-            } else if (w >= 350 && w < 450) {
-                w = w + 18;
-            } else if (w >= 300 && w < 350) {
-                w = w + 16;
-            } else {
-                w = w + 14;
-            }
-            $('#' + targetId).width(w);
-        };
-
-        // 切换TOC目录展开收缩的相关操作.
-        const expandedClass = 'expanded';
-        let $tocAside = $('#toc-aside');
-        let $mainContent = $('#main-content');
-        $('#floating-toc-btn .btn-floating').click(function () {
-            if ($tocAside.hasClass(expandedClass)) {
-                $tocAside.removeClass(expandedClass).hide();
-                $mainContent.removeClass('l9');
-            } else {
-                $tocAside.addClass(expandedClass).show();
-                $mainContent.addClass('l9');
-            }
-            fixPostCardWidth('artDetail', 'prenext-posts');
-        });
-        
-    });
-</script>
 
     
 
