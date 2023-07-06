@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="keywords" content="Windows注入与拦截(1)--DLL注入基础, Windows,Linux,C++,Qt,Node.js,Electron,WebRTC">
-    <meta name="description" content="一. DLL注入技术的用途从Windows内存体系(1)--虚拟地址空间文章中我们可以知道，在Windows系统中，每个进程都有自己私有的地址空间。当我们用指针来引用内存的时候，指针的值表示的是进程自己的地址空间的一个虚拟的内存地址。进程不">
+    <meta name="description" content="一、DLL注入技术的用途从Windows内存体系(1)--虚拟地址空间文章中我们可以知道，在Windows系统中，每个进程都有自己私有的地址空间。当我们用指针来引用内存的时候，指针的值表示的是进程自己的地址空间的一个虚拟的内存地址。进程不能">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Windows注入与拦截(1)--DLL注入基础 | 🅹🅸🅰🅽🅶&#39;s Site</title>
+    <title>Windows注入与拦截(1)--DLL注入基础 | Jiangxueqiao&#39;s Site</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     
 
@@ -62,9 +62,9 @@
             <div class="brand-logo">
                 <a href="/" class="waves-effect waves-light">
                     
-                    <img src="https://static.1key.run/modelarts_white.svg" class="logo-img" alt="LOGO">
+                    <img src="https://static.1key.run/cherry.svg" class="logo-img" alt="LOGO">
                     
-                    <span class="logo-span">🅹🅸🅰🅽🅶&#39;s Site</span>
+                    <span class="logo-span">Jiangxueqiao&#39;s Site</span>
                 </a>
             </div>
             
@@ -166,12 +166,12 @@
 
     <div class="mobile-head bg-color">
         
-        <img src="https://static.1key.run/modelarts_white.svg" class="logo-img circle responsive-img">
+        <img src="https://static.1key.run/cherry.svg" class="logo-img circle responsive-img">
         
-        <div class="logo-name">🅹🅸🅰🅽🅶&#39;s Site</div>
+        <div class="logo-name">Jiangxueqiao&#39;s Site</div>
         <div class="logo-desc">
             
-            学习、沉淀、总结与分享
+            总结⚡归纳⚡沉淀⚡分享
             
         </div>
     </div>
@@ -332,7 +332,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-06-28
+                    2023-07-06
                 </div>
                 
 
@@ -359,7 +359,7 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="一-DLL注入技术的用途"><a href="#一-DLL注入技术的用途" class="headerlink" title="一. DLL注入技术的用途"></a>一. DLL注入技术的用途</h2><p>从<a href="/2023/06/20/windows-nei-cun-ti-xi-1-xu-ni-di-zhi-kong-jian/" title="Windows内存体系(1)--虚拟地址空间">Windows内存体系(1)--虚拟地址空间</a>文章中我们可以知道，在Windows系统中，每个进程都有自己私有的地址空间。当我们用指针来引用内存的时候，指针的值表示的是进程自己的地址空间的一个虚拟的内存地址。<strong>进程不能通过指针来引用其他进程地址空间的内存。</strong>因此，如果一个进程有缺陷会导致其引用和覆盖随机地址处的内存，那么这个缺陷的影响就会不会扩散到其他的进程。</p>
+                <h2 id="一、DLL注入技术的用途"><a href="#一、DLL注入技术的用途" class="headerlink" title="一、DLL注入技术的用途"></a>一、DLL注入技术的用途</h2><p>从<a href="/2023/06/20/windows-nei-cun-ti-xi-1-xu-ni-di-zhi-kong-jian/" title="Windows内存体系(1)--虚拟地址空间">Windows内存体系(1)--虚拟地址空间</a>文章中我们可以知道，在Windows系统中，每个进程都有自己私有的地址空间。当我们用指针来引用内存的时候，指针的值表示的是进程自己的地址空间的一个虚拟的内存地址。<strong>进程不能通过指针来引用其他进程地址空间的内存。</strong>因此，如果一个进程有缺陷会导致其引用和覆盖随机地址处的内存，那么这个缺陷的影响就会不会扩散到其他的进程。</p>
 <p>独立的地址空间有利于系统的稳定性。但很多时候我们还是需要跨越进程的边界来访问另一个进程地址空间，比如：</p>
 <ul>
 <li>我们要从另一个进程创建的窗口来派生子类窗口。比如附着在windows资源管理器上的一些小插件等。</li>
@@ -369,7 +369,7 @@
 <li>干一些羞羞的事情…</li>
 </ul>
 <p>为了满足上面的这些需求，我们可以使用DLL注入的技术，将我们自己开发的dll注入到另一个进程的地址空间中，让dll中的代码在该进程的地址空间中执行，那么我们就可以在那个中进程为所欲为了。</p>
-<h2 id="二-什么样的DLL可以被注入？"><a href="#二-什么样的DLL可以被注入？" class="headerlink" title="二. 什么样的DLL可以被注入？"></a>二. 什么样的DLL可以被注入？</h2><p>理论上任何DLL都可以被注入到其他进程之中，但是大多数情况下，我们注入到其他进程之中是为了实现某些功能、做某些事情的，所以我们需要在我们的DLL被注入之后，DLL中的功能代码能够被调用执行。</p>
+<h2 id="二、什么样的DLL可以被注入？"><a href="#二、什么样的DLL可以被注入？" class="headerlink" title="二、什么样的DLL可以被注入？"></a>二、什么样的DLL可以被注入？</h2><p>理论上任何DLL都可以被注入到其他进程之中，但是大多数情况下，我们注入到其他进程之中是为了实现某些功能、做某些事情的，所以我们需要在我们的DLL被注入之后，DLL中的功能代码能够被调用执行。</p>
 <p>我们知道DLL被<strong>首次</strong>载入到进程中时，会收到<code>DLL_PROCESS_ATTACH</code>的通知，即调用<code>DllMain</code>函数，并且参数<code>fdwReason</code>的值被设为<code>DLL_PROCESS_ATTACH</code>。我们可以在收到<code>DLL_PROCESS_ATTACH</code>通知时开始我们的业务逻辑。</p>
 <p>下面是一个最简单的dll的源码，在被注入成功后（即收到<code>DLL_PROCESS_ATTACH</code>通知时）弹出消息提示框：</p>
 <pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">BOOL APIENTRY DllMain(HMODULE hModule, DWORD fdwReason, LPVOID lpReserved ) {
@@ -452,7 +452,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  fdwReason, LPVOID lpReserved) {
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="/about" rel="external nofollow noreferrer">Jiangxueqiao</a>
+                    <a href="/about" rel="external nofollow noreferrer">jiangxueqiao.com</a>
                 </span>
             </div>
             <div class="reprint__type">
@@ -475,7 +475,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  fdwReason, LPVOID lpReserved) {
                     本博客所有文章除特別声明外，均采用
                     <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
                     许可协议。转载请注明来源
-                    <a href="/about" target="_blank">Jiangxueqiao</a>
+                    <a href="/about" target="_blank">jiangxueqiao.com</a>
                     !
                 </span>
             </div>
@@ -678,8 +678,8 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  fdwReason, LPVOID lpReserved) {
 
         var url = document.location.href;
         newdiv.innerHTML += '<br />'
-            + '来源: 🅹🅸🅰🅽🅶&#39;s Site<br />'
-            + '文章作者: Jiangxueqiao<br />'
+            + '来源: Jiangxueqiao&#39;s Site<br />'
+            + '文章作者: jiangxueqiao.com<br />'
             + '文章链接: <a href="' + url + '">' + url + '</a><br />'
             + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
 
@@ -811,14 +811,14 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  fdwReason, LPVOID lpReserved) {
             
                 <span id="year">2022-2023</span>
             
-            <a href="/about" target="_blank">Jiangxueqiao</a>
+            <a href="/about" target="_blank">jiangxueqiao.com</a>
             
                 <span id="translate">|&nbsp;繁/简：</span><a id="translateLink" href="javascript:translatePage();">繁</a>
             
             <br>
             
                 &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">83k</span>
+                        class="white-color">87.3k</span>
             
             
             
@@ -895,6 +895,11 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD  fdwReason, LPVOID lpReserved) {
                 </script>
             
             <br>
+            
+                <span id="icp"><img src="/medias/icp.png"
+                                    style="vertical-align: text-bottom;"/>
+                <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">鄂ICP备2020015399号-5</a>
+            </span>
             
         </div>
         <div class="col s12 m4 l4 social-link social-statis">
