@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="codeva-RtI1N7UTHz">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-center-atom.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"jiangxueqiao.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"width":320},"copycode":{"enable":true,"style":"flat"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":true,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta property="og:type" content="article">
+<meta property="og:title" content="Windows注入与拦截(2)--DLL注入的方式">
+<meta property="og:url" content="https://jiangxueqiao.com/2021/05/02/windows-zhu-ru-yu-lan-jie-2-dll-zhu-ru-de-fang-shi/index.html">
+<meta property="og:site_name" content="Jeffery&#39;s Site">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-05-02T01:41:58.000Z">
+<meta property="article:modified_time" content="2023-07-12T09:55:15.236Z">
+<meta property="article:author" content="jiangxueqiao">
+<meta property="article:tag" content="Windows">
+<meta property="article:tag" content="Linux">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="Qt">
+<meta property="article:tag" content="Node.js">
+<meta property="article:tag" content="Electron">
+<meta property="article:tag" content="WebRTC">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://jiangxueqiao.com/2021/05/02/windows-zhu-ru-yu-lan-jie-2-dll-zhu-ru-de-fang-shi/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jiangxueqiao.com/2021/05/02/windows-zhu-ru-yu-lan-jie-2-dll-zhu-ru-de-fang-shi/","path":"2021/05/02/windows-zhu-ru-yu-lan-jie-2-dll-zhu-ru-de-fang-shi/","title":"Windows注入与拦截(2)--DLL注入的方式"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Windows注入与拦截(2)--DLL注入的方式 | Jeffery's Site</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Jeffery's Site</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">93</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">16</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">64</span></a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E4%BD%BF%E7%94%A8%E6%B3%A8%E5%86%8C%E8%A1%A8%E6%96%B9%E5%BC%8F%E6%B3%A8%E5%85%A5"><span class="nav-text">一、使用注册表方式注入</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E5%A6%82%E4%BD%95%E5%81%9A%EF%BC%9F"><span class="nav-text">1.1 如何做？</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-1-%E6%B3%A8%E5%85%A564%E4%BD%8D%E7%B3%BB%E7%BB%9F%E4%B8%8A%E7%9A%8432%E4%BD%8D%E8%BF%9B%E7%A8%8B"><span class="nav-text">1.1.1 注入64位系统上的32位进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-2-%E6%B3%A8%E5%85%A564%E4%BD%8D%E8%BF%9B%E7%A8%8B"><span class="nav-text">1.1.2 注入64位进程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%AF%E4%BB%A5%E8%BF%99%E4%B9%88%E5%81%9A%EF%BC%9F"><span class="nav-text">1.2 为什么可以这么做？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-%E8%BF%99%E4%B9%88%E5%81%9A%E6%9C%89%E4%BB%80%E4%B9%88%E5%BC%8A%E7%AB%AF%EF%BC%9F"><span class="nav-text">1.3 这么做有什么弊端？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E4%BD%BF%E7%94%A8%E9%92%A9%E5%AD%90%E6%96%B9%E5%BC%8F%E6%B3%A8%E5%85%A5"><span class="nav-text">二、使用钩子方式注入</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E9%92%A9%E5%AD%90%E6%8A%80%E6%9C%AF%E4%BB%8B%E7%BB%8D"><span class="nav-text">2.1 钩子技术介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-1-SetWindowsHookEx"><span class="nav-text">2.1.1 SetWindowsHookEx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-2-CallNextHookEx"><span class="nav-text">2.1.2 CallNextHookEx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-3-UnhookWindowsHookEx"><span class="nav-text">2.1.3 UnhookWindowsHookEx</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E9%92%A9%E5%AD%90%E5%AE%9E%E4%BE%8B"><span class="nav-text">2.2 钩子实例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E4%BD%BF%E7%94%A8%E8%BF%9C%E7%A8%8B%E7%BA%BF%E7%A8%8B%E6%96%B9%E5%BC%8F%E6%B3%A8%E5%85%A5"><span class="nav-text">三、使用远程线程方式注入</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E8%BF%9C%E7%A8%8B%E7%BA%BF%E7%A8%8B%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86"><span class="nav-text">3.1 远程线程注入原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-text">3.2 注意事项</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-1-LoadLibrary%E5%87%BD%E6%95%B0%E5%9C%B0%E5%9D%80%E9%97%AE%E9%A2%98"><span class="nav-text">3.2.1 LoadLibrary函数地址问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-2-DLL%E8%B7%AF%E5%BE%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%9C%B0%E5%9D%80%E9%97%AE%E9%A2%98"><span class="nav-text">3.2.2 DLL路径字符串地址问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-3-%E5%8F%96%E6%B6%88%E6%B3%A8%E5%85%A5%E9%97%AE%E9%A2%98"><span class="nav-text">3.2.3 取消注入问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-%E5%AE%9E%E4%BE%8B"><span class="nav-text">3.3 实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-1-InjectDllByRemoteThread%E5%87%BD%E6%95%B0"><span class="nav-text">3.3.1 InjectDllByRemoteThread函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-2-EjectDllByRemoteThread%E5%87%BD%E6%95%B0"><span class="nav-text">3.3.2 EjectDllByRemoteThread函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-3-DllMain%E5%87%BD%E6%95%B0"><span class="nav-text">3.3.3 DllMain函数</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">jiangxueqiao</p>
+  <div class="site-description" itemprop="description">不是看到希望才坚持，而是坚持才会看到希望</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">64</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/winsoft666" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;winsoft666" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:smart7178@163.com" title="E-Mail → mailto:smart7178@163.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jiangxueqiao.com/2021/05/02/windows-zhu-ru-yu-lan-jie-2-dll-zhu-ru-de-fang-shi/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jiangxueqiao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jeffery's Site">
+      <meta itemprop="description" content="不是看到希望才坚持，而是坚持才会看到希望">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Windows注入与拦截(2)--DLL注入的方式 | Jeffery's Site">
+      <meta itemprop="description" content=" ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Windows注入与拦截(2)--DLL注入的方式
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-05-02 09:41:58" itemprop="dateCreated datePublished" datetime="2021-05-02T09:41:58+08:00">2021-05-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-07-12 17:55:15" itemprop="dateModified" datetime="2023-07-12T17:55:15+08:00">2023-07-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Windows%E6%B3%A8%E5%85%A5%E4%B8%8E%E6%8B%A6%E6%88%AA/" itemprop="url" rel="index"><span itemprop="name">Windows注入与拦截</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description"> </div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="一、使用注册表方式注入"><a href="#一、使用注册表方式注入" class="headerlink" title="一、使用注册表方式注入"></a>一、使用注册表方式注入</h1><h2 id="1-1-如何做？"><a href="#1-1-如何做？" class="headerlink" title="1.1 如何做？"></a>1.1 如何做？</h2><p>如题，通过注册表的方式来实现DLL注入，我们只需要针对特定的注册表项进行修改即可，有一点需要注意的是：<strong>如果被注入的进程是64位进程，则注入的DLL也需要是64位的，同理，注入32位的进程也需要是32位的DLL。</strong> </p>
+<p>另外，根据被注入进程的位数（32或64）不同，注册表的位置也不同。</p>
+<h3 id="1-1-1-注入64位系统上的32位进程"><a href="#1-1-1-注入64位系统上的32位进程" class="headerlink" title="1.1.1 注入64位系统上的32位进程"></a>1.1.1 注入64位系统上的32位进程</h3><ol>
+<li>将被注入的DLL名称填入到<code>AppInit_DLLs</code>注册表项：<figure class="highlight txt"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows NT\CurrentVersion\Windows\AppInit_DLLs</span><br></pre></td></tr></tbody></table></figure></li>
+</ol>
+<blockquote>
+<p><code>AppInit_DLLs</code>中的文件名通过逗号或空格来分割，所以我们在文件名中要避免使用空格。另外<code>AppInit_DLLs</code>中的第一个文件可以包含路径，而后面的文件的路径则将被忽略。出于这个原因，我们最好将DLL文件放到Windows的系统目录中。</p>
+</blockquote>
+<ol start="2">
+<li>并将<code>LoadAppInit_DLLs</code>注册表项的值修改为<code>1</code>：<figure class="highlight txt"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows NT\CurrentVersion\Windows\LoadAppInit_DLLs</span><br></pre></td></tr></tbody></table></figure></li>
+</ol>
+<h3 id="1-1-2-注入64位进程"><a href="#1-1-2-注入64位进程" class="headerlink" title="1.1.2 注入64位进程"></a>1.1.2 注入64位进程</h3><p>“注入到64位进程”和“注入64位系统上的32位进程”的步骤类似，区别在于：</p>
+<p>1). 注册表位置不一样，注入64位进程的注册表分别位于：</p>
+<figure class="highlight txt"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Windows\AppInit_DLLs</span><br><span class="line">HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Windows\LoadAppInit_DLLs</span><br></pre></td></tr></tbody></table></figure>
+
+<p>2). 被注入DLL需要是64位版本。</p>
+<h2 id="1-2-为什么可以这么做？"><a href="#1-2-为什么可以这么做？" class="headerlink" title="1.2 为什么可以这么做？"></a>1.2 为什么可以这么做？</h2><p>当系统的<code>User32.dll</code>被加载到一个新的进程时，会收到<code>DLL_PROCESS_ATTACH</code>通知，<code>User32.dll</code>在该通知处理过程中读取<code>AppInit_DLLs</code>注册表值，并调用<code>LoadLibrary</code>来加载该项中指定的每个dll。</p>
+<h2 id="1-3-这么做有什么弊端？"><a href="#1-3-这么做有什么弊端？" class="headerlink" title="1.3 这么做有什么弊端？"></a>1.3 这么做有什么弊端？</h2><p>从上面一节我们知道被注入的DLL是通过<code>User32.dll</code>加载到目标进程中去的，这也就要求被注入的目标进程必须使用了<code>User32.dll</code>，基于GUI的程序都会使用这个DLL文件，而命令行程序一般不会加载<code>User32.dll</code>，所以无法通过这种方式被注入。</p>
+<p>系统上所有使用了<code>User32.dll</code>的程序都会被注入，很多时候这也并不是我们想要的。</p>
+<h1 id="二、使用钩子方式注入"><a href="#二、使用钩子方式注入" class="headerlink" title="二、使用钩子方式注入"></a>二、使用钩子方式注入</h1><h2 id="2-1-钩子技术介绍"><a href="#2-1-钩子技术介绍" class="headerlink" title="2.1 钩子技术介绍"></a>2.1 钩子技术介绍</h2><p>Windows提供了3个API让我们可以很方便使用钩子技术将DLL文件注入到进程之中：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 安装指定消息类型的钩子到钩子链中</span></span><br><span class="line"><span class="function">HHOOK <span class="title">SetWindowsHookEx</span><span class="params">(<span class="type">int</span> idHook,</span></span></span><br><span class="line"><span class="params"><span class="function">    HOOKPROC lpfn,</span></span></span><br><span class="line"><span class="params"><span class="function">    HINSTANCE hMod,</span></span></span><br><span class="line"><span class="params"><span class="function">    DWORD dwThreadId</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 从钩子链中删除钩子</span></span><br><span class="line"><span class="function">BOOL <span class="title">UnhookWindowsHookEx</span><span class="params">(HHOOK hhk</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将消息转发到钩子链上的下一个钩子</span></span><br><span class="line"><span class="function">LRESULT <span class="title">CallNextHookEx</span><span class="params">(HHOOK hhk,</span></span></span><br><span class="line"><span class="params"><span class="function">    <span class="type">int</span> nCode,</span></span></span><br><span class="line"><span class="params"><span class="function">    WPARAM wParam,</span></span></span><br><span class="line"><span class="params"><span class="function">    LPARAM lParam</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
+
+
+<p><code>Hook</code>中文名“钩子”，我们可以把它想象成一个“鱼钩”，用来勾住指定类型的消息。“钩子”可以指定需要勾住哪个线程的消息，可以是当前线程，也可以是所有线程。当“指定线程”的“指定消息”被勾住时，系统就会将我们的DLL（如果钩子的处理过程位于DLL中）加载到该线程所属进程的地址空间中，并且在该地址空间中调用我们的DLL中的钩子处理过程函数，从而实现了注入功能。</p>
+<p>我们通过<code>SetWindowsHookEx</code>函数来安装一个钩子，操作系统同时也允许开发人员为“同一个线程”的“同一个消息类型”指定多个钩子，这样就形成了一个<code>“钩子链”</code>（<code>Hook Chain</code>）。</p>
+<h3 id="2-1-1-SetWindowsHookEx"><a href="#2-1-1-SetWindowsHookEx" class="headerlink" title="2.1.1 SetWindowsHookEx"></a>2.1.1 SetWindowsHookEx</h3><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">HHOOK <span class="title">SetWindowsHookExA</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">  [in] <span class="type">int</span>       idHook,</span></span></span><br><span class="line"><span class="params"><span class="function">  [in] HOOKPROC  lpfn,</span></span></span><br><span class="line"><span class="params"><span class="function">  [in] HINSTANCE hmod,</span></span></span><br><span class="line"><span class="params"><span class="function">  [in] DWORD     dwThreadId</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
+
+<p><code>idHook参数</code>：指定我们需要勾住的消息类型；<br><code>lpfn参数</code>：函数指针。当idHook指定的消息触发时，系统将会调用lpfn函数指针。<br><code>hMod参数</code>：lpfn函数指针所在DLL的句柄。有2种情况下这个参数需要传NULL：</p>
+<ol>
+<li>lpfn函数的代码位于本进程内时。</li>
+<li>只需要勾住本进程的消息时，即dwThreadId参数指定的线程位于当前进程。</li>
+</ol>
+<p><code>dwThreadId参数</code>：线程ID，用于指定勾住哪个线程的消息。如果传0，则表示勾住所有线程的指定消息。</p>
+<blockquote>
+<p>SetWindowsHookEx详细的参数解释可以参考MSDN：<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms644990(v=vs.85).aspx">https://msdn.microsoft.com/en-us/library/windows/desktop/ms644990(v=vs.85).aspx</a></p>
+</blockquote>
+<h3 id="2-1-2-CallNextHookEx"><a href="#2-1-2-CallNextHookEx" class="headerlink" title="2.1.2 CallNextHookEx"></a>2.1.2 CallNextHookEx</h3><p>当我们的钩子处理函数将消息处理完之后，我们可以选择将消息丢弃，不让钩子链上的后面的钩子处理；也可以选择将消息继续传递下去，从而让其他钩子有处理的机会。</p>
+<p>如果需要让其他钩子有处理的机会，我们可以在钩子处理函数的最后调用<code>CallNextHookEx</code>函数。</p>
+<h3 id="2-1-3-UnhookWindowsHookEx"><a href="#2-1-3-UnhookWindowsHookEx" class="headerlink" title="2.1.3 UnhookWindowsHookEx"></a>2.1.3 UnhookWindowsHookEx</h3><p><code>UnhookWindowsHookEx</code>函数用于将指定钩子从钩子链中移除。</p>
+<p>即使不调用<code>UnhookWindowsHookEx</code>，在调用<code>SetWindowsHookEx</code>的进程退出后，钩子也将被自动移除。</p>
+<h2 id="2-2-钩子实例"><a href="#2-2-钩子实例" class="headerlink" title="2.2 钩子实例"></a>2.2 钩子实例</h2><p><code>SetWindowsHookEx</code>函数返回一个<code>HHOOK</code>类型的钩子句柄，<code>CallNextHookEx</code>和<code>UnhookWindowsHookEx</code>函数都需要使用这个句柄作为参数。</p>
+<p>如果我们将“注入逻辑”放在独立的exe中，将“钩子处理过程”放到独立的dll中，那么为了在“钩子处理过程”中调用<code>CallNextHookEx</code>时能够拿到钩子的句柄，我们需要通过其他途径将该句柄从exe传递到dll中。</p>
+<p>所以为了避免传递“钩子句柄”的麻烦，我们将“注入逻辑”和“钩子处理过程”都写入到一个DLL之中。我们只需要调用这个DLL的导出函数就可以将这个DLL注入到指定线程所属的进程中。</p>
+<p>示例DLL名称为<code>InjectDLL</code>，用于勾住指定窗口的<code>WH_GETMESSAGE</code>消息，我们也可以指定其他的消息类型，如键盘消息等。完整的消息类型可以参考MSDN上关于<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms644990(v=vs.85).aspx">SetWindowsHookEx</a>函数的解释。</p>
+<p><code>InjectDLL</code>的完整代码如下：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;tchar.h&gt;</span></span></span><br><span class="line"></span><br><span class="line">HHOOK g_hook = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line"><span class="function">BOOL APIENTRY <span class="title">DllMain</span><span class="params">(HMODULE hModule, DWORD  fdwReason, LPVOID lpReserved)</span> </span>{</span><br><span class="line">    <span class="keyword">switch</span>(fdwReason) {</span><br><span class="line">        <span class="keyword">case</span> DLL_PROCESS_ATTACH:</span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">case</span> DLL_THREAD_ATTACH:</span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">case</span> DLL_THREAD_DETACH:</span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">case</span> DLL_PROCESS_DETACH:</span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> TRUE;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 提权函数</span></span><br><span class="line"><span class="comment">// 参考：https://blog.csdn.net/china_jeffery/article/details/79173417</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="function">BOOL <span class="title">EnablePrivilege</span><span class="params">(LPCTSTR szPrivilege, BOOL fEnable)</span> </span>{</span><br><span class="line">	BOOL fOk = FALSE;</span><br><span class="line">	HANDLE hToken = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">OpenProcessToken</span>(<span class="built_in">GetCurrentProcess</span>(), TOKEN_ADJUST_PRIVILEGES, &amp;hToken)) {</span><br><span class="line">		TOKEN_PRIVILEGES tp;</span><br><span class="line">		tp.PrivilegeCount = <span class="number">1</span>;</span><br><span class="line">		<span class="built_in">LookupPrivilegeValue</span>(<span class="literal">NULL</span>, szPrivilege, &amp;tp.Privileges[<span class="number">0</span>].Luid);</span><br><span class="line">		tp.Privileges-&gt;Attributes = fEnable ? SE_PRIVILEGE_ENABLED : <span class="number">0</span>;</span><br><span class="line">		<span class="built_in">AdjustTokenPrivileges</span>(hToken, FALSE, &amp;tp, <span class="built_in">sizeof</span>(TOKEN_PRIVILEGES), <span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line">		fOk = (<span class="built_in">GetLastError</span>() == ERROR_SUCCESS);</span><br><span class="line"></span><br><span class="line">		<span class="built_in">CloseHandle</span>(hToken);</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> fOk;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 钩子处理过程</span></span><br><span class="line"><span class="function">LRESULT CALLBACK <span class="title">HookProc_GetMsg</span><span class="params">(<span class="type">int</span> code, WPARAM wParam, LPARAM lParam)</span> </span>{</span><br><span class="line">	<span class="type">char</span> szMsg[<span class="number">512</span>] = { <span class="number">0</span> };</span><br><span class="line">	<span class="built_in">sprintf_s</span>(szMsg, <span class="number">512</span>, <span class="string">"code: %d, wParam: %d, lParam: %d"</span>, code, wParam, lParam);</span><br><span class="line">	<span class="built_in">OutputDebugStringA</span>(szMsg);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">CallNextHookEx</span>(g_hook, code, wParam, lParam);;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 导出函数，安装钩子</span></span><br><span class="line"><span class="function">HHOOK <span class="title">InjectDllByHook</span><span class="params">(HWND hwnd)</span> </span>{</span><br><span class="line">	DWORD dwThreadId = <span class="number">0</span>;</span><br><span class="line">	HHOOK hHook = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">	__try {</span><br><span class="line">		<span class="keyword">if</span> (!<span class="built_in">EnablePrivilege</span>(SE_DEBUG_NAME, TRUE)) {</span><br><span class="line">			__leave;</span><br><span class="line">		}</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 通过窗口句柄获取到窗口所属线程</span></span><br><span class="line">		dwThreadId = <span class="built_in">GetWindowThreadProcessId</span>(hwnd, <span class="literal">NULL</span>);</span><br><span class="line">		<span class="keyword">if</span> (dwThreadId == <span class="number">0</span>) {</span><br><span class="line">			__leave;</span><br><span class="line">		}</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 获取DLL自身的句柄</span></span><br><span class="line">		HMODULE hModule = <span class="literal">NULL</span>;</span><br><span class="line">		<span class="built_in">GetModuleHandleExW</span>(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,</span><br><span class="line">			(LPCWSTR)InjectDllByHook, &amp;hModule);</span><br><span class="line"></span><br><span class="line">		hHook = <span class="built_in">SetWindowsHookEx</span>(WH_GETMESSAGE, (HOOKPROC)HookProc_GetMsg, hModule, dwThreadId);</span><br><span class="line">	}</span><br><span class="line">	__finally {</span><br><span class="line"></span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> (hHook);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 导出函数，卸载钩子</span></span><br><span class="line"><span class="function">BOOL <span class="title">EjectDllByHook</span><span class="params">(HHOOK hook)</span> </span>{</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">UnhookWindowsHookEx</span>(hook);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>我们可以直接调用该DLL的导出函数<code>InjectDllByHook</code>，实现Hook指定窗口（也可以改成线程，因为<code>InjectDllByHook</code>函数内部也是通过窗口查找到对应线程的）的指定消息。当指定的消息类型被勾住时，我们的DLL也就被加载到了该窗口所属的进程地址空间了，从而实现了注入。</p>
+<h1 id="三、使用远程线程方式注入"><a href="#三、使用远程线程方式注入" class="headerlink" title="三、使用远程线程方式注入"></a>三、使用远程线程方式注入</h1><h2 id="3-1-远程线程注入原理"><a href="#3-1-远程线程注入原理" class="headerlink" title="3.1 远程线程注入原理"></a>3.1 远程线程注入原理</h2><p>“注册表注入方式”由于不能精确指定需要注入的进程，而且只能注入到GUI程序中，灵活性较差；“钩子注入方式”虽然能够精确指定注入的线程，但只能针对特定类型的消息进行Hook，从而间接的实现注入，对于类似windows服务类的程序就束手无策了。</p>
+<p>本节介绍的“远程线程的注入方式”是在实际中使用最为广泛的一种注入方式，它即可以精确指定需要注入的进程，又可以注入到非GUI程序中。</p>
+<p>远程线程注入方式使用的关键API为<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms682437(v=vs.85).aspx">CreateRemoteThread</a>，原型如下：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">HANDLE WINAPI <span class="title">CreateRemoteThread</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">  _In_  HANDLE                 hProcess,</span></span></span><br><span class="line"><span class="params"><span class="function">  _In_  LPSECURITY_ATTRIBUTES  lpThreadAttributes,</span></span></span><br><span class="line"><span class="params"><span class="function">  _In_  SIZE_T                 dwStackSize,</span></span></span><br><span class="line"><span class="params"><span class="function">  _In_  LPTHREAD_START_ROUTINE lpStartAddress,</span></span></span><br><span class="line"><span class="params"><span class="function">  _In_  LPVOID                 lpParameter,</span></span></span><br><span class="line"><span class="params"><span class="function">  _In_  DWORD                  dwCreationFlags,</span></span></span><br><span class="line"><span class="params"><span class="function">  _Out_ LPDWORD                lpThreadId</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
+
+<p><code>CreateRemoteThread</code>的参数和我们平时创建本地线程使用的<code>CreateThread</code>的参数类似，新增了<code>hProcess</code>句柄参数用于指定在哪个进程创建远程线程，通过<code>OpenProcess</code>可以获取到进程句柄，但需要注意权限问题。</p>
+<p><strong>通过远程线程方式实现DLL注入主要是在<code>lpStartAddress</code>和<code>lpParameter</code>这2个参数上面做文章。</strong><br><code>lpStartAddress</code>参数和<code>CreateThread</code>函数的一样，都是线程的处理过程函数，函数原型如下：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">DWORD WINAPI <span class="title">ThreadProc</span><span class="params">(LPVOID lpParameter)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>我们知道加载DLL使用的API是<code>LoadLibraryA</code>或<code>LoadLibraryW</code>，原型如下：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">HMODULE WINAPI <span class="title">LoadLibrary</span><span class="params">(LPCTSTR lpFileName)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>对比<code>LoadLibrary</code>和线程处理函数(<code>LPTHREAD_START_ROUTINE</code>)的原型，我们发现两者的函数的原型基本相同。虽然不是完全相同，但都是接收一个指针参数，而且都是返回一个值，并且调用约定也都是<code>WINAPI</code>。</p>
+<p>我们完全可以利用下它们之间的相似性，把线程处理函数的地址设为<code>LoadLibraryA</code>或<code>LoadLibraryW</code>，类似下面这样：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">HANDLE hThread = <span class="built_in">CreateRemoteThread</span>(hProcessRemote, </span><br><span class="line">	<span class="literal">NULL</span>, </span><br><span class="line">	<span class="number">0</span>, </span><br><span class="line">	LoadLibraryA, </span><br><span class="line">	<span class="string">"C:\\InjectDll.dll"</span>, </span><br><span class="line">	<span class="number">0</span>, </span><br><span class="line">	<span class="literal">NULL</span></span><br><span class="line">);</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>当<code>CreateRemoteThread</code>创建的新线程在远程进程地址空间中被创建的时候，就会立即调用<code>LoadLibraryA</code>函数，并传入DLL路径的地址作为其参数。</strong> </p>
+<h2 id="3-2-注意事项"><a href="#3-2-注意事项" class="headerlink" title="3.2 注意事项"></a>3.2 注意事项</h2><p>按照上面的介绍的方法很容易就能实现远程线程注入，实际上也的确是很容易实现，只是还有3个地方需要注意：LoadLibrary函数地址、DLL路径字符串地址、取消注入。</p>
+<h3 id="3-2-1-LoadLibrary函数地址问题"><a href="#3-2-1-LoadLibrary函数地址问题" class="headerlink" title="3.2.1 LoadLibrary函数地址问题"></a>3.2.1 LoadLibrary函数地址问题</h3><p>我们不能向上面的代码那样直接把<code>LoadLibraryA</code>或<code>LoadLibraryW</code>作为第4个参数传给<code>CreateRemoteThread</code>函数。这其中涉及模块的导入段等问题，如果在调用<code>CreateRemoteThread</code>时直接引用<code>LoadLibraryA</code>，则该引用会被解析为我们被注入DLL的导入段中的<code>LoadLibraryA</code>转换函数的地址，如果把这个转换函数的地址作为远程线程的起始地址传入，其结果很可能是访问违规。</p>
+<p>为了强制代码略过转换函数并直接调用<code>LoadLibraryA</code>函数，我们必须通过GetProcAddress来得到<code>LoadLibraryA</code>的确切地址。如：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">HMODULE hKernel32 = <span class="built_in">GetModuleHandle</span>(<span class="built_in">TEXT</span>(<span class="string">"kernel32.dll"</span>));</span><br><span class="line">LPVOID pLoadLibraryAAddr = (LPVOID)<span class="built_in">GetProcAddress</span>(hKernel32, <span class="string">"LoadLibraryA"</span>);</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="3-2-2-DLL路径字符串地址问题"><a href="#3-2-2-DLL路径字符串地址问题" class="headerlink" title="3.2.2 DLL路径字符串地址问题"></a>3.2.2 DLL路径字符串地址问题</h3><p>DLL路径字符串<code>"C:\\InjectDll.dll"</code>的内存地址位于调用进程的地址空间中，并不位于被注入的进程的地址空间中。所以当<code>LoadLibraryA</code>用这个地址去被注入进程的地址空间中访问的时候，DLL路径的字符串并不在那里，这很有可能导致远程线程访问违规。</p>
+<blockquote>
+<p>如果对进程的地址空间不了解，可以参考：- <a href="/2021/04/26/windows-nei-cun-ti-xi-zhuan-lan/" title="《Windows内存体系》专栏">《Windows内存体系》专栏</a>系列文章。</p>
+</blockquote>
+<p>为了解决这个问题，我们需要把DLL的路径字符串存储到被注入进程的地址空间中。Windows提供的<code>VirtualAllocEx</code>函数可以实现在其他进程的地址空间中分配内存块。实现过程大致如下：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">hTargeProcess = <span class="built_in">OpenProcess</span>(PROCESS_ALL_ACCESS, FALSE, dwProcessID); <span class="comment">// dwProcessID为被注入目标进程的进程ID</span></span><br><span class="line"><span class="keyword">if</span> (!hTargeProcess) {</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">SIZE_T dllPathSize = <span class="built_in">strlen</span>(pszDllPath); <span class="comment">// pszDllPath存储了DLL的路径</span></span><br><span class="line">pVM4DllPath = <span class="built_in">VirtualAllocEx</span>(hTargeProcess, <span class="literal">NULL</span>, dllPathSize, MEM_RESERVE | MEM_COMMIT, PAGE_EXECUTE_READWRITE);</span><br><span class="line"><span class="keyword">if</span> (!pVM4DllPath) {</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!<span class="built_in">WriteProcessMemory</span>(hTargeProcess, pVM4DllPath, pszDllPath, dllPathSize, <span class="literal">NULL</span>)) {</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="3-2-3-取消注入问题"><a href="#3-2-3-取消注入问题" class="headerlink" title="3.2.3 取消注入问题"></a>3.2.3 取消注入问题</h3><p>取消注入就是将DLL从目标进程卸载，卸载DLL所用的API是<code>FreeLibrary</code>，但我们不能直接调用这个函数，因为直接调用的话是在我们的进程中卸载DLL，而不是目标进程中卸载，很显然这样达不到卸载的目的。我们需要和加载DLL时一样，将<code>FreeLibrary</code>的地址作为第4个参数传给<code>CreateRemoteThread</code>函数，但同样需要通过<code>GetProcAddress</code>来得到<code>FreeLibrary</code>的确切地址：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">PTHREAD_START_ROUTINE pfnThreadRtn = (PTHREAD_START_ROUTINE)<span class="built_in">GetProcAddress</span>(<span class="built_in">GetModuleHandle</span>(<span class="built_in">TEXT</span>(<span class="string">"Kernel32"</span>)), <span class="string">"FreeLibrary"</span>);</span><br><span class="line"><span class="keyword">if</span>(pfnThreadRtn) {</span><br><span class="line">    hThread = <span class="built_in">CreateRemoteThread</span>(hProcess, <span class="literal">NULL</span>, <span class="number">0</span>, pfnThreadRtn, me.modBaseAddr, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="3-3-实例"><a href="#3-3-实例" class="headerlink" title="3.3 实例"></a>3.3 实例</h2><p>本实例中的<code>InjectDllByRemoteThread</code>和<code>EjectDllByRemoteThread</code>两个函数使用远程线程的方式分别实现了注入和取消注入的功能。</p>
+<h3 id="3-3-1-InjectDllByRemoteThread函数"><a href="#3-3-1-InjectDllByRemoteThread函数" class="headerlink" title="3.3.1 InjectDllByRemoteThread函数"></a>3.3.1 InjectDllByRemoteThread函数</h3><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">BOOL <span class="title">InjectDllByRemoteThread</span><span class="params">(DWORD dwProcessID, <span class="type">const</span> <span class="type">char</span>* pszDllPath)</span> </span>{</span><br><span class="line">	BOOL bRet = FALSE;</span><br><span class="line">	<span class="type">const</span> DWORD dwThreadSize = <span class="number">50</span> * <span class="number">1024</span>;</span><br><span class="line">	HANDLE hTargeProcess = <span class="literal">NULL</span>;</span><br><span class="line">	HANDLE hRemoteThread = <span class="literal">NULL</span>;</span><br><span class="line">	PVOID pVM4LoadLibrary = <span class="literal">NULL</span>;</span><br><span class="line">	PVOID pVM4DllPath = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">	__try {</span><br><span class="line">		<span class="keyword">if</span> (!<span class="built_in">EnablePrivilege</span>(SE_DEBUG_NAME, TRUE)) {</span><br><span class="line">			__leave;</span><br><span class="line">		}</span><br><span class="line"></span><br><span class="line">		hTargeProcess = <span class="built_in">OpenProcess</span>(PROCESS_ALL_ACCESS, FALSE, dwProcessID);</span><br><span class="line">		<span class="keyword">if</span> (!hTargeProcess) {</span><br><span class="line">			__leave;</span><br><span class="line">		}</span><br><span class="line"></span><br><span class="line">		SIZE_T dllPathSize = <span class="built_in">strlen</span>(pszDllPath);</span><br><span class="line">		pVM4DllPath = <span class="built_in">VirtualAllocEx</span>(hTargeProcess, <span class="literal">NULL</span>, dllPathSize, MEM_RESERVE | MEM_COMMIT, PAGE_EXECUTE_READWRITE);</span><br><span class="line">		<span class="keyword">if</span> (!pVM4DllPath) {</span><br><span class="line">			__leave;</span><br><span class="line">		}</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (!<span class="built_in">WriteProcessMemory</span>(hTargeProcess, pVM4DllPath, pszDllPath, dllPathSize, <span class="literal">NULL</span>)) {</span><br><span class="line">			__leave;</span><br><span class="line">		}</span><br><span class="line"></span><br><span class="line">		HMODULE hKernel32 = <span class="built_in">GetModuleHandle</span>(<span class="built_in">TEXT</span>(<span class="string">"kernel32.dll"</span>));</span><br><span class="line">		LPVOID pLoadLibraryAAddr = (LPVOID)<span class="built_in">GetProcAddress</span>(hKernel32, <span class="string">"LoadLibraryA"</span>);</span><br><span class="line"></span><br><span class="line">		hRemoteThread = <span class="built_in">CreateRemoteThread</span>(hTargeProcess, <span class="literal">NULL</span>, <span class="number">0</span>, (<span class="built_in">DWORD</span>(WINAPI *)(LPVOID))pLoadLibraryAAddr, pVM4DllPath, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line">		<span class="keyword">if</span> (!hRemoteThread) {</span><br><span class="line">			__leave;</span><br><span class="line">		}</span><br><span class="line"></span><br><span class="line">		<span class="built_in">WaitForSingleObject</span>(hRemoteThread, INFINITE);</span><br><span class="line"></span><br><span class="line">		DWORD dwExitCode = <span class="number">0</span>;</span><br><span class="line">		BOOL B = <span class="built_in">GetExitCodeThread</span>(hRemoteThread, &amp;dwExitCode);</span><br><span class="line"></span><br><span class="line">		bRet = TRUE;</span><br><span class="line">	}</span><br><span class="line">	__finally {</span><br><span class="line">		<span class="keyword">if</span> (hTargeProcess &amp;&amp; pVM4DllPath) {</span><br><span class="line">			<span class="built_in">VirtualFreeEx</span>(hTargeProcess, pVM4DllPath, dwThreadSize, MEM_RELEASE);</span><br><span class="line">		}</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (hRemoteThread) {</span><br><span class="line">			<span class="built_in">CloseHandle</span>(hRemoteThread);</span><br><span class="line">		}</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (hTargeProcess) {</span><br><span class="line">			<span class="built_in">CloseHandle</span>(hTargeProcess);</span><br><span class="line">		}</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> bRet;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="3-3-2-EjectDllByRemoteThread函数"><a href="#3-3-2-EjectDllByRemoteThread函数" class="headerlink" title="3.3.2 EjectDllByRemoteThread函数"></a>3.3.2 EjectDllByRemoteThread函数</h3><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">BOOL <span class="title">EjectDllByRemoteThread</span><span class="params">(DWORD dwProcessID, LPCWSTR pszDllPath)</span> </span>{</span><br><span class="line">    BOOL bOk = FALSE;</span><br><span class="line">    HANDLE hTHSnapshot = <span class="literal">NULL</span>;</span><br><span class="line">    HANDLE hProcess = <span class="literal">NULL</span>, hThread = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">    __try {</span><br><span class="line">        hTHSnapshot = <span class="built_in">CreateToolhelp32Snapshot</span>(TH32CS_SNAPMODULE, dwProcessID);</span><br><span class="line">        <span class="keyword">if</span>(hTHSnapshot == INVALID_HANDLE_VALUE) { </span><br><span class="line">            __leave; </span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        MODULEENTRY32W me = {<span class="built_in">sizeof</span>(me)};</span><br><span class="line">        BOOL bFound = FALSE;</span><br><span class="line">        BOOL bMoreMods = <span class="built_in">Module32FirstW</span>(hTHSnapshot, &amp;me);</span><br><span class="line">        <span class="keyword">for</span>(; bMoreMods; bMoreMods = <span class="built_in">Module32NextW</span>(hTHSnapshot, &amp;me)) {</span><br><span class="line">            bFound = (_wcsicmp(me.szModule, pszDllPath) == <span class="number">0</span>) ||</span><br><span class="line">                (_wcsicmp(me.szExePath, pszDllPath) == <span class="number">0</span>);</span><br><span class="line">            <span class="keyword">if</span>(bFound) <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(!bFound) { </span><br><span class="line">            __leave; </span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        hProcess = <span class="built_in">OpenProcess</span>(</span><br><span class="line">            PROCESS_QUERY_INFORMATION |</span><br><span class="line">            PROCESS_CREATE_THREAD |</span><br><span class="line">            PROCESS_VM_OPERATION,  <span class="comment">// For CreateRemoteThread</span></span><br><span class="line">            FALSE, dwProcessID);</span><br><span class="line">        <span class="keyword">if</span>(hProcess == <span class="literal">NULL</span>) {</span><br><span class="line">            __leave; </span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        PTHREAD_START_ROUTINE pfnThreadRtn = (PTHREAD_START_ROUTINE)</span><br><span class="line">            <span class="built_in">GetProcAddress</span>(<span class="built_in">GetModuleHandle</span>(<span class="built_in">TEXT</span>(<span class="string">"Kernel32"</span>)), <span class="string">"FreeLibrary"</span>);</span><br><span class="line">        <span class="keyword">if</span>(pfnThreadRtn == <span class="literal">NULL</span>) {</span><br><span class="line">            __leave; </span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        hThread = <span class="built_in">CreateRemoteThread</span>(hProcess, <span class="literal">NULL</span>, <span class="number">0</span>, pfnThreadRtn, me.modBaseAddr, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line">        <span class="keyword">if</span>(hThread == <span class="literal">NULL</span>) {</span><br><span class="line">            __leave; </span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="built_in">WaitForSingleObject</span>(hThread, INFINITE);</span><br><span class="line"></span><br><span class="line">        bOk = TRUE;</span><br><span class="line">    }</span><br><span class="line">    __finally {</span><br><span class="line">        <span class="keyword">if</span>(hTHSnapshot != <span class="literal">NULL</span>) {</span><br><span class="line">            <span class="built_in">CloseHandle</span>(hTHSnapshot);</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span>(hThread != <span class="literal">NULL</span>) {</span><br><span class="line">            <span class="built_in">CloseHandle</span>(hThread);</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span>(hProcess != <span class="literal">NULL</span>) {</span><br><span class="line">            <span class="built_in">CloseHandle</span>(hProcess);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span>(bOk);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="3-3-3-DllMain函数"><a href="#3-3-3-DllMain函数" class="headerlink" title="3.3.3 DllMain函数"></a>3.3.3 DllMain函数</h3><p>使用远程线程的方式进行DLL注入，我们一般在DllMain的<code>DLL_PROCESS_ATTACH</code>条件分支开始业务逻辑（通常会另外创建一个子线程，将业务逻辑放到子线程中处理），<code>DLL_PROCESS_DETACH</code>条件分支出结束业务逻辑。</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">BOOL APIENTRY <span class="title">DllMain</span><span class="params">(HMODULE hModule, DWORD  fdwReason, LPVOID lpReserved)</span> </span>{</span><br><span class="line">	HANDLE hThread = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">switch</span>(fdwReason) {</span><br><span class="line">        <span class="keyword">case</span> DLL_PROCESS_ATTACH:</span><br><span class="line">        {</span><br><span class="line">			g_hDllModule = hModule;</span><br><span class="line">			<span class="comment">// 使用注册表方式和CreateRemoteThread方式注入时，一般在此处创建线程</span></span><br><span class="line">			<span class="comment">//</span></span><br><span class="line"></span><br><span class="line">			hThread = (HANDLE)_beginthreadex(<span class="literal">NULL</span>, <span class="number">0</span>, PluginProc, <span class="literal">NULL</span>, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line">			<span class="keyword">if</span> (hThread) {</span><br><span class="line">				<span class="built_in">CloseHandle</span>(hThread); <span class="comment">// 关闭句柄，防止句柄泄漏</span></span><br><span class="line">			}</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">case</span> DLL_THREAD_ATTACH:</span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">case</span> DLL_THREAD_DETACH:</span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">case</span> DLL_PROCESS_DETACH:</span><br><span class="line">        {</span><br><span class="line">	        <span class="comment">// 结束业务逻辑</span></span><br><span class="line">	        <span class="comment">// ......</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> TRUE;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>jiangxueqiao
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://jiangxueqiao.com/2021/05/02/windows-zhu-ru-yu-lan-jie-2-dll-zhu-ru-de-fang-shi/" title="Windows注入与拦截(2)--DLL注入的方式">https://jiangxueqiao.com/2021/05/02/windows-zhu-ru-yu-lan-jie-2-dll-zhu-ru-de-fang-shi/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/05/01/windows-zhu-ru-yu-lan-jie-1-dll-zhu-ru-ji-chu/" rel="prev" title="Windows注入与拦截(1)--DLL注入基础">
+                  <i class="fa fa-chevron-left"></i> Windows注入与拦截(1)--DLL注入基础
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/05/03/windows-zhu-ru-yu-lan-jie-3-gua-zai-chuang-kou-dao-mu-biao-kong-jian/" rel="next" title="Windows注入与拦截(3)--挂载窗口到目标控件">
+                  Windows注入与拦截(3)--挂载窗口到目标控件 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">鄂ICP备2020015399号-5 </a>
+  </div>
+  <div class="copyright">
+    &copy; 2021 – 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">jiangxueqiao</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+
+</body>
+</html>

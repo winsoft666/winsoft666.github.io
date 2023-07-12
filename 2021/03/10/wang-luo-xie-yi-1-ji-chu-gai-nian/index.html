@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="codeva-RtI1N7UTHz">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-center-atom.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"jiangxueqiao.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"width":320},"copycode":{"enable":true,"style":"flat"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":true,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta property="og:type" content="article">
+<meta property="og:title" content="网络协议(1)--基础概念">
+<meta property="og:url" content="https://jiangxueqiao.com/2021/03/10/wang-luo-xie-yi-1-ji-chu-gai-nian/index.html">
+<meta property="og:site_name" content="Jeffery&#39;s Site">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://static.1key.run/blog/img/wangluoxieyi-jichugailian-1.jpg">
+<meta property="og:image" content="https://static.1key.run/blog/img/wangluoxieyi-jichugailian-2.jpg">
+<meta property="og:image" content="https://static.1key.run/blog/img/wangluoxieyi-jichugailian-3.jpg">
+<meta property="og:image" content="https://static.1key.run/blog/img/wangluoxieyi-jichugailian-4.jpg">
+<meta property="og:image" content="https://static.1key.run/blog/img/wangluoxieyi-jichugailian-5.jpg">
+<meta property="og:image" content="https://static.1key.run/blog/img/wangluoxieyi-jichugailian-6.jpg">
+<meta property="article:published_time" content="2021-03-10T10:10:58.000Z">
+<meta property="article:modified_time" content="2023-07-12T09:57:08.925Z">
+<meta property="article:author" content="jiangxueqiao">
+<meta property="article:tag" content="IP地址">
+<meta property="article:tag" content="子网掩码">
+<meta property="article:tag" content="网关">
+<meta property="article:tag" content="MTU">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://static.1key.run/blog/img/wangluoxieyi-jichugailian-1.jpg">
+
+
+<link rel="canonical" href="https://jiangxueqiao.com/2021/03/10/wang-luo-xie-yi-1-ji-chu-gai-nian/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jiangxueqiao.com/2021/03/10/wang-luo-xie-yi-1-ji-chu-gai-nian/","path":"2021/03/10/wang-luo-xie-yi-1-ji-chu-gai-nian/","title":"网络协议(1)--基础概念"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>网络协议(1)--基础概念 | Jeffery's Site</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Jeffery's Site</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">93</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">16</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">64</span></a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81TCP-x2F-IP%E5%8D%8F%E8%AE%AE%E6%A0%88"><span class="nav-text">一、TCP&#x2F;IP协议栈</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81IP%E5%9C%B0%E5%9D%80%E3%80%81%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81%E3%80%81%E7%BD%91%E5%85%B3"><span class="nav-text">二、IP地址、子网掩码、网关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-IP%E5%9C%B0%E5%9D%80%E5%8F%8A%E5%88%86%E7%B1%BB"><span class="nav-text">2.1 IP地址及分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E7%BD%91%E7%BB%9C%E6%95%B0%E7%9A%84%E8%A7%A3%E9%87%8A"><span class="nav-text">关于网络数的解释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E4%B8%BB%E6%9C%BA%E6%95%B0%E7%9A%84%E8%A7%A3%E9%87%8A"><span class="nav-text">关于主机数的解释</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E7%A7%81%E6%9C%89IP%E5%9C%B0%E5%9D%80"><span class="nav-text">2.2 私有IP地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81"><span class="nav-text">2.3 子网掩码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-%E7%BD%91%E5%85%B3%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-text">2.3 网关的作用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%8C%85%E7%9A%84%E5%B0%81%E8%A3%85%E4%B8%8E%E8%A7%A3%E5%B0%81%E8%A3%85"><span class="nav-text">三、包的封装与解封装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81MTU"><span class="nav-text">四、MTU</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#windows%E7%B3%BB%E7%BB%9F%E4%BF%AE%E6%94%B9MTU%E5%80%BC"><span class="nav-text">windows系统修改MTU值</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">jiangxueqiao</p>
+  <div class="site-description" itemprop="description">不是看到希望才坚持，而是坚持才会看到希望</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">64</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/winsoft666" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;winsoft666" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:smart7178@163.com" title="E-Mail → mailto:smart7178@163.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jiangxueqiao.com/2021/03/10/wang-luo-xie-yi-1-ji-chu-gai-nian/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jiangxueqiao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jeffery's Site">
+      <meta itemprop="description" content="不是看到希望才坚持，而是坚持才会看到希望">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="网络协议(1)--基础概念 | Jeffery's Site">
+      <meta itemprop="description" content=" ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          网络协议(1)--基础概念
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-03-10 18:10:58" itemprop="dateCreated datePublished" datetime="2021-03-10T18:10:58+08:00">2021-03-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-07-12 17:57:08" itemprop="dateModified" datetime="2023-07-12T17:57:08+08:00">2023-07-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/" itemprop="url" rel="index"><span itemprop="name">网络协议</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description"> </div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="一、TCP-x2F-IP协议栈"><a href="#一、TCP-x2F-IP协议栈" class="headerlink" title="一、TCP/IP协议栈"></a>一、TCP/IP协议栈</h1><p><img data-src="https://static.1key.run/blog/img/wangluoxieyi-jichugailian-1.jpg"></p>
+<h1 id="二、IP地址、子网掩码、网关"><a href="#二、IP地址、子网掩码、网关" class="headerlink" title="二、IP地址、子网掩码、网关"></a>二、IP地址、子网掩码、网关</h1><h2 id="2-1-IP地址及分类"><a href="#2-1-IP地址及分类" class="headerlink" title="2.1 IP地址及分类"></a>2.1 IP地址及分类</h2><p>IP地址相当于互联网上的门牌号, 计算机在启动的时候可以从磁盘（无盘系统例外）上读取该主机的IP配置。IP地址由4个字节（也就是32位）的二进制码组成，包含了<code>网络号( net-id )</code>和<code>主机号( host-id )</code>。但现实中，我们经常还需要再继续划分<code>“子网”</code>，这时就需要借用主机号的一部分充任子网号，这样IP地址也就可以看成由<code>标准网络号、子网号、主机号</code>3部分组成的了，即<code>IP地址=标准网络号+子网号+主机号</code>。</p>
+<blockquote>
+<p>网络号、子网号、主机号三者间的关系，形象的描述如下：假设你的住址IP是<code>武汉市文治街16号</code>，那么，<br>IP地址 = 武汉市文治街16号<br>网络号 = 武汉市<br>子网号 = 文治街<br>主机号 = 16号</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>IP地址种类</th>
+<th>二进制组成(前缀位+网络位+主机位)</th>
+<th>IP范围</th>
+<th>网络数</th>
+<th>主机数/网络</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A类地址</td>
+<td><code>0</code>+7位网络号+24位主机号</td>
+<td>1.0.0.0 - 127.255.255.255</td>
+<td>$2^7-2$</td>
+<td>$2^{24}-2$</td>
+</tr>
+<tr>
+<td>B类地址</td>
+<td><code>10</code>+14位网络号+16位主机号</td>
+<td>128.0.0.0 - 191.255.255.255</td>
+<td>$2^{14}-1$</td>
+<td>$2^{16}-2$</td>
+</tr>
+<tr>
+<td>C类地址</td>
+<td><code>110</code>+21位网络号+8位主机号</td>
+<td>192.0.0.0 - 223.255.255.255</td>
+<td>$2^{21}-1$</td>
+<td>$2^8-2$</td>
+</tr>
+<tr>
+<td>D类地址</td>
+<td><code>1110</code>+多播地址(用于多播)</td>
+<td>224.0.0.0 - 239.255.255.255</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>E类地址</td>
+<td><code>1111</code>+保留位(不开放, 保留使用)</td>
+<td>240.0.0.0-249.255.255.255</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody></table>
+<p>从表中可以看出，A类IP的第1位（二进制位）必须是0，所以A类IP的第一个整数的范围是<code>0000 0000 ~ 01111 11111</code>，转换为十进制就是<code>0 ~ 127</code>，以此类推。</p>
+<h3 id="关于网络数的解释"><a href="#关于网络数的解释" class="headerlink" title="关于网络数的解释"></a>关于网络数的解释</h3><p>网络数就是一种网络的子网数, 比如A类地址, 可以分为多少个子网。看表格可以推出网络数的计算公式为: $2^{网络号位数}$。<br>规定网络地址全为<code>0</code>的IP地址是保留地址，意思是“本网络”。</p>
+<ul>
+<li>在A类地址中，实际上 <code>0.0.0.0</code> 是不指派的，而可以指派的最小网络是 <code>1.0.0.0</code>；网络地址为 <code>127</code> 的A类IP地址保留作为本地软件环回测试本主机的进程之间的通信(比如常用的 <code>127.0.0.1</code>，<strong>但实际上网络地址为<code>127</code>的都可以用作本地环回地址</strong>)。所以A类地址网络数为 $2^7-2$。</li>
+<li>在B类地址中，实际上 <code>128.0.0.0</code> 是不指派的，而可以指派的最小网络是 `128.1.0.0，所以B类地址网络数是 $2^{14} - 1$。</li>
+<li>在C类地址中，实际上 <code>192.0.0.0</code> 是不指派的，而可以指派的最小网络是 192.0.1.0，所以C类地址网络数是 $2^{21}-1$。</li>
+</ul>
+<h3 id="关于主机数的解释"><a href="#关于主机数的解释" class="headerlink" title="关于主机数的解释"></a>关于主机数的解释</h3><p>主机数就是一个子网里面可以容纳多少台主机。看表格可以推出主机数的计算公式为: <code>2^主机号位数-2</code>。主机号全为0表示该网络，而主机号全为1表示广播地址，所以要排除掉这两个。比如A类地址 <code>1.0.0.0</code> 表示主机所在的网段的网络地址, <code>1.255.255.255</code> 为该网段的广播地址。</p>
+<h2 id="2-2-私有IP地址"><a href="#2-2-私有IP地址" class="headerlink" title="2.2 私有IP地址"></a>2.2 私有IP地址</h2><p>经常可以看到<code>192.168.1.101</code>这类的IP地址, 这些是私有IP地址, 专用地址, 也就是局域网内使用的的IP地址。<br>公网IP地址是需要向有关部门申请备案的，私有IP地址不用申请, 但是仅限内网使用, 也节约公网IP。</p>
+<table>
+<thead>
+<tr>
+<th>IP地址种类</th>
+<th>私有IP范围</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A类地址</td>
+<td>10.0.0.0 - 10.255.255.255</td>
+</tr>
+<tr>
+<td>B类地址</td>
+<td>172.16.0.0 - 172.31.255.255</td>
+</tr>
+<tr>
+<td>C类地址</td>
+<td>192.168.0.0 - 192.168.255.255</td>
+</tr>
+</tbody></table>
+<p>路由器看到专用地址就不转发，所以说专用地址作为目的地址是不可能在因特网上传送的。专用IP地址也可叫做可重用地址。那好，问题来了，如果配置了这些专用地址的主机想和因特网上的主机通信，怎么办呢？NAT(network address translation: 网络地址转换)在这种情况下就应运而生了。NAT就是将这种地址转换成有效的外部全球IP地址，使得整个专用网只需要一个全球IP地址就可以与因特网联通。</p>
+<h2 id="2-3-子网掩码"><a href="#2-3-子网掩码" class="headerlink" title="2.3 子网掩码"></a>2.3 子网掩码</h2><p><code>IP地址=标准网络号+子网号+主机号</code>。从IP分类可以很容易确定“标准网络号”，<code>32bit</code>的IP地址除去前面的“标准网络号”之后，剩下的就是“子网号”和“主机号”，那么怎么确定“子网号”和“主机号”了？ 这就需要借助<code>“子网掩码”</code>了。子网掩码也是一个32bit(<code>xxx.xxx.xxx.xxx</code>)的值，其中值为1的bit留给“标准网络号”和“子网号”，为0的bit留给“主机号”。我们可以将子网掩码和IP地址进行二进制<code>“与运算”</code>，通过得到的结果来确定“子网号”。</p>
+<p>以C类IP地址为例，对于规范的C类IP地址来说，规范子网掩码为<code>255.255.255.0</code>，即用32比特IP地址的前24比特标识网络号，后8比特标识主机号。因而，每个C类网络下共可容纳254台主机($2^8-2$)。 如今，我们先思索借用2比特的主机号来充任子网络号的情形。</p>
+<p>C类网络地址<code>210.31.233.0</code>，我们借用2bit的主机号来充当子网号，子网的数目为$2^2-2$(子网号无法全为0或1，所以减2).</p>
+<p><img data-src="https://static.1key.run/blog/img/wangluoxieyi-jichugailian-2.jpg"></p>
+<p>为了借用原来8位主机号中的前2位充任子网络号，采用了新的非规范子网掩255.255.255.192。<br>采用了新的子网掩码后，借用的2位子网号可以用来标识两个子网：01子网和10子网(子网号无法全为0或1，因而00、11子网无法用)。 </p>
+<p><strong>对于上图的01子网来说</strong>，其网络号的点分十进制的方式为：<code>210.31.233.64</code>，该子网的最小IP地址为：<code>210.31.233.65</code>，最大IP地址为：<code>210.31.233.126</code>（主机号全为1位广播地址），共可容纳62台主机。对该子网的直接广播地址为：<code>210.31.233.127</code>（主机号全为1）。</p>
+<blockquote>
+<p>经常见到像<code>192.168.1.0/24</code>这样的写法，它的意思是网络号为<code>192.168.1.0</code>；子网掩码为24位，即<code>111111111 111111111 111111111 00000000</code>，转为点分十进制就为<code>255.255.255.0</code>，没有借用主机号来充当子网号，可以拥有的主机数为$2^8$-2.</p>
+</blockquote>
+<h2 id="2-3-网关的作用"><a href="#2-3-网关的作用" class="headerlink" title="2.3 网关的作用"></a>2.3 网关的作用</h2><p>你的住址IP是<code>武汉市洪山区文治街16号</code>，你的父母只允许你和文治街的小朋友（同一个子网）一起玩耍，如果你想要去和别的街道（别的子网）的小朋友玩耍，你就需要经过你的父母的同意，由你的父母带你过去，这时候你的父母就充当了<strong>网关</strong>的角色，没有你的父母，你就不能和其他街道（其他子网）的小朋友玩耍。</p>
+<h1 id="三、包的封装与解封装"><a href="#三、包的封装与解封装" class="headerlink" title="三、包的封装与解封装"></a>三、包的封装与解封装</h1><blockquote>
+<p>封装英文：Encapsulation<br>解封装英文：Demultiplexing</p>
+</blockquote>
+<p>当应用程序使用网络传送数据时，数据按照协议栈从上到下的顺序，逐次通过每一层。其中每一层对收到的数据都要增加一些首部信息（有时还增加尾部信息）。最终生成一串比特流通过以太网来传输，我们称这串比特流叫帧。<br>如图：<br><img data-src="https://static.1key.run/blog/img/wangluoxieyi-jichugailian-3.jpg"></p>
+<p><strong>当数据报到达链路层时</strong>，链路层也要对IP数据包封装进行包装。链路层也要对IP数据包封装的方式主要有<code>以太网IP数据包封装</code>（RFC894）、<code>IEEE 802 IP数据报封装</code>（RFC1042）两种，最常使用的封装格式是以太网IP数据包封装（RFC894）。下图显示了这两种不同形式的封装格式：<br><img data-src="https://static.1key.run/blog/img/wangluoxieyi-jichugailian-4.jpg"><br>从图中可以看到<code>以太网封装</code>限制了数据帧的最大长度为1500字节，这个限制叫做MTU，最大传输单元（详见第四节）。</p>
+<p>接收端收到帧之后，按照和上面相反的顺序（协议栈从下到上）来解包，依次解析每一层加入的头部（或尾部），最终将原始数据传给最上层应用程序。<br>如图：<br><img data-src="https://static.1key.run/blog/img/wangluoxieyi-jichugailian-5.jpg"></p>
+<p>因为传输层的TCP、UDP、ICMP等都有可能向网络层IP协议传送数据，这样在IP协议层解包的时候，需要知道这个包对应的上层协议是哪一个，因此IP协议必须在生成的IP首部加入某种标识，以表明数据的上一层的具体协议。为此，IP在首部中存入了一个长度为8bit的数值，称作协议域。常见的IP协议号有：<br>1表示ICMP协议，2表示IGMP协议，6表示TCP协议，17表示UDP协议。</p>
+<blockquote>
+<p>完整的IP协议号见：<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/IP%E5%8D%8F%E8%AE%AE%E5%8F%B7%E5%88%97%E8%A1%A8">IP协议号列表</a></p>
+</blockquote>
+<h1 id="四、MTU"><a href="#四、MTU" class="headerlink" title="四、MTU"></a>四、MTU</h1><p>前面第三节提到了以太网封装限制了数据帧的长度为1500字节，这个限制是在链路层封装IP数据报时作的。如果IP层的数据报比链路层的这个MTU值大，那么IP层就需要分片（英文：fragmentation），把数据报分成若干片，保证每一片的大小都小于MTU值。</p>
+<h3 id="windows系统修改MTU值"><a href="#windows系统修改MTU值" class="headerlink" title="windows系统修改MTU值"></a>windows系统修改MTU值</h3><ul>
+<li><p>查询当前MTU值</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh interface ipv4 show subinterfaces</span><br></pre></td></tr></tbody></table></figure>
+<p><img data-src="https://static.1key.run/blog/img/wangluoxieyi-jichugailian-6.jpg"></p>
+</li>
+<li><p>修改MTU值</p>
+<figure class="highlight angelscript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh <span class="keyword">interface</span> <span class="symbol">ipv4</span> <span class="symbol">set</span> <span class="symbol">subinterface</span> "本地连接" <span class="symbol">mtu</span>=<span class="symbol">1480</span> <span class="symbol">store</span>=<span class="symbol">persistent</span></span><br></pre></td></tr></tbody></table></figure></li>
+</ul>
+<blockquote>
+<p>文章参考：<br><a target="_blank" rel="noopener" href="https://m.vipcn.com/a/360973/">https://m.vipcn.com/a/360973/</a><br><a target="_blank" rel="noopener" href="https://ahaochan.github.io/posts/IP_address,_subnet_mask,_gateway_Introduction.html">https://ahaochan.github.io/posts/IP_address,_subnet_mask,_gateway_Introduction.html</a><br><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/20717354">https://www.zhihu.com/question/20717354</a></p>
+</blockquote>
+<p>《TCP/IP详解 卷1：协议》在线阅读地址：<a target="_blank" rel="noopener" href="http://www.52im.net/topic-tcpipvol1.html">http://www.52im.net/topic-tcpipvol1.html</a></p>
+<blockquote>
+<p>文章图片带有“CSDN”水印的说明：<br>由于该文章和图片最初发表在我的<a target="_blank" rel="noopener" href="https://blog.csdn.net/china_jeffery">CSDN博客</a>中，因此图片被CSDN自动添加了水印。</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>jiangxueqiao
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://jiangxueqiao.com/2021/03/10/wang-luo-xie-yi-1-ji-chu-gai-nian/" title="网络协议(1)--基础概念">https://jiangxueqiao.com/2021/03/10/wang-luo-xie-yi-1-ji-chu-gai-nian/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/IP%E5%9C%B0%E5%9D%80/" rel="tag"># IP地址</a>
+              <a href="/tags/%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81/" rel="tag"># 子网掩码</a>
+              <a href="/tags/%E7%BD%91%E5%85%B3/" rel="tag"># 网关</a>
+              <a href="/tags/MTU/" rel="tag"># MTU</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/03/03/bo-kai-zi-fu-bian-ma-de-mi-wu-zhuan-lan/" rel="prev" title="《拨开字符编码的迷雾》专栏">
+                  <i class="fa fa-chevron-left"></i> 《拨开字符编码的迷雾》专栏
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/03/11/wang-luo-xie-yi-2-arp-he-rarp-xie-yi/" rel="next" title="网络协议(2)--ARP和RARP协议">
+                  网络协议(2)--ARP和RARP协议 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">鄂ICP备2020015399号-5 </a>
+  </div>
+  <div class="copyright">
+    &copy; 2021 – 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">jiangxueqiao</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+
+</body>
+</html>

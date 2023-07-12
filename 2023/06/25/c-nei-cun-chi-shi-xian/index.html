@@ -1,366 +1,274 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="zh-CN">
-
-
 <head>
-    <meta charset="utf-8">
-    <meta name="keywords" content="C++内存池实现, Windows,Linux,C++,Qt,Node.js,Electron,WebRTC">
-    <meta name="description" content="一、为什么需要使用内存池在C/C++中我们通常使用malloc,free或new,delete来动态分配内存。一方面，因为这些函数涉及到了系统调用，所以频繁的调用必然会导致程序性能的损耗；
-另一方面，频繁的分配和释放小块内存会导致大量的内存">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta name="renderer" content="webkit|ie-stand|ie-comp">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="referrer" content="no-referrer-when-downgrade">
-    <!-- Global site tag (gtag.js) - Google Analytics -->
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="codeva-RtI1N7UTHz">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-center-atom.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"jiangxueqiao.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"width":320},"copycode":{"enable":true,"style":"flat"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":true,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="本文从实际需求出发，介绍了内存池的实现原理，并且提供了具体的实现方案。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++内存池实现">
+<meta property="og:url" content="https://jiangxueqiao.com/2023/06/25/c-nei-cun-chi-shi-xian/index.html">
+<meta property="og:site_name" content="Jeffery&#39;s Site">
+<meta property="og:description" content="本文从实际需求出发，介绍了内存池的实现原理，并且提供了具体的实现方案。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-06-25T10:24:43.000Z">
+<meta property="article:modified_time" content="2023-07-12T09:31:09.733Z">
+<meta property="article:author" content="jiangxueqiao">
+<meta property="article:tag" content="内存池">
+<meta name="twitter:card" content="summary">
 
 
-    <title>C++内存池实现 | Jiangxueqiao&#39;s Site</title>
-    <link rel="icon" type="image/png" href="/favicon.png">
-    
-
-
-    <!-- bg-cover style     -->
-
-
-
-<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
-<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
-<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
-<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
-<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
-<link rel="stylesheet" type="text/css" href="/css/matery.css">
-<link rel="stylesheet" type="text/css" href="/css/my.css">
-<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
-
-
-
-
-    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
-    <link rel="stylesheet" href="/css/post.css">
-
-
-
-
-    
+<link rel="canonical" href="https://jiangxueqiao.com/2023/06/25/c-nei-cun-chi-shi-xian/">
 
 
 
-    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jiangxueqiao.com/2023/06/25/c-nei-cun-chi-shi-xian/","path":"2023/06/25/c-nei-cun-chi-shi-xian/","title":"C++内存池实现"}</script>
 
-<meta name="generator" content="Hexo 6.3.0">
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>C++内存池实现 | Jeffery's Site</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
 </head>
 
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
-<body>
-    <header class="navbar-fixed">
-    <nav id="headNav" class="bg-color nav-transparent">
-        <div id="navContainer" class="nav-wrapper container">
-            <div class="brand-logo">
-                <a href="/" class="waves-effect waves-light">
-                    
-                    <img src="https://static.1key.run/cherry.svg" class="logo-img" alt="LOGO">
-                    
-                    <span class="logo-span">Jiangxueqiao&#39;s Site</span>
-                </a>
-            </div>
-            
-
-<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
-<ul class="right nav-menu">
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/" class="waves-effect waves-light">
-      
-      <i class="fas fa-home" style="zoom: 0.6;"></i>
-      
-      <span>首页</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/tags" class="waves-effect waves-light">
-      
-      <i class="fas fa-tags" style="zoom: 0.6;"></i>
-      
-      <span>标签</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/categories" class="waves-effect waves-light">
-      
-      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
-      
-      <span>分类</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/archives" class="waves-effect waves-light">
-      
-      <i class="fas fa-archive" style="zoom: 0.6;"></i>
-      
-      <span>归档</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/about" class="waves-effect waves-light">
-      
-      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
-      
-      <span>关于</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a target="_blank" rel="noopener" href="https://support.qq.com/products/597551" class="waves-effect waves-light">
-      
-      <i class="fas fa-comments" style="zoom: 0.6;"></i>
-      
-      <span>留言板</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/friends" class="waves-effect waves-light">
-      
-      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
-      
-      <span>友情链接</span>
-    </a>
-    
-  </li>
-  
-  <li>
-    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
-      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
-    </a>
-  </li>
-  <li>
-    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
-      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
-    </a>
-  </li>
-</ul>
-
-
-<div id="mobile-nav" class="side-nav sidenav">
-
-    <div class="mobile-head bg-color">
-        
-        <img src="https://static.1key.run/cherry.svg" class="logo-img circle responsive-img">
-        
-        <div class="logo-name">Jiangxueqiao&#39;s Site</div>
-        <div class="logo-desc">
-            
-            总结⚡归纳⚡沉淀⚡分享
-            
-        </div>
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
+  </div>
 
-    <ul class="menu-list mobile-menu-list">
-        
-        <li class="m-nav-item">
-	  
-		<a href="/" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-home"></i>
-			
-			首页
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/tags" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-tags"></i>
-			
-			标签
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/categories" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-bookmark"></i>
-			
-			分类
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/archives" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-archive"></i>
-			
-			归档
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/about" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-user-circle"></i>
-			
-			关于
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a target="_blank" rel="noopener" href="https://support.qq.com/products/597551" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-comments"></i>
-			
-			留言板
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/friends" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-address-book"></i>
-			
-			友情链接
-		</a>
-          
-        </li>
-        
-        
-    </ul>
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Jeffery's Site</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
 </div>
 
 
-        </div>
 
-        
-    </nav>
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">93</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">16</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">64</span></a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </header>
+        
+  
+  <aside class="sidebar">
 
-    
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
 
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E4%BD%BF%E7%94%A8%E5%86%85%E5%AD%98%E6%B1%A0"><span class="nav-text">一、为什么需要使用内存池</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%86%85%E5%AD%98%E6%B1%A0%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%A1%88"><span class="nav-text">二、内存池的实现方案</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%86%85%E5%AD%98%E6%B1%A0%E7%9A%84%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0"><span class="nav-text">三、内存池的具体实现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-MemoryPool%E5%AE%9E%E7%8E%B0%E4%BB%A3%E7%A0%81"><span class="nav-text">3.1 MemoryPool实现代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B"><span class="nav-text">3.2 使用示例</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
 
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">jiangxueqiao</p>
+  <div class="site-description" itemprop="description">不是看到希望才坚持，而是坚持才会看到希望</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">64</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/winsoft666" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;winsoft666" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:smart7178@163.com" title="E-Mail → mailto:smart7178@163.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://static.1key.run/blog/img/cpp-fruit.jpg')">
-    <div class="container" style="right: 0px;left: 0px;">
-        <div class="row">
-            <div class="col s12 m12 l12">
-                <div class="brand">
-                    <h1 class="description center-align post-title">C++内存池实现</h1>
-                </div>
-            </div>
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
         </div>
     </div>
-</div>
-
-
-
-
-<main class="post-container content">
 
     
-    <div class="row">
-    <div id="main-content" class="col s12 m12 l9">
-        <!-- 文章内容详情 -->
-<div id="artDetail">
-    <div class="card">
-        <div class="card-content article-info">
-            <div class="row tag-cate">
-                <div class="col s7">
-                    
-                    <div class="article-tag">
-                        
-                            <a href="/tags/%E5%86%85%E5%AD%98%E6%B1%A0/">
-                                <span class="chip bg-color">内存池</span>
-                            </a>
-                        
-                    </div>
-                    
-                </div>
-                <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/C/" class="post-category">
-                                C++
-                            </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
+  </aside>
 
-            <div class="post-info">
-                
-                <div class="post-date info-break-policy">
-                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-06-25
-                </div>
-                
 
-                
-                <div class="post-date info-break-policy">
-                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-07-05
-                </div>
-                
+    </div>
 
-                
-                <div class="info-break-policy">
-                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.7k
-                </div>
-                
+    <div class="main-inner post posts-expand">
 
-                
 
-                
-            </div>
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jiangxueqiao.com/2023/06/25/c-nei-cun-chi-shi-xian/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jiangxueqiao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jeffery's Site">
+      <meta itemprop="description" content="不是看到希望才坚持，而是坚持才会看到希望">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="C++内存池实现 | Jeffery's Site">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C++内存池实现
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-06-25 18:24:43" itemprop="dateCreated datePublished" datetime="2023-06-25T18:24:43+08:00">2023-06-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-07-12 17:31:09" itemprop="dateModified" datetime="2023-07-12T17:31:09+08:00">2023-07-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
         </div>
-        <hr class="clearfix">
+      </header>
 
-        
-        <!-- 是否加载使用自带的 prismjs. -->
-        <link rel="stylesheet" href="/libs/prism/prism.min.css">
-        
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>本文从实际需求出发，介绍了内存池的实现原理，并且提供了具体的实现方案。</p>
+<span id="more"></span>
 
-        
-
-        <div class="card-content article-card-content">
-            <div id="articleContent">
-                <h1 id="一、为什么需要使用内存池"><a href="#一、为什么需要使用内存池" class="headerlink" title="一、为什么需要使用内存池"></a>一、为什么需要使用内存池</h1><p>在C/C++中我们通常使用<code>malloc</code>,<code>free</code>或<code>new</code>,<code>delete</code>来动态分配内存。<br>一方面，因为这些函数涉及到了系统调用，所以频繁的调用必然会导致程序性能的损耗；</p>
+<h1 id="一、为什么需要使用内存池"><a href="#一、为什么需要使用内存池" class="headerlink" title="一、为什么需要使用内存池"></a>一、为什么需要使用内存池</h1><p>在C/C++中我们通常使用<code>malloc</code>,<code>free</code>或<code>new</code>,<code>delete</code>来动态分配内存。<br>一方面，因为这些函数涉及到了系统调用，所以频繁的调用必然会导致程序性能的损耗；</p>
 <p>另一方面，频繁的分配和释放小块内存会导致大量的内存碎片的产生，当碎片积累到一定的量之后，将无法分配到连续的内存空间，系统不得不进行碎片整理来满足分配到连续的空间，这样不仅会导致系统性能损耗，而且会导致程序对内存的利用率低下。</p>
 <p>当然，如果我们的程序不需要频繁的分配和释放小块内存，那就没有使用内存池的必要，直接使用<code>malloc</code>,<code>free</code>或<code>new</code>,<code>delete</code>函数即可。</p>
 <h1 id="二、内存池的实现方案"><a href="#二、内存池的实现方案" class="headerlink" title="二、内存池的实现方案"></a>二、内存池的实现方案</h1><p>内存池的实现原理大致如下：<br>提前申请一块大内存由内存池自己管理，并分成小片供给程序使用。程序使用完之后将内存归还到内存池中（并没有真正的从系统释放），当程序再次从内存池中请求内存时，内存池将池子中的可用内存片返回给程序使用。</p>
@@ -398,1111 +306,118 @@
 <li><code>free_element_</code> 记录未被分配出去的内存片。</li>
 </ol>
 <h2 id="3-1-MemoryPool实现代码"><a href="#3-1-MemoryPool实现代码" class="headerlink" title="3.1 MemoryPool实现代码"></a>3.1 <code>MemoryPool</code>实现代码</h2><p>下面是完整的内存池实现的代码，代码中使用了std::mutex等C++11才支持的特性，所以需要编译器最低支持C++11。</p>
-<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">/* MemoryPool.hpp */
-#ifndef MEMORY_POOL_H_
-#define MEMORY_POOL_H_
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* MemoryPool.hpp */</span></span><br><span class="line"><span class="meta">#<span class="keyword">ifndef</span> MEMORY_POOL_H_</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MEMORY_POOL_H_</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;climits&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstddef&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;mutex&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="type">size_t</span> BlockSize = <span class="number">4096</span>, <span class="type">bool</span> ZeroOnDeallocate = <span class="literal">true</span>&gt;</span><br><span class="line"><span class="keyword">class</span> MemoryPool {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="comment">/* Member types */</span></span><br><span class="line">    <span class="keyword">typedef</span> T               value_type;</span><br><span class="line">    <span class="keyword">typedef</span> T*              pointer;</span><br><span class="line">    <span class="keyword">typedef</span> T&amp;              reference;</span><br><span class="line">    <span class="keyword">typedef</span> <span class="type">const</span> T*        const_pointer;</span><br><span class="line">    <span class="keyword">typedef</span> <span class="type">const</span> T&amp;        const_reference;</span><br><span class="line">    <span class="keyword">typedef</span> <span class="type">size_t</span>          size_type;</span><br><span class="line">    <span class="keyword">typedef</span> <span class="type">ptrdiff_t</span>       difference_type;</span><br><span class="line">    <span class="keyword">typedef</span> std::false_type propagate_on_container_copy_assignment;</span><br><span class="line">    <span class="keyword">typedef</span> std::true_type  propagate_on_container_move_assignment;</span><br><span class="line">    <span class="keyword">typedef</span> std::true_type  propagate_on_container_swap;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U&gt; <span class="keyword">struct</span> <span class="title class_">rebind</span> {</span><br><span class="line">        <span class="keyword">typedef</span> MemoryPool&lt;U&gt; other;</span><br><span class="line">    };</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Member functions */</span></span><br><span class="line">    <span class="built_in">MemoryPool</span>() <span class="keyword">noexcept</span>;</span><br><span class="line">    <span class="built_in">MemoryPool</span>(<span class="type">const</span> MemoryPool&amp; memoryPool) <span class="keyword">noexcept</span>;</span><br><span class="line">    <span class="built_in">MemoryPool</span>(MemoryPool&amp;&amp; memoryPool) <span class="keyword">noexcept</span>;</span><br><span class="line">    <span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">U</span>&gt; <span class="built_in">MemoryPool</span>(<span class="type">const</span> MemoryPool&lt;U&gt;&amp; memoryPool) <span class="keyword">noexcept</span>;</span><br><span class="line"></span><br><span class="line">    ~<span class="built_in">MemoryPool</span>() <span class="keyword">noexcept</span>;</span><br><span class="line"></span><br><span class="line">    MemoryPool&amp; <span class="keyword">operator</span>=(<span class="type">const</span> MemoryPool&amp; memoryPool) = <span class="keyword">delete</span>;</span><br><span class="line">    MemoryPool&amp; <span class="keyword">operator</span>=(MemoryPool&amp;&amp; memoryPool) <span class="keyword">noexcept</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">pointer <span class="title">address</span><span class="params">(reference x)</span> <span class="type">const</span> <span class="keyword">noexcept</span></span>;</span><br><span class="line">    <span class="function">const_pointer <span class="title">address</span><span class="params">(const_reference x)</span> <span class="type">const</span> <span class="keyword">noexcept</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Can only allocate one object at a time. n and hint are ignored</span></span><br><span class="line">    <span class="function">pointer <span class="title">allocate</span><span class="params">(size_type n = <span class="number">1</span>, const_pointer hint = <span class="number">0</span>)</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">deallocate</span><span class="params">(pointer p, size_type n = <span class="number">1</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">size_type <span class="title">max_size</span><span class="params">()</span> <span class="type">const</span> <span class="keyword">noexcept</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">U</span>, <span class="keyword">class</span>... Args&gt; <span class="function"><span class="type">void</span> <span class="title">construct</span><span class="params">(U* p, Args&amp;&amp;... args)</span></span>;</span><br><span class="line">    <span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">U</span>&gt; <span class="function"><span class="type">void</span> <span class="title">destroy</span><span class="params">(U* p)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">template</span> &lt;<span class="keyword">class</span>... Args&gt; <span class="function">pointer <span class="title">newElement</span><span class="params">(Args&amp;&amp;... args)</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">deleteElement</span><span class="params">(pointer p)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">Element_</span> {</span><br><span class="line">        Element_* pre;</span><br><span class="line">        Element_* next;</span><br><span class="line">    };</span><br><span class="line"></span><br><span class="line">    <span class="keyword">typedef</span> <span class="type">char</span>* data_pointer;</span><br><span class="line">    <span class="keyword">typedef</span> Element_ element_type;</span><br><span class="line">    <span class="keyword">typedef</span> Element_* element_pointer;</span><br><span class="line"></span><br><span class="line">    element_pointer data_element_;</span><br><span class="line">    element_pointer free_element_;</span><br><span class="line"></span><br><span class="line">    std::recursive_mutex m_;</span><br><span class="line"></span><br><span class="line">    <span class="function">size_type <span class="title">padPointer</span><span class="params">(data_pointer p, size_type align)</span> <span class="type">const</span> <span class="keyword">noexcept</span></span>;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">allocateBlock</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">static_assert</span>(BlockSize &gt;= <span class="number">2</span> * <span class="built_in">sizeof</span>(element_type), <span class="string">"BlockSize too small."</span>);</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="type">size_t</span> BlockSize,  <span class="type">bool</span> ZeroOnDeallocate&gt;</span><br><span class="line"><span class="keyword">inline</span> <span class="keyword">typename</span> MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;::size_type</span><br><span class="line">    MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;::<span class="built_in">padPointer</span>(data_pointer p, size_type align)</span><br><span class="line">    <span class="type">const</span> <span class="keyword">noexcept</span> {</span><br><span class="line">    <span class="type">uintptr_t</span> result = <span class="built_in">reinterpret_cast</span>&lt;<span class="type">uintptr_t</span>&gt;(p);</span><br><span class="line">    <span class="keyword">return</span> ((align - result) % align);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="type">size_t</span> BlockSize,  <span class="type">bool</span> ZeroOnDeallocate&gt;</span><br><span class="line">MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;::<span class="built_in">MemoryPool</span>()</span><br><span class="line">    <span class="keyword">noexcept</span> {</span><br><span class="line">    data_element_ = <span class="literal">nullptr</span>;</span><br><span class="line">    free_element_ = <span class="literal">nullptr</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="type">size_t</span> BlockSize,  <span class="type">bool</span> ZeroOnDeallocate&gt;</span><br><span class="line">MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;::<span class="built_in">MemoryPool</span>(<span class="type">const</span> MemoryPool&amp; memoryPool)</span><br><span class="line">    <span class="keyword">noexcept</span> :</span><br><span class="line">    <span class="built_in">MemoryPool</span>() {</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="type">size_t</span> BlockSize,  <span class="type">bool</span> ZeroOnDeallocate&gt;</span><br><span class="line">MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;::<span class="built_in">MemoryPool</span>(MemoryPool&amp;&amp; memoryPool)</span><br><span class="line">    <span class="keyword">noexcept</span> {</span><br><span class="line">    <span class="function">std::lock_guard&lt;std::recursive_mutex&gt; <span class="title">lock</span><span class="params">(m_)</span></span>;</span><br><span class="line"></span><br><span class="line">    data_element_ = memoryPool.data_element_;</span><br><span class="line">    memoryPool.data_element_ = <span class="literal">nullptr</span>;</span><br><span class="line">    free_element_ = memoryPool.free_element_;</span><br><span class="line">    memoryPool.free_element_ = <span class="literal">nullptr</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="type">size_t</span> BlockSize,  <span class="type">bool</span> ZeroOnDeallocate&gt;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="title class_">U</span>&gt;</span><br><span class="line">MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;::<span class="built_in">MemoryPool</span>(<span class="type">const</span> MemoryPool&lt;U&gt;&amp; memoryPool)</span><br><span class="line">    <span class="keyword">noexcept</span> :</span><br><span class="line">    <span class="built_in">MemoryPool</span>() {</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="type">size_t</span> BlockSize,  <span class="type">bool</span> ZeroOnDeallocate&gt;</span><br><span class="line">MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;&amp;</span><br><span class="line">    MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;::<span class="keyword">operator</span>=(MemoryPool&amp;&amp; memoryPool)</span><br><span class="line">    <span class="keyword">noexcept</span> {</span><br><span class="line">    std::lock_guard&lt;std::recursive_mutex&gt; <span class="built_in">lock</span>(m_);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span> != &amp;memoryPool) {</span><br><span class="line">        std::<span class="built_in">swap</span>(data_element_, memoryPool.data_element_);</span><br><span class="line">        std::<span class="built_in">swap</span>(free_element_, memoryPool.free_element_);</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="type">size_t</span> BlockSize,  <span class="type">bool</span> ZeroOnDeallocate&gt;</span><br><span class="line">MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;::~<span class="built_in">MemoryPool</span>()</span><br><span class="line">    <span class="keyword">noexcept</span> {</span><br><span class="line">    <span class="function">std::lock_guard&lt;std::recursive_mutex&gt; <span class="title">lock</span><span class="params">(m_)</span></span>;</span><br><span class="line"></span><br><span class="line">    element_pointer curr = data_element_;</span><br><span class="line">    <span class="keyword">while</span> (curr != <span class="literal">nullptr</span>) {</span><br><span class="line">        element_pointer prev = curr-&gt;next;</span><br><span class="line">        <span class="function"><span class="keyword">operator</span> <span class="title">delete</span><span class="params">(<span class="keyword">reinterpret_cast</span>&lt;<span class="type">void</span>*&gt;(curr))</span></span>;</span><br><span class="line">        curr = prev;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    curr = free_element_;</span><br><span class="line">    <span class="keyword">while</span> (curr != <span class="literal">nullptr</span>) {</span><br><span class="line">        element_pointer prev = curr-&gt;next;</span><br><span class="line">        <span class="function"><span class="keyword">operator</span> <span class="title">delete</span><span class="params">(<span class="keyword">reinterpret_cast</span>&lt;<span class="type">void</span>*&gt;(curr))</span></span>;</span><br><span class="line">        curr = prev;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="type">size_t</span> BlockSize,  <span class="type">bool</span> ZeroOnDeallocate&gt;</span><br><span class="line"><span class="keyword">inline</span> <span class="keyword">typename</span> MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;::pointer</span><br><span class="line">    MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;::<span class="built_in">address</span>(reference x)</span><br><span class="line">    <span class="type">const</span> <span class="keyword">noexcept</span> {</span><br><span class="line">    <span class="keyword">return</span> &amp;x;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="type">size_t</span> BlockSize,  <span class="type">bool</span> ZeroOnDeallocate&gt;</span><br><span class="line"><span class="keyword">inline</span> <span class="keyword">typename</span> MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;::const_pointer</span><br><span class="line">    MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;::<span class="built_in">address</span>(const_reference x)</span><br><span class="line">    <span class="type">const</span> <span class="keyword">noexcept</span> {</span><br><span class="line">    <span class="keyword">return</span> &amp;x;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="type">size_t</span> BlockSize,  <span class="type">bool</span> ZeroOnDeallocate&gt;</span><br><span class="line"><span class="type">void</span></span><br><span class="line">    MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;::<span class="built_in">allocateBlock</span>() {</span><br><span class="line">    <span class="comment">// Allocate space for the new block and store a pointer to the previous one</span></span><br><span class="line">    data_pointer new_block = <span class="built_in">reinterpret_cast</span>&lt;data_pointer&gt; (<span class="keyword">operator</span> <span class="built_in">new</span>(BlockSize));</span><br><span class="line">    element_pointer new_ele_pointer = <span class="built_in">reinterpret_cast</span>&lt;element_pointer&gt;(new_block);</span><br><span class="line">    new_ele_pointer-&gt;pre = <span class="literal">nullptr</span>;</span><br><span class="line">    new_ele_pointer-&gt;next = <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (data_element_) {</span><br><span class="line">        data_element_-&gt;pre = new_ele_pointer;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    new_ele_pointer-&gt;next = data_element_;</span><br><span class="line">    data_element_ = new_ele_pointer;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="type">size_t</span> BlockSize,  <span class="type">bool</span> ZeroOnDeallocate&gt;</span><br><span class="line"><span class="keyword">inline</span> <span class="keyword">typename</span> MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;::pointer</span><br><span class="line">    MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;::<span class="built_in">allocate</span>(size_type n, const_pointer hint) {</span><br><span class="line">    <span class="function">std::lock_guard&lt;std::recursive_mutex&gt; <span class="title">lock</span><span class="params">(m_)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (free_element_ != <span class="literal">nullptr</span>) {</span><br><span class="line">        data_pointer body =</span><br><span class="line">            <span class="built_in">reinterpret_cast</span>&lt;data_pointer&gt;(<span class="built_in">reinterpret_cast</span>&lt;data_pointer&gt;(free_element_) + <span class="built_in">sizeof</span>(element_type));</span><br><span class="line"></span><br><span class="line">        size_type bodyPadding = <span class="built_in">padPointer</span>(body, <span class="built_in">alignof</span>(element_type));</span><br><span class="line"></span><br><span class="line">        pointer result = <span class="built_in">reinterpret_cast</span>&lt;pointer&gt;(<span class="built_in">reinterpret_cast</span>&lt;data_pointer&gt;(body + bodyPadding));</span><br><span class="line"></span><br><span class="line">        element_pointer tmp = free_element_;</span><br><span class="line"></span><br><span class="line">        free_element_ = free_element_-&gt;next;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (free_element_)</span><br><span class="line">            free_element_-&gt;pre = <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">        tmp-&gt;next = data_element_;</span><br><span class="line">        <span class="keyword">if</span> (data_element_)</span><br><span class="line">            data_element_-&gt;pre = tmp;</span><br><span class="line">        tmp-&gt;pre = <span class="literal">nullptr</span>;</span><br><span class="line">        data_element_ = tmp;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">else</span> {</span><br><span class="line">        <span class="built_in">allocateBlock</span>();</span><br><span class="line"></span><br><span class="line">        data_pointer body =</span><br><span class="line">            <span class="built_in">reinterpret_cast</span>&lt;data_pointer&gt;(<span class="built_in">reinterpret_cast</span>&lt;data_pointer&gt;(data_element_) + <span class="built_in">sizeof</span>(element_type));</span><br><span class="line"></span><br><span class="line">        size_type bodyPadding = <span class="built_in">padPointer</span>(body, <span class="built_in">alignof</span>(element_type));</span><br><span class="line"></span><br><span class="line">        pointer result = <span class="built_in">reinterpret_cast</span>&lt;pointer&gt;(<span class="built_in">reinterpret_cast</span>&lt;data_pointer&gt;(body + bodyPadding));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="type">size_t</span> BlockSize, <span class="type">bool</span> ZeroOnDeallocate&gt;</span><br><span class="line"><span class="keyword">inline</span> <span class="type">void</span></span><br><span class="line">    MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;::<span class="built_in">deallocate</span>(pointer p, size_type n) {</span><br><span class="line">    <span class="function">std::lock_guard&lt;std::recursive_mutex&gt; <span class="title">lock</span><span class="params">(m_)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (p != <span class="literal">nullptr</span>) {</span><br><span class="line">        element_pointer ele_p =</span><br><span class="line">            <span class="built_in">reinterpret_cast</span>&lt;element_pointer&gt;(<span class="built_in">reinterpret_cast</span>&lt;data_pointer&gt;(p) - <span class="built_in">sizeof</span>(element_type));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (ZeroOnDeallocate) {</span><br><span class="line">            <span class="built_in">memset</span>(<span class="built_in">reinterpret_cast</span>&lt;data_pointer&gt;(p), <span class="number">0</span>, BlockSize - <span class="built_in">sizeof</span>(element_type));</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (ele_p-&gt;pre) {</span><br><span class="line">            ele_p-&gt;pre-&gt;next = ele_p-&gt;next;</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (ele_p-&gt;next) {</span><br><span class="line">            ele_p-&gt;next-&gt;pre = ele_p-&gt;pre;</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (ele_p-&gt;pre == <span class="literal">nullptr</span>) {</span><br><span class="line">            data_element_ = ele_p-&gt;next;</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        ele_p-&gt;pre = <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">if</span> (free_element_) {</span><br><span class="line">            ele_p-&gt;next = free_element_;</span><br><span class="line">            free_element_-&gt;pre = ele_p;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">else</span> {</span><br><span class="line">            ele_p-&gt;next = <span class="literal">nullptr</span>;</span><br><span class="line">        }</span><br><span class="line">        free_element_ = ele_p;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="type">size_t</span> BlockSize, <span class="type">bool</span> ZeroOnDeallocate&gt;</span><br><span class="line"><span class="keyword">inline</span> <span class="keyword">typename</span> MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;::size_type</span><br><span class="line">    MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;::<span class="built_in">max_size</span>()</span><br><span class="line">    <span class="type">const</span> <span class="keyword">noexcept</span> {</span><br><span class="line">    size_type maxBlocks = <span class="number">-1</span> / BlockSize;</span><br><span class="line">    <span class="keyword">return</span> (BlockSize - <span class="built_in">sizeof</span>(data_pointer)) / <span class="built_in">sizeof</span>(element_type) * maxBlocks;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="type">size_t</span> BlockSize, <span class="type">bool</span> ZeroOnDeallocate&gt;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">U</span>, <span class="keyword">class</span>... Args&gt;</span><br><span class="line"><span class="keyword">inline</span> <span class="type">void</span></span><br><span class="line">    MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;::<span class="built_in">construct</span>(U* p, Args&amp;&amp;... args) {</span><br><span class="line">    <span class="keyword">new</span> (p) <span class="built_in">U</span>(std::forward&lt;Args&gt;(args)...);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="type">size_t</span> BlockSize, <span class="type">bool</span> ZeroOnDeallocate&gt;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span> <span class="title class_">U</span>&gt;</span><br><span class="line"><span class="keyword">inline</span> <span class="type">void</span></span><br><span class="line">    MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;::<span class="built_in">destroy</span>(U* p) {</span><br><span class="line">    p-&gt;~<span class="built_in">U</span>();</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="type">size_t</span> BlockSize, <span class="type">bool</span> ZeroOnDeallocate&gt;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span>... Args&gt;</span><br><span class="line"><span class="keyword">inline</span> <span class="keyword">typename</span> MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;::pointer</span><br><span class="line">    MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;::<span class="built_in">newElement</span>(Args&amp;&amp;... args) {</span><br><span class="line">    <span class="function">std::lock_guard&lt;std::recursive_mutex&gt; <span class="title">lock</span><span class="params">(m_)</span></span>;</span><br><span class="line">    pointer result = <span class="built_in">allocate</span>();</span><br><span class="line">    <span class="built_in">construct</span>&lt;value_type&gt;(result, std::forward&lt;Args&gt;(args)...);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T, <span class="type">size_t</span> BlockSize, <span class="type">bool</span> ZeroOnDeallocate&gt;</span><br><span class="line"><span class="keyword">inline</span> <span class="type">void</span></span><br><span class="line">    MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;::<span class="built_in">deleteElement</span>(pointer p) {</span><br><span class="line">    <span class="function">std::lock_guard&lt;std::recursive_mutex&gt; <span class="title">lock</span><span class="params">(m_)</span></span>;</span><br><span class="line">    <span class="keyword">if</span> (p != <span class="literal">nullptr</span>) {</span><br><span class="line">        p-&gt;~<span class="built_in">value_type</span>();</span><br><span class="line">        <span class="built_in">deallocate</span>(p);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></tbody></table></figure>
 
-#include &lt;climits&gt;
-#include &lt;cstddef&gt;
-#include &lt;mutex&gt;
+<h2 id="3-2-使用示例"><a href="#3-2-使用示例" class="headerlink" title="3.2 使用示例"></a>3.2 使用示例</h2><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">"MemoryPool.hpp"</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;thread&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;assert.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Apple</span> {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Apple</span>() {</span><br><span class="line">        id_ = <span class="number">0</span>;</span><br><span class="line">        cout &lt;&lt; <span class="string">"Apple()"</span> &lt;&lt; endl;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="built_in">Apple</span>(<span class="type">int</span> id) {</span><br><span class="line">        id_ = id;</span><br><span class="line">        cout &lt;&lt; <span class="string">"Apple("</span> &lt;&lt; id_ &lt;&lt; <span class="string">")"</span> &lt;&lt; endl;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    ~<span class="built_in">Apple</span>() {</span><br><span class="line">        cout &lt;&lt; <span class="string">"~Apple()"</span> &lt;&lt; endl;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">SetId</span><span class="params">(<span class="type">int</span> id)</span> </span>{</span><br><span class="line">        id_ = id;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">GetId</span><span class="params">()</span> </span>{</span><br><span class="line">        <span class="keyword">return</span> id_;</span><br><span class="line">    }</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> id_;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">ThreadProc</span><span class="params">(MemoryPool&lt;<span class="type">char</span>&gt; *mp)</span> </span>{</span><br><span class="line">    <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (i++ &lt; <span class="number">100000</span>) {</span><br><span class="line">        <span class="type">char</span>* p0 = (<span class="type">char</span>*)mp-&gt;<span class="built_in">allocate</span>();</span><br><span class="line"></span><br><span class="line">        <span class="type">char</span>* p1 = (<span class="type">char</span>*)mp-&gt;<span class="built_in">allocate</span>();</span><br><span class="line"></span><br><span class="line">        mp-&gt;<span class="built_in">deallocate</span>(p0);</span><br><span class="line"></span><br><span class="line">        <span class="type">char</span>* p2 = (<span class="type">char</span>*)mp-&gt;<span class="built_in">allocate</span>();</span><br><span class="line"></span><br><span class="line">        mp-&gt;<span class="built_in">deallocate</span>(p1);</span><br><span class="line">        </span><br><span class="line">        mp-&gt;<span class="built_in">deallocate</span>(p2);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    MemoryPool&lt;<span class="type">char</span>&gt; mp;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (i++ &lt; <span class="number">100000</span>) {</span><br><span class="line">        <span class="type">char</span>* p0 = (<span class="type">char</span>*)mp.<span class="built_in">allocate</span>();</span><br><span class="line"></span><br><span class="line">        <span class="type">char</span>* p1 = (<span class="type">char</span>*)mp.<span class="built_in">allocate</span>();</span><br><span class="line"></span><br><span class="line">        mp.<span class="built_in">deallocate</span>(p0);</span><br><span class="line"></span><br><span class="line">        <span class="type">char</span>* p2 = (<span class="type">char</span>*)mp.<span class="built_in">allocate</span>();</span><br><span class="line"></span><br><span class="line">        mp.<span class="built_in">deallocate</span>(p1);</span><br><span class="line"></span><br><span class="line">        mp.<span class="built_in">deallocate</span>(p2);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function">std::thread <span class="title">th0</span><span class="params">(ThreadProc, &amp;mp)</span></span>;</span><br><span class="line">    <span class="function">std::thread <span class="title">th1</span><span class="params">(ThreadProc, &amp;mp)</span></span>;</span><br><span class="line">    <span class="function">std::thread <span class="title">th2</span><span class="params">(ThreadProc, &amp;mp)</span></span>;</span><br><span class="line"></span><br><span class="line">    th0.<span class="built_in">join</span>();</span><br><span class="line">    th1.<span class="built_in">join</span>();</span><br><span class="line">    th2.<span class="built_in">join</span>();</span><br><span class="line"></span><br><span class="line">    Apple* apple = <span class="literal">nullptr</span>;</span><br><span class="line">    MemoryPool&lt;Apple&gt; mp2;</span><br><span class="line">    apple = mp2.<span class="built_in">newElement</span>(<span class="number">10</span>);</span><br><span class="line">    <span class="built_in">assert</span>(apple);</span><br><span class="line">    <span class="type">int</span> a = apple-&gt;<span class="built_in">GetId</span>(); <span class="comment">// 10</span></span><br><span class="line">    <span class="built_in">assert</span>(a == <span class="number">10</span>);</span><br><span class="line">    apple-&gt;<span class="built_in">SetId</span>(<span class="number">12</span>);</span><br><span class="line"></span><br><span class="line">    mp2.<span class="built_in">deleteElement</span>(apple);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
-template &lt;typename T, size_t BlockSize = 4096, bool ZeroOnDeallocate = true&gt;
-class MemoryPool {
-public:
-    /* Member types */
-    typedef T               value_type;
-    typedef T*              pointer;
-    typedef T&amp;              reference;
-    typedef const T*        const_pointer;
-    typedef const T&amp;        const_reference;
-    typedef size_t          size_type;
-    typedef ptrdiff_t       difference_type;
-    typedef std::false_type propagate_on_container_copy_assignment;
-    typedef std::true_type  propagate_on_container_move_assignment;
-    typedef std::true_type  propagate_on_container_swap;
-
-    template &lt;typename U&gt; struct rebind {
-        typedef MemoryPool&lt;U&gt; other;
-    };
-
-    /* Member functions */
-    MemoryPool() noexcept;
-    MemoryPool(const MemoryPool&amp; memoryPool) noexcept;
-    MemoryPool(MemoryPool&amp;&amp; memoryPool) noexcept;
-    template &lt;class U&gt; MemoryPool(const MemoryPool&lt;U&gt;&amp; memoryPool) noexcept;
-
-    ~MemoryPool() noexcept;
-
-    MemoryPool&amp; operator=(const MemoryPool&amp; memoryPool) = delete;
-    MemoryPool&amp; operator=(MemoryPool&amp;&amp; memoryPool) noexcept;
-
-    pointer address(reference x) const noexcept;
-    const_pointer address(const_reference x) const noexcept;
-
-    // Can only allocate one object at a time. n and hint are ignored
-    pointer allocate(size_type n = 1, const_pointer hint = 0);
-    void deallocate(pointer p, size_type n = 1);
-
-    size_type max_size() const noexcept;
-
-    template &lt;class U, class... Args&gt; void construct(U* p, Args&amp;&amp;... args);
-    template &lt;class U&gt; void destroy(U* p);
-
-    template &lt;class... Args&gt; pointer newElement(Args&amp;&amp;... args);
-    void deleteElement(pointer p);
-
-private:
-    struct Element_ {
-        Element_* pre;
-        Element_* next;
-    };
-
-    typedef char* data_pointer;
-    typedef Element_ element_type;
-    typedef Element_* element_pointer;
-
-    element_pointer data_element_;
-    element_pointer free_element_;
-
-    std::recursive_mutex m_;
-
-    size_type padPointer(data_pointer p, size_type align) const noexcept;
-    void allocateBlock();
-
-    static_assert(BlockSize &gt;= 2 * sizeof(element_type), "BlockSize too small.");
-};
-
-
-template &lt;typename T, size_t BlockSize,  bool ZeroOnDeallocate&gt;
-inline typename MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;::size_type
-    MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;::padPointer(data_pointer p, size_type align)
-    const noexcept {
-    uintptr_t result = reinterpret_cast&lt;uintptr_t&gt;(p);
-    return ((align - result) % align);
-}
-
-
-
-template &lt;typename T, size_t BlockSize,  bool ZeroOnDeallocate&gt;
-MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;::MemoryPool()
-    noexcept {
-    data_element_ = nullptr;
-    free_element_ = nullptr;
-}
-
-template &lt;typename T, size_t BlockSize,  bool ZeroOnDeallocate&gt;
-MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;::MemoryPool(const MemoryPool&amp; memoryPool)
-    noexcept :
-    MemoryPool() {
-}
-
-template &lt;typename T, size_t BlockSize,  bool ZeroOnDeallocate&gt;
-MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;::MemoryPool(MemoryPool&amp;&amp; memoryPool)
-    noexcept {
-    std::lock_guard&lt;std::recursive_mutex&gt; lock(m_);
-
-    data_element_ = memoryPool.data_element_;
-    memoryPool.data_element_ = nullptr;
-    free_element_ = memoryPool.free_element_;
-    memoryPool.free_element_ = nullptr;
-}
-
-template &lt;typename T, size_t BlockSize,  bool ZeroOnDeallocate&gt;
-template&lt;class U&gt;
-MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;::MemoryPool(const MemoryPool&lt;U&gt;&amp; memoryPool)
-    noexcept :
-    MemoryPool() {
-}
-
-template &lt;typename T, size_t BlockSize,  bool ZeroOnDeallocate&gt;
-MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;&amp;
-    MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;::operator=(MemoryPool&amp;&amp; memoryPool)
-    noexcept {
-    std::lock_guard&lt;std::recursive_mutex&gt; lock(m_);
-
-    if (this != &amp;memoryPool) {
-        std::swap(data_element_, memoryPool.data_element_);
-        std::swap(free_element_, memoryPool.free_element_);
-    }
-    return *this;
-}
-
-template &lt;typename T, size_t BlockSize,  bool ZeroOnDeallocate&gt;
-MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;::~MemoryPool()
-    noexcept {
-    std::lock_guard&lt;std::recursive_mutex&gt; lock(m_);
-
-    element_pointer curr = data_element_;
-    while (curr != nullptr) {
-        element_pointer prev = curr-&gt;next;
-        operator delete(reinterpret_cast&lt;void*&gt;(curr));
-        curr = prev;
-    }
-
-    curr = free_element_;
-    while (curr != nullptr) {
-        element_pointer prev = curr-&gt;next;
-        operator delete(reinterpret_cast&lt;void*&gt;(curr));
-        curr = prev;
-    }
-}
-
-template &lt;typename T, size_t BlockSize,  bool ZeroOnDeallocate&gt;
-inline typename MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;::pointer
-    MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;::address(reference x)
-    const noexcept {
-    return &amp;x;
-}
-
-template &lt;typename T, size_t BlockSize,  bool ZeroOnDeallocate&gt;
-inline typename MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;::const_pointer
-    MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;::address(const_reference x)
-    const noexcept {
-    return &amp;x;
-}
-
-template &lt;typename T, size_t BlockSize,  bool ZeroOnDeallocate&gt;
-void
-    MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;::allocateBlock() {
-    // Allocate space for the new block and store a pointer to the previous one
-    data_pointer new_block = reinterpret_cast&lt;data_pointer&gt; (operator new(BlockSize));
-    element_pointer new_ele_pointer = reinterpret_cast&lt;element_pointer&gt;(new_block);
-    new_ele_pointer-&gt;pre = nullptr;
-    new_ele_pointer-&gt;next = nullptr;
-
-    if (data_element_) {
-        data_element_-&gt;pre = new_ele_pointer;
-    }
-
-    new_ele_pointer-&gt;next = data_element_;
-    data_element_ = new_ele_pointer;
-}
-
-template &lt;typename T, size_t BlockSize,  bool ZeroOnDeallocate&gt;
-inline typename MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;::pointer
-    MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;::allocate(size_type n, const_pointer hint) {
-    std::lock_guard&lt;std::recursive_mutex&gt; lock(m_);
-
-    if (free_element_ != nullptr) {
-        data_pointer body =
-            reinterpret_cast&lt;data_pointer&gt;(reinterpret_cast&lt;data_pointer&gt;(free_element_) + sizeof(element_type));
-
-        size_type bodyPadding = padPointer(body, alignof(element_type));
-
-        pointer result = reinterpret_cast&lt;pointer&gt;(reinterpret_cast&lt;data_pointer&gt;(body + bodyPadding));
-
-        element_pointer tmp = free_element_;
-
-        free_element_ = free_element_-&gt;next;
-
-        if (free_element_)
-            free_element_-&gt;pre = nullptr;
-
-        tmp-&gt;next = data_element_;
-        if (data_element_)
-            data_element_-&gt;pre = tmp;
-        tmp-&gt;pre = nullptr;
-        data_element_ = tmp;
-
-        return result;
-    }
-    else {
-        allocateBlock();
-
-        data_pointer body =
-            reinterpret_cast&lt;data_pointer&gt;(reinterpret_cast&lt;data_pointer&gt;(data_element_) + sizeof(element_type));
-
-        size_type bodyPadding = padPointer(body, alignof(element_type));
-
-        pointer result = reinterpret_cast&lt;pointer&gt;(reinterpret_cast&lt;data_pointer&gt;(body + bodyPadding));
-
-        return result;
-    }
-}
-
-template &lt;typename T, size_t BlockSize, bool ZeroOnDeallocate&gt;
-inline void
-    MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;::deallocate(pointer p, size_type n) {
-    std::lock_guard&lt;std::recursive_mutex&gt; lock(m_);
-
-    if (p != nullptr) {
-        element_pointer ele_p =
-            reinterpret_cast&lt;element_pointer&gt;(reinterpret_cast&lt;data_pointer&gt;(p) - sizeof(element_type));
-
-        if (ZeroOnDeallocate) {
-            memset(reinterpret_cast&lt;data_pointer&gt;(p), 0, BlockSize - sizeof(element_type));
-        }
-
-        if (ele_p-&gt;pre) {
-            ele_p-&gt;pre-&gt;next = ele_p-&gt;next;
-        }
-
-        if (ele_p-&gt;next) {
-            ele_p-&gt;next-&gt;pre = ele_p-&gt;pre;
-        }
-
-        if (ele_p-&gt;pre == nullptr) {
-            data_element_ = ele_p-&gt;next;
-        }
-
-        ele_p-&gt;pre = nullptr;
-        if (free_element_) {
-            ele_p-&gt;next = free_element_;
-            free_element_-&gt;pre = ele_p;
-        }
-        else {
-            ele_p-&gt;next = nullptr;
-        }
-        free_element_ = ele_p;
-    }
-}
-
-template &lt;typename T, size_t BlockSize, bool ZeroOnDeallocate&gt;
-inline typename MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;::size_type
-    MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;::max_size()
-    const noexcept {
-    size_type maxBlocks = -1 / BlockSize;
-    return (BlockSize - sizeof(data_pointer)) / sizeof(element_type) * maxBlocks;
-}
-
-template &lt;typename T, size_t BlockSize, bool ZeroOnDeallocate&gt;
-template &lt;class U, class... Args&gt;
-inline void
-    MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;::construct(U* p, Args&amp;&amp;... args) {
-    new (p) U(std::forward&lt;Args&gt;(args)...);
-}
-
-template &lt;typename T, size_t BlockSize, bool ZeroOnDeallocate&gt;
-template &lt;class U&gt;
-inline void
-    MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;::destroy(U* p) {
-    p-&gt;~U();
-}
-
-template &lt;typename T, size_t BlockSize, bool ZeroOnDeallocate&gt;
-template &lt;class... Args&gt;
-inline typename MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;::pointer
-    MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;::newElement(Args&amp;&amp;... args) {
-    std::lock_guard&lt;std::recursive_mutex&gt; lock(m_);
-    pointer result = allocate();
-    construct&lt;value_type&gt;(result, std::forward&lt;Args&gt;(args)...);
-    return result;
-}
-
-template &lt;typename T, size_t BlockSize, bool ZeroOnDeallocate&gt;
-inline void
-    MemoryPool&lt;T, BlockSize, ZeroOnDeallocate&gt;::deleteElement(pointer p) {
-    std::lock_guard&lt;std::recursive_mutex&gt; lock(m_);
-    if (p != nullptr) {
-        p-&gt;~value_type();
-        deallocate(p);
-    }
-}
-
-#endif<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="3-2-使用示例"><a href="#3-2-使用示例" class="headerlink" title="3.2 使用示例"></a>3.2 使用示例</h2><pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">#include "MemoryPool.hpp"
-#include &lt;iostream&gt;
-#include &lt;thread&gt;
-#include &lt;assert.h&gt;
-using namespace std;
-
-class Apple {
-public:
-    Apple() {
-        id_ = 0;
-        cout &lt;&lt; "Apple()" &lt;&lt; endl;
-    }
-
-    Apple(int id) {
-        id_ = id;
-        cout &lt;&lt; "Apple(" &lt;&lt; id_ &lt;&lt; ")" &lt;&lt; endl;
-    }
-
-    ~Apple() {
-        cout &lt;&lt; "~Apple()" &lt;&lt; endl;
-    }
-
-    void SetId(int id) {
-        id_ = id;
-    }
-
-    int GetId() {
-        return id_;
-    }
-private:
-    int id_;
-};
-
-
-void ThreadProc(MemoryPool&lt;char&gt; *mp) {
-    int i = 0;
-    while (i++ &lt; 100000) {
-        char* p0 = (char*)mp-&gt;allocate();
-
-        char* p1 = (char*)mp-&gt;allocate();
-
-        mp-&gt;deallocate(p0);
-
-        char* p2 = (char*)mp-&gt;allocate();
-
-        mp-&gt;deallocate(p1);
-        
-        mp-&gt;deallocate(p2);
-    }
-}
-
-int main()
-{
-    MemoryPool&lt;char&gt; mp;
-    int i = 0;
-    while (i++ &lt; 100000) {
-        char* p0 = (char*)mp.allocate();
-
-        char* p1 = (char*)mp.allocate();
-
-        mp.deallocate(p0);
-
-        char* p2 = (char*)mp.allocate();
-
-        mp.deallocate(p1);
-
-        mp.deallocate(p2);
-    }
-
-    std::thread th0(ThreadProc, &amp;mp);
-    std::thread th1(ThreadProc, &amp;mp);
-    std::thread th2(ThreadProc, &amp;mp);
-
-    th0.join();
-    th1.join();
-    th2.join();
-
-    Apple* apple = nullptr;
-    MemoryPool&lt;Apple&gt; mp2;
-    apple = mp2.newElement(10);
-    assert(apple);
-    int a = apple-&gt;GetId(); // 10
-    assert(a == 10);
-    apple-&gt;SetId(12);
-
-    mp2.deleteElement(apple);
-
-    return 0;
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-                
-            </div>
-            <hr/>
-
-            
-
-    <div class="reprint" id="reprint-statement">
-        
-            <div class="reprint__author">
-                <span class="reprint-meta" style="font-weight: bold;">
-                    <i class="fas fa-user">
-                        文章作者:
-                    </i>
-                </span>
-                <span class="reprint-info">
-                    <a href="/about" rel="external nofollow noreferrer">jiangxueqiao.com</a>
-                </span>
-            </div>
-            <div class="reprint__type">
-                <span class="reprint-meta" style="font-weight: bold;">
-                    <i class="fas fa-link">
-                        文章链接:
-                    </i>
-                </span>
-                <span class="reprint-info">
-                    <a href="https://jiangxueqiao.com/2023/06/25/c-nei-cun-chi-shi-xian/">https://jiangxueqiao.com/2023/06/25/c-nei-cun-chi-shi-xian/</a>
-                </span>
-            </div>
-            <div class="reprint__notice">
-                <span class="reprint-meta" style="font-weight: bold;">
-                    <i class="fas fa-copyright">
-                        版权声明:
-                    </i>
-                </span>
-                <span class="reprint-info">
-                    本博客所有文章除特別声明外，均采用
-                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
-                    许可协议。转载请注明来源
-                    <a href="/about" target="_blank">jiangxueqiao.com</a>
-                    !
-                </span>
-            </div>
-        
     </div>
 
-    <script async defer>
-      document.addEventListener("copy", function (e) {
-        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
-        M.toast({html: toastHTML})
-      });
-
-      function navToReprintStatement() {
-        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
-      }
-    </script>
-
-
-
-            <div class="tag_share" style="display: block;">
-                <div class="post-meta__tag-list" style="display: inline-block;">
-                    
-                        <div class="article-tag">
-                            
-                                <a href="/tags/%E5%86%85%E5%AD%98%E6%B1%A0/">
-                                    <span class="chip bg-color">内存池</span>
-                                </a>
-                            
-                        </div>
-                    
-                </div>
-                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
-                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
-<div id="article-share">
-
     
-    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
-    <script src="/libs/share/js/social-share.min.js"></script>
+    
     
 
-    
+    <footer class="post-footer">
+          
 
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>jiangxueqiao
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://jiangxueqiao.com/2023/06/25/c-nei-cun-chi-shi-xian/" title="C++内存池实现">https://jiangxueqiao.com/2023/06/25/c-nei-cun-chi-shi-xian/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
 </div>
 
-                </div>
-            </div>
-            
-        </div>
-    </div>
+          <div class="post-tags">
+              <a href="/tags/%E5%86%85%E5%AD%98%E6%B1%A0/" rel="tag"># 内存池</a>
+          </div>
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-<article id="prenext-posts" class="prev-next articles">
-    <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
-            <div class="card">
-                <a href="/2023/06/25/windows-zhu-ru-yu-lan-jie-1-dll-zhu-ru-ji-chu/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="https://static.1key.run/blog/matery-theme/medias/featureimages/7.jpg" class="responsive-img" alt="Windows注入与拦截(1)--DLL注入基础">
-                        
-                        <span class="card-title">Windows注入与拦截(1)--DLL注入基础</span>
-                    </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/06/25/c-sheng-cheng-tiao-xing-ma/" rel="prev" title="C++生成条形码">
+                  <i class="fa fa-chevron-left"></i> C++生成条形码
                 </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-06-25
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/Windows%E6%B3%A8%E5%85%A5%E4%B8%8E%E6%8B%A6%E6%88%AA/" class="post-category">
-                                    Windows注入与拦截
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/DLL%E6%B3%A8%E5%85%A5/">
-                        <span class="chip bg-color">DLL注入</span>
-                    </a>
-                    
-                </div>
-                
             </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2023/06/25/c-sheng-cheng-tiao-xing-ma/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="https://static.1key.run/blog/matery-theme/medias/featureimages/20.jpg" class="responsive-img" alt="C++生成条形码">
-                        
-                        <span class="card-title">C++生成条形码</span>
-                    </div>
+            <div class="post-nav-item">
+                <a href="/2023/06/28/windows-yong-hu-jie-mian-te-quan-ge-chi-uipi/" rel="next" title="Windows用户界面特权隔离(UIPI)">
+                  Windows用户界面特权隔离(UIPI) <i class="fa fa-chevron-right"></i>
                 </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-25
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/C/" class="post-category">
-                                    C++
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E6%9D%A1%E5%BD%A2%E7%A0%81/">
-                        <span class="chip bg-color">条形码</span>
-                    </a>
-                    
-                </div>
-                
             </div>
-        </div>
-        
-    </div>
-</article>
-
+          </div>
+    </footer>
+  </article>
 </div>
 
 
-<script>
-    $('#articleContent').on('copy', function (e) {
-        // IE8 or earlier browser is 'undefined'
-        if (typeof window.getSelection === 'undefined') return;
-
-        var selection = window.getSelection();
-        // if the selection is short let's not annoy our users.
-        if (('' + selection).length < Number.parseInt('120')) {
-            return;
-        }
-
-        // create a div outside of the visible area and fill it with the selected text.
-        var bodyElement = document.getElementsByTagName('body')[0];
-        var newdiv = document.createElement('div');
-        newdiv.style.position = 'absolute';
-        newdiv.style.left = '-99999px';
-        bodyElement.appendChild(newdiv);
-        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
-
-        // we need a <pre> tag workaround.
-        // otherwise the text inside "pre" loses all the line breaks!
-        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
-            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
-        }
-
-        var url = document.location.href;
-        newdiv.innerHTML += '<br />'
-            + '来源: Jiangxueqiao&#39;s Site<br />'
-            + '文章作者: jiangxueqiao.com<br />'
-            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
-            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
-
-        selection.selectAllChildren(newdiv);
-        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
-    });
-</script>
 
 
-<!-- 代码块功能依赖 -->
-<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
 
-  <!-- 是否加载使用自带的 prismjs. -->
-  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+</div>
+  </main>
 
+  <footer class="footer">
+    <div class="footer-inner">
 
-<!-- 代码语言 -->
-
-<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
-
-
-<!-- 代码块复制 -->
-
-<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
-
-
-<!-- 代码块收缩 -->
-
-<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
-
-
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">鄂ICP备2020015399号-5 </a>
+  </div>
+  <div class="copyright">
+    &copy; 2021 – 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">jiangxueqiao</span>
+  </div>
 
     </div>
-    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
-        <div class="toc-widget card" style="background-color: white;">
-            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
-            <div id="toc-content"></div>
-        </div>
-    </div>
-</div>
+  </footer>
 
-<!-- TOC 悬浮按钮. -->
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
 
-<div id="floating-toc-btn" class="hide-on-med-and-down">
-    <a class="btn-floating btn-large bg-color">
-        <i class="fas fa-list-ul"></i>
-    </a>
-</div>
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
 
-<script src="/libs/tocbot/tocbot.min.js"></script>
-<script>
-    $(function () {
-        tocbot.init({
-            tocSelector: '#toc-content',
-            contentSelector: '#articleContent',
-            headingsOffset: -($(window).height() * 0.4 - 45),
-            collapseDepth: Number('2'),
-            headingSelector: 'h1, h2, h3, h4'
-        });
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
 
-        // Set scroll toc fixed.
-        let tocHeight = parseInt($(window).height() * 0.4 - 64);
-        let $tocWidget = $('.toc-widget');
-        $(window).scroll(function () {
-            let scroll = $(window).scrollTop();
-            /* add post toc fixed. */
-            if (scroll > tocHeight) {
-                $tocWidget.addClass('toc-fixed');
-            } else {
-                $tocWidget.removeClass('toc-fixed');
-            }
-        });
-
-        
-        /* 修复文章卡片 div 的宽度. */
-        let fixPostCardWidth = function (srcId, targetId) {
-            let srcDiv = $('#' + srcId);
-            if (srcDiv.length === 0) {
-                return;
-            }
-
-            let w = srcDiv.width();
-            if (w >= 450) {
-                w = w + 21;
-            } else if (w >= 350 && w < 450) {
-                w = w + 18;
-            } else if (w >= 300 && w < 350) {
-                w = w + 16;
-            } else {
-                w = w + 14;
-            }
-            $('#' + targetId).width(w);
-        };
-
-        // 切换TOC目录展开收缩的相关操作.
-        const expandedClass = 'expanded';
-        let $tocAside = $('#toc-aside');
-        let $mainContent = $('#main-content');
-        $('#floating-toc-btn .btn-floating').click(function () {
-            if ($tocAside.hasClass(expandedClass)) {
-                $tocAside.removeClass(expandedClass).hide();
-                $mainContent.removeClass('l9');
-            } else {
-                $tocAside.addClass(expandedClass).show();
-                $mainContent.addClass('l9');
-            }
-            fixPostCardWidth('artDetail', 'prenext-posts');
-        });
-        
-    });
-</script>
-
-    
-
-</main>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
 
 
 
 
-    <footer class="page-footer bg-color">
-    
+  <script src="/js/third-party/fancybox.js"></script>
 
-    <div class="container row center-align"
-         style="margin-bottom: 15px !important;">
-        <div class="col s12 m8 l8 copy-right">
-            Copyright&nbsp;&copy;
-            
-                <span id="year">2022-2023</span>
-            
-            <a href="/about" target="_blank">jiangxueqiao.com</a>
-            
-                <span id="translate">|&nbsp;繁/简：</span><a id="translateLink" href="javascript:translatePage();">繁</a>
-            
-            <br>
-            
-                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">87.3k</span>
-            
-            
-            
-                
-            
-            
-                <span id="busuanzi_container_site_pv">
-                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
-                    <span id="busuanzi_value_site_pv" class="white-color"></span>
-            </span>
-            
-            
-                <span id="busuanzi_container_site_uv">
-                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
-                    <span id="busuanzi_value_site_uv" class="white-color"></span>
-            </span>
-            
-            <br>
-
-            <!-- 运行天数提醒. -->
-            
-                <span id="sitetime"> Loading ...</span>
-                <script>
-                    var calcSiteTime = function () {
-                        var seconds = 1000;
-                        var minutes = seconds * 60;
-                        var hours = minutes * 60;
-                        var days = hours * 24;
-                        var years = days * 365;
-                        var today = new Date();
-                        var startYear = "2022";
-                        var startMonth = "6";
-                        var startDate = "20";
-                        var startHour = "0";
-                        var startMinute = "0";
-                        var startSecond = "0";
-                        var todayYear = today.getFullYear();
-                        var todayMonth = today.getMonth() + 1;
-                        var todayDate = today.getDate();
-                        var todayHour = today.getHours();
-                        var todayMinute = today.getMinutes();
-                        var todaySecond = today.getSeconds();
-                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
-                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
-                        var diff = t2 - t1;
-                        var diffYears = Math.floor(diff / years);
-                        var diffDays = Math.floor((diff / days) - diffYears * 365);
-
-                        // 区分是否有年份.
-                        var language = 'zh-CN';
-                        if (startYear === String(todayYear)) {
-                            document.getElementById("year").innerHTML = todayYear;
-                            var daysTip = 'This site has been running for ' + diffDays + ' days';
-                            if (language === 'zh-CN') {
-                                daysTip = '本站已运行 ' + diffDays + ' 天';
-                            } else if (language === 'zh-HK') {
-                                daysTip = '本站已運行 ' + diffDays + ' 天';
-                            }
-                            document.getElementById("sitetime").innerHTML = daysTip;
-                        } else {
-                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
-                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
-                                + diffDays + ' days';
-                            if (language === 'zh-CN') {
-                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
-                            } else if (language === 'zh-HK') {
-                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
-                            }
-                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
-                        }
-                    }
-
-                    calcSiteTime();
-                </script>
-            
-            <br>
-            
-                <span id="icp"><img src="/medias/icp.png"
-                                    style="vertical-align: text-bottom;"/>
-                <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">鄂ICP备2020015399号-5</a>
-            </span>
-            
-        </div>
-        <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/winsoft666" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
-        <i class="fab fa-github"></i>
-    </a>
+  <script src="/js/third-party/pace.js"></script>
 
 
-
-    <a href="mailto:smart7178@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
-        <i class="fas fa-envelope-open"></i>
-    </a>
+  
 
 
 
 
-
-
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=295429457" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 295429457" data-position="top" data-delay="50">
-        <i class="fab fa-qq"></i>
-    </a>
-
-
-
-
-
-
-
-</div>
-    </div>
-</footer>
-
-<div class="progress-bar"></div>
-
-
-    <!-- 搜索遮罩框 -->
-<div id="searchModal" class="modal">
-    <div class="modal-content">
-        <div class="search-header">
-            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
-            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
-                   class="search-input">
-        </div>
-        <div id="searchResult"></div>
-    </div>
-</div>
-
-<script type="text/javascript">
-$(function () {
-    var searchFunc = function (path, search_id, content_id) {
-        'use strict';
-        $.ajax({
-            url: path,
-            dataType: "xml",
-            success: function (xmlResponse) {
-                // get the contents from search data
-                var datas = $("entry", xmlResponse).map(function () {
-                    return {
-                        title: $("title", this).text(),
-                        content: $("content", this).text(),
-                        url: $("url", this).text()
-                    };
-                }).get();
-                var $input = document.getElementById(search_id);
-                var $resultContent = document.getElementById(content_id);
-                $input.addEventListener('input', function () {
-                    var str = '<ul class=\"search-result-list\">';
-                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
-                    $resultContent.innerHTML = "";
-                    if (this.value.trim().length <= 0) {
-                        return;
-                    }
-                    // perform local searching
-                    datas.forEach(function (data) {
-                        var isMatch = true;
-                        var data_title = data.title.trim().toLowerCase();
-                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
-                        var data_url = data.url;
-                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
-                        var index_title = -1;
-                        var index_content = -1;
-                        var first_occur = -1;
-                        // only match artiles with not empty titles and contents
-                        if (data_title !== '' && data_content !== '') {
-                            keywords.forEach(function (keyword, i) {
-                                index_title = data_title.indexOf(keyword);
-                                index_content = data_content.indexOf(keyword);
-                                if (index_title < 0 && index_content < 0) {
-                                    isMatch = false;
-                                } else {
-                                    if (index_content < 0) {
-                                        index_content = 0;
-                                    }
-                                    if (i === 0) {
-                                        first_occur = index_content;
-                                    }
-                                }
-                            });
-                        }
-                        // show search results
-                        if (isMatch) {
-                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
-                            var content = data.content.trim().replace(/<[^>]+>/g, "");
-                            if (first_occur >= 0) {
-                                // cut out 100 characters
-                                var start = first_occur - 20;
-                                var end = first_occur + 80;
-                                if (start < 0) {
-                                    start = 0;
-                                }
-                                if (start === 0) {
-                                    end = 100;
-                                }
-                                if (end > content.length) {
-                                    end = content.length;
-                                }
-                                var match_content = content.substr(start, end);
-                                // highlight all keywords
-                                keywords.forEach(function (keyword) {
-                                    var regS = new RegExp(keyword, "gi");
-                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
-                                });
-
-                                str += "<p class=\"search-result\">" + match_content + "...</p>"
-                            }
-                            str += "</li>";
-                        }
-                    });
-                    str += "</ul>";
-                    $resultContent.innerHTML = str;
-                });
-            }
-        });
-    };
-
-    searchFunc('/search.xml', 'searchInput', 'searchResult');
-});
-</script>
-
-    <!-- 白天和黑夜主题 -->
-<div class="stars-con">
-    <div id="stars"></div>
-    <div id="stars2"></div>
-    <div id="stars3"></div>  
-</div>
-
-<script>
-    function switchNightMode() {
-        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
-        setTimeout(function () {
-            $('body').hasClass('DarkMode') 
-            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
-            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
-            
-            setTimeout(function () {
-            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
-                $(this).remove()
-            })
-            }, 2e3)
-        })
-    }
-</script>
-
-    <!-- 回到顶部按钮 -->
-<div id="backTop" class="top-scroll">
-    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
-        <i class="fas fa-arrow-up"></i>
-    </a>
-</div>
-
-
-    <script src="/libs/materialize/materialize.min.js"></script>
-    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
-    <script src="/libs/aos/aos.js"></script>
-    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
-    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
-    <script src="/js/matery.js"></script>
-
-    
-
-    
-        <script type="text/javascript" src="/js/tw_cn.js"></script>
-        <script type="text/javascript">
-          var defaultEncoding = 2; //网站编写字体是否繁体，1-繁体，2-简体
-          var translateDelay = 0; //延迟时间,若不在前, 要设定延迟翻译时间, 如100表示100ms,默认为0
-          var cookieDomain = "https://jiangxueqiao.com"; //Cookie地址, 一定要设定, 通常为你的网址
-          var msgToTraditionalChinese = "繁"; //此处可以更改为你想要显示的文字
-          var msgToSimplifiedChinese = "简"; //同上，但两处均不建议更改
-          var translateButtonId = "translateLink"; //默认互换id
-          translateInitilization();
-        </script>
-    
-    
-    
-
-    <!-- 雪花特效 -->
-    
-
-    <!-- 鼠标星星特效 -->
-    
-
-     
-        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
-        <script src="/libs/others/TencentCaptcha.js"></script>
-        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
-    
-
-    <!-- Baidu Analytics -->
-
-    <!-- Baidu Push -->
-
-<script>
-    (function () {
-        var bp = document.createElement('script');
-        var curProtocol = window.location.protocol.split(':')[0];
-        if (curProtocol === 'https') {
-            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-        } else {
-            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-        }
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(bp, s);
-    })();
-</script>
-
-    
-    
-    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
-    
-
-    
-
-    
-
-    <!--腾讯兔小巢-->
-    
-        <div style="position:fixed;bottom:125px;right:16px;cursor: pointer;">
-            <a title="兔小巢" target="_blank" rel="noopener" href="https://support.qq.com/products/597551"><i class="fa fa-comments fa-3x"  aria-hidden="true"></i></a>
-        </div>
-    
-    
-
-    
-
-    
-
-    
-    <script src="/libs/instantpage/instantpage.js" type="module"></script>
-    
 
 </body>
-
 </html>

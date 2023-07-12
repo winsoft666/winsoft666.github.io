@@ -1,376 +1,275 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="zh-CN">
-
-
 <head>
-    <meta charset="utf-8">
-    <meta name="keywords" content="Windows内核对象, Windows,Linux,C++,Qt,Node.js,Electron,WebRTC">
-    <meta name="description" content="一、什么是内核对象我们在windows开发中经常会遇到内核对象，如事件(Event)，管道(Pipe)，互斥量(Mutex)，完成端口(IOCP)，进程(Process)，线程(Thread)等，他们都是内核对象。这些内核对象虽然通过不同的">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta name="renderer" content="webkit|ie-stand|ie-comp">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="referrer" content="no-referrer-when-downgrade">
-    <!-- Global site tag (gtag.js) - Google Analytics -->
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="codeva-RtI1N7UTHz">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-center-atom.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"jiangxueqiao.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"width":320},"copycode":{"enable":true,"style":"flat"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":true,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta property="og:type" content="article">
+<meta property="og:title" content="Windows内核对象">
+<meta property="og:url" content="https://jiangxueqiao.com/2023/06/28/windows-nei-he-dui-xiang/index.html">
+<meta property="og:site_name" content="Jeffery&#39;s Site">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-06-28T10:00:35.000Z">
+<meta property="article:modified_time" content="2023-07-12T09:54:33.196Z">
+<meta property="article:author" content="jiangxueqiao">
+<meta property="article:tag" content="内核对象">
+<meta property="article:tag" content="句柄">
+<meta property="article:tag" content="HANDLE">
+<meta name="twitter:card" content="summary">
 
 
-    <title>Windows内核对象 | Jiangxueqiao&#39;s Site</title>
-    <link rel="icon" type="image/png" href="/favicon.png">
-    
-
-
-    <!-- bg-cover style     -->
-
-
-
-<link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
-<link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
-<link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
-<link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
-<link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
-<link rel="stylesheet" type="text/css" href="/css/matery.css">
-<link rel="stylesheet" type="text/css" href="/css/my.css">
-<link rel="stylesheet" type="text/css" href="/css/dark.css" media="none" onload="if(media!='all')media='all'">
-
-
-
-
-    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
-    <link rel="stylesheet" href="/css/post.css">
-
-
-
-
-    
+<link rel="canonical" href="https://jiangxueqiao.com/2023/06/28/windows-nei-he-dui-xiang/">
 
 
 
-    <script src="/libs/jquery/jquery-3.6.0.min.js"></script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jiangxueqiao.com/2023/06/28/windows-nei-he-dui-xiang/","path":"2023/06/28/windows-nei-he-dui-xiang/","title":"Windows内核对象"}</script>
 
-<meta name="generator" content="Hexo 6.3.0">
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Windows内核对象 | Jeffery's Site</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
 </head>
 
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
 
-<body>
-    <header class="navbar-fixed">
-    <nav id="headNav" class="bg-color nav-transparent">
-        <div id="navContainer" class="nav-wrapper container">
-            <div class="brand-logo">
-                <a href="/" class="waves-effect waves-light">
-                    
-                    <img src="https://static.1key.run/cherry.svg" class="logo-img" alt="LOGO">
-                    
-                    <span class="logo-span">Jiangxueqiao&#39;s Site</span>
-                </a>
-            </div>
-            
-
-<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
-<ul class="right nav-menu">
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/" class="waves-effect waves-light">
-      
-      <i class="fas fa-home" style="zoom: 0.6;"></i>
-      
-      <span>首页</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/tags" class="waves-effect waves-light">
-      
-      <i class="fas fa-tags" style="zoom: 0.6;"></i>
-      
-      <span>标签</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/categories" class="waves-effect waves-light">
-      
-      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
-      
-      <span>分类</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/archives" class="waves-effect waves-light">
-      
-      <i class="fas fa-archive" style="zoom: 0.6;"></i>
-      
-      <span>归档</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/about" class="waves-effect waves-light">
-      
-      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
-      
-      <span>关于</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a target="_blank" rel="noopener" href="https://support.qq.com/products/597551" class="waves-effect waves-light">
-      
-      <i class="fas fa-comments" style="zoom: 0.6;"></i>
-      
-      <span>留言板</span>
-    </a>
-    
-  </li>
-  
-  <li class="hide-on-med-and-down nav-item">
-    
-    <a href="/friends" class="waves-effect waves-light">
-      
-      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
-      
-      <span>友情链接</span>
-    </a>
-    
-  </li>
-  
-  <li>
-    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
-      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
-    </a>
-  </li>
-  <li>
-    <a href="javascript:;" class="waves-effect waves-light" onclick="switchNightMode()" title="深色/浅色模式" >
-      <i id="sum-moon-icon" class="fas fa-sun" style="zoom: 0.85;"></i>
-    </a>
-  </li>
-</ul>
-
-
-<div id="mobile-nav" class="side-nav sidenav">
-
-    <div class="mobile-head bg-color">
-        
-        <img src="https://static.1key.run/cherry.svg" class="logo-img circle responsive-img">
-        
-        <div class="logo-name">Jiangxueqiao&#39;s Site</div>
-        <div class="logo-desc">
-            
-            总结⚡归纳⚡沉淀⚡分享
-            
-        </div>
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
+  </div>
 
-    <ul class="menu-list mobile-menu-list">
-        
-        <li class="m-nav-item">
-	  
-		<a href="/" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-home"></i>
-			
-			首页
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/tags" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-tags"></i>
-			
-			标签
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/categories" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-bookmark"></i>
-			
-			分类
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/archives" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-archive"></i>
-			
-			归档
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/about" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-user-circle"></i>
-			
-			关于
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a target="_blank" rel="noopener" href="https://support.qq.com/products/597551" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-comments"></i>
-			
-			留言板
-		</a>
-          
-        </li>
-        
-        <li class="m-nav-item">
-	  
-		<a href="/friends" class="waves-effect waves-light">
-			
-			    <i class="fa-fw fas fa-address-book"></i>
-			
-			友情链接
-		</a>
-          
-        </li>
-        
-        
-    </ul>
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Jeffery's Site</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
 </div>
 
 
-        </div>
 
-        
-    </nav>
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">93</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">16</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">64</span></a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </header>
+        
+  
+  <aside class="sidebar">
 
-    
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
 
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E5%86%85%E6%A0%B8%E5%AF%B9%E8%B1%A1"><span class="nav-text">一、什么是内核对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%86%85%E6%A0%B8%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%9B%E5%BB%BA"><span class="nav-text">二、内核对象的创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%86%85%E6%A0%B8%E5%AF%B9%E8%B1%A1%E7%9A%84%E8%AE%BF%E9%97%AE"><span class="nav-text">三、内核对象的访问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%86%85%E6%A0%B8%E5%AF%B9%E8%B1%A1%E7%9A%84%E9%94%80%E6%AF%81"><span class="nav-text">四、内核对象的销毁</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0"><span class="nav-text">4.1 引用计数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-%E6%AD%A3%E7%A1%AE%E7%9A%84%E9%94%80%E6%AF%81%E6%96%B9%E5%BC%8F"><span class="nav-text">4.2 正确的销毁方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-%E8%8E%B7%E5%8F%96%E5%86%85%E6%A0%B8%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0"><span class="nav-text">4.3 获取内核对象的引用计数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E5%86%85%E6%A0%B8%E5%AF%B9%E8%B1%A1%E8%B7%A8%E8%BF%9B%E7%A8%8B%E8%AE%BF%E9%97%AE"><span class="nav-text">五、内核对象跨进程访问</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-%E4%BD%BF%E7%94%A8%E5%8F%A5%E6%9F%84%E7%BB%A7%E6%89%BF%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="nav-text">5.1 使用句柄继承的方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-%E4%BD%BF%E7%94%A8DuplicateHandle%E6%96%B9%E5%BC%8F"><span class="nav-text">5.2 使用DuplicateHandle方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B"><span class="nav-text">示例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-%E4%BD%BF%E7%94%A8%E5%91%BD%E5%90%8D%E7%9A%84%E5%86%85%E6%A0%B8%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="nav-text">5.3 使用命名的内核对象的方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-1-%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="nav-text">5.3.1 实现原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-2-%E5%85%A8%E5%B1%80%E5%91%BD%E4%BB%A4%E7%A9%BA%E9%97%B4"><span class="nav-text">5.3.2 全局命令空间</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
 
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">jiangxueqiao</p>
+  <div class="site-description" itemprop="description">不是看到希望才坚持，而是坚持才会看到希望</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">64</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/winsoft666" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;winsoft666" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:smart7178@163.com" title="E-Mail → mailto:smart7178@163.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://static.1key.run/blog/img/windows1.jpg')">
-    <div class="container" style="right: 0px;left: 0px;">
-        <div class="row">
-            <div class="col s12 m12 l12">
-                <div class="brand">
-                    <h1 class="description center-align post-title">Windows内核对象</h1>
-                </div>
-            </div>
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
         </div>
     </div>
-</div>
-
-
-
-
-<main class="post-container content">
 
     
-    <div class="row">
-    <div id="main-content" class="col s12 m12 l9">
-        <!-- 文章内容详情 -->
-<div id="artDetail">
-    <div class="card">
-        <div class="card-content article-info">
-            <div class="row tag-cate">
-                <div class="col s7">
-                    
-                    <div class="article-tag">
-                        
-                            <a href="/tags/%E5%86%85%E6%A0%B8%E5%AF%B9%E8%B1%A1/">
-                                <span class="chip bg-color">内核对象</span>
-                            </a>
-                        
-                            <a href="/tags/%E5%8F%A5%E6%9F%84/">
-                                <span class="chip bg-color">句柄</span>
-                            </a>
-                        
-                            <a href="/tags/HANDLE/">
-                                <span class="chip bg-color">HANDLE</span>
-                            </a>
-                        
-                    </div>
-                    
-                </div>
-                <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/Windows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B/" class="post-category">
-                                Windows核心编程
-                            </a>
-                        
-                    </div>
-                    
-                </div>
-            </div>
+  </aside>
 
-            <div class="post-info">
-                
-                <div class="post-date info-break-policy">
-                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-06-28
-                </div>
-                
 
-                
-                <div class="post-date info-break-policy">
-                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-07-05
-                </div>
-                
+    </div>
 
-                
-                <div class="info-break-policy">
-                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    3.5k
-                </div>
-                
+    <div class="main-inner post posts-expand">
 
-                
 
-                
-            </div>
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jiangxueqiao.com/2023/06/28/windows-nei-he-dui-xiang/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jiangxueqiao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jeffery's Site">
+      <meta itemprop="description" content="不是看到希望才坚持，而是坚持才会看到希望">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Windows内核对象 | Jeffery's Site">
+      <meta itemprop="description" content=" ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Windows内核对象
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-06-28 18:00:35" itemprop="dateCreated datePublished" datetime="2023-06-28T18:00:35+08:00">2023-06-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-07-12 17:54:33" itemprop="dateModified" datetime="2023-07-12T17:54:33+08:00">2023-07-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Windows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">Windows核心编程</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description"> </div>
         </div>
-        <hr class="clearfix">
+      </header>
 
-        
-        <!-- 是否加载使用自带的 prismjs. -->
-        <link rel="stylesheet" href="/libs/prism/prism.min.css">
-        
-
-        
-
-        <div class="card-content article-card-content">
-            <div id="articleContent">
-                <h2 id="一、什么是内核对象"><a href="#一、什么是内核对象" class="headerlink" title="一、什么是内核对象"></a>一、什么是内核对象</h2><p>我们在windows开发中经常会遇到内核对象，如事件(Event)，管道(Pipe)，互斥量(Mutex)，完成端口(IOCP)，进程(Process)，线程(Thread)等，他们都是内核对象。这些内核对象虽然通过不同的系统API来创建，但这些API都有一个共同特点，就是都需要传入<code>SECURITY_ATTRIBUTES</code>安全描述符结构体指针，并且返回句柄(HANDLE)。依据这个特点，我们有一个简单方法来判断对象是否是内核对象，就是看创建它的函数是否允许传入<code>SECURITY_ATTRIBUTES</code>安全描述符。</p>
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="一、什么是内核对象"><a href="#一、什么是内核对象" class="headerlink" title="一、什么是内核对象"></a>一、什么是内核对象</h2><p>我们在windows开发中经常会遇到内核对象，如事件(Event)，管道(Pipe)，互斥量(Mutex)，完成端口(IOCP)，进程(Process)，线程(Thread)等，他们都是内核对象。这些内核对象虽然通过不同的系统API来创建，但这些API都有一个共同特点，就是都需要传入<code>SECURITY_ATTRIBUTES</code>安全描述符结构体指针，并且返回句柄(HANDLE)。依据这个特点，我们有一个简单方法来判断对象是否是内核对象，就是看创建它的函数是否允许传入<code>SECURITY_ATTRIBUTES</code>安全描述符。</p>
 <h2 id="二、内核对象的创建"><a href="#二、内核对象的创建" class="headerlink" title="二、内核对象的创建"></a>二、内核对象的创建</h2><p>大多数创建内核对象的系统API函数，如CreateEvent, CreateMutex, CreateThread, CreateProcess, CreatePipe, CreateNamedPipe等都会返回一个HANDLE（无论是以返回值的形式，还是以指针参数的形式返回），创建内核对象成功时HANDLE为<code>非NULL</code>，我们可以通过将HANDLE的值与NULL进行比较，来判断函数是否执行成功。但是有些函数比较例外，如<code>CreateFile</code>，这些函数执行失败时，返回的<code>HANDLE</code>的值为<code>INVALID_HANDLE_VALUIE</code>。</p>
 <h2 id="三、内核对象的访问"><a href="#三、内核对象的访问" class="headerlink" title="三、内核对象的访问"></a>三、内核对象的访问</h2><p><strong>虽然内核对象属于系统内核，但创建函数返回的<code>HANDLE</code>句柄却只和当前进程有关，离开了当前进程这个句柄也就失去了意义。</strong><br>内核对象属于系统内核级别，为了系统安全性，Windows不允许我们直接访问内核对象的内存区域，只允许我们通过Windows提供的一系列API来访问内核对象，如<code>SetEvent</code>, <code>ResetEvent</code>等等，使用这些函数时我们都会用到<code>HANDLE</code>，windows头文件中<code>HANDLE</code>的定义如下：</p>
-<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">typedef void *HANDLE;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="type">void</span> *HANDLE;</span><br></pre></td></tr></tbody></table></figure>
 <p>虽然定义为<code>void*</code>类型，但很显然这个<code>HANDLE</code>不是指向内核对象的指针。</p>
 <blockquote>
 <p>如何证明HANDLE不是指向内核对象的指针？<br>一方面直接执行内核对象毫无安全性可言；<br>另一方面内核对象保存在内核地址空间（32位系统是<code>0x80000000 到 0xFFFFFFFF</code>，64位系统是<code>0x00000040 00000000到0xFFFFFFFF FFFFFFFF</code>），我们可以调用类似<code>CreateEvent</code>的函数创建一个内核对象，观察其返回的HANDLE，明显不在内核地址空间的范围内，且值一般比较小。</p>
@@ -417,116 +316,23 @@
 </ol>
 <h3 id="4-3-获取内核对象的引用计数"><a href="#4-3-获取内核对象的引用计数" class="headerlink" title="4.3 获取内核对象的引用计数"></a>4.3 获取内核对象的引用计数</h3><p>虽然windows没有提供API让用户在用户态（Ring3）查询一个内核对象的句柄计数和引用计数，但我们可以从<code>Ntdll.dll</code>导出<code>NtQueryObject</code>函数来实现查询内核对象的当前状态(该函数没有被文档化)。 </p>
 <p><code>NtQueryObject</code>函数声明如下：</p>
-<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">// 返回值：如果成功则返回0
-//
-DWORD WINAPI NtQueryObject(
-HANDLE   handle,       // 待查询的句柄
-DWORD   nQueryIndex,   // 0为查询对象的当前状态，包括句柄计数，引用计数等等。
-VOID*   pOutBuffer,    // 存放查询结果
-DWORD   cbInBufferSize,   // pOutBuffer的大小，如果nQueryIndex为0，这里为sizeof(SYSTEM_HANDLE_STATE)
-VOID*   cbOutBufferSize   // 实际大小
-);  <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 返回值：如果成功则返回0</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="function">DWORD WINAPI <span class="title">NtQueryObject</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">HANDLE   handle,       <span class="comment">// 待查询的句柄</span></span></span></span><br><span class="line"><span class="params"><span class="function">DWORD   nQueryIndex,   <span class="comment">// 0为查询对象的当前状态，包括句柄计数，引用计数等等。</span></span></span></span><br><span class="line"><span class="params"><span class="function">VOID*   pOutBuffer,    <span class="comment">// 存放查询结果</span></span></span></span><br><span class="line"><span class="params"><span class="function">DWORD   cbInBufferSize,   <span class="comment">// pOutBuffer的大小，如果nQueryIndex为0，这里为sizeof(SYSTEM_HANDLE_STATE)</span></span></span></span><br><span class="line"><span class="params"><span class="function">VOID*   cbOutBufferSize   <span class="comment">// 实际大小</span></span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>;  </span><br></pre></td></tr></tbody></table></figure>
 
 <p>将<code>NtQueryObject</code>函数调用的细节封装到<code>GetKernelObjectRefCount</code>函数中，方便使用：</p>
-<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">bool GetKernelObjectRefCount(HANDLE handle, DWORD &amp;handle_count, DWORD &amp;point_count) {
-	typedef struct _SYSTEM_HANDLE_STATE {
-		DWORD   r1;
-		DWORD   GrantedAccess;
-		DWORD   HandleCount;      // 减1为句柄计数 
-		DWORD   ReferenceCount;   // 减1为指针引用计数 
-		DWORD   r5;
-		DWORD   r6;
-		DWORD   r7;
-		DWORD   r8;
-		DWORD   r9;
-		DWORD   r10;
-		DWORD   r11;
-		DWORD   r12;
-		DWORD   r13;
-		DWORD   r14;
-	}SYSTEM_HANDLE_STATE, *PSYSTEM_HANDLE_STATE;
-
-	typedef DWORD(WINAPI *PFN_NtQueryObject)(HANDLE handle,
-		DWORD nQueryIndex,
-		VOID* pOutBuffer,
-		DWORD cbInBufferSize,
-		VOID* cbOutBufferSize);
-
-	static PFN_NtQueryObject pfnNtQueryObject = NULL;
-	bool ret = false;
-
-	do {
-		if (pfnNtQueryObject == NULL) {
-			HMODULE ntdll = GetModuleHandle(TEXT("Ntdll.dll"));
-			if (ntdll == NULL)
-				break;
-
-			pfnNtQueryObject = (PFN_NtQueryObject)GetProcAddress(ntdll, "NtQueryObject");
-			if (pfnNtQueryObject == NULL)
-				break;
-		}
-		
-		SYSTEM_HANDLE_STATE sys_handle_state;
-		memset(&amp;sys_handle_state, 0, sizeof(SYSTEM_HANDLE_STATE));
-
-		DWORD out_buf_size = 0;
-		ret = (pfnNtQueryObject(handle, 0, &amp;sys_handle_state, sizeof(SYSTEM_HANDLE_STATE), &amp;out_buf_size) == 0);
-		if (ret) {
-			handle_count = sys_handle_state.HandleCount - 1;
-			point_count = sys_handle_state.ReferenceCount - 1;
-		}
-	} while (false);
-
-	return ret;
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">GetKernelObjectRefCount</span><span class="params">(HANDLE handle, DWORD &amp;handle_count, DWORD &amp;point_count)</span> </span>{</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">_SYSTEM_HANDLE_STATE</span> {</span><br><span class="line">		DWORD   r1;</span><br><span class="line">		DWORD   GrantedAccess;</span><br><span class="line">		DWORD   HandleCount;      <span class="comment">// 减1为句柄计数 </span></span><br><span class="line">		DWORD   ReferenceCount;   <span class="comment">// 减1为指针引用计数 </span></span><br><span class="line">		DWORD   r5;</span><br><span class="line">		DWORD   r6;</span><br><span class="line">		DWORD   r7;</span><br><span class="line">		DWORD   r8;</span><br><span class="line">		DWORD   r9;</span><br><span class="line">		DWORD   r10;</span><br><span class="line">		DWORD   r11;</span><br><span class="line">		DWORD   r12;</span><br><span class="line">		DWORD   r13;</span><br><span class="line">		DWORD   r14;</span><br><span class="line">	}SYSTEM_HANDLE_STATE, *PSYSTEM_HANDLE_STATE;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">typedef</span> <span class="title">DWORD</span><span class="params">(WINAPI *PFN_NtQueryObject)</span><span class="params">(HANDLE handle,</span></span></span><br><span class="line"><span class="params"><span class="function">		DWORD nQueryIndex,</span></span></span><br><span class="line"><span class="params"><span class="function">		VOID* pOutBuffer,</span></span></span><br><span class="line"><span class="params"><span class="function">		DWORD cbInBufferSize,</span></span></span><br><span class="line"><span class="params"><span class="function">		VOID* cbOutBufferSize)</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="type">static</span> PFN_NtQueryObject pfnNtQueryObject = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="type">bool</span> ret = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">do</span> {</span><br><span class="line">		<span class="keyword">if</span> (pfnNtQueryObject == <span class="literal">NULL</span>) {</span><br><span class="line">			HMODULE ntdll = <span class="built_in">GetModuleHandle</span>(<span class="built_in">TEXT</span>(<span class="string">"Ntdll.dll"</span>));</span><br><span class="line">			<span class="keyword">if</span> (ntdll == <span class="literal">NULL</span>)</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">			pfnNtQueryObject = (PFN_NtQueryObject)<span class="built_in">GetProcAddress</span>(ntdll, <span class="string">"NtQueryObject"</span>);</span><br><span class="line">			<span class="keyword">if</span> (pfnNtQueryObject == <span class="literal">NULL</span>)</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">		}</span><br><span class="line">		</span><br><span class="line">		SYSTEM_HANDLE_STATE sys_handle_state;</span><br><span class="line">		<span class="built_in">memset</span>(&amp;sys_handle_state, <span class="number">0</span>, <span class="built_in">sizeof</span>(SYSTEM_HANDLE_STATE));</span><br><span class="line"></span><br><span class="line">		DWORD out_buf_size = <span class="number">0</span>;</span><br><span class="line">		ret = (<span class="built_in">pfnNtQueryObject</span>(handle, <span class="number">0</span>, &amp;sys_handle_state, <span class="built_in">sizeof</span>(SYSTEM_HANDLE_STATE), &amp;out_buf_size) == <span class="number">0</span>);</span><br><span class="line">		<span class="keyword">if</span> (ret) {</span><br><span class="line">			handle_count = sys_handle_state.HandleCount - <span class="number">1</span>;</span><br><span class="line">			point_count = sys_handle_state.ReferenceCount - <span class="number">1</span>;</span><br><span class="line">		}</span><br><span class="line">	} <span class="keyword">while</span> (<span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <h2 id="五、内核对象跨进程访问"><a href="#五、内核对象跨进程访问" class="headerlink" title="五、内核对象跨进程访问"></a>五、内核对象跨进程访问</h2><p>虽然内核对象位于独立于进程之外的内核区域，我们在开发中却只能通过调用Win32 API传入HANDLE参数来操作内核对象（如<code>SetEvent</code>等）。然而<code>HANDLE句柄</code>只对当前进程有效，离开了当前进程该句柄就无效了。所以说，跨进程访问内核对象的关键在于我们怎么跨进程访问<code>句柄HANDLE</code>？</p>
 <p>下面介绍几种方法来实现跨进程共享内核对象。</p>
 <h3 id="5-1-使用句柄继承的方式"><a href="#5-1-使用句柄继承的方式" class="headerlink" title="5.1 使用句柄继承的方式"></a>5.1 使用句柄继承的方式</h3><p>只有进程之间有父子关系时，才可以使用句柄继承的方式。在这种情况下，父进程可以生成一个子进程，并允许子进程访问父进程的内核对象。为了使这种继承生效，父进程必须执行几个步骤：<br>（1）. 父进程在创建一个内核对象时，父进程必须向系统指定它希望这个内核对象的句柄是可以继承的。为了创建一个可继承的内核对象，必须分配并初始化一个<code>SECURITY_ATTRIBUTES</code>结构，如：</p>
-<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">SECURITY_ATTRIBUTES sa;
-sa.nLength = sizeof(SECURITY_ATTRIBUTES);
-sa.bInheritHandle = TRUE;  // 可继承的
-sa.lpSecurityDescriptor = NULL;
-
-HANDLE h = CreateEvent(&amp;sa, TRUE, FALSE, NULL); <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SECURITY_ATTRIBUTES sa;</span><br><span class="line">sa.nLength = <span class="built_in">sizeof</span>(SECURITY_ATTRIBUTES);</span><br><span class="line">sa.bInheritHandle = TRUE;  <span class="comment">// 可继承的</span></span><br><span class="line">sa.lpSecurityDescriptor = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">HANDLE h = <span class="built_in">CreateEvent</span>(&amp;sa, TRUE, FALSE, <span class="literal">NULL</span>); </span><br></pre></td></tr></tbody></table></figure>
 
 <p>（2）. 父进程通过CreateProcess生成子进程，且指定<code>bInheritHandles</code>为TRUE，从而允许子进程来继承父进程的那些“可继承的句柄”。</p>
-<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">// 启动子进程TestB.exe，将句柄h作为启动参数传给进程TestB
-//
-TCHAR cmd_buf[MAX_PATH];
-StringCchPrintf(cmd_buf, MAX_PATH, TEXT("TestB.exe %ld"), (long)h);
-
-STARTUPINFO si = { sizeof(si) };
-PROCESS_INFORMATION pi;
-BOOL ret = CreateProcess(
-	NULL, 
-	cmd_buf, 
-	NULL, 
-	NULL, 
-	TRUE,  // 指定子进程可以继承父进程的“可继承句柄”
-	0, 
-	NULL, 
-	NULL, 
-	&amp;si, 
-	&amp;pi
-);
-
-
-CloseHandle(pi.hProcess);
-CloseHandle(pi.hThread);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 启动子进程TestB.exe，将句柄h作为启动参数传给进程TestB</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line">TCHAR cmd_buf[MAX_PATH];</span><br><span class="line"><span class="built_in">StringCchPrintf</span>(cmd_buf, MAX_PATH, <span class="built_in">TEXT</span>(<span class="string">"TestB.exe %ld"</span>), (<span class="type">long</span>)h);</span><br><span class="line"></span><br><span class="line">STARTUPINFO si = { <span class="built_in">sizeof</span>(si) };</span><br><span class="line">PROCESS_INFORMATION pi;</span><br><span class="line">BOOL ret = <span class="built_in">CreateProcess</span>(</span><br><span class="line">	<span class="literal">NULL</span>, </span><br><span class="line">	cmd_buf, </span><br><span class="line">	<span class="literal">NULL</span>, </span><br><span class="line">	<span class="literal">NULL</span>, </span><br><span class="line">	TRUE,  <span class="comment">// 指定子进程可以继承父进程的“可继承句柄”</span></span><br><span class="line">	<span class="number">0</span>, </span><br><span class="line">	<span class="literal">NULL</span>, </span><br><span class="line">	<span class="literal">NULL</span>, </span><br><span class="line">	&amp;si, </span><br><span class="line">	&amp;pi</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">CloseHandle</span>(pi.hProcess);</span><br><span class="line"><span class="built_in">CloseHandle</span>(pi.hThread);</span><br></pre></td></tr></tbody></table></figure>
 
 <p>由于我们传给<code>bInheritHandles</code>参数的值是<code>TRUE</code>，所以系统在创建子进程时会多做一件事情：它会遍历父进程的句柄表，对它的每一项进行检查，凡是包含一个有效的“可继承的句柄”的项，都会将该项完整的复制到子进程的句柄表。在子进程的句柄表中，复制项的位置与它在父进程句柄表中的位置完全一样（包含索引），这个就意味着：在父进程和子进程中，对一个内核对象进行标识的句柄值也是完全一样的。所以我们只需要通过某种方式（如上面示例中的启动参数的方式，或者环境变量的方式等任何进程间通讯的方式）将这个值告诉子进程，子进程就可以将该值转成<code>HANDLE</code>，然后使用这个<code>HANDLE</code>来调用系统API。</p>
 <h3 id="5-2-使用DuplicateHandle方式"><a href="#5-2-使用DuplicateHandle方式" class="headerlink" title="5.2 使用DuplicateHandle方式"></a>5.2 使用DuplicateHandle方式</h3><p>DuplicateHandle函数可以将指定“源进程的句柄表”中的某一项<strong>复制</strong>到“目的进程句柄表”中（除了索引），并且返回该项在目的进程句柄表中的索引（即HADNLE）。<br>可以在任何时候调用DuplicateHandle函数，DuplicateHandle对源句柄是否是可继承的没有要求。</p>
 <p>函数声明如下：</p>
-<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">BOOL DuplicateHandle(
-  HANDLE hSourceProcessHandle,
-  HANDLE hSourceHandle,
-  HANDLE hTargetProcessHandle,
-  LPHANDLE lpTargetHandle,
-  DWORD dwDesiredAccess,
-  BOOL bInheritHandle,
-  DWORD dwOptions
-);<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">BOOL <span class="title">DuplicateHandle</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">  HANDLE hSourceProcessHandle,</span></span></span><br><span class="line"><span class="params"><span class="function">  HANDLE hSourceHandle,</span></span></span><br><span class="line"><span class="params"><span class="function">  HANDLE hTargetProcessHandle,</span></span></span><br><span class="line"><span class="params"><span class="function">  LPHANDLE lpTargetHandle,</span></span></span><br><span class="line"><span class="params"><span class="function">  DWORD dwDesiredAccess,</span></span></span><br><span class="line"><span class="params"><span class="function">  BOOL bInheritHandle,</span></span></span><br><span class="line"><span class="params"><span class="function">  DWORD dwOptions</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
 
 <blockquote>
 <p>DuplicateHandle详细介绍可以参考MSDN：<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms724251(v=vs.85).aspx">https://msdn.microsoft.com/en-us/library/windows/desktop/ms724251(v=vs.85).aspx</a></p>
@@ -622,790 +428,137 @@ CloseHandle(pi.hThread);<span aria-hidden="true" class="line-numbers-rows"><span
 </tbody></table>
 <p>不同的事件类型对应的<code>dwDesiredAccess</code>参数不同，具体参考<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms724251(v=vs.85).aspx">MSDN</a>。</p>
 <h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><p><strong>进程TestA源码</strong></p>
-<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">int main(int argc, char** argv) {
-	HANDLE h = CreateEvent(NULL, TRUE, FALSE, NULL);
-
-	// 启动子进程TestB.exe
-	//
-	TCHAR cmd_buf[MAX_PATH];
-	StringCchPrintf(cmd_buf, MAX_PATH, TEXT("D:\\TestB.exe"), (long)h);
-
-	STARTUPINFO si = { sizeof(si) };
-	PROCESS_INFORMATION pi;
-	BOOL ret = CreateProcess(NULL, cmd_buf, NULL, NULL, TRUE, 0, NULL, NULL, &amp;si, &amp;pi);
-	assert(ret);
-	assert(pi.hProcess);
-
-	HANDLE duplicated_h = NULL;
-	ret = DuplicateHandle(GetCurrentProcess(), h, pi.hProcess, &amp;duplicated_h, 0, FALSE, DUPLICATE_SAME_ACCESS);
-
-
-	WaitForSingleObject(pi.hProcess, INFINITE);
-	CloseHandle(pi.hProcess);
-	CloseHandle(pi.hThread);
-
-	bool has_signal = WaitForSingleObject(h, 0) == WAIT_OBJECT_0;
-	assert(has_signal == true);
-
-	return 0;
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>** argv)</span> </span>{</span><br><span class="line">	HANDLE h = <span class="built_in">CreateEvent</span>(<span class="literal">NULL</span>, TRUE, FALSE, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 启动子进程TestB.exe</span></span><br><span class="line">	<span class="comment">//</span></span><br><span class="line">	TCHAR cmd_buf[MAX_PATH];</span><br><span class="line">	<span class="built_in">StringCchPrintf</span>(cmd_buf, MAX_PATH, <span class="built_in">TEXT</span>(<span class="string">"D:\\TestB.exe"</span>), (<span class="type">long</span>)h);</span><br><span class="line"></span><br><span class="line">	STARTUPINFO si = { <span class="built_in">sizeof</span>(si) };</span><br><span class="line">	PROCESS_INFORMATION pi;</span><br><span class="line">	BOOL ret = <span class="built_in">CreateProcess</span>(<span class="literal">NULL</span>, cmd_buf, <span class="literal">NULL</span>, <span class="literal">NULL</span>, TRUE, <span class="number">0</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>, &amp;si, &amp;pi);</span><br><span class="line">	<span class="built_in">assert</span>(ret);</span><br><span class="line">	<span class="built_in">assert</span>(pi.hProcess);</span><br><span class="line"></span><br><span class="line">	HANDLE duplicated_h = <span class="literal">NULL</span>;</span><br><span class="line">	ret = <span class="built_in">DuplicateHandle</span>(<span class="built_in">GetCurrentProcess</span>(), h, pi.hProcess, &amp;duplicated_h, <span class="number">0</span>, FALSE, DUPLICATE_SAME_ACCESS);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="built_in">WaitForSingleObject</span>(pi.hProcess, INFINITE);</span><br><span class="line">	<span class="built_in">CloseHandle</span>(pi.hProcess);</span><br><span class="line">	<span class="built_in">CloseHandle</span>(pi.hThread);</span><br><span class="line"></span><br><span class="line">	<span class="type">bool</span> has_signal = <span class="built_in">WaitForSingleObject</span>(h, <span class="number">0</span>) == WAIT_OBJECT_0;</span><br><span class="line">	<span class="built_in">assert</span>(has_signal == <span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 
 <p><strong>子进程TestB源码</strong></p>
-<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">int main(int argc, char** argv)
-{
-	long l = 0;
-	printf("Input Handle:");
-	scanf("%ld", &amp;l);
-
-	HANDLE h = (HANDLE)l;
-
-	bool has_signal = WaitForSingleObject(h, 0) == WAIT_OBJECT_0;
-	assert(has_signal == false);
-
-	SetEvent(h);
-
-    return 0;
-}
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>** argv)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="type">long</span> l = <span class="number">0</span>;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"Input Handle:"</span>);</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%ld"</span>, &amp;l);</span><br><span class="line"></span><br><span class="line">	HANDLE h = (HANDLE)l;</span><br><span class="line"></span><br><span class="line">	<span class="type">bool</span> has_signal = <span class="built_in">WaitForSingleObject</span>(h, <span class="number">0</span>) == WAIT_OBJECT_0;</span><br><span class="line">	<span class="built_in">assert</span>(has_signal == <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">SetEvent</span>(h);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
 
 <p>在父进程TestA中创建一个不可继承的事件 -&gt; 然后启动子进程TestB -&gt; 调用DuplicateHandle复制句柄项到TestB进程句柄表 -&gt; 并向TestB输入句柄值 -&gt; TestB访问该事件句柄，将事件置为有信号状态。</p>
 <h3 id="5-3-使用命名的内核对象的方式"><a href="#5-3-使用命名的内核对象的方式" class="headerlink" title="5.3 使用命名的内核对象的方式"></a>5.3 使用命名的内核对象的方式</h3><h4 id="5-3-1-实现原理"><a href="#5-3-1-实现原理" class="headerlink" title="5.3.1 实现原理"></a>5.3.1 实现原理</h4><p>这种方式严格的说已经不是文章开头说到的跨进程访问句柄了，有点类似跨进程直接访问内核对象了。<br>该方式实现起来比较简单，就是在调用创建内核对象的<code>Create***</code>函数时，通过<code>pszName</code>参数为内核对象取一个名字。<br>如创建事件Event的函数<code>CreateEvent</code>：</p>
-<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">HANDLE WINAPI CreateEvent(
-  LPSECURITY_ATTRIBUTES lpEventAttributes,
-  BOOL bManualReset,
-  BOOL bInitialState,
-  LPCTSTR lpName  // 指定名称
-);
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">HANDLE WINAPI <span class="title">CreateEvent</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">  LPSECURITY_ATTRIBUTES lpEventAttributes,</span></span></span><br><span class="line"><span class="params"><span class="function">  BOOL bManualReset,</span></span></span><br><span class="line"><span class="params"><span class="function">  BOOL bInitialState,</span></span></span><br><span class="line"><span class="params"><span class="function">  LPCTSTR lpName  <span class="comment">// 指定名称</span></span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>;</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
 
-<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">HANDLE h = CreateEvent(NULL, TRUE, FALSE, TEXT("TestA_Obj"));<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HANDLE h = <span class="built_in">CreateEvent</span>(<span class="literal">NULL</span>, TRUE, FALSE, <span class="built_in">TEXT</span>(<span class="string">"TestA_Obj"</span>));</span><br></pre></td></tr></tbody></table></figure>
 
 <p>若在其他进程中要访问这个内核对象，只需要使用打开函数<code>Open***</code>打开该内核对象，<strong>系统就会在进程的句柄表中插入一条记录，并返回这条记录的索引，也就是句柄</strong>。需要注意的是，在打开内核对象时需要留意<code>返回值</code>和<code>GetLastError</code>函数的返回值。由于内核对象是有访问权限的，有时候虽然这个名字的内核对象存在，但该进程却不见得有权限可以打开它，这个时候<code>GetLastError</code>函数会返回失败的原因。</p>
 <p>以打开事件的函数<code>OpenEvent</code>为例：</p>
-<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">HANDLE h = OpenEvent(READ_CONTROL, FALSE, TEXT("TestA_Obj"));
-if (h == NULL) {
-	if (GetLastError() == ERROR_ACCESS_DENIED) { // 没有READ_CONTROL权限
-
-	}
-}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">HANDLE h = <span class="built_in">OpenEvent</span>(READ_CONTROL, FALSE, <span class="built_in">TEXT</span>(<span class="string">"TestA_Obj"</span>));</span><br><span class="line"><span class="keyword">if</span> (h == <span class="literal">NULL</span>) {</span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">GetLastError</span>() == ERROR_ACCESS_DENIED) { <span class="comment">// 没有READ_CONTROL权限</span></span><br><span class="line"></span><br><span class="line">	}</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <h4 id="5-3-2-全局命令空间"><a href="#5-3-2-全局命令空间" class="headerlink" title="5.3.2 全局命令空间"></a>5.3.2 全局命令空间</h4><p>不同的会话（Session）有不同的内核对象命名空间（如windows服务程序位于<code>Session 0</code>，而普通的用户进程位于<code>Session 1</code>），要通过名称访问其他会话中的内核对象，需要在名称前面加上<code>Session\&lt;当前会话ID&gt;</code>。Windows提供了一个全局的内核对象命名空间，处于任何会话中的进程都可以访问该命名空间，将内核对象放入全局命令空间的方式很简单：只需要在内核对象名称前加入<code>Global\</code>即可。</p>
 <p>如：</p>
-<pre class="line-numbers language-CPP" data-language="CPP"><code class="language-CPP">HANDLE h = CreateEvent(NULL, TRUE, FALSE, TEXT("Global\\TestA_Obj"));<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HANDLE h = <span class="built_in">CreateEvent</span>(<span class="literal">NULL</span>, TRUE, FALSE, <span class="built_in">TEXT</span>(<span class="string">"Global\\TestA_Obj"</span>));</span><br></pre></td></tr></tbody></table></figure>
 
 
-                
-            </div>
-            <hr/>
-
-            
-
-    <div class="reprint" id="reprint-statement">
-        
-            <div class="reprint__author">
-                <span class="reprint-meta" style="font-weight: bold;">
-                    <i class="fas fa-user">
-                        文章作者:
-                    </i>
-                </span>
-                <span class="reprint-info">
-                    <a href="/about" rel="external nofollow noreferrer">jiangxueqiao.com</a>
-                </span>
-            </div>
-            <div class="reprint__type">
-                <span class="reprint-meta" style="font-weight: bold;">
-                    <i class="fas fa-link">
-                        文章链接:
-                    </i>
-                </span>
-                <span class="reprint-info">
-                    <a href="https://jiangxueqiao.com/2023/06/28/windows-nei-he-dui-xiang/">https://jiangxueqiao.com/2023/06/28/windows-nei-he-dui-xiang/</a>
-                </span>
-            </div>
-            <div class="reprint__notice">
-                <span class="reprint-meta" style="font-weight: bold;">
-                    <i class="fas fa-copyright">
-                        版权声明:
-                    </i>
-                </span>
-                <span class="reprint-info">
-                    本博客所有文章除特別声明外，均采用
-                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
-                    许可协议。转载请注明来源
-                    <a href="/about" target="_blank">jiangxueqiao.com</a>
-                    !
-                </span>
-            </div>
-        
     </div>
 
-    <script async defer>
-      document.addEventListener("copy", function (e) {
-        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
-        M.toast({html: toastHTML})
-      });
-
-      function navToReprintStatement() {
-        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
-      }
-    </script>
-
-
-
-            <div class="tag_share" style="display: block;">
-                <div class="post-meta__tag-list" style="display: inline-block;">
-                    
-                        <div class="article-tag">
-                            
-                                <a href="/tags/%E5%86%85%E6%A0%B8%E5%AF%B9%E8%B1%A1/">
-                                    <span class="chip bg-color">内核对象</span>
-                                </a>
-                            
-                                <a href="/tags/%E5%8F%A5%E6%9F%84/">
-                                    <span class="chip bg-color">句柄</span>
-                                </a>
-                            
-                                <a href="/tags/HANDLE/">
-                                    <span class="chip bg-color">HANDLE</span>
-                                </a>
-                            
-                        </div>
-                    
-                </div>
-                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
-                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
-<div id="article-share">
-
     
-    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
-    <script src="/libs/share/js/social-share.min.js"></script>
+    
     
 
-    
+    <footer class="post-footer">
+          
 
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>jiangxueqiao
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://jiangxueqiao.com/2023/06/28/windows-nei-he-dui-xiang/" title="Windows内核对象">https://jiangxueqiao.com/2023/06/28/windows-nei-he-dui-xiang/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
 </div>
 
-                </div>
-            </div>
-            
-        </div>
-    </div>
+          <div class="post-tags">
+              <a href="/tags/%E5%86%85%E6%A0%B8%E5%AF%B9%E8%B1%A1/" rel="tag"># 内核对象</a>
+              <a href="/tags/%E5%8F%A5%E6%9F%84/" rel="tag"># 句柄</a>
+              <a href="/tags/HANDLE/" rel="tag"># HANDLE</a>
+          </div>
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-<article id="prenext-posts" class="prev-next articles">
-    <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
-            <div class="card">
-                <a href="/2023/06/28/windows-shi-xian-wen-jian-qiang-zhi-zhan-yong/">
-                    <div class="card-image">
-                        
-                        <img src="https://static.1key.run/blog/img/windows1.jpg" class="responsive-img" alt="Windows实现文件强制占用">
-                        
-                        <span class="card-title">Windows实现文件强制占用</span>
-                    </div>
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/06/28/typescript-ji-chu-yu-fa/" rel="prev" title="Typescript基础语法">
+                  <i class="fa fa-chevron-left"></i> Typescript基础语法
                 </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2023-06-28
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/Windows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B/" class="post-category">
-                                    Windows核心编程
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
             </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2023/06/28/typescript-ji-chu-yu-fa/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="https://static.1key.run/blog/matery-theme/medias/featureimages/21.jpg" class="responsive-img" alt="Typescript基础语法">
-                        
-                        <span class="card-title">Typescript基础语法</span>
-                    </div>
+            <div class="post-nav-item">
+                <a href="/2023/06/28/windows-shi-xian-wen-jian-qiang-zhi-zhan-yong/" rel="next" title="Windows实现文件强制占用">
+                  Windows实现文件强制占用 <i class="fa fa-chevron-right"></i>
                 </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-06-28
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/Web/" class="post-category">
-                                    Web
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/Typescript/">
-                        <span class="chip bg-color">Typescript</span>
-                    </a>
-                    
-                </div>
-                
             </div>
-        </div>
-        
-    </div>
-</article>
-
+          </div>
+    </footer>
+  </article>
 </div>
 
 
-<script>
-    $('#articleContent').on('copy', function (e) {
-        // IE8 or earlier browser is 'undefined'
-        if (typeof window.getSelection === 'undefined') return;
-
-        var selection = window.getSelection();
-        // if the selection is short let's not annoy our users.
-        if (('' + selection).length < Number.parseInt('120')) {
-            return;
-        }
-
-        // create a div outside of the visible area and fill it with the selected text.
-        var bodyElement = document.getElementsByTagName('body')[0];
-        var newdiv = document.createElement('div');
-        newdiv.style.position = 'absolute';
-        newdiv.style.left = '-99999px';
-        bodyElement.appendChild(newdiv);
-        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
-
-        // we need a <pre> tag workaround.
-        // otherwise the text inside "pre" loses all the line breaks!
-        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE' || selection.getRangeAt(0).commonAncestorContainer.nodeName === 'CODE') {
-            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
-        }
-
-        var url = document.location.href;
-        newdiv.innerHTML += '<br />'
-            + '来源: Jiangxueqiao&#39;s Site<br />'
-            + '文章作者: jiangxueqiao.com<br />'
-            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
-            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
-
-        selection.selectAllChildren(newdiv);
-        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
-    });
-</script>
 
 
-<!-- 代码块功能依赖 -->
-<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
 
-  <!-- 是否加载使用自带的 prismjs. -->
-  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
+</div>
+  </main>
 
+  <footer class="footer">
+    <div class="footer-inner">
 
-<!-- 代码语言 -->
-
-<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
-
-
-<!-- 代码块复制 -->
-
-<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
-
-
-<!-- 代码块收缩 -->
-
-<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
-
-
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">鄂ICP备2020015399号-5 </a>
+  </div>
+  <div class="copyright">
+    &copy; 2021 – 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">jiangxueqiao</span>
+  </div>
 
     </div>
-    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
-        <div class="toc-widget card" style="background-color: white;">
-            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
-            <div id="toc-content"></div>
-        </div>
-    </div>
-</div>
+  </footer>
 
-<!-- TOC 悬浮按钮. -->
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
 
-<div id="floating-toc-btn" class="hide-on-med-and-down">
-    <a class="btn-floating btn-large bg-color">
-        <i class="fas fa-list-ul"></i>
-    </a>
-</div>
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
 
 
-<script src="/libs/tocbot/tocbot.min.js"></script>
-<script>
-    $(function () {
-        tocbot.init({
-            tocSelector: '#toc-content',
-            contentSelector: '#articleContent',
-            headingsOffset: -($(window).height() * 0.4 - 45),
-            collapseDepth: Number('2'),
-            headingSelector: 'h1, h2, h3, h4'
-        });
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
 
-        // Set scroll toc fixed.
-        let tocHeight = parseInt($(window).height() * 0.4 - 64);
-        let $tocWidget = $('.toc-widget');
-        $(window).scroll(function () {
-            let scroll = $(window).scrollTop();
-            /* add post toc fixed. */
-            if (scroll > tocHeight) {
-                $tocWidget.addClass('toc-fixed');
-            } else {
-                $tocWidget.removeClass('toc-fixed');
-            }
-        });
-
-        
-        /* 修复文章卡片 div 的宽度. */
-        let fixPostCardWidth = function (srcId, targetId) {
-            let srcDiv = $('#' + srcId);
-            if (srcDiv.length === 0) {
-                return;
-            }
-
-            let w = srcDiv.width();
-            if (w >= 450) {
-                w = w + 21;
-            } else if (w >= 350 && w < 450) {
-                w = w + 18;
-            } else if (w >= 300 && w < 350) {
-                w = w + 16;
-            } else {
-                w = w + 14;
-            }
-            $('#' + targetId).width(w);
-        };
-
-        // 切换TOC目录展开收缩的相关操作.
-        const expandedClass = 'expanded';
-        let $tocAside = $('#toc-aside');
-        let $mainContent = $('#main-content');
-        $('#floating-toc-btn .btn-floating').click(function () {
-            if ($tocAside.hasClass(expandedClass)) {
-                $tocAside.removeClass(expandedClass).hide();
-                $mainContent.removeClass('l9');
-            } else {
-                $tocAside.addClass(expandedClass).show();
-                $mainContent.addClass('l9');
-            }
-            fixPostCardWidth('artDetail', 'prenext-posts');
-        });
-        
-    });
-</script>
-
-    
-
-</main>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
 
 
 
 
-    <footer class="page-footer bg-color">
-    
+  <script src="/js/third-party/fancybox.js"></script>
 
-    <div class="container row center-align"
-         style="margin-bottom: 15px !important;">
-        <div class="col s12 m8 l8 copy-right">
-            Copyright&nbsp;&copy;
-            
-                <span id="year">2022-2023</span>
-            
-            <a href="/about" target="_blank">jiangxueqiao.com</a>
-            
-                <span id="translate">|&nbsp;繁/简：</span><a id="translateLink" href="javascript:translatePage();">繁</a>
-            
-            <br>
-            
-                &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                        class="white-color">87.3k</span>
-            
-            
-            
-                
-            
-            
-                <span id="busuanzi_container_site_pv">
-                &nbsp;|&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;
-                    <span id="busuanzi_value_site_pv" class="white-color"></span>
-            </span>
-            
-            
-                <span id="busuanzi_container_site_uv">
-                &nbsp;|&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;
-                    <span id="busuanzi_value_site_uv" class="white-color"></span>
-            </span>
-            
-            <br>
-
-            <!-- 运行天数提醒. -->
-            
-                <span id="sitetime"> Loading ...</span>
-                <script>
-                    var calcSiteTime = function () {
-                        var seconds = 1000;
-                        var minutes = seconds * 60;
-                        var hours = minutes * 60;
-                        var days = hours * 24;
-                        var years = days * 365;
-                        var today = new Date();
-                        var startYear = "2022";
-                        var startMonth = "6";
-                        var startDate = "20";
-                        var startHour = "0";
-                        var startMinute = "0";
-                        var startSecond = "0";
-                        var todayYear = today.getFullYear();
-                        var todayMonth = today.getMonth() + 1;
-                        var todayDate = today.getDate();
-                        var todayHour = today.getHours();
-                        var todayMinute = today.getMinutes();
-                        var todaySecond = today.getSeconds();
-                        var t1 = Date.UTC(startYear, startMonth, startDate, startHour, startMinute, startSecond);
-                        var t2 = Date.UTC(todayYear, todayMonth, todayDate, todayHour, todayMinute, todaySecond);
-                        var diff = t2 - t1;
-                        var diffYears = Math.floor(diff / years);
-                        var diffDays = Math.floor((diff / days) - diffYears * 365);
-
-                        // 区分是否有年份.
-                        var language = 'zh-CN';
-                        if (startYear === String(todayYear)) {
-                            document.getElementById("year").innerHTML = todayYear;
-                            var daysTip = 'This site has been running for ' + diffDays + ' days';
-                            if (language === 'zh-CN') {
-                                daysTip = '本站已运行 ' + diffDays + ' 天';
-                            } else if (language === 'zh-HK') {
-                                daysTip = '本站已運行 ' + diffDays + ' 天';
-                            }
-                            document.getElementById("sitetime").innerHTML = daysTip;
-                        } else {
-                            document.getElementById("year").innerHTML = startYear + " - " + todayYear;
-                            var yearsAndDaysTip = 'This site has been running for ' + diffYears + ' years and '
-                                + diffDays + ' days';
-                            if (language === 'zh-CN') {
-                                yearsAndDaysTip = '本站已运行 ' + diffYears + ' 年 ' + diffDays + ' 天';
-                            } else if (language === 'zh-HK') {
-                                yearsAndDaysTip = '本站已運行 ' + diffYears + ' 年 ' + diffDays + ' 天';
-                            }
-                            document.getElementById("sitetime").innerHTML = yearsAndDaysTip;
-                        }
-                    }
-
-                    calcSiteTime();
-                </script>
-            
-            <br>
-            
-                <span id="icp"><img src="/medias/icp.png"
-                                    style="vertical-align: text-bottom;"/>
-                <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">鄂ICP备2020015399号-5</a>
-            </span>
-            
-        </div>
-        <div class="col s12 m4 l4 social-link social-statis">
-    <a href="https://github.com/winsoft666" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
-        <i class="fab fa-github"></i>
-    </a>
+  <script src="/js/third-party/pace.js"></script>
 
 
-
-    <a href="mailto:smart7178@163.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
-        <i class="fas fa-envelope-open"></i>
-    </a>
+  
 
 
 
 
-
-
-
-    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=295429457" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 295429457" data-position="top" data-delay="50">
-        <i class="fab fa-qq"></i>
-    </a>
-
-
-
-
-
-
-
-</div>
-    </div>
-</footer>
-
-<div class="progress-bar"></div>
-
-
-    <!-- 搜索遮罩框 -->
-<div id="searchModal" class="modal">
-    <div class="modal-content">
-        <div class="search-header">
-            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
-            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
-                   class="search-input">
-        </div>
-        <div id="searchResult"></div>
-    </div>
-</div>
-
-<script type="text/javascript">
-$(function () {
-    var searchFunc = function (path, search_id, content_id) {
-        'use strict';
-        $.ajax({
-            url: path,
-            dataType: "xml",
-            success: function (xmlResponse) {
-                // get the contents from search data
-                var datas = $("entry", xmlResponse).map(function () {
-                    return {
-                        title: $("title", this).text(),
-                        content: $("content", this).text(),
-                        url: $("url", this).text()
-                    };
-                }).get();
-                var $input = document.getElementById(search_id);
-                var $resultContent = document.getElementById(content_id);
-                $input.addEventListener('input', function () {
-                    var str = '<ul class=\"search-result-list\">';
-                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
-                    $resultContent.innerHTML = "";
-                    if (this.value.trim().length <= 0) {
-                        return;
-                    }
-                    // perform local searching
-                    datas.forEach(function (data) {
-                        var isMatch = true;
-                        var data_title = data.title.trim().toLowerCase();
-                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
-                        var data_url = data.url;
-                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
-                        var index_title = -1;
-                        var index_content = -1;
-                        var first_occur = -1;
-                        // only match artiles with not empty titles and contents
-                        if (data_title !== '' && data_content !== '') {
-                            keywords.forEach(function (keyword, i) {
-                                index_title = data_title.indexOf(keyword);
-                                index_content = data_content.indexOf(keyword);
-                                if (index_title < 0 && index_content < 0) {
-                                    isMatch = false;
-                                } else {
-                                    if (index_content < 0) {
-                                        index_content = 0;
-                                    }
-                                    if (i === 0) {
-                                        first_occur = index_content;
-                                    }
-                                }
-                            });
-                        }
-                        // show search results
-                        if (isMatch) {
-                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
-                            var content = data.content.trim().replace(/<[^>]+>/g, "");
-                            if (first_occur >= 0) {
-                                // cut out 100 characters
-                                var start = first_occur - 20;
-                                var end = first_occur + 80;
-                                if (start < 0) {
-                                    start = 0;
-                                }
-                                if (start === 0) {
-                                    end = 100;
-                                }
-                                if (end > content.length) {
-                                    end = content.length;
-                                }
-                                var match_content = content.substr(start, end);
-                                // highlight all keywords
-                                keywords.forEach(function (keyword) {
-                                    var regS = new RegExp(keyword, "gi");
-                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
-                                });
-
-                                str += "<p class=\"search-result\">" + match_content + "...</p>"
-                            }
-                            str += "</li>";
-                        }
-                    });
-                    str += "</ul>";
-                    $resultContent.innerHTML = str;
-                });
-            }
-        });
-    };
-
-    searchFunc('/search.xml', 'searchInput', 'searchResult');
-});
-</script>
-
-    <!-- 白天和黑夜主题 -->
-<div class="stars-con">
-    <div id="stars"></div>
-    <div id="stars2"></div>
-    <div id="stars3"></div>  
-</div>
-
-<script>
-    function switchNightMode() {
-        $('<div class="Cuteen_DarkSky"><div class="Cuteen_DarkPlanet"></div></div>').appendTo($('body')),
-        setTimeout(function () {
-            $('body').hasClass('DarkMode') 
-            ? ($('body').removeClass('DarkMode'), localStorage.setItem('isDark', '0'), $('#sum-moon-icon').removeClass("fa-sun").addClass('fa-moon')) 
-            : ($('body').addClass('DarkMode'), localStorage.setItem('isDark', '1'), $('#sum-moon-icon').addClass("fa-sun").removeClass('fa-moon')),
-            
-            setTimeout(function () {
-            $('.Cuteen_DarkSky').fadeOut(1e3, function () {
-                $(this).remove()
-            })
-            }, 2e3)
-        })
-    }
-</script>
-
-    <!-- 回到顶部按钮 -->
-<div id="backTop" class="top-scroll">
-    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
-        <i class="fas fa-arrow-up"></i>
-    </a>
-</div>
-
-
-    <script src="/libs/materialize/materialize.min.js"></script>
-    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
-    <script src="/libs/aos/aos.js"></script>
-    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
-    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
-    <script src="/js/matery.js"></script>
-
-    
-
-    
-        <script type="text/javascript" src="/js/tw_cn.js"></script>
-        <script type="text/javascript">
-          var defaultEncoding = 2; //网站编写字体是否繁体，1-繁体，2-简体
-          var translateDelay = 0; //延迟时间,若不在前, 要设定延迟翻译时间, 如100表示100ms,默认为0
-          var cookieDomain = "https://jiangxueqiao.com"; //Cookie地址, 一定要设定, 通常为你的网址
-          var msgToTraditionalChinese = "繁"; //此处可以更改为你想要显示的文字
-          var msgToSimplifiedChinese = "简"; //同上，但两处均不建议更改
-          var translateButtonId = "translateLink"; //默认互换id
-          translateInitilization();
-        </script>
-    
-    
-    
-
-    <!-- 雪花特效 -->
-    
-
-    <!-- 鼠标星星特效 -->
-    
-
-     
-        <script src="https://ssl.captcha.qq.com/TCaptcha.js"></script>
-        <script src="/libs/others/TencentCaptcha.js"></script>
-        <button id="TencentCaptcha" data-appid="xxxxxxxxxx" data-cbfn="callback" type="button" hidden></button>
-    
-
-    <!-- Baidu Analytics -->
-
-    <!-- Baidu Push -->
-
-<script>
-    (function () {
-        var bp = document.createElement('script');
-        var curProtocol = window.location.protocol.split(':')[0];
-        if (curProtocol === 'https') {
-            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-        } else {
-            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-        }
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(bp, s);
-    })();
-</script>
-
-    
-    
-    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
-    
-
-    
-
-    
-
-    <!--腾讯兔小巢-->
-    
-        <div style="position:fixed;bottom:125px;right:16px;cursor: pointer;">
-            <a title="兔小巢" target="_blank" rel="noopener" href="https://support.qq.com/products/597551"><i class="fa fa-comments fa-3x"  aria-hidden="true"></i></a>
-        </div>
-    
-    
-
-    
-
-    
-
-    
-    <script src="/libs/instantpage/instantpage.js" type="module"></script>
-    
 
 </body>
-
 </html>

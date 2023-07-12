@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="codeva-RtI1N7UTHz">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-center-atom.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"jiangxueqiao.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"width":320},"copycode":{"enable":true,"style":"flat"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":true,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="一、什么是UDP协议？UDP是User Datagram Protocol的简称，中文名是用户数据报协议，是OSI参考模型中的传输层协议，它是一种无连接的传输层协议，提供面向事务的简单不可靠信息传送服务。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络协议(5)--UDP协议">
+<meta property="og:url" content="https://jiangxueqiao.com/2021/03/13/wang-luo-xie-yi-5-udp-xie-yi/index.html">
+<meta property="og:site_name" content="Jeffery&#39;s Site">
+<meta property="og:description" content="一、什么是UDP协议？UDP是User Datagram Protocol的简称，中文名是用户数据报协议，是OSI参考模型中的传输层协议，它是一种无连接的传输层协议，提供面向事务的简单不可靠信息传送服务。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://static.1key.run/blog/img/wangluoxieyi-udp-1.jpg">
+<meta property="og:image" content="https://static.1key.run/blog/img/wangluoxieyi-udp-2.jpg">
+<meta property="article:published_time" content="2021-03-13T04:30:00.000Z">
+<meta property="article:modified_time" content="2023-07-12T09:56:42.370Z">
+<meta property="article:author" content="jiangxueqiao">
+<meta property="article:tag" content="UDP">
+<meta property="article:tag" content="单播">
+<meta property="article:tag" content="多播">
+<meta property="article:tag" content="广播">
+<meta property="article:tag" content="组播">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://static.1key.run/blog/img/wangluoxieyi-udp-1.jpg">
+
+
+<link rel="canonical" href="https://jiangxueqiao.com/2021/03/13/wang-luo-xie-yi-5-udp-xie-yi/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jiangxueqiao.com/2021/03/13/wang-luo-xie-yi-5-udp-xie-yi/","path":"2021/03/13/wang-luo-xie-yi-5-udp-xie-yi/","title":"网络协议(5)--UDP协议"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>网络协议(5)--UDP协议 | Jeffery's Site</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Jeffery's Site</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">93</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">16</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">64</span></a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFUDP%E5%8D%8F%E8%AE%AE%EF%BC%9F"><span class="nav-text">一、什么是UDP协议？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81UDP%E6%8A%A5%E5%A4%B4"><span class="nav-text">二、UDP报头</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81TCP%E5%92%8CUDP%E5%8C%BA%E5%88%AB"><span class="nav-text">三、TCP和UDP区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-text">四、应用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E5%8D%95%E6%92%AD%E3%80%81%E5%A4%9A%E6%92%AD%E3%80%81%E5%B9%BF%E6%92%AD%E3%80%81%E7%BB%84%E6%92%AD"><span class="nav-text">五、单播、多播、广播、组播</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-%E5%8D%95%E6%92%AD"><span class="nav-text">5.1 单播</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-1-%E5%8D%95%E6%92%AD%E5%8F%91%E9%80%81%E7%AB%AF"><span class="nav-text">5.1.1 单播发送端</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-2-%E5%8D%95%E6%92%AD%E6%8E%A5%E6%94%B6%E7%AB%AF"><span class="nav-text">5.1.2 单播接收端</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-%E5%B9%BF%E6%92%AD"><span class="nav-text">5.2 广播</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-1-%E5%B9%BF%E6%92%AD%E5%8F%91%E9%80%81%E7%AB%AF"><span class="nav-text">5.2.1 广播发送端</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-2-%E5%B9%BF%E6%92%AD%E6%8E%A5%E6%94%B6%E7%AB%AF-%E5%92%8C%E5%8D%95%E6%92%AD%E4%B8%80%E6%A0%B7"><span class="nav-text">5.2.2 广播接收端(和单播一样)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-%E7%BB%84%E6%92%AD"><span class="nav-text">5.3 组播</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-1-%E7%BB%84%E6%92%AD%E5%8F%91%E9%80%81%E7%AB%AF"><span class="nav-text">5.3.1 组播发送端</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-2-%E7%BB%84%E6%92%AD%E6%8E%A5%E6%94%B6%E7%AB%AF"><span class="nav-text">5.3.2 组播接收端</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">jiangxueqiao</p>
+  <div class="site-description" itemprop="description">不是看到希望才坚持，而是坚持才会看到希望</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">64</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/winsoft666" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;winsoft666" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:smart7178@163.com" title="E-Mail → mailto:smart7178@163.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jiangxueqiao.com/2021/03/13/wang-luo-xie-yi-5-udp-xie-yi/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jiangxueqiao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jeffery's Site">
+      <meta itemprop="description" content="不是看到希望才坚持，而是坚持才会看到希望">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="网络协议(5)--UDP协议 | Jeffery's Site">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          网络协议(5)--UDP协议
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-03-13 12:30:00" itemprop="dateCreated datePublished" datetime="2021-03-13T12:30:00+08:00">2021-03-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-07-12 17:56:42" itemprop="dateModified" datetime="2023-07-12T17:56:42+08:00">2023-07-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/" itemprop="url" rel="index"><span itemprop="name">网络协议</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="一、什么是UDP协议？"><a href="#一、什么是UDP协议？" class="headerlink" title="一、什么是UDP协议？"></a>一、什么是UDP协议？</h2><p>UDP是User Datagram Protocol的简称，中文名是用户数据报协议，是OSI参考模型中的传输层协议，它是一种无连接的传输层协议，提供面向事务的简单不可靠信息传送服务。</p>
+<span id="more"></span>
+<p>UDP的正式规范是<a target="_blank" rel="noopener" href="https://www.ietf.org/rfc/rfc768.txt">IETF RFC768</a>。UDP在IP报文的协议号是17。</p>
+<blockquote>
+<p>ISO七层模型：<br><img data-src="https://static.1key.run/blog/img/wangluoxieyi-udp-1.jpg"></p>
+</blockquote>
+<h2 id="二、UDP报头"><a href="#二、UDP报头" class="headerlink" title="二、UDP报头"></a>二、UDP报头</h2><p>UDP报头的结构如图：<br><img data-src="https://static.1key.run/blog/img/wangluoxieyi-udp-2.jpg"></p>
+<p>UDP报头由4个部分组成，其中两个是可选的（粉红背景标出部分）：</p>
+<ul>
+<li><p>各16bit的<code>来源端口</code>和<code>目的端口</code>用来标记发送和接受的应用进程。因为UDP不需要应答，所以来源端口是可选的，如果来源端口不用，那么置为零。</p>
+</li>
+<li><p>在目的端口后面是长度固定的以字节为单位的报文长度域，用来指定UDP数据报包括数据部分的长度，长度最小值为8byte。</p>
+</li>
+<li><p>首部剩下地16bit是用来对首部和数据部分一起做<code>校验和</code>（Checksum）的，这部分是可选的，但在实际应用中一般都使用这一功能。</p>
+</li>
+<li><p>UDP和TCP的<code>校验和</code>都覆盖到了他们的首部和数据，而之前介绍的IP首部的<code>校验和</code>只覆盖了IP首部。</p>
+</li>
+</ul>
+<h2 id="三、TCP和UDP区别"><a href="#三、TCP和UDP区别" class="headerlink" title="三、TCP和UDP区别"></a>三、TCP和UDP区别</h2><table>
+<thead>
+<tr>
+<th>特征点</th>
+<th>TCP</th>
+<th>UDP</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>是否连接</td>
+<td>面向连接</td>
+<td>面向非连接</td>
+</tr>
+<tr>
+<td>传输可靠性</td>
+<td>可靠</td>
+<td>会丢包，不可靠</td>
+</tr>
+<tr>
+<td>应用场景</td>
+<td>传输数据量大</td>
+<td>传输量小</td>
+</tr>
+<tr>
+<td>速度</td>
+<td>慢</td>
+<td>快</td>
+</tr>
+</tbody></table>
+<p>TCP(传输控制协议)提供的是面向连接、可靠的字节流服务。当客户端和服务器彼此交换数据前，必须先在双方之间建立一个TCP连接，之后才能传输数据。TCP提供超时重发，丢弃重复数据，检验数据，流量控制等功能，保证数据能从一端传到另一端。<br>UDP(用户数据报协议)是一个简单的面向数据报的运输层协议。UDP不提供可靠性，它只是把应用程序传给IP层的数据报发送出去，但是并不能保证它们能到达目的地。由于UDP在传输数据报前不用在客户和服务器之间建立一个连接，且没有超时重发等机制，故而传输速度很快。</p>
+<p>由于UDP缺乏拥塞控制（congestion control），需要基于网络的机制来减少因失控和高速UDP流量负荷而导致的拥塞崩溃效应。换句话说，因为UDP发送者不能够检测拥塞，所以像使用包队列和丢弃技术的路由器这样的网络基本设备往往就成为降低UDP过大通信量的有效工具。数据报拥塞控制协议（DCCP）设计成通过在诸如流媒体类型的高速率UDP流中，增加主机拥塞控制，来减小这个潜在的问题。</p>
+<h2 id="四、应用场景"><a href="#四、应用场景" class="headerlink" title="四、应用场景"></a>四、应用场景</h2><p>由于缺乏可靠性且属于非连接导向协议，UDP的应用一般必须允许一定量的丢包、出错和复制粘贴。但有些应用，比如TFTP，需要可靠性保证，则必须在应用层增加根本的可靠机制。但是绝大多数UDP应用都不需要可靠机制，甚至可能因为引入可靠机制而降低性能。流媒体、即时多媒体游戏和IP电话（VoIP）就是典型的UDP应用。如果某个应用需要很高的可靠性，那么可以用传输控制协议（即TCP协议）来代替UDP。</p>
+<p>使用UDP协议的应用有：域名系统（DNS）、简单网络管理协议（SNMP）、动态主机配置协议（DHCP）、路由信息协议（RIP）等等。</p>
+<p>因为UDP不属于连接型协议，因而具有资源消耗小，处理速度快的优点，所以通常音频、视频和普通数据在传送时使用UDP较多，因为它们即使偶尔丢失几个数据包，也不会对接收结果产生太大影响。</p>
+<h2 id="五、单播、多播、广播、组播"><a href="#五、单播、多播、广播、组播" class="headerlink" title="五、单播、多播、广播、组播"></a>五、单播、多播、广播、组播</h2><p>假设A(all简写)代表所有的机器，M(multiple简写)代表A中的多个机器，G(group简写)代表一组机器，1代表一台机器，那么：</p>
+<figure class="highlight clean"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> -&gt; <span class="number">1</span> 就是单播；</span><br><span class="line"><span class="number">1</span> -&gt; M 就是多播；</span><br><span class="line"><span class="number">1</span> -&gt; A 就是广播；</span><br><span class="line"><span class="number">1</span> -&gt; G 就是组播；</span><br><span class="line"></span><br><span class="line">当M=A时，多播就是广播；</span><br><span class="line">当M=G时，多播就是组播；</span><br></pre></td></tr></tbody></table></figure>
+<p>多播包括组播和广播，组播、广播都是多播的一种表现形式。</p>
+<h3 id="5-1-单播"><a href="#5-1-单播" class="headerlink" title="5.1 单播"></a>5.1 单播</h3><p>单播是主机之间“一对一”的通讯模式。发送方需要指定一个接收方的IP和端口，只有这个接收方会收到数据报。不会对子网内的其他机器产生影响。<br>在单播模式下，服务器针对每个客户机都要发送数据流，<code>服务器流量=客户机数量×客户机流量</code>，在客户机数量大、每个客户机流量大的应用（如流媒体）中，服务器将不堪重负。</p>
+<h4 id="5-1-1-单播发送端"><a href="#5-1-1-单播发送端" class="headerlink" title="5.1.1 单播发送端"></a>5.1.1 单播发送端</h4><p>因为UDP不是面向连接的，且不可靠的，所以发送端在调用<code>sendto</code>之后，就算<code>sendto</code>返回成功，也不代表接收端一定收到了数据，可能接收端压根都没启动，也是有可能的。不能根据<code>sendto</code>的返回值来确保接收端一定收到了数据。如果需要数据传输的可靠性得到保证，可以使用TCP或者通过业务逻辑来保证。</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;WinSock2.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> comment(lib, <span class="string">"Ws2_32.lib"</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">SendLogic</span><span class="params">()</span> </span>{</span><br><span class="line">	WSADATA wsaData;</span><br><span class="line">	WORD wVersionRequested = <span class="built_in">MAKEWORD</span>(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">	<span class="built_in">WSAStartup</span>(wVersionRequested, &amp;wsaData);</span><br><span class="line"></span><br><span class="line">	SOCKET socket = ::<span class="built_in">WSASocket</span>(AF_INET, SOCK_DGRAM, IPPROTO_UDP, <span class="literal">nullptr</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">	<span class="keyword">if</span> (socket == INVALID_SOCKET) {</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"WSASocket failed, error=%d\n"</span>, <span class="built_in">WSAGetLastError</span>());</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	sockaddr_in addr;</span><br><span class="line">	addr.sin_family = AF_INET;</span><br><span class="line">	addr.sin_port = <span class="built_in">htons</span>(<span class="number">6000</span>);  <span class="comment">// 接收端端口</span></span><br><span class="line">	addr.sin_addr.s_addr = <span class="built_in">inet_addr</span>(<span class="string">"127.0.0.1"</span>); <span class="comment">// 接收端IP</span></span><br><span class="line"></span><br><span class="line">	<span class="type">char</span> buf[<span class="number">100</span>] = { <span class="string">"hello"</span> };</span><br><span class="line">	<span class="type">int</span> err = <span class="built_in">sendto</span>(socket, buf, <span class="built_in">strlen</span>(buf), <span class="number">0</span>, <span class="built_in">reinterpret_cast</span>&lt;<span class="type">const</span> sockaddr*&gt;(&amp;addr), <span class="built_in">sizeof</span>(addr));</span><br><span class="line">	<span class="keyword">if</span> (err == SOCKET_ERROR) {</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"sendto failed, error=%d\n"</span>, <span class="built_in">WSAGetLastError</span>());</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"[SEND] %s OK\n"</span>, buf);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">WSACleanup</span>();</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="built_in">SendLogic</span>();</span><br><span class="line"></span><br><span class="line">	<span class="built_in">getchar</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="5-1-2-单播接收端"><a href="#5-1-2-单播接收端" class="headerlink" title="5.1.2 单播接收端"></a>5.1.2 单播接收端</h4><p>因为UDP不是面向连接的，所以接收端不用listen，也不用accept，只需要绑定到指定的端口和地址即可。<br><code>recvfrom</code>是同步的，会阻塞住等待数据的到来。如果要使用异步方式，可以使用<code>WSARecvFrom</code>结合ICOP的方式来实现。</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;WinSock2.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> comment(lib, <span class="string">"Ws2_32.lib"</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">RecvLogic</span><span class="params">()</span> </span>{</span><br><span class="line">	WSADATA wsaData;</span><br><span class="line">	WORD wVersionRequested = <span class="built_in">MAKEWORD</span>(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">	<span class="built_in">WSAStartup</span>(wVersionRequested, &amp;wsaData);</span><br><span class="line"></span><br><span class="line">	SOCKET socket = ::<span class="built_in">WSASocket</span>(AF_INET, SOCK_DGRAM, IPPROTO_UDP, <span class="literal">nullptr</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">	<span class="keyword">if</span> (socket == INVALID_SOCKET) {</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"WSASocket failed, error=%d\n"</span>, <span class="built_in">WSAGetLastError</span>());</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	sockaddr_in addr;</span><br><span class="line">	addr.sin_family = AF_INET;</span><br><span class="line">	addr.sin_port = <span class="built_in">htons</span>(<span class="number">6000</span>);  <span class="comment">// 端口</span></span><br><span class="line">	addr.sin_addr.s_addr = INADDR_ANY;  <span class="comment">// 任意IP地址</span></span><br><span class="line"></span><br><span class="line">	<span class="type">int</span> err = <span class="built_in">bind</span>(socket, <span class="built_in">reinterpret_cast</span>&lt;<span class="type">const</span> sockaddr*&gt;(&amp;addr), <span class="built_in">sizeof</span>(addr));</span><br><span class="line">	<span class="keyword">if</span> (err == SOCKET_ERROR) {</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"bind failed, error=%d\n"</span>, <span class="built_in">WSAGetLastError</span>());</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (<span class="literal">true</span>) { <span class="comment">// TODO：未考虑退出的情况</span></span><br><span class="line">		<span class="type">char</span> buf[<span class="number">100</span>] = { <span class="number">0</span> };</span><br><span class="line">		<span class="type">int</span> fromlen = <span class="built_in">sizeof</span>(addr);</span><br><span class="line">		err = <span class="built_in">recvfrom</span>(socket, buf, <span class="number">100</span>, <span class="number">0</span>, <span class="built_in">reinterpret_cast</span>&lt;sockaddr*&gt;(&amp;addr), &amp;fromlen);</span><br><span class="line">		<span class="keyword">if</span> (err == SOCKET_ERROR) {</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"recvfrom failed, error=%d\n"</span>, <span class="built_in">WSAGetLastError</span>());</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		}</span><br><span class="line"></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"[RECV] %s\n"</span>, buf);</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="built_in">WSACleanup</span>();</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="built_in">RecvLogic</span>();</span><br><span class="line"></span><br><span class="line">	<span class="built_in">getchar</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="5-2-广播"><a href="#5-2-广播" class="headerlink" title="5.2 广播"></a>5.2 广播</h3><p>广播是主机之间“一对所有”的通讯模式。子网的一台主机作为发送发广播一条信息，该子网中的所有主机都可以接收到该信息（不管你是否需要该信息）。<br>在广播模式下，由于服务器不用向每个客户机单独发送数据，所以服务器流量负载极低。<br>无法在广域网上进行广播，而且广播消息不会被路由转发，所以只能在一个子网中进行广播。因为如果路由器转发了广播信息，那么势必会引起网络瘫痪。这也是为什么IP协议的设计者故意没有定义互联网范围的广播机制。</p>
+<p>主机发送广播消息时，需要指定目的IP地址为<code>255.255.255.255</code>和接受者的端口号。</p>
+<p>UDP的广播和单播的不同在于发送端（接收端的实现和单播方式没有区别）的实现上：</p>
+<ol>
+<li>发送端将套接字配置为发送广播消息，使用<code>setsockopt</code>函数。</li>
+<li>发送地址更改为受限的广播地址<code>255.255.255.255</code>。</li>
+</ol>
+<blockquote>
+<p>需要说明的是广播地址不仅仅只有<code>255.255.255.255</code>一个。广播地址分为受限的广播、指向网络的广播、指向子网的广播、指向所有子网的网广播。<code>255.255.255.255</code>只是受限的广播地址。</p>
+</blockquote>
+<h4 id="5-2-1-广播发送端"><a href="#5-2-1-广播发送端" class="headerlink" title="5.2.1 广播发送端"></a>5.2.1 广播发送端</h4><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;WinSock2.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> comment(lib, <span class="string">"Ws2_32.lib"</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">SendLogic</span><span class="params">()</span> </span>{</span><br><span class="line">	WSADATA wsaData;</span><br><span class="line">	WORD wVersionRequested = <span class="built_in">MAKEWORD</span>(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">	<span class="built_in">WSAStartup</span>(wVersionRequested, &amp;wsaData);</span><br><span class="line"></span><br><span class="line">	SOCKET socket = ::<span class="built_in">WSASocket</span>(AF_INET, SOCK_DGRAM, IPPROTO_UDP, <span class="literal">nullptr</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">	<span class="keyword">if</span> (socket == INVALID_SOCKET) {</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"WSASocket failed, error=%d\n"</span>, <span class="built_in">WSAGetLastError</span>());</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 将套接字配置为发送广播消息</span></span><br><span class="line">	<span class="type">int</span> broadcast = <span class="number">1</span>;</span><br><span class="line">	<span class="type">int</span> err = <span class="built_in">setsockopt</span>(socket, SOL_SOCKET, SO_BROADCAST, <span class="built_in">reinterpret_cast</span>&lt;<span class="type">const</span> <span class="type">char</span>*&gt;(&amp;broadcast), <span class="built_in">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">	<span class="keyword">if</span> (err == SOCKET_ERROR) {</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"setsockopt failed, error=%d\n"</span>, <span class="built_in">WSAGetLastError</span>());</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	sockaddr_in addr;</span><br><span class="line">	addr.sin_family = AF_INET;</span><br><span class="line">	addr.sin_port = <span class="built_in">htons</span>(<span class="number">6000</span>);</span><br><span class="line">	addr.sin_addr.s_addr = INADDR_BROADCAST; <span class="comment">// 也可以换成inet_addr("255.255.255.255")</span></span><br><span class="line"></span><br><span class="line">	<span class="type">char</span> buf[<span class="number">100</span>] = { <span class="string">"hello"</span> };</span><br><span class="line">	err = <span class="built_in">sendto</span>(socket, buf, <span class="built_in">strlen</span>(buf), <span class="number">0</span>, <span class="built_in">reinterpret_cast</span>&lt;<span class="type">const</span> sockaddr*&gt;(&amp;addr), <span class="built_in">sizeof</span>(addr));</span><br><span class="line">	<span class="keyword">if</span> (err == SOCKET_ERROR) {</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"sendto failed, error=%d\n"</span>, <span class="built_in">WSAGetLastError</span>());</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"[BROADCAST] %s OK\n"</span>, buf);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">WSACleanup</span>();</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="built_in">SendLogic</span>();</span><br><span class="line"></span><br><span class="line">	<span class="built_in">getchar</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="5-2-2-广播接收端-和单播一样"><a href="#5-2-2-广播接收端-和单播一样" class="headerlink" title="5.2.2 广播接收端(和单播一样)"></a>5.2.2 广播接收端(和单播一样)</h4><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;WinSock2.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> comment(lib, <span class="string">"Ws2_32.lib"</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">RecvLogic</span><span class="params">()</span> </span>{</span><br><span class="line">	WSADATA wsaData;</span><br><span class="line">	WORD wVersionRequested = <span class="built_in">MAKEWORD</span>(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">	<span class="built_in">WSAStartup</span>(wVersionRequested, &amp;wsaData);</span><br><span class="line"></span><br><span class="line">	SOCKET socket = ::<span class="built_in">WSASocket</span>(AF_INET, SOCK_DGRAM, IPPROTO_UDP, <span class="literal">nullptr</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">	<span class="keyword">if</span> (socket == INVALID_SOCKET) {</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"WSASocket failed, error=%d\n"</span>, <span class="built_in">WSAGetLastError</span>());</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	sockaddr_in addr;</span><br><span class="line">	addr.sin_family = AF_INET;</span><br><span class="line">	addr.sin_port = <span class="built_in">htons</span>(<span class="number">6000</span>);</span><br><span class="line">	addr.sin_addr.s_addr = INADDR_ANY;</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span> err = <span class="built_in">bind</span>(socket, <span class="built_in">reinterpret_cast</span>&lt;<span class="type">const</span> sockaddr*&gt;(&amp;addr), <span class="built_in">sizeof</span>(addr));</span><br><span class="line">	<span class="keyword">if</span> (err == SOCKET_ERROR) {</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"bind failed, error=%d\n"</span>, <span class="built_in">WSAGetLastError</span>());</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (<span class="literal">true</span>) {</span><br><span class="line">		<span class="type">char</span> buf[<span class="number">100</span>] = { <span class="number">0</span> };</span><br><span class="line">		<span class="type">int</span> fromlen = <span class="built_in">sizeof</span>(addr);</span><br><span class="line">		err = <span class="built_in">recvfrom</span>(socket, buf, <span class="number">100</span>, <span class="number">0</span>, <span class="built_in">reinterpret_cast</span>&lt;sockaddr*&gt;(&amp;addr), &amp;fromlen);</span><br><span class="line">		<span class="keyword">if</span> (err == SOCKET_ERROR) {</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"recvfrom failed, error=%d\n"</span>, <span class="built_in">WSAGetLastError</span>());</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		}</span><br><span class="line"></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"[RECV] %s\n"</span>, buf);</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="built_in">WSACleanup</span>();</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="built_in">RecvLogic</span>();</span><br><span class="line"></span><br><span class="line">	<span class="built_in">getchar</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="5-3-组播"><a href="#5-3-组播" class="headerlink" title="5.3 组播"></a>5.3 组播</h3><p>组播是主机之间“一对多”的通讯模式。一台主机加入一个组播IP后，之后向该组播IP发送的数据报都会发送到该主机。<br>专门为组播划出了一个地址范围，在IPv4中为D类地址，范围是<code>224.0.0.0 ~ 239.255.255.255</code>，并将D类地址划分为局部链接组播地址、预留组播地址、管理权限组播地址如下：<br>局部链接地址：<code>224.0.0.0～224.0.0.255</code>，用于局域网，路由器不转发属于此范围的IP包。</p>
+<p>预留组播地址：<code>224.0.1.0～238.255.255.255</code>，用于全球范围或网络协议。</p>
+<p>管理权限地址：<code>239.0.0.0～239.255.255.255</code>，组织内部使用，用于限制组播范围。</p>
+<p>组播就是将数据发送到一组主机。接收端如果要接收消息，则需要加入到该分组，分组是用IP来标识的。<br>从<a href="/2021/03/12/wang-luo-xie-yi-3-ip-xie-yi/" title="网络协议(3)--IP协议">网络协议(3)--IP协议</a>可以知道，适用于分组的IP有<code>224.0.0.0 ~ 239.255.255.255</code>。<br>同样，发送端就需要将数据发送到该分组IP。</p>
+<h4 id="5-3-1-组播发送端"><a href="#5-3-1-组播发送端" class="headerlink" title="5.3.1 组播发送端"></a>5.3.1 组播发送端</h4><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;WinSock2.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> comment(lib, <span class="string">"Ws2_32.lib"</span>)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">SendLogic</span><span class="params">()</span> </span>{</span><br><span class="line">	WSADATA wsaData;</span><br><span class="line">	WORD wVersionRequested = <span class="built_in">MAKEWORD</span>(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">	<span class="built_in">WSAStartup</span>(wVersionRequested, &amp;wsaData);</span><br><span class="line"></span><br><span class="line">	SOCKET socket = ::<span class="built_in">WSASocket</span>(AF_INET, SOCK_DGRAM, IPPROTO_UDP, <span class="literal">nullptr</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">	<span class="keyword">if</span> (socket == INVALID_SOCKET) {</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"WSASocket failed, error=%d\n"</span>, <span class="built_in">WSAGetLastError</span>());</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 将套接字配置为发送广播消息</span></span><br><span class="line">	<span class="type">int</span> broadcast = <span class="number">1</span>;</span><br><span class="line">	<span class="type">int</span> err = <span class="built_in">setsockopt</span>(socket, SOL_SOCKET, SO_BROADCAST, <span class="built_in">reinterpret_cast</span>&lt;<span class="type">const</span> <span class="type">char</span>*&gt;(&amp;broadcast), <span class="built_in">sizeof</span>(<span class="type">int</span>));</span><br><span class="line">	<span class="keyword">if</span> (err == SOCKET_ERROR) {</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"setsockopt failed, error=%d\n"</span>, <span class="built_in">WSAGetLastError</span>());</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	sockaddr_in addr;</span><br><span class="line">	addr.sin_family = AF_INET;</span><br><span class="line">	addr.sin_port = <span class="built_in">htons</span>(<span class="number">6000</span>);</span><br><span class="line">	addr.sin_addr.s_addr = <span class="built_in">inet_addr</span>(<span class="string">"225.0.0.37"</span>); <span class="comment">// 向指定广播组发送消息</span></span><br><span class="line"></span><br><span class="line">	<span class="type">char</span> buf[<span class="number">100</span>] = { <span class="string">"hello"</span> };</span><br><span class="line">	err = <span class="built_in">sendto</span>(socket, buf, <span class="built_in">strlen</span>(buf), <span class="number">0</span>, <span class="built_in">reinterpret_cast</span>&lt;<span class="type">const</span> sockaddr*&gt;(&amp;addr), <span class="built_in">sizeof</span>(addr));</span><br><span class="line">	<span class="keyword">if</span> (err == SOCKET_ERROR) {</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"sendto failed, error=%d\n"</span>, <span class="built_in">WSAGetLastError</span>());</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"[BROADCAST] %s OK\n"</span>, buf);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">WSACleanup</span>();</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="built_in">SendLogic</span>();</span><br><span class="line"></span><br><span class="line">	<span class="built_in">getchar</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="5-3-2-组播接收端"><a href="#5-3-2-组播接收端" class="headerlink" title="5.3.2 组播接收端"></a>5.3.2 组播接收端</h4><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;WinSock2.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Ws2ipdef.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> comment(lib, <span class="string">"Ws2_32.lib"</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">RecvLogic</span><span class="params">()</span> </span>{</span><br><span class="line">	WSADATA wsaData;</span><br><span class="line">	WORD wVersionRequested = <span class="built_in">MAKEWORD</span>(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">	<span class="built_in">WSAStartup</span>(wVersionRequested, &amp;wsaData);</span><br><span class="line"></span><br><span class="line">	SOCKET socket = ::<span class="built_in">WSASocket</span>(AF_INET, SOCK_DGRAM, IPPROTO_UDP, <span class="literal">nullptr</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">	<span class="keyword">if</span> (socket == INVALID_SOCKET) {</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"WSASocket failed, error=%d\n"</span>, <span class="built_in">WSAGetLastError</span>());</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	sockaddr_in addr;</span><br><span class="line">	addr.sin_family = AF_INET;</span><br><span class="line">	addr.sin_port = <span class="built_in">htons</span>(<span class="number">6000</span>);</span><br><span class="line">	addr.sin_addr.s_addr = <span class="built_in">htonl</span>(INADDR_ANY);</span><br><span class="line"></span><br><span class="line">	<span class="type">int</span> err = <span class="built_in">bind</span>(socket, <span class="built_in">reinterpret_cast</span>&lt;<span class="type">const</span> sockaddr*&gt;(&amp;addr), <span class="built_in">sizeof</span>(addr));</span><br><span class="line">	<span class="keyword">if</span> (err == SOCKET_ERROR) {</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"bind failed, error=%d\n"</span>, <span class="built_in">WSAGetLastError</span>());</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 将SOCKET加入广播组</span></span><br><span class="line">	<span class="comment">//</span></span><br><span class="line">	<span class="keyword">struct</span> <span class="title class_">ip_mreq</span> mreq; <span class="comment">// 引入头文件&lt;Ws2ipdef.h&gt;</span></span><br><span class="line">	mreq.imr_multiaddr.s_addr = <span class="built_in">inet_addr</span>(<span class="string">"225.0.0.37"</span>);  <span class="comment">// 广播组地址</span></span><br><span class="line">	mreq.imr_interface.s_addr = <span class="built_in">htonl</span>(INADDR_ANY);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 注：使用IP_DROP_MEMBERSHIP可以离开广播组</span></span><br><span class="line">	err = <span class="built_in">setsockopt</span>(socket, IPPROTO_IP, IP_ADD_MEMBERSHIP, <span class="built_in">reinterpret_cast</span>&lt;<span class="type">const</span> <span class="type">char</span>*&gt;(&amp;mreq), <span class="built_in">sizeof</span>(ip_mreq));</span><br><span class="line">	<span class="keyword">if</span> (err == SOCKET_ERROR) {</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"setsockopt failed, error=%d\n"</span>, <span class="built_in">WSAGetLastError</span>());</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (<span class="literal">true</span>) {</span><br><span class="line">		<span class="type">char</span> buf[<span class="number">100</span>] = { <span class="number">0</span> };</span><br><span class="line">		<span class="type">int</span> fromlen = <span class="built_in">sizeof</span>(addr);</span><br><span class="line">		err = <span class="built_in">recvfrom</span>(socket, buf, <span class="number">100</span>, <span class="number">0</span>, <span class="built_in">reinterpret_cast</span>&lt;sockaddr*&gt;(&amp;addr), &amp;fromlen);</span><br><span class="line">		<span class="keyword">if</span> (err == SOCKET_ERROR) {</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"recvfrom failed, error=%d\n"</span>, <span class="built_in">WSAGetLastError</span>());</span><br><span class="line">			<span class="keyword">return</span>;</span><br><span class="line">		}</span><br><span class="line"></span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"[RECV] %s\n"</span>, buf);</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="built_in">WSACleanup</span>();</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">	<span class="built_in">RecvLogic</span>();</span><br><span class="line"></span><br><span class="line">	<span class="built_in">getchar</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+
+<blockquote>
+<p>《TCP/IP详解 卷1：协议》在线阅读地址：<a target="_blank" rel="noopener" href="http://www.52im.net/topic-tcpipvol1.html">http://www.52im.net/topic-tcpipvol1.html</a></p>
+</blockquote>
+<blockquote>
+<p>文章图片带有“CSDN”水印的说明：<br>由于该文章和图片最初发表在我的<a target="_blank" rel="noopener" href="https://blog.csdn.net/china_jeffery">CSDN博客</a>中，因此图片被CSDN自动添加了水印。</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>jiangxueqiao
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://jiangxueqiao.com/2021/03/13/wang-luo-xie-yi-5-udp-xie-yi/" title="网络协议(5)--UDP协议">https://jiangxueqiao.com/2021/03/13/wang-luo-xie-yi-5-udp-xie-yi/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/UDP/" rel="tag"># UDP</a>
+              <a href="/tags/%E5%8D%95%E6%92%AD/" rel="tag"># 单播</a>
+              <a href="/tags/%E5%A4%9A%E6%92%AD/" rel="tag"># 多播</a>
+              <a href="/tags/%E5%B9%BF%E6%92%AD/" rel="tag"># 广播</a>
+              <a href="/tags/%E7%BB%84%E6%92%AD/" rel="tag"># 组播</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/03/12/wang-luo-xie-yi-4-icmp-xie-yi/" rel="prev" title="网络协议(4)--ICMP协议">
+                  <i class="fa fa-chevron-left"></i> 网络协议(4)--ICMP协议
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/03/14/wang-luo-xie-yi-6-tcp-xie-yi/" rel="next" title="网络协议(6)--TCP协议">
+                  网络协议(6)--TCP协议 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">鄂ICP备2020015399号-5 </a>
+  </div>
+  <div class="copyright">
+    &copy; 2021 – 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">jiangxueqiao</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+
+</body>
+</html>

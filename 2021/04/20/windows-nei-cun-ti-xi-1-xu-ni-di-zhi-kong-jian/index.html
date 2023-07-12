@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="baidu-site-verification" content="codeva-RtI1N7UTHz">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-center-atom.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"jiangxueqiao.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"width":320},"copycode":{"enable":true,"style":"flat"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":true,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta property="og:type" content="article">
+<meta property="og:title" content="Windows内存体系(1)--虚拟地址空间">
+<meta property="og:url" content="https://jiangxueqiao.com/2021/04/20/windows-nei-cun-ti-xi-1-xu-ni-di-zhi-kong-jian/index.html">
+<meta property="og:site_name" content="Jeffery&#39;s Site">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://static.1key.run/blog/img/windows-nctx-1.jpg">
+<meta property="og:image" content="https://static.1key.run/blog/img/windows-nctx-2.jpg">
+<meta property="article:published_time" content="2021-04-20T02:43:08.000Z">
+<meta property="article:modified_time" content="2023-07-12T09:54:11.841Z">
+<meta property="article:author" content="jiangxueqiao">
+<meta property="article:tag" content="实模式">
+<meta property="article:tag" content="虚拟地址">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://static.1key.run/blog/img/windows-nctx-1.jpg">
+
+
+<link rel="canonical" href="https://jiangxueqiao.com/2021/04/20/windows-nei-cun-ti-xi-1-xu-ni-di-zhi-kong-jian/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jiangxueqiao.com/2021/04/20/windows-nei-cun-ti-xi-1-xu-ni-di-zhi-kong-jian/","path":"2021/04/20/windows-nei-cun-ti-xi-1-xu-ni-di-zhi-kong-jian/","title":"Windows内存体系(1)--虚拟地址空间"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Windows内存体系(1)--虚拟地址空间 | Jeffery's Site</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Jeffery's Site</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">93</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">16</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">64</span></a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%AE%9E%E6%A8%A1%E5%BC%8F%E4%B8%8B%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E6%9C%BA%E5%88%B6"><span class="nav-text">一、实模式下内存分配机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4%E4%BB%8B%E7%BB%8D"><span class="nav-text">二、虚拟地址空间介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E7%A9%BA%E6%8C%87%E9%92%88%E8%B5%8B%E5%80%BC%E5%88%86%E5%8C%BA"><span class="nav-text">3.1 空指针赋值分区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E7%94%A8%E6%88%B7%E6%A8%A1%E5%BC%8F%E5%88%86%E5%8C%BA"><span class="nav-text">3.2 用户模式分区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E5%86%85%E6%A0%B8%E6%A8%A1%E5%BC%8F%E5%88%86%E5%8C%BA"><span class="nav-text">3.3 内核模式分区</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-text">四、虚拟地址空间的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E9%A1%B5%E9%9D%A2%E5%A4%A7%E5%B0%8F"><span class="nav-text">4.1 页面大小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-%E5%88%86%E9%85%8D%E7%B2%92%E5%BA%A6"><span class="nav-text">4.2 分配粒度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-%E9%A2%84%E5%AE%9A%E5%92%8C%E8%B0%83%E6%8B%A8"><span class="nav-text">4.3 预定和调拨</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">jiangxueqiao</p>
+  <div class="site-description" itemprop="description">不是看到希望才坚持，而是坚持才会看到希望</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">64</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/winsoft666" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;winsoft666" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:smart7178@163.com" title="E-Mail → mailto:smart7178@163.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+        <div class="back-to-top animated" role="button" aria-label="返回顶部">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jiangxueqiao.com/2021/04/20/windows-nei-cun-ti-xi-1-xu-ni-di-zhi-kong-jian/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jiangxueqiao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jeffery's Site">
+      <meta itemprop="description" content="不是看到希望才坚持，而是坚持才会看到希望">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Windows内存体系(1)--虚拟地址空间 | Jeffery's Site">
+      <meta itemprop="description" content=" ">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Windows内存体系(1)--虚拟地址空间
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-04-20 10:43:08" itemprop="dateCreated datePublished" datetime="2021-04-20T10:43:08+08:00">2021-04-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-07-12 17:54:11" itemprop="dateModified" datetime="2023-07-12T17:54:11+08:00">2023-07-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Windows%E5%86%85%E5%AD%98%E4%BD%93%E7%B3%BB/" itemprop="url" rel="index"><span itemprop="name">Windows内存体系</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+            <div class="post-description"> </div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="一、实模式下内存分配机制"><a href="#一、实模式下内存分配机制" class="headerlink" title="一、实模式下内存分配机制"></a>一、实模式下内存分配机制</h2><p>在8086或者80186以前，程序运行时，操作系统会把程序全都装入内存，程序都是直接运行在物理内存上的。也就是说程序中访问的内存地址都是实际的物理内存地址。当计算机同时运行多个程序时，必须保证这些程序用到的内存总量要小于计算机实际物理内存的大小。</p>
+<p>例如某台计算机总的内存大小是<code>128M</code> ，现在同时运行两个程序 A和B ，A需占用内存<code>10M</code> ， B需占用内存<code>110M</code> 。计算机在给程序分配内存时会采取这样的方法：先将内存中的前<code>10M</code>分配给程序 A ，接着再从内存中剩余的<code>118M</code>中划分出 <code>110M</code>分配给程序B 。这种分配方法虽然可以保证程序A和程序B都能运行，但是这种简单的内存分配策略会导致很多问题：</p>
+<ul>
+<li><p>问题 1 ：进程地址空间不隔离。由于程序都是直接访问物理内存，所以恶意程序可以随意修改别的进程的内存数据，以达到破坏的目的。有些非恶意但有bug的程序也可能不小心修改了其它程序的内存数据，就会导致其它程序的运行出现异常。这种情况对用户来说是无法容忍的，因为用户希望使用计算机的时候，其中一个任务失败了，不能影响其它的任务。</p>
+</li>
+<li><p>问题 2 ：内存使用效率低。在 A 和 B 都运行的情况下，如果用户又运行了程序 C ，而程序 C 需要 20M 大小的内存才能运行，而此时系统只剩下 8M 的空间可供使用，所以此时系统必须在已运行的程序中选择一个将该程序的数据暂时拷贝到硬盘上，释放出部分空间来供程序 C 使用，然后再将程序 C 的数据全部装入内存中运行。可以想象得到，在这个过程中，有大量的数据在装入装出，导致效率十分低下。</p>
+</li>
+<li><p>问题 3 ：程序运行的地址不确定。当内存中的剩余空间可以满足程序 C 的要求后，操作系统会在剩余空间中随机分配一段连续的 20M 大小的空间给程序 C 使用，因为是随机分配的，所以程序运行的地址是不确定的。</p>
+</li>
+</ul>
+<hr>
+<h2 id="二、虚拟地址空间介绍"><a href="#二、虚拟地址空间介绍" class="headerlink" title="二、虚拟地址空间介绍"></a>二、虚拟地址空间介绍</h2><p>操作系统让每个进程都有自己的虚拟地址空间（<code>Virtual Address Space</code>，简称<code>VAS</code>）。以32位进程为例，每个进程都有<code>0x00000000 ~ 0xFFFFFFFF</code>(4GB)的虚拟地址空间，所以每个进程都可能分配到<code>0x123456</code>地址的内存，但这个地址不能在进程间相互访问。 </p>
+<p>因为这些都是“虚拟”的地址空间，这些“地址”都不能直接使用，CPU在寻址的时候虽然是按照虚拟地址来寻址的，但是还要通过<code>MMU</code>(内存管理单元)来将虚拟地址转换为物理存储器（如内存等）上的物理地址：</p>
+<p><img data-src="https://static.1key.run/blog/img/windows-nctx-1.jpg"></p>
+<p>从图上可以看出，进程A和B虽然都有地址<code>0x123456</code>，但它们分别对应的物理地址不一样。</p>
+<hr>
+<p>##三、虚拟地址空间分区<br>进程的虚拟地址空间虽然很大，但是它被划分成了很多分区，供Ring3层应用程序使用的用户模式分区并不大（一半不到），如图：<br><img data-src="https://static.1key.run/blog/img/windows-nctx-2.jpg"></p>
+<h3 id="3-1-空指针赋值分区"><a href="#3-1-空指针赋值分区" class="headerlink" title="3.1 空指针赋值分区"></a>3.1 空指针赋值分区</h3><p>这一分区的进程地址空间的范围为：[<code>0x00000000</code>, <code>0x0000FFFF</code>]，总大小为<code>64K</code>，保留该分区的目的是为了帮助应用程序员捕获对空指针的赋值。如<code>malloc</code>分配内存失败，就会返回<code>NULL</code>。</p>
+<p>如果进程中的线程试图访问该分区内的内存地址，就会引发访问违规。</p>
+<h3 id="3-2-用户模式分区"><a href="#3-2-用户模式分区" class="headerlink" title="3.2 用户模式分区"></a>3.2 用户模式分区</h3><p>在Windows中，所有的exe和动态链接库都载入到这一区域。系统同时会把该进程可以访问的所有内存映射文件（后面会介绍）映射到这一分区。</p>
+<p>进程无法通过指针来读取、写入、访问其他进程的这一分区，因此一个应用程序破坏另一个应用程序的可能性就非常小了，从而使整个系统更加坚固。</p>
+<h3 id="3-3-内核模式分区"><a href="#3-3-内核模式分区" class="headerlink" title="3.3 内核模式分区"></a>3.3 内核模式分区</h3><p>内核模式分区是操作系统代码的驻地。与线程调度、内存管理、文件系统支持、网络支持以及设备驱动程序相关的代码都会载入到这一分区。该分区内的代码和数据被完全的保护起来了，如果一个应用程序试图读取或写入位于这一分区的内存地址，会引发访问违规。</p>
+<p>驻留在这一分区内的代码为所有进程共有。</p>
+<h2 id="四、虚拟地址空间的使用"><a href="#四、虚拟地址空间的使用" class="headerlink" title="四、虚拟地址空间的使用"></a>四、虚拟地址空间的使用</h2><p>虚拟地址空间的使用涉及到3个概念：<code>页面大小</code>、<code>分配粒度</code>、<code>预定和调拨</code>。</p>
+<h3 id="4-1-页面大小"><a href="#4-1-页面大小" class="headerlink" title="4.1 页面大小"></a>4.1 页面大小</h3><p>虚拟地址空间被分成以<code>“页面”</code>为单位，因为硬件内存管理单元是以<code>页面</code>为粒度将虚拟地址转译成物理地址的。<code>页面</code>的大小根据不同的CPU不而有所不同。x86和x64系统使用的<code>页面</code>大小都是<code>4KB</code>，而IA-64系统使用的<code>页面</code>大小是<code>8KB</code>。</p>
+<blockquote>
+<p>IA-64操作系统只能在INTEL安腾系列处理器及AMD部分服务器处理器运行，所以主流市场并不常见</p>
+</blockquote>
+<p>当<strong>应用程序</strong>在虚拟地址空间分配空间时，系统需要确保分配区域的大小正好是系统<code>页面</code>大小的整数倍。</p>
+<h3 id="4-2-分配粒度"><a href="#4-2-分配粒度" class="headerlink" title="4.2 分配粒度"></a>4.2 分配粒度</h3><p>当<strong>应用程序</strong>在从虚拟地址空间分配空间时，系统会确保所有分配区域的起始地址都是<code>分配粒度</code>的整数倍。<code>分配粒度</code>的会根据不同的CPU平台而有所不同，但目前所有的CPU平台的分配粒度都是使用<code>64KB</code>。也就是说，<code>分配的起始地址 = 64 * N</code>。</p>
+<p>通过Windows的<code>GetSystemInfo</code>函数也可以获得此分配粒度值。</p>
+<blockquote>
+<p>上面所说的<code>分配粒度</code>和<code>页面大小</code>的限制，只是针对于<code>“应用程序”</code>，系统内核自己不存在这样的限制。</p>
+</blockquote>
+<h3 id="4-3-预定和调拨"><a href="#4-3-预定和调拨" class="headerlink" title="4.3 预定和调拨"></a>4.3 预定和调拨</h3><p>虚拟地址空间的使用分为2个步骤：</p>
+<ol>
+<li><p>预定（reserve）：告诉系统我们要从虚拟地址空间<code>预定</code>哪一块区域，系统为我们保留这一块区域。预定的局域的起始地址和大小遵循上面介绍的<code>分配粒度</code>和<code>页面大小</code>的要求。因为预定的只是虚拟地址空间，不占用任何其他物理存储器，所以没有形成实质的开销。</p>
+</li>
+<li><p>调拨（commit）：预定的区域还不能使用，我们还需要为<code>预定</code>的区域从<code>页交换文件</code>中<code>调拨</code>存储器，<code>调拨</code>之后我们才能使用该区域。<br>至于为什么要从<code>页交换文件</code>中调拨存储器？ <code>页交换文件</code>如何与物理内存之间交互？在下一篇文章<a href="/2021/04/21/windows-nei-cun-ti-xi-2-xu-ni-nei-cun/" title="Windows内存体系(2)--虚拟内存">Windows内存体系(2)--虚拟内存</a>中会详细介绍。</p>
+</li>
+</ol>
+<blockquote>
+<p>文章图片带有“CSDN”水印的说明：<br>由于该文章和图片最初发表在我的<a target="_blank" rel="noopener" href="https://blog.csdn.net/china_jeffery">CSDN博客</a>中，因此图片被CSDN自动添加了水印。</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>jiangxueqiao
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://jiangxueqiao.com/2021/04/20/windows-nei-cun-ti-xi-1-xu-ni-di-zhi-kong-jian/" title="Windows内存体系(1)--虚拟地址空间">https://jiangxueqiao.com/2021/04/20/windows-nei-cun-ti-xi-1-xu-ni-di-zhi-kong-jian/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E5%AE%9E%E6%A8%A1%E5%BC%8F/" rel="tag"># 实模式</a>
+              <a href="/tags/%E8%99%9A%E6%8B%9F%E5%9C%B0%E5%9D%80/" rel="tag"># 虚拟地址</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/03/16/wang-luo-xie-yi-zhuan-lan/" rel="prev" title="《网络协议》专栏">
+                  <i class="fa fa-chevron-left"></i> 《网络协议》专栏
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/04/21/windows-nei-cun-ti-xi-3-nei-cun-ying-she-wen-jian/" rel="next" title="Windows内存体系(3)--内存映射文件">
+                  Windows内存体系(3)--内存映射文件 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">鄂ICP备2020015399号-5 </a>
+  </div>
+  <div class="copyright">
+    &copy; 2021 – 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">jiangxueqiao</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+
+</body>
+</html>
