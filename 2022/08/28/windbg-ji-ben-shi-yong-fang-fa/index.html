@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-200x200-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/favicon-200x200-next.png" color="#222">
+  <meta name="baidu-site-verification" content="codeva-RtI1N7UTHz">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Segoe+UI:300,300italic,400,400italic,700,700italic%7CTahoma:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-big-counter.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"jiangxueqiao.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"width":320},"copycode":{"enable":true,"style":"flat"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":null,"post_block":null,"post_header":null,"post_body":null,"coll_header":null,"sidebar":null}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":true,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Windbg是Microsoft公司推出的免费的、带GUI的调试器，支持Source和Assembly两种模式的调试。Windbg不仅可以调试应用程序，还可以进行系统内核调试。Windbg支持的平台包括X86、IA64、AMD64。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windbg基本使用方法">
+<meta property="og:url" content="https://jiangxueqiao.com/2022/08/28/windbg-ji-ben-shi-yong-fang-fa/index.html">
+<meta property="og:site_name" content="Jiang&#39;s Blog">
+<meta property="og:description" content="Windbg是Microsoft公司推出的免费的、带GUI的调试器，支持Source和Assembly两种模式的调试。Windbg不仅可以调试应用程序，还可以进行系统内核调试。Windbg支持的平台包括X86、IA64、AMD64。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-08-28T06:39:49.000Z">
+<meta property="article:modified_time" content="2023-07-13T10:23:43.128Z">
+<meta property="article:author" content="JiangXueQiao">
+<meta property="article:tag" content="Windbg">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://jiangxueqiao.com/2022/08/28/windbg-ji-ben-shi-yong-fang-fa/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jiangxueqiao.com/2022/08/28/windbg-ji-ben-shi-yong-fang-fa/","path":"2022/08/28/windbg-ji-ben-shi-yong-fang-fa/","title":"Windbg基本使用方法"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Windbg基本使用方法 | Jiang's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Jiang's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">江雪桥博客-专注软件开发-涉足客户端、服务端等领域</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">93</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">16</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">64</span></a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%AE%89%E8%A3%85"><span class="nav-text">一、安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E9%85%8D%E7%BD%AE"><span class="nav-text">二、配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%BC%80%E5%A7%8B%E8%B0%83%E8%AF%95"><span class="nav-text">三、开始调试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4"><span class="nav-text">四、工作空间</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E7%AA%97%E5%8F%A3%E7%95%8C%E9%9D%A2%E4%BB%8B%E7%BB%8D"><span class="nav-text">五、窗口界面介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-text">六、常用命令</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%83%E3%80%81%E5%B8%B8%E7%94%A8%E8%B0%83%E8%AF%95%E6%96%B9%E6%B3%95"><span class="nav-text">七、常用调试方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#7-1%E3%80%81%E9%99%84%E5%8A%A0%E8%BF%9B%E7%A8%8B%E8%B0%83%E8%AF%95"><span class="nav-text">7.1、附加进程调试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-2%E3%80%81%E5%90%AF%E5%8A%A8%E8%B0%83%E8%AF%95%E6%96%B0%E8%BF%9B%E7%A8%8B"><span class="nav-text">7.2、启动调试新进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-3%E3%80%81%E8%B0%83%E8%AF%95%E8%BD%AC%E5%82%A8%E6%96%87%E4%BB%B6"><span class="nav-text">7.3、调试转储文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-4%E3%80%81%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95"><span class="nav-text">7.4、远程调试</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="JiangXueQiao"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">JiangXueQiao</p>
+  <div class="site-description" itemprop="description">All things are difficult before they are easy.</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">64</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">93</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/winsoft666" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;winsoft666" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:smart7178@163.com" title="E-Mail → mailto:smart7178@163.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          链接
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://1key.run/" title="https:&#x2F;&#x2F;1key.run" rel="noopener" target="_blank">1key.run</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jiangxueqiao.com/2022/08/28/windbg-ji-ben-shi-yong-fang-fa/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="JiangXueQiao">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Jiang's Blog">
+      <meta itemprop="description" content="All things are difficult before they are easy.">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Windbg基本使用方法 | Jiang's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Windbg基本使用方法
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-08-28 14:39:49" itemprop="dateCreated datePublished" datetime="2022-08-28T14:39:49+08:00">2022-08-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-07-13 18:23:43" itemprop="dateModified" datetime="2023-07-13T18:23:43+08:00">2023-07-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%BD%AF%E4%BB%B6%E8%B0%83%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">软件调试</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>Windbg是Microsoft公司推出的免费的、带GUI的调试器，支持Source和Assembly两种模式的调试。Windbg不仅可以调试应用程序，还可以进行系统内核调试。Windbg支持的平台包括X86、IA64、AMD64。</p>
+<span id="more"></span>
+
+<h2 id="一、安装"><a href="#一、安装" class="headerlink" title="一、安装"></a>一、安装</h2><p>从下面的链接或其他链接下载安装：<br><a target="_blank" rel="noopener" href="https://developer.microsoft.com/en-us/windows/hardware/download-windbg">Download Debugging tools for Windows</a></p>
+<h2 id="二、配置"><a href="#二、配置" class="headerlink" title="二、配置"></a>二、配置</h2><p>常用的配置包含符号文件搜索路径、可执行文件搜索路径、源码文件搜索路径配置。</p>
+<ul>
+<li><p>符号文件搜索路径配置（Symbol File Path）<br>在菜单项<code>File-&gt; Symbol File Path</code>中设置，如<code>D:\symbol_path;SRV*D:\symbolslocal*http://msdl.microsoft.com/download/symbols</code>意思是先从<code>D:\symbol_path</code>中找符号文件；如果没找到，就去服务器中下载并保存到<code>D:\symbolslocal</code>目录中。<br>可以使用<code>.sympath+ </code>命令来添加其他目录到搜索路径中，如<code>.sympath+ D:\other_symbol_dir</code>。 然后使用<code>.reload</code>来根据新的路径重新搜索并加载符号文件。</p>
+</li>
+<li><p>Image File Path配置<br>此项是在加载dump时，设置可执行文件exe、dll的路径的。</p>
+</li>
+<li><p>Source File Path配置<br>设置源代码目录。如果当前指令指针在源代码范围内，就会自动跳出源文件窗口。源文件窗口中的操作和vs类似。如果没有跳出，可以单机菜单项Open Source File手动选择源文件</p>
+</li>
+<li><p>启动命令<br>可以使用对windbg加入启动参数，通过启动参数指定符号文件路径和源码路径等等。</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">start <span class="string">""</span> <span class="string">"%~dp0/Debuggers_x86/windbg.exe"</span> -Q -y <span class="string">"D:\symbolslocal*http://msdl.microsoft.com/download/symbols"</span> -srcpath <span class="string">"srv*C:\CodeCache"</span></span><br></pre></td></tr></tbody></table></figure></li>
+</ul>
+<h2 id="三、开始调试"><a href="#三、开始调试" class="headerlink" title="三、开始调试"></a>三、开始调试</h2><p>可以通过菜单项<code>File -&gt; Open Executable</code>来加载本地的一个exe来进行调试，也可以通过菜单项<code>File -&gt; Attache to a Process</code>来加载一个已经运行的exe来进行调试。 </p>
+<p>具体调试指令可以参考：<br><code>Help -&gt; Contents -&gt; Debugging Tools for Windows -&gt; Debuggers -&gt; Debugger Reference</code></p>
+<h2 id="四、工作空间"><a href="#四、工作空间" class="headerlink" title="四、工作空间"></a>四、工作空间</h2><p>Windbg会保存每个你调试的工程的信息，这些信息包括调试项目的属性、参数、会话状态、调试器设置、及图形界面信息，类似于ide的项目文件。<br>每个调试的工作空间信息默认保存在<br><code>HKEY_CURRENT_USER\Software\Microsoft\Windbg\Workspaces</code>中，在这个键下一般有4个子键User、Kernel、Dump、Explicit, 他们分别保存用户态调试，内核态调试、转储文件调试、以及手动保存（Save Workspace As）的工作空间信息。</p>
+<h1 id="五、窗口界面介绍"><a href="#五、窗口界面介绍" class="headerlink" title="五、窗口界面介绍"></a>五、窗口界面介绍</h1><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>热键</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Command</td>
+<td>Atl+1</td>
+<td>输入命令、显示命令结果和调试信息输出</td>
+</tr>
+<tr>
+<td>Watch</td>
+<td>Atl+2</td>
+<td>观察指令全局变量、局部变量和寄存器的信息</td>
+</tr>
+<tr>
+<td>Locals</td>
+<td>Atl+3</td>
+<td>自动显示当前函数的所有局部变量</td>
+</tr>
+<tr>
+<td>Registers</td>
+<td>Atl+4</td>
+<td>观察和修改寄存器的值</td>
+</tr>
+<tr>
+<td>Memory</td>
+<td>Atl+5</td>
+<td>观察和修改内存数据</td>
+</tr>
+<tr>
+<td>Call Stack</td>
+<td>Atl+6</td>
+<td>栈中记录的函数调用序列</td>
+</tr>
+<tr>
+<td>Disassembly</td>
+<td>Atl+7</td>
+<td>反汇编</td>
+</tr>
+<tr>
+<td>Scratch Pad</td>
+<td>Atl+8</td>
+<td>白板，可以用来做调试笔记等</td>
+</tr>
+<tr>
+<td>Processes and Threads</td>
+<td>Atl+9</td>
+<td>显示所有调试目标的列表，包括进程和线程等</td>
+</tr>
+<tr>
+<td>Command Browser</td>
+<td>Ctrl+N</td>
+<td>执行和浏览命令</td>
+</tr>
+</tbody></table>
+<h1 id="六、常用命令"><a href="#六、常用命令" class="headerlink" title="六、常用命令"></a>六、常用命令</h1><p>windbg命令分为<code>标准命令</code>，<code>元命令</code>和<code>扩展命令</code>。<br>以<code>.</code>开头的元命令提供标准命令没有提供的功能，也内建在调试引擎中。<br>以<code>!</code>开头的扩展命令用于扩展某一方面的调试功能，实现在动态加载的扩展模块中。</p>
+<figure class="highlight txt"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">tab键       自动完成命令</span><br><span class="line">.hh         查看指定命令的帮助手册</span><br><span class="line">.reload     重新加载符号文件 </span><br><span class="line">.restart    重新启动调试目标 </span><br><span class="line"></span><br><span class="line">bp $exentry 在程序入口点设置断点，$exentry是一个伪寄存器 </span><br><span class="line">bp 0x00401030              在地址0x00401030处设置断点 </span><br><span class="line">bp MyTestModule!MyTestFunc 在MyTestModule模块中的MyTestFunc函数处设置断点，前提是该模块符号已经加载 </span><br><span class="line">bp MyTestModule!MyTestClass::SetValue        在模块MyTestModule的MyTestClass类成员函数SetValue处设置断点 </span><br><span class="line">bp @@C++(MyTestModule!MyTestClass::SetValue) 与上面一样，语法不同，C++语法，上面的为MASM语法 </span><br><span class="line">bl 查看设置的断点 </span><br><span class="line">be 激活断点 </span><br><span class="line">bd 禁用断点 </span><br><span class="line">bc 删除某个断点 </span><br><span class="line">ba              设置访问断点 </span><br><span class="line">ba r 1 0044108c 在内存0044108c的位置开始的下一个字节的读断点 </span><br><span class="line">ba w4@@C++(&amp;i)  给变量i地址下4个字节的写断点 </span><br><span class="line"></span><br><span class="line">g               运行程序，相当于F5 </span><br><span class="line">gu              返回函数调用处，相当于shift+F11 </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">u               查看当前正要执行的代码 </span><br><span class="line">k               查看当前调用堆栈 </span><br><span class="line">~*kb	        显示所有进程调用堆栈</span><br><span class="line"></span><br><span class="line">~           查看调试进程中的线程信息 </span><br><span class="line">!teb        线程环境块</span><br><span class="line">~.          当前线程信息</span><br><span class="line">~#          导致当前异常或调试事件的线程信息</span><br><span class="line">~[Number]s  线程切换</span><br><span class="line"></span><br><span class="line">a                                修改当前指令，输入修改的指令按Enter结束 </span><br><span class="line">s –a 00400000 L53000 “Wrong”     以ASCII码的形式从00400000处开始往后53000个字节搜索字符串“Wrong” </span><br><span class="line">db 400000       以二进制的方式显示内存地位为400000开始的内容 </span><br><span class="line">dd 400000       以DWORD类型查看 </span><br><span class="line">d               按上一次的d命令的方式来显示，如果不带参数，则从上一次显示结束的地方继续显示 </span><br><span class="line">?i              查看局部变量i的值，会以10进制和16进制同时显示 </span><br><span class="line">eb 0012ff78 'a' 'b'      从内存地址0012ff78开始依次写入后面的值 </span><br><span class="line">r                        用于查看或者修改寄存器或伪寄存器 </span><br><span class="line">r $peb                   $peb是一个伪寄存器，调试器将它定义为当前进程的进程环境块地址 </span><br><span class="line">dt                       用于查看结构体内容 </span><br><span class="line">!address 400000          查看指定内存地址的信息 </span><br><span class="line">dv                       查看当前作用域下局部变量的类型和值</span><br><span class="line"></span><br><span class="line">.ecxr	                 当前异常的上下文信息</span><br><span class="line">!analyze -v              详细显示当前异常信息，常用于分析dmp文件</span><br><span class="line"></span><br><span class="line">|             所有进程列表</span><br><span class="line">|.	          当前进程信息</span><br><span class="line">|#	          导致当前异常或调试事件的进程信息</span><br><span class="line">|[Number]s	  进程切换</span><br><span class="line">!peb	      进程环境块</span><br><span class="line"></span><br><span class="line">!locks              查看进程中有些锁处于锁定状态</span><br><span class="line">!cs -l              查看处于锁定状态的关键区</span><br><span class="line">!handle 000000c0 f  查看句柄000000c0的信息</span><br></pre></td></tr></tbody></table></figure>
+
+<h1 id="七、常用调试方法"><a href="#七、常用调试方法" class="headerlink" title="七、常用调试方法"></a>七、常用调试方法</h1><h2 id="7-1、附加进程调试"><a href="#7-1、附加进程调试" class="headerlink" title="7.1、附加进程调试"></a>7.1、附加进程调试</h2><p>使用File菜单中的Attach to a Process选项来选择要附加调试的进程.</p>
+<h2 id="7-2、启动调试新进程"><a href="#7-2、启动调试新进程" class="headerlink" title="7.2、启动调试新进程"></a>7.2、启动调试新进程</h2><ol>
+<li>使用菜单<code>File-&gt; Open Executable</code>选项来选择要启动调试的进程。</li>
+<li>启动windbg时将待调试的程序的文件路径作为参数传递给windbg。</li>
+<li>在注册表<code>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Image File Execution Options</code>下新建一个以程序名命名的子项，然后在这个子项中新建一个名为<code>Debugger</code>的<code>REG_SZ</code>类型的值，将值设置为windbg的全路径，比如C:\Program Files (x86)\Windows Kits\8.1\Debuggers\x86\windbg.exe。这样，再运行待调试的程序时，操作系统就会先启动windbg，并把要调试程序的路径传递给他。</li>
+</ol>
+<h2 id="7-3、调试转储文件"><a href="#7-3、调试转储文件" class="headerlink" title="7.3、调试转储文件"></a>7.3、调试转储文件</h2><p>使用File菜单中的Open Crash Dump选项来加载dump文件。</p>
+<h2 id="7-4、远程调试"><a href="#7-4、远程调试" class="headerlink" title="7.4、远程调试"></a>7.4、远程调试</h2><p>服务器（被调试程序的机器）和客户端（发出远程请求的机器）都应该安装版本相同的windbg，应该有网络连接或者串行口连接。 </p>
+<ul>
+<li><p>以tcp端口方式：<br>以命令行的方式启动服务器中的windbg，如：windbg.exe -server tcp:port=5005<br>以命令行的方式启动客户端中的windbg，如：windbg.exe -remote tcp:port=5005,server=192.168.1.180</p>
+</li>
+<li><p>以管道方式：<br>以命令行的方式启动服务器中的windbg，如：windbg -server npipe:pipe=advdbg （adbdbg为命名管道名称）。<br>在客户端中以命令行的方式启动windbg，如：windbg -remote npipe:server=REMOTEHOSTNAME,pipe=advdbg （REMOTEHOSTNAME为远程主机名，dbvdbg为远程主机创建的命名管道名，也可以选择File菜单中的Connect to Remote Session,在弹出来的编辑框中输入远程参数npipe:server=REMOTEHOSTNAME,pipe=advdbg）</p>
+</li>
+</ul>
+<p>成功连接后，命令行信息区会显示类似如下信息：<br>…(npipe advdbg) connected at Thu Jul 11 14:22:02 2017<br>之后可以在客户端或者服务器的windbg中执行各种调试命令，执行结果会同时显示在两个调试器中。</p>
+<p>其它的远程调试方案，可以参考:<br><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/remode-debugging-using-windbg">https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/remode-debugging-using-windbg</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>JiangXueQiao
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://jiangxueqiao.com/2022/08/28/windbg-ji-ben-shi-yong-fang-fa/" title="Windbg基本使用方法">https://jiangxueqiao.com/2022/08/28/windbg-ji-ben-shi-yong-fang-fa/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Windbg/" rel="tag"><i class="fa fa-tag"></i> Windbg</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/07/30/shen-ru-li-jie-c-xu-han-shu/" rel="prev" title="深入理解C++虚函数">
+                  <i class="fa fa-chevron-left"></i> 深入理解C++虚函数
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/09/25/yi-chu-qt-kong-jian-xu-xian-kuang/" rel="next" title="移除Qt控件虚线框">
+                  移除Qt控件虚线框 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">鄂ICP备2020015399号-5 </a>
+  </div>
+  <div class="copyright">
+    &copy; 2021 – 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">JiangXueQiao</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+  <script src="/js/third-party/pace.js"></script>
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
