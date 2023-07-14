@@ -1,0 +1,72 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="专注软件开发，涉足客户端、服务端等领域"><title>C++的API设计规范 | 江雪桥 | Blog</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=1.0.0"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/normalize/latest/normalize.min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/latest/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/latest/grids-responsive-min.min.css"><link rel="stylesheet" href="//lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//lib.baomitu.com/jquery/latest/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><script type="text/javascript" src="//lib.baomitu.com/clipboard.js/latest/clipboard.min.js"></script><script type="text/javascript" src="//lib.baomitu.com/toastr.js/latest/toastr.min.js"></script><link rel="stylesheet" href="//lib.baomitu.com/toastr.js/latest/toastr.min.css"><div class="darkmode-toggle">🌓</div><script>var prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)');
+var toggle = document.querySelector('.darkmode-toggle');
+var html = document.querySelector('html');
+
+html.dataset.dark = localStorage.dark || prefersDarkMode.matches;
+
+toggle.addEventListener('click', () => {
+localStorage.dark = !(html.dataset.dark == 'true');
+html.dataset.dark = localStorage.dark;
+});</script><meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">C++的API设计规范</h1><a id="logo" href="/.">江雪桥 | Blog</a><p class="description"></p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">C++的API设计规范</h1><div class="post-meta">2023-07-16<span> | </span><span class="category"><a href="/categories/C/">C++</a></span></div><div class="post-content"><p>《C++ API设计》是一本非常不错的书，该书内容远远超过了它标题所指的C++ API设计，它不仅仅讲述了与编程语言无关的API设计需要遵循的一些规范，同时也介绍了很多C++开发中需要遵守一些准则，如果在开发中能遵循这些准则，将有利于我们写出高质量的代码。</p>
+<p>读完该书，使我受益匪浅，本文将该书中我认为比较受用的部分摘录下来。</p>
+<span id="more"></span>
+
+<ul>
+<li><p>只有两种编程语言：一种是天天挨骂的，另一种是没人用的。</p>
+</li>
+<li><p>良好的API设计的首要目标是：在为客户提供所需功能的前提下，使用新发布的API对客户的代码造成的影响应该最小，理想的情况下应该是零影响。</p>
+</li>
+<li><p>C++ 没有包私有的概念，而是使用更加宽泛的友元的概念，以允许指定的类和方法访问某个类的受保护的和私有的成员。虽然友元可以用来加强封装，但是如果使用不当，它会向用户暴露过多的内部细节。</p>
+</li>
+<li><p>类的数据成员应该始终声明为私有的，而不是公有的或受保护的。</p>
+</li>
+<li><p>类只应该定义做什么，而不是怎么做。不要将某一个功能的具体实现步骤暴露出来，即便定义为私有的，也尽量不要这样做。可以使用<code>Pimpl</code>技巧来将所有的私有数据成员和函数隔离到一个.cpp文件中独立实现的类或结构体内。</p>
+</li>
+<li><p>不要过度承诺。当不确定是否需要某个接口时，就不要提供此接口。谨记奥卡姆（Occam）剃刀原理：若无必要，勿增实体。</p>
+</li>
+<li><p>谨慎添加虚函数，使用虚函数要意识到其潜在的隐患：</p>
+<ol>
+<li>对基类看似无害的修改可能会给客户带来不利的影响。</li>
+<li>客户可能会以你根本无法预料的方式来使用API。</li>
+<li>客户可能采用不正确的或易于出错的方式来扩展API。</li>
+<li>重写虚函数可能破坏类的内部原有逻辑的完整性。</li>
+</ol>
+</li>
+<li><p>使用虚函数要注意的方面：</p>
+<ol>
+<li>虚函数的调用必须在运行时查虚函数表才能决定，无法在编译时决定。</li>
+<li>使用虚函数需要维护虚函数表指针，进而增加对象的大小。</li>
+<li>添加、重排或者移除虚函数会破坏二进制兼容性。因为虚函数调用通常用类的虚函数表的整型偏移量来表示，所以改变虚函数的顺序，或者执行可能会引起其他虚函数的顺序发送变化的操作，都需要重新编译现有代码。</li>
+<li>如果类包含了任一虚函数，那么必须将析构函数声明为虚函数。这样子类就可以释放其可能申请的额外资源。</li>
+<li>绝不在构造函数或析构函数中调用虚函数，这些调用不会指向之类。</li>
+</ol>
+</li>
+<li><p>Sutter建议接口应该是非虚的，同时在适当的情况下使用模板方法设计模式。</p>
+</li>
+<li><p><strong>给出清晰的、描述性强的且恰当的名字是API设计中最困难的任务之一。</strong></p>
+</li>
+<li><p>避免编写拥有多个相同类型参数的函数。</p>
+</li>
+<li><p>使用一致的（统一规范）函数命令和参数顺序。</p>
+</li>
+<li><p>API接口应该是平台独立的。不要将平台相关的<code>#if</code>或<code>#ifdef</code>语句放在公共的API中，因为这些语句暴露了实现的细节，并使API因平台而异。</p>
+</li>
+<li><p>优秀的API表现为松耦合和高内聚。</p>
+</li>
+<li><p>除非确实需要<code>#include</code>类的完整定义，否则应该为类使用前置声明。</p>
+</li>
+<li><p>通常，优秀的软件工程实践的目标是去除冗余，即确保每个重要的知识点或行为有且仅有一次实现。而代码复用意味着耦合，因此略微的增加重复以断绝过分的耦合关系有时是值得的。</p>
+</li>
+</ul>
+<blockquote>
+<p>《C++ API设计》[美] Martin Reddy 著；刘晓娜，臧秀涛，林健 译</p>
+</blockquote>
+</div><div class="post-copyright"><script type="text/javascript" src="/js/copyright.js?v=1.0.0" successtext="复制成功！"></script><link rel="stylesheet" type="text/css" href="/css/copyright.css?v=1.0.0"><p><span>本文标题：</span>C++的API设计规范</p><p><span>文章作者：</span>江雪桥</p><p><span>发布时间：</span>2023-07-16</p><p><span>最后更新：</span>2023-07-14</p><p><span>原始链接：</span><a href="/2023/07/16/c-de-api-she-ji-gui-fan/">https://jiangxueqiao.com/2023/07/16/c-de-api-she-ji-gui-fan/</a><span class="copy-path"><i class="fa fa-clipboard" data-clipboard-text="https://jiangxueqiao.com/2023/07/16/c-de-api-she-ji-gui-fan/"></i></span></p><p><span>版权声明：</span>本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议。转载请注明出处！</p></div><br><div class="tags"></div><div class="post-nav"><a class="next" href="/2023/07/15/qpixmap-shi-yong-yao-dian/">QPixmap使用要点</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="search-form"><input id="local-search-input" placeholder="Search" type="text" name="q" results="0"/><div id="local-search-result"></div></div></div><div class="widget"><div class="author-info"><a class="info-avatar" href="/about/" title="关于"><img class="nofancybox" src="/img/avatar.png"/></a><p>All things are difficult before they are easy.</p><a class="info-icon" href="mailto:smart7178@163.com" title="Email" target="_blank" style="margin-inline:5px"> <i class="fa fa-envelope-square" style="margin-inline:5px"></i></a><a class="info-icon" href="https://github.com/winsoft666" title="Github" target="_blank" style="margin-inline:5px"> <i class="fa fa-github-square" style="margin-inline:5px"></i></a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="https://1key.run" title="1key.run" target="_blank">1key.run</a></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">14</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CMake/">CMake</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CentOS/">CentOS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Qt/">Qt</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vcpkg/">Vcpkg</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows%E5%86%85%E5%AD%98%E4%BD%93%E7%B3%BB/">Windows内存体系</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B/">Windows核心编程</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows%E6%B3%A8%E5%85%A5%E4%B8%8E%E6%8B%A6%E6%88%AA/">Windows注入与拦截</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%88%91%E7%9A%84%E4%BA%A7%E5%93%81/">我的产品</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%89%B9%E5%A4%84%E7%90%86/">批处理</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8B%A8%E5%BC%80%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E7%9A%84%E8%BF%B7%E9%9B%BE/">拨开字符编码的迷雾</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C/">网络</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6%E8%B0%83%E8%AF%95/">软件调试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%85%92/">酒</a><span class="category-list-count">1</span></li></ul></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2023 <a href="/." rel="nofollow">江雪桥 | Blog.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script><script type="text/javascript" src="//lib.baomitu.com/fancybox/latest/jquery.fancybox.min.js"></script><script type="text/javascript" src="/js/fancybox.js?v=1.0.0"></script><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/fancybox/latest/jquery.fancybox.min.css"><link rel="stylesheet" type="text/css" href="/css/search.css?v=1.0.0"><script type="text/javascript" src="/js/search.js?v=1.0.0"></script><script>var search_path = 'search.xml';
+if (search_path.length == 0) {
+  search_path = 'search.xml';
+}
+var path = '/' + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+</script><script type="text/javascript" src="/js/copycode.js?v=1.0.0" successtext="复制成功！"></script><link rel="stylesheet" type="text/css" href="/css/copycode.css?v=1.0.0"><script type="text/javascript" src="/js/codeblock-resizer.js?v=1.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=1.0.0"></script></div></body></html>
