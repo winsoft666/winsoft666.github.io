@@ -1,299 +1,10 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width">
-<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon-200x200-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/favicon-200x200-next.png" color="#222">
-  <meta name="baidu-site-verification" content="codeva-RtI1N7UTHz">
-
-<link rel="stylesheet" href="/css/main.css">
-
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Segoe+UI:300,300italic,400,400italic,700,700italic%7CTahoma:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-big-counter.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous"></script>
-
-<script class="next-config" data-name="main" type="application/json">{"hostname":"jiangxueqiao.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.17.1","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"width":320},"copycode":{"enable":true,"style":"flat"},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":true,"transition":{"menu_item":null,"post_block":null,"post_header":null,"post_body":null,"coll_header":null,"sidebar":null}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":-1,"unescape":true,"preload":false}}</script><script src="/js/config.js"></script>
-
-    <meta name="description" content="一、TCP特性尽管TCP和UDP都是用IP协议作为网络层，但TCP却提供和UDP完全不同的网络服务。TCP是面向连接的、稳定可靠的字节流服务。TCP首部的很多字段都是为了实现这2大特性而设计的。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="网络协议(6)--TCP协议">
-<meta property="og:url" content="https://jiangxueqiao.com/2021/03/14/wang-luo-xie-yi-6-tcp-xie-yi/index.html">
-<meta property="og:site_name" content="Jiang&#39;s Blog">
-<meta property="og:description" content="一、TCP特性尽管TCP和UDP都是用IP协议作为网络层，但TCP却提供和UDP完全不同的网络服务。TCP是面向连接的、稳定可靠的字节流服务。TCP首部的很多字段都是为了实现这2大特性而设计的。">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://static.1key.run/blog/img/wangluoxieyi-tcp-1.jpg">
-<meta property="og:image" content="https://static.1key.run/blog/img/wangluoxieyi-tcp-2.jpg">
-<meta property="og:image" content="https://static.1key.run/blog/img/wangluoxieyi-tcp-3.jpg">
-<meta property="og:image" content="https://static.1key.run/blog/img/wangluoxieyi-tcp-4.png">
-<meta property="og:image" content="https://static.1key.run/blog/img/wangluoxieyi-tcp-5.jpg">
-<meta property="og:image" content="https://static.1key.run/blog/img/wangluoxieyi-tcp-6.jpg">
-<meta property="og:image" content="https://static.1key.run/blog/img/wangluoxieyi-tcp-7.jpg">
-<meta property="og:image" content="https://static.1key.run/blog/img/wangluoxieyi-tcp-8.png">
-<meta property="og:image" content="https://static.1key.run/blog/img/wangluoxieyi-tcp-9.png">
-<meta property="article:published_time" content="2021-03-14T04:30:00.000Z">
-<meta property="article:modified_time" content="2023-07-12T09:56:36.222Z">
-<meta property="article:author" content="JiangXueQiao">
-<meta property="article:tag" content="TCP">
-<meta property="article:tag" content="三次握手">
-<meta property="article:tag" content="四次挥手">
-<meta property="article:tag" content="Wireshark">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://static.1key.run/blog/img/wangluoxieyi-tcp-1.jpg">
-
-
-<link rel="canonical" href="https://jiangxueqiao.com/2021/03/14/wang-luo-xie-yi-6-tcp-xie-yi/">
-
-
-
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jiangxueqiao.com/2021/03/14/wang-luo-xie-yi-6-tcp-xie-yi/","path":"2021/03/14/wang-luo-xie-yi-6-tcp-xie-yi/","title":"网络协议(6)--TCP协议"}</script>
-
-<script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>网络协议(6)--TCP协议 | Jiang's Blog</title>
-  
-
-
-
-
-
-
-
-
-  <noscript>
-    <link rel="stylesheet" href="/css/noscript.css">
-  </noscript>
-
+<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="专注软件开发，涉足客户端、服务端等领域"><title>网络协议(6)--TCP协议 | 江雪桥 | Blog</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=1.0.0"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/normalize/latest/normalize.min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/latest/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/latest/grids-responsive-min.min.css"><link rel="stylesheet" href="//lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//lib.baomitu.com/jquery/latest/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><script type="text/javascript" src="//lib.baomitu.com/clipboard.js/latest/clipboard.min.js"></script><script type="text/javascript" src="//lib.baomitu.com/toastr.js/latest/toastr.min.js"></script><link rel="stylesheet" href="//lib.baomitu.com/toastr.js/latest/toastr.min.css"><meta name="generator" content="Hexo 6.3.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
-  <div class="headband"></div>
-
-  <main class="main">
-    <div class="column">
-      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="切换导航栏" role="button">
-        <span class="toggle-line"></span>
-        <span class="toggle-line"></span>
-        <span class="toggle-line"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <i class="logo-line"></i>
-      <p class="site-title">Jiang's Blog</p>
-      <i class="logo-line"></i>
-    </a>
-      <p class="site-subtitle" itemprop="description">江雪桥博客-专注软件开发-涉足客户端、服务端等领域</p>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger" aria-label="搜索" role="button">
-        <i class="fa fa-search fa-fw fa-lg"></i>
-    </div>
-  </div>
-</div>
-
-
-
-<nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">93</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">16</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">64</span></a></li><li class="menu-item menu-item-commonweal"><a href="/404/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>公益 404</a></li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
-        </a>
-      </li>
-  </ul>
-</nav>
-
-
-
-  <div class="search-pop-overlay">
-    <div class="popup search-popup"><div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container">
-    <input autocomplete="off" autocapitalize="off" maxlength="80"
-           placeholder="搜索..." spellcheck="false"
-           type="search" class="search-input">
-  </div>
-  <span class="popup-btn-close" role="button">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div class="search-result-container no-result">
-  <div class="search-result-icon">
-    <i class="fa fa-spinner fa-pulse fa-5x"></i>
-  </div>
-</div>
-
-    </div>
-  </div>
-
-</header>
-        
-  
-  <aside class="sidebar">
-
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
-      <ul class="sidebar-nav">
-        <li class="sidebar-nav-toc">
-          文章目录
-        </li>
-        <li class="sidebar-nav-overview">
-          站点概览
-        </li>
-      </ul>
-
-      <div class="sidebar-panel-container">
-        <!--noindex-->
-        <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81TCP%E7%89%B9%E6%80%A7"><span class="nav-text">一、TCP特性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81TCP%E5%8D%8F%E8%AE%AE%E9%A6%96%E9%83%A8"><span class="nav-text">二、TCP协议首部</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E4%B8%8E%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B"><span class="nav-text">三、三次握手与四次挥手</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E5%AE%8C%E6%95%B4%E7%9A%84TCP%E4%BC%9A%E8%AF%9D%E6%B5%81%E7%A8%8B%E5%9B%BE"><span class="nav-text">3.1 完整的TCP会话流程图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-Wireshark%E7%9A%84%E7%9B%B8%E5%AF%B9%E5%BA%8F%E5%8F%B7"><span class="nav-text">3.2 Wireshark的相对序号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-Wireshark%E7%9A%84TCP%E6%B5%81%E9%87%8F%E5%9B%BE"><span class="nav-text">3.3 Wireshark的TCP流量图</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81TIME-WAIT%E5%8F%8AMSL"><span class="nav-text">四、TIME_WAIT及MSL</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-TIME-WAIT%E7%8A%B6%E6%80%81%E4%B8%BA%E4%BD%95%E5%AD%98%E5%9C%A8%EF%BC%9F"><span class="nav-text">4.1 TIME_WAIT状态为何存在？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-%E7%AD%89%E5%BE%85%E6%97%B6%E9%97%B4"><span class="nav-text">4.2 等待时间</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-1-windows%E7%B3%BB%E7%BB%9FMSL"><span class="nav-text">4.2.1 windows系统MSL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-2-Linux%E7%B3%BB%E7%BB%9FMSL"><span class="nav-text">4.2.2 Linux系统MSL</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-SO-REUSEADDR"><span class="nav-text">4.3 SO_REUSEADDR</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E8%BF%9B%E8%A1%8C3%E6%AC%A1%E6%8F%A1%E6%89%8B%EF%BC%9F"><span class="nav-text">五、为什么要进行3次握手？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1"><span class="nav-text">1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2"><span class="nav-text">2</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3"><span class="nav-text">3</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E8%BF%9B%E8%A1%8C4%E6%AC%A1%E6%8C%A5%E6%89%8B%EF%BC%9F"><span class="nav-text">六、为什么要进行4次挥手？</span></a></li></ol></div>
-        </div>
-        <!--/noindex-->
-
-        <div class="site-overview-wrap sidebar-panel">
-          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="JiangXueQiao"
-      src="/images/avatar.png">
-  <p class="site-author-name" itemprop="name">JiangXueQiao</p>
-  <div class="site-description" itemprop="description">All things are difficult before they are easy.</div>
-</div>
-<div class="site-state-wrap animated">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-        <a href="/archives/">
-          <span class="site-state-item-count">64</span>
-          <span class="site-state-item-name">日志</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-          <a href="/categories/">
-        <span class="site-state-item-count">16</span>
-        <span class="site-state-item-name">分类</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-          <a href="/tags/">
-        <span class="site-state-item-count">93</span>
-        <span class="site-state-item-name">标签</span></a>
-      </div>
-  </nav>
-</div>
-  <div class="links-of-author animated">
-      <span class="links-of-author-item">
-        <a href="https://github.com/winsoft666" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;winsoft666" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="mailto:smart7178@163.com" title="E-Mail → mailto:smart7178@163.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
-      </span>
-  </div>
-
-        </div>
-      </div>
-    </div>
-
-    
-    <div class="sidebar-inner sidebar-blogroll">
-      <div class="links-of-blogroll animated">
-        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
-          链接
-        </div>
-        <ul class="links-of-blogroll-list">
-            <li class="links-of-blogroll-item">
-              <a href="https://1key.run/" title="https:&#x2F;&#x2F;1key.run" rel="noopener" target="_blank">1key.run</a>
-            </li>
-        </ul>
-      </div>
-    </div>
-  </aside>
-
-
-    </div>
-
-    <div class="main-inner post posts-expand">
-
-
-  
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://jiangxueqiao.com/2021/03/14/wang-luo-xie-yi-6-tcp-xie-yi/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="JiangXueQiao">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Jiang's Blog">
-      <meta itemprop="description" content="All things are difficult before they are easy.">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="网络协议(6)--TCP协议 | Jiang's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          网络协议(6)--TCP协议
-        </h1>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-03-14 12:30:00" itemprop="dateCreated datePublished" datetime="2021-03-14T12:30:00+08:00">2021-03-14</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-07-12 17:56:36" itemprop="dateModified" datetime="2023-07-12T17:56:36+08:00">2023-07-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/" itemprop="url" rel="index"><span itemprop="name">网络协议</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody"><h1 id="一、TCP特性"><a href="#一、TCP特性" class="headerlink" title="一、TCP特性"></a>一、TCP特性</h1><p>尽管TCP和UDP都是用IP协议作为网络层，但TCP却提供和UDP完全不同的网络服务。TCP是<code>面向连接的</code>、<code>稳定可靠</code>的<code>字节流</code>服务。TCP首部的很多字段都是为了实现这2大特性而设计的。</p>
+</head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">网络协议(6)--TCP协议</h1><a id="logo" href="/.">江雪桥 | Blog</a><p class="description"></p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">网络协议(6)--TCP协议</h1><div class="post-meta">2021-03-14<span> | </span><span class="category"><a href="/categories/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a></span></div><div class="clear"><div class="toc-article" id="toc"><div class="toc-title">文章目录</div><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81TCP%E7%89%B9%E6%80%A7"><span class="toc-text">一、TCP特性</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81TCP%E5%8D%8F%E8%AE%AE%E9%A6%96%E9%83%A8"><span class="toc-text">二、TCP协议首部</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B%E4%B8%8E%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B"><span class="toc-text">三、三次握手与四次挥手</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-%E5%AE%8C%E6%95%B4%E7%9A%84TCP%E4%BC%9A%E8%AF%9D%E6%B5%81%E7%A8%8B%E5%9B%BE"><span class="toc-text">3.1 完整的TCP会话流程图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-Wireshark%E7%9A%84%E7%9B%B8%E5%AF%B9%E5%BA%8F%E5%8F%B7"><span class="toc-text">3.2 Wireshark的相对序号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-Wireshark%E7%9A%84TCP%E6%B5%81%E9%87%8F%E5%9B%BE"><span class="toc-text">3.3 Wireshark的TCP流量图</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81TIME-WAIT%E5%8F%8AMSL"><span class="toc-text">四、TIME_WAIT及MSL</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-TIME-WAIT%E7%8A%B6%E6%80%81%E4%B8%BA%E4%BD%95%E5%AD%98%E5%9C%A8%EF%BC%9F"><span class="toc-text">4.1 TIME_WAIT状态为何存在？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-%E7%AD%89%E5%BE%85%E6%97%B6%E9%97%B4"><span class="toc-text">4.2 等待时间</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-1-windows%E7%B3%BB%E7%BB%9FMSL"><span class="toc-text">4.2.1 windows系统MSL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-2-Linux%E7%B3%BB%E7%BB%9FMSL"><span class="toc-text">4.2.2 Linux系统MSL</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-SO-REUSEADDR"><span class="toc-text">4.3 SO_REUSEADDR</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E8%BF%9B%E8%A1%8C3%E6%AC%A1%E6%8F%A1%E6%89%8B%EF%BC%9F"><span class="toc-text">五、为什么要进行3次握手？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1"><span class="toc-text">1</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2"><span class="toc-text">2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3"><span class="toc-text">3</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E8%BF%9B%E8%A1%8C4%E6%AC%A1%E6%8C%A5%E6%89%8B%EF%BC%9F"><span class="toc-text">六、为什么要进行4次挥手？</span></a></li></ol></div></div><div class="post-content"><h1 id="一、TCP特性"><a href="#一、TCP特性" class="headerlink" title="一、TCP特性"></a>一、TCP特性</h1><p>尽管TCP和UDP都是用IP协议作为网络层，但TCP却提供和UDP完全不同的网络服务。TCP是<code>面向连接的</code>、<code>稳定可靠</code>的<code>字节流</code>服务。TCP首部的很多字段都是为了实现这2大特性而设计的。</p>
 <span id="more"></span>
 <p>在一个TCP连接中，仅有两方能进行彼此通信。所以说广播和多播不适用于TCP协议。</p>
 <p>为了通过IP数据报实现可靠性传输，需要考虑很多事情，如数据的破坏、丢包、重复以及分片顺序混乱等问题。TCP通过检验和、序列号、确认序列号、重发控制、连接管理以及窗口控制等机制来实现可靠性传输。</p>
-<h1 id="二、TCP协议首部"><a href="#二、TCP协议首部" class="headerlink" title="二、TCP协议首部"></a>二、TCP协议首部</h1><p>摘自《TCP/IP详解卷1》中的关于TCP首部定义的图：<br><img data-src="https://static.1key.run/blog/img/wangluoxieyi-tcp-1.jpg"></p>
+<h1 id="二、TCP协议首部"><a href="#二、TCP协议首部" class="headerlink" title="二、TCP协议首部"></a>二、TCP协议首部</h1><p>摘自《TCP/IP详解卷1》中的关于TCP首部定义的图：<br><img src="https://static.1key.run/blog/img/wangluoxieyi-tcp-1.jpg"></p>
 <p><strong>TCP协议的实现较UDP协议复杂太多，它的首部的各个字段的用法也比UDP首部字段复杂多，这里先对TCP首部字段的功能做个大概的介绍。</strong></p>
 <ul>
 <li>16位源端口号：表示发送端端口号。传输层使用端口号来标识发送端和接收端的应用程序，而网络层是通过IP地址来标识主机，这样使用“IP地址+端口”就可以精确定位到某一台主机上的某一应用程序。</li>
@@ -307,9 +18,9 @@
 <li>16位紧急指针：只有前面提到的<code>URG</code>标记位为1时，这个字段才有效。</li>
 <li>选项：添加一些附加数据。和UDP不同，TCP的“选项”字段使用的比较多。</li>
 </ul>
-<h1 id="三、三次握手与四次挥手"><a href="#三、三次握手与四次挥手" class="headerlink" title="三、三次握手与四次挥手"></a>三、三次握手与四次挥手</h1><h2 id="3-1-完整的TCP会话流程图"><a href="#3-1-完整的TCP会话流程图" class="headerlink" title="3.1 完整的TCP会话流程图"></a>3.1 完整的TCP会话流程图</h2><p>本文通过真实的网络示例来讲解TCP的三次握手和四次挥手。读者可以先<a target="_blank" rel="noopener" href="https://static.1key.run/misc/tcp.pcapng">下载</a>作者写本文时使用的网络包示例，然后使用wireshark打开（当然也可以使用wireshark随便抓取一个网络包），选中编号为<code>No.9</code>的包，右键选择“追踪流” –&gt; “TCP流”：<br><img data-src="https://static.1key.run/blog/img/wangluoxieyi-tcp-2.jpg"></p>
-<p><img data-src="https://static.1key.run/blog/img/wangluoxieyi-tcp-3.jpg"></p>
-<p>上图是使用wireshark抓取的一个Http接口请求的过程（不含DNS解析等步骤），包含了TCP连接建立、Http请求、Http响应、TCP连接断开。现在以这个示例为基础，来画出该Http接口请求中涉及的整个TCP会话的流程（也是本文最重要的图）：<br><img data-src="https://static.1key.run/blog/img/wangluoxieyi-tcp-4.png"></p>
+<h1 id="三、三次握手与四次挥手"><a href="#三、三次握手与四次挥手" class="headerlink" title="三、三次握手与四次挥手"></a>三、三次握手与四次挥手</h1><h2 id="3-1-完整的TCP会话流程图"><a href="#3-1-完整的TCP会话流程图" class="headerlink" title="3.1 完整的TCP会话流程图"></a>3.1 完整的TCP会话流程图</h2><p>本文通过真实的网络示例来讲解TCP的三次握手和四次挥手。读者可以先<a target="_blank" rel="noopener" href="https://static.1key.run/misc/tcp.pcapng">下载</a>作者写本文时使用的网络包示例，然后使用wireshark打开（当然也可以使用wireshark随便抓取一个网络包），选中编号为<code>No.9</code>的包，右键选择“追踪流” –&gt; “TCP流”：<br><img src="https://static.1key.run/blog/img/wangluoxieyi-tcp-2.jpg"></p>
+<p><img src="https://static.1key.run/blog/img/wangluoxieyi-tcp-3.jpg"></p>
+<p>上图是使用wireshark抓取的一个Http接口请求的过程（不含DNS解析等步骤），包含了TCP连接建立、Http请求、Http响应、TCP连接断开。现在以这个示例为基础，来画出该Http接口请求中涉及的整个TCP会话的流程（也是本文最重要的图）：<br><img src="https://static.1key.run/blog/img/wangluoxieyi-tcp-4.png"></p>
 <blockquote>
 <ul>
 <li>箭头上方标出了该TCP包<code>SYN、ACK、FIN、PSH</code>等标志位的设置情况（大家可能注意到，除了第一个箭头上没有<code>ACK</code>之外，其他的箭头上都有<code>ACK</code>，这是因为<code>ACK</code>标记位只是用于标记TCP首部的<code>32位确认序列号</code>是否有效。在此之后的<code>32位确认序列号</code>一直有效，所以也就一直有<code>ACK</code>标记位。）；箭头下发标出了该TCP包的序号和确认序号。</li>
@@ -319,13 +30,13 @@
 <li>在三次握手和四次挥手的部分，旁边的红色粗体字表示当前端的TCP状态。<strong>在这个示例中是服务端执行主动关闭。</strong></li>
 </ul>
 </blockquote>
-<h2 id="3-2-Wireshark的相对序号"><a href="#3-2-Wireshark的相对序号" class="headerlink" title="3.2 Wireshark的相对序号"></a>3.2 Wireshark的相对序号</h2><p><code>相对序号</code>是Wireshark引出的概念，TCP协议中没有这个概念。Wireshark使用相对数值来显示序号和确认序号，这个相对值是相对于初始序号（ISN）而言的。因为人类更加习惯跟踪更小数值，所以Wireshark默认用相对数值来展示。如果需要查看真实的序号，可以在wireshark中选中该网络包，在最下方的数据窗口查看，如：<br><img data-src="https://static.1key.run/blog/img/wangluoxieyi-tcp-5.jpg"></p>
-<h2 id="3-3-Wireshark的TCP流量图"><a href="#3-3-Wireshark的TCP流量图" class="headerlink" title="3.3 Wireshark的TCP流量图"></a>3.3 Wireshark的TCP流量图</h2><p>我们也可以使用Wireshark自带的统计功能来查看整个TCP会话的过程。通过菜单“统计” –&gt; “流量图”打开流量图窗口，在“显示”选项选择“显示的分组”，“流类型”选项选择“TCP流”，如图：<br><img data-src="https://static.1key.run/blog/img/wangluoxieyi-tcp-6.jpg"></p>
+<h2 id="3-2-Wireshark的相对序号"><a href="#3-2-Wireshark的相对序号" class="headerlink" title="3.2 Wireshark的相对序号"></a>3.2 Wireshark的相对序号</h2><p><code>相对序号</code>是Wireshark引出的概念，TCP协议中没有这个概念。Wireshark使用相对数值来显示序号和确认序号，这个相对值是相对于初始序号（ISN）而言的。因为人类更加习惯跟踪更小数值，所以Wireshark默认用相对数值来展示。如果需要查看真实的序号，可以在wireshark中选中该网络包，在最下方的数据窗口查看，如：<br><img src="https://static.1key.run/blog/img/wangluoxieyi-tcp-5.jpg"></p>
+<h2 id="3-3-Wireshark的TCP流量图"><a href="#3-3-Wireshark的TCP流量图" class="headerlink" title="3.3 Wireshark的TCP流量图"></a>3.3 Wireshark的TCP流量图</h2><p>我们也可以使用Wireshark自带的统计功能来查看整个TCP会话的过程。通过菜单“统计” –&gt; “流量图”打开流量图窗口，在“显示”选项选择“显示的分组”，“流类型”选项选择“TCP流”，如图：<br><img src="https://static.1key.run/blog/img/wangluoxieyi-tcp-6.jpg"></p>
 <h1 id="四、TIME-WAIT及MSL"><a href="#四、TIME-WAIT及MSL" class="headerlink" title="四、TIME_WAIT及MSL"></a>四、TIME_WAIT及MSL</h1><h2 id="4-1-TIME-WAIT状态为何存在？"><a href="#4-1-TIME-WAIT状态为何存在？" class="headerlink" title="4.1 TIME_WAIT状态为何存在？"></a>4.1 TIME_WAIT状态为何存在？</h2><p>这里我们不使用“客户端”、“服务端”来表示TCP连接的2端，转而使用“主动断开连接端”、“被动断开连接端”来表示TCP通讯的2端。因为执行主动断开连接的端可能是服务端也可能是客户端（虽然我们大多数情况下遇到的是客户端执行主动断开）。</p>
 <p>在“主动断开连接端”收到了“被动断开连接端”发来的<code>LAST_ACK</code>之后，会给“被动断开连接端”回复一个<code>ACK</code>确认消息。但这个时候为了确保“被动断开连接端”有足够的时间能够收到该消息，“主动断开连接端”不能马上关闭socket，需要等待一定的时间来确保“被动断开连接端”可以收到<code>ACK</code>确认消息。“主动断开连接端”在等待的这个时间段内的状态我们称之为<code>TIME_WAIT</code>状态。</p>
 <p>归纳为一句话就是：<strong>TIME_WAIT状态就是“主动断开的一方”在发送完最后一次ACK后进入的等待状态。</strong></p>
 <h2 id="4-2-等待时间"><a href="#4-2-等待时间" class="headerlink" title="4.2 等待时间"></a>4.2 等待时间</h2><p>那么<code>TIME_WAIT</code>状态需要持续多久了，也就是“主动断开连接端”在发送完最后一个ACK之后需要等待多久了？<br><a target="_blank" rel="noopener" href="http://www.52im.net/topic-tcpipvol1.html">《TCP/IP详解 卷1：协议》</a>中提到：默认TIME_WAIT的超时时间是2倍的MSL。MSL是<code>Maximum Segment Lifetime</code>的缩写，表示报文的最大生存时间，这个时间和系统的TCP实现有关，每个系统是不一样的。</p>
-<h3 id="4-2-1-windows系统MSL"><a href="#4-2-1-windows系统MSL" class="headerlink" title="4.2.1 windows系统MSL"></a>4.2.1 windows系统MSL</h3><p>注册表<code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters</code>下的<code>TcpTimedWaitDelay</code>键（如果没有可以新建一个）就对应了<code>2*MSL</code>（2倍的MSL）的值。<br><img data-src="https://static.1key.run/blog/img/wangluoxieyi-tcp-7.jpg"></p>
+<h3 id="4-2-1-windows系统MSL"><a href="#4-2-1-windows系统MSL" class="headerlink" title="4.2.1 windows系统MSL"></a>4.2.1 windows系统MSL</h3><p>注册表<code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters</code>下的<code>TcpTimedWaitDelay</code>键（如果没有可以新建一个）就对应了<code>2*MSL</code>（2倍的MSL）的值。<br><img src="https://static.1key.run/blog/img/wangluoxieyi-tcp-7.jpg"></p>
 <h3 id="4-2-2-Linux系统MSL"><a href="#4-2-2-Linux系统MSL" class="headerlink" title="4.2.2 Linux系统MSL"></a>4.2.2 Linux系统MSL</h3><p>以CentOS为例（<strong>摘自网络，仅供参考</strong>）：</p>
 <ul>
 <li><p>查看默认的MSL值（60s）：</p>
@@ -363,7 +74,7 @@
 </ul>
 <p>其中第一个功能就可以用来解决该问题。</p>
 <h1 id="五、为什么要进行3次握手？"><a href="#五、为什么要进行3次握手？" class="headerlink" title="五、为什么要进行3次握手？"></a>五、为什么要进行3次握手？</h1><p>前面的文章介绍了TCP的三次握手，那么TCP的握手为什么是3次了？</p>
-<p><img data-src="https://static.1key.run/blog/img/wangluoxieyi-tcp-8.png"></p>
+<p><img src="https://static.1key.run/blog/img/wangluoxieyi-tcp-8.png"></p>
 <p>本文从3个角度来解释为什么要进行3次握手？</p>
 <h1 id="1"><a href="#1" class="headerlink" title="1"></a>1</h1><p>TCP的握手的目的是让通信双方都确定双方能够正常发送和接收信息。</p>
 <p>第一步，服务端收到客户端发送的SYN，服务端能够确定如下信息：“客户端的发送功能正常，服务端自己的接受功能正常”。但客户端还什么都不能确定。<br>第二步，客户端收到服务端回复的SYN+ACK，截至目前，客户端能够确定如下信息：“客户端自己的发送/接收功能都正常，服务端的接收和发送功能都正常”；服务端还是只能确定自己的接受功能正常，还不知道自己的发送功能是否正常，客户端的接受功能是否正常。</p>
@@ -378,7 +89,7 @@
 <h1 id="3"><a href="#3" class="headerlink" title="3"></a>3</h1><p>对照文章开始处TCP握手图的前2步，现在我们假设TCP只有2次握手：</p>
 <p>服务端在收到客户端的<code>SYN</code>并且回复<code>SYN+AKC</code>之后，就认为连接已经建立完成了，并为之分配相应的资源。<br>但客户机却因为网络延迟等问题一直没收到服务端回复的<code>SYN+ACK</code>，这样客户端就认为连接没有建立成功，糟糕的是，客户端会因为连接没有成功而不停的重试，这样每次服务端都会认为连接建立成功并分配资源。</p>
 <p>如果按照上面描述的那样，客户端一直没有收到服务端回复的<code>SYN+ACK</code>，且一直这样尝试建立连接，就会造成服务端资源极大的浪费，加重服务端的负担。</p>
-<h1 id="六、为什么要进行4次挥手？"><a href="#六、为什么要进行4次挥手？" class="headerlink" title="六、为什么要进行4次挥手？"></a>六、为什么要进行4次挥手？</h1><p><img data-src="https://static.1key.run/blog/img/wangluoxieyi-tcp-9.png"></p>
+<h1 id="六、为什么要进行4次挥手？"><a href="#六、为什么要进行4次挥手？" class="headerlink" title="六、为什么要进行4次挥手？"></a>六、为什么要进行4次挥手？</h1><p><img src="https://static.1key.run/blog/img/wangluoxieyi-tcp-9.png"></p>
 <p>对比上面的图，我们不难发现：4次挥手相比3次握手多了一次，主要是因为握手的<code>ACK和SYN</code>是合并在一条发送的，而挥手的<code>ACK和FIN</code>是分开发送的，所以挥手比握手多了一次。</p>
 <p><strong>现在我们分析为什么TCP挥手的<code>ACK和FIN</code>（分别对应图中的第2,3条线）要分开发送？</strong></p>
 <p><code>“被动断开方”</code>之所以叫称之为“被动”是因为TCP连接的断开并不是它想的，也不是它主动触发的，是对面的<code>“主动断开方”</code>想要断开的，也许这个时候<code>“被动断开方”</code>还正想发送点数据给<code>“主动断开方”</code>了。</p>
@@ -389,128 +100,10 @@
 <blockquote>
 <p>文章图片带有“CSDN”水印的说明：<br>由于该文章和图片最初发表在我的<a target="_blank" rel="noopener" href="https://blog.csdn.net/china_jeffery">CSDN博客</a>中，因此图片被CSDN自动添加了水印。</p>
 </blockquote>
-
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-          
-
-<div class="post-copyright">
-<ul>
-  <li class="post-copyright-author">
-      <strong>本文作者： </strong>JiangXueQiao
-  </li>
-  <li class="post-copyright-link">
-      <strong>本文链接：</strong>
-      <a href="https://jiangxueqiao.com/2021/03/14/wang-luo-xie-yi-6-tcp-xie-yi/" title="网络协议(6)--TCP协议">https://jiangxueqiao.com/2021/03/14/wang-luo-xie-yi-6-tcp-xie-yi/</a>
-  </li>
-  <li class="post-copyright-license">
-      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
-  </li>
-</ul>
-</div>
-
-          <div class="post-tags">
-              <a href="/tags/TCP/" rel="tag"><i class="fa fa-tag"></i> TCP</a>
-              <a href="/tags/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B/" rel="tag"><i class="fa fa-tag"></i> 三次握手</a>
-              <a href="/tags/%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/" rel="tag"><i class="fa fa-tag"></i> 四次挥手</a>
-              <a href="/tags/Wireshark/" rel="tag"><i class="fa fa-tag"></i> Wireshark</a>
-          </div>
-
-        
-
-          <div class="post-nav">
-            <div class="post-nav-item">
-                <a href="/2021/03/13/wang-luo-xie-yi-5-udp-xie-yi/" rel="prev" title="网络协议(5)--UDP协议">
-                  <i class="fa fa-chevron-left"></i> 网络协议(5)--UDP协议
-                </a>
-            </div>
-            <div class="post-nav-item">
-                <a href="/2021/03/15/wang-luo-xie-yi-7-http-yu-https-xie-yi/" rel="next" title="网络协议(7)--HTTP与HTTPS协议">
-                  网络协议(7)--HTTP与HTTPS协议 <i class="fa fa-chevron-right"></i>
-                </a>
-            </div>
-          </div>
-    </footer>
-  </article>
-</div>
-
-
-
-
-
-
-</div>
-  </main>
-
-  <footer class="footer">
-    <div class="footer-inner">
-
-  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">鄂ICP备2020015399号-5 </a>
-  </div>
-  <div class="copyright">
-    &copy; 2021 – 
-    <span itemprop="copyrightYear">2023</span>
-    <span class="with-love">
-      <i class="fa fa-heart"></i>
-    </span>
-    <span class="author" itemprop="copyrightHolder">JiangXueQiao</span>
-  </div>
-
-    </div>
-  </footer>
-
-  
-  <div class="toggle sidebar-toggle" role="button">
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-    <span class="toggle-line"></span>
-  </div>
-  <div class="sidebar-dimmer"></div>
-  <div class="back-to-top" role="button" aria-label="返回顶部">
-    <i class="fa fa-arrow-up fa-lg"></i>
-    <span>0%</span>
-  </div>
-  <div class="reading-progress-bar"></div>
-
-<noscript>
-  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
-</noscript>
-
-
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous"></script>
-<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
-<script src="/js/third-party/search/local-search.js"></script>
-
-
-
-
-  <script src="/js/third-party/fancybox.js"></script>
-
-  <script src="/js/third-party/pace.js"></script>
-
-
-  
-
-
-
-
-  
-
-  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
-<script src="/js/third-party/math/mathjax.js"></script>
-
-
-
-</body>
-</html>
+</div><div class="post-copyright"><script type="text/javascript" src="/js/copyright.js?v=1.0.0" successtext="复制成功！"></script><link rel="stylesheet" type="text/css" href="/css/copyright.css?v=1.0.0"><p><span>本文标题：</span>网络协议(6)--TCP协议</p><p><span>文章作者：</span>江雪桥</p><p><span>发布时间：</span>2021-03-14</p><p><span>最后更新：</span>2023-07-14</p><p><span>原始链接：</span><a href="/2021/03/14/wang-luo-xie-yi-6-tcp-xie-yi/">https://jiangxueqiao.com/2021/03/14/wang-luo-xie-yi-6-tcp-xie-yi/</a><span class="copy-path"><i class="fa fa-clipboard" data-clipboard-text="https://jiangxueqiao.com/2021/03/14/wang-luo-xie-yi-6-tcp-xie-yi/"></i></span></p><p><span>版权声明：</span>本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议。转载请注明出处！</p></div><br><div class="tags"><ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TCP/" rel="tag">TCP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Wireshark/" rel="tag">Wireshark</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B/" rel="tag">三次握手</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%9B%9B%E6%AC%A1%E6%8C%A5%E6%89%8B/" rel="tag">四次挥手</a></li></ul></div><div class="post-nav"><a class="pre" href="/2021/03/15/wang-luo-xie-yi-7-http-yu-https-xie-yi/">网络协议(7)--HTTP与HTTPS协议</a><a class="next" href="/2021/03/13/wang-luo-xie-yi-5-udp-xie-yi/">网络协议(5)--UDP协议</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="search-form"><input id="local-search-input" placeholder="Search" type="text" name="q" results="0"/><div id="local-search-result"></div></div></div><div class="widget"><div class="author-info"><a class="info-avatar" href="/about/" title="关于"><img class="nofancybox" src="/img/avatar.png"/></a><p>All things are difficult before they are easy.</p><a class="info-icon" href="mailto:smart7178@163.com" title="Email" target="_blank" style="margin-inline:5px"> <i class="fa fa-envelope-square" style="margin-inline:5px"></i></a><a class="info-icon" href="https://github.com/winsoft666" title="Github" target="_blank" style="margin-inline:5px"> <i class="fa fa-github-square" style="margin-inline:5px"></i></a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div><ul></ul><a href="https://1key.run" title="1key.run" target="_blank">1key.run</a></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/C/">C++</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CMake/">CMake</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/CentOS/">CentOS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Qt/">Qt</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vcpkg/">Vcpkg</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web/">Web</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows%E5%86%85%E5%AD%98%E4%BD%93%E7%B3%BB/">Windows内存体系</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B/">Windows核心编程</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Windows%E6%B3%A8%E5%85%A5%E4%B8%8E%E6%8B%A6%E6%88%AA/">Windows注入与拦截</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%88%91%E7%9A%84%E4%BA%A7%E5%93%81/">我的产品</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%89%B9%E5%A4%84%E7%90%86/">批处理</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8B%A8%E5%BC%80%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E7%9A%84%E8%BF%B7%E9%9B%BE/">拨开字符编码的迷雾</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C/">网络</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a><span class="category-list-count">8</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%BD%AF%E4%BB%B6%E8%B0%83%E8%AF%95/">软件调试</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E9%85%92/">酒</a><span class="category-list-count">1</span></li></ul></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2023 <a href="/." rel="nofollow">江雪桥 | Blog.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script><script type="text/javascript" src="//lib.baomitu.com/fancybox/latest/jquery.fancybox.min.js"></script><script type="text/javascript" src="/js/fancybox.js?v=1.0.0"></script><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/fancybox/latest/jquery.fancybox.min.css"><link rel="stylesheet" type="text/css" href="/css/search.css?v=1.0.0"><script type="text/javascript" src="/js/search.js?v=1.0.0"></script><script>var search_path = 'search.xml';
+if (search_path.length == 0) {
+  search_path = 'search.xml';
+}
+var path = '/' + search_path;
+searchFunc(path, 'local-search-input', 'local-search-result');
+</script><script type="text/javascript" src="/js/copycode.js?v=1.0.0" successtext="复制成功！"></script><link rel="stylesheet" type="text/css" href="/css/copycode.css?v=1.0.0"><script type="text/javascript" src="/js/codeblock-resizer.js?v=1.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=1.0.0"></script></div></body></html>
