@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>拨开字符编码的迷雾(2)--编译器处理文件编码 - CodeSilo</title><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#3273dc"><meta name="application-name" content="CodeSilo"><meta name="msapplication-TileImage" content="img/pi-200.png"><meta name="msapplication-TileColor" content="#3273dc"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="CodeSilo"><meta name="apple-mobile-web-app-status-bar-style" content="default"><link rel="apple-touch-icon" sizes="200x200" href="img/pi-200.png"><meta name="description" content="本文主要介绍微软 MSVC 编译器如何加载和处理 C++代码文件。"><meta property="og:type" content="blog"><meta property="og:title" content="拨开字符编码的迷雾(2)--编译器处理文件编码"><meta property="og:url" content="https://jiangxueqiao.com/post/1337290471.html"><meta property="og:site_name" content="CodeSilo"><meta property="og:description" content="本文主要介绍微软 MSVC 编译器如何加载和处理 C++代码文件。"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://blog-static.jiangxueqiao.com/blog/img/byqrhclzfbm-1.jpg"><meta property="og:image" content="https://blog-static.jiangxueqiao.com/blog/img/byqrhclzfbm-2.jpg"><meta property="article:published_time" content="2017-11-27T13:29:35.000Z"><meta property="article:modified_time" content="2023-10-27T04:54:07.951Z"><meta property="article:author" content="江雪桥"><meta property="article:tag" content="Windows"><meta property="article:tag" content="Linux"><meta property="article:tag" content="C/C++"><meta property="article:tag" content="Golang"><meta property="article:tag" content="Qt"><meta property="article:tag" content="Node.js"><meta property="article:tag" content="Electron"><meta property="article:tag" content="WebRTC"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://blog-static.jiangxueqiao.com/blog/img/byqrhclzfbm-1.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://jiangxueqiao.com/post/1337290471.html"},"headline":"拨开字符编码的迷雾(2)--编译器处理文件编码","image":["https://blog-static.jiangxueqiao.com/blog/img/byqrhclzfbm-1.jpg","https://blog-static.jiangxueqiao.com/blog/img/byqrhclzfbm-2.jpg"],"datePublished":"2017-11-27T13:29:35.000Z","dateModified":"2023-10-27T04:54:07.951Z","author":{"@type":"Person","name":"江雪桥"},"publisher":{"@type":"Organization","name":"CodeSilo","logo":{"@type":"ImageObject","url":"https://blog-static.jiangxueqiao.com/blog/icarus-theme/codesilo.png"}},"description":"本文主要介绍微软 MSVC 编译器如何加载和处理 C++代码文件。"}</script><link rel="canonical" href="https://jiangxueqiao.com/post/1337290471.html"><link rel="icon" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/favicon.png"><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/all.min.css"><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/highlight.js/11.7.0/styles/xt256.css"><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/font/css2/Oxanium-Roboto-Mono.css"><link rel="stylesheet" href="/css/cyberpunk.css"><!--!--><script>var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?fbb46283a7b4d42d425356f8779708d5";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();</script><!--!--><!--!--><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/lightgallery/1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/justifiedGallery/3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/pace-js/1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/codesilo.png" alt="CodeSilo" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">时间轴</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="https://jiangxueqiao.com/post/2185937873.html">留言</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Email" href="mailto:smart7178@163.com"><i class="fa fa-envelope"></i></a><a class="navbar-item" target="_blank" rel="noopener" title="GitHub" href="https://github.com/winsoft666"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2017-11-27T13:29:35.000Z" title="2017/11/27 21:29:35">2017-11-27</time>发表</span><span class="level-item"><time dateTime="2023-10-27T04:54:07.951Z" title="2023/10/27 12:54:07">2023-10-27</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/">① 专栏集锦</a><span> / </span><a class="link-muted" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/%E6%8B%A8%E5%BC%80%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E7%9A%84%E8%BF%B7%E9%9B%BE/">拨开字符编码的迷雾</a></span><span class="level-item twikoo_visitors" id="/post/1337290471.html" data-flag-title="拨开字符编码的迷雾(2)--编译器处理文件编码"><i class="far fa-eye"></i>&nbsp;&nbsp;<span id="twikoo_visitors"><i class="fa fa-spinner fa-spin"></i></span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">拨开字符编码的迷雾(2)--编译器处理文件编码</h1><div class="content"><p>本文主要介绍微软 MSVC 编译器如何加载和处理 C++代码文件。</p>
+<span id="more"></span>
+
+<h1 id="一-Visual-Studio-字符集"><a href="#一-Visual-Studio-字符集" class="headerlink" title="一. Visual Studio 字符集"></a>一. Visual Studio 字符集</h1><p>使用 Visual Studio 创建的 C++工程可以在工程属性<code>配置属性--&gt;常规</code>中配置字符集：<code>使用Unicode字符集</code>（默认）、<code>使用多字节字符集</code>。<br>如图：<br><img src="https://blog-static.jiangxueqiao.com/blog/img/byqrhclzfbm-1.jpg"></p>
+<p>但<strong>这个设置项不会对编译器处理字符编码产生直接的影响</strong>（注意这里的“直接”二字，第 3 节会说到），只会在工程属性<code>配置属性--&gt;C/C++--&gt;预处理器</code>加入相应的宏：</p>
+<figure class="highlight txt"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">使用Unicode字符集 --&gt; _UNICODE和UNICODE宏</span><br><span class="line">使用多字节字符集   --&gt; _MBCS宏</span><br></pre></td></tr></tbody></table></figure>
+
+<p>这几个宏一般用来判断是使用 char 还是 wchar_t，在系统 API 中使用比较多，如 MessegeBox 通过是否定义了 UNICODE 宏来决定是使用 LPCSTR 还是 LPCWSTR（LPCSTR 即 const char*, LPCWSTR 即 const wchar_t*）：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifdef</span> UNICODE</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MessageBox  MessageBoxW</span></span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MessageBox  MessageBoxA</span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">// !UNICODE</span></span></span><br></pre></td></tr></tbody></table></figure>
+
+<h1 id="二-char-和-wchar-t"><a href="#二-char-和-wchar-t" class="headerlink" title="二. char 和 wchar_t"></a>二. char 和 wchar_t</h1><p>上面提到了，定义 API 时通过UNICODE 宏来决定是使用 char 还是 wchar_t类型，那么 char 和 wchar_t 有什么不同了？</p>
+<p>char 和 wchar_t 是标准 C/C++字符类型，并不是 Windows 特有的。 char 固定占 1 个字节，wchar_t 固定占 2 个字节，从内存的角度来看，char、wchar_t 和其他数据类型一样，只是代表一段内存块，用来存储固定长度的二进制 0 或 1。 在编程时，我们一般习惯于将字符串储到 char 或 wchar_t 定义的内存空间中，将整形存储在 int 定义的内存空间中。</p>
+<p>所以，用 char 还是 wchar_t 来存储字符，只是内存分配和数据存储上面的事情，<strong>它们本身也是与字符编码无直接关系的</strong>（ 同样注意这里的“直接”二字，第 3 节会说到）。</p>
+<h1 id="三-编译器如何处理硬编码字符"><a href="#三-编译器如何处理硬编码字符" class="headerlink" title="三. 编译器如何处理硬编码字符"></a>三. 编译器如何处理硬编码字符</h1><p>VC++编译器编译源代码的步骤中，涉及编码处理的步骤主要有 2 个：<br>第 1 步：预处理</p>
+<p>1.1) 读取源文件，判断源文件采用的字符编码类型。(<strong>这一步不会改变文件内容</strong>)</p>
+<figure class="highlight txt"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">编译器判断源文件编码类型的步骤为：</span><br><span class="line">1. 若文件开始处有BOM(EF BB BF)，则判定为UTF-8编码；</span><br><span class="line">2. 若没有BOM，则试图从文件的前8个字节来判断文件是否像UTF-16编码，如果像，则就判断为UTF-16编码。</span><br><span class="line">3. 如果既没BOM，也不是UTF-16编码，则使用系统当前的代码页（简体中文操作系统为CP936）。</span><br></pre></td></tr></tbody></table></figure>
+
+<p>1.2) 将源文件内容转成<code>源字符集</code>(Source Character Set)，默认为 UTF-8 编码。</p>
+<p>第 2 步：链接</p>
+<p>2.1) 将 1.2 中得到的 UTF-8 转为<code>执行字符集</code>(Execution Character Set)：</p>
+<ul>
+<li>对于宽字符串（即 C/C++中以<code>L</code>标记的串，如<code>L"abc"</code>, <code>L'中'</code>），<code>执行字符集</code>为 UTF-16 编码。</li>
+<li>对于窄字符串（和宽字符串对应，即不以<code>L</code>标记的串），<code>执行字符集</code>为系统当前的代码页。</li>
+</ul>
+<p><img src="https://blog-static.jiangxueqiao.com/blog/img/byqrhclzfbm-2.jpg"></p>
+<p>现在我们就可以说清楚 Visual Studio 字符集设置、char、wchar*t 是如何***间接_**影响到编译器对字符编码的处理了：</p>
+<figure class="highlight txt"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Visual Studio字符集设置</span><br><span class="line">      |</span><br><span class="line">决定声明哪一个宏（UNICODE还是_MBCS宏）</span><br><span class="line">      |</span><br><span class="line">宏又决定了API参数使用char还是wchar_t</span><br><span class="line">      |</span><br><span class="line">编译器在进行【执行字符集】编码时对char和wchar_采用不同的处理方式，从而对字符编码产生了影响。</span><br></pre></td></tr></tbody></table></figure>
+
+<blockquote>
+<p>在 Visual Studio 2010（含）之后，支持使用<code>#pragma execution_character_set</code>来设置执行字符集。</p>
+</blockquote>
+<h1 id="四-实例分析"><a href="#四-实例分析" class="headerlink" title="四. 实例分析"></a>四. 实例分析</h1><ul>
+<li>已知汉字“中”的各种编码如下：</li>
+</ul>
+<figure class="highlight txt"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">GBK        D6 D0</span><br><span class="line">Unicode    2D 4E</span><br><span class="line">UTF-8      E4 B8 AD</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>函数<code>DumpCharacterCode</code>用于按字节打印内存中的数据：</li>
+</ul>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">DumpCharacterCode</span><span class="params">(<span class="type">const</span> <span class="type">char</span>* pChar, <span class="type">int</span> iSize)</span> </span>{</span><br><span class="line">  <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; iSize; i++) {</span><br><span class="line">    <span class="type">char</span> a = *pChar++;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%02X "</span>, a &amp; <span class="number">0xff</span>);</span><br><span class="line">  }</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li><p>设置系统代码页的方法：<br>“控制面板” –&gt; “区域和语言” –&gt; “管理” –&gt; “非 Unicode 程序的语言” –&gt; “更改系统区域设置”</p>
+</li>
+<li><p>Visual Studio 保存文件到指定编码方法：<br>“文件” –&gt; “高级保存选项”</p>
+</li>
+</ul>
+<h2 id="4-1-测试编译器处理窄字符编码"><a href="#4-1-测试编译器处理窄字符编码" class="headerlink" title="4.1 测试编译器处理窄字符编码"></a>4.1 测试编译器处理窄字符编码</h2><p>测试代码如下：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> _tmain(<span class="type">int</span> argc, _TCHAR* argv[])</span><br><span class="line">{</span><br><span class="line">  <span class="type">char</span> buf[<span class="number">100</span>] = {<span class="string">"中"</span>};   <span class="comment">// char</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">DumpCharacterCode</span>(buf, <span class="number">2</span>);  <span class="comment">// 也可以打印4个字节</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>针对不同的系统代码页和源文件编码，打印出的汉字“中”的编码分别为：</p>
+<table>
+<thead>
+<tr>
+<th>测试用例</th>
+<th>系统代码页</th>
+<th>保存源文件编码</th>
+<th>编译器判断文件采用的编码</th>
+<th>源字符集(Source Character Set)</th>
+<th>执行字符集(Execution Character Set)</th>
+<th>打印输出</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>用例 1</td>
+<td>简体中文 CP936</td>
+<td>简体中文 CP936</td>
+<td>简体中文 CP936</td>
+<td>UTF-8</td>
+<td>简体中文 CP936</td>
+<td>D6 D0</td>
+</tr>
+<tr>
+<td>用例 2</td>
+<td>简体中文 CP936</td>
+<td>UTF-8 BOM</td>
+<td>UTF-8 BOM</td>
+<td>UTF-8</td>
+<td>简体中文 CP936</td>
+<td>D6 D0</td>
+</tr>
+<tr>
+<td>用例 3</td>
+<td>简体中文 CP936</td>
+<td>UTF-8</td>
+<td>简体中文 CP936</td>
+<td>UTF-8</td>
+<td>简体中文 CP936</td>
+<td>编译错误(C2146)</td>
+</tr>
+<tr>
+<td>用例 4</td>
+<td>西欧 CP1252</td>
+<td>简体中文 CP936</td>
+<td>西欧 CP1252</td>
+<td>UTF-8</td>
+<td>西欧 CP1252</td>
+<td>D6 D0</td>
+</tr>
+<tr>
+<td>用例 5</td>
+<td>西欧 CP1252</td>
+<td>UTF-8 BOM</td>
+<td>UTF-8 BOM</td>
+<td>UTF-8</td>
+<td>西欧 CP1252</td>
+<td>3F 00</td>
+</tr>
+</tbody></table>
+<p>表格中列 4~6 依次对应编译处理源文件的几个步骤。<br><code>3F</code>对应的 ASCII 字符为<code>?</code>，编译器遇到不能识别的字符时，就会用<code>?</code>来替代。 出现<code>?</code>的情况会伴随着编译警告<code>C4566</code>。<br>上面出现了 1 次<code>3F</code>（用例 5），导致乱码的原因是<code>UTF-8 --&gt; 西欧 CP1252</code>. <code>西欧 CP1252</code>也就是 ASCII 的扩展，不支持汉字，所以用<code>3F</code>替代。</p>
+<h4 id="用例-3-为什么会编译错误？"><a href="#用例-3-为什么会编译错误？" class="headerlink" title="用例 3 为什么会编译错误？"></a>用例 3 为什么会编译错误？</h4><p>微软的编译器只能识别带 BOM 的 UTF-8，用例 3 的 UTF-8 没带 BOM，编译器会判定源文件编码为系统当前代码页 CP936。“中”的 UTF-8 编码为<code>E4 B8 AD</code>，列 5 执行从 CP936 到 UTF-8 转换之后变成了<code>E6 B6 93 3F</code>，列 6 再要将<code>E6 B6 93 3F</code>转换为 CP936 肯定是转换不回去的，相当于 UTF-8（1） –&gt; UTF-8 （2），再将 UTF-8（2）转换回 CP936，这时肯定得到的字符不是原来的字符了。</p>
+<h4 id="用例-4-为什么输出的D6-D0，而不是3F？"><a href="#用例-4-为什么输出的D6-D0，而不是3F？" class="headerlink" title="用例 4 为什么输出的D6 D0，而不是3F？"></a>用例 4 为什么输出的<code>D6 D0</code>，而不是<code>3F</code>？</h4><p>对着用例 4 的各个顺序来看，源文件通过 CP936 保存着，但编译器通过 CP1252 来读取的，CP1252 就是 ASCII 扩展，单字节的，虽然此时显示为乱码，但各字节仍然是 D6 D0；然后将读取到的文件内容从 CP1252 转成 UTF-8 编码，转码后为 C3 96 C3 90；然后再将 UTF-8 编码转回为 CP1251，转码就又变成了 D6 D0。 但这个<code>D6 D0</code>在 CP1252 中是无法显示的，如果我们在用例 4 加入<code>MessageBoxA(NULL, "中", "test", MB_OK);</code> 会发现弹出的对话框中显示仍然是乱码。<br>可以使用下面的代码进行测试：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> _tmain(<span class="type">int</span> argc, _TCHAR* argv[])</span><br><span class="line">{</span><br><span class="line">  <span class="type">char</span> buf[<span class="number">3</span>] = { <span class="number">0</span> };    <span class="comment">// 模拟CP936编码的“中”</span></span><br><span class="line">  buf[<span class="number">0</span>] = <span class="number">0xD6</span>;</span><br><span class="line">  buf[<span class="number">1</span>] = <span class="number">0xD0</span>;</span><br><span class="line"></span><br><span class="line">  std::string strUTF8 = <span class="built_in">ANSIToUTF8</span>(buf, <span class="number">1252</span>);</span><br><span class="line">  <span class="type">char</span> *p = (<span class="type">char</span>*)strUTF8.<span class="built_in">c_str</span>();  <span class="comment">// 通过visual studio查看指针p处内存为： C3 96 C3 90</span></span><br><span class="line"></span><br><span class="line">  std::string str = <span class="built_in">UTF8ToANSI</span>(strUTF8, <span class="number">1252</span>);</span><br><span class="line">  p = (<span class="type">char</span>*)str.<span class="built_in">c_str</span>();   <span class="comment">// 通过visual studio查看指针p处内存为： D6 D0</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="4-2-测试编译器处理宽字符编码"><a href="#4-2-测试编译器处理宽字符编码" class="headerlink" title="4.2 测试编译器处理宽字符编码"></a>4.2 测试编译器处理宽字符编码</h2><p>测试代码如下：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> _tmain(<span class="type">int</span> argc, _TCHAR* argv[])</span><br><span class="line">{</span><br><span class="line">  <span class="type">wchar_t</span> buf[<span class="number">100</span>] = {<span class="string">L"中"</span>};   <span class="comment">// wchar_t</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">DumpCharacterCode</span>((<span class="type">char</span>*)buf, <span class="number">4</span>); <span class="comment">// 打印4个字节</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>同样，针对不同的系统代码页和源文件编码，打印出的汉字“中”的编码分别为：</p>
+<table>
+<thead>
+<tr>
+<th>测试用例</th>
+<th>系统代码页</th>
+<th>保存源文件编码</th>
+<th>编译器判断文件采用的编码</th>
+<th>源字符集(Source Character Set)</th>
+<th>执行字符集(Execution Character Set)</th>
+<th>打印输出</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>用例 1</td>
+<td>简体中文 CP936</td>
+<td>简体中文 CP936</td>
+<td>简体中文 CP936</td>
+<td>UTF-8</td>
+<td>UTF-16</td>
+<td>2D 4E 00 00</td>
+</tr>
+<tr>
+<td>用例 2</td>
+<td>简体中文 CP936</td>
+<td>UTF-8 BOM</td>
+<td>UTF-8 BOM</td>
+<td>UTF-8</td>
+<td>UTF-16</td>
+<td>2D 4E 00 00</td>
+</tr>
+<tr>
+<td>用例 3</td>
+<td>简体中文 CP936</td>
+<td>UTF-8</td>
+<td>简体中文 CP936</td>
+<td>UTF-8</td>
+<td>UTF-16</td>
+<td>编译错误(C2146)</td>
+</tr>
+<tr>
+<td>用例 4</td>
+<td>西欧 CP1252</td>
+<td>简体中文 CP936</td>
+<td>西欧 CP1252</td>
+<td>UTF-8</td>
+<td>UTF-16</td>
+<td>D6 00 D0 00 <strong>大小端</strong></td>
+</tr>
+<tr>
+<td>用例 5</td>
+<td>西欧 CP1252</td>
+<td>UTF-8 BOM</td>
+<td>UTF-8 BOM</td>
+<td>UTF-8</td>
+<td>UTF-16</td>
+<td>2D 4E 00 00</td>
+</tr>
+</tbody></table>
+<h1 id="五-彻底避免硬编码字符乱码"><a href="#五-彻底避免硬编码字符乱码" class="headerlink" title="五. 彻底避免硬编码字符乱码"></a>五. 彻底避免硬编码字符乱码</h1><p>通过第 3 节的说明，很容易知道，要开发支持多语言，在任意语言（系统代码页）的 windows 环境下都正常编译，且运行起来没有乱码的程序，需要遵循如下原则：</p>
+<ol>
+<li>代码文件采用 UTF-8 with BOM 编码。</li>
+<li>Visual Studio 字符集设置为 Unicode 字符集。</li>
+<li>使用 wchar_t。</li>
+</ol>
+<p>做到上面 3 步，你的代码被别人从 github 上 clone 下来编译，不会因为你代码中含有中文等字符，产生类似<code>error C2015</code>这样的编译错误，更不会产生乱码。</p>
+<blockquote>
+<p>本文介绍的方法只用来解决硬编码字符乱码的问题，至于数据传输中的乱码，需要统一字符编码来解决。</p>
+</blockquote>
+<blockquote>
+<p>参考: <a target="_blank" rel="noopener" href="https://blogs.msdn.microsoft.com/vcblog/2016/02/22/new-options-for-managing-character-sets-in-the-microsoft-cc-compiler">https://blogs.msdn.microsoft.com/vcblog/2016/02/22/new-options-for-managing-character-sets-in-the-microsoft-cc-compiler</a></p>
+</blockquote>
+<blockquote>
+<p>文章图片带有“CSDN”水印的说明：<br>由于该文章和图片最初发表在我的<a target="_blank" rel="noopener" href="https://blog.csdn.net/china_jeffery">CSDN 博客</a>中，因此图片被 CSDN 自动添加了水印。</p>
+</blockquote>
+</div><div class="article-licensing box"><div class="licensing-title"><p>拨开字符编码的迷雾(2)--编译器处理文件编码</p><p><a href="https://jiangxueqiao.com/post/1337290471.html">https://jiangxueqiao.com/post/1337290471.html</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>江雪桥</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2017-11-27</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2023-10-27</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/post/1559270845.html"><i class="level-item fas fa-chevron-left"></i><span class="level-item">拨开字符编码的迷雾(4)--MySQL字符编码</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/post/4126466705.html"><span class="level-item">拨开字符编码的迷雾(3)--字符编码转换</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div class="content twikoo" id="twikoo"></div><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/twikoo/1.6.6/dist/twikoo.all.min.js"></script><script>twikoo.init({
+            envId: 'https://twikoo.jiangxueqiao.com',
+            
+            lang: "zh-CN",
+        });</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/pi-200.png" alt="Jiang Xueqiao"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Jiang Xueqiao</p><p class="is-size-6 is-block">Software Engineer</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Wuhan, Hubei</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">156</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">26</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">30</p></a></div></div></nav></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-11-26T11:07:09.000Z">2023-11-26</time></p><p class="title"><a href="/post/1533480858.html">Windows窗口调试利器-WinSpyPlus</a></p><p class="categories"><a href="/categories/%E2%91%A2-Power-By-Me/">③ Power By Me</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-11-26T09:39:23.000Z">2023-11-26</time></p><p class="title"><a href="/post/2510508225.html">Windows API的不同返回状态</a></p><p class="categories"><a href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/">① 专栏集锦</a> / <a href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B/">Windows核心编程</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/post/711494356.html"><img src="https://blog-static.jiangxueqiao.com/blog/img/qt-logo.png" alt="Qt自定义和美化菜单"></a></figure><div class="media-content"><p class="date"><time dateTime="2023-11-07T06:00:00.000Z">2023-11-07</time></p><p class="title"><a href="/post/711494356.html">Qt自定义和美化菜单</a></p><p class="categories"><a href="/categories/%E2%91%A1-C/">② C++</a> / <a href="/categories/%E2%91%A1-C/Qt/">Qt</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-11-02T05:45:13.000Z">2023-11-02</time></p><p class="title"><a href="/post/3832058229.html">为什么SetParent会失败</a></p><p class="categories"><a href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/">① 专栏集锦</a> / <a href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B/">Windows核心编程</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-10-31T15:55:23.000Z">2023-10-31</time></p><p class="title"><a href="/post/2065788833.html">窗口如何逃脱显示桌面指令</a></p><p class="categories"><a href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/">① 专栏集锦</a> / <a href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B/">Windows核心编程</a></p></div></article></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/"><span class="level-start"><span class="level-item">① 专栏集锦</span></span><span class="level-end"><span class="level-item tag">63</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E5%86%85%E5%AD%98%E4%BD%93%E7%B3%BB/"><span class="level-start"><span class="level-item">Windows内存体系</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E5%A5%97%E6%8E%A5%E5%AD%97I-O%E6%A8%A1%E5%9E%8B/"><span class="level-start"><span class="level-item">Windows套接字I/O模型</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B/"><span class="level-start"><span class="level-item">Windows核心编程</span></span><span class="level-end"><span class="level-item tag">19</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E6%B3%A8%E5%85%A5%E4%B8%8E%E6%8B%A6%E6%88%AA/"><span class="level-start"><span class="level-item">Windows注入与拦截</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/%E6%89%93%E5%8C%85%E7%8B%82%E9%AD%94%E4%B9%8BNSIS%E6%95%99%E7%A8%8B/"><span class="level-start"><span class="level-item">打包狂魔之NSIS教程</span></span><span class="level-end"><span class="level-item tag">13</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/%E6%8B%A8%E5%BC%80%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E7%9A%84%E8%BF%B7%E9%9B%BE/"><span class="level-start"><span class="level-item">拨开字符编码的迷雾</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/"><span class="level-start"><span class="level-item">网络协议</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E2%91%A1-C/"><span class="level-start"><span class="level-item">② C++</span></span><span class="level-end"><span class="level-item tag">27</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E2%91%A1-C/Qt/"><span class="level-start"><span class="level-item">Qt</span></span><span class="level-end"><span class="level-item tag">15</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E2%91%A2-Power-By-Me/"><span class="level-start"><span class="level-item">③ Power By Me</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A3-Electron/"><span class="level-start"><span class="level-item">④ Electron</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A4-%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E7%A8%8B/"><span class="level-start"><span class="level-item">⑤ 音视频编程</span></span><span class="level-end"><span class="level-item tag">11</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E2%91%A4-%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E7%A8%8B/WebRTC/"><span class="level-start"><span class="level-item">WebRTC</span></span><span class="level-end"><span class="level-item tag">9</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E2%91%A5-%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%8F%91/"><span class="level-start"><span class="level-item">⑥ 服务器开发</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A6-%E8%BD%AF%E4%BB%B6%E8%B0%83%E8%AF%95/"><span class="level-start"><span class="level-item">⑦ 软件调试</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A7-%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84/"><span class="level-start"><span class="level-item">⑧ 软件架构</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A8-%E6%95%B0%E6%8D%AE%E5%BA%93/"><span class="level-start"><span class="level-item">⑨ 数据库</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A9-%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"><span class="level-start"><span class="level-item">⑩ 编程基础</span></span><span class="level-end"><span class="level-item tag">13</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E2%91%A9-%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/CMake/"><span class="level-start"><span class="level-item">CMake</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A9-%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E6%89%B9%E5%A4%84%E7%90%86/"><span class="level-start"><span class="level-item">批处理</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E2%91%AA-%E5%BC%80%E6%BA%90%E5%BA%93/"><span class="level-start"><span class="level-item">⑪ 开源库</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%AB-Web%E5%BC%80%E5%8F%91/"><span class="level-start"><span class="level-item">⑫ Web开发</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%AC-%E7%BE%8E%E6%96%87%E8%B5%8F%E6%9E%90/"><span class="level-start"><span class="level-item">⑬ 美文赏析</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%AD-%E6%9D%82%E5%BF%B5/"><span class="level-start"><span class="level-item">⑭ 杂念</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%AE-%E7%88%B1%E6%8A%98%E8%85%BE/"><span class="level-start"><span class="level-item">⑮ 爱折腾</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#一-Visual-Studio-字符集"><span class="level-left"><span class="level-item">一. Visual Studio 字符集</span></span></a></li><li><a class="level is-mobile" href="#二-char-和-wchar-t"><span class="level-left"><span class="level-item">二. char 和 wchar_t</span></span></a></li><li><a class="level is-mobile" href="#三-编译器如何处理硬编码字符"><span class="level-left"><span class="level-item">三. 编译器如何处理硬编码字符</span></span></a></li><li><a class="level is-mobile" href="#四-实例分析"><span class="level-left"><span class="level-item">四. 实例分析</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#4-1-测试编译器处理窄字符编码"><span class="level-left"><span class="level-item">4.1 测试编译器处理窄字符编码</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#用例-4-为什么输出的D6-D0，而不是3F？"><span class="level-left"><span class="level-item">用例 4 为什么输出的D6 D0，而不是3F？</span></span></a></li></ul></li><li><a class="level is-mobile" href="#4-2-测试编译器处理宽字符编码"><span class="level-left"><span class="level-item">4.2 测试编译器处理宽字符编码</span></span></a></li></ul></li><li><a class="level is-mobile" href="#五-彻底避免硬编码字符乱码"><span class="level-left"><span class="level-item">五. 彻底避免硬编码字符乱码</span></span></a></li></ul></div></div><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/codesilo.png" alt="CodeSilo" height="28"></a><p class="is-size-7"><span class="is-size-7">© 2017~2023 江雪桥</span>  <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/" style="color:#000">鄂ICP备2020015399号-6</a>  </p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="GitHub" href="https://github.com/winsoft666"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/jquery/3.3.1/dist/jquery.min.js"></script><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/moment/2.22.2/min/moment-with-locales.min.js"></script><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/clipboard/2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/lightgallery/1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/justifiedGallery/3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/mathjax/2.7.9/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

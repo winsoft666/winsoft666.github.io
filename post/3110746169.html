@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>聊聊桌面客户端开发的技术选型 - CodeSilo</title><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#3273dc"><meta name="application-name" content="CodeSilo"><meta name="msapplication-TileImage" content="img/pi-200.png"><meta name="msapplication-TileColor" content="#3273dc"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="CodeSilo"><meta name="apple-mobile-web-app-status-bar-style" content="default"><link rel="apple-touch-icon" sizes="200x200" href="img/pi-200.png"><meta name="description" content="桌面客户端（也叫 PC 客户端，支持 Windows、MacOS、Ubuntu 等系统）开发有多种技术选型的方式，每种方式各有优劣。采用不同的方式会导致在开发周期、技术人员构成、软件性能、安装包体积等方面有比较大的差别。本文结合作者多年客户端开发经验，聊聊在客户端开发方面的各种技术选型。"><meta property="og:type" content="blog"><meta property="og:title" content="聊聊桌面客户端开发的技术选型"><meta property="og:url" content="https://jiangxueqiao.com/post/3110746169.html"><meta property="og:site_name" content="CodeSilo"><meta property="og:description" content="桌面客户端（也叫 PC 客户端，支持 Windows、MacOS、Ubuntu 等系统）开发有多种技术选型的方式，每种方式各有优劣。采用不同的方式会导致在开发周期、技术人员构成、软件性能、安装包体积等方面有比较大的差别。本文结合作者多年客户端开发经验，聊聊在客户端开发方面的各种技术选型。"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://blog-static.jiangxueqiao.com/blog/img/llkhdjsxx-1.jpg"><meta property="og:image" content="https://blog-static.jiangxueqiao.com/blog/img/llkhdjsxx-2.gif"><meta property="article:published_time" content="2023-07-22T15:35:10.000Z"><meta property="article:modified_time" content="2023-11-01T03:58:46.783Z"><meta property="article:author" content="江雪桥"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://blog-static.jiangxueqiao.com/blog/img/llkhdjsxx-1.jpg"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://jiangxueqiao.com/post/3110746169.html"},"headline":"聊聊桌面客户端开发的技术选型","image":["https://blog-static.jiangxueqiao.com/blog/img/llkhdjsxx-1.jpg","https://blog-static.jiangxueqiao.com/blog/img/llkhdjsxx-2.gif"],"datePublished":"2023-07-22T15:35:10.000Z","dateModified":"2023-11-01T03:58:46.783Z","author":{"@type":"Person","name":"江雪桥"},"publisher":{"@type":"Organization","name":"CodeSilo","logo":{"@type":"ImageObject","url":"https://blog-static.jiangxueqiao.com/blog/icarus-theme/codesilo.png"}},"description":"桌面客户端（也叫 PC 客户端，支持 Windows、MacOS、Ubuntu 等系统）开发有多种技术选型的方式，每种方式各有优劣。采用不同的方式会导致在开发周期、技术人员构成、软件性能、安装包体积等方面有比较大的差别。本文结合作者多年客户端开发经验，聊聊在客户端开发方面的各种技术选型。"}</script><link rel="canonical" href="https://jiangxueqiao.com/post/3110746169.html"><link rel="icon" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/favicon.png"><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/all.min.css"><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/highlight.js/11.7.0/styles/xt256.css"><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/font/css2/Oxanium-Roboto-Mono.css"><link rel="stylesheet" href="/css/cyberpunk.css"><!--!--><script>var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?fbb46283a7b4d42d425356f8779708d5";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();</script><!--!--><!--!--><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/lightgallery/1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/justifiedGallery/3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/pace-js/1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/codesilo.png" alt="CodeSilo" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">时间轴</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="https://jiangxueqiao.com/post/2185937873.html">留言</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Email" href="mailto:smart7178@163.com"><i class="fa fa-envelope"></i></a><a class="navbar-item" target="_blank" rel="noopener" title="GitHub" href="https://github.com/winsoft666"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-07-22T15:35:10.000Z" title="2023/7/22 23:35:10">2023-07-22</time>发表</span><span class="level-item"><time dateTime="2023-11-01T03:58:46.783Z" title="2023/11/1 11:58:46">2023-11-01</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E2%91%A7-%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84/">⑧ 软件架构</a></span><span class="level-item twikoo_visitors" id="/post/3110746169.html" data-flag-title="聊聊桌面客户端开发的技术选型"><i class="far fa-eye"></i>&nbsp;&nbsp;<span id="twikoo_visitors"><i class="fa fa-spinner fa-spin"></i></span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">聊聊桌面客户端开发的技术选型</h1><div class="content"><p>桌面客户端（也叫 PC 客户端，支持 Windows、MacOS、Ubuntu 等系统）开发有多种技术选型的方式，每种方式各有优劣。采用不同的方式会导致在开发周期、技术人员构成、软件性能、安装包体积等方面有比较大的差别。本文结合作者多年客户端开发经验，聊聊在客户端开发方面的各种技术选型。</p>
+<span id="more"></span>
+
+<h1 id="1-WinForms"><a href="#1-WinForms" class="headerlink" title="1. WinForms"></a>1. WinForms</h1><p>WinForms（Windows Forms）是微软推出的 UI 框架，可以使用 C#和 Visual Basic 语言开发。<br>WinForms 框架适合开发传统 UI 元素和界面的应用程序，比如工业、医疗领域的管理、控制软件。<br><img src="https://blog-static.jiangxueqiao.com/blog/img/llkhdjsxx-1.jpg"></p>
+<blockquote>
+<p>WinForms 也能开发出绚丽、非标准化的界面效果，但需要花费较多的时间，对开发人员的技术要求也更高。</p>
+</blockquote>
+<p>基于 WinForms 开发的应用程序需要依赖.Net Framework 运行时，如果用户电脑上未安装，则需要自动为用户安装，否则程序无法运行。</p>
+<p>使用 WinForms 开发的应用程序体积本身很小，但为了适应不同的用户电脑环境，安装包需要检测用户电脑上的.Net Framework 运行时版本是否与软件所需版本匹配，如不匹配则需要自动安装相应的.Net Framework 运行时。</p>
+<p>.Net Framework 很难做成便携版，通常需要使用微软提供的安装包进行安装，安装.Net Framework 运行时分为在线和离线安装两种方式：</p>
+<ul>
+<li>离线安装方式。<br>将微软提供的.Net Framework 离线安装包（不同版本体积不同，如 4.8 版本的离线安装包约 115M 左右）打包进程序安装包，安装时进行释放和安装。这种方式会增加程序安装包的体积。</li>
+<li>在线安装方式。<br>将微软提供的.Net Framework 在线安装工具（体积很小，约 1.5M 左右）打包进程序安装包，安装时进行释放和在线安装，这种方式虽然可以减少安装包体积，但在线安装需要实时从微软服务器下载资源，受限于用户网络环境，可能导致安装失败。</li>
+</ul>
+<h2 id="1-1-Net-Framework-版本兼容性"><a href="#1-1-Net-Framework-版本兼容性" class="headerlink" title="1.1 .Net Framework 版本兼容性"></a>1.1 .Net Framework 版本兼容性</h2><p>在.Net Framework 4.5 版本之前，其各个版本之间不相互兼容（无论是向前还是向后都无法兼容），但从 4.5 及以后的版本就可以保证向后兼容了。</p>
+<p>举例说明：</p>
+<ul>
+<li>如果程序使用.Net Framework 3.5 版本开发，则只能基于该版本的运行时运行。</li>
+<li>如果程序使用.Net Framework 4.6 版本开发，则用户电脑上只需要安装<code>&gt;=4.6</code> 版本的运行时即可运行。</li>
+</ul>
+<h2 id="1-2-系统自带-Net-Framework-版本"><a href="#1-2-系统自带-Net-Framework-版本" class="headerlink" title="1.2 系统自带.Net Framework 版本"></a>1.2 系统自带.Net Framework 版本</h2><p>从 Windows Vista 开始，Windows 系统会自带.Net Framework 运行时，但各个系统自带的运行时版本不同。</p>
+<p>下表列出了不同系统自带的.Net Framework 运行时的最低版本：</p>
+<blockquote>
+<p>为什么是最低版本了？<br>因为用户可能通过系统升级的方式更新了.Net Framework 运行时的版本。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>操作系统</th>
+<th>.Net Framework 运行时版本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Windows XP</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>Windows Vista</td>
+<td>2.0</td>
+</tr>
+<tr>
+<td>Windows 7</td>
+<td>3.5</td>
+</tr>
+<tr>
+<td>Windows 8</td>
+<td>4.5</td>
+</tr>
+<tr>
+<td>Windows 10</td>
+<td>4.6 ~ 4.7</td>
+</tr>
+<tr>
+<td>Windows 11</td>
+<td>4.8+</td>
+</tr>
+</tbody></table>
+<p>不同系统所支持的.Net Framework 最高版本也有所不同：</p>
+<ul>
+<li>Windows XP 最高支持.NET Framework 4.0</li>
+<li>Windows 7 最高支持.NET Framework 4.6.2</li>
+<li>Windows 8.1 最高支持.NET Framework 4.6.2</li>
+<li>Windows 10 和 Windows 11 可以支持任意版本的.NET Framework</li>
+</ul>
+<h2 id="1-3-Net-Core"><a href="#1-3-Net-Core" class="headerlink" title="1.3 .Net Core"></a>1.3 .Net Core</h2><blockquote>
+<p>.Net Core 官网：<a target="_blank" rel="noopener" href="https://dotnet.microsoft.com/en-us/">https://dotnet.microsoft.com/en-us/</a></p>
+</blockquote>
+<p>.Net Core 是微软开发的一个开源的、跨平台的（支持 Windows、MacOS、Linux 等系统）通用软件开发框架。在.Net Core 出现之前，开发人员只能基于.Net Framwork 开发 WinForms 应用程序，.Net Core 出现之后，开发人员多了一种选择。</p>
+<p>.Net Core 与.Net Framework 最大的不同在于.Net Core 是开源和跨平台的，基于.Net Core 开发的应用程序可以运行在不同的操作系统上，如 Windows、Linux、MacOS。</p>
+<p>.Net Core 还处于快速的更新迭代中，之前的老版本对 WinForms 及 WPF 的支持不太好（甚至不支持），建议采用最新版本的.Net Core 进行开发。</p>
+<p>使用.Net Core 开发的应用的体积本身非常小，但在打包分发时也需要携带.Net Core 运行时。不同于.Net Framework，.Net Core 运行时既支持安装包的方式，也支持便携版的方式。<br>以.Net Core 6.0 版本为例，微软官方提供的 WindowsDesktop 的运行时大小为 50M，我们可以根据程序实际依赖情况，安装包只包含程序依赖的文件，从而缩减安装包体积（缩减后约 20M 左右）。</p>
+<h1 id="2-WPF"><a href="#2-WPF" class="headerlink" title="2. WPF"></a>2. WPF</h1><p>WPF（Windows Presentation Foundation）也是微软推出的 UI 框架。与 WinForms 一样，可以使用 C#和 Visual Basic 进行开发，也都支持.Net Framework 和.Net Core 两种开发平台。</p>
+<p>使用 WPF 框架开发的应用程序界面更加炫酷，界面组件可随意定制化，适合用于对界面要求较高的应用。</p>
+<p>WPF 程序的性能稍逊与 WinForms 应用，不过这种性能差别在计算机硬件配置快速提升的今天已在逐渐的被淡化，因此在进行技术选型时 WPF 的性能问题基本可以忽略。</p>
+<p>需要注意的是，WPF 应用在启动时通常较慢，比如用户打开应用后需要花费大概 1 秒左右的时间才能看见主界面。</p>
+<h1 id="3-MFC"><a href="#3-MFC" class="headerlink" title="3. MFC"></a>3. MFC</h1><p>MFC（Microsoft Foundation Classes）是微软提供的一个基础类库，对 Windows 系统 API 进行了封装，包含一些基础控件，从而减少应用开发人员的工作量。<br>MFC 应用程序的开发语言为 C++，MFC 提供的控件都是常规的 Windows 风格，和 WinForms 一样，如果需要开发炫丽、交互复杂的界面，需要开发人员花费精力自己绘制，会降低不少开发效率。</p>
+<p>MFC 比较适合应用在对软件性能要求较高、调用系统 API 较多、界面交互较简单的软件上。</p>
+<h1 id="4-DirectUI"><a href="#4-DirectUI" class="headerlink" title="4. DirectUI"></a>4. DirectUI</h1><p>DirectUI 是一类技术的统称，即 <code>Paint on parent dc directly</code>，直接在父窗体上进行绘制。是对 MFC 的一种改进，整个窗口只有一个句柄，而不是像 MFC 一样，每个控件都有一个句柄。</p>
+<p>目前流行的 DirectUI 界面库大多由个人开发并开源，由于没有专门的团队进行维护，因此使用该类界面库的公司通常需要自己维护一个分支进行 Bug 修复和添加新功能。</p>
+<p>常用的 DirectUI 界面库有：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/duilib/duilib">duilib</a> 作者已基本不维护。</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/qdtroy/DuiLib_Ultimate">DuiLib_Ultimate</a> 其他人维护的一个 duilib 版本。</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/vczh-libraries/GacUI">GacUI</a></li>
+<li>……</li>
+</ul>
+<p>建议选择技术人员熟练的库，最好熟悉源码可以进行 Bug 修复和功能定制开发。</p>
+<p>DirectUI 界面库通常都是轻量级的，因此其开发的应用程序体积都会比较小。</p>
+<h1 id="5-Qt"><a href="#5-Qt" class="headerlink" title="5. Qt"></a>5. Qt</h1><p>Qt 是一个跨平台的 C++图像界面开发框架，不仅支持 Windows、MacOS、Linux 等 PC 操作系统，还支持嵌入式 QNX、VxWorks 及 Android、iOS 等操作系统。</p>
+<p>Qt 的应用非常广泛，是目前使用最广的 C++ 图像界面框架。Qt 应用程序的开发语言为 C++，Qt 比 MFC 上手更快，而且在控件定制、 UI 绘制上也比 MFC 方便。</p>
+<p><img src="https://blog-static.jiangxueqiao.com/blog/img/llkhdjsxx-2.gif"></p>
+<p>以 Qt 5.15.2 版本为例，Qt 应用程序打包后的体积最小到 6MB 左右，如果使用更老版本的 Qt，体积可以更小。</p>
+<h2 id="5-1-Qt-版权问题"><a href="#5-1-Qt-版权问题" class="headerlink" title="5.1 Qt 版权问题"></a>5.1 Qt 版权问题</h2><p>Qt 分为开源版本和商业版本，开源版本可以免费使用，商业版本需要付费才能使用。开源版本也可以用于商业用途，但需要遵守相应的规则。</p>
+<p>Qt中的大多数模块采用LGPL开源协议，少部分模块采用的是GPL协议，在开发商业软件是我们应选择LGPL协议的模块，并采用Qt动态链接库的方式（而不是静态库的方式）。</p>
+<blockquote>
+<p>对应有些必须静态链接的模块，如<code>QtMain</code>，Qt采用BSD协议，允许在商业软件中使用。</p>
+</blockquote>
+<p>慎用采用GPL协议的模块，该协议具有传染性，它要求所有使用这些模块的软件要开源，因此要慎用GPL协议的模块。</p>
+<p>可以在<a target="_blank" rel="noopener" href="https://www.qt.io/product/features">https://www.qt.io/product/features</a>网站查询Qt模块对应的开源协议。</p>
+<p>另外如果有对 Qt 源码进行修改，需要公布修改部分的源码。</p>
+<h1 id="6-CEF"><a href="#6-CEF" class="headerlink" title="6. CEF"></a>6. CEF</h1><blockquote>
+<p>CEF 官网：<br><a target="_blank" rel="noopener" href="https://bitbucket.org/chromiumembedded/cef/wiki/Home">https://bitbucket.org/chromiumembedded/cef/wiki/Home</a>。</p>
+</blockquote>
+<p>CEF（Chromium Embedded Framework ）是 Google 公司开发的一个跨平台的浏览器内核框架（与 Chrome 浏览器为同一内核），以开源库的方式提供，可以内嵌到第三方程序中用于显示网页以及与网页进行交互。</p>
+<p>CEF 自身主要使用 C++进行开发，目前也有 CEF 的其他语言的绑定，比如 CefSharp 就是 C#的绑定。因此基于 CEF 技术方案，可以使用 C++、C#或其他语言作为开发语言，但据我了解大多使用的还是 C++。</p>
+<p>在开发中，我们通常不会直接使用 CEF，而是进行二次封装，将其封装成组件，该组件用于打开 Web 页面，由 Web 页面进行界面交互，Javascript 和 C++或 C#进行交互。</p>
+<blockquote>
+<p>为了节省开发时间，可以使用我封装的<a target="_blank" rel="noopener" href="https://github.com/winsoft666/QCefWidget">QCefWidget</a>组件。</p>
+</blockquote>
+<p>CEF 经历了 CEF1 和 CEF3 两个大版本，CEF1 现已基本被淘汰，目前主流的是 CEF3（CEF 2623 版本是最后一个支持 Windows XP 的版本）。</p>
+<p>由于版权问题，CEF 默认不支持 MP4 解码，如需支持，需要自行下载源码进行编译（这个过程可能会耗时 1 天左右）。</p>
+<p>采用 CEF 内嵌 Web 页面的方式，可以借助 Web 开发的优势，极大提升软件开发效率，Web 页面更新起来也比客户端的升级更加方便。但由于本质还是客户端内嵌浏览器，因此软件内存占用会比较高，通常一个简单的程序可能会占用 100MB 左右。在性能方面，也远远不及上面介绍的其他原生开发方式。</p>
+<p>CEF 不同版本的体积差距较大，2623 版本压缩后大约 25MB，而 89.0.18 版本压缩后大约 60MB。不同版本对 Web 新特效的支持程度不同，在不在乎安装包体积的情况下可以选择最新版本，如果需要考虑安装包体积，则需要做出权衡。</p>
+<p>采用该技术方案需要由 Web 开发者开发客户端内嵌页面，并 C++开发者开发客户端主体框架，由于 Web 页面无法直接访问系统资源，因此还需 Web 与 C++进行交互，由 C++完成系统功能的开发。</p>
+<h1 id="7-Electron"><a href="#7-Electron" class="headerlink" title="7. Electron"></a>7. Electron</h1><p>前面提到使用 CEF 时需要二次封装，而 CEF 的接口又不是那么易于使用，所以封装一个功能完整、稳定运行的 CEF 组件需要花费不少时间。而 Electron 则是基于 CEF 进行了深层次的封装，Electron 相比自己封装 CEF 会更加稳定，而且可以节省开发和后期维护的时间。</p>
+<p>Electron 和 CEF 最大的不同之处是 Electron 可以直接调用 Node.js 的模块，如文件、系统、网络等模块，基于这些模块，理论上可以使用 JavaScript 完成客户端应用的开发，但这也仅限于理论上，实际上由于大多数的 Web 开发者缺少客户端软件开发经验，甚至缺少系统方面的理论基础，因此很难完全依靠 Web 开发者开发出功能完备的客户端软件。</p>
+<p>基于 Electron 开发客户端应用时，大多数时候都需要有 C++开发者开发 Node 模块来供 JavaScript 调用。</p>
+<h1 id="8-其他图像界面库"><a href="#8-其他图像界面库" class="headerlink" title="8. 其他图像界面库"></a>8. 其他图像界面库</h1><p>除了上面介绍的方案，还要很多其他的优秀界面库，这些库各有特色，目前它们的使用者还没有上面的多。</p>
+<p>下面列举了一些我所知道的优秀界面库，欢迎补充：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/mikke89/RmlUi">RmlUi</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/yue/yue">yue</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/cycfi/elements">elements</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/ocornut/imgui">imgui</a></li>
+</ul>
+</div><div class="article-licensing box"><div class="licensing-title"><p>聊聊桌面客户端开发的技术选型</p><p><a href="https://jiangxueqiao.com/post/3110746169.html">https://jiangxueqiao.com/post/3110746169.html</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>江雪桥</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2023-07-22</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2023-11-01</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/post/2767065786.html"><i class="level-item fas fa-chevron-left"></i><span class="level-item">Qt加载字体文件</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/post/1878076142.html"><span class="level-item">戴建业：阅读习惯与人生未来</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div class="content twikoo" id="twikoo"></div><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/twikoo/1.6.6/dist/twikoo.all.min.js"></script><script>twikoo.init({
+            envId: 'https://twikoo.jiangxueqiao.com',
+            
+            lang: "zh-CN",
+        });</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/pi-200.png" alt="Jiang Xueqiao"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Jiang Xueqiao</p><p class="is-size-6 is-block">Software Engineer</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Wuhan, Hubei</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">156</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">26</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">30</p></a></div></div></nav></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-11-26T11:07:09.000Z">2023-11-26</time></p><p class="title"><a href="/post/1533480858.html">Windows窗口调试利器-WinSpyPlus</a></p><p class="categories"><a href="/categories/%E2%91%A2-Power-By-Me/">③ Power By Me</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-11-26T09:39:23.000Z">2023-11-26</time></p><p class="title"><a href="/post/2510508225.html">Windows API的不同返回状态</a></p><p class="categories"><a href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/">① 专栏集锦</a> / <a href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B/">Windows核心编程</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/post/711494356.html"><img src="https://blog-static.jiangxueqiao.com/blog/img/qt-logo.png" alt="Qt自定义和美化菜单"></a></figure><div class="media-content"><p class="date"><time dateTime="2023-11-07T06:00:00.000Z">2023-11-07</time></p><p class="title"><a href="/post/711494356.html">Qt自定义和美化菜单</a></p><p class="categories"><a href="/categories/%E2%91%A1-C/">② C++</a> / <a href="/categories/%E2%91%A1-C/Qt/">Qt</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-11-02T05:45:13.000Z">2023-11-02</time></p><p class="title"><a href="/post/3832058229.html">为什么SetParent会失败</a></p><p class="categories"><a href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/">① 专栏集锦</a> / <a href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B/">Windows核心编程</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-10-31T15:55:23.000Z">2023-10-31</time></p><p class="title"><a href="/post/2065788833.html">窗口如何逃脱显示桌面指令</a></p><p class="categories"><a href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/">① 专栏集锦</a> / <a href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B/">Windows核心编程</a></p></div></article></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/"><span class="level-start"><span class="level-item">① 专栏集锦</span></span><span class="level-end"><span class="level-item tag">63</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E5%86%85%E5%AD%98%E4%BD%93%E7%B3%BB/"><span class="level-start"><span class="level-item">Windows内存体系</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E5%A5%97%E6%8E%A5%E5%AD%97I-O%E6%A8%A1%E5%9E%8B/"><span class="level-start"><span class="level-item">Windows套接字I/O模型</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B/"><span class="level-start"><span class="level-item">Windows核心编程</span></span><span class="level-end"><span class="level-item tag">19</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E6%B3%A8%E5%85%A5%E4%B8%8E%E6%8B%A6%E6%88%AA/"><span class="level-start"><span class="level-item">Windows注入与拦截</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/%E6%89%93%E5%8C%85%E7%8B%82%E9%AD%94%E4%B9%8BNSIS%E6%95%99%E7%A8%8B/"><span class="level-start"><span class="level-item">打包狂魔之NSIS教程</span></span><span class="level-end"><span class="level-item tag">13</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/%E6%8B%A8%E5%BC%80%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E7%9A%84%E8%BF%B7%E9%9B%BE/"><span class="level-start"><span class="level-item">拨开字符编码的迷雾</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/"><span class="level-start"><span class="level-item">网络协议</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E2%91%A1-C/"><span class="level-start"><span class="level-item">② C++</span></span><span class="level-end"><span class="level-item tag">27</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E2%91%A1-C/Qt/"><span class="level-start"><span class="level-item">Qt</span></span><span class="level-end"><span class="level-item tag">15</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E2%91%A2-Power-By-Me/"><span class="level-start"><span class="level-item">③ Power By Me</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A3-Electron/"><span class="level-start"><span class="level-item">④ Electron</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A4-%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E7%A8%8B/"><span class="level-start"><span class="level-item">⑤ 音视频编程</span></span><span class="level-end"><span class="level-item tag">11</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E2%91%A4-%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E7%A8%8B/WebRTC/"><span class="level-start"><span class="level-item">WebRTC</span></span><span class="level-end"><span class="level-item tag">9</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E2%91%A5-%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%8F%91/"><span class="level-start"><span class="level-item">⑥ 服务器开发</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A6-%E8%BD%AF%E4%BB%B6%E8%B0%83%E8%AF%95/"><span class="level-start"><span class="level-item">⑦ 软件调试</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A7-%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84/"><span class="level-start"><span class="level-item">⑧ 软件架构</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A8-%E6%95%B0%E6%8D%AE%E5%BA%93/"><span class="level-start"><span class="level-item">⑨ 数据库</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A9-%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"><span class="level-start"><span class="level-item">⑩ 编程基础</span></span><span class="level-end"><span class="level-item tag">13</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E2%91%A9-%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/CMake/"><span class="level-start"><span class="level-item">CMake</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A9-%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E6%89%B9%E5%A4%84%E7%90%86/"><span class="level-start"><span class="level-item">批处理</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E2%91%AA-%E5%BC%80%E6%BA%90%E5%BA%93/"><span class="level-start"><span class="level-item">⑪ 开源库</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%AB-Web%E5%BC%80%E5%8F%91/"><span class="level-start"><span class="level-item">⑫ Web开发</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%AC-%E7%BE%8E%E6%96%87%E8%B5%8F%E6%9E%90/"><span class="level-start"><span class="level-item">⑬ 美文赏析</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%AD-%E6%9D%82%E5%BF%B5/"><span class="level-start"><span class="level-item">⑭ 杂念</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%AE-%E7%88%B1%E6%8A%98%E8%85%BE/"><span class="level-start"><span class="level-item">⑮ 爱折腾</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#1-WinForms"><span class="level-left"><span class="level-item">1. WinForms</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#1-1-Net-Framework-版本兼容性"><span class="level-left"><span class="level-item">1.1 .Net Framework 版本兼容性</span></span></a></li><li><a class="level is-mobile" href="#1-2-系统自带-Net-Framework-版本"><span class="level-left"><span class="level-item">1.2 系统自带.Net Framework 版本</span></span></a></li><li><a class="level is-mobile" href="#1-3-Net-Core"><span class="level-left"><span class="level-item">1.3 .Net Core</span></span></a></li></ul></li><li><a class="level is-mobile" href="#2-WPF"><span class="level-left"><span class="level-item">2. WPF</span></span></a></li><li><a class="level is-mobile" href="#3-MFC"><span class="level-left"><span class="level-item">3. MFC</span></span></a></li><li><a class="level is-mobile" href="#4-DirectUI"><span class="level-left"><span class="level-item">4. DirectUI</span></span></a></li><li><a class="level is-mobile" href="#5-Qt"><span class="level-left"><span class="level-item">5. Qt</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#5-1-Qt-版权问题"><span class="level-left"><span class="level-item">5.1 Qt 版权问题</span></span></a></li></ul></li><li><a class="level is-mobile" href="#6-CEF"><span class="level-left"><span class="level-item">6. CEF</span></span></a></li><li><a class="level is-mobile" href="#7-Electron"><span class="level-left"><span class="level-item">7. Electron</span></span></a></li><li><a class="level is-mobile" href="#8-其他图像界面库"><span class="level-left"><span class="level-item">8. 其他图像界面库</span></span></a></li></ul></div></div><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/codesilo.png" alt="CodeSilo" height="28"></a><p class="is-size-7"><span class="is-size-7">© 2017~2023 江雪桥</span>  <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/" style="color:#000">鄂ICP备2020015399号-6</a>  </p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="GitHub" href="https://github.com/winsoft666"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/jquery/3.3.1/dist/jquery.min.js"></script><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/moment/2.22.2/min/moment-with-locales.min.js"></script><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/clipboard/2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/lightgallery/1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/justifiedGallery/3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/mathjax/2.7.9/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

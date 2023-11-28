@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>QSS基本使用方法 - CodeSilo</title><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#3273dc"><meta name="application-name" content="CodeSilo"><meta name="msapplication-TileImage" content="img/pi-200.png"><meta name="msapplication-TileColor" content="#3273dc"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="CodeSilo"><meta name="apple-mobile-web-app-status-bar-style" content="default"><link rel="apple-touch-icon" sizes="200x200" href="img/pi-200.png"><meta name="description" content="Qt QSS 选择器和 CSS2、CSS3 的选择器类似，建议先学习或者复习CSS 选择器的语法。QSS 来源与 CSS ，但有也稍许不同，而且支持的语法也没 CSS 那么多。"><meta property="og:type" content="blog"><meta property="og:title" content="QSS基本使用方法"><meta property="og:url" content="https://jiangxueqiao.com/post/749849405.html"><meta property="og:site_name" content="CodeSilo"><meta property="og:description" content="Qt QSS 选择器和 CSS2、CSS3 的选择器类似，建议先学习或者复习CSS 选择器的语法。QSS 来源与 CSS ，但有也稍许不同，而且支持的语法也没 CSS 那么多。"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://blog-static.jiangxueqiao.com/blog/img/qss-jbsyff-1.png"><meta property="article:published_time" content="2022-10-22T11:42:38.000Z"><meta property="article:modified_time" content="2023-11-01T03:53:07.941Z"><meta property="article:author" content="江雪桥"><meta property="article:tag" content="QSS"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://blog-static.jiangxueqiao.com/blog/img/qss-jbsyff-1.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://jiangxueqiao.com/post/749849405.html"},"headline":"QSS基本使用方法","image":["https://blog-static.jiangxueqiao.com/blog/img/qss-jbsyff-1.png"],"datePublished":"2022-10-22T11:42:38.000Z","dateModified":"2023-11-01T03:53:07.941Z","author":{"@type":"Person","name":"江雪桥"},"publisher":{"@type":"Organization","name":"CodeSilo","logo":{"@type":"ImageObject","url":"https://blog-static.jiangxueqiao.com/blog/icarus-theme/codesilo.png"}},"description":"Qt QSS 选择器和 CSS2、CSS3 的选择器类似，建议先学习或者复习CSS 选择器的语法。QSS 来源与 CSS ，但有也稍许不同，而且支持的语法也没 CSS 那么多。"}</script><link rel="canonical" href="https://jiangxueqiao.com/post/749849405.html"><link rel="icon" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/favicon.png"><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/all.min.css"><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/highlight.js/11.7.0/styles/xt256.css"><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/font/css2/Oxanium-Roboto-Mono.css"><link rel="stylesheet" href="/css/cyberpunk.css"><!--!--><script>var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?fbb46283a7b4d42d425356f8779708d5";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();</script><!--!--><!--!--><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/lightgallery/1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/justifiedGallery/3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/pace-js/1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/codesilo.png" alt="CodeSilo" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">时间轴</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="https://jiangxueqiao.com/post/2185937873.html">留言</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Email" href="mailto:smart7178@163.com"><i class="fa fa-envelope"></i></a><a class="navbar-item" target="_blank" rel="noopener" title="GitHub" href="https://github.com/winsoft666"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2022-10-22T11:42:38.000Z" title="2022/10/22 19:42:38">2022-10-22</time>发表</span><span class="level-item"><time dateTime="2023-11-01T03:53:07.941Z" title="2023/11/1 11:53:07">2023-11-01</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E2%91%A1-C/">② C++</a><span> / </span><a class="link-muted" href="/categories/%E2%91%A1-C/Qt/">Qt</a></span><span class="level-item twikoo_visitors" id="/post/749849405.html" data-flag-title="QSS基本使用方法"><i class="far fa-eye"></i>&nbsp;&nbsp;<span id="twikoo_visitors"><i class="fa fa-spinner fa-spin"></i></span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">QSS基本使用方法</h1><div class="content"><p>Qt QSS 选择器和 CSS2、CSS3 的选择器类似，建议先学习或者复习<a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/css_selectors.asp">CSS 选择器的语法</a>。QSS 来源与 CSS ，但有也稍许不同，而且支持的语法也没 CSS 那么多。</p>
+<span id="more"></span>
+
+<h1 id="一、选择器类型"><a href="#一、选择器类型" class="headerlink" title="一、选择器类型"></a>一、选择器类型</h1><h2 id="1-1-类选择器"><a href="#1-1-类选择器" class="headerlink" title="1.1 类选择器"></a>1.1 类选择器</h2><figure class="highlight css"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">匹配QPushButton的实例及其子类</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">QPushButton {</span><br><span class="line">  <span class="attribute">color</span>: blue;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">匹配QPushButton的实例，但不包含子类</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="selector-class">.QPushButton</span> {</span><br><span class="line">  <span class="attribute">color</span>: blue;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="1-2-选择器分组"><a href="#1-2-选择器分组" class="headerlink" title="1.2 选择器分组"></a>1.2 选择器分组</h2><figure class="highlight css"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*同时匹配QPushButton、QLineEdit的实例</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">QPushButton,</span><br><span class="line">QLineEdit {</span><br><span class="line">  <span class="attribute">color</span>: blue;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="1-3-ID-选择器"><a href="#1-3-ID-选择器" class="headerlink" title="1.3 ID 选择器"></a>1.3 ID 选择器</h2><figure class="highlight css"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">匹配所有objectName为btnOK的实例</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">*<span class="selector-id">#btnOK</span> {</span><br><span class="line">  <span class="attribute">font-weight</span>: bold;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">和*#btnOK一样，匹配所有objectName为btnOK的实例</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="selector-id">#btnOK</span> {</span><br><span class="line">  <span class="attribute">font-weight</span>: bold;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">匹配所有objectName为btnOK的QPushButton实例</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">QPushButton<span class="selector-id">#btnOK</span> {</span><br><span class="line">  <span class="attribute">font-weight</span>: bold;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="1-4-属性选择器"><a href="#1-4-属性选择器" class="headerlink" title="1.4 属性选择器"></a>1.4 属性选择器</h2><figure class="highlight css"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">匹配包含flat属性的所有实例</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">*<span class="selector-attr">[flat]</span> {</span><br><span class="line">  <span class="attribute">color</span>: red;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">匹配包含flat属性的所有QPushButton的实例</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">QPushButton<span class="selector-attr">[flat]</span> {</span><br><span class="line">  <span class="attribute">color</span>: red;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">匹配flat属性为true的所有QPushButton的实例</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">QPushButton<span class="selector-attr">[flat=<span class="string">"true"</span>]</span> {</span><br><span class="line">  <span class="attribute">color</span>: red;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">匹配falt属性为true且default属性为false的所有QPushButton的实例</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">QPushButton<span class="selector-attr">[flat=<span class="string">"true"</span>]</span><span class="selector-attr">[default=<span class="string">"false"</span>]</span> {</span><br><span class="line">  <span class="attribute">color</span>: red;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="1-5-后代选择器"><a href="#1-5-后代选择器" class="headerlink" title="1.5 后代选择器"></a>1.5 后代选择器</h2><figure class="highlight css"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">匹配属于QDialog后代（孩子，孙子等）的QPushButton所有实例</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">QDialog QPushButton {</span><br><span class="line">  <span class="attribute">color</span>: red;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="1-6-子元素选择器"><a href="#1-6-子元素选择器" class="headerlink" title="1.6 子元素选择器"></a>1.6 子元素选择器</h2><figure class="highlight css"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">匹配属于QDialog直接子类的QPushButton所有实例</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">QDialog &gt; QPushButton {</span><br><span class="line">  <span class="attribute">color</span>: red;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="1-7-伪状态"><a href="#1-7-伪状态" class="headerlink" title="1.7 伪状态"></a>1.7 伪状态</h2><figure class="highlight css"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">匹配hover状态的所有QPushButton的实例</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">QPushButton<span class="selector-pseudo">:hover</span> {</span><br><span class="line">  <span class="attribute">color</span>: white;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">匹配同时为hover和enabled状态的所有QPushButton的实例</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">QPushButton<span class="selector-pseudo">:hover</span><span class="selector-pseudo">:enabled</span> {</span><br><span class="line">  <span class="attribute">color</span>: white;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">匹配不为hover状态的所有QPushButton的实例</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">qradiobutton: !hover {</span><br><span class="line">  <span class="attribute">color</span>: red;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="1-8-子控件选择器"><a href="#1-8-子控件选择器" class="headerlink" title="1.8 子控件选择器"></a>1.8 子控件选择器</h2><figure class="highlight css"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">QRadioButton::indicator::unchecked:disabled {</span><br><span class="line">  image: <span class="built_in">url</span>(<span class="string">:/qss/radiobutton_unchecked_disable.png</span>);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h1 id="二、选择器优先级"><a href="#二、选择器优先级" class="headerlink" title="二、选择器优先级"></a>二、选择器优先级</h1><p>一句话归纳为：<strong>优先使用更具体的选择器。</strong></p>
+<p>具体实例如下：</p>
+<figure class="highlight css"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">QPushButton#okButton选择器比QPushButton更具体，所以选择QPushButton#okButton</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">QPushButton<span class="selector-id">#okButton</span> {</span><br><span class="line">  <span class="attribute">color</span>: gray;</span><br><span class="line">}</span><br><span class="line">QPushButton {</span><br><span class="line">  <span class="attribute">color</span>: red;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight css"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">如下2个规则应用于QPushButton实例时：</span></span><br><span class="line"><span class="comment">因为QPushButton继承QAbstractButton，所以QPushButton比QAbstractButton更具体，选择QPushButton</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">QPushButton {</span><br><span class="line">  <span class="attribute">color</span>: red;</span><br><span class="line">}</span><br><span class="line">QAbstractButton {</span><br><span class="line">  <span class="attribute">color</span>: gray;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight css"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">指定伪状态比不指定伪状态的选择器更具体，所以当鼠标悬停时选择QPushButton:hover，否则选择QPushButton</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">QPushButton<span class="selector-pseudo">:hover</span> {</span><br><span class="line">  <span class="attribute">color</span>: white;</span><br><span class="line">}</span><br><span class="line">QPushButton {</span><br><span class="line">  <span class="attribute">color</span>: red;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight css"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">如下2个规则应用于处于Enabled状态的QPushButton实例时：</span></span><br><span class="line"><span class="comment">鼠标悬停时，QPushButton:hover更能具体描述当前状态，所以选择QPushButton:hover</span></span><br><span class="line"><span class="comment">其他时候选择QPushButton:enabled</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">QPushButton<span class="selector-pseudo">:enabled</span> {</span><br><span class="line">  <span class="attribute">color</span>: red;</span><br><span class="line">}</span><br><span class="line">QPushButton<span class="selector-pseudo">:hover</span> {</span><br><span class="line">  <span class="attribute">color</span>: white;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight css"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">如下2个规则应用于处于Enabled状态的QPushButton实例时：</span></span><br><span class="line"><span class="comment">鼠标悬停时，QPushButton:enabled:hover更能具体描述当前状态，所以选择QPushButton:enabled:hover</span></span><br><span class="line"><span class="comment">其他时候选择QPushButton:enabled</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">QPushButton<span class="selector-pseudo">:enabled</span> {</span><br><span class="line">  <span class="attribute">color</span>: red;</span><br><span class="line">}</span><br><span class="line">QPushButton<span class="selector-pseudo">:hover</span> {</span><br><span class="line">  <span class="attribute">color</span>: white;</span><br><span class="line">}</span><br><span class="line">QPushButton<span class="selector-pseudo">:enabled</span><span class="selector-pseudo">:hover</span> {</span><br><span class="line">  <span class="attribute">color</span>: white;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h1 id="三、QSS-支持的类型、属性、伪状态、子控件"><a href="#三、QSS-支持的类型、属性、伪状态、子控件" class="headerlink" title="三、QSS 支持的类型、属性、伪状态、子控件"></a>三、QSS 支持的类型、属性、伪状态、子控件</h1><p>关于 QSS 支持哪些类型、每种类型支持哪些属性、伪状态和子控件，在 Qt 的官方的英文文档中有详细的介绍：<br><a target="_blank" rel="noopener" href="https://doc.qt.io/qt-5/stylesheet-reference.html">《Qt Style Sheets Reference》</a></p>
+<p>也可以在Qt Assistant中搜索”Qt Style Sheets Reference”打开帮助文档。</p>
+<h2 id="3-1-伪状态列表"><a href="#3-1-伪状态列表" class="headerlink" title="3.1 伪状态列表"></a>3.1 伪状态列表</h2><p>为了方便查阅，这里列举出QSS目前支持的所有伪状态。</p>
+<blockquote>
+<p>伪状态都是以一个冒号<code>:</code>开头，如<code>:active</code>。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>伪状态</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>:active</td>
+<td>此状态在Widget驻留在活动窗口时设置</td>
+</tr>
+<tr>
+<td>:adjoins-item</td>
+<td>此状态在QTreeView的::branch与一个item相邻时设置</td>
+</tr>
+<tr>
+<td>:alternate</td>
+<td>当QAbstractItemView::alternatingRowColors()设置为真时，在绘制QAbstractItemView的行时，为每个交替行设置此状态</td>
+</tr>
+<tr>
+<td>:bottom</td>
+<td>此item位于底部时设置。例如，QTabBar有位于底部的选项卡</td>
+</tr>
+<tr>
+<td>:checked</td>
+<td>此item被选中时设置。例如，QAbstractButton的checked状态</td>
+</tr>
+<tr>
+<td>:closable</td>
+<td>此item可以被关闭时设置。例如，QDockWidget的QDockWidget::DockWidgetClosable特性开启时</td>
+</tr>
+<tr>
+<td>:closed</td>
+<td>此item处于关闭状态时设置。例如，QTreeView中未展开的item</td>
+</tr>
+<tr>
+<td>:default</td>
+<td>此item的默认状态时设置。例如，一个default的QPushButton或QMenu中的一个默认动作</td>
+</tr>
+<tr>
+<td>:disabled</td>
+<td>此item被禁用时设置</td>
+</tr>
+<tr>
+<td>:editable</td>
+<td>如QComboBox是可编辑时设置</td>
+</tr>
+<tr>
+<td>:edit-focus</td>
+<td>此item具有编辑焦点(参考QStyle::State_HasEditFocus)时设置。此状态仅对Qt扩展应用程序可用</td>
+</tr>
+<tr>
+<td>:enabled</td>
+<td>此item已启用时设置</td>
+</tr>
+<tr>
+<td>:exclusive</td>
+<td>此item是属于某个独占组时设置。例如，独占QActionGroup中的菜单项</td>
+</tr>
+<tr>
+<td>:first</td>
+<td>此item是列表中的第一项时设置。例如，QTabBar中的第一个选项卡</td>
+</tr>
+<tr>
+<td>:flat</td>
+<td>此item是扁平时设置。例如，一个扁平的QPushButton</td>
+</tr>
+<tr>
+<td>:floatable</td>
+<td>此item可以浮动时设置。例如，QDockWidget的QDockWidget::DockWidgetFloatable的特性开启时</td>
+</tr>
+<tr>
+<td>:focus</td>
+<td>此item具有输入焦点时设置</td>
+</tr>
+<tr>
+<td>:has-children</td>
+<td>此item具有子对象时设置。例如，QTreeView中具有子项的项</td>
+</tr>
+<tr>
+<td>:has-sibling</td>
+<td>此item具有兄弟对象时设置。例如，QTreeView中与之相邻的项</td>
+</tr>
+<tr>
+<td>:horizontal</td>
+<td>此item处于水平方向时设置</td>
+</tr>
+<tr>
+<td>:hover</td>
+<td>鼠标悬浮在此item上时设置</td>
+</tr>
+<tr>
+<td>:indeterminate</td>
+<td>此item处于不确定状态时设置。例如，QCheckBox或QRadioButton被部分选中</td>
+</tr>
+<tr>
+<td>:last</td>
+<td>此item是列表中的最后一项时设置。例如，QTabBar中的最后一个选项卡</td>
+</tr>
+<tr>
+<td>:left</td>
+<td>此item位于左侧时设置。例如，QTabBar有位于左侧的选项卡</td>
+</tr>
+<tr>
+<td>:maximized</td>
+<td>此item处于最大化状态时设置。例如，一个最大化的QMdiSubWindow</td>
+</tr>
+<tr>
+<td>:middle</td>
+<td>此item是列表中的中间一项时设置。例如，一个不在QTabBar中的开头或结尾的选项卡</td>
+</tr>
+<tr>
+<td>:minimized</td>
+<td>此item处于最小化状态时设置。例如，一个最小化的QMdiSubWindow</td>
+</tr>
+<tr>
+<td>:movable</td>
+<td>此item可以被移动时设置。例如， QDockWidget的QDockWidget::DockWidgetMovable特性开启时</td>
+</tr>
+<tr>
+<td>:no-frame</td>
+<td>此item没有边框时设置。例如，没有边框的QSpinBox或QLineEdit</td>
+</tr>
+<tr>
+<td>:non-exclusive</td>
+<td>此item是属于非独占组时设置。例如，非独占QActionGroup中的菜单项</td>
+</tr>
+<tr>
+<td>:off</td>
+<td>对可以切换的items，这适用于处于off状态的item</td>
+</tr>
+<tr>
+<td>:on</td>
+<td>对可以切换的items，这适用于处于on状态的widget</td>
+</tr>
+<tr>
+<td>:only-one</td>
+<td>此item是列表中的唯一项时设置。例如，一个在QTabBar中单独的选项卡</td>
+</tr>
+<tr>
+<td>:open</td>
+<td>此item处于打开状态时设置。例如，QTreeView中的展开项，或带有菜单的QComboBox或QPushButton</td>
+</tr>
+<tr>
+<td>:next-selected</td>
+<td>此item是列表中的下一个被选中的项时设置。例如，在QTabBar中当前选项卡的下一个要选中的选项卡</td>
+</tr>
+<tr>
+<td>:pressed</td>
+<td>鼠标正在按压在此item上时设置</td>
+</tr>
+<tr>
+<td>:previous-selected</td>
+<td>此item是列表中的上一个被选中的项时设置。例如，在QTabBar中当前选项卡的上一个要选中的选项卡</td>
+</tr>
+<tr>
+<td>:read-only</td>
+<td>此item处于只读或不可编辑状态时设置。例如，一个只读QLineEdit或不可编辑的QComboBox</td>
+</tr>
+<tr>
+<td>:right</td>
+<td>此item位于右侧时设置。例如，QTabBar有位于右侧的选项卡</td>
+</tr>
+<tr>
+<td>:selected</td>
+<td>此item处于选中状态时设置。例如，一个在QTabBar中被选中的选项卡或一个在菜单中被选中的菜单项</td>
+</tr>
+<tr>
+<td>:top</td>
+<td>此item位于顶部时设置。例如，QTabBar有位于顶部的选项卡</td>
+</tr>
+<tr>
+<td>:unchecked</td>
+<td>此item处于未被选中状态时设置</td>
+</tr>
+<tr>
+<td>:vertical</td>
+<td>此item处于垂直方向时设置</td>
+</tr>
+<tr>
+<td>:window</td>
+<td>Widget是一个窗口(例如，一个顶层Widget)时设置</td>
+</tr>
+</tbody></table>
+<h2 id="3-2-子控件列表"><a href="#3-2-子控件列表" class="headerlink" title="3.2 子控件列表"></a>3.2 子控件列表</h2><blockquote>
+<p>伪状态都是以两个冒号<code>::</code>开头，如<code>::item</code>。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>子控件</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>::add-line</td>
+<td>在QScrollBar中跳转下一行的按钮</td>
+</tr>
+<tr>
+<td>::add-page</td>
+<td>在QScrollBar中滑动条和add-line之间的区域</td>
+</tr>
+<tr>
+<td>::branch</td>
+<td>在QTreeView中的分支指示器</td>
+</tr>
+<tr>
+<td>::chunk</td>
+<td>在QProgressBar中的进度块</td>
+</tr>
+<tr>
+<td>::close-button</td>
+<td>在QDockWidget或QTabBar选项卡的关闭按钮</td>
+</tr>
+<tr>
+<td>::corner</td>
+<td>在QAbstractScrollArea中两个滚动条之间的角落</td>
+</tr>
+<tr>
+<td>::down-arrow</td>
+<td>在QComboBox、QHeaderView(排序指示器)、QScrollBar或QSpinBox的向下箭头</td>
+</tr>
+<tr>
+<td>::down-button</td>
+<td>在QScrollBar或QSpinBox中的向下按钮</td>
+</tr>
+<tr>
+<td>::drop-down</td>
+<td>在QComboBox中的下拉框</td>
+</tr>
+<tr>
+<td>::float-button</td>
+<td>在QDockWidget中的浮动按钮</td>
+</tr>
+<tr>
+<td>::groove</td>
+<td>在QSlider中的滑动槽</td>
+</tr>
+<tr>
+<td>::indicator</td>
+<td>在QAbstractItemVIew、QCheckBox、QRadioButton、可选中的菜单项或可选中的QGroupBox中的指示器</td>
+</tr>
+<tr>
+<td>::handle</td>
+<td>在QScrollBar、QSplitter和QSlider中的操作条(滑动条)</td>
+</tr>
+<tr>
+<td>::icon</td>
+<td>在QAbstractItemVIew或QMenu中的图标</td>
+</tr>
+<tr>
+<td>::item</td>
+<td>在QAbstractItemVIew、QMenuBar、QMenu或QStatuBar中的一项</td>
+</tr>
+<tr>
+<td>::left-arrow</td>
+<td>在QScrollBar中的向左箭头</td>
+</tr>
+<tr>
+<td>::left-corner</td>
+<td>在QTabWidget中的左上角</td>
+</tr>
+<tr>
+<td>::menu-arrow</td>
+<td>带有菜单的QToolButton中的箭头</td>
+</tr>
+<tr>
+<td>::menu-button</td>
+<td>在QToolButton中的菜单按钮</td>
+</tr>
+<tr>
+<td>::menu-indicator</td>
+<td>在QPushButton中的菜单指示器</td>
+</tr>
+<tr>
+<td>::right-arrow</td>
+<td>在QMenu或QScrollBar中的向右箭头</td>
+</tr>
+<tr>
+<td>::pane</td>
+<td>在QTabWidget中的边或框</td>
+</tr>
+<tr>
+<td>::right-corner</td>
+<td>在QTabWidget中的右上角</td>
+</tr>
+<tr>
+<td>::scroller</td>
+<td>在QMenu或QTabBar中的滚动条</td>
+</tr>
+<tr>
+<td>::section</td>
+<td>在QHeaderView中的区块</td>
+</tr>
+<tr>
+<td>::separator</td>
+<td>在QMenu或QMainWIndow中分隔条</td>
+</tr>
+<tr>
+<td>::sub-line</td>
+<td>在QScrollBar中跳转上一行的按钮</td>
+</tr>
+<tr>
+<td>::sub-page</td>
+<td>在QScrollBar中滑动条和sub-line之间的区域</td>
+</tr>
+<tr>
+<td>::tab</td>
+<td>在QTabBar或QToolBox中选项卡</td>
+</tr>
+<tr>
+<td>::tab-bar</td>
+<td>在QTabWidget中的选项卡栏</td>
+</tr>
+<tr>
+<td>::tear</td>
+<td>在QTabBar中的tear指示器</td>
+</tr>
+<tr>
+<td>::tearoff</td>
+<td>在QMenu中的tear-off指示器</td>
+</tr>
+<tr>
+<td>::text</td>
+<td>在QAbstractItemView中的文本</td>
+</tr>
+<tr>
+<td>::title</td>
+<td>在QGroupBox或QDockWidget中的标题栏</td>
+</tr>
+<tr>
+<td>::up-arrow</td>
+<td>在QComboBox、QHeaderView(排序指示器)、QScrollBar或QSpinBox的向上箭头</td>
+</tr>
+<tr>
+<td>::up-button</td>
+<td>在QScrollBar或QSpinBox中的向上按钮</td>
+</tr>
+</tbody></table>
+<p>使用示例：</p>
+<figure class="highlight css"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">QPushButton<span class="selector-id">#btnTest</span>::menu-indicator {</span><br><span class="line">  image: <span class="built_in">url</span>(<span class="string">indicator.png</span>);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<h1 id="四、盒子模型"><a href="#四、盒子模型" class="headerlink" title="四、盒子模型"></a>四、盒子模型</h1><p>在使用 QSS 设置样式时，有一个关键的概念需要知晓，那就是“盒子模型”（即<code>Box Model</code>）。<br><img src="https://blog-static.jiangxueqiao.com/blog/img/qss-jbsyff-1.png"></p>
+<p>每个 Widget 都被视为具有 4 个同心矩形的框：<br><code>MARGIN矩形</code>、<code>BORDER矩形</code>、<code>PADDING矩形</code>和<code>CONTENT矩形</code>，上图标注了每个矩形的区域。</p>
+<p>默认情况下<code>MARGIN矩形</code>、<code>BORDER矩形</code>、<code>PADDING矩形</code>的宽度都为 0，这样在默认情况下，4 个矩形就重合为 1 个<code>CONTENT矩形</code>了。</p>
+<p>同样，默认情况下<code>background-image</code>指定的背景，只在 border 内的区域绘制。但我们要也可以使用<code>background-clip</code>或<code>background-origin</code>属性来更改这种默认行为。</p>
+<p><strong>如何实现背景图像随 Widget 大小自动缩放？</strong><br>background-image 指定的背景图像无法随 Widget 大小自动缩放，要提供可以随 Widget 大小缩放的背景图像可以使用<code>border-image</code>和<code>image</code>属性，二者区别如下：</p>
+<ul>
+<li>border-image 属性指定的图像从 border 及其内的区域开始绘制，会导致 border 属性被覆盖。</li>
+<li>image 属性指定的图像从绘制到 content 区域内，image 指定的 url 为 SVG 图像，则支持自动缩放，非 SVG 图像仅支持自动缩小。</li>
+</ul>
+<h1 id="五、动态属性"><a href="#五、动态属性" class="headerlink" title="五、动态属性"></a>五、动态属性</h1><p>通过 setProperty 方法设置 QWidget 对象属性，在 QSS 中可以根据不同的属性值应用不同的样式。</p>
+<p>设置 pushButtonMax 按钮的 isMax 属性，表示当前窗口是否最大化：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pushButtonMax-&gt;<span class="built_in">setProperty</span>(<span class="string">"isMax"</span>, <span class="keyword">this</span>-&gt;<span class="built_in">isMaximized</span>() ? <span class="literal">true</span> : <span class="literal">false</span>);</span><br></pre></td></tr></tbody></table></figure>
+
+<p>在 QSS 中根据不同的属性值应用不同的样式：</p>
+<figure class="highlight css"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#pushButtonMax</span><span class="selector-attr">[isMax=<span class="string">"false"</span>]</span> {</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">40px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">40px</span>;</span><br><span class="line">  <span class="attribute">background</span>: gray;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#pushButtonMax</span><span class="selector-attr">[isMax=<span class="string">"false"</span>]</span><span class="selector-pseudo">:hover</span> {</span><br><span class="line">  <span class="attribute">background</span>: blue;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#pushButtonMax</span><span class="selector-attr">[isMax=<span class="string">"true"</span>]</span> {</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">40px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">40px</span>;</span><br><span class="line">  <span class="attribute">background</span>: transparent;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="selector-id">#pushButtonMax</span><span class="selector-attr">[isMax=<span class="string">"true"</span>]</span><span class="selector-pseudo">:hover</span> {</span><br><span class="line">  <span class="attribute">background</span>: red;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h1 id="六、Q-PROPERTY"><a href="#六、Q-PROPERTY" class="headerlink" title="六、Q_PROPERTY"></a>六、Q_PROPERTY</h1><p>在 Qt 中可以使用<code>Q_PROPERTY</code>宏为 QObject 对象（含子对象）声明属性，任何被<code>Q_PROPERTY</code>声明的属性都能在 QSS 中使用<code>qproperty-&lt;property name&gt;</code>语法进行设置。</p>
+<p>以 QToolButton 为例，QToolButton 继承至 QAbstractButton，QAbstractButton 拥有以下被 Q_PROPERTY 声明的属性：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Q_WIDGETS_EXPORT</span> QAbstractButton : <span class="keyword">public</span> QWidget</span><br><span class="line">{</span><br><span class="line">    <span class="function">Q_OBJECT</span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">    <span class="title">Q_PROPERTY</span><span class="params">(QString text READ text WRITE setText)</span></span></span><br><span class="line"><span class="function">    <span class="title">Q_PROPERTY</span><span class="params">(QIcon icon READ icon WRITE setIcon)</span></span></span><br><span class="line"><span class="function">    <span class="title">Q_PROPERTY</span><span class="params">(QSize iconSize READ iconSize WRITE setIconSize)</span></span></span><br><span class="line"><span class="function"><span class="meta">#<span class="keyword">ifndef</span> QT_NO_SHORTCUT</span></span></span><br><span class="line"><span class="function">    <span class="title">Q_PROPERTY</span><span class="params">(QKeySequence shortcut READ shortcut WRITE setShortcut)</span></span></span><br><span class="line"><span class="function"><span class="meta">#<span class="keyword">endif</span></span></span></span><br><span class="line"><span class="function">    <span class="title">Q_PROPERTY</span><span class="params">(<span class="type">bool</span> checkable READ isCheckable WRITE setCheckable)</span></span></span><br><span class="line"><span class="function">    <span class="title">Q_PROPERTY</span><span class="params">(<span class="type">bool</span> checked READ isChecked WRITE setChecked DESIGNABLE isCheckable NOTIFY toggled USER <span class="literal">true</span>)</span></span></span><br><span class="line"><span class="function">    <span class="title">Q_PROPERTY</span><span class="params">(<span class="type">bool</span> autoRepeat READ autoRepeat WRITE setAutoRepeat)</span></span></span><br><span class="line"><span class="function">    <span class="title">Q_PROPERTY</span><span class="params">(<span class="type">bool</span> autoExclusive READ autoExclusive WRITE setAutoExclusive)</span></span></span><br><span class="line"><span class="function">    <span class="title">Q_PROPERTY</span><span class="params">(<span class="type">int</span> autoRepeatDelay READ autoRepeatDelay WRITE setAutoRepeatDelay)</span></span></span><br><span class="line"><span class="function">    <span class="title">Q_PROPERTY</span><span class="params">(<span class="type">int</span> autoRepeatInterval READ autoRepeatInterval WRITE setAutoRepeatInterval)</span></span></span><br><span class="line"><span class="function">    <span class="title">Q_PROPERTY</span><span class="params">(<span class="type">bool</span> down READ isDown WRITE setDown DESIGNABLE <span class="literal">false</span>)</span></span></span><br><span class="line"><span class="function">    ....</span></span><br><span class="line"><span class="function">}</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>在 QSS 中可以直接对属性赋值，如：</p>
+<figure class="highlight css"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">QToolButton {</span><br><span class="line">  qproperty-text: <span class="string">"文本"</span>;</span><br><span class="line">  qproperty-<span class="attribute">icon</span>: <span class="built_in">url</span>(<span class="string">://img/icon.png</span>);</span><br><span class="line">  qproperty-iconsize: <span class="number">100px</span> <span class="number">100px</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h1 id="七、Padding和Margin的使用"><a href="#七、Padding和Margin的使用" class="headerlink" title="七、Padding和Margin的使用"></a>七、Padding和Margin的使用</h1><p>Margin指控件和其他控件的间距，而Padding指控件内的内容与边框的间距。</p>
+<p>二者的语法与CSS中的一样：</p>
+<figure class="highlight css"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">margin</span>: <span class="number">25px</span> <span class="number">50px</span> <span class="number">75px</span> <span class="number">100px</span>;</span><br><span class="line"><span class="attribute">padding</span>: <span class="number">25px</span> <span class="number">50px</span> <span class="number">75px</span> <span class="number">100px</span>;</span><br></pre></td></tr></tbody></table></figure>
+
+<p>从左到右依次为：上、右、下、左。</p>
+<p>支持简写形式：</p>
+<figure class="highlight css"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">margin</span>: <span class="number">25px</span> <span class="number">50px</span>;</span><br><span class="line"><span class="attribute">padding</span>: <span class="number">25px</span> <span class="number">50px</span>;</span><br></pre></td></tr></tbody></table></figure>
+<p>表示：上下间距为25px，左右间距为50px。</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>QSS基本使用方法</p><p><a href="https://jiangxueqiao.com/post/749849405.html">https://jiangxueqiao.com/post/749849405.html</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>江雪桥</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2022-10-22</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2023-11-01</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><div class="article-tags is-size-7 mb-4"><span class="mr-2">#</span><a class="link-muted mr-2" rel="tag" href="/tags/QSS/">QSS</a></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/post/830332637.html"><i class="level-item fas fa-chevron-left"></i><span class="level-item">QSS的几种图片设置方法</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/post/818165951.html"><span class="level-item">C++默认构造函数</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div class="content twikoo" id="twikoo"></div><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/twikoo/1.6.6/dist/twikoo.all.min.js"></script><script>twikoo.init({
+            envId: 'https://twikoo.jiangxueqiao.com',
+            
+            lang: "zh-CN",
+        });</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/pi-200.png" alt="Jiang Xueqiao"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Jiang Xueqiao</p><p class="is-size-6 is-block">Software Engineer</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Wuhan, Hubei</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">156</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">26</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">30</p></a></div></div></nav></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-11-26T11:07:09.000Z">2023-11-26</time></p><p class="title"><a href="/post/1533480858.html">Windows窗口调试利器-WinSpyPlus</a></p><p class="categories"><a href="/categories/%E2%91%A2-Power-By-Me/">③ Power By Me</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-11-26T09:39:23.000Z">2023-11-26</time></p><p class="title"><a href="/post/2510508225.html">Windows API的不同返回状态</a></p><p class="categories"><a href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/">① 专栏集锦</a> / <a href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B/">Windows核心编程</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/post/711494356.html"><img src="https://blog-static.jiangxueqiao.com/blog/img/qt-logo.png" alt="Qt自定义和美化菜单"></a></figure><div class="media-content"><p class="date"><time dateTime="2023-11-07T06:00:00.000Z">2023-11-07</time></p><p class="title"><a href="/post/711494356.html">Qt自定义和美化菜单</a></p><p class="categories"><a href="/categories/%E2%91%A1-C/">② C++</a> / <a href="/categories/%E2%91%A1-C/Qt/">Qt</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-11-02T05:45:13.000Z">2023-11-02</time></p><p class="title"><a href="/post/3832058229.html">为什么SetParent会失败</a></p><p class="categories"><a href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/">① 专栏集锦</a> / <a href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B/">Windows核心编程</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-10-31T15:55:23.000Z">2023-10-31</time></p><p class="title"><a href="/post/2065788833.html">窗口如何逃脱显示桌面指令</a></p><p class="categories"><a href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/">① 专栏集锦</a> / <a href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B/">Windows核心编程</a></p></div></article></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/"><span class="level-start"><span class="level-item">① 专栏集锦</span></span><span class="level-end"><span class="level-item tag">63</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E5%86%85%E5%AD%98%E4%BD%93%E7%B3%BB/"><span class="level-start"><span class="level-item">Windows内存体系</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E5%A5%97%E6%8E%A5%E5%AD%97I-O%E6%A8%A1%E5%9E%8B/"><span class="level-start"><span class="level-item">Windows套接字I/O模型</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B/"><span class="level-start"><span class="level-item">Windows核心编程</span></span><span class="level-end"><span class="level-item tag">19</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E6%B3%A8%E5%85%A5%E4%B8%8E%E6%8B%A6%E6%88%AA/"><span class="level-start"><span class="level-item">Windows注入与拦截</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/%E6%89%93%E5%8C%85%E7%8B%82%E9%AD%94%E4%B9%8BNSIS%E6%95%99%E7%A8%8B/"><span class="level-start"><span class="level-item">打包狂魔之NSIS教程</span></span><span class="level-end"><span class="level-item tag">13</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/%E6%8B%A8%E5%BC%80%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E7%9A%84%E8%BF%B7%E9%9B%BE/"><span class="level-start"><span class="level-item">拨开字符编码的迷雾</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/"><span class="level-start"><span class="level-item">网络协议</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E2%91%A1-C/"><span class="level-start"><span class="level-item">② C++</span></span><span class="level-end"><span class="level-item tag">27</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E2%91%A1-C/Qt/"><span class="level-start"><span class="level-item">Qt</span></span><span class="level-end"><span class="level-item tag">15</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E2%91%A2-Power-By-Me/"><span class="level-start"><span class="level-item">③ Power By Me</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A3-Electron/"><span class="level-start"><span class="level-item">④ Electron</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A4-%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E7%A8%8B/"><span class="level-start"><span class="level-item">⑤ 音视频编程</span></span><span class="level-end"><span class="level-item tag">11</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E2%91%A4-%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E7%A8%8B/WebRTC/"><span class="level-start"><span class="level-item">WebRTC</span></span><span class="level-end"><span class="level-item tag">9</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E2%91%A5-%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%8F%91/"><span class="level-start"><span class="level-item">⑥ 服务器开发</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A6-%E8%BD%AF%E4%BB%B6%E8%B0%83%E8%AF%95/"><span class="level-start"><span class="level-item">⑦ 软件调试</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A7-%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84/"><span class="level-start"><span class="level-item">⑧ 软件架构</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A8-%E6%95%B0%E6%8D%AE%E5%BA%93/"><span class="level-start"><span class="level-item">⑨ 数据库</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A9-%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"><span class="level-start"><span class="level-item">⑩ 编程基础</span></span><span class="level-end"><span class="level-item tag">13</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E2%91%A9-%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/CMake/"><span class="level-start"><span class="level-item">CMake</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A9-%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E6%89%B9%E5%A4%84%E7%90%86/"><span class="level-start"><span class="level-item">批处理</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E2%91%AA-%E5%BC%80%E6%BA%90%E5%BA%93/"><span class="level-start"><span class="level-item">⑪ 开源库</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%AB-Web%E5%BC%80%E5%8F%91/"><span class="level-start"><span class="level-item">⑫ Web开发</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%AC-%E7%BE%8E%E6%96%87%E8%B5%8F%E6%9E%90/"><span class="level-start"><span class="level-item">⑬ 美文赏析</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%AD-%E6%9D%82%E5%BF%B5/"><span class="level-start"><span class="level-item">⑭ 杂念</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%AE-%E7%88%B1%E6%8A%98%E8%85%BE/"><span class="level-start"><span class="level-item">⑮ 爱折腾</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#一、选择器类型"><span class="level-left"><span class="level-item">一、选择器类型</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#1-1-类选择器"><span class="level-left"><span class="level-item">1.1 类选择器</span></span></a></li><li><a class="level is-mobile" href="#1-2-选择器分组"><span class="level-left"><span class="level-item">1.2 选择器分组</span></span></a></li><li><a class="level is-mobile" href="#1-3-ID-选择器"><span class="level-left"><span class="level-item">1.3 ID 选择器</span></span></a></li><li><a class="level is-mobile" href="#1-4-属性选择器"><span class="level-left"><span class="level-item">1.4 属性选择器</span></span></a></li><li><a class="level is-mobile" href="#1-5-后代选择器"><span class="level-left"><span class="level-item">1.5 后代选择器</span></span></a></li><li><a class="level is-mobile" href="#1-6-子元素选择器"><span class="level-left"><span class="level-item">1.6 子元素选择器</span></span></a></li><li><a class="level is-mobile" href="#1-7-伪状态"><span class="level-left"><span class="level-item">1.7 伪状态</span></span></a></li><li><a class="level is-mobile" href="#1-8-子控件选择器"><span class="level-left"><span class="level-item">1.8 子控件选择器</span></span></a></li></ul></li><li><a class="level is-mobile" href="#二、选择器优先级"><span class="level-left"><span class="level-item">二、选择器优先级</span></span></a></li><li><a class="level is-mobile" href="#三、QSS-支持的类型、属性、伪状态、子控件"><span class="level-left"><span class="level-item">三、QSS 支持的类型、属性、伪状态、子控件</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#3-1-伪状态列表"><span class="level-left"><span class="level-item">3.1 伪状态列表</span></span></a></li><li><a class="level is-mobile" href="#3-2-子控件列表"><span class="level-left"><span class="level-item">3.2 子控件列表</span></span></a></li></ul></li><li><a class="level is-mobile" href="#四、盒子模型"><span class="level-left"><span class="level-item">四、盒子模型</span></span></a></li><li><a class="level is-mobile" href="#五、动态属性"><span class="level-left"><span class="level-item">五、动态属性</span></span></a></li><li><a class="level is-mobile" href="#六、Q-PROPERTY"><span class="level-left"><span class="level-item">六、Q_PROPERTY</span></span></a></li><li><a class="level is-mobile" href="#七、Padding和Margin的使用"><span class="level-left"><span class="level-item">七、Padding和Margin的使用</span></span></a></li></ul></div></div><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/codesilo.png" alt="CodeSilo" height="28"></a><p class="is-size-7"><span class="is-size-7">© 2017~2023 江雪桥</span>  <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/" style="color:#000">鄂ICP备2020015399号-6</a>  </p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="GitHub" href="https://github.com/winsoft666"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/jquery/3.3.1/dist/jquery.min.js"></script><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/moment/2.22.2/min/moment-with-locales.min.js"></script><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/clipboard/2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/lightgallery/1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/justifiedGallery/3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/mathjax/2.7.9/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>

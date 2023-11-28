@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>拨开字符编码的迷雾(1)--字符编码概述 - CodeSilo</title><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#3273dc"><meta name="application-name" content="CodeSilo"><meta name="msapplication-TileImage" content="img/pi-200.png"><meta name="msapplication-TileColor" content="#3273dc"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="CodeSilo"><meta name="apple-mobile-web-app-status-bar-style" content="default"><link rel="apple-touch-icon" sizes="200x200" href="img/pi-200.png"><meta name="description" content="为什么这样的字符串{&amp;quot;data&amp;quot;:&amp;quot;颸颸&amp;quot;}，JSON 库（如jsoncpp）会解析失败？ 为什么软件界面上的韩文会显示乱码？ ASCII 和 ANSI 有什么区别？ 相信不少人在字符编码上面摔过跟头，这篇文章针对开发中需要了解的字符编码知识进行了简要的讲解，希望能够对大家有所帮助。"><meta property="og:type" content="blog"><meta property="og:title" content="拨开字符编码的迷雾(1)--字符编码概述"><meta property="og:url" content="https://jiangxueqiao.com/post/2720283852.html"><meta property="og:site_name" content="CodeSilo"><meta property="og:description" content="为什么这样的字符串{&amp;quot;data&amp;quot;:&amp;quot;颸颸&amp;quot;}，JSON 库（如jsoncpp）会解析失败？ 为什么软件界面上的韩文会显示乱码？ ASCII 和 ANSI 有什么区别？ 相信不少人在字符编码上面摔过跟头，这篇文章针对开发中需要了解的字符编码知识进行了简要的讲解，希望能够对大家有所帮助。"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://blog-static.jiangxueqiao.com/blog/img/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMTI3MjA0OTUyMDA5"><meta property="og:image" content="https://blog-static.jiangxueqiao.com/blog/img/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMTI3MjA1MDA0NTIy"><meta property="og:image" content="https://blog-static.jiangxueqiao.com/blog/img/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMTI3MjA1MTI5ODIz"><meta property="og:image" content="https://blog-static.jiangxueqiao.com/blog/img/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMTI3MjA1MTM4NTUx"><meta property="article:published_time" content="2017-11-27T12:46:23.000Z"><meta property="article:modified_time" content="2023-10-27T04:54:07.950Z"><meta property="article:author" content="江雪桥"><meta property="article:tag" content="Windows"><meta property="article:tag" content="Linux"><meta property="article:tag" content="C/C++"><meta property="article:tag" content="Golang"><meta property="article:tag" content="Qt"><meta property="article:tag" content="Node.js"><meta property="article:tag" content="Electron"><meta property="article:tag" content="WebRTC"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://blog-static.jiangxueqiao.com/blog/img/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMTI3MjA0OTUyMDA5"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://jiangxueqiao.com/post/2720283852.html"},"headline":"拨开字符编码的迷雾(1)--字符编码概述","image":[],"datePublished":"2017-11-27T12:46:23.000Z","dateModified":"2023-10-27T04:54:07.950Z","author":{"@type":"Person","name":"江雪桥"},"publisher":{"@type":"Organization","name":"CodeSilo","logo":{"@type":"ImageObject","url":"https://blog-static.jiangxueqiao.com/blog/icarus-theme/codesilo.png"}},"description":"为什么这样的字符串{&quot;data&quot;:&quot;颸颸&quot;}，JSON 库（如jsoncpp）会解析失败？ 为什么软件界面上的韩文会显示乱码？ ASCII 和 ANSI 有什么区别？ 相信不少人在字符编码上面摔过跟头，这篇文章针对开发中需要了解的字符编码知识进行了简要的讲解，希望能够对大家有所帮助。"}</script><link rel="canonical" href="https://jiangxueqiao.com/post/2720283852.html"><link rel="icon" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/favicon.png"><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/all.min.css"><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/highlight.js/11.7.0/styles/xt256.css"><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/font/css2/Oxanium-Roboto-Mono.css"><link rel="stylesheet" href="/css/cyberpunk.css"><!--!--><script>var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?fbb46283a7b4d42d425356f8779708d5";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();</script><!--!--><!--!--><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/lightgallery/1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/justifiedGallery/3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/pace-js/1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/codesilo.png" alt="CodeSilo" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">时间轴</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="https://jiangxueqiao.com/post/2185937873.html">留言</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Email" href="mailto:smart7178@163.com"><i class="fa fa-envelope"></i></a><a class="navbar-item" target="_blank" rel="noopener" title="GitHub" href="https://github.com/winsoft666"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2017-11-27T12:46:23.000Z" title="2017/11/27 20:46:23">2017-11-27</time>发表</span><span class="level-item"><time dateTime="2023-10-27T04:54:07.950Z" title="2023/10/27 12:54:07">2023-10-27</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/">① 专栏集锦</a><span> / </span><a class="link-muted" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/%E6%8B%A8%E5%BC%80%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E7%9A%84%E8%BF%B7%E9%9B%BE/">拨开字符编码的迷雾</a></span><span class="level-item twikoo_visitors" id="/post/2720283852.html" data-flag-title="拨开字符编码的迷雾(1)--字符编码概述"><i class="far fa-eye"></i>&nbsp;&nbsp;<span id="twikoo_visitors"><i class="fa fa-spinner fa-spin"></i></span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">拨开字符编码的迷雾(1)--字符编码概述</h1><div class="content"><p>为什么这样的字符串<code>{"data":"颸颸"}</code>，JSON 库（如<code>jsoncpp</code>）会解析失败？</p>
+<p>为什么软件界面上的韩文会显示乱码？</p>
+<p>ASCII 和 ANSI 有什么区别？</p>
+<p>相信不少人在字符编码上面摔过跟头，这篇文章针对开发中需要了解的字符编码知识进行了简要的讲解，希望能够对大家有所帮助。</p>
+<span id="more"></span>
+
+<h1 id="1-ASCII-及其扩展"><a href="#1-ASCII-及其扩展" class="headerlink" title="1. ASCII 及其扩展"></a>1. ASCII 及其扩展</h1><h2 id="1-1-什么是-ASCII-字符集"><a href="#1-1-什么是-ASCII-字符集" class="headerlink" title="1.1 什么是 ASCII 字符集"></a>1.1 什么是 ASCII 字符集</h2><p>字符集就是一系列用于显示的字符的集合。</p>
+<p>ASCII 字符集由美国国家标准协会（American National Standard Institute)于 1968 年制定一个字符映射集合。</p>
+<p>ASCII 使用 7 位二进制位来表示一个字符，总共可以表示 128 个字符（即<code>2^7</code>，二进制<code>000 0000 ～ 111 1111</code>，十进制<code>0～127</code>）。</p>
+<p>ASCII 字符集中每个数字对应一个唯一的字符，如下表：<br><img src="https://blog-static.jiangxueqiao.com/blog/img/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMTI3MjA0OTUyMDA5"></p>
+<p>因为其对应关系非常简单，不需要特殊的编码规则，所以严格来讲 ASCII 不能算字符编码，因为它没有规定编码规则。我们只是习惯性的将 ASCII 字符集称之为 ASCII 码、ASCII 编码。</p>
+<h2 id="1-2-ASCII-的扩展"><a href="#1-2-ASCII-的扩展" class="headerlink" title="1.2 ASCII 的扩展"></a>1.2 ASCII 的扩展</h2><h3 id="1-2-1-最高位扩展-ISO-IEC-8859"><a href="#1-2-1-最高位扩展-ISO-IEC-8859" class="headerlink" title="1.2.1 最高位扩展 - ISO/IEC 8859"></a>1.2.1 最高位扩展 - ISO/IEC 8859</h3><p>ASCII 字符集是美国人发明的，其中的字符完全是为其自己量身定制的。随着计算机技术普及到欧洲（如法国、德国）各国，欧洲很多国家使用的字符除了 ASCII 表中的 128 个字符之外，还有一些各国特有的字符，此时欧洲人民发现 ASCII 字符集不能完全表达他们所要表达的内容。怎么办了？他们发现 ASCII 只使用了一个字节（8 位）之中的低 7 位，于是欧洲各国开始各显神通，打起了那 1 个最高位（第 0 位）的主意，将最高位利用了起来，这样又多了 128 个字符，从而满足了欧洲人民的需要。</p>
+<p>但因为每个国家的需求不一样，各国都设计了不同的方案。为了结束这种混乱的局面，国际标准化组织(ISO)及国际电工委员会(IEC)联合制定了<strong>一系列 8 位字符集</strong>的标准，统称为 ISO 8859（全称 ISO/IEC 8859）。注意，这是一系列字符集的统称，如 ISO/IEC 8859-1（也就是常听到的 Latin-1）支持西欧语言，ISO/IEC 8859-4（Latin-4）支持北欧语言等。</p>
+<p>完整列表如下（摘自百度百科）：<br>ISO/IEC 8859-1 (Latin-1) - 西欧语言<br>ISO/IEC 8859-2 (Latin-2) - 中欧语言<br>ISO/IEC 8859-3 (Latin-3) - 南欧语言，世界语也可用此字符集显示。<br>ISO/IEC 8859-4 (Latin-4) - 北欧语言<br>ISO/IEC 8859-5 (Cyrillic) - 斯拉夫语言<br>ISO/IEC 8859-6 (Arabic) - 阿拉伯语<br>ISO/IEC 8859-7 (Greek) - 希腊语<br>ISO/IEC 8859-8 (Hebrew) - 希伯来语(视觉顺序)<br>ISO 8859-8-I - 希伯来语(逻辑顺序)<br>ISO/IEC 8859-9 (Latin-5 或 Turkish) - 它把 Latin-1 的冰岛语字母换走，加入土耳其语字母。<br>ISO/IEC 8859-10 (Latin-6 或 Nordic) - 北日耳曼语支，用来代替 Latin-4。<br>ISO/IEC 8859-11 (Thai) - 泰语，从泰国的 TIS620 标准字集演化而来。<br>ISO/IEC 8859-13 (Latin-7 或 Baltic Rim) - 波罗的语族<br>ISO/IEC 8859-14 (Latin-8 或 Celtic) - 凯尔特语族<br>ISO/IEC 8859-15 (Latin-9) - 西欧语言，加入 Latin-1 欠缺的芬兰语字母和大写法语重音字母，以及欧元符号。<br>ISO/IEC 8859-16 (Latin-10) - 东南欧语言。主要供罗马尼亚语使用，并加入欧元符号。</p>
+<blockquote>
+<p>我们在数据库中常见到的 Latin-1、2、5、7 其实就是上面提到的针对特定语言的 ASCII 扩展字符集。<br><img src="https://blog-static.jiangxueqiao.com/blog/img/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMTI3MjA1MDA0NTIy"></p>
+</blockquote>
+<h3 id="1-2-2-多字节扩展-GB-系列"><a href="#1-2-2-多字节扩展-GB-系列" class="headerlink" title="1.2.2 多字节扩展 - GB 系列"></a>1.2.2 多字节扩展 - GB 系列</h3><p>前面讲到了，欧洲各国有效利用闲置的最高位对 ASCII 字符集进行了扩展。可是欧洲人民没有想到在大洋彼岸有着一个拥有五千年历史的伟大民族，她拥有着成千上万的汉字，1 个字节显然不够表达如此深厚的文化底蕴。</p>
+<p>于是当计算机引入到中国之初，国家技术监督局就设计了 GB 系列编码方案（GB 为 guo biao 的简称)。<br><strong>GB 编码方案使用 2 个字节来表达一个汉字。同时为了兼容 ASCII 编码，规定各个字节的最高位（首位）必须为 1，从而避免了和最高位为 0 的 ASCII 字符集的冲突。</strong></p>
+<p>GB 系列字符集经历下面的几个发展过程：</p>
+<table>
+<thead>
+<tr>
+<th>编码名称</th>
+<th>发布时间</th>
+<th>字节数</th>
+<th>汉字范围</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GB2312</td>
+<td>1980 年</td>
+<td>变字节（ASCII 1 字节，汉字 2 个字节）</td>
+<td>6763 个汉字</td>
+</tr>
+<tr>
+<td>GB13000</td>
+<td>1993 年第一版</td>
+<td>变字节（ASCII 1 字节，汉字 2 个字节）</td>
+<td>20902 个汉字</td>
+</tr>
+<tr>
+<td>GBK</td>
+<td>Windows95 中</td>
+<td>2 个字节</td>
+<td>21886 个汉字和图形符号（含 GB2312，BIG5 中所有字符）</td>
+</tr>
+<tr>
+<td>GB18030</td>
+<td>2000 年第一版</td>
+<td>变字节（ASCII 1 字节，汉字 2 个或 4 个字节）</td>
+<td>27484 个汉字</td>
+</tr>
+</tbody></table>
+<p>每一次迭代，支持的字符数量都会增加，而且每一次迭代都会保留之前版本支持的编码，所以做到了向上兼容。</p>
+<h3 id="1-2-3-全角与半角"><a href="#1-2-3-全角与半角" class="headerlink" title="1.2.3 全角与半角"></a>1.2.3 全角与半角</h3><p>因为汉字在显示器上的显示宽度要比英文字符的宽度要宽一倍，在一起排版显示时不太美观。所以 GB 编码不仅仅加入了汉字字符，而且包括了 ASCII 字符集中本来就有的数字、标点符号、字母等字符。这些被编入 GB 编码的数字、标点、字母在显示器上的显示宽度比 ASCII 字符集中的宽度宽一倍，所以前者称为全角字符，后者称为半角字符。</p>
+<h1 id="2-ANSI"><a href="#2-ANSI" class="headerlink" title="2. ANSI"></a>2. ANSI</h1><h2 id="2-1-ANSI-与代码页"><a href="#2-1-ANSI-与代码页" class="headerlink" title="2.1 ANSI 与代码页"></a>2.1 ANSI 与代码页</h2><p>前面说到了世界各国针对 ASCII 的扩展方案（如欧洲的 ISO/IEC 8859，中国的 GB 系列等），这些 ASCII 扩展编码方案的特点是：他们都兼容 ASCII 编码，但他们彼此之间是不兼容的。微软将这些编码方案统称为 ANSI 编码。故 ANSI 并不是特指某一种编码方案，只有知道了在哪个国家，哪个语言环境下，才知道它具体表示哪个编码方案。</p>
+<p>在 Windows 操作系统上，默认使用 ANSI 来保存文件（从Windows 10开始默认使用UTF8编码）。操作系统是如何知道 ANSI 到底应该表示哪种编码了，是 GBK还是 ASCII，或者还是 EUC-KR 了？ Windows 通过一个叫”Code Page”（翻译为中文叫代码页）的东西来判断系统的默认编码。</p>
+<p>简体中文操作系统默认的代码页是 936，它表示 ANSI 使用的是 GBK 编码。<br>GB18030 编码对应的 windows 代码页为 CP54936。</p>
+<p>可以使用命令<code>chcp</code>来查看系统默认的代码页.</p>
+<p>汉字“𤭢”（念 suì）只包含在 GB18030 中，GB2312、GB13000、GBK 中均不包含。默认情况下，在 Visual Studio 中输入该汉字，visual studio 会使用 CP936（即 GBK）来保存代码文件，但如果在代码文件中输入该汉字，visual studio 弹出如下提示要求用户选择代码页：<br><img src="https://blog-static.jiangxueqiao.com/blog/img/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMTI3MjA1MTI5ODIz"><br><img src="https://blog-static.jiangxueqiao.com/blog/img/aHR0cDovL2ltZy5ibG9nLmNzZG4ubmV0LzIwMTcxMTI3MjA1MTM4NTUx"></p>
+<h2 id="2-2-更改默认代码页"><a href="#2-2-更改默认代码页" class="headerlink" title="2.2 更改默认代码页"></a>2.2 更改默认代码页</h2><h3 id="2-2-1-chcp-命令"><a href="#2-2-1-chcp-命令" class="headerlink" title="2.2.1 chcp 命令"></a>2.2.1 chcp 命令</h3><p>可以使用<code>chcp</code>命令来更改默认代码页，如<code>chcp 437</code>将默认代码页更改为 437（美国）。</p>
+<h3 id="2-2-2-控制面板"><a href="#2-2-2-控制面板" class="headerlink" title="2.2.2 控制面板"></a>2.2.2 控制面板</h3><p>在“控制面板”–&gt;“区域和语言”–&gt; “更改系统区域设置”中更改系统默认的代码页为“中文（简体，中国）”。</p>
+<h3 id="2-2-3-代码修改"><a href="#2-2-3-代码修改" class="headerlink" title="2.2.3 代码修改"></a>2.2.3 代码修改</h3><p>也可以通过代码更改默认的代码页：</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> *<span class="title function_">setlocale</span><span class="params">(</span></span><br><span class="line"><span class="params">   <span class="type">int</span> category,</span></span><br><span class="line"><span class="params">   <span class="type">const</span> <span class="type">char</span> *locale</span></span><br><span class="line"><span class="params">)</span>;</span><br></pre></td></tr></tbody></table></figure>
+
+<h1 id="3-Unicode"><a href="#3-Unicode" class="headerlink" title="3. Unicode"></a>3. Unicode</h1><h2 id="3-1-Unicode-产生背景"><a href="#3-1-Unicode-产生背景" class="headerlink" title="3.1 Unicode 产生背景"></a>3.1 Unicode 产生背景</h2><p>各个国家使用不同的编码规则，虽然他们都是兼容 ASCII 的，但它们相互却是不兼容的。</p>
+<p>试想法国人 Jack 写了一封名为”love_you.txt”的信，传给了他的德国朋友 Rose，Rose 想要在 windows 系统上打开这个文件，她需要知道德国使用的字符编码是 Latin-1，然后还要确保她的计算机上安装了该编码，才能顺利的打开这个文件。<br>如果上面这些还能忍受，那么随着网络的发展，你从互联网上获取的文件，你很有可能不知道它来自哪个国家，使用的哪种编码。这也就是 Email 刚诞生时常常出现乱码的原因，发信人和收信人使用的编码可能是不一样的。</p>
+<p>于是<code>The Unicode Standard</code>（统一码标准）横空出世，它由 The Unicode Consortium 于 1991 年发布，我们习惯称它为 Unicode 字符集。</p>
+<p>Unicode 字符集和 ASCII 字符集一样，也只是一个字符集合，标记着字符和数字之间的映射关系，它不包含任何编码规则和方案。和 ASCII 不一样的是，Unicode 字符集支持的字符数量是没有限制的（具体可以参考 Unicode 规范）。</p>
+<blockquote>
+<p>我们通常认为的 Unicode 字符固定占用 2 个字节的观点是错误的。如“𤭢”（念 suì）Unicode 码为<code>D852 DF62</code>。</p>
+</blockquote>
+<p>那么 Unicode 字符是怎样被编码成内存中的字节的了？它是通过 UTF(Unicode Transformation Formats)实现的，比较常见得有 UTF-8，UTF-16。</p>
+<blockquote>
+<p>在 windows 系统上汉字默认使用 CP936（即 GBK 编码），占 2 个字节。而大多数 Unicode 字符的 Unicode 码值也占 2 个字节，所以大多数人误以为汉字字符串在内存中的值就是 Unicode 值，这是错误的。<br>可以从 <a target="_blank" rel="noopener" href="http://tool.chinaz.com/tools/unicode.aspx" title="站长工具">站长工具-Unicode</a> 查询汉字的 Unicode 码值。</p>
+</blockquote>
+<h2 id="3-3-字符集与字符编码的区别"><a href="#3-3-字符集与字符编码的区别" class="headerlink" title="3.3 字符集与字符编码的区别"></a>3.3 字符集与字符编码的区别</h2><p>从 ASCII、GB2312、GBK、GB18030、Big5（繁体中文）、Latin-1 等采用的方案来看，它们都只是定义了单个字符与二进制数据的映射关系，一个字符在一个方案中只会存在一种表示方式，所以我们说 GB2312 是字符集还是字符编码方式都无所谓了。但是 Unicode 不一样，Unicode 作为一个字符集可以采用多种编码方式，如 UTF-8, UTF-16, UTF-32 等。<strong>所以自 Unicode 出现之后，字符集与字符编码需要明确区分开来。</strong></p>
+<h2 id="3-4-UTF-16-编码的缺点"><a href="#3-4-UTF-16-编码的缺点" class="headerlink" title="3.4 UTF-16 编码的缺点"></a>3.4 UTF-16 编码的缺点</h2><p>UTF-16 编码方式规定用两个或四个字节来表示所有的字符。对于 ASCII 字符保持不变，只是将原来的 7 位扩展到了 16 位，其高 9 位永远是 0。如字符’A’：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ASCII: 100 0001</span><br><span class="line">UTF-16: 0000 0000 0100 0001</span><br></pre></td></tr></tbody></table></figure>
+
+<p>可以看到对于 ASCII 字符，UTF-16 的存储空间扩大了一倍，UTF-16 并不是完全兼容 ASCII 字符集。这对于那些 ASCII 字符集已经满足需求的西方国家来说完全是没必要的，而且 ASCII 字符经过 UTF-16 编码之后高字节始终是 0，导致很多 C 语言函数（如<code>strcpy</code>,<code>strlen</code>)会将此字节视为字符串的结束符<code>'\0'</code>，从而出现错误的计算结果。<br>而且，UTF-16 还存在大小端的问题，“𤭢”（念 suì）Unicode 码在大端系统上为<code>D852 DF62</code>，小端系统上为<code>52D8 62DF</code>。<br>因此，UTF-16 一开始推出的时候就遭到很多西方国家的抵制，影响了 Unicode 的推行。于是后来又设计了 UTF-8 编码方式，才解决了这些问题。</p>
+<h2 id="3-5-Unicode-字符集常用编码方式：UTF-8"><a href="#3-5-Unicode-字符集常用编码方式：UTF-8" class="headerlink" title="3.5. Unicode 字符集常用编码方式：UTF-8"></a>3.5. Unicode 字符集常用编码方式：UTF-8</h2><h3 id="3-5-1-UTF-8-概述"><a href="#3-5-1-UTF-8-概述" class="headerlink" title="3.5.1 UTF-8 概述"></a>3.5.1 UTF-8 概述</h3><p>UTF-8 是互联网上使用最广泛的 Unicode 字符集编码方式。UTF-8 编码的最小单位由 8 位（1 个字节）组成，UTF-8 使用一个至四个字节来表示 Unicode 字符。另外，UTF-8 是完美兼容 ASCII 字符集的，这一点可以通过下面的 UTF-8 的编码规则得到证明。</p>
+<h3 id="3-5-2-UTF-8-编码规则"><a href="#3-5-2-UTF-8-编码规则" class="headerlink" title="3.5.2 UTF-8 编码规则"></a>3.5.2 UTF-8 编码规则</h3><p>UTF-8 编码规则很简单：<br>（1）对于 ASCII（单字节字符）字符，采用和 ASCII 相同的编码方式，即只使用一个字节表示，且该字节第一位为 0.<br>（2）对于多字节（2~4 字节）字符，假设字节数为 n（1 &lt; n &lt;= 4），第一个字节：前 n 位都设为 1，第 n+1 位设为 0；后面的 n-1 个字节的前两位一律设为 10。所有字节中的没有提及的其他二进制位，全部为这个符号的 unicode 码。</p>
+<table>
+<thead>
+<tr>
+<th>Unicode 符号范围(十六进制)</th>
+<th>UTF-8 编码方式(二进制)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>单字节:00000000-0000 007F</td>
+<td>0xxxxxxx</td>
+</tr>
+<tr>
+<td>双字节:00000080-0000 07FF</td>
+<td>110xxxxx 10xxxxxx</td>
+</tr>
+<tr>
+<td>三字节:00000800-0000 FFFF</td>
+<td>1110xxxx 10xxxxxx 10xxxxxx</td>
+</tr>
+<tr>
+<td>四字节:0001 0000-0010 FFFF</td>
+<td>11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</td>
+</tr>
+</tbody></table>
+<h3 id="3-5-2-UTF-8-BOM"><a href="#3-5-2-UTF-8-BOM" class="headerlink" title="3.5.2 UTF-8 BOM"></a>3.5.2 UTF-8 BOM</h3><p>BOM（byte order mark）从字面意义来看是标记字节顺序的。最早出现的原因是因为 UTF-16 和 UTF-32 编码采用 2 个或 4 个字节表示一个字符，面临大小端的问题。为了区分是使用的大端(Big Endian，简称 BE)还是小端(Little Endian，简称 LE)，采用了在串的前面加入指定的字节加以区分，UTF-16 大端加入<code>FE FF</code>，小端加入<code>FF FE</code>. 比如， 字符串“ABC”的 UTF-16 编码为 <code>00 41 00 42 00 43</code>，对应的各种的字节序列如下：</p>
+<table>
+<thead>
+<tr>
+<th>序列</th>
+<th>数据</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>UTF-16BE(withoutBOM)</td>
+<td>00 41 00 42 00 43</td>
+</tr>
+<tr>
+<td>UTF-16LE(withoutBOM)</td>
+<td>41 00 42 00 43 00</td>
+</tr>
+<tr>
+<td>UTF-16BE(with BOM)</td>
+<td>FE FF 00 41 00 42 00 43</td>
+</tr>
+<tr>
+<td>UTF-16LE(with BOM)</td>
+<td>FF FE 41 00 42 00 43 00</td>
+</tr>
+</tbody></table>
+<p>因为 UTF-8 和 ASCII 都是单字节序列，二者不好区分，微软采用在 UTF-8 编码的字符串前也加入 BOM（3 个字节<code>EF BB BF</code>）来标记 UTF-8 编码的串。UTF-8 BOM 这一规范大多在 windows 下被使用，在其他平台下用的很少使用，如：Linux 全部采用 UTF-8 编码，不存在要区分的情况；HTTP 协议中可以包含<code>Content-Type:text/html; charset=utf-8</code>这样的说明，也不需要区分。</p>
+<blockquote>
+<p>文章图片带有“CSDN”水印的说明：<br>由于该文章和图片最初发表在我的<a target="_blank" rel="noopener" href="https://blog.csdn.net/china_jeffery">CSDN 博客</a>中，因此图片被 CSDN 自动添加了水印。</p>
+</blockquote>
+</div><div class="article-licensing box"><div class="licensing-title"><p>拨开字符编码的迷雾(1)--字符编码概述</p><p><a href="https://jiangxueqiao.com/post/2720283852.html">https://jiangxueqiao.com/post/2720283852.html</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>江雪桥</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2017-11-27</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2023-10-27</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/post/4126466705.html"><i class="level-item fas fa-chevron-left"></i><span class="level-item">拨开字符编码的迷雾(3)--字符编码转换</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/post/2842059394.html"><span class="level-item">SQL批量添加更新和删除</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div class="content twikoo" id="twikoo"></div><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/twikoo/1.6.6/dist/twikoo.all.min.js"></script><script>twikoo.init({
+            envId: 'https://twikoo.jiangxueqiao.com',
+            
+            lang: "zh-CN",
+        });</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/pi-200.png" alt="Jiang Xueqiao"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Jiang Xueqiao</p><p class="is-size-6 is-block">Software Engineer</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Wuhan, Hubei</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">156</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">26</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">30</p></a></div></div></nav></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-11-26T11:07:09.000Z">2023-11-26</time></p><p class="title"><a href="/post/1533480858.html">Windows窗口调试利器-WinSpyPlus</a></p><p class="categories"><a href="/categories/%E2%91%A2-Power-By-Me/">③ Power By Me</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-11-26T09:39:23.000Z">2023-11-26</time></p><p class="title"><a href="/post/2510508225.html">Windows API的不同返回状态</a></p><p class="categories"><a href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/">① 专栏集锦</a> / <a href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B/">Windows核心编程</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/post/711494356.html"><img src="https://blog-static.jiangxueqiao.com/blog/img/qt-logo.png" alt="Qt自定义和美化菜单"></a></figure><div class="media-content"><p class="date"><time dateTime="2023-11-07T06:00:00.000Z">2023-11-07</time></p><p class="title"><a href="/post/711494356.html">Qt自定义和美化菜单</a></p><p class="categories"><a href="/categories/%E2%91%A1-C/">② C++</a> / <a href="/categories/%E2%91%A1-C/Qt/">Qt</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-11-02T05:45:13.000Z">2023-11-02</time></p><p class="title"><a href="/post/3832058229.html">为什么SetParent会失败</a></p><p class="categories"><a href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/">① 专栏集锦</a> / <a href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B/">Windows核心编程</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-10-31T15:55:23.000Z">2023-10-31</time></p><p class="title"><a href="/post/2065788833.html">窗口如何逃脱显示桌面指令</a></p><p class="categories"><a href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/">① 专栏集锦</a> / <a href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B/">Windows核心编程</a></p></div></article></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/"><span class="level-start"><span class="level-item">① 专栏集锦</span></span><span class="level-end"><span class="level-item tag">63</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E5%86%85%E5%AD%98%E4%BD%93%E7%B3%BB/"><span class="level-start"><span class="level-item">Windows内存体系</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E5%A5%97%E6%8E%A5%E5%AD%97I-O%E6%A8%A1%E5%9E%8B/"><span class="level-start"><span class="level-item">Windows套接字I/O模型</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B/"><span class="level-start"><span class="level-item">Windows核心编程</span></span><span class="level-end"><span class="level-item tag">19</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E6%B3%A8%E5%85%A5%E4%B8%8E%E6%8B%A6%E6%88%AA/"><span class="level-start"><span class="level-item">Windows注入与拦截</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/%E6%89%93%E5%8C%85%E7%8B%82%E9%AD%94%E4%B9%8BNSIS%E6%95%99%E7%A8%8B/"><span class="level-start"><span class="level-item">打包狂魔之NSIS教程</span></span><span class="level-end"><span class="level-item tag">13</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/%E6%8B%A8%E5%BC%80%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E7%9A%84%E8%BF%B7%E9%9B%BE/"><span class="level-start"><span class="level-item">拨开字符编码的迷雾</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/"><span class="level-start"><span class="level-item">网络协议</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E2%91%A1-C/"><span class="level-start"><span class="level-item">② C++</span></span><span class="level-end"><span class="level-item tag">27</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E2%91%A1-C/Qt/"><span class="level-start"><span class="level-item">Qt</span></span><span class="level-end"><span class="level-item tag">15</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E2%91%A2-Power-By-Me/"><span class="level-start"><span class="level-item">③ Power By Me</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A3-Electron/"><span class="level-start"><span class="level-item">④ Electron</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A4-%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E7%A8%8B/"><span class="level-start"><span class="level-item">⑤ 音视频编程</span></span><span class="level-end"><span class="level-item tag">11</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E2%91%A4-%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E7%A8%8B/WebRTC/"><span class="level-start"><span class="level-item">WebRTC</span></span><span class="level-end"><span class="level-item tag">9</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E2%91%A5-%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%8F%91/"><span class="level-start"><span class="level-item">⑥ 服务器开发</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A6-%E8%BD%AF%E4%BB%B6%E8%B0%83%E8%AF%95/"><span class="level-start"><span class="level-item">⑦ 软件调试</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A7-%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84/"><span class="level-start"><span class="level-item">⑧ 软件架构</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A8-%E6%95%B0%E6%8D%AE%E5%BA%93/"><span class="level-start"><span class="level-item">⑨ 数据库</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A9-%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"><span class="level-start"><span class="level-item">⑩ 编程基础</span></span><span class="level-end"><span class="level-item tag">13</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E2%91%A9-%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/CMake/"><span class="level-start"><span class="level-item">CMake</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A9-%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E6%89%B9%E5%A4%84%E7%90%86/"><span class="level-start"><span class="level-item">批处理</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E2%91%AA-%E5%BC%80%E6%BA%90%E5%BA%93/"><span class="level-start"><span class="level-item">⑪ 开源库</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%AB-Web%E5%BC%80%E5%8F%91/"><span class="level-start"><span class="level-item">⑫ Web开发</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%AC-%E7%BE%8E%E6%96%87%E8%B5%8F%E6%9E%90/"><span class="level-start"><span class="level-item">⑬ 美文赏析</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%AD-%E6%9D%82%E5%BF%B5/"><span class="level-start"><span class="level-item">⑭ 杂念</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%AE-%E7%88%B1%E6%8A%98%E8%85%BE/"><span class="level-start"><span class="level-item">⑮ 爱折腾</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#1-ASCII-及其扩展"><span class="level-left"><span class="level-item">1. ASCII 及其扩展</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#1-1-什么是-ASCII-字符集"><span class="level-left"><span class="level-item">1.1 什么是 ASCII 字符集</span></span></a></li><li><a class="level is-mobile" href="#1-2-ASCII-的扩展"><span class="level-left"><span class="level-item">1.2 ASCII 的扩展</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#1-2-1-最高位扩展-ISO-IEC-8859"><span class="level-left"><span class="level-item">1.2.1 最高位扩展 - ISO/IEC 8859</span></span></a></li><li><a class="level is-mobile" href="#1-2-2-多字节扩展-GB-系列"><span class="level-left"><span class="level-item">1.2.2 多字节扩展 - GB 系列</span></span></a></li><li><a class="level is-mobile" href="#1-2-3-全角与半角"><span class="level-left"><span class="level-item">1.2.3 全角与半角</span></span></a></li></ul></li></ul></li><li><a class="level is-mobile" href="#2-ANSI"><span class="level-left"><span class="level-item">2. ANSI</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#2-1-ANSI-与代码页"><span class="level-left"><span class="level-item">2.1 ANSI 与代码页</span></span></a></li><li><a class="level is-mobile" href="#2-2-更改默认代码页"><span class="level-left"><span class="level-item">2.2 更改默认代码页</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#2-2-1-chcp-命令"><span class="level-left"><span class="level-item">2.2.1 chcp 命令</span></span></a></li><li><a class="level is-mobile" href="#2-2-2-控制面板"><span class="level-left"><span class="level-item">2.2.2 控制面板</span></span></a></li><li><a class="level is-mobile" href="#2-2-3-代码修改"><span class="level-left"><span class="level-item">2.2.3 代码修改</span></span></a></li></ul></li></ul></li><li><a class="level is-mobile" href="#3-Unicode"><span class="level-left"><span class="level-item">3. Unicode</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#3-1-Unicode-产生背景"><span class="level-left"><span class="level-item">3.1 Unicode 产生背景</span></span></a></li><li><a class="level is-mobile" href="#3-3-字符集与字符编码的区别"><span class="level-left"><span class="level-item">3.3 字符集与字符编码的区别</span></span></a></li><li><a class="level is-mobile" href="#3-4-UTF-16-编码的缺点"><span class="level-left"><span class="level-item">3.4 UTF-16 编码的缺点</span></span></a></li><li><a class="level is-mobile" href="#3-5-Unicode-字符集常用编码方式：UTF-8"><span class="level-left"><span class="level-item">3.5. Unicode 字符集常用编码方式：UTF-8</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#3-5-1-UTF-8-概述"><span class="level-left"><span class="level-item">3.5.1 UTF-8 概述</span></span></a></li><li><a class="level is-mobile" href="#3-5-2-UTF-8-编码规则"><span class="level-left"><span class="level-item">3.5.2 UTF-8 编码规则</span></span></a></li><li><a class="level is-mobile" href="#3-5-2-UTF-8-BOM"><span class="level-left"><span class="level-item">3.5.2 UTF-8 BOM</span></span></a></li></ul></li></ul></li></ul></div></div><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/codesilo.png" alt="CodeSilo" height="28"></a><p class="is-size-7"><span class="is-size-7">© 2017~2023 江雪桥</span>  <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/" style="color:#000">鄂ICP备2020015399号-6</a>  </p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="GitHub" href="https://github.com/winsoft666"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/jquery/3.3.1/dist/jquery.min.js"></script><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/moment/2.22.2/min/moment-with-locales.min.js"></script><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/clipboard/2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/lightgallery/1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/justifiedGallery/3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/mathjax/2.7.9/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
