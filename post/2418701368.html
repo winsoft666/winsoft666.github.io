@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>C/C++不同整数类型的区别 - CodeSilo</title><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#3273dc"><meta name="application-name" content="CodeSilo"><meta name="msapplication-TileImage" content="img/pi-200.png"><meta name="msapplication-TileColor" content="#3273dc"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="CodeSilo"><meta name="apple-mobile-web-app-status-bar-style" content="default"><link rel="apple-touch-icon" sizes="200x200" href="img/pi-200.png"><meta name="description" content="在C&amp;#x2F;C++中涉及的整数相关的类型大致有如下几种：  char、unsigned char short、unsigned short int、unsigned int long、unsigned long long long、unsigned long long int8_t、uint8_t int32_t、uint32_t int64_t、uint64_t DWORD DWORD32、DWORD"><meta property="og:type" content="blog"><meta property="og:title" content="C/C++不同整数类型的区别"><meta property="og:url" content="https://jiangxueqiao.com/post/2418701368.html"><meta property="og:site_name" content="CodeSilo"><meta property="og:description" content="在C&amp;#x2F;C++中涉及的整数相关的类型大致有如下几种：  char、unsigned char short、unsigned short int、unsigned int long、unsigned long long long、unsigned long long int8_t、uint8_t int32_t、uint32_t int64_t、uint64_t DWORD DWORD32、DWORD"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://jiangxueqiao.com/img/og_image.png"><meta property="article:published_time" content="2023-12-15T13:20:06.000Z"><meta property="article:modified_time" content="2023-12-15T07:10:23.063Z"><meta property="article:author" content="江雪桥"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://jiangxueqiao.com/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://jiangxueqiao.com/post/2418701368.html"},"headline":"C/C++不同整数类型的区别","image":["https://jiangxueqiao.com/img/og_image.png"],"datePublished":"2023-12-15T13:20:06.000Z","dateModified":"2023-12-15T07:10:23.063Z","author":{"@type":"Person","name":"江雪桥"},"publisher":{"@type":"Organization","name":"CodeSilo","logo":{"@type":"ImageObject","url":"https://blog-static.jiangxueqiao.com/blog/icarus-theme/codesilo.png"}},"description":"在C&#x2F;C++中涉及的整数相关的类型大致有如下几种：  char、unsigned char short、unsigned short int、unsigned int long、unsigned long long long、unsigned long long int8_t、uint8_t int32_t、uint32_t int64_t、uint64_t DWORD DWORD32、DWORD"}</script><link rel="canonical" href="https://jiangxueqiao.com/post/2418701368.html"><link rel="icon" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/favicon.png"><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/all.min.css"><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/highlight.js/11.7.0/styles/xt256.css"><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/font/css2/Oxanium-Roboto-Mono.css"><link rel="stylesheet" href="/css/cyberpunk.css"><!--!--><script>var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?fbb46283a7b4d42d425356f8779708d5";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();</script><!--!--><!--!--><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/lightgallery/1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/justifiedGallery/3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/pace-js/1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/codesilo.png" alt="CodeSilo" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">时间轴</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="https://jiangxueqiao.com/post/2185937873.html">留言</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Email" href="mailto:smart7178@163.com"><i class="fa fa-envelope"></i></a><a class="navbar-item" target="_blank" rel="noopener" title="GitHub" href="https://github.com/winsoft666"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-12-15T13:20:06.000Z" title="2023/12/15 21:20:06">2023-12-15</time>发表</span><span class="level-item"><time dateTime="2023-12-15T07:10:23.063Z" title="2023/12/15 15:10:23">2023-12-15</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E2%91%A1-C/">② C++</a></span><span class="level-item twikoo_visitors" id="/post/2418701368.html" data-flag-title="C/C++不同整数类型的区别"><i class="far fa-eye"></i>&nbsp;&nbsp;<span id="twikoo_visitors"><i class="fa fa-spinner fa-spin"></i></span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">C/C++不同整数类型的区别</h1><div class="content"><p>在C/C++中涉及的整数相关的类型大致有如下几种：</p>
+<ul>
+<li>char、unsigned char</li>
+<li>short、unsigned short</li>
+<li>int、unsigned int</li>
+<li>long、unsigned long</li>
+<li>long long、unsigned long long</li>
+<li>int8_t、uint8_t</li>
+<li>int32_t、uint32_t</li>
+<li>int64_t、uint64_t</li>
+<li>DWORD</li>
+<li>DWORD32、DWORD64</li>
+<li>size_t、ssize_t</li>
+<li>SIZE_T、SSIZE_T</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="一、原生数据类型"><a href="#一、原生数据类型" class="headerlink" title="一、原生数据类型"></a>一、原生数据类型</h2><p>以下数据类型C/C++语言中的原生整数类型，其长度取决于所使用的计算机系统和编译器：</p>
+<ul>
+<li>short、unsigned short</li>
+<li>int、unsigned int</li>
+<li>long、unsigned long</li>
+<li>long long、unsigned long long</li>
+</ul>
+<p>如果需要开发跨平台的、具有良好可移植性的程序，请不要使用这些数据类型。<strong>通常情况下</strong>，这些数据类型所占字节数如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>字节数</th>
+<th>范围</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>char</td>
+<td>1</td>
+<td>-128 ~ 127</td>
+</tr>
+<tr>
+<td>unsigned char</td>
+<td>1</td>
+<td>0 ~ 255</td>
+</tr>
+<tr>
+<td>short</td>
+<td>2</td>
+<td>-32,768 ~ 32,767</td>
+</tr>
+<tr>
+<td>unsigned short</td>
+<td>2</td>
+<td>0 ~ 65,535</td>
+</tr>
+<tr>
+<td>int</td>
+<td>4</td>
+<td>-2,147,483,648 ~ 2,147,483,647</td>
+</tr>
+<tr>
+<td>unsigned int</td>
+<td>0</td>
+<td>0 ~ 4,294,967,295</td>
+</tr>
+<tr>
+<td>long</td>
+<td>4</td>
+<td>-2,147,483,648 ~ 2,147,483,647</td>
+</tr>
+<tr>
+<td>unsigned long</td>
+<td>4</td>
+<td>0 ~ 4,294,967,295</td>
+</tr>
+<tr>
+<td>long long</td>
+<td>8</td>
+<td>-9,223,372,036,854,775,808 ~ 9,223,372,036,854,775,807</td>
+</tr>
+<tr>
+<td>unsigned long long</td>
+<td>8</td>
+<td>0 ~ 18,446,744,073,709,551,615</td>
+</tr>
+</tbody></table>
+<h2 id="二、int-t数据类型"><a href="#二、int-t数据类型" class="headerlink" title="二、int*_t数据类型"></a>二、int*_t数据类型</h2><p><code>int*_t</code>格式的数据类型是使用typedef重新定义的数据类型。通过在不同的编译环境进行重定义，确保其所占用的字节数始终相同（即数据范围也相同）。</p>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>字节数</th>
+<th>范围</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>int8_t</td>
+<td>1</td>
+<td>-128 ~ 127</td>
+</tr>
+<tr>
+<td>uint8_t</td>
+<td>1</td>
+<td>0 ~ 255</td>
+</tr>
+<tr>
+<td>int32_t</td>
+<td>4</td>
+<td>-2,147,483,648 ~ 2,147,483,647</td>
+</tr>
+<tr>
+<td>uint32_t</td>
+<td>4</td>
+<td>0 ~ 4,294,967,295</td>
+</tr>
+<tr>
+<td>int64_t</td>
+<td>8</td>
+<td>-9,223,372,036,854,775,808 ~ 9,223,372,036,854,775,807</td>
+</tr>
+<tr>
+<td>uint64_t</td>
+<td>8</td>
+<td>0 ~ 18,446,744,073,709,551,615</td>
+</tr>
+</tbody></table>
+<h2 id="三、size-t和std-size-t"><a href="#三、size-t和std-size-t" class="headerlink" title="三、size_t和std::size_t"></a>三、size_t和std::size_t</h2><p>size_t和std::size_t是不同的数据类型，size_t是定义在C语言的头文件，而std::size_t定义在C++标准库的<code>&lt;cstddef&gt;</code>头文件中。</p>
+<p>虽然二者是不同的数据类型，但std::size_t在实现上兼容size_t了，二者所占的字节数始终相同。</p>
+<p>size_t和std::size_t都是无符号整型，它们在32位编译环境占用4字节，64位编译环境占8字节。</p>
+<p>如果需要使用有符号的size_t类型，在Linux上可以使用<code>ssize_t</code>类型，Windows上可以使用<code>SSIZE_T</code>类型。</p>
+<h2 id="四、DWORD和DWORD32、DWORD64"><a href="#四、DWORD和DWORD32、DWORD64" class="headerlink" title="四、DWORD和DWORD32、DWORD64"></a>四、DWORD和DWORD32、DWORD64</h2><p>DWORD是32位无符号整型（范围<code>0 ~ 4,294,967,295</code>）</p>
+<p><code>DWORD32</code>是32位无符号整型（范围<code>0 ~ 4,294,967,295</code>）,<code>DWORD64</code>是64位无符号整型（范围<code>0 ~ 18,446,744,073,709,551,615</code>）。</p>
+<p>而<code>DWORD</code>也是32位无符号整型（范围<code>0 ~ 4,294,967,295</code>），可能微软在设计之初是打算让DWORD在不同的编译环境具有不同的位数，但从目前情况来看，这种希望已然破灭，<code>DWORD</code>将永远是32位的无符号整型。</p>
+<h2 id="五、一点点建议"><a href="#五、一点点建议" class="headerlink" title="五、一点点建议"></a>五、一点点建议</h2><p>为了保证程序的可移植性，请在开发中只使用固定字节数的数据类型，如int8_t、int32_t、int64_t。</p>
+</div><div class="article-licensing box"><div class="licensing-title"><p>C/C++不同整数类型的区别</p><p><a href="https://jiangxueqiao.com/post/2418701368.html">https://jiangxueqiao.com/post/2418701368.html</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>江雪桥</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2023-12-15</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2023-12-15</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/post/1533480858.html"><span class="level-item">Windows窗口调试利器-WinSpyPlus</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div class="content twikoo" id="twikoo"></div><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/twikoo/1.6.6/dist/twikoo.all.min.js"></script><script>twikoo.init({
+            envId: 'https://twikoo.jiangxueqiao.com',
+            
+            lang: "zh-CN",
+        });</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/pi-200.png" alt="Jiang Xueqiao"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Jiang Xueqiao</p><p class="is-size-6 is-block">Software Engineer</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Wuhan, Hubei</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">157</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">26</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">30</p></a></div></div></nav></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-12-15T13:20:06.000Z">2023-12-15</time></p><p class="title"><a href="/post/2418701368.html">C/C++不同整数类型的区别</a></p><p class="categories"><a href="/categories/%E2%91%A1-C/">② C++</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-11-26T11:07:09.000Z">2023-11-26</time></p><p class="title"><a href="/post/1533480858.html">Windows窗口调试利器-WinSpyPlus</a></p><p class="categories"><a href="/categories/%E2%91%A2-Power-By-Me/">③ Power By Me</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-11-26T09:39:23.000Z">2023-11-26</time></p><p class="title"><a href="/post/2510508225.html">Windows API的不同返回状态</a></p><p class="categories"><a href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/">① 专栏集锦</a> / <a href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B/">Windows核心编程</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/post/711494356.html"><img src="https://blog-static.jiangxueqiao.com/blog/img/qt-logo.png" alt="Qt自定义和美化菜单"></a></figure><div class="media-content"><p class="date"><time dateTime="2023-11-07T06:00:00.000Z">2023-11-07</time></p><p class="title"><a href="/post/711494356.html">Qt自定义和美化菜单</a></p><p class="categories"><a href="/categories/%E2%91%A1-C/">② C++</a> / <a href="/categories/%E2%91%A1-C/Qt/">Qt</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-11-02T05:45:13.000Z">2023-11-02</time></p><p class="title"><a href="/post/3832058229.html">为什么SetParent会失败</a></p><p class="categories"><a href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/">① 专栏集锦</a> / <a href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B/">Windows核心编程</a></p></div></article></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/"><span class="level-start"><span class="level-item">① 专栏集锦</span></span><span class="level-end"><span class="level-item tag">63</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E5%86%85%E5%AD%98%E4%BD%93%E7%B3%BB/"><span class="level-start"><span class="level-item">Windows内存体系</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E5%A5%97%E6%8E%A5%E5%AD%97I-O%E6%A8%A1%E5%9E%8B/"><span class="level-start"><span class="level-item">Windows套接字I/O模型</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B/"><span class="level-start"><span class="level-item">Windows核心编程</span></span><span class="level-end"><span class="level-item tag">19</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E6%B3%A8%E5%85%A5%E4%B8%8E%E6%8B%A6%E6%88%AA/"><span class="level-start"><span class="level-item">Windows注入与拦截</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/%E6%89%93%E5%8C%85%E7%8B%82%E9%AD%94%E4%B9%8BNSIS%E6%95%99%E7%A8%8B/"><span class="level-start"><span class="level-item">打包狂魔之NSIS教程</span></span><span class="level-end"><span class="level-item tag">13</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/%E6%8B%A8%E5%BC%80%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E7%9A%84%E8%BF%B7%E9%9B%BE/"><span class="level-start"><span class="level-item">拨开字符编码的迷雾</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/"><span class="level-start"><span class="level-item">网络协议</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E2%91%A1-C/"><span class="level-start"><span class="level-item">② C++</span></span><span class="level-end"><span class="level-item tag">28</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E2%91%A1-C/Qt/"><span class="level-start"><span class="level-item">Qt</span></span><span class="level-end"><span class="level-item tag">15</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E2%91%A2-Power-By-Me/"><span class="level-start"><span class="level-item">③ Power By Me</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A3-Electron/"><span class="level-start"><span class="level-item">④ Electron</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A4-%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E7%A8%8B/"><span class="level-start"><span class="level-item">⑤ 音视频编程</span></span><span class="level-end"><span class="level-item tag">11</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E2%91%A4-%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E7%A8%8B/WebRTC/"><span class="level-start"><span class="level-item">WebRTC</span></span><span class="level-end"><span class="level-item tag">9</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E2%91%A5-%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%8F%91/"><span class="level-start"><span class="level-item">⑥ 服务器开发</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A6-%E8%BD%AF%E4%BB%B6%E8%B0%83%E8%AF%95/"><span class="level-start"><span class="level-item">⑦ 软件调试</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A7-%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84/"><span class="level-start"><span class="level-item">⑧ 软件架构</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A8-%E6%95%B0%E6%8D%AE%E5%BA%93/"><span class="level-start"><span class="level-item">⑨ 数据库</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A9-%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"><span class="level-start"><span class="level-item">⑩ 编程基础</span></span><span class="level-end"><span class="level-item tag">13</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E2%91%A9-%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/CMake/"><span class="level-start"><span class="level-item">CMake</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A9-%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E6%89%B9%E5%A4%84%E7%90%86/"><span class="level-start"><span class="level-item">批处理</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E2%91%AA-%E5%BC%80%E6%BA%90%E5%BA%93/"><span class="level-start"><span class="level-item">⑪ 开源库</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%AB-Web%E5%BC%80%E5%8F%91/"><span class="level-start"><span class="level-item">⑫ Web开发</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%AC-%E7%BE%8E%E6%96%87%E8%B5%8F%E6%9E%90/"><span class="level-start"><span class="level-item">⑬ 美文赏析</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%AD-%E6%9D%82%E5%BF%B5/"><span class="level-start"><span class="level-item">⑭ 杂念</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%AE-%E7%88%B1%E6%8A%98%E8%85%BE/"><span class="level-start"><span class="level-item">⑮ 爱折腾</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#一、原生数据类型"><span class="level-left"><span class="level-item">一、原生数据类型</span></span></a></li><li><a class="level is-mobile" href="#二、int-t数据类型"><span class="level-left"><span class="level-item">二、int*_t数据类型</span></span></a></li><li><a class="level is-mobile" href="#三、size-t和std-size-t"><span class="level-left"><span class="level-item">三、size_t和std::size_t</span></span></a></li><li><a class="level is-mobile" href="#四、DWORD和DWORD32、DWORD64"><span class="level-left"><span class="level-item">四、DWORD和DWORD32、DWORD64</span></span></a></li><li><a class="level is-mobile" href="#五、一点点建议"><span class="level-left"><span class="level-item">五、一点点建议</span></span></a></li></ul></div></div><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/codesilo.png" alt="CodeSilo" height="28"></a><p class="is-size-7"><span class="is-size-7">© 2017~2023 江雪桥</span>  <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/" style="color:#000">鄂ICP备2020015399号-6</a>  </p><p class="is-size-7">网站风格：<a target="_blank" rel="noopener" href="https://www.cyberpunk.net/gb/zh-cn/" style="color:#75d4ef">赛博朋克（cyberpunk）</a></p><p class="is-size-7">内容同步发布到以下站点：<a href="https://jiangxueqiao.com" style="color:#fc1e1e">jiangxueqiao.com</a>    <a target="_blank" rel="noopener" href="https://winsoft666.github.io" style="color:#fc1e1e">winsoft666.github.io</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="GitHub" href="https://github.com/winsoft666"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/jquery/3.3.1/dist/jquery.min.js"></script><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/moment/2.22.2/min/moment-with-locales.min.js"></script><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/clipboard/2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/lightgallery/1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/justifiedGallery/3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/mathjax/2.7.9/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
