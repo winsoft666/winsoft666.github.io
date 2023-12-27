@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>开源库spdlog使用备忘 - CodeSilo</title><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#3273dc"><meta name="application-name" content="CodeSilo"><meta name="msapplication-TileImage" content="img/pi-200.png"><meta name="msapplication-TileColor" content="#3273dc"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="CodeSilo"><meta name="apple-mobile-web-app-status-bar-style" content="default"><link rel="apple-touch-icon" sizes="200x200" href="img/pi-200.png"><meta name="description" content="spdlog是一个高性能C++日志库，支持仅头文件（header-only）模式使用。  官网地址： https:&amp;#x2F;&amp;#x2F;github.com&amp;#x2F;gabime&amp;#x2F;spdlog  spdlog是线程安全的，但不是进程安全的，可以多个线程同时使用一个spdlog对象输出日志，但不能多个进程同时往一个文件写入日志。 在spdlog内部使用fmt进行字符串的格式化，因此spdlog字符串格式的方式与fmt库相同，"><meta property="og:type" content="blog"><meta property="og:title" content="开源库spdlog使用备忘"><meta property="og:url" content="https://jiangxueqiao.com/post/2185523635.html"><meta property="og:site_name" content="CodeSilo"><meta property="og:description" content="spdlog是一个高性能C++日志库，支持仅头文件（header-only）模式使用。  官网地址： https:&amp;#x2F;&amp;#x2F;github.com&amp;#x2F;gabime&amp;#x2F;spdlog  spdlog是线程安全的，但不是进程安全的，可以多个线程同时使用一个spdlog对象输出日志，但不能多个进程同时往一个文件写入日志。 在spdlog内部使用fmt进行字符串的格式化，因此spdlog字符串格式的方式与fmt库相同，"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://jiangxueqiao.com/img/og_image.png"><meta property="article:published_time" content="2023-12-21T13:48:55.000Z"><meta property="article:modified_time" content="2023-12-27T06:32:37.680Z"><meta property="article:author" content="江雪桥"><meta property="article:tag" content="spdlog"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://jiangxueqiao.com/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://jiangxueqiao.com/post/2185523635.html"},"headline":"开源库spdlog使用备忘","image":["https://jiangxueqiao.com/img/og_image.png"],"datePublished":"2023-12-21T13:48:55.000Z","dateModified":"2023-12-27T06:32:37.680Z","author":{"@type":"Person","name":"江雪桥"},"publisher":{"@type":"Organization","name":"CodeSilo","logo":{"@type":"ImageObject","url":"https://blog-static.jiangxueqiao.com/blog/icarus-theme/codesilo.png"}},"description":"spdlog是一个高性能C++日志库，支持仅头文件（header-only）模式使用。  官网地址： https:&#x2F;&#x2F;github.com&#x2F;gabime&#x2F;spdlog  spdlog是线程安全的，但不是进程安全的，可以多个线程同时使用一个spdlog对象输出日志，但不能多个进程同时往一个文件写入日志。 在spdlog内部使用fmt进行字符串的格式化，因此spdlog字符串格式的方式与fmt库相同，"}</script><link rel="canonical" href="https://jiangxueqiao.com/post/2185523635.html"><link rel="icon" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/favicon.png"><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/all.min.css"><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/highlight.js/11.7.0/styles/xt256.css"><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/font/css2/Oxanium-Roboto-Mono.css"><link rel="stylesheet" href="/css/cyberpunk.css"><!--!--><script>var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?fbb46283a7b4d42d425356f8779708d5";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();</script><!--!--><!--!--><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/lightgallery/1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/justifiedGallery/3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/pace-js/1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
+
+          const id = '#' + CSS.escape(location.hash.substring(1));
+          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
+          if (!$tabMenu) {
+            return;
+          }
+
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
+
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(id);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/codesilo.png" alt="CodeSilo" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">时间轴</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="https://jiangxueqiao.com/post/2185937873.html">留言</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Email" href="mailto:smart7178@163.com"><i class="fa fa-envelope"></i></a><a class="navbar-item" target="_blank" rel="noopener" title="GitHub" href="https://github.com/winsoft666"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-12-21T13:48:55.000Z" title="2023/12/21 21:48:55">2023-12-21</time>发表</span><span class="level-item"><time dateTime="2023-12-27T06:32:37.680Z" title="2023/12/27 14:32:37">2023-12-27</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E2%91%AA-%E5%BC%80%E6%BA%90%E5%BA%93/">⑪ 开源库</a></span><span class="level-item twikoo_visitors" id="/post/2185523635.html" data-flag-title="开源库spdlog使用备忘"><i class="far fa-eye"></i>&nbsp;&nbsp;<span id="twikoo_visitors"><i class="fa fa-spinner fa-spin"></i></span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">开源库spdlog使用备忘</h1><div class="content"><p><code>spdlog</code>是一个高性能C++日志库，支持仅头文件（header-only）模式使用。</p>
+<blockquote>
+<p>官网地址： <a target="_blank" rel="noopener" href="https://github.com/gabime/spdlog">https://github.com/gabime/spdlog</a></p>
+</blockquote>
+<p>spdlog是线程安全的，但不是进程安全的，可以多个线程同时使用一个spdlog对象输出日志，但不能多个进程同时往一个文件写入日志。</p>
+<p>在spdlog内部使用<a target="_blank" rel="noopener" href="https://github.com/fmtlib/fmt">fmt</a>进行字符串的格式化，因此spdlog字符串格式的方式与fmt库相同，如：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spdlog::<span class="built_in">critical</span>(<span class="string">"Support for int: {0:d};  hex: {0:x};  oct: {0:o}; bin: {0:b}"</span>, <span class="number">42</span>);</span><br></pre></td></tr></tbody></table></figure>
+
+<span id="more"></span>
+
+<h1 id="一、日志级别"><a href="#一、日志级别" class="headerlink" title="一、日志级别"></a>一、日志级别</h1><p>大多数日志库都有日志级别的概念，通过设定日志级别可以动态控制我们需要打印输出的日志，spdlog支持如下日志级别：</p>
+<figure class="highlight txt"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">trace = SPDLOG_LEVEL_TRACE   // 最低级</span><br><span class="line">debug = SPDLOG_LEVEL_DEBUG</span><br><span class="line">info = SPDLOG_LEVEL_INFO</span><br><span class="line">warn = SPDLOG_LEVEL_WARN</span><br><span class="line">err = SPDLOG_LEVEL_ERROR</span><br><span class="line">critical = SPDLOG_LEVEL_CRITICAL // 最高级    </span><br></pre></td></tr></tbody></table></figure>
+
+<p>如下代码设置日志级别为<code>info</code>，此时只会打印输出info及比info级别高的日志：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spdlog::<span class="built_in">set_level</span>(spdlog::level::info);</span><br></pre></td></tr></tbody></table></figure>
+
+<h1 id="二、Logger和Sink"><a href="#二、Logger和Sink" class="headerlink" title="二、Logger和Sink"></a>二、Logger和Sink</h1><p>spdlog主要由Logger(记录器)和Sink(输出位置)两部分组成，spdlog的高可拓展体现在Logger和Sink的可以由用户自定义。</p>
+<p>每个程序可以创建多个Logger对象，而每个Logger对象又可以包含多个Sink（即可以同时输出到多个位置）。</p>
+<h2 id="2-1-创建Sink"><a href="#2-1-创建Sink" class="headerlink" title="2.1 创建Sink"></a>2.1 创建Sink</h2><p>在介绍Logger的创建方法前，我们先看看如何创建Sink。</p>
+<p>每个Sink都是一个<code>std::shared_ptr&lt;spdlog::sink&gt;</code>对象，创建Sink方法如下：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> sink = std::<span class="built_in">make_shared</span>&lt;spdlog::sinks::stdout_sink_mt&gt;();</span><br></pre></td></tr></tbody></table></figure>
+
+<p>spdlog有<code>_mt</code>（multi threaded）和<code>_st</code>（single threaded）两类后缀的sink对象，用于区分是否线程安全。单线程(<code>_st</code>后缀)的sink不能多线程使用，非线程安全。</p>
+<p>spdlog支持多种不同的sink类型，如可以输出到文件、控制台、tcp/udp端口、Windows事件日志、mongo数据库等。完整的sink可以查看源代码的<a target="_blank" rel="noopener" href="https://github.com/gabime/spdlog/tree/v1.x/include/spdlog/sinks/">sinks目录</a>，通常一个文件对应一个sink。</p>
+<p>下面介绍几种常用的sink创建方法。</p>
+<h3 id="simple-file-sink"><a href="#simple-file-sink" class="headerlink" title="simple_file_sink"></a>simple_file_sink</h3><p>一个简单的文件接收器，将日志写入到给定的日志文件，没有任何的限制。</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">"spdlog/sinks/basic_file_sink.h"</span></span></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="keyword">auto</span> logger = spdlog::<span class="built_in">basic_logger_mt</span>(<span class="string">"mylogger"</span>, <span class="string">"log.txt"</span>);</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>关于日志的输出目录，如上面的<code>data/logs</code>目录，从splog 1.5.0版本开始，spdlog将自动创建包含日志文件的文件夹。但在此之前，必须手动创建文件夹。</strong></p>
+<h3 id="rotating-file-sink"><a href="#rotating-file-sink" class="headerlink" title="rotating_file_sink"></a>rotating_file_sink</h3><p>当达到最大文件大小时，关闭文件，并重命名，然后创建一个新的文件。最大文件大小和最大文件数都可以在构造函数中配置。</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">"spdlog/sinks/rotating_file_sink.h"</span></span></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> file_logger = spdlog::<span class="built_in">rotating_logger_mt</span>(<span class="string">"file_logger"</span>, <span class="string">"data/logs/mylogfile.log"</span>, <span class="number">1048576</span> * <span class="number">5</span>, <span class="number">3</span>);</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="daily-file-sink"><a href="#daily-file-sink" class="headerlink" title="daily_file_sink"></a>daily_file_sink</h3><p>每天在指定的时间创建一个新的日志文件，并在文件名后附加一个时间戳。</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">"spdlog/sinks/daily_file_sink.h"</span></span></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="keyword">auto</span> daily_logger = spdlog::<span class="built_in">daily_logger_mt</span>(<span class="string">"daily_logger"</span>, <span class="string">"logs/daily"</span>, <span class="number">14</span>, <span class="number">55</span>);</span><br></pre></td></tr></tbody></table></figure>
+
+<p>上面代码将创建一个线程安全的sink，该sink将在每天14:55创建一个新的日志文件。</p>
+<h3 id="stdout-sink"><a href="#stdout-sink" class="headerlink" title="stdout_sink"></a>stdout_sink</h3><p>输出到控制台。</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">"spdlog/sinks/stdout_sinks.h"</span></span></span><br><span class="line"><span class="keyword">auto</span> sink = std::<span class="built_in">make_shared</span>&lt;spdlog::sinks::stdout_sink_mt&gt;();</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="stdout-sink-with-colors"><a href="#stdout-sink-with-colors" class="headerlink" title="stdout_sink with colors"></a>stdout_sink with colors</h3><p>输出到控制台，并带颜色标记。</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">"spdlog/sinks/stdout_sinks.h"</span></span></span><br><span class="line"><span class="keyword">auto</span> sink = std::<span class="built_in">make_shared</span>&lt;spdlog::sinks::stdout_color_sink_mt&gt;();</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="msvc-sink"><a href="#msvc-sink" class="headerlink" title="msvc_sink"></a>msvc_sink</h3><p>输出到Windows调试接收器（如DbgView）,在spdlog内部实际使用<code>OutputDebugStringA</code>进行日志输出。</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">"spdlog/sinks/msvc_sink.h"</span></span></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"><span class="keyword">auto</span> sink = std::<span class="built_in">make_shared</span>&lt;spdlog::sinks::msvc_sink_mt&gt;(<span class="literal">false</span>);</span><br></pre></td></tr></tbody></table></figure>
+
+<p><code>msvc_sink</code>的构造函数支持<code>check_debugger_present</code>参数，如果该参数为true，则仅在调试环境输出日志到Windows调试接收器。</p>
+<h3 id="dup-filter-sink"><a href="#dup-filter-sink" class="headerlink" title="dup_filter_sink"></a>dup_filter_sink</h3><p>在日志输出时移除重复的日志。如果日志与前一条日志相同，并且间隔时间小于<code>max_skip_duration</code>，则跳过输出该日志。</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">"spdlog/sinks/dup_filter_sink.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> dup_filter = std::<span class="built_in">make_shared</span>&lt;dup_filter_sink_mt&gt;(std::chrono::<span class="built_in">seconds</span>(<span class="number">5</span>));</span><br><span class="line"></span><br><span class="line"><span class="function">spdlog::logger <span class="title">l</span><span class="params">(<span class="string">"logger"</span>, dup_filter)</span></span>;</span><br><span class="line">l.<span class="built_in">info</span>(<span class="string">"Hello"</span>);</span><br><span class="line">l.<span class="built_in">info</span>(<span class="string">"Hello"</span>);</span><br><span class="line">l.<span class="built_in">info</span>(<span class="string">"Hello"</span>);</span><br><span class="line">l.<span class="built_in">info</span>(<span class="string">"Different Hello"</span>);</span><br></pre></td></tr></tbody></table></figure>
+
+<p>上面示例输出的日志如下：</p>
+<figure class="highlight txt"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[2019-06-25 17:50:56.511] [logger] [info] Hello</span><br><span class="line">[2019-06-25 17:50:56.512] [logger] [info] Skipped 3 duplicate messages..</span><br><span class="line">[2019-06-25 17:50:56.512] [logger] [info] Different Hello</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="2-2-创建Logger"><a href="#2-2-创建Logger" class="headerlink" title="2.2 创建Logger"></a>2.2 创建Logger</h2><p>在创建完Sink对象后，就可以使用这些Sink来创建Logger对象。</p>
+<p>下面示例创建了名为<code>mylogger</code>的同步Logger对象，为该对象配置了2个sink。</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> file_sink = std::<span class="built_in">make_shared</span>&lt;spdlog::sinks::rotating_file_sink_mt&gt;(<span class="string">"logs/app.log"</span>, <span class="number">1048576</span>, <span class="number">7</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> msvc_sink = std::<span class="built_in">make_shared</span>&lt;spdlog::sinks::msvc_sink_mt&gt;(<span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">std::vector&lt;spdlog::sink_ptr&gt; sinks = {file_sink, msvc_sink};</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> logger = std::<span class="built_in">make_shared</span>&lt;spdlog::logger&gt;(<span class="string">"mylogger"</span>,</span><br><span class="line">                                                sinks.<span class="built_in">begin</span>(),</span><br><span class="line">                                                sinks.<span class="built_in">end</span>());</span><br></pre></td></tr></tbody></table></figure>
+
+<p>spdlog内部为每个进程都维护一张全局Logger记录表，记载了每个进程中通过工程方法创建的Logger实例(某些情况需要用户手动注册)。因而，在使用Logger时只需要知道创建时指定的名称即可：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> logger = spdlog::<span class="built_in">get</span>(<span class="string">"mylogger"</span>);</span><br><span class="line"></span><br><span class="line">logger-&gt;<span class="built_in">info</span>(<span class="string">"some things want to say."</span>);</span><br></pre></td></tr></tbody></table></figure>
+
+<h1 id="三、自定义日志格式"><a href="#三、自定义日志格式" class="headerlink" title="三、自定义日志格式"></a>三、自定义日志格式</h1><p>日志格式作用在Sink对象上，每个Sink都有一个格式化程序，spdlog的默认日志记录格式为：</p>
+<figure class="highlight txt"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[2014-10-31 23:46:59.678] [my_loggername] [info] Some message</span><br></pre></td></tr></tbody></table></figure>
+
+<p>我们可以通过下面方式为当前进程的所有Logger对象的所有Sink都统一设置日志格式：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spdlog::<span class="built_in">set_pattern</span>(<span class="string">"*** [%H:%M:%S %z] [thread %t] %v ***"</span>);</span><br></pre></td></tr></tbody></table></figure>
+
+<p>也可以通过下面方式为指定的Logger对象的所有Sink设置日志格式：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">some_logger-&gt;<span class="built_in">set_pattern</span>(<span class="string">"&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; %H:%M:%S %z %v &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;"</span>);</span><br></pre></td></tr></tbody></table></figure>
+
+<p>当然可以针对具体的Sink来设置日志格式：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">some_logger-&gt;<span class="built_in">sinks</span>()[<span class="number">0</span>]-&gt;<span class="built_in">set_pattern</span>(<span class="string">"&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; %H:%M:%S %z %v &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;"</span>);</span><br><span class="line">some_logger-&gt;<span class="built_in">sinks</span>()[<span class="number">1</span>]-&gt;<span class="built_in">set_pattern</span>(<span class="string">".."</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 或</span></span><br><span class="line">some_sink-&gt;<span class="built_in">set_pattern</span>(<span class="string">"&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt; %H:%M:%S %z %v &lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;"</span>);</span><br></pre></td></tr></tbody></table></figure>
+
+<p>在设置日志格式时，spdlog都会对格式进程预编译，避免每次输出日志都进程格式解析，提升日志性能。</p>
+<h2 id="3-1-格式标记"><a href="#3-1-格式标记" class="headerlink" title="3.1 格式标记"></a>3.1 格式标记</h2><p>下面列出了spdlog的pattern字符串支持的格式标记（类似<code>%flag</code>）。</p>
+<table>
+<thead>
+<tr>
+<th>标记</th>
+<th>含义</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%v</td>
+<td>实际的日志文本</td>
+<td>some user text</td>
+</tr>
+<tr>
+<td>%t</td>
+<td>线程ID</td>
+<td>1232</td>
+</tr>
+<tr>
+<td>%P</td>
+<td>进程ID</td>
+<td>3456</td>
+</tr>
+<tr>
+<td>%n</td>
+<td>日志名称</td>
+<td>some logger name</td>
+</tr>
+<tr>
+<td>%l</td>
+<td>The log level of the message</td>
+<td>debug、info等</td>
+</tr>
+<tr>
+<td>%L</td>
+<td>Short log level of the message</td>
+<td>D、I等</td>
+</tr>
+<tr>
+<td>%a</td>
+<td>简写星期名称</td>
+<td>Thu</td>
+</tr>
+<tr>
+<td>%A</td>
+<td>星期名称全程</td>
+<td>Thursday</td>
+</tr>
+<tr>
+<td>%b</td>
+<td>简写月份名称</td>
+<td>Aug</td>
+</tr>
+<tr>
+<td>%B</td>
+<td>月份名称全程</td>
+<td>August</td>
+</tr>
+<tr>
+<td>%c</td>
+<td>日期和时间</td>
+<td>Thu Aug 23 15:35:46 2014</td>
+</tr>
+<tr>
+<td>%C</td>
+<td>两位数表示年份</td>
+<td>2014输出14</td>
+</tr>
+<tr>
+<td>%Y</td>
+<td>四位数表示年份</td>
+<td>2014</td>
+</tr>
+<tr>
+<td>%D</td>
+<td>r %x	Short MM/DD/YY date</td>
+<td>08/23/14</td>
+</tr>
+<tr>
+<td>%m</td>
+<td>Month 01-12</td>
+<td>11</td>
+</tr>
+<tr>
+<td>%d</td>
+<td>Day of month 01-31</td>
+<td>29</td>
+</tr>
+<tr>
+<td>%H</td>
+<td>Hours in 24 format 00-23</td>
+<td>23</td>
+</tr>
+<tr>
+<td>%I</td>
+<td>Hours in 12 format 01-12</td>
+<td>11</td>
+</tr>
+<tr>
+<td>%M</td>
+<td>Minutes 00-59</td>
+<td>59</td>
+</tr>
+<tr>
+<td>%S</td>
+<td>Seconds 00-59</td>
+<td>58</td>
+</tr>
+<tr>
+<td>%e</td>
+<td>毫秒</td>
+<td>678</td>
+</tr>
+<tr>
+<td>%f</td>
+<td>微妙</td>
+<td>056789</td>
+</tr>
+<tr>
+<td>%F</td>
+<td>纳秒</td>
+<td>256789123</td>
+</tr>
+<tr>
+<td>%p</td>
+<td>AM/PM</td>
+<td>AM</td>
+</tr>
+<tr>
+<td>%r</td>
+<td>12小时计时</td>
+<td>02:55:02 PM</td>
+</tr>
+<tr>
+<td>%R</td>
+<td>24小时计时，等同于 %H:%M</td>
+<td>23:55</td>
+</tr>
+<tr>
+<td>%T或%X</td>
+<td>ISO 8601时间格式，等同于%H:%M:%S</td>
+<td>23:55:59</td>
+</tr>
+<tr>
+<td>%z</td>
+<td>ISO 8601时间格式，时区偏移 ([+/-]HH:MM)</td>
+<td>如中国是东8区，+08:00</td>
+</tr>
+<tr>
+<td>%E</td>
+<td>时间戳</td>
+<td>1528834770</td>
+</tr>
+<tr>
+<td>%%</td>
+<td>输出%</td>
+<td>%</td>
+</tr>
+<tr>
+<td>%+</td>
+<td>spdlog默认格式</td>
+<td>[2014-10-31 23:46:59.678] [mylogger] [info] Some message</td>
+</tr>
+<tr>
+<td>%^</td>
+<td>开始颜色标记（只能使用一次）</td>
+<td>[mylogger] [info(green)] Some message</td>
+</tr>
+<tr>
+<td>%$</td>
+<td>结束颜色标记(如%^[+++]%$ %v) (只能使用一次)</td>
+<td>[+++] Some message</td>
+</tr>
+<tr>
+<td>%@</td>
+<td>源文件路径和所在行数，等同于%g:%#</td>
+<td>/some/dir/my_file.cpp:123</td>
+</tr>
+<tr>
+<td>%s</td>
+<td>源文件名</td>
+<td>my_file.cpp</td>
+</tr>
+<tr>
+<td>%g</td>
+<td>源文件的完整路径或相对路径，等同于__FILE__宏</td>
+<td>/some/dir/my_file.cpp</td>
+</tr>
+<tr>
+<td>%#</td>
+<td>源码所在行数</td>
+<td>123</td>
+</tr>
+<tr>
+<td>%!</td>
+<td>源码所在函数名</td>
+<td>my_func</td>
+</tr>
+<tr>
+<td>%o</td>
+<td>与上条日志的间隔时间（毫秒）</td>
+<td>456</td>
+</tr>
+<tr>
+<td>%i</td>
+<td>与上条日志的间隔时间（微秒）</td>
+<td>456</td>
+</tr>
+<tr>
+<td>%u</td>
+<td>与上条日志的间隔时间（纳秒）</td>
+<td>11456</td>
+</tr>
+<tr>
+<td>%O</td>
+<td>与上条日志的间隔时间（秒）</td>
+<td>4</td>
+</tr>
+</tbody></table>
+<p>使用示例：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> file_sink = std::<span class="built_in">make_shared</span>&lt;spdlog::sinks::rotating_file_sink_mt&gt;(<span class="string">"logs/app.log"</span>, <span class="number">1048576</span>, <span class="number">7</span>);</span><br><span class="line">file_sink-&gt;<span class="built_in">set_pattern</span>(<span class="string">"%Y-%m-%d %H:%M:%S.%e %z %-10n %-8l [%P %t] %v"</span>);</span><br></pre></td></tr></tbody></table></figure>
+
+<p>输出日志格式如下：</p>
+<figure class="highlight txt"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2023-12-21 09:34:45.691 +08:00 Dock1703122417075610 info     [15460 6948] this is log text</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="源码位置标记"><a href="#源码位置标记" class="headerlink" title="源码位置标记"></a>源码位置标记</h3><p>如果需要使用源码位置标记，如<code>%s</code>, <code>%g</code>, <code>%#</code>, <code>%!</code>，需要在包含spdlog头文件之前，定义如下宏：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> SPDLOG_ACTIVE_LEVEL SPDLOG_LEVEL_TRACE</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="3-2-对齐"><a href="#3-2-对齐" class="headerlink" title="3.2 对齐"></a>3.2 对齐</h2><p>每个格式标记可以通过预先添加宽度标记来实现对齐。</p>
+<p>使用<code>-</code>（左对齐）或<code>=</code>（中间对齐）控制对齐方向：</p>
+<table>
+<thead>
+<tr>
+<th>对齐</th>
+<th>含义</th>
+<th>示例</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%<width><flag></flag></width></td>
+<td>右对齐</td>
+<td>%8l</td>
+<td>“    info”</td>
+</tr>
+<tr>
+<td>%-<width><flag></flag></width></td>
+<td>左对齐</td>
+<td>%-8l</td>
+<td>“info    “</td>
+</tr>
+<tr>
+<td>%=<width><flag></flag></width></td>
+<td>中间对齐</td>
+<td>%=8l</td>
+<td>“  info  “</td>
+</tr>
+</tbody></table>
+<h2 id="3-3-截断"><a href="#3-3-截断" class="headerlink" title="3.3 截断"></a>3.3 截断</h2><p>还可以通过添加<code>!</code>标记来进行数据截断，如果宽度超过指定的宽度，则截断结果：</p>
+<table>
+<thead>
+<tr>
+<th>对齐</th>
+<th>含义</th>
+<th>示例</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%<width>!<flag></flag></width></td>
+<td>右对齐并长度超过3个后截断</td>
+<td>%3!l</td>
+<td>“inf”</td>
+</tr>
+<tr>
+<td>%-<width>!<flag></flag></width></td>
+<td>左对齐并长度超过2个后截断</td>
+<td>%-2!l</td>
+<td>“in”</td>
+</tr>
+<tr>
+<td>%=<width>!<flag></flag></width></td>
+<td>中间对齐并长度超过1个后截断</td>
+<td>%=1!l</td>
+<td>“i”</td>
+</tr>
+</tbody></table>
+<h1 id="四、输出策略-Flush-policy"><a href="#四、输出策略-Flush-policy" class="headerlink" title="四、输出策略(Flush policy)"></a>四、输出策略(Flush policy)</h1><p>基于性能考虑，spdlog不是立即输出日志，而是在内部通过日志队列的方式缓存日志，在合适的时候进行输出。</p>
+<p>如果需要让spdlog立即输出队列中的日志，可以通过下面的几种方式。</p>
+<h2 id="4-1-手动操作"><a href="#4-1-手动操作" class="headerlink" title="4.1 手动操作"></a>4.1 手动操作</h2><p>我们可以单独调用Sink的<code>flush</code>函数立即输出队列中的日志，也可以调用Logger对象的<code>flush</code>函数让该对象下的所有sink立即输出。</p>
+<p>如果是异步日志，调用flush函数只会给日志队列发送一个flush消息，不会立即刷新。</p>
+<p>在程序退出前，spdlog会确保队列中的所有日志都输出完成。如果想手动确保所有日志输出完成后退出程序，可以调用<code>spdlog::shutdown()</code>函数。</p>
+<h2 id="4-2-基于日志等级的输出"><a href="#4-2-基于日志等级的输出" class="headerlink" title="4.2 基于日志等级的输出"></a>4.2 基于日志等级的输出</h2><p>您可以设置将触发自动输出的最低日志级别。例如，每当记录错误或更严重的消息时，这将触发立即输出：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">my_logger-&gt;<span class="built_in">flush_on</span>(spdlog::level::err); </span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="4-3-定时输出"><a href="#4-3-定时输出" class="headerlink" title="4.3 定时输出"></a>4.3 定时输出</h2><p>所有已注册的Logger每5秒的定期输出：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spdlog::<span class="built_in">flush_every</span>(std::chrono::<span class="built_in">seconds</span>(<span class="number">5</span>));</span><br></pre></td></tr></tbody></table></figure>
+
+<p>这种方式只能使用在线程安全的sink上（即<code>_mt</code>后缀），因为定时输出任务执行在不同的线程上。</p>
+<h1 id="五、异常"><a href="#五、异常" class="headerlink" title="五、异常"></a>五、异常</h1><p>spdlog在其文档中关于异常的说明，spdlog只会在构造Logger和Sink错误时主动抛出异常，因为spdlog认为这个错误是致命的，但这个并不可信，最多只能认为spdlog在其他情况下不会主动抛出异常，但不能保证其依赖的库（如fmt）不会抛出异常。</p>
+<p>而且如果多个进程向同一个文件写入日志，当文件达到最大大小时，spdlog会自动重命名当前文件，并新建一个新的日志文件。如果多个进程向同一个文件写入日志，会导致重命名日志文件失败，splog会将该失败认为是致命错误，并抛出异常。</p>
+<p>如果在打印日志时出现了spdlog能够预料的错误（非预料的及三方库抛出的异常仍然会传递到外部），spdlog默认将向<code>stderr</code>打印错误消息，为了避免错误消息充斥屏幕，每个Logger的错误消息输出速率限制为1条消息/分钟。</p>
+<p>spdlog提供了错误处理方法，来让用户自定义如何处理错误信息，我们可以通过<code>set_error_handler</code>函数来自定义错误处理方法：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 全局为每个Logger注册错误处理方法</span></span><br><span class="line">spdlog::<span class="built_in">set_error_handler</span>([](<span class="type">const</span> std::string&amp; msg) {</span><br><span class="line">      std::cerr &lt;&lt; <span class="string">"my err handler: "</span> &lt;&lt; msg &lt;&lt; std::endl;</span><br><span class="line">});</span><br><span class="line"></span><br><span class="line"><span class="comment">// 分别为特定的Logger注册错误处理方法</span></span><br><span class="line">critical_logger-&gt;<span class="built_in">set_error_handler</span>([](<span class="type">const</span> std::string&amp; msg) {</span><br><span class="line">    <span class="keyword">throw</span> std::<span class="built_in">runtime_error</span>(msg);</span><br><span class="line">});</span><br></pre></td></tr></tbody></table></figure>
+
+<p>spdlog不是异常安全的，在使用spdlog时一定要注意异常捕获，否则可能因为一个格式化标记写错导致程序崩溃，本来是想通过日志来排除问题的，结果却因为日志导致程序崩溃，如：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 导致程序崩溃</span></span><br><span class="line">logger-&gt;<span class="built_in">error</span>(<span class="string">"create device enumerator failed, hr: {#x}"</span>, hr);</span><br></pre></td></tr></tbody></table></figure>
+
+<h1 id="六、宽窄字符"><a href="#六、宽窄字符" class="headerlink" title="六、宽窄字符"></a>六、宽窄字符</h1><p>spdlog内部将字符作为<code>char</code>类型处理，如果需要输出<code>wchar_t</code>类型的字符串，需要将其转换为char类型，spdlog仅将char类型字符串原样输出，不做字符编码判断和处理，需要调用者来觉得字符串的编码，建议统一日志字符串的编码格式为UTF-8或ANSI。</p>
+<h1 id="七、日志格式"><a href="#七、日志格式" class="headerlink" title="七、日志格式"></a>七、日志格式</h1><p>spdlog日志字符串的格式化处理使用的是开源<a target="_blank" rel="noopener" href="https://github.com/fmtlib/fmt">fmt库</a>，其详细语法见：<a target="_blank" rel="noopener" href="https://fmt.dev/latest/syntax.html">Format String Syntax</a>。</p>
+<p>下面列举了常用的日志格式化方法。</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">logger-&gt;<span class="built_in">info</span>(<span class="string">"输出char字符串:{}"</span>, <span class="string">"hello"</span>);</span><br><span class="line"><span class="comment">// 输出char字符串:hello</span></span><br><span class="line"></span><br><span class="line">logger-&gt;<span class="built_in">info</span>(<span class="string">"输出std::string:{}"</span>, std::<span class="built_in">string</span>(<span class="string">"hello"</span>));</span><br><span class="line"><span class="comment">// 输出std::string:hello</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 输出最小长度的字符串，如果长度不足则用固定字符填充，但超出不会截断字符串</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">logger-&gt;<span class="built_in">info</span>(<span class="string">"输出左对齐字符串(最小长度10，空格填充):{:&lt;10}"</span>, <span class="string">"hello"</span>);</span><br><span class="line"><span class="comment">// 输出左对齐字符串(最小长度10，空格填充):hello     </span></span><br><span class="line"></span><br><span class="line">logger-&gt;<span class="built_in">info</span>(<span class="string">"输出左对齐字符串(最小长度10):{:&lt;10}"</span>, <span class="string">"hello my world"</span>);</span><br><span class="line"><span class="comment">// 输出左对齐字符串(最小长度10):hello my world</span></span><br><span class="line"></span><br><span class="line">logger-&gt;<span class="built_in">info</span>(<span class="string">"输出右对齐字符串(最小长度10，空格填充):{:&gt;10}"</span>, <span class="string">"hello"</span>);</span><br><span class="line"><span class="comment">// 输出右对齐字符串(最小长度10，空格填充):     hello</span></span><br><span class="line"></span><br><span class="line">logger-&gt;<span class="built_in">info</span>(<span class="string">"输出居中对齐字符串(最小长度10，空格填充):{:^10}"</span>, <span class="string">"hello"</span>);</span><br><span class="line"><span class="comment">// 输出居中对齐字符串(最小长度10，空格填充):  hello   </span></span><br><span class="line"></span><br><span class="line">logger-&gt;<span class="built_in">info</span>(<span class="string">"输出居中对齐字符串(最小长度10，*填充):{:*^10}"</span>, <span class="string">"hello"</span>);</span><br><span class="line"><span class="comment">// 输出居中对齐字符串(最小长度10，*填充):**hello***</span></span><br><span class="line"></span><br><span class="line">logger-&gt;<span class="built_in">info</span>(<span class="string">"输出整型:{}"</span>, <span class="number">1234</span>);</span><br><span class="line"><span class="comment">// 输出整型:1234</span></span><br><span class="line"></span><br><span class="line">logger-&gt;<span class="built_in">info</span>(<span class="string">"输出布尔类型:{}"</span>, <span class="literal">true</span>);</span><br><span class="line"><span class="comment">// 输出布尔类型:true</span></span><br><span class="line"></span><br><span class="line">logger-&gt;<span class="built_in">info</span>(<span class="string">"输出float:{}"</span>, <span class="number">3.1415936f</span>);</span><br><span class="line"><span class="comment">// 输出float:3.1415937</span></span><br><span class="line"></span><br><span class="line">logger-&gt;<span class="built_in">info</span>(<span class="string">"输出double:{}"</span>, <span class="number">3.1415936</span>);</span><br><span class="line"><span class="comment">// 输出double:3.1415936</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 输出最小位数（含小数点）的浮点型</span></span><br><span class="line"><span class="comment">* 小数点前部的最小位数=总位数-后部固定位数-1，位数不足默认填充空格，超过不截断；</span></span><br><span class="line"><span class="comment">* 小数点后部的位数始终固定，位数不足则在尾部添加0，超出则四舍五入后截断；</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">logger-&gt;<span class="built_in">info</span>(<span class="string">"输出浮点型(含小数点最小位数6位（左边填充空格），小数点后始终3位):{:6.3f}"</span>, <span class="number">3.1415936</span>);</span><br><span class="line"><span class="comment">// 输出浮点型(含小数点最小位数6位（左边填充空格），小数点后始终3位): 3.142</span></span><br><span class="line"></span><br><span class="line">logger-&gt;<span class="built_in">info</span>(<span class="string">"输出浮点型(含小数点最小位数6位（左边填充空格），小数点后始终3位):{:6.2f}"</span>, <span class="number">31415926.1</span>);</span><br><span class="line"><span class="comment">// 输出浮点型(含小数点最小位数6位（左边填充空格），小数点后始终3位):31415926.10</span></span><br><span class="line"></span><br><span class="line">logger-&gt;<span class="built_in">info</span>(<span class="string">"输出小写十六进制:{:x}"</span>, <span class="number">123</span>);</span><br><span class="line"><span class="comment">// 输出小写十六进制:7b</span></span><br><span class="line"></span><br><span class="line">logger-&gt;<span class="built_in">info</span>(<span class="string">"输出大写十六进制:{:X}"</span>, <span class="number">123</span>);</span><br><span class="line"><span class="comment">// 输出大写十六进制:7B</span></span><br><span class="line"></span><br><span class="line">logger-&gt;<span class="built_in">info</span>(<span class="string">"输出小写十六进制(带0x前缀):{:#x}"</span>, <span class="number">123</span>);</span><br><span class="line"><span class="comment">// 输出小写十六进制(带0x前缀):0x7b</span></span><br><span class="line"></span><br><span class="line">logger-&gt;<span class="built_in">info</span>(<span class="string">"输出大写十六进制(带0x前缀):{:#X}"</span>, <span class="number">123</span>);</span><br><span class="line"><span class="comment">// 输出大写十六进制(带0x前缀):0X7B</span></span><br><span class="line"></span><br><span class="line">logger-&gt;<span class="built_in">info</span>(<span class="string">"输出小写十六进制(固定8位，不足补0):{:08x}"</span>, <span class="number">123</span>);</span><br><span class="line"><span class="comment">// 输出小写十六进制(固定8位，不足补0):0000007b</span></span><br><span class="line"></span><br><span class="line">logger-&gt;<span class="built_in">info</span>(<span class="string">"输出小写十六进制(带0x前缀，固定8位，不足补0):{:#010x}"</span>, <span class="number">123</span>);</span><br><span class="line"><span class="comment">// 输出小写十六进制(带0x前缀，固定8位，不足补0):0x0000007b</span></span><br></pre></td></tr></tbody></table></figure>
+</div><div class="article-licensing box"><div class="licensing-title"><p>开源库spdlog使用备忘</p><p><a href="https://jiangxueqiao.com/post/2185523635.html">https://jiangxueqiao.com/post/2185523635.html</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>江雪桥</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2023-12-21</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2023-12-27</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/post/2418701368.html"><span class="level-item">C/C++不同整数类型的区别</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div class="content twikoo" id="twikoo"></div><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/twikoo/1.6.6/dist/twikoo.all.min.js"></script><script>twikoo.init({
+            envId: 'https://twikoo.jiangxueqiao.com',
+            
+            lang: "zh-CN",
+        });</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/pi-200.png" alt="Jiang Xueqiao"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Jiang Xueqiao</p><p class="is-size-6 is-block">Software Engineer</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Wuhan, Hubei</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">158</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">26</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">30</p></a></div></div></nav></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-12-21T13:48:55.000Z">2023-12-21</time></p><p class="title"><a href="/post/2185523635.html">开源库spdlog使用备忘</a></p><p class="categories"><a href="/categories/%E2%91%AA-%E5%BC%80%E6%BA%90%E5%BA%93/">⑪ 开源库</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-12-15T13:20:06.000Z">2023-12-15</time></p><p class="title"><a href="/post/2418701368.html">C/C++不同整数类型的区别</a></p><p class="categories"><a href="/categories/%E2%91%A1-C/">② C++</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-11-26T11:07:09.000Z">2023-11-26</time></p><p class="title"><a href="/post/1533480858.html">Windows窗口调试利器-WinSpyPlus</a></p><p class="categories"><a href="/categories/%E2%91%A2-Power-By-Me/">③ Power By Me</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-11-26T09:39:23.000Z">2023-11-26</time></p><p class="title"><a href="/post/2510508225.html">Windows API的不同返回状态</a></p><p class="categories"><a href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/">① 专栏集锦</a> / <a href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B/">Windows核心编程</a></p></div></article><article class="media"><figure class="media-left"><a class="image" href="/post/711494356.html"><img src="https://blog-static.jiangxueqiao.com/blog/img/qt-logo.png" alt="Qt自定义和美化菜单"></a></figure><div class="media-content"><p class="date"><time dateTime="2023-11-07T06:00:00.000Z">2023-11-07</time></p><p class="title"><a href="/post/711494356.html">Qt自定义和美化菜单</a></p><p class="categories"><a href="/categories/%E2%91%A1-C/">② C++</a> / <a href="/categories/%E2%91%A1-C/Qt/">Qt</a></p></div></article></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/"><span class="level-start"><span class="level-item">① 专栏集锦</span></span><span class="level-end"><span class="level-item tag">63</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E5%86%85%E5%AD%98%E4%BD%93%E7%B3%BB/"><span class="level-start"><span class="level-item">Windows内存体系</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E5%A5%97%E6%8E%A5%E5%AD%97I-O%E6%A8%A1%E5%9E%8B/"><span class="level-start"><span class="level-item">Windows套接字I/O模型</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B/"><span class="level-start"><span class="level-item">Windows核心编程</span></span><span class="level-end"><span class="level-item tag">19</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E6%B3%A8%E5%85%A5%E4%B8%8E%E6%8B%A6%E6%88%AA/"><span class="level-start"><span class="level-item">Windows注入与拦截</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/%E6%89%93%E5%8C%85%E7%8B%82%E9%AD%94%E4%B9%8BNSIS%E6%95%99%E7%A8%8B/"><span class="level-start"><span class="level-item">打包狂魔之NSIS教程</span></span><span class="level-end"><span class="level-item tag">13</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/%E6%8B%A8%E5%BC%80%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E7%9A%84%E8%BF%B7%E9%9B%BE/"><span class="level-start"><span class="level-item">拨开字符编码的迷雾</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/"><span class="level-start"><span class="level-item">网络协议</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E2%91%A1-C/"><span class="level-start"><span class="level-item">② C++</span></span><span class="level-end"><span class="level-item tag">28</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E2%91%A1-C/Qt/"><span class="level-start"><span class="level-item">Qt</span></span><span class="level-end"><span class="level-item tag">15</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E2%91%A2-Power-By-Me/"><span class="level-start"><span class="level-item">③ Power By Me</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A3-Electron/"><span class="level-start"><span class="level-item">④ Electron</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A4-%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E7%A8%8B/"><span class="level-start"><span class="level-item">⑤ 音视频编程</span></span><span class="level-end"><span class="level-item tag">11</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E2%91%A4-%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E7%A8%8B/WebRTC/"><span class="level-start"><span class="level-item">WebRTC</span></span><span class="level-end"><span class="level-item tag">9</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E2%91%A5-%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%8F%91/"><span class="level-start"><span class="level-item">⑥ 服务器开发</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A6-%E8%BD%AF%E4%BB%B6%E8%B0%83%E8%AF%95/"><span class="level-start"><span class="level-item">⑦ 软件调试</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A7-%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84/"><span class="level-start"><span class="level-item">⑧ 软件架构</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A8-%E6%95%B0%E6%8D%AE%E5%BA%93/"><span class="level-start"><span class="level-item">⑨ 数据库</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A9-%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"><span class="level-start"><span class="level-item">⑩ 编程基础</span></span><span class="level-end"><span class="level-item tag">13</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E2%91%A9-%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/CMake/"><span class="level-start"><span class="level-item">CMake</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A9-%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E6%89%B9%E5%A4%84%E7%90%86/"><span class="level-start"><span class="level-item">批处理</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E2%91%AA-%E5%BC%80%E6%BA%90%E5%BA%93/"><span class="level-start"><span class="level-item">⑪ 开源库</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%AB-Web%E5%BC%80%E5%8F%91/"><span class="level-start"><span class="level-item">⑫ Web开发</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%AC-%E7%BE%8E%E6%96%87%E8%B5%8F%E6%9E%90/"><span class="level-start"><span class="level-item">⑬ 美文赏析</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%AD-%E6%9D%82%E5%BF%B5/"><span class="level-start"><span class="level-item">⑭ 杂念</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%AE-%E7%88%B1%E6%8A%98%E8%85%BE/"><span class="level-start"><span class="level-item">⑮ 爱折腾</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#一、日志级别"><span class="level-left"><span class="level-item">一、日志级别</span></span></a></li><li><a class="level is-mobile" href="#二、Logger和Sink"><span class="level-left"><span class="level-item">二、Logger和Sink</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#2-1-创建Sink"><span class="level-left"><span class="level-item">2.1 创建Sink</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#simple-file-sink"><span class="level-left"><span class="level-item">simple_file_sink</span></span></a></li><li><a class="level is-mobile" href="#rotating-file-sink"><span class="level-left"><span class="level-item">rotating_file_sink</span></span></a></li><li><a class="level is-mobile" href="#daily-file-sink"><span class="level-left"><span class="level-item">daily_file_sink</span></span></a></li><li><a class="level is-mobile" href="#stdout-sink"><span class="level-left"><span class="level-item">stdout_sink</span></span></a></li><li><a class="level is-mobile" href="#stdout-sink-with-colors"><span class="level-left"><span class="level-item">stdout_sink with colors</span></span></a></li><li><a class="level is-mobile" href="#msvc-sink"><span class="level-left"><span class="level-item">msvc_sink</span></span></a></li><li><a class="level is-mobile" href="#dup-filter-sink"><span class="level-left"><span class="level-item">dup_filter_sink</span></span></a></li></ul></li><li><a class="level is-mobile" href="#2-2-创建Logger"><span class="level-left"><span class="level-item">2.2 创建Logger</span></span></a></li></ul></li><li><a class="level is-mobile" href="#三、自定义日志格式"><span class="level-left"><span class="level-item">三、自定义日志格式</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#3-1-格式标记"><span class="level-left"><span class="level-item">3.1 格式标记</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#源码位置标记"><span class="level-left"><span class="level-item">源码位置标记</span></span></a></li></ul></li><li><a class="level is-mobile" href="#3-2-对齐"><span class="level-left"><span class="level-item">3.2 对齐</span></span></a></li><li><a class="level is-mobile" href="#3-3-截断"><span class="level-left"><span class="level-item">3.3 截断</span></span></a></li></ul></li><li><a class="level is-mobile" href="#四、输出策略-Flush-policy"><span class="level-left"><span class="level-item">四、输出策略(Flush policy)</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#4-1-手动操作"><span class="level-left"><span class="level-item">4.1 手动操作</span></span></a></li><li><a class="level is-mobile" href="#4-2-基于日志等级的输出"><span class="level-left"><span class="level-item">4.2 基于日志等级的输出</span></span></a></li><li><a class="level is-mobile" href="#4-3-定时输出"><span class="level-left"><span class="level-item">4.3 定时输出</span></span></a></li></ul></li><li><a class="level is-mobile" href="#五、异常"><span class="level-left"><span class="level-item">五、异常</span></span></a></li><li><a class="level is-mobile" href="#六、宽窄字符"><span class="level-left"><span class="level-item">六、宽窄字符</span></span></a></li><li><a class="level is-mobile" href="#七、日志格式"><span class="level-left"><span class="level-item">七、日志格式</span></span></a></li></ul></div></div><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/codesilo.png" alt="CodeSilo" height="28"></a><p class="is-size-7"><span class="is-size-7">© 2017~2023 江雪桥</span>  <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/" style="color:#000">鄂ICP备2020015399号-6</a>  </p><p class="is-size-7">网站风格：<a target="_blank" rel="noopener" href="https://www.cyberpunk.net/gb/zh-cn/" style="color:#75d4ef">赛博朋克（cyberpunk）</a></p><p class="is-size-7">内容同步发布到以下站点：<a href="https://jiangxueqiao.com" style="color:#fc1e1e">jiangxueqiao.com</a>    <a target="_blank" rel="noopener" href="https://winsoft666.github.io" style="color:#fc1e1e">winsoft666.github.io</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="GitHub" href="https://github.com/winsoft666"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/jquery/3.3.1/dist/jquery.min.js"></script><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/moment/2.22.2/min/moment-with-locales.min.js"></script><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/clipboard/2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/lightgallery/1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/justifiedGallery/3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
+            'HTML-CSS': {
+                matchFontHeight: false
+            },
+            SVG: {
+                matchFontHeight: false
+            },
+            CommonHTML: {
+                matchFontHeight: false
+            },
+            tex2jax: {
+                inlineMath: [
+                    ['$','$'],
+                    ['\\(','\\)']
+                ]
+            }
+        });</script><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/mathjax/2.7.9/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
+        });</script></body></html>
