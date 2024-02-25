@@ -1397,6 +1397,7 @@
 <h2 id="开源库"><a href="#开源库" class="headerlink" title="开源库"></a>开源库</h2><ul>
 <li><a href="/post/3157704992.html" title="高速文件下载器的实现">高速文件下载器的实现</a></li>
 <li><a href="/post/2402568381.html" title="基于Qt的无边框窗体实现">基于Qt的无边框窗体实现</a></li>
+<li><a href="/post/946276004.html" title="产品级的Electron项目模板">产品级的Electron项目模板</a></li>
 </ul>
 ]]></content>
       <categories>
@@ -9512,5 +9513,184 @@
         <tag>Docker</tag>
         <tag>Watch­tower</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>产品级的Electron项目模板</title>
+    <url>/post/946276004.html</url>
+    <content><![CDATA[<h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>最初选择使用Electron来开发客户端产品，主要是看重了Web开发的高效率，但进入到实际开发流程很多问题就都暴露出来了。</p>
+<p>和开发人员有关的问题主要集中在Web开发人员缺少对客户端的认识，系统编程方面的知识就更不用提了。</p>
+<p>Web开发大多喜欢使用模板搭建项目，大多数开发人员离开模板寸步难行，在模板选择方面也遇到了一些问题，有的模板项目（如Electron-vite）功能很强大，但项目过于复杂，甚至远远超过了我们需要开发的项目本身，这样一旦遇到问题，团队将很难上手进行修改，而有的模板项目又过于简单，使用的技术也比较老了，属于Demo类型，不适合用在产品开发中。</p>
+<p>基于上述问题，我着手开发了一个基于Vue3+Vite的Electron模板项目，在开发这个模板时，我一直遵循稳定、易于维护的初衷。而且在Web开发方面，我属于新手级别，因此我相信这个项目大多数人都是可以上手的。</p>
+<p>项目地址：<br><a href="https://github.com/winsoft666/electron-vue3-template">https://github.com/winsoft666/electron-vue3-template</a></p>
+<span id="more"></span>
+
+<h1 id="1-项目介绍"><a href="#1-项目介绍" class="headerlink" title="1. 项目介绍"></a>1. 项目介绍</h1><p>基于<strong>Vue3</strong> + <strong>Electron</strong> + <strong>TypeScript</strong>的客户端程序模板，使用<strong>Vite</strong>和<strong>Electron Forge</strong>构建和打包。</p>
+<p>真正做到开箱即用，面向跨平台客户端设计，产品级的项目模板。</p>
+<h2 id="1-1-特性"><a href="#1-1-特性" class="headerlink" title="1.1 特性"></a>1.1 特性</h2><ul>
+<li>使用<a href="https://vitejs.dev/">ViteJS</a>构建和驱动前端页面，支持热加载（HMR），使开发和调试变得更加高效 ⚡</li>
+<li>支持Vue3多页面，提供页面创建指令，适合客户端开发场景 💖</li>
+<li>支持Electron窗口创建指令，并且可隔离不同窗口的IPC事件 💖</li>
+<li>封装简化了IPC的调用方式，并提供了IPC函数快速创建指令，主进程与渲染进程的相互调用从未如此简单 👍</li>
+<li>主进程和渲染进程支持热加载 ⚡</li>
+<li>精选依赖包，提升项目稳定性</li>
+<li>代码简洁，易掌控，可定制性强</li>
+<li>日志文件，主进程和渲染进程可以直接写文件日志</li>
+<li>配置文件</li>
+<li>主进程和渲染进程均支持axios HTTP请求</li>
+<li>文件下载（含哈希校验、进度反馈），渲染进程可直接异步调用 👍</li>
+<li>功能完善的无边框窗口</li>
+<li>托盘图标和右键菜单，窗口关闭时程序最小化到托盘</li>
+<li>客户端程序单实例</li>
+<li>基于ESLint的代码规范和自动格式化</li>
+<li>使用Electron官方推荐的<a href="https://www.electronforge.io/">Electron Forge</a>进行客户端构建和打包</li>
+<li>支持NSIS安装包 😎</li>
+<li>……</li>
+</ul>
+<h2 id="1-2-快速开始-🌈"><a href="#1-2-快速开始-🌈" class="headerlink" title="1.2 快速开始 🌈"></a>1.2 快速开始 🌈</h2><p>点击右上角绿色的 <strong>Use this template</strong> 按钮，使用该模板创建一个新的仓库并克隆到本地。</p>
+<p><strong>或者..</strong></p>
+<p>直接克隆该项目: <code>git clone https://github.com/winsoft666/electron-vue3-template.git</code></p>
+<h3 id="Visual-Studio-Code"><a href="#Visual-Studio-Code" class="headerlink" title="Visual Studio Code"></a>Visual Studio Code</h3><p>推荐使用<code>Visual Studio Code</code>进行项目开发，并安装如下插件：</p>
+<ul>
+<li>ESLint</li>
+<li>Vue Language Features (Volar)</li>
+</ul>
+<h3 id="安装依赖-⏬"><a href="#安装依赖-⏬" class="headerlink" title="安装依赖 ⏬"></a>安装依赖 ⏬</h3><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">yarn install</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="开发-⚒️"><a href="#开发-⚒️" class="headerlink" title="开发 ⚒️"></a>开发 ⚒️</h3><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">yarn run dev</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="其他命令"><a href="#其他命令" class="headerlink" title="其他命令"></a>其他命令</h3><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">yarn run dev <span class="comment"># 启动应用并支持热加载</span></span><br><span class="line">yarn run build <span class="comment"># 构建应用，可发布的包位于"out\make"目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">yarn run build:win32 <span class="comment"># 构建Windows平台 32位应用</span></span><br><span class="line">yarn run build:win64 <span class="comment"># 构建Windows平台 64位应用</span></span><br><span class="line">yarn run build:mac <span class="comment"># 构建macOS平台应用</span></span><br><span class="line">yarn run build:linux <span class="comment"># 构建Linux平台应用</span></span><br><span class="line"></span><br><span class="line">yarn run new:page  <span class="comment"># 创建新的Vue页面</span></span><br><span class="line">yarn run new:window <span class="comment"># 创建新的Electron窗口</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>更多的可选配置项可以参考 <a href="https://www.electronforge.io/cli">Electron Forge CLI docs</a>。</p>
+<h3 id="NSIS安装包-🪟"><a href="#NSIS安装包-🪟" class="headerlink" title="NSIS安装包 🪟"></a>NSIS安装包 🪟</h3><p>需要先手动下载和安装NSIS：<br><a href="https://nsis.sourceforge.io/Download">https://nsis.sourceforge.io/Download</a></p>
+<p>使用如下命令构建Windows平台 32位应用（如需构建64位应用，则需要手动修改<code>win-setup-x86.nsi</code>脚本）：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">yarn run build:win32</span><br></pre></td></tr></tbody></table></figure>
+
+<p>运行NSIS安装目录内的<code>makensisw.exe</code>。</p>
+<p>依次点击<code>File -&gt; Load Script...</code>，选择并加载本项目的<code>setup\NSIS\win-setup-x86.nsi</code>脚本。</p>
+<p>最后，执行<code>Recompile</code>命令即可编译生成安装包。</p>
+<p><img src="https://blog-static.jiangxueqiao.com/blog/img/nsis-setup-1.jpg"></p>
+<h1 id="2-项目介绍"><a href="#2-项目介绍" class="headerlink" title="2. 项目介绍"></a>2. 项目介绍</h1><h2 id="2-1-工程结构-🌳"><a href="#2-1-工程结构-🌳" class="headerlink" title="2.1 工程结构 🌳"></a>2.1 工程结构 🌳</h2><figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="string">scripts/</span>         <span class="comment"># 该目录中的脚本用构建应用程序和驱动前端页面</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">screenshots</span>      <span class="comment"># 本文档中用到的截图</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">setup/</span>            <span class="comment"># 存储编译和构建相关文件</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">NSIS/</span>                <span class="comment"># NSIS安装包脚本</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">exe.ico</span>             <span class="comment"># 构建后的可执行文件图标（非安装包图标）</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">install.ico</span>        <span class="comment"># NSIS安装包图标</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">uninstall.ico</span>      <span class="comment"># NSIS卸载程序图标</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">src/</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">lib/</span>            <span class="comment"># 公共库，为了方便修改，未做成独立的包</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">file-download/</span>    <span class="comment"># 文件下载库</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">main</span>                 <span class="comment"># 仅供主进程使用</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">renderer</span>            <span class="comment"># 仅供渲染进程使用</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">shared</span>               <span class="comment"># 主进程和渲染进程都可以使用</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">utils/</span>            <span class="comment"># 公共代码库</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">main/</span>           <span class="comment"># 主进程的代码 (Electron)</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">static/</span>          <span class="comment"># 静态资源</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">windows/</span>         <span class="comment"># 多窗口文件夹 (每个子目录表示一个窗口)</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">primary/</span>          <span class="comment"># 主窗口（客户端通常都会有一个主窗口）</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">frameless/</span>        <span class="comment"># 无边框示例窗口</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">...</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">renderer/</span>      <span class="comment"># 渲染进程的代码 (VueJS)</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">public</span>           <span class="comment"># 静态资源</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">pages/</span>           <span class="comment"># 多页面目录 (强制约定：每个子目录代表一个页面)</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">primary/</span>          <span class="comment"># 主窗口页面</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">frameless/</span>        <span class="comment"># 无边框示例窗口的页面</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">...</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">typings/</span>         <span class="comment"># ts声明文件</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="2-2-使用静态文件"><a href="#2-2-使用静态文件" class="headerlink" title="2.2 使用静态文件"></a>2.2 使用静态文件</h2><ul>
+<li><code>src/main/static</code>目录存放主进程使用的静态文件。</li>
+<li><code>src/renderer/public</code>目录存放渲染进程使用的静态文件。</li>
+</ul>
+<h4 id="在主进程中引用静态文件"><a href="#在主进程中引用静态文件" class="headerlink" title="在主进程中引用静态文件"></a>在主进程中引用静态文件</h4><figure class="highlight ts"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// 假设 src/main/static/tray.ico 文件存在</span></span><br><span class="line"><span class="comment">// 使用 appState.mainStaticPath 属性获取主进程的静态文件存储目录</span></span><br><span class="line"><span class="keyword">import</span> path <span class="keyword">from</span> <span class="string">"path"</span>;</span><br><span class="line"><span class="keyword">import</span> appState <span class="keyword">from</span> <span class="string">"./app-state"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> iconPath = path.<span class="title function_">join</span>(appState.<span class="property">mainStaticPath</span>, <span class="string">"tray.ico"</span>);</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="2-3-AppState对象"><a href="#2-3-AppState对象" class="headerlink" title="2.3 AppState对象"></a>2.3 AppState对象</h2><p>为了方便在主进程中跨模块访问某些对象（如<code>primaryWindow</code>、<code>tray</code>、<code>cfgStore</code>等）和应用配置（如<code>onlyAllowSingleInstance</code>等），我们定义了单实例对象AppState来存储这些数据。</p>
+<p>使用方法如下：</p>
+<figure class="highlight javascript"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> appState <span class="keyword">from</span> <span class="string">"./app-state"</span>;</span><br><span class="line"></span><br><span class="line">appState.<span class="property">primaryWindow</span>?.<span class="title function_">show</span>();</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="2-4-快速创建Vue页面"><a href="#2-4-快速创建Vue页面" class="headerlink" title="2.4 快速创建Vue页面"></a>2.4 快速创建Vue页面</h2><p>执行如下命令，输入页面名称后将自动在<code>renderer/pages</code>目录创建子页面，每个子页面的相关代码位于单独的目录中，目录名为我们指定的页面名称（小写）。</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">yarn run new:page</span><br></pre></td></tr></tbody></table></figure>
+
+<p>创建的子页面在代码中通过以下方式访问：</p>
+<figure class="highlight javascript"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">// 开发环境</span></span><br><span class="line"><span class="keyword">const</span> rendererPort = process.<span class="property">argv</span>[<span class="number">2</span>];</span><br><span class="line">primaryWindow.<span class="title function_">loadURL</span>(<span class="string">`http://localhost:<span class="subst">${rendererPort}</span>/pages/&lt;PAGE-NAME&gt;/index.html`</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 非开发环境</span></span><br><span class="line">primaryWindow.<span class="title function_">loadFile</span>(path.<span class="title function_">join</span>(app.<span class="title function_">getAppPath</span>(), <span class="string">"build/renderer/pages/&lt;PAGE-NAME&gt;/index.html"</span>));</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="2-5-快速创建Electron窗口"><a href="#2-5-快速创建Electron窗口" class="headerlink" title="2.5 快速创建Electron窗口"></a>2.5 快速创建Electron窗口</h2><p>虽然直接构造Electron的BrowerWindow对象就可以创建新的Electron窗口，但为了方便代码管理和ipcMain消息隔离，本模板中的每个窗口都继承自<code>WindowBase</code>对象，每个窗口的相关代码位于<code>src\main\windows\</code>的不同子目录中，目录名为我们指定的窗口名称（小写）。</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">yarn run new:window</span><br></pre></td></tr></tbody></table></figure>
+
+<p>创建的子窗口默认会访问同名的子页面，可以手动修改代码访问其他页面：</p>
+<figure class="highlight javascript"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(process.<span class="property">env</span>.<span class="property">NODE_ENV</span> === <span class="string">"development"</span>){</span><br><span class="line">  <span class="keyword">const</span> rendererPort = process.<span class="property">argv</span>[<span class="number">2</span>];</span><br><span class="line">  primaryWindow.<span class="title function_">loadURL</span>(<span class="string">`http://localhost:<span class="subst">${rendererPort}</span>/pages/primary/index.html`</span>);</span><br><span class="line">}<span class="keyword">else</span>{</span><br><span class="line">  primaryWindow.<span class="title function_">loadFile</span>(path.<span class="title function_">join</span>(app.<span class="title function_">getAppPath</span>(), <span class="string">"build/renderer/pages/primary/index.html"</span>));</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>创建窗口后，需要在<code>registerIpcMainHandler</code>方法中注册该窗口的ipcMain事件及处理函数。</p>
+<p>如果多个窗口注册了同名的事件，当渲染进程发送该名称的事件到主进程时，所有窗口对象都会收到该事件，为了避免这种情况，我们可以在事件处理函数中使用<code>isIpcMainEventBelongMe</code>方法来过滤非本窗口的事件。</p>
+<figure class="highlight javascript"><table><tbody><tr><td class="code"><pre><span class="line">ipcMain.<span class="title function_">on</span>(<span class="string">"message"</span>, <span class="function">(<span class="params">event, message</span>) =&gt;</span> {</span><br><span class="line">  <span class="keyword">if</span>(!<span class="variable language_">this</span>.<span class="title function_">isIpcMainEventBelongMe</span>(event))</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(message);</span><br><span class="line">});</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="2-6-快速创建IPC函数"><a href="#2-6-快速创建IPC函数" class="headerlink" title="2.6 快速创建IPC函数"></a>2.6 快速创建IPC函数</h2><p>在<code>src\renderer\pages\primary\App.vue</code>中获取文件MD5的代码如下：</p>
+<figure class="highlight javascript"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">onGetFileMd5</span>(<span class="params"></span>){</span><br><span class="line">  <span class="keyword">const</span> result = <span class="keyword">await</span> utils.<span class="title function_">showOpenDialog</span>({</span><br><span class="line">    <span class="attr">properties</span>: [ <span class="string">"openFile"</span> ],</span><br><span class="line">    <span class="attr">filters</span>: [</span><br><span class="line">      { <span class="attr">name</span>: <span class="string">"All Files"</span>, <span class="attr">extensions</span>: [ <span class="string">"*"</span> ] }</span><br><span class="line">    ]</span><br><span class="line">  });</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span>(result.<span class="property">filePaths</span>.<span class="property">length</span> &gt; <span class="number">0</span>){</span><br><span class="line">    utils.<span class="title function_">getFileMd5</span>(result.<span class="property">filePaths</span>[<span class="number">0</span>])</span><br><span class="line">      .<span class="title function_">then</span>(<span class="function">(<span class="params">md5</span>) =&gt;</span> {</span><br><span class="line">        message.<span class="title function_">success</span>(md5);</span><br><span class="line">      }).<span class="title function_">catch</span>(<span class="function">(<span class="params">e</span>) =&gt;</span> {</span><br><span class="line">        message.<span class="title function_">error</span>(<span class="title class_">GetErrorMessage</span>(e));</span><br><span class="line">      });</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>上述代码通过调用Utils库的<code>showOpenDialog</code>、<code>getFileMd5</code>函数轻松实现了通知主进程选择文件、计算文件MD5并获取相应结果的操作，代码非常简洁。</p>
+<p>但是Utils只预置了部分常用的功能，预置功能肯定无法满足我们产品开发的所有需求。在此情况下，我们可以向Utils库中添加自定义的功能函数，该如何添加了？</p>
+<p>不用担心，本模板已经提供了IPC函数快速创建指令：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">yarn run new:ipc</span><br></pre></td></tr></tbody></table></figure>
+
+<p>执行上面指令后，会出现如下提示：</p>
+<figure class="highlight txt"><table><tbody><tr><td class="code"><pre><span class="line">Create syntax: CallWay,FunctionName,FunctionType</span><br><span class="line">Call Way:</span><br><span class="line">        rm = Renderer process call the function of main process</span><br><span class="line">        mr = Main process call the function of renderer process (Ignore FunctionType)</span><br><span class="line">Function Name:</span><br><span class="line">        xxx-xxx-xxx</span><br><span class="line">Function Type:</span><br><span class="line">        a = Asynchronous call without result</span><br><span class="line">        ap = Asynchronous call with promise result</span><br><span class="line">        s = Synchronous call with result</span><br></pre></td></tr></tbody></table></figure>
+
+<p>参数1（CallWay）表示函数调用方向：</p>
+<ul>
+<li>rm 表示渲染进程调用主进程的函数，可以支持同步调用、异步调用，并且可以返回Promise结果。</li>
+<li>mr 表示主进程调用渲染进程的函数，该方向只能是异步调用，而且不支持返回结果，会忽略第三个参数（FunctionType）。</li>
+</ul>
+<p>参数2（FunctionName）表示函数名称，函数名称的单词间使用<code>-</code>分隔，如<code>GetFileSha256</code>需要指定为<code>get-file-sha256</code>。</p>
+<p>参数3（FunctionType）函数类型：</p>
+<ul>
+<li>a 表示不返回结果的异步函数</li>
+<li>ap 表示返回Promise结果的异步函数</li>
+<li>s 表示同步函数</li>
+</ul>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>依次输入如下命令：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">yarn run new:ipc</span><br><span class="line"></span><br><span class="line">Input:</span><br><span class="line"><span class="built_in">rm</span>,get-file-sha256,ap</span><br></pre></td></tr></tbody></table></figure>
+
+<p>命令执行成功后，会自动在<code>src\lib\utils\renderer\index.ts</code>生成<code>Utils.getFileSha256</code>函数：</p>
+<figure class="highlight javascript"><table><tbody><tr><td class="code"><pre><span class="line">public <span class="keyword">async</span> <span class="title function_">getFileSha256</span>(<span class="params"></span>){</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">await</span> (<span class="variable language_">window</span> <span class="keyword">as</span> any).<span class="property">__ElectronUtils__</span>.<span class="title function_">getFileSha256</span>();</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>自动生成的函数都没有指定参数和返回值，需要我们手动添加，如修改后的函数如下：</p>
+<figure class="highlight javascript"><table><tbody><tr><td class="code"><pre><span class="line">public <span class="keyword">async</span> <span class="title function_">getFileSha256</span>(<span class="attr">filePath</span>: string) : string {</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">await</span> (<span class="variable language_">window</span> <span class="keyword">as</span> any).<span class="property">__ElectronUtils__</span>.<span class="title function_">getFileSha256</span>(filePath) <span class="keyword">as</span> string;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>在渲染进程中（如App.vue）中可以直接调用该函数：</p>
+<figure class="highlight javascript"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> utils <span class="keyword">from</span> <span class="string">"../../../lib/utils/renderer"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> sha256 = <span class="keyword">await</span> utils.<span class="title function_">getFileSha256</span>(<span class="string">"file-path.txt"</span>);</span><br></pre></td></tr></tbody></table></figure>
+
+<p>IPC函数创建指令只会创建函数骨架，不会为我们实现具体的功能，我们还需要在主进程ipcMain处理函数中实现计算文件SHA256的具体功能。</p>
+<p>自动生成的主进程ipcMain处理函数如下：</p>
+<figure class="highlight javascript"><table><tbody><tr><td class="code"><pre><span class="line">ipcMain.<span class="title function_">handle</span>(<span class="string">"electron-utils-get-file-sha256"</span>, <span class="title function_">async</span>(event) =&gt; {</span><br><span class="line">});</span><br></pre></td></tr></tbody></table></figure>
+
+<p>手动添加参数、返回值，及具体的功能代码（此处省略）：</p>
+<figure class="highlight javascript"><table><tbody><tr><td class="code"><pre><span class="line">ipcMain.<span class="title function_">handle</span>(<span class="string">"electron-utils-get-file-sha256"</span>, <span class="title function_">async</span>(event, <span class="attr">filePath</span>: string) : <span class="title class_">Promise</span>&lt;string&gt; =&gt; {</span><br><span class="line">  <span class="comment">// .....</span></span><br><span class="line">});</span><br></pre></td></tr></tbody></table></figure>
+
+<h1 id="3-代码规范"><a href="#3-代码规范" class="headerlink" title="3. 代码规范"></a>3. 代码规范</h1><p>本项目使用ESLint进行代码检查和格式化，没有使用Prettier进行代码格式化。</p>
+<p>原因大体如下：</p>
+<ol>
+<li><p>需要额外的插件和配置来避免ESLint和Prettier的规则冲突。</p>
+</li>
+<li><p>Prettier的<code>printWidth</code>配置项会损害代码和Git Diff的可读性。<br><img src="https://blog-static.jiangxueqiao.com/blog/img/why-not-prettier-1.jpg"></p>
+</li>
+</ol>
+<p><img src="https://blog-static.jiangxueqiao.com/blog/img/why-not-prettier-2.jpg"></p>
+<p><a href="https://prettier.io/playground/#N4Igxg9gdgLgprEAuc0DOMAEBXNcBOamAvJgNoA6UmmwOe+AkgCZKYCMANPQVAIYBbOGwogAggBsAZgEs4mAMJ98QiTJh9RmAL6cqNOrgIs2AJm5H8-ISJABxGf0wAlCGgAWfKFt37aPJlZMAGYLBmthTFEAZXdsAHNMADk+ACNsHz1qf0sTTAAWMN5BSNFnPncBL0wAMXw+Bky-QwY8gFYiqxLbABU3d3kAGQBPbFSEJuyW4yCANk6I22iCeJkIZJkJCCllSYBdAG4qEE4QCAAHGDWoNGRQZXwIAHcABWUEW5Q+CSe+YdvTql6mAANZwGDREqDRxwZA7CR4QHAsEQ858MCOeLIGD4bBwU5wATjZjMODMQZeeLYPjxOA1CAqPgwK5QLFfbAwCAnEDuGACCQAdXc6jgaDRYDgyxu6hkADd1MNkOA0ACQI4GDAXvV4lU4d9ESAAFZoAAe0UxEjgAEVsBB4HqEfiQGjCAQlak0nAJNzzvhHDABTJmDB3Mh8uZnY88AL6uclb7RQRZbDTgBHW3wLUXT4gBoAWigcDJZO5+Dg6ZkZa1NN1SHhBrwAhk2NxTrQFutGdhdf1To0qUDwdDSAjOL4m0xCggAlrIFFbW5Rh6aU+9adsrxjCgpNg0TAfsuYm30Rgw0tDrw2m0QA">在线演示</a></p>
+<h1 id="4-依赖包-🎈"><a href="#4-依赖包-🎈" class="headerlink" title="4. 依赖包 🎈"></a>4. 依赖包 🎈</h1><h2 id="4-1-基本原则"><a href="#4-1-基本原则" class="headerlink" title="4.1 基本原则"></a>4.1 基本原则</h2><blockquote>
+<p>一个构建在众多不稳定性因素下的项目，是没有稳定性可言的。</p>
+</blockquote>
+<p>为了保证项目的稳定性，本模板项目只使用具有知名度、稳定性强的依赖包（库），如<code>electron-log</code>等。</p>
+<p>对于作者自己写的库（如<code>file-download</code>等），统一以源码形式提供在<code>src\lib\</code>目录，方便模板使用者进行bug修复和功能扩充，在使用时直接采用相对路径进行导入即可。</p>
+<h2 id="4-2-dependencies和devDependencies的区别"><a href="#4-2-dependencies和devDependencies的区别" class="headerlink" title="4.2 dependencies和devDependencies的区别"></a>4.2 dependencies和devDependencies的区别</h2><p>由于Electron Forge会将<code>dependencies</code>中的所有依赖项都进行打包，因此为了减少安装包的体积，我们只将主进程需要使用的依赖安装到<code>dependencies</code>项下，而其他的依赖均安装到<code>devDependencies</code>。</p>
+<p>如将vue作为开发依赖进行安装：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">yarn add -D vue</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="4-3-依赖包说明"><a href="#4-3-依赖包说明" class="headerlink" title="4.3 依赖包说明"></a>4.3 依赖包说明</h2><blockquote>
+<p>作为开发者，应知晓每个依赖包的用途，避免node_modules黑洞的产生。</p>
+</blockquote>
+<ul>
+<li><p>unplugin-vue-components<br>实现自动按需引入AntDesign-Vue组件。</p>
+</li>
+<li><p>electron-log<br>提供本地日志文件的打印和输出。</p>
+</li>
+<li><p>electron-store<br>提供本地配置文件的读取和写入功能。</p>
+</li>
+<li><p>@fortawesome-*<br>提供对FontAwesome图标字体的支持。</p>
+</li>
+<li><p>uuid<br>使用uuid字符串，在file-download库中使用。</p>
+</li>
+<li><p>chalk<br>用于在命令行终端输出带颜色样式的字符串，仅在<code>scripts\*.js</code>中使用。</p>
+</li>
+<li><p>chokidar<br>轻量级的文件监控组件，用于实现热加载，仅在<code>scripts\*.js</code>中使用。</p>
+</li>
+<li><p>@electron-forge/*<br>与Electron Forge构建和打包相关的依赖包，除了<code>@electron-forge/cli</code>是必须的，其他的可以根据<code>forge.config.js -&gt; makers</code>的配置按需引用。</p>
+</li>
+<li><p>axios<br>异步HTTP网络请求组件</p>
+</li>
+</ul>
+<h1 id="5-客户端版本号"><a href="#5-客户端版本号" class="headerlink" title="5. 客户端版本号"></a>5. 客户端版本号</h1><p>使用<code>package.json</code>文件的<code>version</code>字段标识客户端的版本号，在主进程内可以通过<code>appState.appVersion</code>属性获取。</p>
+<p>💡 不需要设置<code>forge.config.js</code>文件的<code>appVersion</code>字段。</p>
+<p>在渲染进程可以直接使用<code>utils.getAppVersion()</code>获取版本号。</p>
+<figure class="highlight javascript"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> utils <span class="keyword">from</span> <span class="string">"../../../lib/utils/renderer"</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(utils.<span class="title function_">getAppVersion</span>());</span><br></pre></td></tr></tbody></table></figure>
+
+<h1 id="6-期待你的反馈-🥳"><a href="#6-期待你的反馈-🥳" class="headerlink" title="6. 期待你的反馈 🥳"></a>6. 期待你的反馈 🥳</h1><p>个人能力有限，代码不免有错误和不足之处，欢迎在Github中提交issue和PR。</p>
+<p>如果这个项目对你有帮助，请点击Github右上角的Star ⭐让我知道。</p>
+]]></content>
+      <categories>
+        <category>③ Power By Me</category>
+      </categories>
   </entry>
 </search>
