@@ -1,280 +1,800 @@
-<!doctype html>
-<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>CodeSilo</title><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#3273dc"><meta name="application-name" content="CodeSilo"><meta name="msapplication-TileImage" content="img/pi-200.png"><meta name="msapplication-TileColor" content="#3273dc"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="CodeSilo"><meta name="apple-mobile-web-app-status-bar-style" content="default"><link rel="apple-touch-icon" sizes="200x200" href="img/pi-200.png"><meta name="description" content="学习、总结与分享"><meta property="og:type" content="blog"><meta property="og:title" content="CodeSilo"><meta property="og:url" content="https://jiangxueqiao.com/"><meta property="og:site_name" content="CodeSilo"><meta property="og:description" content="学习、总结与分享"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://jiangxueqiao.com/img/og_image.png"><meta property="article:author" content="江雪桥"><meta property="article:tag" content="Windows"><meta property="article:tag" content="Linux"><meta property="article:tag" content="C/C++"><meta property="article:tag" content="Golang"><meta property="article:tag" content="Qt"><meta property="article:tag" content="Node.js"><meta property="article:tag" content="Electron"><meta property="article:tag" content="WebRTC"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://jiangxueqiao.com/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://jiangxueqiao.com"},"headline":"CodeSilo","image":["https://jiangxueqiao.com/img/og_image.png"],"author":{"@type":"Person","name":"江雪桥"},"publisher":{"@type":"Organization","name":"CodeSilo","logo":{"@type":"ImageObject","url":"https://blog-static.jiangxueqiao.com/blog/icarus-theme/codesilo.png"}},"description":"学习、总结与分享"}</script><link rel="icon" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/favicon.png"><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/all.min.css"><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/highlight.js/11.7.0/styles/xt256.css"><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/font/css2/Oxanium-Roboto-Mono.css"><link rel="stylesheet" href="/css/cyberpunk.css"><!--!--><script>var _hmt = _hmt || [];
-        (function() {
-            var hm = document.createElement("script");
-            hm.src = "//hm.baidu.com/hm.js?fbb46283a7b4d42d425356f8779708d5";
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(hm, s);
-        })();</script><!--!--><!--!--><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/lightgallery/1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/justifiedGallery/3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/pace-js/1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
-  (function () {
-      function switchTab() {
-          if (!location.hash) {
-            return;
-          }
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Windows,Linux,C/C++,Golang,Qt,Node.js,Electron,Vue,WebRTC">
+    <meta name="description" content="除注明转载以外，所有文章均为原创">
+    <meta name="author" content="江雪桥">
+    
+    <title>
+        
+        CodeSilo
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
 
-          const id = '#' + CSS.escape(location.hash.substring(1));
-          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
-          if (!$tabMenu) {
-            return;
-          }
+    
+        <link rel="shortcut icon" href="/images/favicon.png">
+    
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
 
-          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
-          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
-          Array.from($tabMenuContainer.querySelectorAll('a'))
-              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
-              .forEach($content => $content.classList.add('is-hidden'));
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
 
-          if ($tabMenu) {
-              $tabMenu.parentElement.classList.add('is-active');
-          }
-          const $activeTab = document.querySelector(id);
-          if ($activeTab) {
-              $activeTab.classList.remove('is-hidden');
-          }
-      }
-      switchTab();
-      window.addEventListener('hashchange', switchTab, false);
-  })();
-  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0">
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"jiangxueqiao.com","root":"/","language":"zh-CN","path":"search.xml"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"CodeSilo","author":"江雪桥","avatar":"/images/avatar.png","logo":"/images/avatar.png","favicon":"/images/favicon.png"},"menu":{"Archives":"/archives","Categories":"/categories","About":"/about","Github":"https://github.com/winsoft666"},"first_screen":{"enable":false,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/winsoft666","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":true,"hide_header":true},"home":{"category":false,"tag":true,"announcement":null},"post":{"author_badge":{"enable":false,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":true,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":false},"comment":{"enable":true,"use":"twikoo","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":"https://twikoo.jiangxueqiao.com","region":"zh-CN","version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2017,"word_count":false,"icp":{"enable":true,"record_code":"鄂ICP备2020015399号-6","url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","version":"4.0.7"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 6.3.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-</head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/codesilo.png" alt="CodeSilo" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">时间轴</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="https://jiangxueqiao.com/post/2185937873.html">留言</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Email" href="mailto:smart7178@163.com"><i class="fa fa-envelope"></i></a><a class="navbar-item" target="_blank" rel="noopener" title="GitHub" href="https://github.com/winsoft666"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2019-10-24T03:08:32.000Z" title="2019/10/24 11:08:32">2019-10-24</time>发表</span><span class="level-item"><time dateTime="2023-10-27T04:54:07.918Z" title="2023/10/27 12:54:07">2023-10-27</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E2%91%A4-%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E7%A8%8B/">⑤ 音视频编程</a></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/post/737279469.html">流媒体基础概念</a></p><div class="content"><h1 id="一、流媒体协议"><a href="#一、流媒体协议" class="headerlink" title="一、流媒体协议"></a>一、流媒体协议</h1><h2 id="1-1-RTP-Real-time-Transport-Protocol"><a href="#1-1-RTP-Real-time-Transport-Protocol" class="headerlink" title="1.1 RTP (Real-time Transport Protocol)"></a>1.1 RTP (Real-time Transport Protocol)</h2><h3 id="1-1-1-RTP-特征"><a href="#1-1-1-RTP-特征" class="headerlink" title="1.1.1 RTP 特征"></a>1.1.1 RTP 特征</h3><p>实时传输协议（Real-time Transport Protocol）是一个<strong>网络传输层</strong>协议，它是由 IETF 的多媒体传输工作小组 1996 年在 RFC 1889 中公布的，它作为因特网标准在 RFC 3550（该文档的旧版本是 RFC 1889）有详细说明，RTP 标准定义了两个子协议：RTP 和 RTCP。</p>
-<p><strong>RTP 协议是建立在 UDP 协议上的。</strong> RTP 协议详细说明了在互联网上传递音频和视频的标准数据包格式。RTP 协议常用于流媒体系统（配合 RTCP 协议）、视频会议和视频电话系统（配合 H.263 或 SIP）。</p>
-<p>RTP 标准由两个紧密链接部分组成：</p>
-<ul>
-<li>RTP —- 传送具有实时属性的数据；</li>
-<li>RTP 控制协议（RTCP）—-监控服务质量并传送正在进行的会话参与者的相关信息。</li>
-</ul>
-<p>RTP 本身并没有提供按时发送机制或其他服务质量（QoS）保证，它依赖于底层服务去实现这一过程。RTP 并不保证传送或防止无序传送，也不确定底层网络的可靠性。RTP 实行有序传送，RTP 中的序列号允许接收方重组发送方的包序列，同时序列号也能用于决定适当的包位置，例如：在视频解码中，就不需要顺序解码。</p>
-<h3 id="1-1-2-RTP-报头"><a href="#1-1-2-RTP-报头" class="headerlink" title="1.1.2 RTP 报头"></a>1.1.2 RTP 报头</h3><p>RTP 报头格式如下：<br><img src="https://blog-static.jiangxueqiao.com/blog/img/liumeitijichu-1.jpg"></p>
-<ul>
-<li>V：RTP 协议的版本号，占 2 位，当前协议版本号为 2。</li>
-<li>P：填充标志，占 1 位，如果 P=1，则在该报文的尾部填充一个或多个额外的八位组，它们不是有效载荷的一部分。</li>
-<li>X：扩展标志，占 1 位，如果 X=1，则在 RTP 报头后跟有一个扩展报头。</li>
-<li>CC：CSRC 计数器，占 4 位，指示 CSRC 标识符的个数。</li>
-<li>M: 标记，占 1 位，不同的有效载荷有不同的含义，对于视频，标记一帧的结束；对于音频，标记会话的开始。</li>
-<li>PT: 有效载荷类型，占 7 位，用于说明 RTP 报文中有效载荷的类型，如 GSM 音频、JPEM 图像等。</li>
-<li>序列号：占 16 位，用于标识发送者所发送的 RTP 报文的序列号，每发送一个报文，序列号增 1。接收者通过序列号来检测报文丢失情况，重新排序报文，恢复数据。</li>
-<li>时戳(Timestamp)：占 32 位，时戳反映了该 RTP 报文的第一个八位组的采样时刻。接收者使用时戳来计算延迟和延迟抖动，并进行同步控制。</li>
-<li>同步信源(SSRC)标识符：占 32 位，用于标识同步信源。该标识符是随机选择的，参加同一视频会议的两个同步信源不能有相同的 SSRC。</li>
-<li>特约信源(CSRC)标识符：每个 CSRC 标识符占 32 位，可以有 0 ～ 15 个。每个 CSRC 标识了包含在该 RTP 报文有效载荷中的所有特约信源。</li>
-</ul>
-<p>这里的同步信源是指产生媒体流的信源，它通过 RTP 报头中的一个 32 位数字 SSRC 标识符来标识，而不依赖于网络地址，接收者将根据 SSRC 标识符来区分不同的信源，进行 RTP 报文的分组。特约信源是指当混合器接收到一个或多个同步信源的 RTP 报文后，经过混合处理产生一个新的组合 RTP 报文，并把混合器作为组合 RTP 报文的 SSRC，而将原来所有的 SSRC 都作为 CSRC 传送给接收者，使接收者知道组成组合报文的各个 SSRC。</p>
-<h2 id="1-2-RTCP-Real-time-Transport-Control-Protocol"><a href="#1-2-RTCP-Real-time-Transport-Control-Protocol" class="headerlink" title="1.2 RTCP (Real-time Transport Control Protocol)"></a>1.2 RTCP (Real-time Transport Control Protocol)</h2><p>实时传输控制协议（Real-time Transport Control Protocol,RTCP）是实时传输协议（RTP）的一个姐妹协议。</p>
-<p>RTCP 为 RTP 媒体流提供信道外控制。RTCP 定期在多媒体流会话参加者之间传输控制数据。RTCP 的主要功能是为 RTP 所提供的服务质量提供反馈。</p>
-<p>RTCP 收集相关媒体连接的统计信息，例如：传输字节数，传输分组数，丢失分组数，时延抖动，单向和双向网络延迟等等。网络应用程序可以利用 RTCP 所提供的信息试图提高服务质量，比如限制信息流量或改用压缩比较小的编解码器。RTCP 本身不提供数据加密或身份认证，其伴生协议<code>SRTCP（安全实时传输控制协议）</code>则可用于此类用途。</p>
-<blockquote>
-<p>WebRTC 内部采用的是 RTC+RTCP</p>
-</blockquote>
-<h2 id="1-3-SRTP-SRTCP"><a href="#1-3-SRTP-SRTCP" class="headerlink" title="1.3 SRTP &amp; SRTCP"></a>1.3 SRTP &amp; SRTCP</h2><p>SRTP = Secure Real-time Transport Protocol<br>SRTCP = Secure Real-time Transport Control Protocol<br>SRTP 是在实时传输协议 RTP 基础上所定义的一个协议，旨在为单播和多播应用程序中的实时传输协议的数据提供加密、消息认证、完整性保证和重放保护。它是由 David Oran（思科）和 Rolf Blom（爱立信）开发的，并最早由 IETF 于 2004 年 3 月作为 RFC 3711 发布。</p>
-<h2 id="1-4-RTSP-Real-time-Transport-Streaming-Protocol"><a href="#1-4-RTSP-Real-time-Transport-Streaming-Protocol" class="headerlink" title="1.4 RTSP (Real-time Transport Streaming Protocol)"></a>1.4 RTSP (Real-time Transport Streaming Protocol)</h2><p>RTSP（Real Time Streaming Protocol），RFC2326，实时流传输协议。RTSP 在体系结构上位于 RTP 和 RTCP 之上，它使用 TCP 或 UDP 完成数据传输。</p>
-<p>RTSP 是一种基于文本的<strong>应用层协议</strong>，在语法及一些消息参数等方面与 HTTP 协议类似。</p>
-<p>RTSP 被用于建立的控制媒体流的传输，它为多媒体服务扮演“网络远程控制”的角色。尽管有时可以把 RTSP 控制信息和媒体数据流交织在一起传送，但一般情况 RTSP 本身并不用于传送媒体流数据，媒体数据的传送可通过 RTP/RTCP 等协议来完成。<br><img src="https://blog-static.jiangxueqiao.com/blog/img/liumeitijichu-2.jpg"></p>
-<h2 id="1-5-SDP-Session-Description-Protocol"><a href="#1-5-SDP-Session-Description-Protocol" class="headerlink" title="1.5 SDP (Session Description Protocol)"></a>1.5 SDP (Session Description Protocol)</h2><p>会话描述协议（Session Description Protocol 或简写 SDP）描述的是流媒体的初始化参数。此协议由 IETF 发表为 RFC 2327。</p>
-<p>SDP 完全是一种会话描述格式，它不属于传输协议。</p>
-<p>SDP 用于描述多媒体通信会话，包括会话建立、会话请求和参数协商。SDP 不用于传输媒体数据，只能用于两个通信终端的参数协商，包括媒体类型、格式以及所有其他和会话相关的属性。SDP 以字符串的形式描述上述初始化参数。</p>
-<blockquote>
-<p>可以参考 <a href="/post/2172509399.html" title="SDP格式解析">SDP格式解析</a></p>
-</blockquote>
-<h2 id="1-6-SIP-Session-Initiation-Protocol"><a href="#1-6-SIP-Session-Initiation-Protocol" class="headerlink" title="1.6 SIP (Session Initiation Protocol)"></a>1.6 SIP (Session Initiation Protocol)</h2><p>SIP(Session Initiation Protocol)是一个应用层的信令控制协议。</p>
-<p>SIP 用于初始化一个 Session，并负责传输 SDP 包；而 SDP 包中描述了一个 Session 中包含哪些媒体数据，邀请的人等等；当需要被邀请的人都通过各自的终端设备被通知到后，就可以使用 RTSP 来控制特定 Media 的通信，比如 RTSP 控制信息要求开始 Video 的播放，那么就开始使用 RTP（或者 TCP）实时传输数据，在传输过程中，RTCP 要负责 QoS 等。</p>
-<h2 id="1-7-RTMP-Real-Time-Messaging-Protocol"><a href="#1-7-RTMP-Real-Time-Messaging-Protocol" class="headerlink" title="1.7 RTMP (Real Time Messaging Protocol)"></a>1.7 RTMP (Real Time Messaging Protocol)</h2><p>RTMP(Real-Time Messaging Protocol 实时消息传送协议)的缩写，它是 Adobe Systems 公司为 Flash 播放器和服务器之间音频、视频和数据传输开发的一个基于<strong>TCP</strong>的<strong>应用层</strong>传输协议。这是一个标准的、未加密的实时消息传递协议，默认端口是 1935。</p>
-<p>RTMP 是一种有状态协议。</p>
-<p>RTMP 协议有效的保证了媒体传输质量，使用户可以观看到高质量的多媒体。RTMP 采用 TCP 协议作为其在传输层的协议，避免了多媒体数据在广域网传输过程中的丢包对质量造成的损失。此外 RTMP 协议传输的 FLV 封装格式支持的 H．264 视频编码方式可以在很低的码率下显示质量还不错的画面，非常适合网络带宽不足的情况下收看流媒体。</p>
-<p>当然 RTMP 协议也有一些局限，RTMP 基于 TCP 协议，而 TCP 协议实时性不如 UDP，也非常占用带宽。目前基于 UDP 的 RTMFP 协议能很好的解决这些问题。</p>
-<blockquote>
-<p>RTMPT 封装在 HTTP 请求之中，可穿越防火墙;<br>RTMPS 类似 RTMPT，但使用的是 HTTPS 连接;</p>
-</blockquote>
-<h2 id="1-8-RTMFP-Real-Time-Media-Flow-Protocol"><a href="#1-8-RTMFP-Real-Time-Media-Flow-Protocol" class="headerlink" title="1.8 RTMFP (Real Time Media Flow Protocol)"></a>1.8 RTMFP (Real Time Media Flow Protocol)</h2><p>RTMFP 是 Adobe 公司开发的一套新的通信协议。</p>
-<p>RTMFP 是基于 UDP 的，RTMP 是基于 TCP 的。UDP 在传送直播数据方面比 TCP 还是有较多优势的，比如减少延时，对丢包的容忍，虽然在可靠性上有所损失。与 RTMP 不同, RTMFP 支持 Flash Player 直接发送数据给另一个，而不经过 Server。</p>
-<h2 id="1-9-RSVP-Resource-ReSerVation-Protocol"><a href="#1-9-RSVP-Resource-ReSerVation-Protocol" class="headerlink" title="1.9 RSVP (Resource ReSerVation Protocol)"></a>1.9 RSVP (Resource ReSerVation Protocol)</h2><p>使用 RSVP 预留一部分网络资源（即带宽），能在一定程度上为流媒体的传输提供 QoS。通常 RSVP 请求将会引起每个节点数据路径上的资源预留。</p>
-<p>RSVP 只在单方向上进行资源请求，因此，尽管相同的应用程序，同时可能既担当发送者也担当接受者，但 RSVP 对发送者与接受者在逻辑上是有区别的。 RSVP 属于<strong>网络层</strong>协议。 RSVP 不传输应用数据，但支持因特网控制协议，如 ICMP、IGMP 或者路由选择协议。</p>
-<h2 id="1-10-MMS-Microsoft-Media-Server-Protocol"><a href="#1-10-MMS-Microsoft-Media-Server-Protocol" class="headerlink" title="1.10 MMS (Microsoft Media Server Protocol)"></a>1.10 MMS (Microsoft Media Server Protocol)</h2><p>MMS(Microsoft Media Server Protocol)，微软媒体服务器协议，用来访问接收 Windows Media 服务器中 .asf 文件的一种协议。MMS 协议用于访问 Windows Media 发布点上的单播内容。</p>
-<p>MMS 的默认端口是 1755.</p>
-<h2 id="1-11-HLS-HTTP-Live-Streaming"><a href="#1-11-HLS-HTTP-Live-Streaming" class="headerlink" title="1.11 HLS (HTTP Live Streaming)"></a>1.11 HLS (HTTP Live Streaming)</h2><p>HTTP Live Streaming（缩写是 HLS）是一个由苹果公司提出的基于<strong>HTTP</strong>的流媒体网络传输协议。它的工作原理是把整个流分成一个个小的基于 HTTP 的文件来下载，每次只下载一些。当媒体流正在播放时，客户端可以选择从许多不同的备用源中以不同的速率下载同样的资源，允许流媒体会话适应不同的数据速率。在开始一个流媒体会话时，客户端会下载一个包含元数据的 extended M3U (m3u8)playlist 文件，用于寻找可用的媒体流。</p>
-<p>HLS 只请求基本的 HTTP 报文，与实时传输协议（RTP)不同，HLS 可以穿过任何允许 HTTP 数据通过的防火墙或者代理服务器。它也很容易使用内容分发网络来传输媒体流。</p>
-<p>HLS 协议规定：</p>
-<ul>
-<li>视频的封装格式是 TS。</li>
-<li>视频的编码格式为 H264,音频编码格式为 MP3、AAC 或者 AC-3。</li>
-<li>除了 TS 视频文件本身，还定义了用来控制播放的 m3u8 文件（文本文件）。</li>
-</ul>
-<h1 id="二、封装格式"><a href="#二、封装格式" class="headerlink" title="二、封装格式"></a>二、封装格式</h1><table>
-<thead>
-<tr>
-<th>名称</th>
-<th>推出机构</th>
-<th>流媒体支持</th>
-<th>支持的视频编码</th>
-<th>支持的音频编码</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>AVI</td>
-<td>Microsoft Inc.</td>
-<td>否</td>
-<td>几乎所有格式</td>
-<td>几乎所有格式</td>
-</tr>
-<tr>
-<td>MP4</td>
-<td>MPEG</td>
-<td>是</td>
-<td>MPEG-2, MPEG-4, H.264, H.263 等</td>
-<td>AAC, MPEG-1 Layers I, II, III, AC-3 等</td>
-</tr>
-<tr>
-<td>TS</td>
-<td>MPEG</td>
-<td>是</td>
-<td>MPEG-1, MPEG-2, MPEG-4, H.264</td>
-<td>MPEG-1 Layers I, II, III, AAC</td>
-</tr>
-<tr>
-<td>FLV</td>
-<td>Adobe Inc.</td>
-<td>是</td>
-<td>Sorenson, VP6, H.264</td>
-<td>MP3, ADPCM, Linear PCM, AAC 等</td>
-</tr>
-<tr>
-<td>MKV</td>
-<td>CoreCodec Inc.</td>
-<td>是</td>
-<td>几乎所有格式</td>
-<td>几乎所有格式</td>
-</tr>
-<tr>
-<td>RMVB</td>
-<td>Real Network Inc.</td>
-<td>是</td>
-<td>RealVideo 8, 9, 10</td>
-<td>AAC, Cook Codec, RealAudio Lossless</td>
-</tr>
-</tbody></table>
-<h1 id="三、视频编码格式"><a href="#三、视频编码格式" class="headerlink" title="三、视频编码格式"></a>三、视频编码格式</h1><table>
-<thead>
-<tr>
-<th>名称</th>
-<th>推出机构</th>
-<th>推出时间</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>HEVC(h.265)</td>
-<td>MPEG/ITU-T</td>
-<td>2013</td>
-</tr>
-<tr>
-<td>H.264</td>
-<td>MPEG/ITU-T</td>
-<td>2003</td>
-</tr>
-<tr>
-<td>MPEG4</td>
-<td>MPEG</td>
-<td>2001</td>
-</tr>
-<tr>
-<td>MPEG2</td>
-<td>MPEG</td>
-<td>1994</td>
-</tr>
-<tr>
-<td>VP9</td>
-<td>Google</td>
-<td>2013</td>
-</tr>
-<tr>
-<td>VP8</td>
-<td>Google</td>
-<td>2008</td>
-</tr>
-<tr>
-<td>VC-1</td>
-<td>Microsoft Inc.</td>
-<td>2006</td>
-</tr>
-</tbody></table>
-<h1 id="四、音频编码格式"><a href="#四、音频编码格式" class="headerlink" title="四、音频编码格式"></a>四、音频编码格式</h1><table>
-<thead>
-<tr>
-<th>名称</th>
-<th>推出机构</th>
-<th>推出时间</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>AAC</td>
-<td>MPEG</td>
-<td>1997</td>
-</tr>
-<tr>
-<td>AC-3</td>
-<td>Dolby Inc.</td>
-<td>1992</td>
-</tr>
-<tr>
-<td>MP3</td>
-<td>MPEG</td>
-<td>1993</td>
-</tr>
-<tr>
-<td>WMA</td>
-<td>Microsoft Inc.</td>
-<td>1999</td>
-</tr>
-</tbody></table>
-<br>
-目前，直播服务普通采用RTMP作为流媒体协议，FLV作为封装格式，H.264作为视频编码格式，AAC作为音频编码格式化。点播服务普通采用HTTP作为流媒体协议，H.264作为视频编码格式，AAC作为音频编码格式，而封装格式有多种，如MP4，FLV，F4V等。
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2019-06-20T02:01:46.000Z" title="2019/6/20 10:01:46">2019-06-20</time>发表</span><span class="level-item"><time dateTime="2023-09-22T03:29:36.751Z" title="2023/9/22 11:29:36">2023-09-22</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E2%91%A4-%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E7%A8%8B/">⑤ 音视频编程</a><span> / </span><a class="link-muted" href="/categories/%E2%91%A4-%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E7%A8%8B/WebRTC/">WebRTC</a></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/post/2910781705.html">Windows平台编译WebRTC源码</a></p><div class="content"><blockquote>
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container border-box">
+
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box is-home">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/avatar.png">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               CodeSilo
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc">
+                <ul class="menu-list">
+                    <li class="menu-item">
+                        <a class="active"
+                           href="/"
+                        >首页</a>
+                    </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >归档</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >分类</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >关于</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               target="_blank" rel="noopener" href="https://github.com/winsoft666"
+                            >GITHUB</a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            <li class="drawer-menu-item flex-center">
+                <a class="active"
+                   href="/"
+                >首页</a>
+            </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives"
+                    >归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories"
+                    >分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about"
+                    >关于</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       target="_blank" rel="noopener" href="https://github.com/winsoft666"
+                    >GITHUB</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    <div class="home-content-container fade-in-down-animation">
+    
+    <ul class="home-post-list border-box">
+        
+            <li class="home-post-item">
+
+                
+
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
+                        <a href="/post/2256138363.html">
+                            如何搭建WebRTC的TURN服务器
+                        </a>
+                    </h3>
+
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            <p>本文讲解如何在 Ubuntu 系统上采用<a class="link" target="_blank" rel="noopener" href="https://github.com/coturn/coturn">coturn<i class="fas fa-external-link-alt"></i></a>搭建 p2p 打洞服务器，coturn 是一个开源的 stun 和 turn 服务器实现。</p>
+                        
+                    </div>
+
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Fri Sep 22 2023 17:27:21 GMT+0800">2023-09-22 17:27:21</span>
+            </span>
+        
+
+        
+
+        
+
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+        <a class="home-read-more" href="/post/2256138363.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-post-item">
+
+                
+
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
+                        <a href="/post/2114040426.html">
+                            WebRTC的三种架构
+                        </a>
+                    </h3>
+
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            <p>WebRTC 是基于 P2P 的实时通信技术，（如果 P2P 打洞失败，则会使用 TURN 服务器进行数据转发），在有 2 台客户端参与的情况下，网络拓扑结构如图：<br><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/webrtc-jiagou-1.png"></p>
+                        
+                    </div>
+
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Fri Oct 27 2023 12:54:07 GMT+0800">2023-10-27 12:54:07</span>
+            </span>
+        
+
+        
+
+        
+
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+        <a class="home-read-more" href="/post/2114040426.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-post-item">
+
+                
+
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
+                        <a href="/post/449620601.html">
+                            客户端软件日志输出规范
+                        </a>
+                    </h3>
+
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            众所周知，软件日志对问题的排查可以起到至关重要的作用，但在多人协同开发的情况下，可能会导致不同的人使用不同的日志打印风格，导致日志可阅读性不高。纵观各大知名软件的输出日志，无不有着规范的格式，非常利于阅读。
+本日志输出规范仅适用于客户端软件，不适用于...
+                        
+                    </div>
+
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Thu Sep 07 2023 13:12:01 GMT+0800">2023-09-07 13:12:01</span>
+            </span>
+        
+
+        
+
+        
+
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+        <a class="home-read-more" href="/post/449620601.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-post-item">
+
+                
+
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
+                        <a href="/post/737279469.html">
+                            流媒体基础概念
+                        </a>
+                    </h3>
+
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            一、流媒体协议1.1 RTP (Real-time Transport Protocol)1.1.1 RTP 特征实时传输协议（Real-time Transport Protocol）是一个网络传输层协议，它是由 IETF 的多媒体传输工作小组 1...
+                        
+                    </div>
+
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Fri Oct 27 2023 12:54:07 GMT+0800">2023-10-27 12:54:07</span>
+            </span>
+        
+
+        
+
+        
+
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+        <a class="home-read-more" href="/post/737279469.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-post-item">
+
+                
+
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
+                        <a href="/post/2910781705.html">
+                            Windows平台编译WebRTC源码
+                        </a>
+                    </h3>
+
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            <blockquote>
 <p>写作本文时使用的 webrtc 版本为：<code>branch heads/67</code></p>
 </blockquote>
-<h2 id="一、-准备工作"><a href="#一、-准备工作" class="headerlink" title="一、 准备工作"></a>一、 准备工作</h2><h3 id="1-0-请确保可以访问国外网站"><a href="#1-0-请确保可以访问国外网站" class="headerlink" title="1.0 请确保可以访问国外网站"></a>1.0 请确保可以访问国外网站</h3><h3 id="1-1-系统语言切换到英文"><a href="#1-1-系统语言切换到英文" class="headerlink" title="1.1 系统语言切换到英文"></a>1.1 系统语言切换到英文</h3><p>系统 Windows 7/10 都可以，在“控制面板”–&gt;”区域和语言”–&gt;”管理”–&gt;”更改系统区域设置”中切换到“英语（美国）”，然后重启系统。</p></div><a class="article-more button is-small is-size-7" href="/post/2910781705.html#more">阅读更多</a></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2018-10-21T12:33:04.000Z" title="2018/10/21 20:33:04">2018-10-21</time>发表</span><span class="level-item"><time dateTime="2023-09-27T06:33:42.058Z" title="2023/9/27 14:33:42">2023-09-27</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/">① 专栏集锦</a><span> / </span><a class="link-muted" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/%E6%8B%A8%E5%BC%80%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E7%9A%84%E8%BF%B7%E9%9B%BE/">拨开字符编码的迷雾</a></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/post/1204594779.html">拨开字符编码的迷雾(5)--Qt字符编码</a></p><div class="content"><p>我们以<code>“测试字符串-보고싶다-Test String.”</code>这个字符串来进行讲解，它包含了英文、中文和韩文。<br>因为我使用 Qt 的方式是<code>Visual Studio + Qt库</code>的形式，所以本文以<code>Visual Studio</code>的<code>MSVC编译器</code>为例来进行讲解，但这种方式的原理也适用于其他编译器。</p>
+<h2 id="一、-准备工作"><a href="#一、-准备工作" class="headerlink" title="一、 准备工作"></a>一、 准备工作</h2><h3 id="1-0-请确保可以访问国外网站"><a href="#1-0-请确保可以访问国外网站" class="headerlink" title="1.0 请确保可以访问国外网站"></a>1.0 请确保可以访问国外网站</h3><h3 id="1-1-系统语言切换到英文"><a href="#1-1-系统语言切换到英文" class="headerlink" title="1.1 系统语言切换到英文"></a>1.1 系统语言切换到英文</h3><p>系统 Windows 7/10 都可以，在“控制面板”–&gt;”区域和语言”–&gt;”管理”–&gt;”更改系统区域设置”中切换到“英语（美国）”，然后重启系统。</p>
+                        
+                    </div>
+
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Fri Sep 22 2023 11:29:36 GMT+0800">2023-09-22 11:29:36</span>
+            </span>
+        
+
+        
+
+        
+
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+        <a class="home-read-more" href="/post/2910781705.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-post-item">
+
+                
+
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
+                        <a href="/post/1204594779.html">
+                            拨开字符编码的迷雾(5)--Qt字符编码
+                        </a>
+                    </h3>
+
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            <p>我们以<code>“测试字符串-보고싶다-Test String.”</code>这个字符串来进行讲解，它包含了英文、中文和韩文。<br>因为我使用 Qt 的方式是<code>Visual Studio + Qt库</code>的形式，所以本文以<code>Visual Studio</code>的<code>MSVC编译器</code>为例来进行讲解，但这种方式的原理也适用于其他编译器。</p>
 <p>QString 中使用 QChar 来存储每一个字符，QChar 是 short 类型，占 2 个字节，默认按 Unicode 编码存储。</p>
-<p>首先，为了保证写到代码文件中的测试字符串能被 MSVC 编译器理解，我们需要将源文件保存为<code>Utf8-带签名</code>的格式。具体参考：<a href="/post/1337290471.html" title="拨开字符编码的迷雾(2)--编译器处理文件编码">拨开字符编码的迷雾(2)--编译器处理文件编码</a></p></div><a class="article-more button is-small is-size-7" href="/post/1204594779.html#more">阅读更多</a></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2018-04-29T11:09:34.000Z" title="2018/4/29 19:09:34">2018-04-29</time>发表</span><span class="level-item"><time dateTime="2023-10-27T04:54:07.982Z" title="2023/10/27 12:54:07">2023-10-27</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/">① 专栏集锦</a><span> / </span><a class="link-muted" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E5%86%85%E5%AD%98%E4%BD%93%E7%B3%BB/">Windows内存体系</a></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/post/3937624737.html">Windows内存体系(7)--使用std::string跨MT模块传参</a></p><div class="content"><p>前面的<a href="/post/213040252.html" title="Windows内存体系(6)--跨模块内存分配释放">Windows内存体系(6)--跨模块内存分配释放</a>文章解释了跨 MT 模块分配的内存相互释放为什么会崩溃的问题，本文介绍如何解决该问题。</p></div><a class="article-more button is-small is-size-7" href="/post/3937624737.html#more">阅读更多</a></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2018-04-28T07:50:27.000Z" title="2018/4/28 15:50:27">2018-04-28</time>发表</span><span class="level-item"><time dateTime="2023-10-27T04:54:07.919Z" title="2023/10/27 12:54:07">2023-10-27</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E2%91%A4-%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E7%A8%8B/">⑤ 音视频编程</a></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/post/3666885372.html">Wav音频编码</a></p><div class="content"><h1 id="一-WAVE-简介"><a href="#一-WAVE-简介" class="headerlink" title="一. WAVE 简介"></a>一. WAVE 简介</h1><p>WAV格式是微软公司（Microsoft)开发的一种声音文件格式，它符合 RIFF(Resource Interchange File Format)文件规范，用于保存 Windows 平台的音频信息资源，被 Windows 平台及其应用程序所广泛支持。</p>
+<p>首先，为了保证写到代码文件中的测试字符串能被 MSVC 编译器理解，我们需要将源文件保存为<code>Utf8-带签名</code>的格式。具体参考：<a href="/post/1337290471.html" title="拨开字符编码的迷雾(2)--编译器处理文件编码">拨开字符编码的迷雾(2)--编译器处理文件编码</a></p>
+                        
+                    </div>
+
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Wed Sep 27 2023 14:33:42 GMT+0800">2023-09-27 14:33:42</span>
+            </span>
+        
+
+        
+
+        
+
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+        <a class="home-read-more" href="/post/1204594779.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-post-item">
+
+                
+
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
+                        <a href="/post/3937624737.html">
+                            Windows内存体系(7)--使用std::string跨MT模块传参
+                        </a>
+                    </h3>
+
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            <p>前面的<a href="/post/213040252.html" title="Windows内存体系(6)--跨模块内存分配释放">Windows内存体系(6)--跨模块内存分配释放</a>文章解释了跨 MT 模块分配的内存相互释放为什么会崩溃的问题，本文介绍如何解决该问题。</p>
+                        
+                    </div>
+
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Fri Oct 27 2023 12:54:07 GMT+0800">2023-10-27 12:54:07</span>
+            </span>
+        
+
+        
+
+        
+
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+        <a class="home-read-more" href="/post/3937624737.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-post-item">
+
+                
+
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
+                        <a href="/post/3666885372.html">
+                            Wav音频编码
+                        </a>
+                    </h3>
+
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            <h1 id="一-WAVE-简介"><a href="#一-WAVE-简介" class="headerlink" title="一. WAVE 简介"></a>一. WAVE 简介</h1><p>WAV格式是微软公司（Microsoft)开发的一种声音文件格式，它符合 RIFF(Resource Interchange File Format)文件规范，用于保存 Windows 平台的音频信息资源，被 Windows 平台及其应用程序所广泛支持。</p>
 <p>WAVE 是录音时用的标准的 WINDOWS 文件格式，文件的扩展名为“WAV”，数据本身的格式为 PCM 或其他压缩数据，属于无损音乐格式的一种。</p>
-<p>所有的 WAV 都有一个文件头，这个文件头记录了音频流的编码参数。<code>WAV文件 = WAV头 + PCM数据</code>。</p></div><a class="article-more button is-small is-size-7" href="/post/3666885372.html#more">阅读更多</a></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2018-04-28T01:00:01.000Z" title="2018/4/28 09:00:01">2018-04-28</time>发表</span><span class="level-item"><time dateTime="2023-10-27T04:54:07.982Z" title="2023/10/27 12:54:07">2023-10-27</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/">① 专栏集锦</a><span> / </span><a class="link-muted" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E5%86%85%E5%AD%98%E4%BD%93%E7%B3%BB/">Windows内存体系</a></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/post/213040252.html">Windows内存体系(6)--跨模块内存分配释放</a></p><div class="content"><p>在《Windows核心编程 第五版》第19章 DLL基础（511页）中给出了一个建议：</p>
-<p>“当一个 MT 版本的模块如果提供一个内存分配函数的时候，它必须同时提供另一个用来释放内存的函数。”。</p>
-<p>说得更加直白一点就是，“对于 MT 的模块，不要跨模块进行内存释放。”。但是核心编程这本书上面没有具体分析原因，本文就来分析具体的原因。</p></div><a class="article-more button is-small is-size-7" href="/post/213040252.html#more">阅读更多</a></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2018-04-26T02:00:00.000Z" title="2018/4/26 10:00:00">2018-04-26</time>发表</span><span class="level-item"><time dateTime="2023-10-27T04:54:07.979Z" title="2023/10/27 12:54:07">2023-10-27</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/">① 专栏集锦</a><span> / </span><a class="link-muted" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E5%86%85%E5%AD%98%E4%BD%93%E7%B3%BB/">Windows内存体系</a></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/post/3599385732.html">Windows内存体系(5)--堆</a></p><div class="content"><h2 id="一、为什么要使用堆-Heap-？"><a href="#一、为什么要使用堆-Heap-？" class="headerlink" title="一、为什么要使用堆 (Heap)？"></a>一、为什么要使用堆 (Heap)？</h2><p>应用程序虽然可以使用页面粒度的函数（如<code>VirualAlloc</code>）来分配一个最小为<code>4KB</code>或<code>8K</code>的内存块，但是很多时候我们并不需要分配这么大的内存块，我们可能只想分配 1K，2K 的内存块，那么这个时候无论从内存的使用率，还是从性能的角度来看，再分配这么大的一个内存区域显然不是最优的了。</p>
-<p>为了满足这种需求，Windows 提供了一个被称为<code>“堆管理器”</code>的组件，它负责管理大内存区域中的内存分配，这些大内存区域就是通过一些页面粒度的内存分配函数（如<code>VirualAlloc</code>）来预定（<code>reserve</code>）的。</p>
-<p>堆管理器中的分配粒度相对比较小：<code>在32位系统上是8字节，在64位系统上是16字节</code>。</p>
-<p>堆管理器已经被 Windows 系统精心设计，在这些小内存分配的情况下会进行内存使用率和性能两个方面的优化。</p></div><a class="article-more button is-small is-size-7" href="/post/3599385732.html#more">阅读更多</a></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2018-04-24T01:43:01.000Z" title="2018/4/24 09:43:01">2018-04-24</time>发表</span><span class="level-item"><time dateTime="2023-10-27T04:54:07.978Z" title="2023/10/27 12:54:07">2023-10-27</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/">① 专栏集锦</a><span> / </span><a class="link-muted" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E5%86%85%E5%AD%98%E4%BD%93%E7%B3%BB/">Windows内存体系</a></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/post/4245522728.html">Windows内存体系(4)--内存对齐</a></p><div class="content"><h2 id="一、内存为什么要对齐"><a href="#一、内存为什么要对齐" class="headerlink" title="一、内存为什么要对齐"></a>一、内存为什么要对齐</h2><p>虽然所有的变量都是保存在特定地址的内存中，但最好还是按照内存对齐的要求来存储。这主要出于两个方面的原因考虑：</p>
-<ol>
-<li>平台原因：<br>不是所有的硬件平台(特别是嵌入式系统中使用的低端处理器)都能访问任意地址上的任意数据，某些硬件平台只能访问对齐的地址，否则会出现硬件异常。</li>
-<li>性能原因：<br>如果数据存放在未对齐的内存空间中，则处理器访问变量时需要进行两次内存访问才能完整读取该变量的值，而对齐的内存访问仅需一次访问。</li>
-</ol></div><a class="article-more button is-small is-size-7" href="/post/4245522728.html#more">阅读更多</a></article></div><nav class="pagination" role="navigation" aria-label="pagination"><div class="pagination-previous"><a href="/page/15/">上一页</a></div><div class="pagination-next"><a href="/page/17/">下一页</a></div><ul class="pagination-list is-hidden-mobile"><li><a class="pagination-link" href="/">1</a></li><li><span class="pagination-ellipsis">&hellip;</span></li><li><a class="pagination-link" href="/page/15/">15</a></li><li><a class="pagination-link is-current" href="/page/16/">16</a></li><li><a class="pagination-link" href="/page/17/">17</a></li><li><span class="pagination-ellipsis">&hellip;</span></li><li><a class="pagination-link" href="/page/20/">20</a></li></ul></nav></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/pi-200.png" alt="Jiang Xueqiao"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Jiang Xueqiao</p><p class="is-size-6 is-block">Software Engineer</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Wuhan, Hubei</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">160</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">26</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">30</p></a></div></div></nav></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/"><span class="level-start"><span class="level-item">① 专栏集锦</span></span><span class="level-end"><span class="level-item tag">63</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E5%86%85%E5%AD%98%E4%BD%93%E7%B3%BB/"><span class="level-start"><span class="level-item">Windows内存体系</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E5%A5%97%E6%8E%A5%E5%AD%97I-O%E6%A8%A1%E5%9E%8B/"><span class="level-start"><span class="level-item">Windows套接字I/O模型</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B/"><span class="level-start"><span class="level-item">Windows核心编程</span></span><span class="level-end"><span class="level-item tag">19</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E6%B3%A8%E5%85%A5%E4%B8%8E%E6%8B%A6%E6%88%AA/"><span class="level-start"><span class="level-item">Windows注入与拦截</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/%E6%89%93%E5%8C%85%E7%8B%82%E9%AD%94%E4%B9%8BNSIS%E6%95%99%E7%A8%8B/"><span class="level-start"><span class="level-item">打包狂魔之NSIS教程</span></span><span class="level-end"><span class="level-item tag">13</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/%E6%8B%A8%E5%BC%80%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E7%9A%84%E8%BF%B7%E9%9B%BE/"><span class="level-start"><span class="level-item">拨开字符编码的迷雾</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/"><span class="level-start"><span class="level-item">网络协议</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E2%91%A1-C/"><span class="level-start"><span class="level-item">② C++</span></span><span class="level-end"><span class="level-item tag">28</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E2%91%A1-C/Qt/"><span class="level-start"><span class="level-item">Qt</span></span><span class="level-end"><span class="level-item tag">15</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E2%91%A2-Power-By-Me/"><span class="level-start"><span class="level-item">③ Power By Me</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A3-Electron/"><span class="level-start"><span class="level-item">④ Electron</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A4-%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E7%A8%8B/"><span class="level-start"><span class="level-item">⑤ 音视频编程</span></span><span class="level-end"><span class="level-item tag">11</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E2%91%A4-%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E7%A8%8B/WebRTC/"><span class="level-start"><span class="level-item">WebRTC</span></span><span class="level-end"><span class="level-item tag">9</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E2%91%A5-%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%8F%91/"><span class="level-start"><span class="level-item">⑥ 服务器开发</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A6-%E8%BD%AF%E4%BB%B6%E8%B0%83%E8%AF%95/"><span class="level-start"><span class="level-item">⑦ 软件调试</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A7-%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84/"><span class="level-start"><span class="level-item">⑧ 软件架构</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A8-%E6%95%B0%E6%8D%AE%E5%BA%93/"><span class="level-start"><span class="level-item">⑨ 数据库</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A9-%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"><span class="level-start"><span class="level-item">⑩ 编程基础</span></span><span class="level-end"><span class="level-item tag">13</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E2%91%A9-%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/CMake/"><span class="level-start"><span class="level-item">CMake</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A9-%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E6%89%B9%E5%A4%84%E7%90%86/"><span class="level-start"><span class="level-item">批处理</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E2%91%AA-%E5%BC%80%E6%BA%90%E5%BA%93/"><span class="level-start"><span class="level-item">⑪ 开源库</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%AB-Web%E5%BC%80%E5%8F%91/"><span class="level-start"><span class="level-item">⑫ Web开发</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%AC-%E7%BE%8E%E6%96%87%E8%B5%8F%E6%9E%90/"><span class="level-start"><span class="level-item">⑬ 美文赏析</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%AD-%E6%9D%82%E5%BF%B5/"><span class="level-start"><span class="level-item">⑭ 杂念</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%AE-%E7%88%B1%E6%8A%98%E8%85%BE/"><span class="level-start"><span class="level-item">⑮ 爱折腾</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><!--!--><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-02-25T05:53:19.000Z">2024-02-25</time></p><p class="title"><a href="/post/946276004.html">产品级的Electron项目模板</a></p><p class="categories"><a href="/categories/%E2%91%A2-Power-By-Me/">③ Power By Me</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-02-20T01:25:38.000Z">2024-02-20</time></p><p class="title"><a href="/post/1391804423.html">🐉2024龙行龘龘</a></p><p class="categories"><a href="/categories/%E2%91%AD-%E6%9D%82%E5%BF%B5/">⑭ 杂念</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-12-21T13:48:55.000Z">2023-12-21</time></p><p class="title"><a href="/post/2185523635.html">开源库spdlog使用备忘</a></p><p class="categories"><a href="/categories/%E2%91%AA-%E5%BC%80%E6%BA%90%E5%BA%93/">⑪ 开源库</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-12-15T13:20:06.000Z">2023-12-15</time></p><p class="title"><a href="/post/2418701368.html">C/C++不同整数类型的区别</a></p><p class="categories"><a href="/categories/%E2%91%A1-C/">② C++</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-11-26T11:07:09.000Z">2023-11-26</time></p><p class="title"><a href="/post/1533480858.html">Windows窗口调试利器-WinSpyPlus</a></p><p class="categories"><a href="/categories/%E2%91%A2-Power-By-Me/">③ Power By Me</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/CentOS/"><span class="tag">CentOS</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Crash/"><span class="tag">Crash</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Deadlock/"><span class="tag">Deadlock</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Docker/"><span class="tag">Docker</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GDB/"><span class="tag">GDB</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Github/"><span class="tag">Github</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTTPS/"><span class="tag">HTTPS</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Hexo/"><span class="tag">Hexo</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Joplin/"><span class="tag">Joplin</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Lamada/"><span class="tag">Lamada</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LetsEncrypt/"><span class="tag">LetsEncrypt</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MySQL/"><span class="tag">MySQL</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Ping/"><span class="tag">Ping</span></a></div><div class="control"><a class="tags has-addons" href="/tags/QSS/"><span class="tag">QSS</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Redis/"><span class="tag">Redis</span></a></div><div class="control"><a class="tags has-addons" href="/tags/SQL/"><span class="tag">SQL</span></a></div><div class="control"><a class="tags has-addons" href="/tags/SSL/"><span class="tag">SSL</span></a></div><div class="control"><a class="tags has-addons" href="/tags/TCP/"><span class="tag">TCP</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Thread/"><span class="tag">Thread</span></a></div><div class="control"><a class="tags has-addons" href="/tags/UDP/"><span class="tag">UDP</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Vcpkg/"><span class="tag">Vcpkg</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Watch%C2%ADtower/"><span class="tag">Watch­tower</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Wav/"><span class="tag">Wav</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Windbg/"><span class="tag">Windbg</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%8F%B2%E9%93%81%E7%94%9F/"><span class="tag">史铁生</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%88%B4%E5%BB%BA%E4%B8%9A/"><span class="tag">戴建业</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%AD%A3%E5%88%99/"><span class="tag">正则</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%99%BD%E9%85%92/"><span class="tag">白酒</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E9%9D%99%E9%BB%98%E5%AE%89%E8%A3%85/"><span class="tag">静默安装</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/codesilo.png" alt="CodeSilo" height="28"></a><p class="is-size-7"><span class="is-size-7">© 2017~2024 江雪桥</span>  <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/" style="color:#000">鄂ICP备2020015399号-6</a>  </p><p class="is-size-7">网站风格：<a target="_blank" rel="noopener" href="https://www.cyberpunk.net/gb/zh-cn/" style="color:#75d4ef">赛博朋克（cyberpunk）</a></p><p class="is-size-7">内容同步发布到以下站点：<a href="https://jiangxueqiao.com" style="color:#fc1e1e">jiangxueqiao.com</a>    <a target="_blank" rel="noopener" href="https://winsoft666.github.io" style="color:#fc1e1e">winsoft666.github.io</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="GitHub" href="https://github.com/winsoft666"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/jquery/3.3.1/dist/jquery.min.js"></script><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/moment/2.22.2/min/moment-with-locales.min.js"></script><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/clipboard/2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
-            article: {
-                highlight: {
-                    clipboard: true,
-                    fold: 'unfolded'
-                }
-            }
-        };</script><script src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/lightgallery/1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/justifiedGallery/3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
-            if (typeof $.fn.lightGallery === 'function') {
-                $('.article').lightGallery({ selector: '.gallery-item' });
-            }
-            if (typeof $.fn.justifiedGallery === 'function') {
-                if ($('.justified-gallery > p > .gallery-item').length) {
-                    $('.justified-gallery > p > .gallery-item').unwrap();
-                }
-                $('.justified-gallery').justifiedGallery();
-            }
-        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
-            'HTML-CSS': {
-                matchFontHeight: false
-            },
-            SVG: {
-                matchFontHeight: false
-            },
-            CommonHTML: {
-                matchFontHeight: false
-            },
-            tex2jax: {
-                inlineMath: [
-                    ['$','$'],
-                    ['\\(','\\)']
-                ]
-            }
-        });</script><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/mathjax/2.7.9/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
-            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
-        });</script></body></html>
+<p>所有的 WAV 都有一个文件头，这个文件头记录了音频流的编码参数。<code>WAV文件 = WAV头 + PCM数据</code>。</p>
+                        
+                    </div>
+
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Fri Oct 27 2023 12:54:07 GMT+0800">2023-10-27 12:54:07</span>
+            </span>
+        
+
+        
+
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <i class="icon fas fa-tags"></i>&nbsp;
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Wav/">Wav</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+        <a class="home-read-more" href="/post/3666885372.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
+</div>
+
+                </div>
+            </li>
+        
+    </ul>
+    
+    <div class="paginator border-box flex-center">
+        <div class="btn-wrap allowed">
+            <a class="jump-btn"
+               href="/page/15/"
+            ><i class="fa-solid fa-chevron-left"></i></a>
+        </div>
+
+
+        <div class="page-number-box border-box flex-center">
+            <input class="page-number-input border-box base-color-size"
+                   type="number"
+                   value="16"
+                   min="1"
+                   max="21"
+            ><span class="delimiter base-color-size">/</span><span class="base-color-size">21</span>
+        </div>
+
+
+        <div class="btn-wrap allowed">
+            <a class="jump-btn"
+               href="/page/17/"
+            ><i class="fa-solid fa-chevron-right"></i></a>
+        </div>
+    </div>
+
+
+
+
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="border-box website-info-box default">
+        
+            <div class="copyright-info info-item default">
+                &copy;&nbsp;<span>2017</span>&nbsp;-&nbsp;2024
+                
+                    &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">江雪桥</a>
+                
+            </div>
+
+            
+                <div class="icp-info info-item default">
+                    <a class=""
+                       target="_blank"
+                       href="https://beian.miit.gov.cn"
+                    >
+                        鄂ICP备2020015399号-6
+                    </a>
+                </div>
+            
+
+            
+        
+
+        <div class="count-item info-item default">
+            
+
+            
+
+            
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box side-tools-show-handle">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-toggle-theme-mode flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+</main>
+
+
+
+
+<!-- common -->
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+
+<!-- local-search -->
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+<!-- lazyload -->
+
+    
+<script src="/js/lazyload.js"></script>
+
+
+
+<div class="">
+    
+
+    <!-- category-page -->
+    
+
+    <!-- links-page -->
+    
+
+    <!-- photos-page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+</body>
+</html>

@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Windows,Linux,C/C++,Golang,Qt,Node.js,Electron,Vue,WebRTC">
+    <meta name="description" content="除注明转载以外，所有文章均为原创">
+    <meta name="author" content="江雪桥">
+    
+    <title>
+        
+            Node插件开发(2)-不同的调用方式 |
+        
+        CodeSilo
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/favicon.png">
+    
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"jiangxueqiao.com","root":"/","language":"zh-CN","path":"search.xml"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"CodeSilo","author":"江雪桥","avatar":"/images/avatar.png","logo":"/images/avatar.png","favicon":"/images/favicon.png"},"menu":{"Archives":"/archives","Categories":"/categories","About":"/about","Github":"https://github.com/winsoft666"},"first_screen":{"enable":false,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/winsoft666","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":true,"hide_header":true},"home":{"category":false,"tag":true,"announcement":null},"post":{"author_badge":{"enable":false,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":true,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":false},"comment":{"enable":true,"use":"twikoo","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":"https://twikoo.jiangxueqiao.com","region":"zh-CN","version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2017,"word_count":false,"icp":{"enable":true,"record_code":"鄂ICP备2020015399号-6","url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","version":"4.0.7"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container border-box">
+
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/avatar.png">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               CodeSilo
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc">
+                <ul class="menu-list">
+                    <li class="menu-item">
+                        <a class=""
+                           href="/"
+                        >首页</a>
+                    </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >归档</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >分类</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >关于</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               target="_blank" rel="noopener" href="https://github.com/winsoft666"
+                            >GITHUB</a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            <li class="drawer-menu-item flex-center">
+                <a class=""
+                   href="/"
+                >首页</a>
+            </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives"
+                    >归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories"
+                    >分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about"
+                    >关于</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       target="_blank" rel="noopener" href="https://github.com/winsoft666"
+                    >GITHUB</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        Node插件开发(2)-不同的调用方式
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="/images/avatar.png">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">江雪桥</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2024-03-02 13:26:54</span>
+            </span>
+
+            <span class="meta-info-item post-update-date">
+                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                <span class="datetime" data-updated="Sat Mar 02 2024 14:08:22 GMT+0800">2024-03-02 14:08:22</span>
+            </span>
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E2%91%A3-Electron/">④ Electron</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body">
+                    
+
+                    <p>本文主要介绍如何在Node-API中实现不同的类型的接口，如：</p>
+<ul>
+<li>同步调用</li>
+<li>基于Napi::AsyncWorker的异步调用，通过回调函数返回</li>
+<li>异步调用，返回Promise</li>
+<li>基于Napi::ThreadSafeFunction的异步调用，通过回调函数返回</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="一、同步调用"><a href="#一、同步调用" class="headerlink" title="一、同步调用"></a>一、同步调用</h2><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Napi::Number <span class="title">Add</span><span class="params">(<span class="type">const</span> Napi::CallbackInfo&amp; info)</span> </span>{</span><br><span class="line">    Napi::Env env = info.<span class="built_in">Env</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (info.<span class="built_in">Length</span>() != <span class="number">2</span>)</span><br><span class="line">        <span class="keyword">throw</span> Napi::TypeError::<span class="built_in">New</span>(env, <span class="string">"Wrong number of arguments"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!info[<span class="number">0</span>].<span class="built_in">IsNumber</span>() || !info[<span class="number">1</span>].<span class="built_in">IsNumber</span>())</span><br><span class="line">        <span class="keyword">throw</span> Napi::TypeError::<span class="built_in">New</span>(env, <span class="string">"Wrong arguments"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="type">const</span> <span class="type">int</span> ret = info[<span class="number">0</span>].<span class="built_in">ToNumber</span>().<span class="built_in">Int32Value</span>() + info[<span class="number">1</span>].<span class="built_in">ToNumber</span>().<span class="built_in">Int32Value</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> Napi::Number::<span class="built_in">New</span>(env, ret);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="二、基于Napi-AsyncWorker的异步回调"><a href="#二、基于Napi-AsyncWorker的异步回调" class="headerlink" title="二、基于Napi::AsyncWorker的异步回调"></a>二、基于Napi::AsyncWorker的异步回调</h2><p>在Node-API中，不能在本地线程中直接调用JavaScript函数，可以借助Napi::AsyncWorker在子线程中执行任务，并在<code>OnOK</code>或<code>OnError</code>中执行回调函数返回结果到JavaScript。</p>
+<p>以异步计算正整数N的10次方为例，通过回调函数返回计算结果。</p>
+<p>与Node.js官方模块的接口一样，回调函数有2个参数callback(err, result)，失败err不为Null，成功则err为Null。</p>
+<p>继承自Napi::AsyncWorker，重写<code>Execute</code>虚函数实现任务逻辑，重写<code>OnOK</code>虚函数执行回调函数返回成功结果，重写<code>OnError</code>虚函数执行回调函数返回失败。</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Power10AsyncWorker</span> : <span class="keyword">public</span> Napi::AsyncWorker {</span><br><span class="line">   <span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Power10AsyncWorker</span>(<span class="type">const</span> Napi::Function&amp; callback, <span class="type">int32_t</span> n) :</span><br><span class="line">        Napi::<span class="built_in">AsyncWorker</span>(callback),</span><br><span class="line">        <span class="built_in">n_</span>(n) {</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Execute</span><span class="params">()</span> <span class="keyword">override</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (n_ &lt;= <span class="number">0</span>) {</span><br><span class="line">            <span class="comment">// N小于0则返回错误</span></span><br><span class="line">            <span class="built_in">SetError</span>(<span class="string">"N must larger than 0"</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        result_ = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) {</span><br><span class="line">            <span class="comment">// 每次暂停10ms，模拟耗时操作</span></span><br><span class="line">            std::this_thread::<span class="built_in">sleep_for</span>(std::chrono::<span class="built_in">milliseconds</span>(<span class="number">10</span>));</span><br><span class="line">            result_ *= n_;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">OnOK</span><span class="params">()</span> <span class="keyword">override</span> </span>{</span><br><span class="line">        <span class="built_in">Callback</span>().<span class="built_in">Call</span>({<span class="built_in">Env</span>().<span class="built_in">Null</span>(), Napi::Value::<span class="built_in">From</span>(<span class="built_in">Env</span>(), result_)});</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">OnError</span><span class="params">(<span class="type">const</span> Napi::Error&amp; e)</span> <span class="keyword">override</span> </span>{</span><br><span class="line">        <span class="built_in">Callback</span>().<span class="built_in">Call</span>({e.<span class="built_in">Value</span>(), <span class="built_in">Env</span>().<span class="built_in">Null</span>()});</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">   <span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int32_t</span> n_ = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int32_t</span> result_ = <span class="number">0</span>;</span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
+
+<p>定义接口<code>GetPower10</code>，支持2个参数：整数N和回调函数。</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">GetPower10</span><span class="params">(<span class="type">const</span> Napi::CallbackInfo&amp; info)</span> </span>{</span><br><span class="line">    Napi::Env env = info.<span class="built_in">Env</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (info.<span class="built_in">Length</span>() != <span class="number">2</span>)</span><br><span class="line">        <span class="keyword">throw</span> Napi::TypeError::<span class="built_in">New</span>(env, <span class="string">"Wrong number of arguments"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!info[<span class="number">0</span>].<span class="built_in">IsNumber</span>() || !info[<span class="number">1</span>].<span class="built_in">IsFunction</span>())</span><br><span class="line">        <span class="keyword">throw</span> Napi::TypeError::<span class="built_in">New</span>(env, <span class="string">"Wrong arguments"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="type">int32_t</span> n = info[<span class="number">0</span>].<span class="built_in">ToNumber</span>().<span class="built_in">Int32Value</span>();</span><br><span class="line">    Napi::Function callback = info[<span class="number">1</span>].<span class="built_in">As</span>&lt;Napi::Function&gt;();</span><br><span class="line"></span><br><span class="line">    (<span class="keyword">new</span> <span class="built_in">Power10AsyncWorker</span>(callback, n))-&gt;<span class="built_in">Queue</span>();</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="三、基于Napi-AsyncWorker返回Promise"><a href="#三、基于Napi-AsyncWorker返回Promise" class="headerlink" title="三、基于Napi::AsyncWorker返回Promise"></a>三、基于Napi::AsyncWorker返回Promise</h2><p>以异步计算正整数N的20次方为例，返回Promise对象，当N小于0时，Promise设置为reject状态。</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Power20AsyncWorker</span> : <span class="keyword">public</span> Napi::AsyncWorker {</span><br><span class="line">   <span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Power20AsyncWorker</span>(<span class="type">const</span> Napi::Env&amp; env, <span class="type">const</span> Napi::Promise::Deferred&amp; deferred, <span class="type">int32_t</span> n) :</span><br><span class="line">        Napi::<span class="built_in">AsyncWorker</span>(env),</span><br><span class="line">        <span class="built_in">deferred_</span>(deferred),</span><br><span class="line">        <span class="built_in">n_</span>(n) {</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">Execute</span><span class="params">()</span> <span class="keyword">override</span> </span>{</span><br><span class="line">        <span class="keyword">if</span> (n_ &lt;= <span class="number">0</span>) {</span><br><span class="line">            <span class="comment">// 小于0时返回错误</span></span><br><span class="line">            <span class="built_in">SetError</span>(<span class="string">"N must larger than 0"</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        result_ = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">20</span>; i++) {</span><br><span class="line">            <span class="comment">// 每次暂停10ms，模拟耗时操作</span></span><br><span class="line">            std::this_thread::<span class="built_in">sleep_for</span>(std::chrono::<span class="built_in">milliseconds</span>(<span class="number">10</span>));</span><br><span class="line">            result_ *= n_;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">OnOK</span><span class="params">()</span> <span class="keyword">override</span> </span>{</span><br><span class="line">        deferred_.<span class="built_in">Resolve</span>(Napi::Number::<span class="built_in">New</span>(<span class="built_in">Env</span>(), result_));</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">OnError</span><span class="params">(<span class="type">const</span> Napi::Error&amp; e)</span> <span class="keyword">override</span> </span>{</span><br><span class="line">        deferred_.<span class="built_in">Reject</span>(e.<span class="built_in">Value</span>());</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">   <span class="keyword">private</span>:</span><br><span class="line">    Napi::Promise::Deferred deferred_;</span><br><span class="line">    <span class="type">int32_t</span> n_ = <span class="number">0</span>;</span><br><span class="line">    <span class="type">int32_t</span> result_ = <span class="number">0</span>;</span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
+
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Napi::Value <span class="title">GetPower20</span><span class="params">(<span class="type">const</span> Napi::CallbackInfo&amp; info)</span> </span>{</span><br><span class="line">    Napi::Env env = info.<span class="built_in">Env</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (info.<span class="built_in">Length</span>() != <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">throw</span> Napi::TypeError::<span class="built_in">New</span>(env, <span class="string">"Wrong number of arguments"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!info[<span class="number">0</span>].<span class="built_in">IsNumber</span>())</span><br><span class="line">        <span class="keyword">throw</span> Napi::TypeError::<span class="built_in">New</span>(env, <span class="string">"Wrong arguments"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="type">int32_t</span> n = info[<span class="number">0</span>].<span class="built_in">ToNumber</span>().<span class="built_in">Int32Value</span>();</span><br><span class="line">    Napi::Function callback = info[<span class="number">1</span>].<span class="built_in">As</span>&lt;Napi::Function&gt;();</span><br><span class="line"></span><br><span class="line">    Napi::Promise::Deferred deferred = Napi::Promise::Deferred::<span class="built_in">New</span>(env);</span><br><span class="line"></span><br><span class="line">    (<span class="keyword">new</span> <span class="built_in">Power20AsyncWorker</span>(env, deferred, n))-&gt;<span class="built_in">Queue</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> deferred.<span class="built_in">Promise</span>();</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="四、基于Napi-ThreadSafeFunction的异步回调"><a href="#四、基于Napi-ThreadSafeFunction的异步回调" class="headerlink" title="四、基于Napi::ThreadSafeFunction的异步回调"></a>四、基于Napi::ThreadSafeFunction的异步回调</h2><p>前面的示例都没有启动本地子线程，而是通过Napi::AsyncWorker实现的异步调用，在本示例中我们使用<code>std::thread</code>开启子线程，在子线程中执行任务并调用回调函数返回结果。</p>
+<p>以异步计算正整数N的30次方为例，通过回调函数返回计算结果。</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">GetPower30</span><span class="params">(<span class="type">const</span> Napi::CallbackInfo&amp; info)</span> </span>{</span><br><span class="line">    Napi::Env env = info.<span class="built_in">Env</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (info.<span class="built_in">Length</span>() != <span class="number">2</span>)</span><br><span class="line">        <span class="keyword">throw</span> Napi::TypeError::<span class="built_in">New</span>(env, <span class="string">"Wrong number of arguments"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!info[<span class="number">0</span>].<span class="built_in">IsNumber</span>() || !info[<span class="number">1</span>].<span class="built_in">IsFunction</span>())</span><br><span class="line">        <span class="keyword">throw</span> Napi::TypeError::<span class="built_in">New</span>(env, <span class="string">"Wrong arguments"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="type">int32_t</span> n = info[<span class="number">0</span>].<span class="built_in">ToNumber</span>().<span class="built_in">Int32Value</span>();</span><br><span class="line">    Napi::Function callback = info[<span class="number">1</span>].<span class="built_in">As</span>&lt;Napi::Function&gt;();</span><br><span class="line"></span><br><span class="line">    std::thread* nativeThread = <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">    Napi::ThreadSafeFunction tsfn = Napi::ThreadSafeFunction::<span class="built_in">New</span>(</span><br><span class="line">        env,</span><br><span class="line">        callback,</span><br><span class="line">        <span class="string">"Resource Name"</span>,             <span class="comment">// Name</span></span><br><span class="line">        <span class="number">0</span>,                           <span class="comment">// Unlimited queue</span></span><br><span class="line">        <span class="number">1</span>,                           <span class="comment">// Only one thread will use this initially</span></span><br><span class="line">        [nativeThread](Napi::Env) {  <span class="comment">// Finalizer used to clean threads up</span></span><br><span class="line">            <span class="keyword">if</span> (nativeThread &amp;&amp; nativeThread-&gt;<span class="built_in">joinable</span>()) {</span><br><span class="line">                nativeThread-&gt;<span class="built_in">join</span>();</span><br><span class="line">            }</span><br><span class="line">        });</span><br><span class="line"></span><br><span class="line">    nativeThread = <span class="keyword">new</span> std::<span class="built_in">thread</span>([n, tsfn]() {</span><br><span class="line">        <span class="keyword">struct</span> CallParam {</span><br><span class="line">            std::string error;</span><br><span class="line">            <span class="type">int32_t</span> result = <span class="number">0</span>;</span><br><span class="line">        };</span><br><span class="line"></span><br><span class="line">        CallParam* param = <span class="keyword">new</span> <span class="built_in">CallParam</span>();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (n &gt; <span class="number">0</span>) {</span><br><span class="line">            param-&gt;result = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">30</span>; i++) {</span><br><span class="line">                param-&gt;result *= n;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">else</span> {</span><br><span class="line">            param-&gt;error = <span class="string">"N must larger than 0"</span>;</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="keyword">auto</span> callback = [](Napi::Env env, Napi::Function jsCallback, CallParam* param) {</span><br><span class="line">            <span class="keyword">if</span> (jsCallback &amp;&amp; param) {</span><br><span class="line">                <span class="keyword">try</span> {</span><br><span class="line">                    <span class="keyword">if</span> (param-&gt;error.<span class="built_in">empty</span>()) {</span><br><span class="line">                        jsCallback.<span class="built_in">Call</span>({env.<span class="built_in">Null</span>(), Napi::Number::<span class="built_in">New</span>(env, param-&gt;result)});</span><br><span class="line">                    }</span><br><span class="line">                    <span class="keyword">else</span> {</span><br><span class="line">                        Napi::Error err = Napi::Error::<span class="built_in">New</span>(env, param-&gt;error);</span><br><span class="line">                        jsCallback.<span class="built_in">Call</span>({err.<span class="built_in">Value</span>(), env.<span class="built_in">Null</span>()});</span><br><span class="line">                    }</span><br><span class="line">                } <span class="built_in">catch</span> (std::exception&amp; e) {</span><br><span class="line"><span class="meta">#<span class="keyword">if</span> (defined _WIN32 || defined WIN32)</span></span><br><span class="line">                    <span class="built_in">OutputDebugStringA</span>(e.<span class="built_in">what</span>());</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (param) {</span><br><span class="line">                <span class="keyword">delete</span> param;</span><br><span class="line">            }</span><br><span class="line">        };</span><br><span class="line"></span><br><span class="line">        napi_status status = tsfn.<span class="built_in">BlockingCall</span>(param, callback);</span><br><span class="line">        <span class="keyword">if</span> (status != napi_ok) {</span><br><span class="line">            <span class="comment">// TODO How to handle error</span></span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        tsfn.<span class="built_in">Release</span>();</span><br><span class="line">    });</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<blockquote>
+<p>完整的示例代码以上传自Github：<a class="link" target="_blank" rel="noopener" href="https://github.com/winsoft666/node-addon-sample">https://github.com/winsoft666/node-addon-sample<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+
+                </div>
+
+                
+                        
+<div class="post-copyright-info-container border-box">
+    <div class="copyright-info-content border-box">
+        <div class="copyright-info-top border-box">
+            <div class="copyright-post-title border-box text-ellipsis">
+                Node插件开发(2)-不同的调用方式
+            </div>
+
+            <div class="copyright-post-link border-box text-ellipsis">
+                post/235943795.html
+            </div>
+        </div>
+
+        <div class="copyright-info-bottom border-box">
+            <div class="copyright-post-author bottom-item">
+                <div class="type">
+                    作者
+                </div>
+                <div class="content">江雪桥</div>
+            </div>
+
+            <div class="post-time bottom-item">
+                <div class="type">
+                    发布于
+                </div>
+                <div class="content">2024-03-02 13:26</div>
+            </div>
+
+
+            <div class="post-license bottom-item">
+                <div class="type">
+                    许可
+                </div>
+                <div class="content tooltip" data-tooltip-content="CC BY-NC-SA 4.0">
+                    <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans">
+                        <i class="fa-brands fa-creative-commons"></i>
+                        <i class="fa-brands fa-creative-commons-by"></i>
+                        <i class="fa-brands fa-creative-commons-nc"></i>
+                        <i class="fa-brands fa-creative-commons-sa"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <i class="copyright-bg fa-solid fa-copyright"></i>
+    </div>
+    <div class="copy-copyright-info flex-center tooltip" data-tooltip-content="复制版权信息" data-tooltip-offset-y="-2px">
+        <i class="fa-solid fa-copy"></i>
+    </div>
+</div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                    </div>
+                    <div>
+                        
+                            <div class="post-share-container border-box">
+    <ul class="share-list-wrap border-box">
+        <li class="qq share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到 QQ"
+        >
+            <i class="fa-brands fa-qq"></i>
+        </li>
+        <li class="wechat share-item border-box flex-center tooltip tooltip-img"
+            data-tooltip-content="分享到微信"
+            data-tooltip-img-tip="微信扫一扫"
+            data-tooltip-img-style="background-color: #fff; top: -10px; padding: 0.6rem 0.6rem 0.1rem 0.6rem;"
+        >
+            <i class="fa-brands fa-weixin"></i>
+        </li>
+        <li class="weibo share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到微博"
+        >
+            <i class="fa-brands fa-weibo"></i>
+        </li>
+    </ul>
+</div>
+
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/post/529732738.html"
+                                   title="ABI兼容性"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">ABI兼容性</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+    <div class="comments-container border-box">
+        <div id="comments-anchor" class="comment-area-title border-box">
+            <i class="fas fa-comments"></i>&nbsp;评论
+        </div>
+        <div class="comment-plugin-fail border-box">
+    <span class="fail-tip">评论插件加载失败</span>
+    <button class="reload keep-button">点击重新加载</button>
+</div>
+<div class="comment-plugin-loading flex-center border-box">
+    <i class="loading-icon fa-solid fa-spinner fa-spin"></i>
+    <span class="load-tip">正在加载评论插件</span>
+</div>
+<script data-pjax>
+  window.KeepCommentPlugin = {}
+  window.KeepCommentPlugin.hideLoading = () => {
+    const cplDom = document.querySelector('.comments-container .comment-plugin-loading')
+    cplDom.style.display = 'none'
+  }
+  window.KeepCommentPlugin.loadFailHandle = () => {
+    window.KeepCommentPlugin.hideLoading()
+    const cpfDom = document.querySelector('.comments-container .comment-plugin-fail')
+    cpfDom.style.display = 'flex'
+    cpfDom.querySelector('.reload').addEventListener('click', () => {
+      window.location.reload()
+    })
+  }
+</script>
+
+        
+            
+
+    <div class="twikoo-container">
+        <div id="twikoo-comment"></div>
+        <script 
+                src="//cdn.jsdelivr.net/npm/twikoo@1.6.21/dist/twikoo.all.min.js"
+                async
+                onerror="window.KeepCommentPlugin.loadFailHandle()"
+        ></script>
+        <script 
+                async
+                onerror="window.KeepCommentPlugin.loadFailHandle()"
+        >
+          window.KeepCommentPlugin.initTwikoo = () => {
+            if (window?.twikoo) {
+              twikoo.init({
+                el: '#twikoo-comment',
+                envId: 'https://twikoo.jiangxueqiao.com',
+                region: 'zh-CN',
+                lang: 'zh-CN' || 'zh-CN'
+              })
+              window.KeepCommentPlugin.hideLoading()
+            } else {
+              setTimeout(() => {
+                window.KeepCommentPlugin.initTwikoo()
+              }, 1000)
+            }
+          }
+
+          if ('false' === 'true') {
+            setTimeout(() => {
+              window.KeepCommentPlugin.initTwikoo()
+            }, 1200)
+          } else {
+            window.addEventListener('DOMContentLoaded', window.KeepCommentPlugin.initTwikoo)
+          }
+        </script>
+    </div>
+
+
+        
+    </div>
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="border-box website-info-box default">
+        
+            <div class="copyright-info info-item default">
+                &copy;&nbsp;<span>2017</span>&nbsp;-&nbsp;2024
+                
+                    &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">江雪桥</a>
+                
+            </div>
+
+            
+                <div class="icp-info info-item default">
+                    <a class=""
+                       target="_blank"
+                       href="https://beian.miit.gov.cn"
+                    >
+                        鄂ICP备2020015399号-6
+                    </a>
+                </div>
+            
+
+            
+        
+
+        <div class="count-item info-item default">
+            
+
+            
+
+            
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="tools-list border-box">
+        <!-- PC TOC show toggle -->
+        
+
+        <!-- PC go comment -->
+        
+            <li class="tools-item flex-center go-to-comments">
+                <i class="fas fa-comment"></i>
+                <span class="post-comments-count"></span>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-toggle-theme-mode flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+
+        
+            <li class="tools-item go-to-comments-tablet flex-center">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+</main>
+
+
+
+<!-- common -->
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+
+<!-- local-search -->
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+<!-- lazyload -->
+
+    
+<script src="/js/lazyload.js"></script>
+
+
+
+<div class="">
+    
+        <!-- post-helper -->
+        
+<script src="/js/post/post-helper.js"></script>
+
+
+        <!-- toc -->
+        
+            
+<script src="/js/post/toc.js"></script>
+
+        
+
+        <!-- copyright-info -->
+        
+            
+<script src="/js/post/copyright-info.js"></script>
+
+        
+
+        <!-- share -->
+        
+            
+<script src="/js/post/share.js"></script>
+
+        
+    
+
+    <!-- category-page -->
+    
+
+    <!-- links-page -->
+    
+
+    <!-- photos-page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+</body>
+</html>

@@ -1,56 +1,513 @@
-<!doctype html>
-<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>CodeSilo</title><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#3273dc"><meta name="application-name" content="CodeSilo"><meta name="msapplication-TileImage" content="img/pi-200.png"><meta name="msapplication-TileColor" content="#3273dc"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="CodeSilo"><meta name="apple-mobile-web-app-status-bar-style" content="default"><link rel="apple-touch-icon" sizes="200x200" href="img/pi-200.png"><meta name="description" content="学习、总结与分享"><meta property="og:type" content="blog"><meta property="og:title" content="CodeSilo"><meta property="og:url" content="https://jiangxueqiao.com/"><meta property="og:site_name" content="CodeSilo"><meta property="og:description" content="学习、总结与分享"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://jiangxueqiao.com/img/og_image.png"><meta property="article:author" content="江雪桥"><meta property="article:tag" content="Windows"><meta property="article:tag" content="Linux"><meta property="article:tag" content="C/C++"><meta property="article:tag" content="Golang"><meta property="article:tag" content="Qt"><meta property="article:tag" content="Node.js"><meta property="article:tag" content="Electron"><meta property="article:tag" content="WebRTC"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://jiangxueqiao.com/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://jiangxueqiao.com"},"headline":"CodeSilo","image":["https://jiangxueqiao.com/img/og_image.png"],"author":{"@type":"Person","name":"江雪桥"},"publisher":{"@type":"Organization","name":"CodeSilo","logo":{"@type":"ImageObject","url":"https://blog-static.jiangxueqiao.com/blog/icarus-theme/codesilo.png"}},"description":"学习、总结与分享"}</script><link rel="icon" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/favicon.png"><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/all.min.css"><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/highlight.js/11.7.0/styles/xt256.css"><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/font/css2/Oxanium-Roboto-Mono.css"><link rel="stylesheet" href="/css/cyberpunk.css"><!--!--><script>var _hmt = _hmt || [];
-        (function() {
-            var hm = document.createElement("script");
-            hm.src = "//hm.baidu.com/hm.js?fbb46283a7b4d42d425356f8779708d5";
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(hm, s);
-        })();</script><!--!--><!--!--><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/lightgallery/1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/justifiedGallery/3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/pace-js/1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
-  (function () {
-      function switchTab() {
-          if (!location.hash) {
-            return;
-          }
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Windows,Linux,C/C++,Golang,Qt,Node.js,Electron,Vue,WebRTC">
+    <meta name="description" content="除注明转载以外，所有文章均为原创">
+    <meta name="author" content="江雪桥">
+    
+    <title>
+        
+        CodeSilo
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
 
-          const id = '#' + CSS.escape(location.hash.substring(1));
-          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
-          if (!$tabMenu) {
-            return;
-          }
+    
+        <link rel="shortcut icon" href="/images/favicon.png">
+    
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
 
-          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
-          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
-          Array.from($tabMenuContainer.querySelectorAll('a'))
-              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
-              .forEach($content => $content.classList.add('is-hidden'));
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
 
-          if ($tabMenu) {
-              $tabMenu.parentElement.classList.add('is-active');
-          }
-          const $activeTab = document.querySelector(id);
-          if ($activeTab) {
-              $activeTab.classList.remove('is-hidden');
-          }
-      }
-      switchTab();
-      window.addEventListener('hashchange', switchTab, false);
-  })();
-  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0">
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"jiangxueqiao.com","root":"/","language":"zh-CN","path":"search.xml"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"CodeSilo","author":"江雪桥","avatar":"/images/avatar.png","logo":"/images/avatar.png","favicon":"/images/favicon.png"},"menu":{"Archives":"/archives","Categories":"/categories","About":"/about","Github":"https://github.com/winsoft666"},"first_screen":{"enable":false,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/winsoft666","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":true,"hide_header":true},"home":{"category":false,"tag":true,"announcement":null},"post":{"author_badge":{"enable":false,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":true,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":false},"comment":{"enable":true,"use":"twikoo","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":"https://twikoo.jiangxueqiao.com","region":"zh-CN","version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2017,"word_count":false,"icp":{"enable":true,"record_code":"鄂ICP备2020015399号-6","url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","version":"4.0.7"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 6.3.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-</head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/codesilo.png" alt="CodeSilo" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">时间轴</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="https://jiangxueqiao.com/post/2185937873.html">留言</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Email" href="mailto:smart7178@163.com"><i class="fa fa-envelope"></i></a><a class="navbar-item" target="_blank" rel="noopener" title="GitHub" href="https://github.com/winsoft666"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-09-19T04:55:23.000Z" title="2023/9/19 12:55:23">2023-09-19</time>发表</span><span class="level-item"><time dateTime="2023-09-27T03:56:07.384Z" title="2023/9/27 11:56:07">2023-09-27</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/">① 专栏集锦</a><span> / </span><a class="link-muted" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B/">Windows核心编程</a></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/post/1955778079.html">窗口无法接收WM_LBUTTONDBLCLK消息</a></p><div class="content"><p>在开发中遇到了如下问题：</p>
-<p>通过鼠标钩子获取某窗口的消息，发现可以接收到WM_LBUTTONDOWN消息，但始终无法接收到WM_LBUTTONDBLCLK消息。</p>
-<p>经过一番排查，发现Windows窗口只有在拥有<code>CS_DBLCLKS</code>类样式时才能接收到鼠标双击事件，即在RegisterClassEx函数的<code>WNDCLASSEX.style</code>参数中指定CS_DBLCLKS样式。</p>
-<p>但是窗口不是我们自己创建的，能否通过<code>SetClassLongPtr</code>函数来通过句柄改变窗口类样式，经过多方尝试最终以失败告终（SetClassLongPtr返回值0，GetLastError也为0）。</p>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-09-18T04:59:09.000Z" title="2023/9/18 12:59:09">2023-09-18</time>发表</span><span class="level-item"><time dateTime="2024-01-17T03:42:48.962Z" title="2024/1/17 11:42:48">2024-01-17</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E2%91%A2-Power-By-Me/">③ Power By Me</a></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/post/2053741240.html">TinyTu-跨平台图片压缩软件</a></p><div class="content"><p>我平时压缩图片通常会使用类似tinify这样的在线图片压缩网站，这些网站有很多，但使用起来总是感觉不太舒爽，似乎差了点什么，仔细想想它们或多或少有这些缺点：</p>
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container border-box">
+
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box is-home">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/avatar.png">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               CodeSilo
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc">
+                <ul class="menu-list">
+                    <li class="menu-item">
+                        <a class="active"
+                           href="/"
+                        >首页</a>
+                    </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >归档</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >分类</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >关于</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               target="_blank" rel="noopener" href="https://github.com/winsoft666"
+                            >GITHUB</a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            <li class="drawer-menu-item flex-center">
+                <a class="active"
+                   href="/"
+                >首页</a>
+            </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives"
+                    >归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories"
+                    >分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about"
+                    >关于</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       target="_blank" rel="noopener" href="https://github.com/winsoft666"
+                    >GITHUB</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    <div class="home-content-container fade-in-down-animation">
+    
+    <ul class="home-post-list border-box">
+        
+            <li class="home-post-item">
+
+                
+
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
+                        <a href="/post/4169328538.html">
+                            如何在批处理中执行SQL
+                        </a>
+                    </h3>
+
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            示例如下：
+123"%~dp0\mysql-5.6.19-win32\bin\mysql.exe" ^  -h127.0.0.1 -P31060 -uroot ^  --execute="update mysql.user SET password=...
+                        
+                    </div>
+
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Fri Sep 22 2023 14:42:12 GMT+0800">2023-09-22 14:42:12</span>
+            </span>
+        
+
+        
+
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <i class="icon fas fa-tags"></i>&nbsp;
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/MySQL/">MySQL</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+        <a class="home-read-more" href="/post/4169328538.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-post-item">
+
+                
+
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
+                        <a href="/post/3906615635.html">
+                            由HANDLE返回值不确定性引发的思考
+                        </a>
+                    </h3>
+
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            <p>HANDLE返回值的不确定性指的是Windows API函数的返回值为HANDLE类型时，有两种表示失败的方式：</p>
+<ul>
+<li>HANDLE == NULL，如CreateEvent等</li>
+<li>HANDLE == INVALID_HANDLE_VALUE，如CreateFile等</li>
+</ul>
+<p>其中，NULL的值始终为0，而INVALID_HANDLE_VALUE的值为-1，其在32位和64位程序中分别使用0xFFFFFFFF和0xFFFFFFFFFFFFFFFF表示。</p>
+<p>具体哪些函数失败时返回NULL，哪些返回INVALID_HANDLE_VALUE了？这个需要查阅MSDN文档来确定。</p>
+                        
+                    </div>
+
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Wed Nov 01 2023 11:55:19 GMT+0800">2023-11-01 11:55:19</span>
+            </span>
+        
+
+        
+
+        
+
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+        <a class="home-read-more" href="/post/3906615635.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-post-item">
+
+                
+
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
+                        <a href="/post/2185937873.html">
+                            留言板
+                        </a>
+                    </h3>
+
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            来都来了，那就留下点什么吧！
+
+                        
+                    </div>
+
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Wed Nov 01 2023 11:47:57 GMT+0800">2023-11-01 11:47:57</span>
+            </span>
+        
+
+        
+
+        
+
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+        <a class="home-read-more" href="/post/2185937873.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-post-item">
+
+                
+
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
+                        <a href="/post/1955778079.html">
+                            窗口无法接收WM_LBUTTONDBLCLK消息
+                        </a>
+                    </h3>
+
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            在开发中遇到了如下问题：
+通过鼠标钩子获取某窗口的消息，发现可以接收到WM_LBUTTONDOWN消息，但始终无法接收到WM_LBUTTONDBLCLK消息。
+经过一番排查，发现Windows窗口只有在拥有CS_DBLCLKS类样式时才能接收到鼠标双...
+                        
+                    </div>
+
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Wed Sep 27 2023 11:56:07 GMT+0800">2023-09-27 11:56:07</span>
+            </span>
+        
+
+        
+
+        
+
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+        <a class="home-read-more" href="/post/1955778079.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-post-item">
+
+                
+
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
+                        <a href="/post/2053741240.html">
+                            TinyTu-跨平台图片压缩软件
+                        </a>
+                    </h3>
+
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            <p>我平时压缩图片通常会使用类似tinify这样的在线图片压缩网站，这些网站有很多，但使用起来总是感觉不太舒爽，似乎差了点什么，仔细想想它们或多或少有这些缺点：</p>
 <ul>
 <li>有的网站需要收费或者半收费。</li>
 <li>支持图片格式不全，例如有的网站仅PNG格式，而有的网站又不支持jpg、gif等。</li>
 <li>通常还会限制上传图片的数量和大小，毕竟上传和下载都会消耗服务器的网络带宽，网站为了节省成本做出此限制。</li>
 <li>图片的压缩速度较慢，毕竟压缩速度越快对服务器的硬件要求越高，成本也会越高。</li>
-</ul></div><a class="article-more button is-small is-size-7" href="/post/2053741240.html#more">阅读更多</a></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-09-16T12:24:54.000Z" title="2023/9/16 20:24:54">2023-09-16</time>发表</span><span class="level-item"><time dateTime="2023-11-01T03:52:53.841Z" title="2023/11/1 11:52:53">2023-11-01</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E2%91%A1-C/">② C++</a><span> / </span><a class="link-muted" href="/categories/%E2%91%A1-C/Qt/">Qt</a></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/post/3168359900.html">QListWidget使用记录</a></p><div class="content"><h2 id="1-解决无法拖入文件到QListWidget"><a href="#1-解决无法拖入文件到QListWidget" class="headerlink" title="1. 解决无法拖入文件到QListWidget"></a>1. 解决无法拖入文件到QListWidget</h2><p>一般而言，QWidget支持拖入文件只需要做如下操作即可：</p>
+</ul>
+                        
+                    </div>
+
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Wed Jan 17 2024 11:42:48 GMT+0800">2024-01-17 11:42:48</span>
+            </span>
+        
+
+        
+
+        
+
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+        <a class="home-read-more" href="/post/2053741240.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-post-item">
+
+                
+
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
+                        <a href="/post/3168359900.html">
+                            QListWidget使用记录
+                        </a>
+                    </h3>
+
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            <h2 id="1-解决无法拖入文件到QListWidget"><a href="#1-解决无法拖入文件到QListWidget" class="headerlink" title="1. 解决无法拖入文件到QListWidget"></a>1. 解决无法拖入文件到QListWidget</h2><p>一般而言，QWidget支持拖入文件只需要做如下操作即可：</p>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">setDragDropMode</span>(QAbstractItemView::DropOnly); <span class="comment">// 仅支持拖入文件</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 重写dragEnterEvent，当拖入文件进入时被调用，可以在该函数中取消拖入操作</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dragEnterEvent</span><span class="params">(QDragEnterEvent* e)</span> <span class="keyword">override</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 重写dropEvent，当拖入文件并释放鼠标时被调用</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dropEvent</span><span class="params">(QDropEvent* e)</span> <span class="keyword">override</span></span>;</span><br></pre></td></tr></tbody></table></figure>
 
-<p>但执行上述操作后，拖入文件到QListWidget却只能收到dragEnterEvent事件，却无法收到dropEvent事件。</p></div><a class="article-more button is-small is-size-7" href="/post/3168359900.html#more">阅读更多</a></article></div><div class="card"><div class="card-image"><a class="image is-7by3" href="/post/3406024791.html"><img class="fill" src="https://blog-static.jiangxueqiao.com/blog/img/qtfeature.jpg" alt="Qt静态库编译"></a></div><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-09-16T12:15:44.000Z" title="2023/9/16 20:15:44">2023-09-16</time>发表</span><span class="level-item"><time dateTime="2023-11-01T03:53:37.464Z" title="2023/11/1 11:53:37">2023-11-01</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E2%91%A1-C/">② C++</a><span> / </span><a class="link-muted" href="/categories/%E2%91%A1-C/Qt/">Qt</a></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/post/3406024791.html">Qt静态库编译</a></p><div class="content"><blockquote>
+<p>但执行上述操作后，拖入文件到QListWidget却只能收到dragEnterEvent事件，却无法收到dropEvent事件。</p>
+                        
+                    </div>
+
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Wed Nov 01 2023 11:52:53 GMT+0800">2023-11-01 11:52:53</span>
+            </span>
+        
+
+        
+
+        
+
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+        <a class="home-read-more" href="/post/3168359900.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-post-item">
+
+                
+
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
+                        <a href="/post/3406024791.html">
+                            Qt静态库编译
+                        </a>
+                    </h3>
+
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            <blockquote>
 <p>需要注意：使用Qt静态库违背了Qt的免费使用协议。</p>
 </blockquote>
 <h1 id="1-编译"><a href="#1-编译" class="headerlink" title="1. 编译"></a>1. 编译</h1><p>编译Qt源码需要提前安装如下工具：</p>
@@ -62,83 +519,306 @@
 <li>llvm</li>
 <li>python2</li>
 <li>openssl</li>
-</ul></div><a class="article-more button is-small is-size-7" href="/post/3406024791.html#more">阅读更多</a></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-09-14T11:09:10.000Z" title="2023/9/14 19:09:10">2023-09-14</time>发表</span><span class="level-item"><time dateTime="2023-11-01T03:55:52.496Z" title="2023/11/1 11:55:52">2023-11-01</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/">① 专栏集锦</a><span> / </span><a class="link-muted" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B/">Windows核心编程</a></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/post/3002178342.html">Windows的DLL全局共享变量</a></p><div class="content"><p>同一个DLL文件可以被多个进程加载。当不同的进程将DLL映射到自己的内存空间时，系统会为DLL中的全局和静态变量创建不同的实例，而不会共享同一个变量实例。</p>
-<p>那我们如何实现在进程间共享DLL全局变量呢？<br>我们可以在DLL中使用如下语句来创建一个段，用来存放那些需要共享的变量：</p>
-<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">pragma</span> data_seg(<span class="string">"AnyName"</span>)  <span class="comment">// 开始</span></span></span><br><span class="line"><span class="comment">// 声明变量</span></span><br><span class="line"><span class="comment">// ....</span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> data_seg()   <span class="comment">// 结束</span></span></span><br></pre></td></tr></tbody></table></figure>
+</ul>
+                        
+                    </div>
 
-<p>共享的变量需要被初始化，并且还要设置链接器开关，使该段在所有映射DLL的进程中成为共享读写属性：</p>
-<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 共享读写</span></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> comment(linker,<span class="string">"/SECTION:AnyName,RWS"</span>)</span></span><br></pre></td></tr></tbody></table></figure>
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Wed Nov 01 2023 11:53:37 GMT+0800">2023-11-01 11:53:37</span>
+            </span>
+        
+
+        
+
+        
+
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+        <a class="home-read-more" href="/post/3406024791.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-post-item">
+
+                
+
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
+                        <a href="/post/3002178342.html">
+                            Windows的DLL全局共享变量
+                        </a>
+                    </h3>
+
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            同一个DLL文件可以被多个进程加载。当不同的进程将DLL映射到自己的内存空间时，系统会为DLL中的全局和静态变量创建不同的实例，而不会共享同一个变量实例。
+那我们如何实现在进程间共享DLL全局变量呢？我们可以在DLL中使用如下语句来创建一个段，用来存...
+                        
+                    </div>
+
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Wed Nov 01 2023 11:55:52 GMT+0800">2023-11-01 11:55:52</span>
+            </span>
+        
+
+        
+
+        
+
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+        <a class="home-read-more" href="/post/3002178342.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
+</div>
+
+                </div>
+            </li>
+        
+    </ul>
+    
+    <div class="paginator border-box flex-center">
+        <div class="btn-wrap allowed">
+            <a class="jump-btn"
+               href="/page/3/"
+            ><i class="fa-solid fa-chevron-left"></i></a>
+        </div>
 
 
-<p>经过上述操作，共享的变量就可以跨不同进程进行读写操作了。</p>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-09-12T05:30:11.000Z" title="2023/9/12 13:30:11">2023-09-12</time>发表</span><span class="level-item"><time dateTime="2023-09-22T06:18:52.021Z" title="2023/9/22 14:18:52">2023-09-22</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E2%91%A9-%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/">⑩ 编程基础</a><span> / </span><a class="link-muted" href="/categories/%E2%91%A9-%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E6%89%B9%E5%A4%84%E7%90%86/">批处理</a></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/post/3801212176.html">批处理杂记</a></p><div class="content"><h1 id="1-exit"><a href="#1-exit" class="headerlink" title="1. exit"></a>1. exit</h1><p>exit命令用于退出当前的批处理脚本，并返回一个退出代码ExitCode（即返回值）。退出代码通常是一个整数，用于指示脚本执行的状态，例如成功（0）或失败（非零值）。</p>
-<p><code>exit</code>命令的语法为：</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exit [/b] [exitCode]</span><br></pre></td></tr></tbody></table></figure>
+        <div class="page-number-box border-box flex-center">
+            <input class="page-number-input border-box base-color-size"
+                   type="number"
+                   value="4"
+                   min="1"
+                   max="21"
+            ><span class="delimiter base-color-size">/</span><span class="base-color-size">21</span>
+        </div>
 
-<p>其中 <code>/b</code> 选项表示仅退出当前批处理脚本的执行，而不会影响调用脚本的父进程。如果不使用 <code>/b</code> 选项，则 exit 命令会终止当前整个的命令处理器进程（CMD.EXE），并返回退出代码给调用者。</p>
-<p>exitCode 是一个可选参数，用于指定退出代码。如果未指定退出代码，则默认返回上一个命令的退出代码。</p></div><a class="article-more button is-small is-size-7" href="/post/3801212176.html#more">阅读更多</a></article></div><div class="card"><div class="card-image"><a class="image is-7by3" href="/post/2402568381.html"><img class="fill" src="https://blog-static.jiangxueqiao.com/blog/img/qtfeature.jpg" alt="基于Qt的无边框窗体实现"></a></div><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-09-06T00:00:00.000Z" title="2023/9/6 08:00:00">2023-09-06</time>发表</span><span class="level-item"><time dateTime="2023-10-27T04:54:07.991Z" title="2023/10/27 12:54:07">2023-10-27</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E2%91%A1-C/">② C++</a><span> / </span><a class="link-muted" href="/categories/%E2%91%A1-C/Qt/">Qt</a></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/post/2402568381.html">基于Qt的无边框窗体实现</a></p><div class="content"><p>Qt虽然提供了诸如<code>Qt::FramelessWindowHint</code>之类的属性可以移除窗体的边框，但是移除边框之后，窗体的一些默认行为同时也被移除了，如鼠标拖动改变大小、双击标题栏最大化等，这些行为需要开发者自己来实现。</p>
-<p>本文主要介绍实现无边框窗体的几种方案，并在最后分享了作者实现的方案。</p>
-<p>笔者认为，一个完美的无边框窗体解决方案需要支持如下功能：</p>
-<ol>
-<li>支持通过使用鼠标拖拽来改变窗体位置和大小；</li>
-<li>支持双击标题栏最大化窗体和还原窗体；</li>
-<li>支持<code>Windows Areo Snap</code>特性；</li>
-<li>支持系统阴影；</li>
-<li>支持跨不同DPI的屏幕拖拽；</li>
-<li>适应分辨率和DPI改变；</li>
-</ol></div><a class="article-more button is-small is-size-7" href="/post/2402568381.html#more">阅读更多</a></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2023-09-05T04:53:19.000Z" title="2023/9/5 12:53:19">2023-09-05</time>发表</span><span class="level-item"><time dateTime="2023-10-13T09:22:07.248Z" title="2023/10/13 17:22:07">2023-10-13</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E2%91%AE-%E7%88%B1%E6%8A%98%E8%85%BE/">⑮ 爱折腾</a></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/post/2737986840.html">基于Hexo搭建静态博客</a></p><div class="content"><p>Hexo是一个快速、简洁且高效的博客框架，使用Hexo可以快速地生成静态博客框架。在框架生成完成后，可以使用任意文本编辑器语法书写博客。我们可以使用Markdown语法书写博客，Hexo在生成博客时会自动将Markdown解析成Html静态页面。</p>
-<blockquote>
-<p>Hexo官网：<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">https://hexo.io/zh-cn/</a><br>Hexo中文文档：<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">https://hexo.io/zh-cn/docs/</a></p>
-</blockquote>
-<h1 id="一、玩法说明"><a href="#一、玩法说明" class="headerlink" title="一、玩法说明"></a>一、玩法说明</h1><p>使用Hexo写博客的大致流程如下：</p>
-<ol>
-<li>生成博客框架</li>
-<li>配置博客</li>
-<li>选择自己喜欢的主题</li>
-<li>配置博客和主题</li>
-<li>写文章</li>
-<li>生成博客</li>
-<li>发布博客到服务器</li>
-</ol>
-<p>其中，<code>第1~4步</code>为前置操作，只需要执行一次。</p>
-<p>Hexo只负责生成静态的HTML文件，不提供服务器。如需对外发布博客，我们还需将HTML文件部署到服务器上，可以选择如下的方式：</p>
-<ul>
-<li>Github Pages、GitLab Pages，免费，访问速度较慢。</li>
-<li>Gitee Pages，收费。</li>
-<li>对象存储服务，如阿里云OSS、腾讯云COS、七牛云OSS等。当访问量大时，需搭配CDN使用，避免因数据回源产生巨额流量费用。</li>
-<li>自己购买服务器使用Nginx搭建Web服务器。当访问量大时，服务器出口带宽要求较高，此时仍然需要搭配对象存储服务和CDN使用。</li></ul></div><a class="article-more button is-small is-size-7" href="/post/2737986840.html#more">阅读更多</a></article></div><nav class="pagination" role="navigation" aria-label="pagination"><div class="pagination-previous"><a href="/page/3/">上一页</a></div><div class="pagination-next"><a href="/page/5/">下一页</a></div><ul class="pagination-list is-hidden-mobile"><li><a class="pagination-link" href="/">1</a></li><li><a class="pagination-link" href="/page/2/">2</a></li><li><a class="pagination-link" href="/page/3/">3</a></li><li><a class="pagination-link is-current" href="/page/4/">4</a></li><li><a class="pagination-link" href="/page/5/">5</a></li><li><span class="pagination-ellipsis">&hellip;</span></li><li><a class="pagination-link" href="/page/20/">20</a></li></ul></nav></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/pi-200.png" alt="Jiang Xueqiao"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Jiang Xueqiao</p><p class="is-size-6 is-block">Software Engineer</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Wuhan, Hubei</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">160</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">26</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">30</p></a></div></div></nav></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/"><span class="level-start"><span class="level-item">① 专栏集锦</span></span><span class="level-end"><span class="level-item tag">63</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E5%86%85%E5%AD%98%E4%BD%93%E7%B3%BB/"><span class="level-start"><span class="level-item">Windows内存体系</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E5%A5%97%E6%8E%A5%E5%AD%97I-O%E6%A8%A1%E5%9E%8B/"><span class="level-start"><span class="level-item">Windows套接字I/O模型</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B/"><span class="level-start"><span class="level-item">Windows核心编程</span></span><span class="level-end"><span class="level-item tag">19</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E6%B3%A8%E5%85%A5%E4%B8%8E%E6%8B%A6%E6%88%AA/"><span class="level-start"><span class="level-item">Windows注入与拦截</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/%E6%89%93%E5%8C%85%E7%8B%82%E9%AD%94%E4%B9%8BNSIS%E6%95%99%E7%A8%8B/"><span class="level-start"><span class="level-item">打包狂魔之NSIS教程</span></span><span class="level-end"><span class="level-item tag">13</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/%E6%8B%A8%E5%BC%80%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E7%9A%84%E8%BF%B7%E9%9B%BE/"><span class="level-start"><span class="level-item">拨开字符编码的迷雾</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/"><span class="level-start"><span class="level-item">网络协议</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E2%91%A1-C/"><span class="level-start"><span class="level-item">② C++</span></span><span class="level-end"><span class="level-item tag">28</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E2%91%A1-C/Qt/"><span class="level-start"><span class="level-item">Qt</span></span><span class="level-end"><span class="level-item tag">15</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E2%91%A2-Power-By-Me/"><span class="level-start"><span class="level-item">③ Power By Me</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A3-Electron/"><span class="level-start"><span class="level-item">④ Electron</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A4-%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E7%A8%8B/"><span class="level-start"><span class="level-item">⑤ 音视频编程</span></span><span class="level-end"><span class="level-item tag">11</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E2%91%A4-%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E7%A8%8B/WebRTC/"><span class="level-start"><span class="level-item">WebRTC</span></span><span class="level-end"><span class="level-item tag">9</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E2%91%A5-%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%8F%91/"><span class="level-start"><span class="level-item">⑥ 服务器开发</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A6-%E8%BD%AF%E4%BB%B6%E8%B0%83%E8%AF%95/"><span class="level-start"><span class="level-item">⑦ 软件调试</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A7-%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84/"><span class="level-start"><span class="level-item">⑧ 软件架构</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A8-%E6%95%B0%E6%8D%AE%E5%BA%93/"><span class="level-start"><span class="level-item">⑨ 数据库</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A9-%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"><span class="level-start"><span class="level-item">⑩ 编程基础</span></span><span class="level-end"><span class="level-item tag">13</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E2%91%A9-%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/CMake/"><span class="level-start"><span class="level-item">CMake</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A9-%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E6%89%B9%E5%A4%84%E7%90%86/"><span class="level-start"><span class="level-item">批处理</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E2%91%AA-%E5%BC%80%E6%BA%90%E5%BA%93/"><span class="level-start"><span class="level-item">⑪ 开源库</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%AB-Web%E5%BC%80%E5%8F%91/"><span class="level-start"><span class="level-item">⑫ Web开发</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%AC-%E7%BE%8E%E6%96%87%E8%B5%8F%E6%9E%90/"><span class="level-start"><span class="level-item">⑬ 美文赏析</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%AD-%E6%9D%82%E5%BF%B5/"><span class="level-start"><span class="level-item">⑭ 杂念</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%AE-%E7%88%B1%E6%8A%98%E8%85%BE/"><span class="level-start"><span class="level-item">⑮ 爱折腾</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><!--!--><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-02-25T05:53:19.000Z">2024-02-25</time></p><p class="title"><a href="/post/946276004.html">产品级的Electron项目模板</a></p><p class="categories"><a href="/categories/%E2%91%A2-Power-By-Me/">③ Power By Me</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-02-20T01:25:38.000Z">2024-02-20</time></p><p class="title"><a href="/post/1391804423.html">🐉2024龙行龘龘</a></p><p class="categories"><a href="/categories/%E2%91%AD-%E6%9D%82%E5%BF%B5/">⑭ 杂念</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-12-21T13:48:55.000Z">2023-12-21</time></p><p class="title"><a href="/post/2185523635.html">开源库spdlog使用备忘</a></p><p class="categories"><a href="/categories/%E2%91%AA-%E5%BC%80%E6%BA%90%E5%BA%93/">⑪ 开源库</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-12-15T13:20:06.000Z">2023-12-15</time></p><p class="title"><a href="/post/2418701368.html">C/C++不同整数类型的区别</a></p><p class="categories"><a href="/categories/%E2%91%A1-C/">② C++</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-11-26T11:07:09.000Z">2023-11-26</time></p><p class="title"><a href="/post/1533480858.html">Windows窗口调试利器-WinSpyPlus</a></p><p class="categories"><a href="/categories/%E2%91%A2-Power-By-Me/">③ Power By Me</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/CentOS/"><span class="tag">CentOS</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Crash/"><span class="tag">Crash</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Deadlock/"><span class="tag">Deadlock</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Docker/"><span class="tag">Docker</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GDB/"><span class="tag">GDB</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Github/"><span class="tag">Github</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTTPS/"><span class="tag">HTTPS</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Hexo/"><span class="tag">Hexo</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Joplin/"><span class="tag">Joplin</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Lamada/"><span class="tag">Lamada</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LetsEncrypt/"><span class="tag">LetsEncrypt</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MySQL/"><span class="tag">MySQL</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Ping/"><span class="tag">Ping</span></a></div><div class="control"><a class="tags has-addons" href="/tags/QSS/"><span class="tag">QSS</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Redis/"><span class="tag">Redis</span></a></div><div class="control"><a class="tags has-addons" href="/tags/SQL/"><span class="tag">SQL</span></a></div><div class="control"><a class="tags has-addons" href="/tags/SSL/"><span class="tag">SSL</span></a></div><div class="control"><a class="tags has-addons" href="/tags/TCP/"><span class="tag">TCP</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Thread/"><span class="tag">Thread</span></a></div><div class="control"><a class="tags has-addons" href="/tags/UDP/"><span class="tag">UDP</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Vcpkg/"><span class="tag">Vcpkg</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Watch%C2%ADtower/"><span class="tag">Watch­tower</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Wav/"><span class="tag">Wav</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Windbg/"><span class="tag">Windbg</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%8F%B2%E9%93%81%E7%94%9F/"><span class="tag">史铁生</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%88%B4%E5%BB%BA%E4%B8%9A/"><span class="tag">戴建业</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%AD%A3%E5%88%99/"><span class="tag">正则</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%99%BD%E9%85%92/"><span class="tag">白酒</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E9%9D%99%E9%BB%98%E5%AE%89%E8%A3%85/"><span class="tag">静默安装</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/codesilo.png" alt="CodeSilo" height="28"></a><p class="is-size-7"><span class="is-size-7">© 2017~2024 江雪桥</span>  <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/" style="color:#000">鄂ICP备2020015399号-6</a>  </p><p class="is-size-7">网站风格：<a target="_blank" rel="noopener" href="https://www.cyberpunk.net/gb/zh-cn/" style="color:#75d4ef">赛博朋克（cyberpunk）</a></p><p class="is-size-7">内容同步发布到以下站点：<a href="https://jiangxueqiao.com" style="color:#fc1e1e">jiangxueqiao.com</a>    <a target="_blank" rel="noopener" href="https://winsoft666.github.io" style="color:#fc1e1e">winsoft666.github.io</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="GitHub" href="https://github.com/winsoft666"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/jquery/3.3.1/dist/jquery.min.js"></script><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/moment/2.22.2/min/moment-with-locales.min.js"></script><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/clipboard/2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
-            article: {
-                highlight: {
-                    clipboard: true,
-                    fold: 'unfolded'
-                }
-            }
-        };</script><script src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/lightgallery/1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/justifiedGallery/3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
-            if (typeof $.fn.lightGallery === 'function') {
-                $('.article').lightGallery({ selector: '.gallery-item' });
-            }
-            if (typeof $.fn.justifiedGallery === 'function') {
-                if ($('.justified-gallery > p > .gallery-item').length) {
-                    $('.justified-gallery > p > .gallery-item').unwrap();
-                }
-                $('.justified-gallery').justifiedGallery();
-            }
-        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
-            'HTML-CSS': {
-                matchFontHeight: false
-            },
-            SVG: {
-                matchFontHeight: false
-            },
-            CommonHTML: {
-                matchFontHeight: false
-            },
-            tex2jax: {
-                inlineMath: [
-                    ['$','$'],
-                    ['\\(','\\)']
-                ]
-            }
-        });</script><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/mathjax/2.7.9/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
-            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
-        });</script></body></html>
+
+        <div class="btn-wrap allowed">
+            <a class="jump-btn"
+               href="/page/5/"
+            ><i class="fa-solid fa-chevron-right"></i></a>
+        </div>
+    </div>
+
+
+
+
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="border-box website-info-box default">
+        
+            <div class="copyright-info info-item default">
+                &copy;&nbsp;<span>2017</span>&nbsp;-&nbsp;2024
+                
+                    &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">江雪桥</a>
+                
+            </div>
+
+            
+                <div class="icp-info info-item default">
+                    <a class=""
+                       target="_blank"
+                       href="https://beian.miit.gov.cn"
+                    >
+                        鄂ICP备2020015399号-6
+                    </a>
+                </div>
+            
+
+            
+        
+
+        <div class="count-item info-item default">
+            
+
+            
+
+            
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box side-tools-show-handle">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-toggle-theme-mode flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+</main>
+
+
+
+
+<!-- common -->
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+
+<!-- local-search -->
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+<!-- lazyload -->
+
+    
+<script src="/js/lazyload.js"></script>
+
+
+
+<div class="">
+    
+
+    <!-- category-page -->
+    
+
+    <!-- links-page -->
+    
+
+    <!-- photos-page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+</body>
+</html>

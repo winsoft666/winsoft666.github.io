@@ -1,204 +1,835 @@
-<!doctype html>
-<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>CodeSilo</title><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#3273dc"><meta name="application-name" content="CodeSilo"><meta name="msapplication-TileImage" content="img/pi-200.png"><meta name="msapplication-TileColor" content="#3273dc"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="CodeSilo"><meta name="apple-mobile-web-app-status-bar-style" content="default"><link rel="apple-touch-icon" sizes="200x200" href="img/pi-200.png"><meta name="description" content="学习、总结与分享"><meta property="og:type" content="blog"><meta property="og:title" content="CodeSilo"><meta property="og:url" content="https://jiangxueqiao.com/"><meta property="og:site_name" content="CodeSilo"><meta property="og:description" content="学习、总结与分享"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://jiangxueqiao.com/img/og_image.png"><meta property="article:author" content="江雪桥"><meta property="article:tag" content="Windows"><meta property="article:tag" content="Linux"><meta property="article:tag" content="C/C++"><meta property="article:tag" content="Golang"><meta property="article:tag" content="Qt"><meta property="article:tag" content="Node.js"><meta property="article:tag" content="Electron"><meta property="article:tag" content="WebRTC"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://jiangxueqiao.com/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://jiangxueqiao.com"},"headline":"CodeSilo","image":["https://jiangxueqiao.com/img/og_image.png"],"author":{"@type":"Person","name":"江雪桥"},"publisher":{"@type":"Organization","name":"CodeSilo","logo":{"@type":"ImageObject","url":"https://blog-static.jiangxueqiao.com/blog/icarus-theme/codesilo.png"}},"description":"学习、总结与分享"}</script><link rel="icon" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/favicon.png"><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/all.min.css"><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/highlight.js/11.7.0/styles/xt256.css"><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/font/css2/Oxanium-Roboto-Mono.css"><link rel="stylesheet" href="/css/cyberpunk.css"><!--!--><script>var _hmt = _hmt || [];
-        (function() {
-            var hm = document.createElement("script");
-            hm.src = "//hm.baidu.com/hm.js?fbb46283a7b4d42d425356f8779708d5";
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(hm, s);
-        })();</script><!--!--><!--!--><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/lightgallery/1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/justifiedGallery/3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/pace-js/1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
-  (function () {
-      function switchTab() {
-          if (!location.hash) {
-            return;
-          }
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Windows,Linux,C/C++,Golang,Qt,Node.js,Electron,Vue,WebRTC">
+    <meta name="description" content="除注明转载以外，所有文章均为原创">
+    <meta name="author" content="江雪桥">
+    
+    <title>
+        
+        CodeSilo
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
 
-          const id = '#' + CSS.escape(location.hash.substring(1));
-          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
-          if (!$tabMenu) {
-            return;
-          }
+    
+        <link rel="shortcut icon" href="/images/favicon.png">
+    
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
 
-          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
-          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
-          Array.from($tabMenuContainer.querySelectorAll('a'))
-              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
-              .forEach($content => $content.classList.add('is-hidden'));
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
 
-          if ($tabMenu) {
-              $tabMenu.parentElement.classList.add('is-active');
-          }
-          const $activeTab = document.querySelector(id);
-          if ($activeTab) {
-              $activeTab.classList.remove('is-hidden');
-          }
-      }
-      switchTab();
-      window.addEventListener('hashchange', switchTab, false);
-  })();
-  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0">
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"jiangxueqiao.com","root":"/","language":"zh-CN","path":"search.xml"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"CodeSilo","author":"江雪桥","avatar":"/images/avatar.png","logo":"/images/avatar.png","favicon":"/images/favicon.png"},"menu":{"Archives":"/archives","Categories":"/categories","About":"/about","Github":"https://github.com/winsoft666"},"first_screen":{"enable":false,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/winsoft666","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":true,"hide_header":true},"home":{"category":false,"tag":true,"announcement":null},"post":{"author_badge":{"enable":false,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":true,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":false},"comment":{"enable":true,"use":"twikoo","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":"https://twikoo.jiangxueqiao.com","region":"zh-CN","version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2017,"word_count":false,"icp":{"enable":true,"record_code":"鄂ICP备2020015399号-6","url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","version":"4.0.7"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 6.3.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-</head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/codesilo.png" alt="CodeSilo" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">时间轴</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="https://jiangxueqiao.com/post/2185937873.html">留言</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Email" href="mailto:smart7178@163.com"><i class="fa fa-envelope"></i></a><a class="navbar-item" target="_blank" rel="noopener" title="GitHub" href="https://github.com/winsoft666"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2018-03-12T12:00:00.000Z" title="2018/3/12 20:00:00">2018-03-12</time>发表</span><span class="level-item"><time dateTime="2023-10-27T04:54:07.931Z" title="2023/10/27 12:54:07">2023-10-27</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/">① 专栏集锦</a><span> / </span><a class="link-muted" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/post/349088656.html">网络协议(4)--ICMP协议</a></p><div class="content"><p>互联网控制消息协议（英文：<code>Internet Control Message Protocol</code>，ICMP）是互联网协议族的核心协议之一。定义在 RFC 792 文档中。<br>ICMP 的消息大致可以分为两类：一类是差错报文，即通知出错原因的错误消息（如<code>traceroute</code>），另一类是查询报文，即用于诊断的查询消息（如<code>ping</code>）。<br>使用 ICMP 协议的典型应用有<code>ping</code>和<code>traceroute</code>（windows 上叫<code>tracert</code>）。</p></div><a class="article-more button is-small is-size-7" href="/post/349088656.html#more">阅读更多</a></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2018-03-12T11:10:00.000Z" title="2018/3/12 19:10:00">2018-03-12</time>发表</span><span class="level-item"><time dateTime="2023-10-27T04:54:07.932Z" title="2023/10/27 12:54:07">2023-10-27</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/">① 专栏集锦</a><span> / </span><a class="link-muted" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/post/2274025898.html">网络协议(3)--IP协议</a></p><div class="content"><p>IP 协议是 TCP/IP 协议族中最核心的协议。所有的 TCP、UDP、ICMP、IGMP 数据都以 IP 数据报的格式传输。</p></div><a class="article-more button is-small is-size-7" href="/post/2274025898.html#more">阅读更多</a></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2018-03-11T11:10:00.000Z" title="2018/3/11 19:10:00">2018-03-11</time>发表</span><span class="level-item"><time dateTime="2023-10-27T04:54:07.932Z" title="2023/10/27 12:54:07">2023-10-27</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/">① 专栏集锦</a><span> / </span><a class="link-muted" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/post/3034381124.html">网络协议(2)--ARP和RARP协议</a></p><div class="content"><p><code>ARP</code>(<code>Address Resolution Protocol</code>)地址解析协议，位于 TCP/IP 协议栈中的链路层。当局域网内主机间（或者是主机与网关间）需要通信时，通过使用<code>ARP协议</code>获取<code>目标IP地址</code>对应的<code>硬件MAC地址</code>，然后主机间通过该<code>硬件MAC地址</code>完成数据包发送和接收。</p></div><a class="article-more button is-small is-size-7" href="/post/3034381124.html#more">阅读更多</a></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2018-03-10T10:10:58.000Z" title="2018/3/10 18:10:58">2018-03-10</time>发表</span><span class="level-item"><time dateTime="2023-10-27T04:54:07.932Z" title="2023/10/27 12:54:07">2023-10-27</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/">① 专栏集锦</a><span> / </span><a class="link-muted" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/">网络协议</a></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/post/3886809266.html">网络协议(1)--基础概念</a></p><div class="content"><h1 id="一、TCP-IP-协议栈"><a href="#一、TCP-IP-协议栈" class="headerlink" title="一、TCP/IP 协议栈"></a>一、TCP/IP 协议栈</h1><p><img src="https://blog-static.jiangxueqiao.com/blog/img/wangluoxieyi-jichugailian-1.jpg"></p>
-<h1 id="二、IP-地址、子网掩码、网关"><a href="#二、IP-地址、子网掩码、网关" class="headerlink" title="二、IP 地址、子网掩码、网关"></a>二、IP 地址、子网掩码、网关</h1><h2 id="2-1-IP-地址及分类"><a href="#2-1-IP-地址及分类" class="headerlink" title="2.1 IP 地址及分类"></a>2.1 IP 地址及分类</h2><p>IP 地址相当于互联网上的门牌号，计算机在启动的时候可以从磁盘（无盘系统例外）上读取该主机的 IP 配置。</p>
-<p>IP 地址由 4 个字节（也就是 32 位）的二进制码组成，包含了<code>网络号( net-id )</code>和<code>主机号( host-id )</code>。但现实中，我们经常还需要再继续划分<code>“子网”</code>，这时就需要借用主机号的一部分充任子网号，这样 IP 地址也就可以看成由<code>标准网络号、子网号、主机号</code>3 部分组成的，即<code>IP地址=标准网络号+子网号+主机号</code>。</p>
-<blockquote>
-<p>网络号、子网号、主机号三者间的关系，形象的描述如下：假设你的住址 IP 是<code>武汉市文治街16号</code>，那么，<br>IP 地址 = 武汉市文治街 16 号<br>网络号 = 武汉市<br>子网号 = 文治街<br>主机号 = 16 号</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>IP 地址种类</th>
-<th>二进制组成(前缀位+网络位+主机位)</th>
-<th>IP 范围</th>
-<th>网络数</th>
-<th>主机数/网络</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>A 类地址</td>
-<td><code>0</code>+7 位网络号+24 位主机号</td>
-<td>1.0.0.0 - 127.255.255.255</td>
-<td>$2^7-2$</td>
-<td>$2^{24}-2$</td>
-</tr>
-<tr>
-<td>B 类地址</td>
-<td><code>10</code>+14 位网络号+16 位主机号</td>
-<td>128.0.0.0 - 191.255.255.255</td>
-<td>$2^{14}-1$</td>
-<td>$2^{16}-2$</td>
-</tr>
-<tr>
-<td>C 类地址</td>
-<td><code>110</code>+21 位网络号+8 位主机号</td>
-<td>192.0.0.0 - 223.255.255.255</td>
-<td>$2^{21}-1$</td>
-<td>$2^8-2$</td>
-</tr>
-<tr>
-<td>D 类地址</td>
-<td><code>1110</code>+多播地址(用于多播)</td>
-<td>224.0.0.0 - 239.255.255.255</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr>
-<td>E 类地址</td>
-<td><code>1111</code>+保留位(不开放, 保留使用)</td>
-<td>240.0.0.0-249.255.255.255</td>
-<td>-</td>
-<td>-</td>
-</tr>
-</tbody></table>
-<p>从表中可以看出，A 类 IP 的第 1 位（二进制位）必须是 0，所以 A 类 IP 的第一个整数的范围是<code>0000 0000 ~ 01111 11111</code>，转换为十进制就是<code>0 ~ 127</code>，以此类推。</p>
-<h3 id="关于网络数的解释"><a href="#关于网络数的解释" class="headerlink" title="关于网络数的解释"></a>关于网络数的解释</h3><p>网络数就是一种网络的子网数, 比如 A 类地址, 可以分为多少个子网。看表格可以推出网络数的计算公式为: $2^{网络号位数}$。<br>规定网络地址全为<code>0</code>的 IP 地址是保留地址，意思是“本网络”。</p>
-<ul>
-<li>在 A 类地址中，实际上 <code>0.0.0.0</code> 是不指派的，而可以指派的最小网络是 <code>1.0.0.0</code>；网络地址为 <code>127</code> 的 A 类 IP 地址保留作为本地软件环回测试本主机的进程之间的通信(比如常用的 <code>127.0.0.1</code>，<strong>但实际上网络地址为<code>127</code>的都可以用作本地环回地址</strong>)。所以 A 类地址网络数为 $2^7-2$。</li>
-<li>在 B 类地址中，实际上 <code>128.0.0.0</code> 是不指派的，而可以指派的最小网络是 `128.1.0.0，所以 B 类地址网络数是 $2^{14} - 1$。</li>
-<li>在 C 类地址中，实际上 <code>192.0.0.0</code> 是不指派的，而可以指派的最小网络是 192.0.1.0，所以 C 类地址网络数是 $2^{21}-1$。</li>
-</ul>
-<h3 id="关于主机数的解释"><a href="#关于主机数的解释" class="headerlink" title="关于主机数的解释"></a>关于主机数的解释</h3><p>主机数就是一个子网里面可以容纳多少台主机。看表格可以推出主机数的计算公式为: <code>2^主机号位数-2</code>。主机号全为 0 表示该网络，而主机号全为 1 表示广播地址，所以要排除掉这两个。比如 A 类地址 <code>1.0.0.0</code> 表示主机所在的网段的网络地址, <code>1.255.255.255</code> 为该网段的广播地址。</p>
-<h2 id="2-2-私有-IP-地址"><a href="#2-2-私有-IP-地址" class="headerlink" title="2.2 私有 IP 地址"></a>2.2 私有 IP 地址</h2><p>经常可以看到<code>192.168.1.101</code>这类的 IP 地址, 这些是私有 IP 地址, 专用地址, 也就是局域网内使用的的 IP 地址。<br>公网 IP 地址是需要向有关部门申请备案的，私有 IP 地址不用申请, 但是仅限内网使用, 也节约公网 IP。</p>
-<table>
-<thead>
-<tr>
-<th>IP 地址种类</th>
-<th>私有 IP 范围</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>A 类地址</td>
-<td>10.0.0.0 - 10.255.255.255</td>
-</tr>
-<tr>
-<td>B 类地址</td>
-<td>172.16.0.0 - 172.31.255.255</td>
-</tr>
-<tr>
-<td>C 类地址</td>
-<td>192.168.0.0 - 192.168.255.255</td>
-</tr>
-</tbody></table>
-<p>路由器看到专用地址就不转发，所以说专用地址作为目的地址是不可能在因特网上传送的。专用 IP 地址也可叫做可重用地址。那好，问题来了，如果配置了这些专用地址的主机想和因特网上的主机通信，怎么办呢？NAT(network address translation: 网络地址转换)在这种情况下就应运而生了。NAT 就是将这种地址转换成有效的外部全球 IP 地址，使得整个专用网只需要一个全球 IP 地址就可以与因特网联通。</p>
-<h2 id="2-3-子网掩码"><a href="#2-3-子网掩码" class="headerlink" title="2.3 子网掩码"></a>2.3 子网掩码</h2><p><code>IP地址=标准网络号+子网号+主机号</code>。从 IP 分类可以很容易确定“标准网络号”，<code>32bit</code>的 IP 地址除去前面的“标准网络号”之后，剩下的就是“子网号”和“主机号”，那么怎么确定“子网号”和“主机号”了？ 这就需要借助<code>“子网掩码”</code>了。子网掩码也是一个 32bit(<code>xxx.xxx.xxx.xxx</code>)的值，其中值为 1 的 bit 留给“标准网络号”和“子网号”，为 0 的 bit 留给“主机号”。我们可以将子网掩码和 IP 地址进行二进制<code>“与运算”</code>，通过得到的结果来确定“子网号”。</p>
-<p>以 C 类 IP 地址为例，对于规范的 C 类 IP 地址来说，规范子网掩码为<code>255.255.255.0</code>，即用 32 比特 IP 地址的前 24 比特标识网络号，后 8 比特标识主机号。因而，每个 C 类网络下共可容纳 254 台主机($2^8-2$)。 如今，我们先思索借用 2 比特的主机号来充任子网络号的情形。</p>
-<p>C 类网络地址<code>210.31.233.0</code>，我们借用 2bit 的主机号来充当子网号，子网的数目为$2^2-2$(子网号无法全为 0 或 1，所以减 2).</p>
-<p><img src="https://blog-static.jiangxueqiao.com/blog/img/wangluoxieyi-jichugailian-2.jpg"></p>
-<p>为了借用原来 8 位主机号中的前 2 位充任子网络号，采用了新的非规范子网掩 255.255.255.192。<br>采用了新的子网掩码后，借用的 2 位子网号可以用来标识两个子网：01 子网和 10 子网(子网号无法全为 0 或 1，因而 00、11 子网无法用)。</p>
-<p><strong>对于上图的 01 子网来说</strong>，其网络号的点分十进制的方式为：<code>210.31.233.64</code>，该子网的最小 IP 地址为：<code>210.31.233.65</code>，最大 IP 地址为：<code>210.31.233.126</code>（主机号全为 1 位广播地址），共可容纳 62 台主机。对该子网的直接广播地址为：<code>210.31.233.127</code>（主机号全为 1）。</p>
-<blockquote>
-<p>经常见到像<code>192.168.1.0/24</code>这样的写法，它的意思是网络号为<code>192.168.1.0</code>；子网掩码为 24 位，即<code>111111111 111111111 111111111 00000000</code>，转为点分十进制就为<code>255.255.255.0</code>，没有借用主机号来充当子网号，可以拥有的主机数为$2^8$-2.</p>
-</blockquote>
-<h2 id="2-3-网关的作用"><a href="#2-3-网关的作用" class="headerlink" title="2.3 网关的作用"></a>2.3 网关的作用</h2><p>你的住址 IP 是<code>武汉市洪山区文治街16号</code>，你的父母只允许你和文治街的小朋友（同一个子网）一起玩耍，如果你想要去和别的街道（别的子网）的小朋友玩耍，你就需要经过你的父母的同意，由你的父母带你过去，这时候你的父母就充当了<strong>网关</strong>的角色，没有你的父母，你就不能和其他街道（其他子网）的小朋友玩耍。</p>
-<h1 id="三、包的封装与解封装"><a href="#三、包的封装与解封装" class="headerlink" title="三、包的封装与解封装"></a>三、包的封装与解封装</h1><blockquote>
-<p>封装英文：Encapsulation<br>解封装英文：Demultiplexing</p>
-</blockquote>
-<p>当应用程序使用网络传送数据时，数据按照协议栈从上到下的顺序，逐次通过每一层。其中每一层对收到的数据都要增加一些首部信息（有时还增加尾部信息）。最终生成一串比特流通过以太网来传输，我们称这串比特流叫帧。<br>如图：<br><img src="https://blog-static.jiangxueqiao.com/blog/img/wangluoxieyi-jichugailian-3.jpg"></p>
-<p><strong>当数据报到达链路层时</strong>，链路层也要对 IP 数据包封装进行包装。链路层也要对 IP 数据包封装的方式主要有<code>以太网IP数据包封装</code>（RFC894）、<code>IEEE 802 IP数据报封装</code>（RFC1042）两种，最常使用的封装格式是以太网 IP 数据包封装（RFC894）。下图显示了这两种不同形式的封装格式：<br><img src="https://blog-static.jiangxueqiao.com/blog/img/wangluoxieyi-jichugailian-4.jpg"><br>从图中可以看到<code>以太网封装</code>限制了数据帧的最大长度为 1500 字节，这个限制叫做 MTU，最大传输单元（详见第四节）。</p>
-<p>接收端收到帧之后，按照和上面相反的顺序（协议栈从下到上）来解包，依次解析每一层加入的头部（或尾部），最终将原始数据传给最上层应用程序。<br>如图：<br><img src="https://blog-static.jiangxueqiao.com/blog/img/wangluoxieyi-jichugailian-5.jpg"></p>
-<p>因为传输层的 TCP、UDP、ICMP 等都有可能向网络层 IP 协议传送数据，这样在 IP 协议层解包的时候，需要知道这个包对应的上层协议是哪一个，因此 IP 协议必须在生成的 IP 首部加入某种标识，以表明数据的上一层的具体协议。为此，IP 在首部中存入了一个长度为 8bit 的数值，称作协议域。常见的 IP 协议号有：<br>1 表示 ICMP 协议，2 表示 IGMP 协议，6 表示 TCP 协议，17 表示 UDP 协议。</p>
-<blockquote>
-<p>完整的 IP 协议号见：<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/IP%E5%8D%8F%E8%AE%AE%E5%8F%B7%E5%88%97%E8%A1%A8">IP 协议号列表</a></p>
-</blockquote>
-<h1 id="四、MTU"><a href="#四、MTU" class="headerlink" title="四、MTU"></a>四、MTU</h1><p>前面第三节提到了以太网封装限制了数据帧的长度为 1500 字节，这个限制是在链路层封装 IP 数据报时作的。如果 IP 层的数据报比链路层的这个 MTU 值大，那么 IP 层就需要分片（英文：fragmentation），把数据报分成若干片，保证每一片的大小都小于 MTU 值。</p>
-<h3 id="windows-系统修改-MTU-值"><a href="#windows-系统修改-MTU-值" class="headerlink" title="windows 系统修改 MTU 值"></a>windows 系统修改 MTU 值</h3><ul>
-<li>查询当前 MTU 值</li>
-</ul>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh interface ipv4 show subinterfaces</span><br></pre></td></tr></tbody></table></figure>
+</head>
 
-<p><img src="https://blog-static.jiangxueqiao.com/blog/img/wangluoxieyi-jichugailian-6.jpg"></p>
-<ul>
-<li>修改 MTU 值</li>
-</ul>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netsh interface ipv4 set subinterface "本地连接" mtu=1480 store=persistent</span><br></pre></td></tr></tbody></table></figure>
 
-<blockquote>
-<p>文章参考：<br><a target="_blank" rel="noopener" href="https://m.vipcn.com/a/360973/">https://m.vipcn.com/a/360973/</a> &gt; <a target="_blank" rel="noopener" href="https://ahaochan.github.io/posts/IP_address,_subnet_mask,_gateway_Introduction.html">https://ahaochan.github.io/posts/IP_address,_subnet_mask,_gateway_Introduction.html</a> &gt; <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/20717354">https://www.zhihu.com/question/20717354</a></p>
-</blockquote>
-<p>《TCP/IP 详解 卷 1：协议》在线阅读地址：<a target="_blank" rel="noopener" href="http://www.52im.net/topic-tcpipvol1.html">http://www.52im.net/topic-tcpipvol1.html</a></p>
-<blockquote>
-<p>文章图片带有“CSDN”水印的说明：<br>由于该文章和图片最初发表在我的<a target="_blank" rel="noopener" href="https://blog.csdn.net/china_jeffery">CSDN 博客</a>中，因此图片被 CSDN 自动添加了水印。</p>
-</blockquote>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2018-02-12T09:19:45.000Z" title="2018/2/12 17:19:45">2018-02-12</time>发表</span><span class="level-item"><time dateTime="2023-09-27T06:26:50.466Z" title="2023/9/27 14:26:50">2023-09-27</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E2%91%A6-%E8%BD%AF%E4%BB%B6%E8%B0%83%E8%AF%95/">⑦ 软件调试</a></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/post/2414867920.html">使用WinDbg查看调用堆栈</a></p><div class="content"><h2 id="一-显示堆栈信息"><a href="#一-显示堆栈信息" class="headerlink" title="一. 显示堆栈信息"></a>一. 显示堆栈信息</h2><p><strong><code>k*</code>命令</strong></p>
-<figure class="highlight txt"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[~Thread] k[b|p|P|v] [c] [n] [f] [L] [M] [FrameCount]</span><br><span class="line">[~Thread] k[b|p|P|v] [c] [n] [f] [L] [M] = BasePtr [FrameCount]</span><br><span class="line">[~Thread] k[b|p|P|v] [c] [n] [f] [L] [M] = BasePtr StackPtr InstructionPtr</span><br><span class="line">[~Thread] kd [WordCount]</span><br></pre></td></tr></tbody></table></figure></div><a class="article-more button is-small is-size-7" href="/post/2414867920.html#more">阅读更多</a></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2018-02-07T12:32:20.000Z" title="2018/2/7 20:32:20">2018-02-07</time>发表</span><span class="level-item"><time dateTime="2023-09-22T06:41:49.956Z" title="2023/9/22 14:41:49">2023-09-22</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E2%91%A8-%E6%95%B0%E6%8D%AE%E5%BA%93/">⑨ 数据库</a></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/post/3457369310.html">MySQL的DECLARE...HANDLER使用</a></p><div class="content"><h2 id="一、-功能"><a href="#一、-功能" class="headerlink" title="一、 功能"></a>一、 功能</h2><p><code>DECLARE...HANDLER</code>语法如下：</p>
-<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DECLARE</span> handler_action HANDLER</span><br><span class="line">    <span class="keyword">FOR</span> condition_value [, condition_value] ...</span><br><span class="line">    statement</span><br></pre></td></tr></tbody></table></figure>
+<body>
+<div class="progress-bar-container">
+    
 
-<p>功能概括起来就是：<br>在一个或者多个<code>condition_value</code>条件满足时，先执行<code>statement语句</code>，然后执行<code>handler_action动作</code>。</p></div><a class="article-more button is-small is-size-7" href="/post/3457369310.html#more">阅读更多</a></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2017-12-28T15:55:00.000Z" title="2017/12/28 23:55:00">2017-12-28</time>发表</span><span class="level-item"><time dateTime="2023-10-27T04:54:07.922Z" title="2023/10/27 12:54:07">2023-10-27</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E2%91%A6-%E8%BD%AF%E4%BB%B6%E8%B0%83%E8%AF%95/">⑦ 软件调试</a></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/post/3177767322.html">使用WinDbg调试关键区死锁</a></p><div class="content"><p>本文通过一个实例来讲解如何使用WinDbg来调试Windows CriticalSection死锁的问题。</p>
-<h1 id="一-演示示例"><a href="#一-演示示例" class="headerlink" title="一. 演示示例"></a>一. 演示示例</h1><p>这里有一个关键区锁死问题的程序，运行之后依次点击“CS锁死”按钮、右上角退出按钮，程序就会卡死。</p>
-<p><img src="https://blog-static.jiangxueqiao.com/blog/img/windbg-debug-cs-1.png"></p>
-<p>对于眼下的这个问题，界面完全失去响应，这说明负责消息处理的UI线程阻塞了。</p>
-<p>对于几乎所有的windows GUI程序，编号为0的初始线程就是UI线程，windows发现该界面一段时间没有消息响应之后就会在标题后面加上“（未响应）”。</p></div><a class="article-more button is-small is-size-7" href="/post/3177767322.html#more">阅读更多</a></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2017-12-28T15:45:29.000Z" title="2017/12/28 23:45:29">2017-12-28</time>发表</span><span class="level-item"><time dateTime="2023-10-27T04:54:07.920Z" title="2023/10/27 12:54:07">2023-10-27</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E2%91%A6-%E8%BD%AF%E4%BB%B6%E8%B0%83%E8%AF%95/">⑦ 软件调试</a></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/post/1092140776.html">使用WinDbg调试互斥体死锁</a></p><div class="content"><p>本文通过一个实例来讲解如何使用WinDbg来调试Windows Mutex死锁的问题。</p></div><a class="article-more button is-small is-size-7" href="/post/1092140776.html#more">阅读更多</a></article></div><nav class="pagination" role="navigation" aria-label="pagination"><div class="pagination-previous"><a href="/page/17/">上一页</a></div><div class="pagination-next"><a href="/page/19/">下一页</a></div><ul class="pagination-list is-hidden-mobile"><li><a class="pagination-link" href="/">1</a></li><li><span class="pagination-ellipsis">&hellip;</span></li><li><a class="pagination-link" href="/page/17/">17</a></li><li><a class="pagination-link is-current" href="/page/18/">18</a></li><li><a class="pagination-link" href="/page/19/">19</a></li><li><a class="pagination-link" href="/page/20/">20</a></li></ul></nav></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/pi-200.png" alt="Jiang Xueqiao"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Jiang Xueqiao</p><p class="is-size-6 is-block">Software Engineer</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Wuhan, Hubei</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">160</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">26</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">30</p></a></div></div></nav></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/"><span class="level-start"><span class="level-item">① 专栏集锦</span></span><span class="level-end"><span class="level-item tag">63</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E5%86%85%E5%AD%98%E4%BD%93%E7%B3%BB/"><span class="level-start"><span class="level-item">Windows内存体系</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E5%A5%97%E6%8E%A5%E5%AD%97I-O%E6%A8%A1%E5%9E%8B/"><span class="level-start"><span class="level-item">Windows套接字I/O模型</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B/"><span class="level-start"><span class="level-item">Windows核心编程</span></span><span class="level-end"><span class="level-item tag">19</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E6%B3%A8%E5%85%A5%E4%B8%8E%E6%8B%A6%E6%88%AA/"><span class="level-start"><span class="level-item">Windows注入与拦截</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/%E6%89%93%E5%8C%85%E7%8B%82%E9%AD%94%E4%B9%8BNSIS%E6%95%99%E7%A8%8B/"><span class="level-start"><span class="level-item">打包狂魔之NSIS教程</span></span><span class="level-end"><span class="level-item tag">13</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/%E6%8B%A8%E5%BC%80%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E7%9A%84%E8%BF%B7%E9%9B%BE/"><span class="level-start"><span class="level-item">拨开字符编码的迷雾</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/"><span class="level-start"><span class="level-item">网络协议</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E2%91%A1-C/"><span class="level-start"><span class="level-item">② C++</span></span><span class="level-end"><span class="level-item tag">28</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E2%91%A1-C/Qt/"><span class="level-start"><span class="level-item">Qt</span></span><span class="level-end"><span class="level-item tag">15</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E2%91%A2-Power-By-Me/"><span class="level-start"><span class="level-item">③ Power By Me</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A3-Electron/"><span class="level-start"><span class="level-item">④ Electron</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A4-%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E7%A8%8B/"><span class="level-start"><span class="level-item">⑤ 音视频编程</span></span><span class="level-end"><span class="level-item tag">11</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E2%91%A4-%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E7%A8%8B/WebRTC/"><span class="level-start"><span class="level-item">WebRTC</span></span><span class="level-end"><span class="level-item tag">9</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E2%91%A5-%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%8F%91/"><span class="level-start"><span class="level-item">⑥ 服务器开发</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A6-%E8%BD%AF%E4%BB%B6%E8%B0%83%E8%AF%95/"><span class="level-start"><span class="level-item">⑦ 软件调试</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A7-%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84/"><span class="level-start"><span class="level-item">⑧ 软件架构</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A8-%E6%95%B0%E6%8D%AE%E5%BA%93/"><span class="level-start"><span class="level-item">⑨ 数据库</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A9-%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"><span class="level-start"><span class="level-item">⑩ 编程基础</span></span><span class="level-end"><span class="level-item tag">13</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E2%91%A9-%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/CMake/"><span class="level-start"><span class="level-item">CMake</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A9-%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E6%89%B9%E5%A4%84%E7%90%86/"><span class="level-start"><span class="level-item">批处理</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E2%91%AA-%E5%BC%80%E6%BA%90%E5%BA%93/"><span class="level-start"><span class="level-item">⑪ 开源库</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%AB-Web%E5%BC%80%E5%8F%91/"><span class="level-start"><span class="level-item">⑫ Web开发</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%AC-%E7%BE%8E%E6%96%87%E8%B5%8F%E6%9E%90/"><span class="level-start"><span class="level-item">⑬ 美文赏析</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%AD-%E6%9D%82%E5%BF%B5/"><span class="level-start"><span class="level-item">⑭ 杂念</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%AE-%E7%88%B1%E6%8A%98%E8%85%BE/"><span class="level-start"><span class="level-item">⑮ 爱折腾</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><!--!--><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-02-25T05:53:19.000Z">2024-02-25</time></p><p class="title"><a href="/post/946276004.html">产品级的Electron项目模板</a></p><p class="categories"><a href="/categories/%E2%91%A2-Power-By-Me/">③ Power By Me</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-02-20T01:25:38.000Z">2024-02-20</time></p><p class="title"><a href="/post/1391804423.html">🐉2024龙行龘龘</a></p><p class="categories"><a href="/categories/%E2%91%AD-%E6%9D%82%E5%BF%B5/">⑭ 杂念</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-12-21T13:48:55.000Z">2023-12-21</time></p><p class="title"><a href="/post/2185523635.html">开源库spdlog使用备忘</a></p><p class="categories"><a href="/categories/%E2%91%AA-%E5%BC%80%E6%BA%90%E5%BA%93/">⑪ 开源库</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-12-15T13:20:06.000Z">2023-12-15</time></p><p class="title"><a href="/post/2418701368.html">C/C++不同整数类型的区别</a></p><p class="categories"><a href="/categories/%E2%91%A1-C/">② C++</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-11-26T11:07:09.000Z">2023-11-26</time></p><p class="title"><a href="/post/1533480858.html">Windows窗口调试利器-WinSpyPlus</a></p><p class="categories"><a href="/categories/%E2%91%A2-Power-By-Me/">③ Power By Me</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/CentOS/"><span class="tag">CentOS</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Crash/"><span class="tag">Crash</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Deadlock/"><span class="tag">Deadlock</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Docker/"><span class="tag">Docker</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GDB/"><span class="tag">GDB</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Github/"><span class="tag">Github</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTTPS/"><span class="tag">HTTPS</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Hexo/"><span class="tag">Hexo</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Joplin/"><span class="tag">Joplin</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Lamada/"><span class="tag">Lamada</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LetsEncrypt/"><span class="tag">LetsEncrypt</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MySQL/"><span class="tag">MySQL</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Ping/"><span class="tag">Ping</span></a></div><div class="control"><a class="tags has-addons" href="/tags/QSS/"><span class="tag">QSS</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Redis/"><span class="tag">Redis</span></a></div><div class="control"><a class="tags has-addons" href="/tags/SQL/"><span class="tag">SQL</span></a></div><div class="control"><a class="tags has-addons" href="/tags/SSL/"><span class="tag">SSL</span></a></div><div class="control"><a class="tags has-addons" href="/tags/TCP/"><span class="tag">TCP</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Thread/"><span class="tag">Thread</span></a></div><div class="control"><a class="tags has-addons" href="/tags/UDP/"><span class="tag">UDP</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Vcpkg/"><span class="tag">Vcpkg</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Watch%C2%ADtower/"><span class="tag">Watch­tower</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Wav/"><span class="tag">Wav</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Windbg/"><span class="tag">Windbg</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%8F%B2%E9%93%81%E7%94%9F/"><span class="tag">史铁生</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%88%B4%E5%BB%BA%E4%B8%9A/"><span class="tag">戴建业</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%AD%A3%E5%88%99/"><span class="tag">正则</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%99%BD%E9%85%92/"><span class="tag">白酒</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E9%9D%99%E9%BB%98%E5%AE%89%E8%A3%85/"><span class="tag">静默安装</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/codesilo.png" alt="CodeSilo" height="28"></a><p class="is-size-7"><span class="is-size-7">© 2017~2024 江雪桥</span>  <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/" style="color:#000">鄂ICP备2020015399号-6</a>  </p><p class="is-size-7">网站风格：<a target="_blank" rel="noopener" href="https://www.cyberpunk.net/gb/zh-cn/" style="color:#75d4ef">赛博朋克（cyberpunk）</a></p><p class="is-size-7">内容同步发布到以下站点：<a href="https://jiangxueqiao.com" style="color:#fc1e1e">jiangxueqiao.com</a>    <a target="_blank" rel="noopener" href="https://winsoft666.github.io" style="color:#fc1e1e">winsoft666.github.io</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="GitHub" href="https://github.com/winsoft666"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/jquery/3.3.1/dist/jquery.min.js"></script><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/moment/2.22.2/min/moment-with-locales.min.js"></script><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/clipboard/2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
-            article: {
-                highlight: {
-                    clipboard: true,
-                    fold: 'unfolded'
-                }
-            }
-        };</script><script src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/lightgallery/1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/justifiedGallery/3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
-            if (typeof $.fn.lightGallery === 'function') {
-                $('.article').lightGallery({ selector: '.gallery-item' });
-            }
-            if (typeof $.fn.justifiedGallery === 'function') {
-                if ($('.justified-gallery > p > .gallery-item').length) {
-                    $('.justified-gallery > p > .gallery-item').unwrap();
-                }
-                $('.justified-gallery').justifiedGallery();
-            }
-        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
-            'HTML-CSS': {
-                matchFontHeight: false
-            },
-            SVG: {
-                matchFontHeight: false
-            },
-            CommonHTML: {
-                matchFontHeight: false
-            },
-            tex2jax: {
-                inlineMath: [
-                    ['$','$'],
-                    ['\\(','\\)']
-                ]
-            }
-        });</script><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/mathjax/2.7.9/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
-            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
-        });</script></body></html>
+    
+</div>
+
+
+<main class="page-container border-box">
+
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box is-home">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/avatar.png">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               CodeSilo
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc">
+                <ul class="menu-list">
+                    <li class="menu-item">
+                        <a class="active"
+                           href="/"
+                        >首页</a>
+                    </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >归档</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >分类</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >关于</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               target="_blank" rel="noopener" href="https://github.com/winsoft666"
+                            >GITHUB</a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            <li class="drawer-menu-item flex-center">
+                <a class="active"
+                   href="/"
+                >首页</a>
+            </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives"
+                    >归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories"
+                    >分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about"
+                    >关于</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       target="_blank" rel="noopener" href="https://github.com/winsoft666"
+                    >GITHUB</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    <div class="home-content-container fade-in-down-animation">
+    
+    <ul class="home-post-list border-box">
+        
+            <li class="home-post-item">
+
+                
+
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
+                        <a href="/post/3654006375.html">
+                            网络协议(7)--HTTP与HTTPS协议
+                        </a>
+                    </h3>
+
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            <p>HTTP 是<code>Hyper Text Transfer Protocol</code>（超文本传输协议）的缩写。HTTP 协议位于 TCP/IP 协议栈的应用层。</p>
+                        
+                    </div>
+
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Fri Oct 27 2023 12:54:07 GMT+0800">2023-10-27 12:54:07</span>
+            </span>
+        
+
+        
+
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <i class="icon fas fa-tags"></i>&nbsp;
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/HTTPS/">HTTPS</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+        <a class="home-read-more" href="/post/3654006375.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-post-item">
+
+                
+
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
+                        <a href="/post/1504706832.html">
+                            网络协议(6)--TCP协议
+                        </a>
+                    </h3>
+
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            <h1 id="一、TCP-特性"><a href="#一、TCP-特性" class="headerlink" title="一、TCP 特性"></a>一、TCP 特性</h1><p>尽管 TCP 和 UDP 都是用 IP 协议作为网络层，但 TCP 却提供和 UDP 完全不同的网络服务。TCP 是<code>面向连接的</code>、<code>稳定可靠</code>的<code>字节流</code>服务。TCP 首部的很多字段都是为了实现这 2 大特性而设计的。</p>
+                        
+                    </div>
+
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Wed Oct 18 2023 18:25:55 GMT+0800">2023-10-18 18:25:55</span>
+            </span>
+        
+
+        
+
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <i class="icon fas fa-tags"></i>&nbsp;
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/TCP/">TCP</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+        <a class="home-read-more" href="/post/1504706832.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-post-item">
+
+                
+
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
+                        <a href="/post/4190400644.html">
+                            网络协议(5)--UDP协议
+                        </a>
+                    </h3>
+
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            <h2 id="一、什么是-UDP-协议？"><a href="#一、什么是-UDP-协议？" class="headerlink" title="一、什么是 UDP 协议？"></a>一、什么是 UDP 协议？</h2><p>UDP 是 User Datagram Protocol 的简称，中文名是用户数据报协议，是 OSI 参考模型中的传输层协议，它是一种无连接的传输层协议，提供面向事务的简单不可靠信息传送服务。</p>
+                        
+                    </div>
+
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Fri Oct 27 2023 12:54:07 GMT+0800">2023-10-27 12:54:07</span>
+            </span>
+        
+
+        
+
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <i class="icon fas fa-tags"></i>&nbsp;
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/UDP/">UDP</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+        <a class="home-read-more" href="/post/4190400644.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-post-item">
+
+                
+
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
+                        <a href="/post/349088656.html">
+                            网络协议(4)--ICMP协议
+                        </a>
+                    </h3>
+
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            <p>互联网控制消息协议（英文：<code>Internet Control Message Protocol</code>，ICMP）是互联网协议族的核心协议之一。定义在 RFC 792 文档中。<br>ICMP 的消息大致可以分为两类：一类是差错报文，即通知出错原因的错误消息（如<code>traceroute</code>），另一类是查询报文，即用于诊断的查询消息（如<code>ping</code>）。<br>使用 ICMP 协议的典型应用有<code>ping</code>和<code>traceroute</code>（windows 上叫<code>tracert</code>）。</p>
+                        
+                    </div>
+
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Fri Oct 27 2023 12:54:07 GMT+0800">2023-10-27 12:54:07</span>
+            </span>
+        
+
+        
+
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <i class="icon fas fa-tags"></i>&nbsp;
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Ping/">Ping</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+        <a class="home-read-more" href="/post/349088656.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-post-item">
+
+                
+
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
+                        <a href="/post/2274025898.html">
+                            网络协议(3)--IP协议
+                        </a>
+                    </h3>
+
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            <p>IP 协议是 TCP/IP 协议族中最核心的协议。所有的 TCP、UDP、ICMP、IGMP 数据都以 IP 数据报的格式传输。</p>
+                        
+                    </div>
+
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Fri Oct 27 2023 12:54:07 GMT+0800">2023-10-27 12:54:07</span>
+            </span>
+        
+
+        
+
+        
+
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+        <a class="home-read-more" href="/post/2274025898.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-post-item">
+
+                
+
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
+                        <a href="/post/3034381124.html">
+                            网络协议(2)--ARP和RARP协议
+                        </a>
+                    </h3>
+
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            <p><code>ARP</code>(<code>Address Resolution Protocol</code>)地址解析协议，位于 TCP/IP 协议栈中的链路层。当局域网内主机间（或者是主机与网关间）需要通信时，通过使用<code>ARP协议</code>获取<code>目标IP地址</code>对应的<code>硬件MAC地址</code>，然后主机间通过该<code>硬件MAC地址</code>完成数据包发送和接收。</p>
+                        
+                    </div>
+
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Fri Oct 27 2023 12:54:07 GMT+0800">2023-10-27 12:54:07</span>
+            </span>
+        
+
+        
+
+        
+
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+        <a class="home-read-more" href="/post/3034381124.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-post-item">
+
+                
+
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
+                        <a href="/post/3886809266.html">
+                            网络协议(1)--基础概念
+                        </a>
+                    </h3>
+
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            一、TCP/IP 协议栈
+二、IP 地址、子网掩码、网关2.1 IP 地址及分类IP 地址相当于互联网上的门牌号，计算机在启动的时候可以从磁盘（无盘系统例外）上读取该主机的 IP 配置。
+IP 地址由 4 个字节（也就是 32 位）的二进制码组成，包...
+                        
+                    </div>
+
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Fri Oct 27 2023 12:54:07 GMT+0800">2023-10-27 12:54:07</span>
+            </span>
+        
+
+        
+
+        
+
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+        <a class="home-read-more" href="/post/3886809266.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-post-item">
+
+                
+
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
+                        <a href="/post/2414867920.html">
+                            使用WinDbg查看调用堆栈
+                        </a>
+                    </h3>
+
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            <h2 id="一-显示堆栈信息"><a href="#一-显示堆栈信息" class="headerlink" title="一. 显示堆栈信息"></a>一. 显示堆栈信息</h2><p><strong><code>k*</code>命令</strong></p>
+<figure class="highlight txt"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[~Thread] k[b|p|P|v] [c] [n] [f] [L] [M] [FrameCount]</span><br><span class="line">[~Thread] k[b|p|P|v] [c] [n] [f] [L] [M] = BasePtr [FrameCount]</span><br><span class="line">[~Thread] k[b|p|P|v] [c] [n] [f] [L] [M] = BasePtr StackPtr InstructionPtr</span><br><span class="line">[~Thread] kd [WordCount]</span><br></pre></td></tr></tbody></table></figure>
+                        
+                    </div>
+
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Wed Sep 27 2023 14:26:50 GMT+0800">2023-09-27 14:26:50</span>
+            </span>
+        
+
+        
+
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <i class="icon fas fa-tags"></i>&nbsp;
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Windbg/">Windbg</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+        <a class="home-read-more" href="/post/2414867920.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
+</div>
+
+                </div>
+            </li>
+        
+    </ul>
+    
+    <div class="paginator border-box flex-center">
+        <div class="btn-wrap allowed">
+            <a class="jump-btn"
+               href="/page/17/"
+            ><i class="fa-solid fa-chevron-left"></i></a>
+        </div>
+
+
+        <div class="page-number-box border-box flex-center">
+            <input class="page-number-input border-box base-color-size"
+                   type="number"
+                   value="18"
+                   min="1"
+                   max="21"
+            ><span class="delimiter base-color-size">/</span><span class="base-color-size">21</span>
+        </div>
+
+
+        <div class="btn-wrap allowed">
+            <a class="jump-btn"
+               href="/page/19/"
+            ><i class="fa-solid fa-chevron-right"></i></a>
+        </div>
+    </div>
+
+
+
+
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="border-box website-info-box default">
+        
+            <div class="copyright-info info-item default">
+                &copy;&nbsp;<span>2017</span>&nbsp;-&nbsp;2024
+                
+                    &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">江雪桥</a>
+                
+            </div>
+
+            
+                <div class="icp-info info-item default">
+                    <a class=""
+                       target="_blank"
+                       href="https://beian.miit.gov.cn"
+                    >
+                        鄂ICP备2020015399号-6
+                    </a>
+                </div>
+            
+
+            
+        
+
+        <div class="count-item info-item default">
+            
+
+            
+
+            
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box side-tools-show-handle">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-toggle-theme-mode flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+</main>
+
+
+
+
+<!-- common -->
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+
+<!-- local-search -->
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+<!-- lazyload -->
+
+    
+<script src="/js/lazyload.js"></script>
+
+
+
+<div class="">
+    
+
+    <!-- category-page -->
+    
+
+    <!-- links-page -->
+    
+
+    <!-- photos-page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+</body>
+</html>

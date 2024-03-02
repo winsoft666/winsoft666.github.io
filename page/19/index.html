@@ -1,137 +1,846 @@
-<!doctype html>
-<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>CodeSilo</title><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#3273dc"><meta name="application-name" content="CodeSilo"><meta name="msapplication-TileImage" content="img/pi-200.png"><meta name="msapplication-TileColor" content="#3273dc"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="CodeSilo"><meta name="apple-mobile-web-app-status-bar-style" content="default"><link rel="apple-touch-icon" sizes="200x200" href="img/pi-200.png"><meta name="description" content="学习、总结与分享"><meta property="og:type" content="blog"><meta property="og:title" content="CodeSilo"><meta property="og:url" content="https://jiangxueqiao.com/"><meta property="og:site_name" content="CodeSilo"><meta property="og:description" content="学习、总结与分享"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://jiangxueqiao.com/img/og_image.png"><meta property="article:author" content="江雪桥"><meta property="article:tag" content="Windows"><meta property="article:tag" content="Linux"><meta property="article:tag" content="C/C++"><meta property="article:tag" content="Golang"><meta property="article:tag" content="Qt"><meta property="article:tag" content="Node.js"><meta property="article:tag" content="Electron"><meta property="article:tag" content="WebRTC"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://jiangxueqiao.com/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://jiangxueqiao.com"},"headline":"CodeSilo","image":["https://jiangxueqiao.com/img/og_image.png"],"author":{"@type":"Person","name":"江雪桥"},"publisher":{"@type":"Organization","name":"CodeSilo","logo":{"@type":"ImageObject","url":"https://blog-static.jiangxueqiao.com/blog/icarus-theme/codesilo.png"}},"description":"学习、总结与分享"}</script><link rel="icon" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/favicon.png"><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/all.min.css"><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/highlight.js/11.7.0/styles/xt256.css"><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/font/css2/Oxanium-Roboto-Mono.css"><link rel="stylesheet" href="/css/cyberpunk.css"><!--!--><script>var _hmt = _hmt || [];
-        (function() {
-            var hm = document.createElement("script");
-            hm.src = "//hm.baidu.com/hm.js?fbb46283a7b4d42d425356f8779708d5";
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(hm, s);
-        })();</script><!--!--><!--!--><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/lightgallery/1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/justifiedGallery/3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/pace-js/1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
-  (function () {
-      function switchTab() {
-          if (!location.hash) {
-            return;
-          }
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Windows,Linux,C/C++,Golang,Qt,Node.js,Electron,Vue,WebRTC">
+    <meta name="description" content="除注明转载以外，所有文章均为原创">
+    <meta name="author" content="江雪桥">
+    
+    <title>
+        
+        CodeSilo
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
 
-          const id = '#' + CSS.escape(location.hash.substring(1));
-          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
-          if (!$tabMenu) {
-            return;
-          }
+    
+        <link rel="shortcut icon" href="/images/favicon.png">
+    
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
 
-          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
-          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
-          Array.from($tabMenuContainer.querySelectorAll('a'))
-              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
-              .forEach($content => $content.classList.add('is-hidden'));
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
 
-          if ($tabMenu) {
-              $tabMenu.parentElement.classList.add('is-active');
-          }
-          const $activeTab = document.querySelector(id);
-          if ($activeTab) {
-              $activeTab.classList.remove('is-hidden');
-          }
-      }
-      switchTab();
-      window.addEventListener('hashchange', switchTab, false);
-  })();
-  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0">
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"jiangxueqiao.com","root":"/","language":"zh-CN","path":"search.xml"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"CodeSilo","author":"江雪桥","avatar":"/images/avatar.png","logo":"/images/avatar.png","favicon":"/images/favicon.png"},"menu":{"Archives":"/archives","Categories":"/categories","About":"/about","Github":"https://github.com/winsoft666"},"first_screen":{"enable":false,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/winsoft666","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":true,"hide_header":true},"home":{"category":false,"tag":true,"announcement":null},"post":{"author_badge":{"enable":false,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":true,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":false},"comment":{"enable":true,"use":"twikoo","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":"https://twikoo.jiangxueqiao.com","region":"zh-CN","version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2017,"word_count":false,"icp":{"enable":true,"record_code":"鄂ICP备2020015399号-6","url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","version":"4.0.7"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 6.3.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-</head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/codesilo.png" alt="CodeSilo" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">时间轴</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="https://jiangxueqiao.com/post/2185937873.html">留言</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Email" href="mailto:smart7178@163.com"><i class="fa fa-envelope"></i></a><a class="navbar-item" target="_blank" rel="noopener" title="GitHub" href="https://github.com/winsoft666"><i class="fab fa-github"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2017-12-24T14:22:51.000Z" title="2017/12/24 22:22:51">2017-12-24</time>发表</span><span class="level-item"><time dateTime="2023-09-22T09:22:58.710Z" title="2023/9/22 17:22:58">2023-09-22</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E2%91%A8-%E6%95%B0%E6%8D%AE%E5%BA%93/">⑨ 数据库</a></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/post/254517042.html">一个MySQL存储过程模板</a></p><div class="content"><p>在进行数据库开发时，我们可能需要写很多存储过程，本文提供一个存储过程的模板，通过该模板可以简化存储过程的开发。</p></div><a class="article-more button is-small is-size-7" href="/post/254517042.html#more">阅读更多</a></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2017-12-15T09:38:58.000Z" title="2017/12/15 17:38:58">2017-12-15</time>发表</span><span class="level-item"><time dateTime="2023-10-27T04:54:07.965Z" title="2023/10/27 12:54:07">2023-10-27</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/">① 专栏集锦</a><span> / </span><a class="link-muted" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E5%A5%97%E6%8E%A5%E5%AD%97I-O%E6%A8%A1%E5%9E%8B/">Windows套接字I/O模型</a></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/post/326824759.html">Windows套接字I/O模型(5)-完成端口模型</a></p><div class="content"><h1 id="一、写在前面"><a href="#一、写在前面" class="headerlink" title="一、写在前面"></a>一、写在前面</h1><p>前面的文章已经介绍了套接字I/O的同步模型、WSAAsyncSelect模型、WSAEventSelect模型，到目前为止套接字I/O还剩下2个模型没有介绍：<code>重叠模型</code>，<code>完成端口模型</code>。 </p>
-<p>如果程序对性能和并发要求不高，可以使用前面介绍的WSAEventSelect模型；如果对性能和并发有要求，可以使用本文介绍的完成端口模型。<br>因为完成端口模型是基于重叠模型的，且在易用性、可伸缩性等方面都高于重叠模型，在一般选择重叠模型的场合，都可以用完成端口模型来替代，强烈建议使用完成端口模型。</p>
-<p><code>完成端口模型</code>是windows系统上面套接字I/O的终极模型，可以用它代替前面的所有模型。如果对完成端口模型有一个好的封装，基本上可以“一招鲜，吃遍天”，免去重复造轮子的麻烦。所以这里对完成端口的模型的介绍和比前面的几篇篇幅更长，示例代码也更加复杂和全面。</p>
-<h1 id="Reactor和Proactor"><a href="#Reactor和Proactor" class="headerlink" title="Reactor和Proactor"></a>Reactor和Proactor</h1><p>在网络编程中，我们常听到的2种I/O多路复用的模式：reactor和proactor。<br>对于这2种模式的区别通俗来说就是：</p>
-<figure class="highlight txt"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Reactor： 能收了你跟我说一声。</span><br><span class="line">Proactor: 你帮我最多收十个字节，收好了跟我说一声。</span><br></pre></td></tr></tbody></table></figure>
-<p>windows提供的<code>完成端口模型</code>就是Proactor模式；而Linux上面由于没有操作系统的支持，只能使用Reactor模式，如epoll等。</p>
-<h1 id="二、完成端口模型介绍"><a href="#二、完成端口模型介绍" class="headerlink" title="二、完成端口模型介绍"></a>二、完成端口模型介绍</h1><p>完成端口模型说白了就是，您要做什么事情（如接收连接AcceptEx、发送数据WSASend、接收数据WSARecv、连接服务端ConnectEx），您告诉我，我做完了通知您。这里的“我”指的是操作系统，“您”指的是应用程序。<br>如应用程序需要接收其他端发来的数据，可以调用WSARecv，并指定接收数据的缓冲区及大小，等其他端发来数据时，操作系统自动将数据放入到应用程序指定的缓冲区中，然后通知应用程序数据来啦。 这个和<code>WSAEventSelect模型</code>最大的不同就是，<code>WSAEventSelect模型</code>只是通知程序数据来了，并没有将数据接收，还需要程序调用recv来接收数据。</p>
-<h2 id="2-1-完成端口创建和绑定"><a href="#2-1-完成端口创建和绑定" class="headerlink" title="2.1 完成端口创建和绑定"></a>2.1 完成端口创建和绑定</h2><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">HANDLE WINAPI <span class="title">CreateIoCompletionPort</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">  _In_     HANDLE    FileHandle,</span></span></span><br><span class="line"><span class="params"><span class="function">  _In_opt_ HANDLE    ExistingCompletionPort,</span></span></span><br><span class="line"><span class="params"><span class="function">  _In_     ULONG_PTR CompletionKey,</span></span></span><br><span class="line"><span class="params"><span class="function">  _In_     DWORD     NumberOfConcurrentThreads</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
-<p>CreateIoCompletionPort这个函数比较特殊，根据传入的参数不同，它可以实现2个功能：创建一个完成端口；将完成端口和设备（套接字）相绑定。一般对该函数进行如下封装来实现这2个功能：</p>
-<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">HANDLE <span class="title">CreateNewCompletionPort</span><span class="params">()</span> </span>{</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">CreateIoCompletionPort</span>(INVALID_HANDLE_VALUE, <span class="literal">NULL</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function">BOOL <span class="title">AssociateDeviceWithCompletionPort</span><span class="params">(HANDLE completion_port, HANDLE device, DWORD completion_key)</span> </span>{</span><br><span class="line">  HANDLE h = <span class="built_in">CreateIoCompletionPort</span>(device, completion_port, completion_key, <span class="number">0</span>);</span><br><span class="line">  <span class="keyword">return</span> (h == completion_port);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-<h2 id="2-2-线程池"><a href="#2-2-线程池" class="headerlink" title="2.2 线程池"></a>2.2 线程池</h2><p>前面说到了，<code>完成端口模型</code>就是应用程序等着操作系统把事情做完了通知它。那既然是<code>等</code>，<code>等</code>的操作肯定是<code>阻塞</code>住了的，所以不能在主线程中<code>等</code>，我们需要启动子线程去等。可是启动多个子线程去<code>等</code>了，一个连接一个线程吗？我们知道，线程越多，占用的系统资源也就越多，而且线程的切换也是消耗CPU时间的。所以线程不是越多越好，这里有一个经验法则就是：<code>线程数量 = CPU数量 * 2</code>。</p>
-<p>线程数量和CPU数量相同是最理想的环境，这样免去了CPU在各个线程之间切换，但现实情况下，难免某些线程执行某些任务耗时较长，导致CPU将时间片从该线程分拨出去。所以这里用CPU数量乘以2，最大限度的利用CPU资源。这也是完成端口的目标，即最大限度的利用CPU资源。</p>
-<p>获取CPU数量的方式：</p>
-<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">GetNumberOfProcesser</span><span class="params">()</span> </span>{</span><br><span class="line">  SYSTEM_INFO si;</span><br><span class="line">  <span class="built_in">GetSystemInfo</span>(&amp;si);</span><br><span class="line">  <span class="keyword">return</span> si.dwNumberOfProcessors;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-<h2 id="2-3-AcceptEx等"><a href="#2-3-AcceptEx等" class="headerlink" title="2.3 AcceptEx等"></a>2.3 AcceptEx等</h2><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">BOOL <span class="title">AcceptEx</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">  _In_  SOCKET       sListenSocket,</span></span></span><br><span class="line"><span class="params"><span class="function">  _In_  SOCKET       sAcceptSocket,</span></span></span><br><span class="line"><span class="params"><span class="function">  _In_  PVOID        lpOutputBuffer,</span></span></span><br><span class="line"><span class="params"><span class="function">  _In_  DWORD        dwReceiveDataLength,</span></span></span><br><span class="line"><span class="params"><span class="function">  _In_  DWORD        dwLocalAddressLength,</span></span></span><br><span class="line"><span class="params"><span class="function">  _In_  DWORD        dwRemoteAddressLength,</span></span></span><br><span class="line"><span class="params"><span class="function">  _Out_ LPDWORD      lpdwBytesReceived,</span></span></span><br><span class="line"><span class="params"><span class="function">  _In_  LPOVERLAPPED lpOverlapped</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
-
-<p>AcceptEx和WSARecv、WSASend、ConnectEx等函数类似，最后一个参数都是LPOVERLAPPED，需要调用者提供一个重叠结构。<br>但这个AcceptEx、ConnectEx等函数比较特别，他们是微软专门在Windows操作系统里面提供的扩展函数，不是在Winsock2标准里面提供的，是微软为了方便使用重叠I/O机制，额外提供的一些函数。</p>
-<p>以AcceptEx为例，微软的实现是通过mswsock.dll中提供的，所以我们可以通过静态链接mswsock.lib来直接调用AcceptEx。但不推荐使用这种方式，因为每次直接调用AcceptEx时，Service Provider都得要通过WSAIoctl()获取一次该函数指针，这样效率比较低。所以我们一般都是在直接代码中先获取到这个函数指针，并保存下来，后面直接使用这个函数指针就好了。</p>
-<p>获取AcceptEx等函数的指针的方式：</p>
-<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">LPFN_ACCEPTEX <span class="title">GetAcceptExFnPointer</span><span class="params">(SOCKET s)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">  LPFN_ACCEPTEX fn = <span class="literal">NULL</span>; </span><br><span class="line">  GUID GuidAcceptEx = WSAID_ACCEPTEX;</span><br><span class="line">  DWORD bytes = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (SOCKET_ERROR == <span class="built_in">WSAIoctl</span>(</span><br><span class="line">    s,</span><br><span class="line">    SIO_GET_EXTENSION_FUNCTION_POINTER,</span><br><span class="line">    &amp;GuidAcceptEx,</span><br><span class="line">    <span class="built_in">sizeof</span>(GuidAcceptEx),</span><br><span class="line">    &amp;fn,</span><br><span class="line">    <span class="built_in">sizeof</span>(fn),</span><br><span class="line">    &amp;bytes,</span><br><span class="line">    <span class="literal">NULL</span>,</span><br><span class="line">    <span class="literal">NULL</span>)) {</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">  }</span><br><span class="line">  <span class="keyword">return</span> fn;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function">LPFN_CONNECTEX <span class="title">GetConnectExFnPointer</span><span class="params">(SOCKET s)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">  LPFN_CONNECTEX fn = <span class="literal">NULL</span>;</span><br><span class="line">  GUID GuidConnectEx = WSAID_CONNECTEX;</span><br><span class="line">  DWORD bytes = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (SOCKET_ERROR == <span class="built_in">WSAIoctl</span>(</span><br><span class="line">    s,</span><br><span class="line">    SIO_GET_EXTENSION_FUNCTION_POINTER,</span><br><span class="line">    &amp;GuidConnectEx,</span><br><span class="line">    <span class="built_in">sizeof</span>(GuidConnectEx),</span><br><span class="line">    &amp;fn,</span><br><span class="line">    <span class="built_in">sizeof</span>(fn),</span><br><span class="line">    &amp;bytes,</span><br><span class="line">    <span class="literal">NULL</span>,</span><br><span class="line">    <span class="literal">NULL</span>)) {</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">  }</span><br><span class="line">  <span class="keyword">return</span> fn;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function">LPFN_GETACCEPTEXSOCKADDRS <span class="title">GetAcceptExSockAddrsFnPointer</span><span class="params">(SOCKET s)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">  LPFN_GETACCEPTEXSOCKADDRS fn = <span class="literal">NULL</span>;</span><br><span class="line">  GUID GuidGetAcceptExSockAddrs = WSAID_GETACCEPTEXSOCKADDRS;</span><br><span class="line">  DWORD bytes = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (SOCKET_ERROR == <span class="built_in">WSAIoctl</span>(</span><br><span class="line">    s,</span><br><span class="line">    SIO_GET_EXTENSION_FUNCTION_POINTER,</span><br><span class="line">    &amp;GuidGetAcceptExSockAddrs,</span><br><span class="line">    <span class="built_in">sizeof</span>(GuidGetAcceptExSockAddrs),</span><br><span class="line">    &amp;fn,</span><br><span class="line">    <span class="built_in">sizeof</span>(fn),</span><br><span class="line">    &amp;bytes,</span><br><span class="line">    <span class="literal">NULL</span>,</span><br><span class="line">    <span class="literal">NULL</span>)) {</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">  }</span><br><span class="line">  <span class="keyword">return</span> fn;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+</head>
 
 
-<h2 id="2-4-GetQueuedCompletionStatus"><a href="#2-4-GetQueuedCompletionStatus" class="headerlink" title="2.4 GetQueuedCompletionStatus"></a>2.4 GetQueuedCompletionStatus</h2><p>函数原型如下：</p>
-<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">BOOL WINAPI <span class="title">GetQueuedCompletionStatus</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">  _In_  HANDLE       CompletionPort,</span></span></span><br><span class="line"><span class="params"><span class="function">  _Out_ LPDWORD      lpNumberOfBytes,</span></span></span><br><span class="line"><span class="params"><span class="function">  _Out_ PULONG_PTR   lpCompletionKey,</span></span></span><br><span class="line"><span class="params"><span class="function">  _Out_ LPOVERLAPPED *lpOverlapped,</span></span></span><br><span class="line"><span class="params"><span class="function">  _In_  DWORD        dwMilliseconds</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
+<body>
+<div class="progress-bar-container">
+    
 
-<p>前面说到了，完成端口模型需要在子线程中等待操作系统做完事情之后的通知。而<code>GetQueuedCompletionStatus</code>函数就是用来等待这个通知的。通过该函数可以获取的本次传输的字节数<code>lpNumberOfBytes</code>、一个用户绑定在套接字上的自定义整数<code>lpCompletionKey</code>、用户调用WSASend等函数时指定的OVERLAPPED结构的指针<code>lpOverlapped</code>。</p>
-<p>我们比较关注的是lpCompletionKey、lpOverlapped这2个参数：<br><code>lpCompletionKey</code>是调用CreateIoCompletionPort函数绑定完成端口和套接字时指定的，每个套接字(SOCKET)对应一个lpCompletionKey。lpCompletionKey可以是包括指针在内的任何整数。</p>
-<p><code>lpOverlapped</code>是每次调用WSASend等函数时指定的，每一次操作（也就是每一次调用，如WSASend, WSARecv, AcceptEx, ConnectEx）对应的lpOverlapped都不一样，所以一次操作对应一个lpOverlapped。一个SOCKET可以有多次操作，多以对应多个lpOverlapped。</p>
-<p>对应关系如下：</p>
-<figure class="highlight txt"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">+-----------+           +--------------------+</span><br><span class="line">|           |  1 --&gt; 1  |                    |</span><br><span class="line">| SOCKET    +-----------&gt; lpCompletionKey    |</span><br><span class="line">|           |           |                    |</span><br><span class="line">+-----+-----+           +--------------------+</span><br><span class="line">      |</span><br><span class="line">      |1 --&gt; n</span><br><span class="line">      |</span><br><span class="line">+-----v------------------+</span><br><span class="line">|                        |</span><br><span class="line">| Send,Recv,Accept...    |</span><br><span class="line">|                        |</span><br><span class="line">+-----+------------------+</span><br><span class="line">      |</span><br><span class="line">      |1 --&gt; 1</span><br><span class="line">      |</span><br><span class="line">+-----v------------------+</span><br><span class="line">|                        |</span><br><span class="line">| lpOverlapped           |</span><br><span class="line">|                        |</span><br><span class="line">+------------------------+</span><br></pre></td></tr></tbody></table></figure>
-<p>注：示例代码中的PER_SOCKET_CONTEXT结构对应图中的SOCKET，PER_IO_CONTEXT结构对应图中的lpOverlapped。知道这个对理解示例代码会有很大的帮助。</p>
-<p>Windows还提供了一个辅助宏<code>CONTAINING_RECORD</code>，该宏可以根据结构体中的某成员的地址来推算出该结构体整体的地址。<br>知道了这个功能，我们就可以在<code>lpOverlapped</code>参数上做文章了（扩展），具体见示例。</p>
-<blockquote>
-<p>上面对完成端口模型只做了一个简单的介绍，关于完成端口的详细介绍可以参考《windows核心编程 第5版》 10.3节。</p>
-</blockquote>
-<h2 id="2-5-CONTAINING-RECORD宏的实现原理"><a href="#2-5-CONTAINING-RECORD宏的实现原理" class="headerlink" title="2.5 CONTAINING_RECORD宏的实现原理"></a>2.5 CONTAINING_RECORD宏的实现原理</h2><p>该宏的作用就是：根据结构体中的某成员的地址来推算出该结构体整体的地址，相当于一个万能公式。</p>
-<p>下面代码的注释中，讲解了该宏的实现原理。</p>
-<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;Windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">T</span></span><br><span class="line">    {</span><br><span class="line">        <span class="type">int</span> a;</span><br><span class="line">        <span class="type">int</span> b;</span><br><span class="line">        <span class="type">int</span> c;</span><br><span class="line">    };</span><br><span class="line">    <span class="comment">//CONTAINING_RECORD宏的作用就是根据结构体中的某成员的地址来推算出该结构体整体的地址。</span></span><br><span class="line">    T t = { <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> };</span><br><span class="line"></span><br><span class="line">    <span class="comment">//假设我们知道T结构体中b的地址和名称，求t的指针</span></span><br><span class="line">    T *pT = <span class="built_in">CONTAINING_RECORD</span>(&amp;t.b, T, b);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"a:%d b:%d c:%d\n"</span>, pT-&gt;a, pT-&gt;b, pT-&gt;c);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//CONTAINING_RECORD的定义:</span></span><br><span class="line">    <span class="comment">//((type *)( (PCHAR)(address) - (ULONG_PTR)(&amp;((type *)0)-&gt;field)))</span></span><br><span class="line">    <span class="comment">//最后一部分(&amp;((type *)0)-&gt;field) 将0(空指针)转成type，再取地址。</span></span><br><span class="line">    <span class="comment">//在本例中就是将空指针转成T*, 然后指向b这个变量, 然后再取地址。</span></span><br><span class="line">    <span class="comment">//这个操作的作用就是：假设T开始在0x000000内存位置上分配内存，在此基础上求b的内存地址,</span></span><br><span class="line">    <span class="comment">//这样等同于求得b的内存结构体对齐偏移量, 求得b的地址我们转成ULONG_PTR类型,</span></span><br><span class="line">    <span class="comment">//然后用实际b的内存地址减去b的结构体偏移量求得结构体首地址。</span></span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    <span class="comment">//分解开来就是：</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//这种情况是允许的。</span></span><br><span class="line">    <span class="comment">//这个大前提很重要！！！</span></span><br><span class="line">    T *pTemp = (T*)<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//求b的内存地址,在结构体首地址为0的情况下b的内存地址其实就是自身的对齐大小偏移量！！！</span></span><br><span class="line">    <span class="comment">//CONTAINING_RECORD宏的核心！！！</span></span><br><span class="line">    <span class="type">int</span> *pB = &amp;pTemp-&gt;b;</span><br><span class="line"></span><br><span class="line">    ULONG_PTR Offset = (ULONG_PTR)pB; <span class="comment">//转成数字, 就是b的偏移量。</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"b的偏移量:%d\n"</span>, Offset);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//因为各个成员的地址是递增的，最后用实际b的地址减b的偏移量的到结构体首地址</span></span><br><span class="line">    T *pFinal = (T*)(((<span class="type">char</span>*)&amp;t.b) - Offset);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"T中a:%d b:%d c:%d\n"</span>, pFinal-&gt;a, pFinal-&gt;b, pFinal-&gt;c);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+    
+</div>
 
-<h1 id="三、示例"><a href="#三、示例" class="headerlink" title="三、示例"></a>三、示例</h1><p>示例代码实现如下功能：</p>
-<ol>
-<li>服务端和客户端都使用完成端口模型来实现。</li>
-<li>服务端和客户端之间通过发送消息来模拟TCP的三次握手机制。</li>
-</ol>
-<h2 id="3-1-辅助函数"><a href="#3-1-辅助函数" class="headerlink" title="3.1 辅助函数"></a>3.1 辅助函数</h2><p>iocp.h和iocp.cpp中实现了IOCP相关的结构体定义和一些通用的辅助函数：<br><strong>iocp.h</strong></p>
-<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// iocp.h</span></span><br><span class="line"><span class="meta">#<span class="keyword">ifndef</span> IOCP_H_</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> IOCP_H_</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;winsock2.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;MSWSock.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAX_BUFFER_LEN        8192  </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> EXIT_CODE        0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> IOCP {</span><br><span class="line"></span><br><span class="line">  <span class="keyword">typedef</span> <span class="keyword">enum</span> <span class="title class_">_OPERATION_TYPE</span></span><br><span class="line">  {</span><br><span class="line">    ACCEPT_POSTED,</span><br><span class="line">    CONNECT_POSTED,</span><br><span class="line">    SEND_POSTED,</span><br><span class="line">    RECV_POSTED,</span><br><span class="line">    NULL_POSTED</span><br><span class="line">  }OPERATION_TYPE;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">_PER_IO_CONTEXT</span></span><br><span class="line">  {</span><br><span class="line">    OVERLAPPED     overlapped;            </span><br><span class="line">    SOCKET         socket;</span><br><span class="line">    WSABUF         wsa_buffer;</span><br><span class="line">    <span class="type">char</span>           buffer[MAX_BUFFER_LEN];</span><br><span class="line">    OPERATION_TYPE operation_type;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    _PER_IO_CONTEXT() {</span><br><span class="line">      <span class="built_in">ZeroMemory</span>(&amp;overlapped, <span class="built_in">sizeof</span>(overlapped));</span><br><span class="line">      <span class="built_in">ZeroMemory</span>(buffer, MAX_BUFFER_LEN);</span><br><span class="line">      socket = INVALID_SOCKET;</span><br><span class="line">      wsa_buffer.buf = buffer;</span><br><span class="line">      wsa_buffer.len = MAX_BUFFER_LEN;</span><br><span class="line">      operation_type = NULL_POSTED;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    ~_PER_IO_CONTEXT() {</span><br><span class="line">      <span class="keyword">if</span> (socket != INVALID_SOCKET) {</span><br><span class="line">        <span class="built_in">closesocket</span>(socket);</span><br><span class="line">        socket = INVALID_SOCKET;</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">ResetBuffer</span><span class="params">()</span> </span>{</span><br><span class="line">      <span class="built_in">ZeroMemory</span>(buffer, MAX_BUFFER_LEN);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">  } PER_IO_CONTEXT;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">_PER_SOCKET_CONTEXT</span> {</span><br><span class="line">    SOCKET      socket; </span><br><span class="line">    SOCKADDR_IN client_addr;</span><br><span class="line">    std::vector&lt;_PER_IO_CONTEXT*&gt; io_ctx_array;</span><br><span class="line"></span><br><span class="line">    _PER_SOCKET_CONTEXT() {</span><br><span class="line">      socket = INVALID_SOCKET;</span><br><span class="line">      <span class="built_in">memset</span>(&amp;client_addr, <span class="number">0</span>, <span class="built_in">sizeof</span>(client_addr));</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    ~_PER_SOCKET_CONTEXT()</span><br><span class="line">    {</span><br><span class="line">      <span class="keyword">if</span> (socket != INVALID_SOCKET) {</span><br><span class="line">        <span class="built_in">closesocket</span>(socket);</span><br><span class="line">        socket = INVALID_SOCKET;</span><br><span class="line">      }</span><br><span class="line"></span><br><span class="line">      <span class="keyword">for</span> (<span class="type">size_t</span> i = <span class="number">0</span>; i &lt; io_ctx_array.<span class="built_in">size</span>(); i++) {</span><br><span class="line">        <span class="keyword">delete</span> io_ctx_array[i];</span><br><span class="line">      }</span><br><span class="line">      io_ctx_array.<span class="built_in">clear</span>();</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function">_PER_IO_CONTEXT* <span class="title">GetNewIoContext</span><span class="params">()</span> </span>{</span><br><span class="line">      _PER_IO_CONTEXT* p = <span class="keyword">new</span> _PER_IO_CONTEXT;</span><br><span class="line"></span><br><span class="line">      io_ctx_array.<span class="built_in">push_back</span>(p);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">return</span> p;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">RemoveContext</span><span class="params">(_PER_IO_CONTEXT* pContext)</span> </span>{</span><br><span class="line">      <span class="keyword">for</span> (std::vector&lt;_PER_IO_CONTEXT*&gt;::iterator it = io_ctx_array.<span class="built_in">begin</span>(); </span><br><span class="line">        it != io_ctx_array.<span class="built_in">end</span>(); it++) {</span><br><span class="line">        <span class="keyword">if</span> (pContext == *it) {</span><br><span class="line">          <span class="keyword">delete</span> pContext;</span><br><span class="line">          pContext = <span class="literal">NULL</span>;</span><br><span class="line">          io_ctx_array.<span class="built_in">erase</span>(it);</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  } PER_SOCKET_CONTEXT;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="type">int</span> <span class="title">GetNumberOfProcesser</span><span class="params">()</span></span>;</span><br><span class="line">  <span class="function">HANDLE <span class="title">CreateNewCompletionPort</span><span class="params">()</span></span>;</span><br><span class="line">  <span class="function">BOOL <span class="title">AssociateDeviceWithCompletionPort</span><span class="params">(HANDLE completion_port, HANDLE device, DWORD completion_key)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="function">LPFN_ACCEPTEX <span class="title">GetAcceptExFnPointer</span><span class="params">(SOCKET s)</span></span>;</span><br><span class="line">  <span class="function">LPFN_CONNECTEX <span class="title">GetConnectExFnPointer</span><span class="params">(SOCKET s)</span></span>;</span><br><span class="line">  <span class="function">LPFN_GETACCEPTEXSOCKADDRS <span class="title">GetAcceptExSockAddrsFnPointer</span><span class="params">(SOCKET s)</span></span>;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span> <span class="comment">// IOCP_H_</span></span></span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
 
-<p><strong>iocp.cpp</strong></p>
-<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// iocp.cpp</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">"iocp.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> IOCP {</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="type">int</span> <span class="title">GetNumberOfProcesser</span><span class="params">()</span> </span>{</span><br><span class="line">    SYSTEM_INFO si;</span><br><span class="line">    <span class="built_in">GetSystemInfo</span>(&amp;si);</span><br><span class="line">    <span class="keyword">return</span> si.dwNumberOfProcessors;</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="function">HANDLE <span class="title">CreateNewCompletionPort</span><span class="params">()</span> </span>{</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">CreateIoCompletionPort</span>(INVALID_HANDLE_VALUE, <span class="literal">NULL</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="function">BOOL <span class="title">AssociateDeviceWithCompletionPort</span><span class="params">(HANDLE completion_port, HANDLE device, DWORD completion_key)</span> </span>{</span><br><span class="line">    HANDLE h = <span class="built_in">CreateIoCompletionPort</span>(device, completion_port, completion_key, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">return</span> (h == completion_port);</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="function">LPFN_ACCEPTEX <span class="title">GetAcceptExFnPointer</span><span class="params">(SOCKET s)</span> </span>{</span><br><span class="line">    LPFN_ACCEPTEX fn = <span class="literal">NULL</span>; </span><br><span class="line">    GUID GuidAcceptEx = WSAID_ACCEPTEX;</span><br><span class="line">    DWORD bytes = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (SOCKET_ERROR == <span class="built_in">WSAIoctl</span>(</span><br><span class="line">      s,</span><br><span class="line">      SIO_GET_EXTENSION_FUNCTION_POINTER,</span><br><span class="line">      &amp;GuidAcceptEx,</span><br><span class="line">      <span class="built_in">sizeof</span>(GuidAcceptEx),</span><br><span class="line">      &amp;fn,</span><br><span class="line">      <span class="built_in">sizeof</span>(fn),</span><br><span class="line">      &amp;bytes,</span><br><span class="line">      <span class="literal">NULL</span>,</span><br><span class="line">      <span class="literal">NULL</span>)) {</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> fn;</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="function">LPFN_CONNECTEX <span class="title">GetConnectExFnPointer</span><span class="params">(SOCKET s)</span> </span>{</span><br><span class="line">    LPFN_CONNECTEX fn = <span class="literal">NULL</span>;</span><br><span class="line">    GUID GuidConnectEx = WSAID_CONNECTEX;</span><br><span class="line">    DWORD bytes = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (SOCKET_ERROR == <span class="built_in">WSAIoctl</span>(</span><br><span class="line">      s,</span><br><span class="line">      SIO_GET_EXTENSION_FUNCTION_POINTER,</span><br><span class="line">      &amp;GuidConnectEx,</span><br><span class="line">      <span class="built_in">sizeof</span>(GuidConnectEx),</span><br><span class="line">      &amp;fn,</span><br><span class="line">      <span class="built_in">sizeof</span>(fn),</span><br><span class="line">      &amp;bytes,</span><br><span class="line">      <span class="literal">NULL</span>,</span><br><span class="line">      <span class="literal">NULL</span>)) {</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> fn;</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="function">LPFN_GETACCEPTEXSOCKADDRS <span class="title">GetAcceptExSockAddrsFnPointer</span><span class="params">(SOCKET s)</span> </span>{</span><br><span class="line">    LPFN_GETACCEPTEXSOCKADDRS fn = <span class="literal">NULL</span>;</span><br><span class="line">    GUID GuidGetAcceptExSockAddrs = WSAID_GETACCEPTEXSOCKADDRS;</span><br><span class="line">    DWORD bytes = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (SOCKET_ERROR == <span class="built_in">WSAIoctl</span>(</span><br><span class="line">      s,</span><br><span class="line">      SIO_GET_EXTENSION_FUNCTION_POINTER,</span><br><span class="line">      &amp;GuidGetAcceptExSockAddrs,</span><br><span class="line">      <span class="built_in">sizeof</span>(GuidGetAcceptExSockAddrs),</span><br><span class="line">      &amp;fn,</span><br><span class="line">      <span class="built_in">sizeof</span>(fn),</span><br><span class="line">      &amp;bytes,</span><br><span class="line">      <span class="literal">NULL</span>,</span><br><span class="line">      <span class="literal">NULL</span>)) {</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> fn;</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<main class="page-container border-box">
 
-<h2 id="3-1-服务端"><a href="#3-1-服务端" class="headerlink" title="3.1 服务端"></a>3.1 服务端</h2><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br><span class="line">319</span><br><span class="line">320</span><br><span class="line">321</span><br><span class="line">322</span><br><span class="line">323</span><br><span class="line">324</span><br><span class="line">325</span><br><span class="line">326</span><br><span class="line">327</span><br><span class="line">328</span><br><span class="line">329</span><br><span class="line">330</span><br><span class="line">331</span><br><span class="line">332</span><br><span class="line">333</span><br><span class="line">334</span><br><span class="line">335</span><br><span class="line">336</span><br><span class="line">337</span><br><span class="line">338</span><br><span class="line">339</span><br><span class="line">340</span><br><span class="line">341</span><br><span class="line">342</span><br><span class="line">343</span><br><span class="line">344</span><br><span class="line">345</span><br><span class="line">346</span><br><span class="line">347</span><br><span class="line">348</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;winsock2.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;assert.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;process.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">"iocp.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> u_short kPort = <span class="number">10001</span>;</span><br><span class="line"><span class="type">const</span> std::string kSYN = <span class="string">"(SYN) hello server, I'm client. Can you hear me?"</span>;</span><br><span class="line"><span class="type">const</span> std::string kSYN_ACK = <span class="string">"(SYN+ACK) hello client, I'm server. I can hear you, can you hear me?"</span>;</span><br><span class="line"><span class="type">const</span> std::string kACK = <span class="string">"(ACK) hello server, I'm client. I can hear you!"</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> comment(lib, <span class="string">"Ws2_32.lib"</span>)</span></span><br><span class="line"></span><br><span class="line">HANDLE g_IOCP = INVALID_HANDLE_VALUE;</span><br><span class="line">HANDLE g_exit = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> g_work_thread_num = <span class="number">0</span>;</span><br><span class="line">HANDLE *g_work_threads = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">IOCP::PER_SOCKET_CONTEXT *g_listen_ctx = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">CRITICAL_SECTION g_cs_socket_ctx_array;</span><br><span class="line">std::vector&lt;IOCP::PER_SOCKET_CONTEXT*&gt; g_socket_ctx_array;</span><br><span class="line"></span><br><span class="line">LPFN_ACCEPTEX g_AcceptExFn = <span class="literal">NULL</span>;</span><br><span class="line">LPFN_GETACCEPTEXSOCKADDRS g_AcceptExSockAddrsFn = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 管理g_socket_ctx_array</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">AddSocketContext</span><span class="params">(IOCP::PER_SOCKET_CONTEXT *socket_ctx)</span> </span>{</span><br><span class="line">  <span class="built_in">EnterCriticalSection</span>(&amp;g_cs_socket_ctx_array);</span><br><span class="line">  g_socket_ctx_array.<span class="built_in">push_back</span>(socket_ctx);</span><br><span class="line">  <span class="built_in">LeaveCriticalSection</span>(&amp;g_cs_socket_ctx_array);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">RemoveSocketContext</span><span class="params">(IOCP::PER_SOCKET_CONTEXT *socket_ctx)</span> </span>{</span><br><span class="line">  <span class="built_in">EnterCriticalSection</span>(&amp;g_cs_socket_ctx_array);</span><br><span class="line">  <span class="keyword">for</span> (std::vector&lt;IOCP::PER_SOCKET_CONTEXT*&gt;::iterator it = g_socket_ctx_array.<span class="built_in">begin</span>(); it != g_socket_ctx_array.<span class="built_in">end</span>(); it++) {</span><br><span class="line">    <span class="keyword">if</span> (*it == socket_ctx) {</span><br><span class="line">      <span class="keyword">delete</span> *it;</span><br><span class="line">      g_socket_ctx_array.<span class="built_in">erase</span>(it);</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">  <span class="built_in">LeaveCriticalSection</span>(&amp;g_cs_socket_ctx_array);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">ClearSocketContextArray</span><span class="params">()</span> </span>{</span><br><span class="line">  <span class="built_in">EnterCriticalSection</span>(&amp;g_cs_socket_ctx_array);</span><br><span class="line">  <span class="keyword">for</span> (std::vector&lt;IOCP::PER_SOCKET_CONTEXT*&gt;::iterator it = g_socket_ctx_array.<span class="built_in">begin</span>(); it != g_socket_ctx_array.<span class="built_in">end</span>(); it++) {</span><br><span class="line">    <span class="built_in">closesocket</span>((*it)-&gt;socket);</span><br><span class="line">    <span class="keyword">delete</span> *it;</span><br><span class="line">  }</span><br><span class="line">  g_socket_ctx_array.<span class="built_in">clear</span>();</span><br><span class="line">  <span class="built_in">LeaveCriticalSection</span>(&amp;g_cs_socket_ctx_array);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 发送Accept、Recv、Send请求</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">PostAccept</span><span class="params">(IOCP::PER_IO_CONTEXT* io_ctx)</span> </span>{</span><br><span class="line">  <span class="keyword">if</span> (io_ctx == <span class="literal">NULL</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">  io_ctx-&gt;operation_type = IOCP::ACCEPT_POSTED;</span><br><span class="line">  io_ctx-&gt;<span class="built_in">ResetBuffer</span>();</span><br><span class="line">  io_ctx-&gt;socket = <span class="built_in">WSASocket</span>(AF_INET, SOCK_STREAM, IPPROTO_TCP, <span class="literal">NULL</span>, <span class="number">0</span>, WSA_FLAG_OVERLAPPED);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (io_ctx-&gt;socket == INVALID_SOCKET) {</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"WSASocket failed with code: %d\n"</span>, <span class="built_in">WSAGetLastError</span>());</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  DWORD bytes = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">g_AcceptExFn</span>(g_listen_ctx-&gt;socket,</span><br><span class="line">    io_ctx-&gt;socket,</span><br><span class="line">    io_ctx-&gt;wsa_buffer.buf,</span><br><span class="line">    <span class="number">0</span>,</span><br><span class="line">    <span class="built_in">sizeof</span>(SOCKADDR_IN) + <span class="number">16</span>,</span><br><span class="line">    <span class="built_in">sizeof</span>(SOCKADDR_IN) + <span class="number">16</span>,</span><br><span class="line">    &amp;bytes,</span><br><span class="line">    &amp;io_ctx-&gt;overlapped) == FALSE) {</span><br><span class="line">    <span class="type">int</span> gle = <span class="built_in">WSAGetLastError</span>();</span><br><span class="line">    <span class="keyword">if</span> (gle != WSA_IO_PENDING) {</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">"AcceptEx failed with code: %d\n"</span>, gle);</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">PostRecv</span><span class="params">(IOCP::PER_IO_CONTEXT* io_ctx)</span> </span>{</span><br><span class="line">  <span class="keyword">if</span> (io_ctx == <span class="literal">NULL</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">  io_ctx-&gt;operation_type = IOCP::RECV_POSTED;</span><br><span class="line">  io_ctx-&gt;<span class="built_in">ResetBuffer</span>();</span><br><span class="line"></span><br><span class="line">  DWORD recv_bytes = <span class="number">0</span>;</span><br><span class="line">  DWORD flags = <span class="number">0</span>;</span><br><span class="line">  <span class="type">int</span> ret = <span class="built_in">WSARecv</span>(io_ctx-&gt;socket, &amp;io_ctx-&gt;wsa_buffer, <span class="number">1</span>, &amp;recv_bytes, &amp;flags, &amp;io_ctx-&gt;overlapped, <span class="literal">NULL</span>);</span><br><span class="line">  <span class="keyword">if</span> (ret == SOCKET_ERROR &amp;&amp; <span class="built_in">WSAGetLastError</span>() != WSA_IO_PENDING) {</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">PostSend</span><span class="params">(IOCP::PER_IO_CONTEXT* io_ctx, <span class="type">const</span> <span class="type">char</span>* msg, <span class="type">int</span> msg_len)</span> </span>{</span><br><span class="line">  <span class="keyword">if</span> (io_ctx == <span class="literal">NULL</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">  io_ctx-&gt;operation_type = IOCP::SEND_POSTED;</span><br><span class="line">  <span class="built_in">memcpy</span>(io_ctx-&gt;wsa_buffer.buf, msg, msg_len);</span><br><span class="line">  io_ctx-&gt;wsa_buffer.len = msg_len;</span><br><span class="line"></span><br><span class="line">  DWORD sent_bytes = <span class="number">0</span>;</span><br><span class="line">  <span class="type">int</span> ret = <span class="built_in">WSASend</span>(io_ctx-&gt;socket, &amp;io_ctx-&gt;wsa_buffer, <span class="number">1</span>, &amp;sent_bytes, <span class="number">0</span>, &amp;io_ctx-&gt;overlapped, <span class="literal">NULL</span>);</span><br><span class="line">  <span class="keyword">if</span> (ret == SOCKET_ERROR &amp;&amp; <span class="built_in">WSAGetLastError</span>() != WSA_IO_PENDING) {</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 处理Accept、Recv、Send完成之后的通知</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">DoAccept</span><span class="params">(IOCP::PER_SOCKET_CONTEXT *socket_ctx, IOCP::PER_IO_CONTEXT *io_ctx)</span> </span>{</span><br><span class="line">  SOCKADDR_IN* ClientAddr = <span class="literal">NULL</span>;</span><br><span class="line">  SOCKADDR_IN* LocalAddr = <span class="literal">NULL</span>;</span><br><span class="line">  <span class="type">int</span> remoteLen = <span class="built_in">sizeof</span>(SOCKADDR_IN);</span><br><span class="line">  <span class="type">int</span> localLen = <span class="built_in">sizeof</span>(SOCKADDR_IN);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">g_AcceptExSockAddrsFn</span>(io_ctx-&gt;wsa_buffer.buf, io_ctx-&gt;wsa_buffer.len - ((<span class="built_in">sizeof</span>(SOCKADDR_IN) + <span class="number">16</span>) * <span class="number">2</span>),</span><br><span class="line">    <span class="built_in">sizeof</span>(SOCKADDR_IN) + <span class="number">16</span>, <span class="built_in">sizeof</span>(SOCKADDR_IN) + <span class="number">16</span>, (LPSOCKADDR*)&amp;LocalAddr, &amp;localLen, (LPSOCKADDR*)&amp;ClientAddr, &amp;remoteLen);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"* new connection(%s:%d): %s\n"</span>, <span class="built_in">inet_ntoa</span>(ClientAddr-&gt;sin_addr), <span class="built_in">ntohs</span>(ClientAddr-&gt;sin_port), io_ctx-&gt;wsa_buffer.buf);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 此次创建一个新的PER_SOCKET_CONTEXT，之前老的PER_SOCKET_CONTEXT继续用作接收客户端连接</span></span><br><span class="line">  <span class="comment">//</span></span><br><span class="line">  IOCP::PER_SOCKET_CONTEXT *new_socket_ctx = <span class="keyword">new</span> IOCP::<span class="built_in">PER_SOCKET_CONTEXT</span>();</span><br><span class="line">  new_socket_ctx-&gt;socket = io_ctx-&gt;socket;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!IOCP::<span class="built_in">AssociateDeviceWithCompletionPort</span>(g_IOCP, (HANDLE)new_socket_ctx-&gt;socket, (DWORD)new_socket_ctx)) {</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"AssociateDeviceWithCompletionPort failed\n"</span>);</span><br><span class="line">    <span class="keyword">delete</span> new_socket_ctx;</span><br><span class="line">    new_socket_ctx = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="built_in">AddSocketContext</span>(new_socket_ctx);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// post recv</span></span><br><span class="line">  IOCP::PER_IO_CONTEXT *new_io_ctx = new_socket_ctx-&gt;<span class="built_in">GetNewIoContext</span>();</span><br><span class="line">  new_io_ctx-&gt;socket = new_socket_ctx-&gt;socket;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">PostRecv</span>(new_io_ctx)) {</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"PostRecv failed\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="comment">// post new accept</span></span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">PostAccept</span>(io_ctx)) {</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"PostAccept failed\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">DoRecv</span><span class="params">(IOCP::PER_SOCKET_CONTEXT *socket_ctx, IOCP::PER_IO_CONTEXT *io_ctx)</span> </span>{</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"recv: %s\n"</span>, io_ctx-&gt;wsa_buffer.buf);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">strcmp</span>(io_ctx-&gt;wsa_buffer.buf, kSYN.<span class="built_in">c_str</span>()) == <span class="number">0</span>) {</span><br><span class="line">    <span class="comment">// SYN+ACK</span></span><br><span class="line">    IOCP::PER_IO_CONTEXT * new_io_ctx = socket_ctx-&gt;<span class="built_in">GetNewIoContext</span>();</span><br><span class="line">    new_io_ctx-&gt;socket = socket_ctx-&gt;socket;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">PostSend</span>(new_io_ctx, kSYN_ACK.<span class="built_in">c_str</span>(), kSYN_ACK.<span class="built_in">length</span>())) {</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">"PostSend failed\n"</span>);</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="comment">// post new recv</span></span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">PostRecv</span>(io_ctx)) {</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"PostRecv failed\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">DoSend</span><span class="params">(IOCP::PER_SOCKET_CONTEXT *socket_ctx, IOCP::PER_IO_CONTEXT *io_ctx)</span> </span>{</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"send: %s\n"</span>, io_ctx-&gt;wsa_buffer.buf);</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 工作线程</span></span><br><span class="line"><span class="function"><span class="type">unsigned</span> <span class="type">int</span> __stdcall <span class="title">WorkThreadProc</span><span class="params">(<span class="type">void</span> *arg)</span> </span>{</span><br><span class="line">  DWORD transferred_bytes = <span class="number">0</span>;</span><br><span class="line">  IOCP::PER_SOCKET_CONTEXT *socket_ctx = <span class="literal">NULL</span>;</span><br><span class="line">  OVERLAPPED *overlapped = <span class="literal">NULL</span>;</span><br><span class="line">  DWORD gle;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> (<span class="built_in">WaitForSingleObject</span>(g_exit, <span class="number">0</span>) != WAIT_OBJECT_0) {</span><br><span class="line">    BOOL ret = <span class="built_in">GetQueuedCompletionStatus</span>(g_IOCP, &amp;transferred_bytes, (PULONG_PTR)&amp;socket_ctx, &amp;overlapped, INFINITE);</span><br><span class="line">    gle = <span class="built_in">GetLastError</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (socket_ctx == EXIT_CODE) {</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (ret == FALSE) {</span><br><span class="line">      <span class="keyword">if</span> (gle == WAIT_TIMEOUT) {</span><br><span class="line">        <span class="keyword">continue</span>;</span><br><span class="line">      }</span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span> (gle == ERROR_NETNAME_DELETED) {</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"client exit\n"</span>);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">RemoveSocketContext</span>(socket_ctx);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">continue</span>;</span><br><span class="line">      }</span><br><span class="line">      <span class="keyword">else</span> {</span><br><span class="line">        <span class="built_in">RemoveSocketContext</span>(socket_ctx);</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">else</span> {</span><br><span class="line">      <span class="comment">// http://blog.csdn.net/china_jeffery/article/details/78801331</span></span><br><span class="line">      IOCP::PER_IO_CONTEXT *io_ctx = <span class="built_in">CONTAINING_RECORD</span>(overlapped, IOCP::PER_IO_CONTEXT, overlapped);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> ((transferred_bytes == <span class="number">0</span>) &amp;&amp; (io_ctx-&gt;operation_type == IOCP::RECV_POSTED || io_ctx-&gt;operation_type == IOCP::SEND_POSTED)) {</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"client disconnect\n"</span>);</span><br><span class="line">        <span class="built_in">RemoveSocketContext</span>(socket_ctx);</span><br><span class="line">        <span class="keyword">continue</span>;</span><br><span class="line">      }</span><br><span class="line"></span><br><span class="line">      <span class="keyword">switch</span> (io_ctx-&gt;operation_type)</span><br><span class="line">      {</span><br><span class="line">      <span class="keyword">case</span> IOCP::ACCEPT_POSTED:</span><br><span class="line">        <span class="built_in">DoAccept</span>(socket_ctx, io_ctx);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> IOCP::RECV_POSTED:</span><br><span class="line">        <span class="built_in">DoRecv</span>(socket_ctx, io_ctx);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> IOCP::SEND_POSTED:</span><br><span class="line">        <span class="built_in">DoSend</span>(socket_ctx, io_ctx);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">default</span>:</span><br><span class="line">        <span class="built_in">assert</span>(<span class="literal">false</span>);</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">  WSADATA wsaData;</span><br><span class="line">  WORD wVersionRequested = <span class="built_in">MAKEWORD</span>(<span class="number">2</span>, <span class="number">2</span>);</span><br><span class="line">  <span class="built_in">WSAStartup</span>(wVersionRequested, &amp;wsaData);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">do</span> </span><br><span class="line">  {</span><br><span class="line">    <span class="built_in">InitializeCriticalSection</span>(&amp;g_cs_socket_ctx_array);</span><br><span class="line">    g_IOCP = IOCP::<span class="built_in">CreateNewCompletionPort</span>();</span><br><span class="line">    g_exit = <span class="built_in">CreateEvent</span>(<span class="literal">NULL</span>, FALSE, FALSE, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">    g_work_thread_num = IOCP::<span class="built_in">GetNumberOfProcesser</span>() * <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    g_work_threads = <span class="keyword">new</span> HANDLE[g_work_thread_num];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; g_work_thread_num; i++) {</span><br><span class="line">      g_work_threads[i] = (HANDLE)_beginthreadex(<span class="literal">NULL</span>, <span class="number">0</span>, WorkThreadProc, <span class="literal">NULL</span>, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    g_listen_ctx = <span class="keyword">new</span> IOCP::PER_SOCKET_CONTEXT;</span><br><span class="line">    g_listen_ctx-&gt;socket = <span class="built_in">WSASocket</span>(AF_INET, SOCK_STREAM, <span class="number">0</span>, <span class="literal">NULL</span>, <span class="number">0</span>, WSA_FLAG_OVERLAPPED);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!IOCP::<span class="built_in">AssociateDeviceWithCompletionPort</span>(g_IOCP, (HANDLE)g_listen_ctx-&gt;socket, (DWORD)g_listen_ctx)) {</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">"AssociateDeviceWithCompletionPort failed with code: %d\n"</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">sockaddr_in</span> addr = { <span class="number">0</span> };</span><br><span class="line">    addr.sin_family = AF_INET;</span><br><span class="line">    addr.sin_addr.s_addr = <span class="built_in">htonl</span>(INADDR_ANY);</span><br><span class="line">    addr.sin_port = <span class="built_in">htons</span>(kPort);</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">bind</span>(g_listen_ctx-&gt;socket, <span class="built_in">reinterpret_cast</span>&lt;<span class="type">const</span> sockaddr*&gt;(&amp;addr), <span class="built_in">sizeof</span>(addr)) == SOCKET_ERROR) {</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">"bind failed with code: %d\n"</span>, <span class="built_in">WSAGetLastError</span>());</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">listen</span>(g_listen_ctx-&gt;socket, SOMAXCONN) == SOCKET_ERROR) {</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">"listen failed with code: %d\n"</span>, <span class="built_in">WSAGetLastError</span>());</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    g_AcceptExFn = IOCP::<span class="built_in">GetAcceptExFnPointer</span>(g_listen_ctx-&gt;socket);</span><br><span class="line">    <span class="keyword">if</span> (g_AcceptExFn == <span class="literal">NULL</span>) {</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">"GetAcceptExFnPointer failed\n"</span>);</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    g_AcceptExSockAddrsFn = IOCP::<span class="built_in">GetAcceptExSockAddrsFnPointer</span>(g_listen_ctx-&gt;socket);</span><br><span class="line">    <span class="keyword">if</span> (g_AcceptExSockAddrsFn == <span class="literal">NULL</span>) {</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">"GetAcceptExSockAddrsFnPointer failed\n"</span>);</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> i = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (; i &lt; <span class="number">10</span>; i++) {</span><br><span class="line">      IOCP::PER_IO_CONTEXT *io_ctx = g_listen_ctx-&gt;<span class="built_in">GetNewIoContext</span>();</span><br><span class="line">      <span class="keyword">if</span> (<span class="built_in">PostAccept</span>(io_ctx) == FALSE) {</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">if</span>(i != <span class="number">10</span>)</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  } <span class="keyword">while</span> (FALSE);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"\npress any ket to stop server...\n"</span>);</span><br><span class="line">  <span class="built_in">getchar</span>();</span><br><span class="line"></span><br><span class="line">  <span class="built_in">SetEvent</span>(g_exit);</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; g_work_thread_num; i++) {</span><br><span class="line">    <span class="built_in">PostQueuedCompletionStatus</span>(g_IOCP, <span class="number">0</span>, (DWORD)EXIT_CODE, <span class="literal">NULL</span>);</span><br><span class="line">  }</span><br><span class="line">  <span class="built_in">WaitForMultipleObjects</span>(g_work_thread_num, g_work_threads, TRUE, INFINITE);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">ClearSocketContextArray</span>();</span><br><span class="line"></span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"\npress any ket to exit...\n"</span>);</span><br><span class="line">  <span class="built_in">getchar</span>();</span><br><span class="line"></span><br><span class="line">  <span class="built_in">DeleteCriticalSection</span>(&amp;g_cs_socket_ctx_array);</span><br><span class="line">  <span class="built_in">WSACleanup</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+    <!-- home first screen  -->
+    
 
-<h2 id="3-2-客户端"><a href="#3-2-客户端" class="headerlink" title="3.2 客户端"></a>3.2 客户端</h2><p>客户端代码和服务端类似，唯一需要注意的是ConnectEx函数调用之前，需要将SOCKET进行bind操作。</p>
-<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;winsock2.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;assert.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;process.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">"iocp.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> std::string kIP = <span class="string">"127.0.0.1"</span>;</span><br><span class="line"><span class="type">const</span> u_short kPort = <span class="number">10001</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> std::string kSYN = <span class="string">"(SYN) hello server, I'm client. Can you hear me?"</span>;</span><br><span class="line"><span class="type">const</span> std::string kSYN_ACK = <span class="string">"(SYN+ACK) hello client, I'm server. I can hear you, can you hear me?"</span>;</span><br><span class="line"><span class="type">const</span> std::string kACK = <span class="string">"(ACK) hello server, I'm client. I can hear you!"</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> comment(lib, <span class="string">"Ws2_32.lib"</span>)</span></span><br><span class="line"></span><br><span class="line">HANDLE g_IOCP = INVALID_HANDLE_VALUE;</span><br><span class="line">HANDLE g_exit = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> g_work_thread_num = <span class="number">0</span>;</span><br><span class="line">HANDLE *g_work_threads = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">IOCP::PER_SOCKET_CONTEXT *g_client_ctx = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">LPFN_CONNECTEX g_ConnectExFn = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">PostConnect</span><span class="params">(IOCP::PER_IO_CONTEXT* io_ctx, <span class="type">const</span> std::string &amp;ip, <span class="type">int</span> port)</span> </span>{</span><br><span class="line">  <span class="keyword">if</span> (io_ctx == <span class="literal">NULL</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  io_ctx-&gt;operation_type = IOCP::CONNECT_POSTED;</span><br><span class="line">  io_ctx-&gt;<span class="built_in">ResetBuffer</span>();</span><br><span class="line"></span><br><span class="line">  <span class="comment">// ConnectEx requires the socket to be initially bound.</span></span><br><span class="line">  <span class="keyword">struct</span> <span class="title class_">sockaddr_in</span> addr0 = { <span class="number">0</span> };</span><br><span class="line">  addr0.sin_family = AF_INET;</span><br><span class="line">  addr0.sin_addr.s_addr = INADDR_ANY;</span><br><span class="line">  addr0.sin_port = <span class="number">0</span>;</span><br><span class="line">  <span class="type">int</span> ret = <span class="built_in">bind</span>(io_ctx-&gt;socket, (SOCKADDR*)&amp;addr0, <span class="built_in">sizeof</span>(addr0));</span><br><span class="line">  <span class="keyword">if</span> (ret != <span class="number">0</span>) {</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"bind failed: %d\n"</span>, <span class="built_in">WSAGetLastError</span>());</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="keyword">struct</span> <span class="title class_">sockaddr_in</span> addr1 = { <span class="number">0</span> };</span><br><span class="line">  addr1.sin_family = AF_INET;</span><br><span class="line">  addr1.sin_addr.s_addr = <span class="built_in">inet_addr</span>(ip.<span class="built_in">c_str</span>());</span><br><span class="line">  addr1.sin_port = <span class="built_in">htons</span>(port);</span><br><span class="line"></span><br><span class="line">  ret = <span class="built_in">g_ConnectExFn</span>(io_ctx-&gt;socket,</span><br><span class="line">    <span class="built_in">reinterpret_cast</span>&lt;<span class="type">const</span> sockaddr*&gt;(&amp;addr1),</span><br><span class="line">    <span class="built_in">sizeof</span>(addr1),</span><br><span class="line">    <span class="literal">NULL</span>,</span><br><span class="line">    <span class="number">0</span>,</span><br><span class="line">    <span class="literal">NULL</span>,</span><br><span class="line">    &amp;io_ctx-&gt;overlapped);</span><br><span class="line">  <span class="type">int</span> gle = <span class="built_in">WSAGetLastError</span>();</span><br><span class="line">  <span class="keyword">if</span> (ret == SOCKET_ERROR &amp;&amp; gle != WSA_IO_PENDING) {</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">PostRecv</span><span class="params">(IOCP::PER_IO_CONTEXT* io_ctx)</span> </span>{</span><br><span class="line">  <span class="keyword">if</span> (io_ctx == <span class="literal">NULL</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">  io_ctx-&gt;operation_type = IOCP::RECV_POSTED;</span><br><span class="line">  io_ctx-&gt;<span class="built_in">ResetBuffer</span>();</span><br><span class="line"></span><br><span class="line">  DWORD recv_bytes = <span class="number">0</span>;</span><br><span class="line">  DWORD flags = <span class="number">0</span>;</span><br><span class="line">  <span class="type">int</span> ret = <span class="built_in">WSARecv</span>(io_ctx-&gt;socket, &amp;io_ctx-&gt;wsa_buffer, <span class="number">1</span>, &amp;recv_bytes, &amp;flags, &amp;io_ctx-&gt;overlapped, <span class="literal">NULL</span>);</span><br><span class="line">  <span class="keyword">if</span> (ret == SOCKET_ERROR &amp;&amp; <span class="built_in">WSAGetLastError</span>() != WSA_IO_PENDING) {</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">PostSend</span><span class="params">(IOCP::PER_IO_CONTEXT* io_ctx, <span class="type">const</span> <span class="type">char</span>* msg, <span class="type">int</span> msg_len)</span> </span>{</span><br><span class="line">  <span class="keyword">if</span> (io_ctx == <span class="literal">NULL</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">  io_ctx-&gt;operation_type = IOCP::SEND_POSTED;</span><br><span class="line">  <span class="built_in">memcpy</span>(io_ctx-&gt;wsa_buffer.buf, msg, msg_len);</span><br><span class="line">  io_ctx-&gt;wsa_buffer.len = msg_len;</span><br><span class="line"></span><br><span class="line">  DWORD sent_bytes = <span class="number">0</span>;</span><br><span class="line">  <span class="type">int</span> ret = <span class="built_in">WSASend</span>(io_ctx-&gt;socket, &amp;io_ctx-&gt;wsa_buffer, <span class="number">1</span>, &amp;sent_bytes, <span class="number">0</span>, &amp;io_ctx-&gt;overlapped, <span class="literal">NULL</span>);</span><br><span class="line">  <span class="type">int</span> gle = <span class="built_in">WSAGetLastError</span>();</span><br><span class="line">  <span class="keyword">if</span> (ret == SOCKET_ERROR &amp;&amp; gle != WSA_IO_PENDING) {</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"WSASend failed with code: %d\n"</span>, gle);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">DoConnect</span><span class="params">(IOCP::PER_SOCKET_CONTEXT *socket_ctx, IOCP::PER_IO_CONTEXT *io_ctx)</span> </span>{</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"connect to server\n"</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">PostRecv</span>(io_ctx)) {</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"PostRecv failed\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  IOCP::PER_IO_CONTEXT* new_io_ctx = socket_ctx-&gt;<span class="built_in">GetNewIoContext</span>();</span><br><span class="line">  new_io_ctx-&gt;socket = socket_ctx-&gt;socket;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">PostSend</span>(new_io_ctx, kSYN.<span class="built_in">c_str</span>(), kSYN.<span class="built_in">length</span>())) {</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"PostSend failed\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">DoRecv</span><span class="params">(IOCP::PER_SOCKET_CONTEXT *socket_ctx, IOCP::PER_IO_CONTEXT *io_ctx)</span> </span>{</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"recv: %s\n"</span>, io_ctx-&gt;wsa_buffer.buf);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">strcmp</span>(io_ctx-&gt;wsa_buffer.buf, kSYN_ACK.<span class="built_in">c_str</span>()) == <span class="number">0</span>) {</span><br><span class="line">    <span class="comment">// ACK</span></span><br><span class="line">    IOCP::PER_IO_CONTEXT * new_io_ctx = socket_ctx-&gt;<span class="built_in">GetNewIoContext</span>();</span><br><span class="line">    new_io_ctx-&gt;socket = socket_ctx-&gt;socket;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">PostSend</span>(new_io_ctx, kACK.<span class="built_in">c_str</span>(), kACK.<span class="built_in">length</span>())) {</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">"PostSend failed\n"</span>);</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="comment">// post new recv</span></span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">PostRecv</span>(io_ctx)) {</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"PostRecv failed\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">DoSend</span><span class="params">(IOCP::PER_SOCKET_CONTEXT *socket_ctx, IOCP::PER_IO_CONTEXT *io_ctx)</span> </span>{</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"send: %s\n"</span>, io_ctx-&gt;wsa_buffer.buf);</span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">unsigned</span> <span class="type">int</span> __stdcall <span class="title">WorkThreadProc</span><span class="params">(<span class="type">void</span> *arg)</span> </span>{</span><br><span class="line">  DWORD transferred_bytes = <span class="number">0</span>;</span><br><span class="line">  IOCP::PER_SOCKET_CONTEXT *socket_ctx = <span class="literal">NULL</span>;</span><br><span class="line">  OVERLAPPED *overlapped = <span class="literal">NULL</span>;</span><br><span class="line">  DWORD gle;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> (<span class="built_in">WaitForSingleObject</span>(g_exit, <span class="number">0</span>) != WAIT_OBJECT_0) {</span><br><span class="line">    BOOL ret = <span class="built_in">GetQueuedCompletionStatus</span>(g_IOCP, &amp;transferred_bytes, (PULONG_PTR)&amp;socket_ctx, &amp;overlapped, INFINITE);</span><br><span class="line">    gle = <span class="built_in">GetLastError</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (socket_ctx == EXIT_CODE) {</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (ret == FALSE) {</span><br><span class="line">      <span class="keyword">if</span> (gle == WAIT_TIMEOUT) {</span><br><span class="line">        <span class="keyword">continue</span>;</span><br><span class="line">      }</span><br><span class="line">      <span class="keyword">else</span> <span class="keyword">if</span> (gle == ERROR_NETNAME_DELETED) {</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"server exit\n"</span>);</span><br><span class="line">        <span class="built_in">closesocket</span>(socket_ctx-&gt;socket);</span><br><span class="line">        socket_ctx-&gt;socket = INVALID_SOCKET;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      }</span><br><span class="line">      <span class="keyword">else</span> {</span><br><span class="line">        <span class="built_in">closesocket</span>(socket_ctx-&gt;socket);</span><br><span class="line">        socket_ctx-&gt;socket = INVALID_SOCKET;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">else</span> {</span><br><span class="line">      IOCP::PER_IO_CONTEXT *io_ctx = <span class="built_in">CONTAINING_RECORD</span>(overlapped, IOCP::PER_IO_CONTEXT, overlapped);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">switch</span> (io_ctx-&gt;operation_type)</span><br><span class="line">      {</span><br><span class="line">      <span class="keyword">case</span> IOCP::CONNECT_POSTED:</span><br><span class="line">        <span class="built_in">DoConnect</span>(socket_ctx, io_ctx);</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> IOCP::RECV_POSTED:</span><br><span class="line">        <span class="built_in">DoRecv</span>(socket_ctx, io_ctx);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">case</span> IOCP::SEND_POSTED:</span><br><span class="line">        <span class="built_in">DoSend</span>(socket_ctx, io_ctx);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      <span class="keyword">default</span>:</span><br><span class="line">        <span class="built_in">assert</span>(<span class="literal">false</span>);</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">  WSADATA wsaData;</span><br><span class="line">  WORD wVersionRequested = <span class="built_in">MAKEWORD</span>(<span class="number">2</span>, <span class="number">2</span>);</span><br><span class="line">  <span class="built_in">WSAStartup</span>(wVersionRequested, &amp;wsaData);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">do</span></span><br><span class="line">  {</span><br><span class="line">    g_IOCP = IOCP::<span class="built_in">CreateNewCompletionPort</span>();</span><br><span class="line">    g_exit = <span class="built_in">CreateEvent</span>(<span class="literal">NULL</span>, FALSE, FALSE, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">    g_work_thread_num = IOCP::<span class="built_in">GetNumberOfProcesser</span>() * <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">    g_work_threads = <span class="keyword">new</span> HANDLE[g_work_thread_num];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; g_work_thread_num; i++) {</span><br><span class="line">      g_work_threads[i] = (HANDLE)_beginthreadex(<span class="literal">NULL</span>, <span class="number">0</span>, WorkThreadProc, <span class="literal">NULL</span>, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    g_client_ctx = <span class="keyword">new</span> IOCP::PER_SOCKET_CONTEXT;</span><br><span class="line">    g_client_ctx-&gt;socket = <span class="built_in">WSASocket</span>(AF_INET, SOCK_STREAM, <span class="number">0</span>, <span class="literal">NULL</span>, <span class="number">0</span>, WSA_FLAG_OVERLAPPED);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!IOCP::<span class="built_in">AssociateDeviceWithCompletionPort</span>(g_IOCP, (HANDLE)g_client_ctx-&gt;socket, (DWORD)g_client_ctx)) {</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">"AssociateDeviceWithCompletionPort failed with code: %d\n"</span>, <span class="built_in">GetLastError</span>());</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    g_ConnectExFn = IOCP::<span class="built_in">GetConnectExFnPointer</span>(g_client_ctx-&gt;socket);</span><br><span class="line">    <span class="keyword">if</span> (g_ConnectExFn == <span class="literal">NULL</span>) {</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">"GetConnectExFnPointer failed\n"</span>);</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    IOCP::PER_IO_CONTEXT* io_ctx = g_client_ctx-&gt;<span class="built_in">GetNewIoContext</span>();</span><br><span class="line">    io_ctx-&gt;socket = g_client_ctx-&gt;socket;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">PostConnect</span>(io_ctx, kIP, kPort)) {</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">"PostConnect failed\n"</span>);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">  } <span class="keyword">while</span> (FALSE);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"press any key to exit client...\n"</span>);</span><br><span class="line">  <span class="built_in">getchar</span>();</span><br><span class="line"></span><br><span class="line">  <span class="built_in">SetEvent</span>(g_exit);</span><br><span class="line">  <span class="built_in">closesocket</span>(g_client_ctx-&gt;socket);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">getchar</span>();</span><br><span class="line">  <span class="built_in">WSACleanup</span>();</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+    <!-- page content -->
+    <div class="page-main-content border-box is-home">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
 
-<blockquote>
-<p>完整工程下载地址：<a target="_blank" rel="noopener" href="https://github.com/winsoft666/CodeSnippet/tree/main/CompletionPort-Sample">https://github.com/winsoft666/CodeSnippet/tree/main/CompletionPort-Sample</a></p>
-</blockquote>
-</div></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2017-12-12T15:11:25.000Z" title="2017/12/12 23:11:25">2017-12-12</time>发表</span><span class="level-item"><time dateTime="2023-09-22T09:22:35.031Z" title="2023/9/22 17:22:35">2023-09-22</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E2%91%A6-%E8%BD%AF%E4%BB%B6%E8%B0%83%E8%AF%95/">⑦ 软件调试</a></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/post/432875265.html">由字符串格式化函数引起的崩溃</a></p><div class="content"><p>本文记录一个由错误使用StringCchVPrintf等格式化函数所导致的崩溃问题。</p></div><a class="article-more button is-small is-size-7" href="/post/432875265.html#more">阅读更多</a></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2017-12-12T13:11:24.000Z" title="2017/12/12 21:11:24">2017-12-12</time>发表</span><span class="level-item"><time dateTime="2023-10-27T04:54:07.976Z" title="2023/10/27 12:54:07">2023-10-27</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/">① 专栏集锦</a><span> / </span><a class="link-muted" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E5%A5%97%E6%8E%A5%E5%AD%97I-O%E6%A8%A1%E5%9E%8B/">Windows套接字I/O模型</a></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/post/547434843.html">Windows套接字I/O模型(4)-WSAEventSelect模型</a></p><div class="content"><h1 id="一、WSAEventSelect模型介绍"><a href="#一、WSAEventSelect模型介绍" class="headerlink" title="一、WSAEventSelect模型介绍"></a>一、WSAEventSelect模型介绍</h1><p>WSAEventSelect模型和WSAAsyncSelect模型类似，但WSAEventSelect模型允许应用程序在一个或多个套接字上面接收以<strong>事件</strong>为基础的网络事件通知。该模型和WSAAsyncSelect模型的最主要的区别在于网络事件是由事件对象句柄完成的，而不是通过窗口消息完成的。</p></div><a class="article-more button is-small is-size-7" href="/post/547434843.html#more">阅读更多</a></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2017-12-12T08:14:24.000Z" title="2017/12/12 16:14:24">2017-12-12</time>发表</span><span class="level-item"><time dateTime="2023-10-27T04:54:07.972Z" title="2023/10/27 12:54:07">2023-10-27</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/">① 专栏集锦</a><span> / </span><a class="link-muted" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E5%A5%97%E6%8E%A5%E5%AD%97I-O%E6%A8%A1%E5%9E%8B/">Windows套接字I/O模型</a></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/post/2544551173.html">Windows套接字I/O模型(3)-WSAAsyncSelect模型</a></p><div class="content"><h1 id="一、WSAAsyncSelect模型介绍"><a href="#一、WSAAsyncSelect模型介绍" class="headerlink" title="一、WSAAsyncSelect模型介绍"></a>一、WSAAsyncSelect模型介绍</h1><p>利用WSAAsyncSelect模型结合windows窗口消息循环，应用程序可以在一个套接字上接收以Windows消息为基础的网络事件通知。要想使用WSAAsyncSelect模型，首先必须创建一个Windows窗口，并为该窗口提供一个窗口过程支持函数。</p></div><a class="article-more button is-small is-size-7" href="/post/2544551173.html#more">阅读更多</a></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2017-12-11T14:19:34.000Z" title="2017/12/11 22:19:34">2017-12-11</time>发表</span><span class="level-item"><time dateTime="2023-10-27T04:54:07.968Z" title="2023/10/27 12:54:07">2023-10-27</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/">① 专栏集锦</a><span> / </span><a class="link-muted" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E5%A5%97%E6%8E%A5%E5%AD%97I-O%E6%A8%A1%E5%9E%8B/">Windows套接字I/O模型</a></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/post/640627104.html">Windows套接字I/O模型(2)-Select模型</a></p><div class="content"><h1 id="一、Select模型介绍"><a href="#一、Select模型介绍" class="headerlink" title="一、Select模型介绍"></a>一、Select模型介绍</h1><p>套接字Select模型的中心思想是利用select函数实现对I/O的管理。利用select函数来判断套接字（一个或多个）上是否存在数据，或者能否向套接字写入数据。它也是同步的，也会阻塞。但和阻塞模型不同的是，Select模型可以同时管理多个Socket。</p></div><a class="article-more button is-small is-size-7" href="/post/640627104.html#more">阅读更多</a></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2017-12-11T08:55:58.000Z" title="2017/12/11 16:55:58">2017-12-11</time>发表</span><span class="level-item"><time dateTime="2023-10-27T04:54:07.975Z" title="2023/10/27 12:54:07">2023-10-27</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/">① 专栏集锦</a><span> / </span><a class="link-muted" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E5%A5%97%E6%8E%A5%E5%AD%97I-O%E6%A8%A1%E5%9E%8B/">Windows套接字I/O模型</a></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/post/2937580891.html">Windows套接字I/O模型(1)-阻塞模型</a></p><div class="content"><p>套接字I/O的阻塞模型是最常见的网络模型，也是在Socket编程时通常最早接触的一个模型。因为它是阻塞的，所以我们一般都会结合线程一起使用（如将<code>accept</code>，<code>recv</code>等放到单独的线程），防止程序主线程被阻塞。</p></div><a class="article-more button is-small is-size-7" href="/post/2937580891.html#more">阅读更多</a></article></div><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2017-12-01T09:47:09.000Z" title="2017/12/1 17:47:09">2017-12-01</time>发表</span><span class="level-item"><time dateTime="2023-09-27T06:28:33.011Z" title="2023/9/27 14:28:33">2023-09-27</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E2%91%A6-%E8%BD%AF%E4%BB%B6%E8%B0%83%E8%AF%95/">⑦ 软件调试</a></span></div></div><p class="title is-3 is-size-4-mobile"><a class="link-muted" href="/post/2824175441.html">Linux GDB调试命令</a></p><div class="content"><h2 id="一、启动GDB"><a href="#一、启动GDB" class="headerlink" title="一、启动GDB"></a>一、启动GDB</h2><p>gdb -tui：分屏显示源代码<br>gdb -q：不显示开始的提示信息</p>
-<p>可以在.bashrc中加入别名：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">alias</span> gdb=<span class="string">"gdb -q -tui"</span></span><br></pre></td></tr></tbody></table></figure></div><a class="article-more button is-small is-size-7" href="/post/2824175441.html#more">阅读更多</a></article></div><nav class="pagination" role="navigation" aria-label="pagination"><div class="pagination-previous"><a href="/page/18/">上一页</a></div><div class="pagination-next"><a href="/page/20/">下一页</a></div><ul class="pagination-list is-hidden-mobile"><li><a class="pagination-link" href="/">1</a></li><li><span class="pagination-ellipsis">&hellip;</span></li><li><a class="pagination-link" href="/page/18/">18</a></li><li><a class="pagination-link is-current" href="/page/19/">19</a></li><li><a class="pagination-link" href="/page/20/">20</a></li></ul></nav></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/pi-200.png" alt="Jiang Xueqiao"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Jiang Xueqiao</p><p class="is-size-6 is-block">Software Engineer</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Wuhan, Hubei</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">160</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">26</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">30</p></a></div></div></nav></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/"><span class="level-start"><span class="level-item">① 专栏集锦</span></span><span class="level-end"><span class="level-item tag">63</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E5%86%85%E5%AD%98%E4%BD%93%E7%B3%BB/"><span class="level-start"><span class="level-item">Windows内存体系</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E5%A5%97%E6%8E%A5%E5%AD%97I-O%E6%A8%A1%E5%9E%8B/"><span class="level-start"><span class="level-item">Windows套接字I/O模型</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B/"><span class="level-start"><span class="level-item">Windows核心编程</span></span><span class="level-end"><span class="level-item tag">19</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E6%B3%A8%E5%85%A5%E4%B8%8E%E6%8B%A6%E6%88%AA/"><span class="level-start"><span class="level-item">Windows注入与拦截</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/%E6%89%93%E5%8C%85%E7%8B%82%E9%AD%94%E4%B9%8BNSIS%E6%95%99%E7%A8%8B/"><span class="level-start"><span class="level-item">打包狂魔之NSIS教程</span></span><span class="level-end"><span class="level-item tag">13</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/%E6%8B%A8%E5%BC%80%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E7%9A%84%E8%BF%B7%E9%9B%BE/"><span class="level-start"><span class="level-item">拨开字符编码的迷雾</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/"><span class="level-start"><span class="level-item">网络协议</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E2%91%A1-C/"><span class="level-start"><span class="level-item">② C++</span></span><span class="level-end"><span class="level-item tag">28</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E2%91%A1-C/Qt/"><span class="level-start"><span class="level-item">Qt</span></span><span class="level-end"><span class="level-item tag">15</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E2%91%A2-Power-By-Me/"><span class="level-start"><span class="level-item">③ Power By Me</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A3-Electron/"><span class="level-start"><span class="level-item">④ Electron</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A4-%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E7%A8%8B/"><span class="level-start"><span class="level-item">⑤ 音视频编程</span></span><span class="level-end"><span class="level-item tag">11</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E2%91%A4-%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E7%A8%8B/WebRTC/"><span class="level-start"><span class="level-item">WebRTC</span></span><span class="level-end"><span class="level-item tag">9</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E2%91%A5-%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%8F%91/"><span class="level-start"><span class="level-item">⑥ 服务器开发</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A6-%E8%BD%AF%E4%BB%B6%E8%B0%83%E8%AF%95/"><span class="level-start"><span class="level-item">⑦ 软件调试</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A7-%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84/"><span class="level-start"><span class="level-item">⑧ 软件架构</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A8-%E6%95%B0%E6%8D%AE%E5%BA%93/"><span class="level-start"><span class="level-item">⑨ 数据库</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A9-%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"><span class="level-start"><span class="level-item">⑩ 编程基础</span></span><span class="level-end"><span class="level-item tag">13</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E2%91%A9-%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/CMake/"><span class="level-start"><span class="level-item">CMake</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A9-%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E6%89%B9%E5%A4%84%E7%90%86/"><span class="level-start"><span class="level-item">批处理</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E2%91%AA-%E5%BC%80%E6%BA%90%E5%BA%93/"><span class="level-start"><span class="level-item">⑪ 开源库</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%AB-Web%E5%BC%80%E5%8F%91/"><span class="level-start"><span class="level-item">⑫ Web开发</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%AC-%E7%BE%8E%E6%96%87%E8%B5%8F%E6%9E%90/"><span class="level-start"><span class="level-item">⑬ 美文赏析</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%AD-%E6%9D%82%E5%BF%B5/"><span class="level-start"><span class="level-item">⑭ 杂念</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%AE-%E7%88%B1%E6%8A%98%E8%85%BE/"><span class="level-start"><span class="level-item">⑮ 爱折腾</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><!--!--><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-02-25T05:53:19.000Z">2024-02-25</time></p><p class="title"><a href="/post/946276004.html">产品级的Electron项目模板</a></p><p class="categories"><a href="/categories/%E2%91%A2-Power-By-Me/">③ Power By Me</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-02-20T01:25:38.000Z">2024-02-20</time></p><p class="title"><a href="/post/1391804423.html">🐉2024龙行龘龘</a></p><p class="categories"><a href="/categories/%E2%91%AD-%E6%9D%82%E5%BF%B5/">⑭ 杂念</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-12-21T13:48:55.000Z">2023-12-21</time></p><p class="title"><a href="/post/2185523635.html">开源库spdlog使用备忘</a></p><p class="categories"><a href="/categories/%E2%91%AA-%E5%BC%80%E6%BA%90%E5%BA%93/">⑪ 开源库</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-12-15T13:20:06.000Z">2023-12-15</time></p><p class="title"><a href="/post/2418701368.html">C/C++不同整数类型的区别</a></p><p class="categories"><a href="/categories/%E2%91%A1-C/">② C++</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-11-26T11:07:09.000Z">2023-11-26</time></p><p class="title"><a href="/post/1533480858.html">Windows窗口调试利器-WinSpyPlus</a></p><p class="categories"><a href="/categories/%E2%91%A2-Power-By-Me/">③ Power By Me</a></p></div></article></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">标签</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/CentOS/"><span class="tag">CentOS</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Crash/"><span class="tag">Crash</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Deadlock/"><span class="tag">Deadlock</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Docker/"><span class="tag">Docker</span></a></div><div class="control"><a class="tags has-addons" href="/tags/GDB/"><span class="tag">GDB</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Git/"><span class="tag">Git</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Github/"><span class="tag">Github</span></a></div><div class="control"><a class="tags has-addons" href="/tags/HTTPS/"><span class="tag">HTTPS</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Hexo/"><span class="tag">Hexo</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Joplin/"><span class="tag">Joplin</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Lamada/"><span class="tag">Lamada</span></a></div><div class="control"><a class="tags has-addons" href="/tags/LetsEncrypt/"><span class="tag">LetsEncrypt</span></a></div><div class="control"><a class="tags has-addons" href="/tags/MySQL/"><span class="tag">MySQL</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Ping/"><span class="tag">Ping</span></a></div><div class="control"><a class="tags has-addons" href="/tags/QSS/"><span class="tag">QSS</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Redis/"><span class="tag">Redis</span></a></div><div class="control"><a class="tags has-addons" href="/tags/SQL/"><span class="tag">SQL</span></a></div><div class="control"><a class="tags has-addons" href="/tags/SSL/"><span class="tag">SSL</span></a></div><div class="control"><a class="tags has-addons" href="/tags/TCP/"><span class="tag">TCP</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Thread/"><span class="tag">Thread</span></a></div><div class="control"><a class="tags has-addons" href="/tags/UDP/"><span class="tag">UDP</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Vcpkg/"><span class="tag">Vcpkg</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Watch%C2%ADtower/"><span class="tag">Watch­tower</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Wav/"><span class="tag">Wav</span></a></div><div class="control"><a class="tags has-addons" href="/tags/Windbg/"><span class="tag">Windbg</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E5%8F%B2%E9%93%81%E7%94%9F/"><span class="tag">史铁生</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%88%B4%E5%BB%BA%E4%B8%9A/"><span class="tag">戴建业</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E6%AD%A3%E5%88%99/"><span class="tag">正则</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E7%99%BD%E9%85%92/"><span class="tag">白酒</span></a></div><div class="control"><a class="tags has-addons" href="/tags/%E9%9D%99%E9%BB%98%E5%AE%89%E8%A3%85/"><span class="tag">静默安装</span></a></div></div></div></div></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/codesilo.png" alt="CodeSilo" height="28"></a><p class="is-size-7"><span class="is-size-7">© 2017~2024 江雪桥</span>  <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/" style="color:#000">鄂ICP备2020015399号-6</a>  </p><p class="is-size-7">网站风格：<a target="_blank" rel="noopener" href="https://www.cyberpunk.net/gb/zh-cn/" style="color:#75d4ef">赛博朋克（cyberpunk）</a></p><p class="is-size-7">内容同步发布到以下站点：<a href="https://jiangxueqiao.com" style="color:#fc1e1e">jiangxueqiao.com</a>    <a target="_blank" rel="noopener" href="https://winsoft666.github.io" style="color:#fc1e1e">winsoft666.github.io</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="GitHub" href="https://github.com/winsoft666"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/jquery/3.3.1/dist/jquery.min.js"></script><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/moment/2.22.2/min/moment-with-locales.min.js"></script><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/clipboard/2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
-            article: {
-                highlight: {
-                    clipboard: true,
-                    fold: 'unfolded'
-                }
-            }
-        };</script><script src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/lightgallery/1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/justifiedGallery/3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
-            if (typeof $.fn.lightGallery === 'function') {
-                $('.article').lightGallery({ selector: '.gallery-item' });
-            }
-            if (typeof $.fn.justifiedGallery === 'function') {
-                if ($('.justified-gallery > p > .gallery-item').length) {
-                    $('.justified-gallery > p > .gallery-item').unwrap();
-                }
-                $('.justified-gallery').justifiedGallery();
-            }
-        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
-            'HTML-CSS': {
-                matchFontHeight: false
-            },
-            SVG: {
-                matchFontHeight: false
-            },
-            CommonHTML: {
-                matchFontHeight: false
-            },
-            tex2jax: {
-                inlineMath: [
-                    ['$','$'],
-                    ['\\(','\\)']
-                ]
-            }
-        });</script><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/mathjax/2.7.9/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
-            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
-        });</script></body></html>
+    <div class="border-box header-content">
+        <div class="left border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/avatar.png">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               CodeSilo
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc">
+                <ul class="menu-list">
+                    <li class="menu-item">
+                        <a class="active"
+                           href="/"
+                        >首页</a>
+                    </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >归档</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >分类</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >关于</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               target="_blank" rel="noopener" href="https://github.com/winsoft666"
+                            >GITHUB</a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            <li class="drawer-menu-item flex-center">
+                <a class="active"
+                   href="/"
+                >首页</a>
+            </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives"
+                    >归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories"
+                    >分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about"
+                    >关于</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       target="_blank" rel="noopener" href="https://github.com/winsoft666"
+                    >GITHUB</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    <div class="home-content-container fade-in-down-animation">
+    
+    <ul class="home-post-list border-box">
+        
+            <li class="home-post-item">
+
+                
+
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
+                        <a href="/post/3457369310.html">
+                            MySQL的DECLARE...HANDLER使用
+                        </a>
+                    </h3>
+
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            <h2 id="一、-功能"><a href="#一、-功能" class="headerlink" title="一、 功能"></a>一、 功能</h2><p><code>DECLARE...HANDLER</code>语法如下：</p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DECLARE</span> handler_action HANDLER</span><br><span class="line">    <span class="keyword">FOR</span> condition_value [, condition_value] ...</span><br><span class="line">    statement</span><br></pre></td></tr></tbody></table></figure>
+
+<p>功能概括起来就是：<br>在一个或者多个<code>condition_value</code>条件满足时，先执行<code>statement语句</code>，然后执行<code>handler_action动作</code>。</p>
+                        
+                    </div>
+
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Fri Sep 22 2023 14:41:49 GMT+0800">2023-09-22 14:41:49</span>
+            </span>
+        
+
+        
+
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <i class="icon fas fa-tags"></i>&nbsp;
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/MySQL/">MySQL</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+        <a class="home-read-more" href="/post/3457369310.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-post-item">
+
+                
+
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
+                        <a href="/post/3177767322.html">
+                            使用WinDbg调试关键区死锁
+                        </a>
+                    </h3>
+
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            <p>本文通过一个实例来讲解如何使用WinDbg来调试Windows CriticalSection死锁的问题。</p>
+<h1 id="一-演示示例"><a href="#一-演示示例" class="headerlink" title="一. 演示示例"></a>一. 演示示例</h1><p>这里有一个关键区锁死问题的程序，运行之后依次点击“CS锁死”按钮、右上角退出按钮，程序就会卡死。</p>
+<p><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/windbg-debug-cs-1.png"></p>
+<p>对于眼下的这个问题，界面完全失去响应，这说明负责消息处理的UI线程阻塞了。</p>
+<p>对于几乎所有的windows GUI程序，编号为0的初始线程就是UI线程，windows发现该界面一段时间没有消息响应之后就会在标题后面加上“（未响应）”。</p>
+                        
+                    </div>
+
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Fri Oct 27 2023 12:54:07 GMT+0800">2023-10-27 12:54:07</span>
+            </span>
+        
+
+        
+
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <i class="icon fas fa-tags"></i>&nbsp;
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Windbg/">Windbg</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Deadlock/">Deadlock</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+        <a class="home-read-more" href="/post/3177767322.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-post-item">
+
+                
+
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
+                        <a href="/post/1092140776.html">
+                            使用WinDbg调试互斥体死锁
+                        </a>
+                    </h3>
+
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            <p>本文通过一个实例来讲解如何使用WinDbg来调试Windows Mutex死锁的问题。</p>
+                        
+                    </div>
+
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Fri Oct 27 2023 12:54:07 GMT+0800">2023-10-27 12:54:07</span>
+            </span>
+        
+
+        
+
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <i class="icon fas fa-tags"></i>&nbsp;
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Windbg/">Windbg</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Deadlock/">Deadlock</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+        <a class="home-read-more" href="/post/1092140776.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-post-item">
+
+                
+
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
+                        <a href="/post/254517042.html">
+                            一个MySQL存储过程模板
+                        </a>
+                    </h3>
+
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            <p>在进行数据库开发时，我们可能需要写很多存储过程，本文提供一个存储过程的模板，通过该模板可以简化存储过程的开发。</p>
+                        
+                    </div>
+
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Fri Sep 22 2023 17:22:58 GMT+0800">2023-09-22 17:22:58</span>
+            </span>
+        
+
+        
+
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <i class="icon fas fa-tags"></i>&nbsp;
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/MySQL/">MySQL</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+        <a class="home-read-more" href="/post/254517042.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-post-item">
+
+                
+
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
+                        <a href="/post/326824759.html">
+                            Windows套接字I/O模型(5)-完成端口模型
+                        </a>
+                    </h3>
+
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            一、写在前面前面的文章已经介绍了套接字I/O的同步模型、WSAAsyncSelect模型、WSAEventSelect模型，到目前为止套接字I/O还剩下2个模型没有介绍：重叠模型，完成端口模型。 
+如果程序对性能和并发要求不高，可以使用前面介绍的WS...
+                        
+                    </div>
+
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Fri Oct 27 2023 12:54:07 GMT+0800">2023-10-27 12:54:07</span>
+            </span>
+        
+
+        
+
+        
+
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+        <a class="home-read-more" href="/post/326824759.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-post-item">
+
+                
+
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
+                        <a href="/post/432875265.html">
+                            由字符串格式化函数引起的崩溃
+                        </a>
+                    </h3>
+
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            <p>本文记录一个由错误使用StringCchVPrintf等格式化函数所导致的崩溃问题。</p>
+                        
+                    </div>
+
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Fri Sep 22 2023 17:22:35 GMT+0800">2023-09-22 17:22:35</span>
+            </span>
+        
+
+        
+
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <i class="icon fas fa-tags"></i>&nbsp;
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Crash/">Crash</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+        <a class="home-read-more" href="/post/432875265.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-post-item">
+
+                
+
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
+                        <a href="/post/547434843.html">
+                            Windows套接字I/O模型(4)-WSAEventSelect模型
+                        </a>
+                    </h3>
+
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            <h1 id="一、WSAEventSelect模型介绍"><a href="#一、WSAEventSelect模型介绍" class="headerlink" title="一、WSAEventSelect模型介绍"></a>一、WSAEventSelect模型介绍</h1><p>WSAEventSelect模型和WSAAsyncSelect模型类似，但WSAEventSelect模型允许应用程序在一个或多个套接字上面接收以<strong>事件</strong>为基础的网络事件通知。该模型和WSAAsyncSelect模型的最主要的区别在于网络事件是由事件对象句柄完成的，而不是通过窗口消息完成的。</p>
+                        
+                    </div>
+
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Fri Oct 27 2023 12:54:07 GMT+0800">2023-10-27 12:54:07</span>
+            </span>
+        
+
+        
+
+        
+
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+        <a class="home-read-more" href="/post/547434843.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-post-item">
+
+                
+
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
+                        <a href="/post/2544551173.html">
+                            Windows套接字I/O模型(3)-WSAAsyncSelect模型
+                        </a>
+                    </h3>
+
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            <h1 id="一、WSAAsyncSelect模型介绍"><a href="#一、WSAAsyncSelect模型介绍" class="headerlink" title="一、WSAAsyncSelect模型介绍"></a>一、WSAAsyncSelect模型介绍</h1><p>利用WSAAsyncSelect模型结合windows窗口消息循环，应用程序可以在一个套接字上接收以Windows消息为基础的网络事件通知。要想使用WSAAsyncSelect模型，首先必须创建一个Windows窗口，并为该窗口提供一个窗口过程支持函数。</p>
+                        
+                    </div>
+
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Fri Oct 27 2023 12:54:07 GMT+0800">2023-10-27 12:54:07</span>
+            </span>
+        
+
+        
+
+        
+
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+        <a class="home-read-more" href="/post/2544551173.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
+</div>
+
+                </div>
+            </li>
+        
+    </ul>
+    
+    <div class="paginator border-box flex-center">
+        <div class="btn-wrap allowed">
+            <a class="jump-btn"
+               href="/page/18/"
+            ><i class="fa-solid fa-chevron-left"></i></a>
+        </div>
+
+
+        <div class="page-number-box border-box flex-center">
+            <input class="page-number-input border-box base-color-size"
+                   type="number"
+                   value="19"
+                   min="1"
+                   max="21"
+            ><span class="delimiter base-color-size">/</span><span class="base-color-size">21</span>
+        </div>
+
+
+        <div class="btn-wrap allowed">
+            <a class="jump-btn"
+               href="/page/20/"
+            ><i class="fa-solid fa-chevron-right"></i></a>
+        </div>
+    </div>
+
+
+
+
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="border-box website-info-box default">
+        
+            <div class="copyright-info info-item default">
+                &copy;&nbsp;<span>2017</span>&nbsp;-&nbsp;2024
+                
+                    &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">江雪桥</a>
+                
+            </div>
+
+            
+                <div class="icp-info info-item default">
+                    <a class=""
+                       target="_blank"
+                       href="https://beian.miit.gov.cn"
+                    >
+                        鄂ICP备2020015399号-6
+                    </a>
+                </div>
+            
+
+            
+        
+
+        <div class="count-item info-item default">
+            
+
+            
+
+            
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box side-tools-show-handle">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-toggle-theme-mode flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+</main>
+
+
+
+
+<!-- common -->
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+
+<!-- local-search -->
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+<!-- lazyload -->
+
+    
+<script src="/js/lazyload.js"></script>
+
+
+
+<div class="">
+    
+
+    <!-- category-page -->
+    
+
+    <!-- links-page -->
+    
+
+    <!-- photos-page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+</body>
+</html>

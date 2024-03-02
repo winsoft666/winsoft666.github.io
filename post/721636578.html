@@ -1,43 +1,257 @@
-<!doctype html>
-<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta><title>Windows注入与拦截(2)--DLL注入的方式 - CodeSilo</title><link rel="manifest" href="/manifest.json"><meta name="theme-color" content="#3273dc"><meta name="application-name" content="CodeSilo"><meta name="msapplication-TileImage" content="img/pi-200.png"><meta name="msapplication-TileColor" content="#3273dc"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="CodeSilo"><meta name="apple-mobile-web-app-status-bar-style" content="default"><link rel="apple-touch-icon" sizes="200x200" href="img/pi-200.png"><meta name="description" content="一、使用注册表方式注入1.1 注入方法如题，通过注册表的方式来实现 DLL 注入，我们只需要针对特定的注册表项进行修改即可，有一点需要注意的是：如果被注入的进程是 64 位进程，则注入的 DLL 也需要是 64 位的，同理，注入 32 位的进程也需要是 32 位的 DLL。 另外，根据被注入进程的位数（32 或 64）不同，注册表的位置也不同。"><meta property="og:type" content="blog"><meta property="og:title" content="Windows注入与拦截(2)--DLL注入的方式"><meta property="og:url" content="https://jiangxueqiao.com/post/721636578.html"><meta property="og:site_name" content="CodeSilo"><meta property="og:description" content="一、使用注册表方式注入1.1 注入方法如题，通过注册表的方式来实现 DLL 注入，我们只需要针对特定的注册表项进行修改即可，有一点需要注意的是：如果被注入的进程是 64 位进程，则注入的 DLL 也需要是 64 位的，同理，注入 32 位的进程也需要是 32 位的 DLL。 另外，根据被注入进程的位数（32 或 64）不同，注册表的位置也不同。"><meta property="og:locale" content="zh_CN"><meta property="og:image" content="https://jiangxueqiao.com/img/og_image.png"><meta property="article:published_time" content="2021-05-02T01:41:58.000Z"><meta property="article:modified_time" content="2023-09-27T06:05:01.176Z"><meta property="article:author" content="江雪桥"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="https://jiangxueqiao.com/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"https://jiangxueqiao.com/post/721636578.html"},"headline":"Windows注入与拦截(2)--DLL注入的方式","image":["https://jiangxueqiao.com/img/og_image.png"],"datePublished":"2021-05-02T01:41:58.000Z","dateModified":"2023-09-27T06:05:01.176Z","author":{"@type":"Person","name":"江雪桥"},"publisher":{"@type":"Organization","name":"CodeSilo","logo":{"@type":"ImageObject","url":"https://blog-static.jiangxueqiao.com/blog/icarus-theme/codesilo.png"}},"description":"一、使用注册表方式注入1.1 注入方法如题，通过注册表的方式来实现 DLL 注入，我们只需要针对特定的注册表项进行修改即可，有一点需要注意的是：如果被注入的进程是 64 位进程，则注入的 DLL 也需要是 64 位的，同理，注入 32 位的进程也需要是 32 位的 DLL。 另外，根据被注入进程的位数（32 或 64）不同，注册表的位置也不同。"}</script><link rel="canonical" href="https://jiangxueqiao.com/post/721636578.html"><link rel="icon" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/favicon.png"><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/all.min.css"><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/highlight.js/11.7.0/styles/xt256.css"><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/font/css2/Oxanium-Roboto-Mono.css"><link rel="stylesheet" href="/css/cyberpunk.css"><!--!--><script>var _hmt = _hmt || [];
-        (function() {
-            var hm = document.createElement("script");
-            hm.src = "//hm.baidu.com/hm.js?fbb46283a7b4d42d425356f8779708d5";
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(hm, s);
-        })();</script><!--!--><!--!--><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/lightgallery/1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/justifiedGallery/3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/pace-js/1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
-  (function () {
-      function switchTab() {
-          if (!location.hash) {
-            return;
-          }
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Windows,Linux,C/C++,Golang,Qt,Node.js,Electron,Vue,WebRTC">
+    <meta name="description" content="除注明转载以外，所有文章均为原创">
+    <meta name="author" content="江雪桥">
+    
+    <title>
+        
+            Windows注入与拦截(2)--DLL注入的方式 |
+        
+        CodeSilo
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
 
-          const id = '#' + CSS.escape(location.hash.substring(1));
-          const $tabMenu = document.querySelector(`.tabs a[href="${id}"]`);
-          if (!$tabMenu) {
-            return;
-          }
+    
+        <link rel="shortcut icon" href="/images/favicon.png">
+    
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
 
-          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
-          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
-          Array.from($tabMenuContainer.querySelectorAll('a'))
-              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
-              .forEach($content => $content.classList.add('is-hidden'));
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
 
-          if ($tabMenu) {
-              $tabMenu.parentElement.classList.add('is-active');
-          }
-          const $activeTab = document.querySelector(id);
-          if ($activeTab) {
-              $activeTab.classList.remove('is-hidden');
-          }
-      }
-      switchTab();
-      window.addEventListener('hashchange', switchTab, false);
-  })();
-  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0">
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"jiangxueqiao.com","root":"/","language":"zh-CN","path":"search.xml"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"CodeSilo","author":"江雪桥","avatar":"/images/avatar.png","logo":"/images/avatar.png","favicon":"/images/favicon.png"},"menu":{"Archives":"/archives","Categories":"/categories","About":"/about","Github":"https://github.com/winsoft666"},"first_screen":{"enable":false,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/winsoft666","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":true,"hide_header":true},"home":{"category":false,"tag":true,"announcement":null},"post":{"author_badge":{"enable":false,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":true,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":false},"comment":{"enable":true,"use":"twikoo","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":"https://twikoo.jiangxueqiao.com","region":"zh-CN","version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":false},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2017,"word_count":false,"icp":{"enable":true,"record_code":"鄂ICP备2020015399号-6","url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","version":"4.0.7"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 6.3.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-</head><body class="is-3-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/codesilo.png" alt="CodeSilo" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">首页</a><a class="navbar-item" href="/archives">时间轴</a><a class="navbar-item" href="/categories">分类</a><a class="navbar-item" href="/tags">标签</a><a class="navbar-item" href="https://jiangxueqiao.com/post/2185937873.html">留言</a><a class="navbar-item" href="/about">关于</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Email" href="mailto:smart7178@163.com"><i class="fa fa-envelope"></i></a><a class="navbar-item" target="_blank" rel="noopener" title="GitHub" href="https://github.com/winsoft666"><i class="fab fa-github"></i></a><a class="navbar-item is-hidden-tablet catalogue" title="目录" href="javascript:;"><i class="fas fa-list-ul"></i></a><a class="navbar-item search" title="搜索" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-6-widescreen"><div class="card"><article class="card-content article" role="article"><div class="article-meta is-size-7 is-uppercase level is-mobile"><div class="level-left"><span class="level-item"><time dateTime="2021-05-02T01:41:58.000Z" title="2021/5/2 09:41:58">2021-05-02</time>发表</span><span class="level-item"><time dateTime="2023-09-27T06:05:01.176Z" title="2023/9/27 14:05:01">2023-09-27</time>更新</span><span class="level-item"><a class="link-muted" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/">① 专栏集锦</a><span> / </span><a class="link-muted" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E6%B3%A8%E5%85%A5%E4%B8%8E%E6%8B%A6%E6%88%AA/">Windows注入与拦截</a></span><span class="level-item twikoo_visitors" id="/post/721636578.html" data-flag-title="Windows注入与拦截(2)--DLL注入的方式"><i class="far fa-eye"></i>&nbsp;&nbsp;<span id="twikoo_visitors"><i class="fa fa-spinner fa-spin"></i></span>次访问</span></div></div><h1 class="title is-3 is-size-4-mobile">Windows注入与拦截(2)--DLL注入的方式</h1><div class="content"><h1 id="一、使用注册表方式注入"><a href="#一、使用注册表方式注入" class="headerlink" title="一、使用注册表方式注入"></a>一、使用注册表方式注入</h1><h2 id="1-1-注入方法"><a href="#1-1-注入方法" class="headerlink" title="1.1 注入方法"></a>1.1 注入方法</h2><p>如题，通过注册表的方式来实现 DLL 注入，我们只需要针对特定的注册表项进行修改即可，有一点需要注意的是：<strong>如果被注入的进程是 64 位进程，则注入的 DLL 也需要是 64 位的，同理，注入 32 位的进程也需要是 32 位的 DLL。</strong></p>
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container border-box">
+
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/avatar.png">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               CodeSilo
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc">
+                <ul class="menu-list">
+                    <li class="menu-item">
+                        <a class=""
+                           href="/"
+                        >首页</a>
+                    </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >归档</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >分类</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >关于</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               target="_blank" rel="noopener" href="https://github.com/winsoft666"
+                            >GITHUB</a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            <li class="drawer-menu-item flex-center">
+                <a class=""
+                   href="/"
+                >首页</a>
+            </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives"
+                    >归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories"
+                    >分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about"
+                    >关于</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       target="_blank" rel="noopener" href="https://github.com/winsoft666"
+                    >GITHUB</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        Windows注入与拦截(2)--DLL注入的方式
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="/images/avatar.png">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">江雪桥</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2021-05-02 09:41:58</span>
+            </span>
+
+            <span class="meta-info-item post-update-date">
+                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                <span class="datetime" data-updated="Wed Sep 27 2023 14:05:01 GMT+0800">2023-09-27 14:05:01</span>
+            </span>
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/">① 专栏集锦</a></li>
+                        
+                    
+                            <li class="category-item">&nbsp;<i class="icon fas fa-angle-right"></i>&nbsp;<a href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E6%B3%A8%E5%85%A5%E4%B8%8E%E6%8B%A6%E6%88%AA/">Windows注入与拦截</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body">
+                    
+
+                    <h1 id="一、使用注册表方式注入"><a href="#一、使用注册表方式注入" class="headerlink" title="一、使用注册表方式注入"></a>一、使用注册表方式注入</h1><h2 id="1-1-注入方法"><a href="#1-1-注入方法" class="headerlink" title="1.1 注入方法"></a>1.1 注入方法</h2><p>如题，通过注册表的方式来实现 DLL 注入，我们只需要针对特定的注册表项进行修改即可，有一点需要注意的是：<strong>如果被注入的进程是 64 位进程，则注入的 DLL 也需要是 64 位的，同理，注入 32 位的进程也需要是 32 位的 DLL。</strong></p>
 <p>另外，根据被注入进程的位数（32 或 64）不同，注册表的位置也不同。</p>
 <span id="more"></span>
 
@@ -77,7 +291,7 @@
 </ol>
 <p><code>dwThreadId参数</code>：线程 ID，用于指定勾住哪个线程的消息。如果传 0，则表示勾住所有线程的指定消息。</p>
 <blockquote>
-<p>SetWindowsHookEx 详细的参数解释可以参考 MSDN：<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms644990(v=vs.85).aspx">https://msdn.microsoft.com/en-us/library/windows/desktop/ms644990(v=vs.85).aspx</a></p>
+<p>SetWindowsHookEx 详细的参数解释可以参考 MSDN：<a class="link" target="_blank" rel="noopener" href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms644990(v=vs.85).aspx">https://msdn.microsoft.com/en-us/library/windows/desktop/ms644990(v=vs.85).aspx<i class="fas fa-external-link-alt"></i></a></p>
 </blockquote>
 <h3 id="2-1-2-CallNextHookEx"><a href="#2-1-2-CallNextHookEx" class="headerlink" title="2.1.2 CallNextHookEx"></a>2.1.2 CallNextHookEx</h3><p>当我们的钩子处理函数将消息处理完之后，我们可以选择将消息丢弃，不让钩子链上的后面的钩子处理；也可以选择将消息继续传递下去，从而让其他钩子有处理的机会。</p>
 <p>如果需要让其他钩子有处理的机会，我们可以在钩子处理函数的最后调用<code>CallNextHookEx</code>函数。</p>
@@ -86,14 +300,14 @@
 <h2 id="2-2-钩子实例"><a href="#2-2-钩子实例" class="headerlink" title="2.2 钩子实例"></a>2.2 钩子实例</h2><p><code>SetWindowsHookEx</code>函数返回一个<code>HHOOK</code>类型的钩子句柄，<code>CallNextHookEx</code>和<code>UnhookWindowsHookEx</code>函数都需要使用这个句柄作为参数。</p>
 <p>如果我们将“注入逻辑”放在独立的 exe 中，将“钩子处理过程”放到独立的 dll 中，那么为了在“钩子处理过程”中调用<code>CallNextHookEx</code>时能够拿到钩子的句柄，我们需要通过其他途径将该句柄从 exe 传递到 dll 中。</p>
 <p>所以为了避免传递“钩子句柄”的麻烦，我们将“注入逻辑”和“钩子处理过程”都写入到一个 DLL 之中。我们只需要调用这个 DLL 的导出函数就可以将这个 DLL 注入到指定线程所属的进程中。</p>
-<p>示例 DLL 名称为<code>InjectDLL</code>，用于勾住指定窗口的<code>WH_GETMESSAGE</code>消息，我们也可以指定其他的消息类型，如键盘消息等。完整的消息类型可以参考 MSDN 上关于<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms644990(v=vs.85).aspx">SetWindowsHookEx</a>函数的解释。</p>
+<p>示例 DLL 名称为<code>InjectDLL</code>，用于勾住指定窗口的<code>WH_GETMESSAGE</code>消息，我们也可以指定其他的消息类型，如键盘消息等。完整的消息类型可以参考 MSDN 上关于<a class="link" target="_blank" rel="noopener" href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms644990(v=vs.85).aspx">SetWindowsHookEx<i class="fas fa-external-link-alt"></i></a>函数的解释。</p>
 <p><code>InjectDLL</code>的完整代码如下：</p>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;tchar.h&gt;</span></span></span><br><span class="line"></span><br><span class="line">HHOOK g_hook = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line"><span class="function">BOOL APIENTRY <span class="title">DllMain</span><span class="params">(HMODULE hModule, DWORD  fdwReason, LPVOID lpReserved)</span> </span>{</span><br><span class="line">    <span class="keyword">switch</span>(fdwReason) {</span><br><span class="line">        <span class="keyword">case</span> DLL_PROCESS_ATTACH:</span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">case</span> DLL_THREAD_ATTACH:</span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">case</span> DLL_THREAD_DETACH:</span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">case</span> DLL_PROCESS_DETACH:</span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> TRUE;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">// 提权函数</span></span><br><span class="line"><span class="comment">// 参考：https://blog.csdn.net/china_jeffery/article/details/79173417</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="function">BOOL <span class="title">EnablePrivilege</span><span class="params">(LPCTSTR szPrivilege, BOOL fEnable)</span> </span>{</span><br><span class="line">  BOOL fOk = FALSE;</span><br><span class="line">  HANDLE hToken = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">OpenProcessToken</span>(<span class="built_in">GetCurrentProcess</span>(), TOKEN_ADJUST_PRIVILEGES, &amp;hToken)) {</span><br><span class="line">    TOKEN_PRIVILEGES tp;</span><br><span class="line">    tp.PrivilegeCount = <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">LookupPrivilegeValue</span>(<span class="literal">NULL</span>, szPrivilege, &amp;tp.Privileges[<span class="number">0</span>].Luid);</span><br><span class="line">    tp.Privileges-&gt;Attributes = fEnable ? SE_PRIVILEGE_ENABLED : <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">AdjustTokenPrivileges</span>(hToken, FALSE, &amp;tp, <span class="built_in">sizeof</span>(TOKEN_PRIVILEGES), <span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line">    fOk = (<span class="built_in">GetLastError</span>() == ERROR_SUCCESS);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">CloseHandle</span>(hToken);</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> fOk;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 钩子处理过程</span></span><br><span class="line"><span class="function">LRESULT CALLBACK <span class="title">HookProc_GetMsg</span><span class="params">(<span class="type">int</span> code, WPARAM wParam, LPARAM lParam)</span> </span>{</span><br><span class="line">  <span class="type">char</span> szMsg[<span class="number">512</span>] = { <span class="number">0</span> };</span><br><span class="line">  <span class="built_in">sprintf_s</span>(szMsg, <span class="number">512</span>, <span class="string">"code: %d, wParam: %d, lParam: %d"</span>, code, wParam, lParam);</span><br><span class="line">  <span class="built_in">OutputDebugStringA</span>(szMsg);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">CallNextHookEx</span>(g_hook, code, wParam, lParam);;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 导出函数，安装钩子</span></span><br><span class="line"><span class="function">HHOOK <span class="title">InjectDllByHook</span><span class="params">(HWND hwnd)</span> </span>{</span><br><span class="line">  DWORD dwThreadId = <span class="number">0</span>;</span><br><span class="line">  HHOOK hHook = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">  __try {</span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">EnablePrivilege</span>(SE_DEBUG_NAME, TRUE)) {</span><br><span class="line">      __leave;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 通过窗口句柄获取到窗口所属线程</span></span><br><span class="line">    dwThreadId = <span class="built_in">GetWindowThreadProcessId</span>(hwnd, <span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">if</span> (dwThreadId == <span class="number">0</span>) {</span><br><span class="line">      __leave;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取DLL自身的句柄</span></span><br><span class="line">    HMODULE hModule = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="built_in">GetModuleHandleExW</span>(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,</span><br><span class="line">      (LPCWSTR)InjectDllByHook, &amp;hModule);</span><br><span class="line"></span><br><span class="line">    hHook = <span class="built_in">SetWindowsHookEx</span>(WH_GETMESSAGE, (HOOKPROC)HookProc_GetMsg, hModule, dwThreadId);</span><br><span class="line">  }</span><br><span class="line">  __finally {</span><br><span class="line"></span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> (hHook);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 导出函数，卸载钩子</span></span><br><span class="line"><span class="function">BOOL <span class="title">EjectDllByHook</span><span class="params">(HHOOK hook)</span> </span>{</span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">UnhookWindowsHookEx</span>(hook);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <p>我们可以直接调用该 DLL 的导出函数<code>InjectDllByHook</code>，实现 Hook 指定窗口（也可以改成线程，因为<code>InjectDllByHook</code>函数内部也是通过窗口查找到对应线程的）的指定消息。当指定的消息类型被勾住时，我们的 DLL 也就被加载到了该窗口所属的进程地址空间了，从而实现了注入。</p>
 <h1 id="三、使用远程线程方式注入"><a href="#三、使用远程线程方式注入" class="headerlink" title="三、使用远程线程方式注入"></a>三、使用远程线程方式注入</h1><h2 id="3-1-远程线程注入原理"><a href="#3-1-远程线程注入原理" class="headerlink" title="3.1 远程线程注入原理"></a>3.1 远程线程注入原理</h2><p>“注册表注入方式”由于不能精确指定需要注入的进程，而且只能注入到 GUI 程序中，灵活性较差；“钩子注入方式”虽然能够精确指定注入的线程，但只能针对特定类型的消息进行 Hook，从而间接的实现注入，对于类似 windows 服务类的程序就束手无策了。</p>
 <p>本节介绍的“远程线程的注入方式”是在实际中使用最为广泛的一种注入方式，它即可以精确指定需要注入的进程，又可以注入到非 GUI 程序中。</p>
-<p>远程线程注入方式使用的关键 API 为<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms682437(v=vs.85).aspx">CreateRemoteThread</a>，原型如下：</p>
+<p>远程线程注入方式使用的关键 API 为<a class="link" target="_blank" rel="noopener" href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms682437(v=vs.85).aspx">CreateRemoteThread<i class="fas fa-external-link-alt"></i></a>，原型如下：</p>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">HANDLE WINAPI <span class="title">CreateRemoteThread</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">  _In_  HANDLE                 hProcess,</span></span></span><br><span class="line"><span class="params"><span class="function">  _In_  LPSECURITY_ATTRIBUTES  lpThreadAttributes,</span></span></span><br><span class="line"><span class="params"><span class="function">  _In_  SIZE_T                 dwStackSize,</span></span></span><br><span class="line"><span class="params"><span class="function">  _In_  LPTHREAD_START_ROUTINE lpStartAddress,</span></span></span><br><span class="line"><span class="params"><span class="function">  _In_  LPVOID                 lpParameter,</span></span></span><br><span class="line"><span class="params"><span class="function">  _In_  DWORD                  dwCreationFlags,</span></span></span><br><span class="line"><span class="params"><span class="function">  _Out_ LPDWORD                lpThreadId</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
 
 <p><code>CreateRemoteThread</code>的参数和我们平时创建本地线程使用的<code>CreateThread</code>的参数类似，新增了<code>hProcess</code>句柄参数用于指定在哪个进程创建远程线程，通过<code>OpenProcess</code>可以获取到进程句柄，但需要注意权限问题。</p>
@@ -130,43 +344,484 @@
 
 <h3 id="3-3-3-DllMain-函数"><a href="#3-3-3-DllMain-函数" class="headerlink" title="3.3.3 DllMain 函数"></a>3.3.3 DllMain 函数</h3><p>使用远程线程的方式进行 DLL 注入，我们一般在 DllMain 的<code>DLL_PROCESS_ATTACH</code>条件分支开始业务逻辑（通常会另外创建一个子线程，将业务逻辑放到子线程中处理），<code>DLL_PROCESS_DETACH</code>条件分支出结束业务逻辑。</p>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">BOOL APIENTRY <span class="title">DllMain</span><span class="params">(HMODULE hModule, DWORD  fdwReason, LPVOID lpReserved)</span> </span>{</span><br><span class="line">  HANDLE hThread = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">switch</span>(fdwReason) {</span><br><span class="line">        <span class="keyword">case</span> DLL_PROCESS_ATTACH:</span><br><span class="line">        {</span><br><span class="line">      g_hDllModule = hModule;</span><br><span class="line">      <span class="comment">// 使用注册表方式和CreateRemoteThread方式注入时，一般在此处创建线程</span></span><br><span class="line">      <span class="comment">//</span></span><br><span class="line"></span><br><span class="line">      hThread = (HANDLE)_beginthreadex(<span class="literal">NULL</span>, <span class="number">0</span>, PluginProc, <span class="literal">NULL</span>, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line">      <span class="keyword">if</span> (hThread) {</span><br><span class="line">        <span class="built_in">CloseHandle</span>(hThread); <span class="comment">// 关闭句柄，防止句柄泄漏</span></span><br><span class="line">      }</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">case</span> DLL_THREAD_ATTACH:</span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">case</span> DLL_THREAD_DETACH:</span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">case</span> DLL_PROCESS_DETACH:</span><br><span class="line">        {</span><br><span class="line">          <span class="comment">// 结束业务逻辑</span></span><br><span class="line">          <span class="comment">// ......</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> TRUE;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-</div><div class="article-licensing box"><div class="licensing-title"><p>Windows注入与拦截(2)--DLL注入的方式</p><p><a href="https://jiangxueqiao.com/post/721636578.html">https://jiangxueqiao.com/post/721636578.html</a></p></div><div class="licensing-meta level is-mobile"><div class="level-left"><div class="level-item is-narrow"><div><h6>作者</h6><p>江雪桥</p></div></div><div class="level-item is-narrow"><div><h6>发布于</h6><p>2021-05-02</p></div></div><div class="level-item is-narrow"><div><h6>更新于</h6><p>2023-09-27</p></div></div><div class="level-item is-narrow"><div><h6>许可协议</h6><p><a class="icons" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="icon fab fa-creative-commons"></i></a><a class="icons" rel="noopener" target="_blank" title="Attribution" href="https://creativecommons.org/licenses/by/4.0/"><i class="icon fab fa-creative-commons-by"></i></a><a class="icons" rel="noopener" target="_blank" title="Noncommercial" href="https://creativecommons.org/licenses/by-nc/4.0/"><i class="icon fab fa-creative-commons-nc"></i></a></p></div></div></div></div></div><!--!--></article></div><!--!--><nav class="post-navigation mt-4 level is-mobile"><div class="level-start"><a class="article-nav-prev level level-item link-muted" href="/post/782629701.html"><i class="level-item fas fa-chevron-left"></i><span class="level-item">理解C/C++运行时库</span></a></div><div class="level-end"><a class="article-nav-next level level-item link-muted" href="/post/1504192511.html"><span class="level-item">Windows注入与拦截(1)--DLL注入基础</span><i class="level-item fas fa-chevron-right"></i></a></div></nav><div class="card"><div class="card-content"><h3 class="title is-5">评论</h3><div class="content twikoo" id="twikoo"></div><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/twikoo/1.6.6/dist/twikoo.all.min.js"></script><script>twikoo.init({
-            envId: 'https://twikoo.jiangxueqiao.com',
+
+                </div>
+
+                
+                        
+<div class="post-copyright-info-container border-box">
+    <div class="copyright-info-content border-box">
+        <div class="copyright-info-top border-box">
+            <div class="copyright-post-title border-box text-ellipsis">
+                Windows注入与拦截(2)--DLL注入的方式
+            </div>
+
+            <div class="copyright-post-link border-box text-ellipsis">
+                post/721636578.html
+            </div>
+        </div>
+
+        <div class="copyright-info-bottom border-box">
+            <div class="copyright-post-author bottom-item">
+                <div class="type">
+                    作者
+                </div>
+                <div class="content">江雪桥</div>
+            </div>
+
+            <div class="post-time bottom-item">
+                <div class="type">
+                    发布于
+                </div>
+                <div class="content">2021-05-02 09:41</div>
+            </div>
+
+
+            <div class="post-license bottom-item">
+                <div class="type">
+                    许可
+                </div>
+                <div class="content tooltip" data-tooltip-content="CC BY-NC-SA 4.0">
+                    <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans">
+                        <i class="fa-brands fa-creative-commons"></i>
+                        <i class="fa-brands fa-creative-commons-by"></i>
+                        <i class="fa-brands fa-creative-commons-nc"></i>
+                        <i class="fa-brands fa-creative-commons-sa"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <i class="copyright-bg fa-solid fa-copyright"></i>
+    </div>
+    <div class="copy-copyright-info flex-center tooltip" data-tooltip-content="复制版权信息" data-tooltip-offset-y="-2px">
+        <i class="fa-solid fa-copy"></i>
+    </div>
+</div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                    </div>
+                    <div>
+                        
+                            <div class="post-share-container border-box">
+    <ul class="share-list-wrap border-box">
+        <li class="qq share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到 QQ"
+        >
+            <i class="fa-brands fa-qq"></i>
+        </li>
+        <li class="wechat share-item border-box flex-center tooltip tooltip-img"
+            data-tooltip-content="分享到微信"
+            data-tooltip-img-tip="微信扫一扫"
+            data-tooltip-img-style="background-color: #fff; top: -10px; padding: 0.6rem 0.6rem 0.1rem 0.6rem;"
+        >
+            <i class="fa-brands fa-weixin"></i>
+        </li>
+        <li class="weibo share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到微博"
+        >
+            <i class="fa-brands fa-weibo"></i>
+        </li>
+    </ul>
+</div>
+
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/post/782629701.html"
+                                   title="理解C/C++运行时库"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">理解C/C++运行时库</span>
+                                        <span class="post-nav-item">上一篇</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/post/1504192511.html"
+                                   title="Windows注入与拦截(1)--DLL注入基础"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">Windows注入与拦截(1)--DLL注入基础</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+    <div class="comments-container border-box">
+        <div id="comments-anchor" class="comment-area-title border-box">
+            <i class="fas fa-comments"></i>&nbsp;评论
+        </div>
+        <div class="comment-plugin-fail border-box">
+    <span class="fail-tip">评论插件加载失败</span>
+    <button class="reload keep-button">点击重新加载</button>
+</div>
+<div class="comment-plugin-loading flex-center border-box">
+    <i class="loading-icon fa-solid fa-spinner fa-spin"></i>
+    <span class="load-tip">正在加载评论插件</span>
+</div>
+<script data-pjax>
+  window.KeepCommentPlugin = {}
+  window.KeepCommentPlugin.hideLoading = () => {
+    const cplDom = document.querySelector('.comments-container .comment-plugin-loading')
+    cplDom.style.display = 'none'
+  }
+  window.KeepCommentPlugin.loadFailHandle = () => {
+    window.KeepCommentPlugin.hideLoading()
+    const cpfDom = document.querySelector('.comments-container .comment-plugin-fail')
+    cpfDom.style.display = 'flex'
+    cpfDom.querySelector('.reload').addEventListener('click', () => {
+      window.location.reload()
+    })
+  }
+</script>
+
+        
             
-            lang: "zh-CN",
-        });</script></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-3-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/pi-200.png" alt="Jiang Xueqiao"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Jiang Xueqiao</p><p class="is-size-6 is-block">Software Engineer</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Wuhan, Hubei</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">文章</p><a href="/archives"><p class="title">160</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">分类</p><a href="/categories"><p class="title">26</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">标签</p><a href="/tags"><p class="title">30</p></a></div></div></nav></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">最新文章</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-02-25T05:53:19.000Z">2024-02-25</time></p><p class="title"><a href="/post/946276004.html">产品级的Electron项目模板</a></p><p class="categories"><a href="/categories/%E2%91%A2-Power-By-Me/">③ Power By Me</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2024-02-20T01:25:38.000Z">2024-02-20</time></p><p class="title"><a href="/post/1391804423.html">🐉2024龙行龘龘</a></p><p class="categories"><a href="/categories/%E2%91%AD-%E6%9D%82%E5%BF%B5/">⑭ 杂念</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-12-21T13:48:55.000Z">2023-12-21</time></p><p class="title"><a href="/post/2185523635.html">开源库spdlog使用备忘</a></p><p class="categories"><a href="/categories/%E2%91%AA-%E5%BC%80%E6%BA%90%E5%BA%93/">⑪ 开源库</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-12-15T13:20:06.000Z">2023-12-15</time></p><p class="title"><a href="/post/2418701368.html">C/C++不同整数类型的区别</a></p><p class="categories"><a href="/categories/%E2%91%A1-C/">② C++</a></p></div></article><article class="media"><div class="media-content"><p class="date"><time dateTime="2023-11-26T11:07:09.000Z">2023-11-26</time></p><p class="title"><a href="/post/1533480858.html">Windows窗口调试利器-WinSpyPlus</a></p><p class="categories"><a href="/categories/%E2%91%A2-Power-By-Me/">③ Power By Me</a></p></div></article></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">分类</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/"><span class="level-start"><span class="level-item">① 专栏集锦</span></span><span class="level-end"><span class="level-item tag">63</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E5%86%85%E5%AD%98%E4%BD%93%E7%B3%BB/"><span class="level-start"><span class="level-item">Windows内存体系</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E5%A5%97%E6%8E%A5%E5%AD%97I-O%E6%A8%A1%E5%9E%8B/"><span class="level-start"><span class="level-item">Windows套接字I/O模型</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B/"><span class="level-start"><span class="level-item">Windows核心编程</span></span><span class="level-end"><span class="level-item tag">19</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/Windows%E6%B3%A8%E5%85%A5%E4%B8%8E%E6%8B%A6%E6%88%AA/"><span class="level-start"><span class="level-item">Windows注入与拦截</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/%E6%89%93%E5%8C%85%E7%8B%82%E9%AD%94%E4%B9%8BNSIS%E6%95%99%E7%A8%8B/"><span class="level-start"><span class="level-item">打包狂魔之NSIS教程</span></span><span class="level-end"><span class="level-item tag">13</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/%E6%8B%A8%E5%BC%80%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81%E7%9A%84%E8%BF%B7%E9%9B%BE/"><span class="level-start"><span class="level-item">拨开字符编码的迷雾</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A0-%E4%B8%93%E6%A0%8F%E9%9B%86%E9%94%A6/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/"><span class="level-start"><span class="level-item">网络协议</span></span><span class="level-end"><span class="level-item tag">8</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E2%91%A1-C/"><span class="level-start"><span class="level-item">② C++</span></span><span class="level-end"><span class="level-item tag">28</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E2%91%A1-C/Qt/"><span class="level-start"><span class="level-item">Qt</span></span><span class="level-end"><span class="level-item tag">15</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E2%91%A2-Power-By-Me/"><span class="level-start"><span class="level-item">③ Power By Me</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A3-Electron/"><span class="level-start"><span class="level-item">④ Electron</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A4-%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E7%A8%8B/"><span class="level-start"><span class="level-item">⑤ 音视频编程</span></span><span class="level-end"><span class="level-item tag">11</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E2%91%A4-%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E7%A8%8B/WebRTC/"><span class="level-start"><span class="level-item">WebRTC</span></span><span class="level-end"><span class="level-item tag">9</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E2%91%A5-%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%80%E5%8F%91/"><span class="level-start"><span class="level-item">⑥ 服务器开发</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A6-%E8%BD%AF%E4%BB%B6%E8%B0%83%E8%AF%95/"><span class="level-start"><span class="level-item">⑦ 软件调试</span></span><span class="level-end"><span class="level-item tag">6</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A7-%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84/"><span class="level-start"><span class="level-item">⑧ 软件架构</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A8-%E6%95%B0%E6%8D%AE%E5%BA%93/"><span class="level-start"><span class="level-item">⑨ 数据库</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A9-%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"><span class="level-start"><span class="level-item">⑩ 编程基础</span></span><span class="level-end"><span class="level-item tag">13</span></span></a><ul><li><a class="level is-mobile" href="/categories/%E2%91%A9-%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/CMake/"><span class="level-start"><span class="level-item">CMake</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%A9-%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/%E6%89%B9%E5%A4%84%E7%90%86/"><span class="level-start"><span class="level-item">批处理</span></span><span class="level-end"><span class="level-item tag">4</span></span></a></li></ul></li><li><a class="level is-mobile" href="/categories/%E2%91%AA-%E5%BC%80%E6%BA%90%E5%BA%93/"><span class="level-start"><span class="level-item">⑪ 开源库</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%AB-Web%E5%BC%80%E5%8F%91/"><span class="level-start"><span class="level-item">⑫ Web开发</span></span><span class="level-end"><span class="level-item tag">5</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%AC-%E7%BE%8E%E6%96%87%E8%B5%8F%E6%9E%90/"><span class="level-start"><span class="level-item">⑬ 美文赏析</span></span><span class="level-end"><span class="level-item tag">3</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%AD-%E6%9D%82%E5%BF%B5/"><span class="level-start"><span class="level-item">⑭ 杂念</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li><li><a class="level is-mobile" href="/categories/%E2%91%AE-%E7%88%B1%E6%8A%98%E8%85%BE/"><span class="level-start"><span class="level-item">⑮ 爱折腾</span></span><span class="level-end"><span class="level-item tag">2</span></span></a></li></ul></div></div></div><div class="column-right-shadow is-hidden-widescreen is-sticky"></div></div><div class="column column-right is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only order-3 is-sticky"><div class="card widget" id="toc" data-type="toc"><div class="card-content"><div class="menu"><h3 class="menu-label">目录</h3><ul class="menu-list"><li><a class="level is-mobile" href="#一、使用注册表方式注入"><span class="level-left"><span class="level-item">一、使用注册表方式注入</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#1-1-注入方法"><span class="level-left"><span class="level-item">1.1 注入方法</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#1-1-1-注入-64-位系统上的-32-位进程"><span class="level-left"><span class="level-item">1.1.1 注入 64 位系统上的 32 位进程</span></span></a></li><li><a class="level is-mobile" href="#1-1-2-注入-64-位进程"><span class="level-left"><span class="level-item">1.1.2 注入 64 位进程</span></span></a></li></ul></li><li><a class="level is-mobile" href="#1-2-为什么可以这么做？"><span class="level-left"><span class="level-item">1.2 为什么可以这么做？</span></span></a></li><li><a class="level is-mobile" href="#1-3-这么做有什么弊端？"><span class="level-left"><span class="level-item">1.3 这么做有什么弊端？</span></span></a></li></ul></li><li><a class="level is-mobile" href="#二、使用钩子方式注入"><span class="level-left"><span class="level-item">二、使用钩子方式注入</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#2-1-钩子技术介绍"><span class="level-left"><span class="level-item">2.1 钩子技术介绍</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#2-1-1-SetWindowsHookEx"><span class="level-left"><span class="level-item">2.1.1 SetWindowsHookEx</span></span></a></li><li><a class="level is-mobile" href="#2-1-2-CallNextHookEx"><span class="level-left"><span class="level-item">2.1.2 CallNextHookEx</span></span></a></li><li><a class="level is-mobile" href="#2-1-3-UnhookWindowsHookEx"><span class="level-left"><span class="level-item">2.1.3 UnhookWindowsHookEx</span></span></a></li></ul></li><li><a class="level is-mobile" href="#2-2-钩子实例"><span class="level-left"><span class="level-item">2.2 钩子实例</span></span></a></li></ul></li><li><a class="level is-mobile" href="#三、使用远程线程方式注入"><span class="level-left"><span class="level-item">三、使用远程线程方式注入</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#3-1-远程线程注入原理"><span class="level-left"><span class="level-item">3.1 远程线程注入原理</span></span></a></li><li><a class="level is-mobile" href="#3-2-注意事项"><span class="level-left"><span class="level-item">3.2 注意事项</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#3-2-1-LoadLibrary-函数地址问题"><span class="level-left"><span class="level-item">3.2.1 LoadLibrary 函数地址问题</span></span></a></li><li><a class="level is-mobile" href="#3-2-2-DLL-路径字符串地址问题"><span class="level-left"><span class="level-item">3.2.2 DLL 路径字符串地址问题</span></span></a></li><li><a class="level is-mobile" href="#3-2-3-取消注入问题"><span class="level-left"><span class="level-item">3.2.3 取消注入问题</span></span></a></li></ul></li><li><a class="level is-mobile" href="#3-3-实例"><span class="level-left"><span class="level-item">3.3 实例</span></span></a><ul class="menu-list"><li><a class="level is-mobile" href="#3-3-1-InjectDllByRemoteThread-函数"><span class="level-left"><span class="level-item">3.3.1 InjectDllByRemoteThread 函数</span></span></a></li><li><a class="level is-mobile" href="#3-3-2-EjectDllByRemoteThread-函数"><span class="level-left"><span class="level-item">3.3.2 EjectDllByRemoteThread 函数</span></span></a></li><li><a class="level is-mobile" href="#3-3-3-DllMain-函数"><span class="level-left"><span class="level-item">3.3.3 DllMain 函数</span></span></a></li></ul></li></ul></li></ul></div></div><script src="/js/toc.js" defer></script></div></div></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/codesilo.png" alt="CodeSilo" height="28"></a><p class="is-size-7"><span class="is-size-7">© 2017~2024 江雪桥</span>  <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/" style="color:#000">鄂ICP备2020015399号-6</a>  </p><p class="is-size-7">网站风格：<a target="_blank" rel="noopener" href="https://www.cyberpunk.net/gb/zh-cn/" style="color:#75d4ef">赛博朋克（cyberpunk）</a></p><p class="is-size-7">内容同步发布到以下站点：<a href="https://jiangxueqiao.com" style="color:#fc1e1e">jiangxueqiao.com</a>    <a target="_blank" rel="noopener" href="https://winsoft666.github.io" style="color:#fc1e1e">winsoft666.github.io</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="GitHub" href="https://github.com/winsoft666"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/jquery/3.3.1/dist/jquery.min.js"></script><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/moment/2.22.2/min/moment-with-locales.min.js"></script><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/clipboard/2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("zh-cn");</script><script>var IcarusThemeSettings = {
-            article: {
-                highlight: {
-                    clipboard: true,
-                    fold: 'unfolded'
-                }
+
+    <div class="twikoo-container">
+        <div id="twikoo-comment"></div>
+        <script 
+                src="//cdn.jsdelivr.net/npm/twikoo@1.6.21/dist/twikoo.all.min.js"
+                async
+                onerror="window.KeepCommentPlugin.loadFailHandle()"
+        ></script>
+        <script 
+                async
+                onerror="window.KeepCommentPlugin.loadFailHandle()"
+        >
+          window.KeepCommentPlugin.initTwikoo = () => {
+            if (window?.twikoo) {
+              twikoo.init({
+                el: '#twikoo-comment',
+                envId: 'https://twikoo.jiangxueqiao.com',
+                region: 'zh-CN',
+                lang: 'zh-CN' || 'zh-CN'
+              })
+              window.KeepCommentPlugin.hideLoading()
+            } else {
+              setTimeout(() => {
+                window.KeepCommentPlugin.initTwikoo()
+              }, 1000)
             }
-        };</script><script src="/js/column.js"></script><a id="back-to-top" title="回到顶端" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/lightgallery/1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/justifiedGallery/3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
-            if (typeof $.fn.lightGallery === 'function') {
-                $('.article').lightGallery({ selector: '.gallery-item' });
-            }
-            if (typeof $.fn.justifiedGallery === 'function') {
-                if ($('.justified-gallery > p > .gallery-item').length) {
-                    $('.justified-gallery > p > .gallery-item').unwrap();
-                }
-                $('.justified-gallery').justifiedGallery();
-            }
-        });</script><!--!--><!--!--><script type="text/x-mathjax-config">MathJax.Hub.Config({
-            'HTML-CSS': {
-                matchFontHeight: false
-            },
-            SVG: {
-                matchFontHeight: false
-            },
-            CommonHTML: {
-                matchFontHeight: false
-            },
-            tex2jax: {
-                inlineMath: [
-                    ['$','$'],
-                    ['\\(','\\)']
-                ]
-            }
-        });</script><script src="https://blog-static.jiangxueqiao.com/blog/icarus-theme/js/mathjax/2.7.9/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="想要查找什么..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
-            loadInsight({"contentUrl":"/content.json"}, {"hint":"想要查找什么...","untitled":"(无标题)","posts":"文章","pages":"页面","categories":"分类","tags":"标签"});
-        });</script></body></html>
+          }
+
+          if ('false' === 'true') {
+            setTimeout(() => {
+              window.KeepCommentPlugin.initTwikoo()
+            }, 1200)
+          } else {
+            window.addEventListener('DOMContentLoaded', window.KeepCommentPlugin.initTwikoo)
+          }
+        </script>
+    </div>
+
+
+        
+    </div>
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E4%BD%BF%E7%94%A8%E6%B3%A8%E5%86%8C%E8%A1%A8%E6%96%B9%E5%BC%8F%E6%B3%A8%E5%85%A5"><span class="nav-text">一、使用注册表方式注入</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E6%B3%A8%E5%85%A5%E6%96%B9%E6%B3%95"><span class="nav-text">1.1 注入方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-1-%E6%B3%A8%E5%85%A5-64-%E4%BD%8D%E7%B3%BB%E7%BB%9F%E4%B8%8A%E7%9A%84-32-%E4%BD%8D%E8%BF%9B%E7%A8%8B"><span class="nav-text">1.1.1 注入 64 位系统上的 32 位进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-2-%E6%B3%A8%E5%85%A5-64-%E4%BD%8D%E8%BF%9B%E7%A8%8B"><span class="nav-text">1.1.2 注入 64 位进程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%AF%E4%BB%A5%E8%BF%99%E4%B9%88%E5%81%9A%EF%BC%9F"><span class="nav-text">1.2 为什么可以这么做？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-%E8%BF%99%E4%B9%88%E5%81%9A%E6%9C%89%E4%BB%80%E4%B9%88%E5%BC%8A%E7%AB%AF%EF%BC%9F"><span class="nav-text">1.3 这么做有什么弊端？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E4%BD%BF%E7%94%A8%E9%92%A9%E5%AD%90%E6%96%B9%E5%BC%8F%E6%B3%A8%E5%85%A5"><span class="nav-text">二、使用钩子方式注入</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E9%92%A9%E5%AD%90%E6%8A%80%E6%9C%AF%E4%BB%8B%E7%BB%8D"><span class="nav-text">2.1 钩子技术介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-1-SetWindowsHookEx"><span class="nav-text">2.1.1 SetWindowsHookEx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-2-CallNextHookEx"><span class="nav-text">2.1.2 CallNextHookEx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-3-UnhookWindowsHookEx"><span class="nav-text">2.1.3 UnhookWindowsHookEx</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E9%92%A9%E5%AD%90%E5%AE%9E%E4%BE%8B"><span class="nav-text">2.2 钩子实例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E4%BD%BF%E7%94%A8%E8%BF%9C%E7%A8%8B%E7%BA%BF%E7%A8%8B%E6%96%B9%E5%BC%8F%E6%B3%A8%E5%85%A5"><span class="nav-text">三、使用远程线程方式注入</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E8%BF%9C%E7%A8%8B%E7%BA%BF%E7%A8%8B%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86"><span class="nav-text">3.1 远程线程注入原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-text">3.2 注意事项</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-1-LoadLibrary-%E5%87%BD%E6%95%B0%E5%9C%B0%E5%9D%80%E9%97%AE%E9%A2%98"><span class="nav-text">3.2.1 LoadLibrary 函数地址问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-2-DLL-%E8%B7%AF%E5%BE%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%9C%B0%E5%9D%80%E9%97%AE%E9%A2%98"><span class="nav-text">3.2.2 DLL 路径字符串地址问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-3-%E5%8F%96%E6%B6%88%E6%B3%A8%E5%85%A5%E9%97%AE%E9%A2%98"><span class="nav-text">3.2.3 取消注入问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-%E5%AE%9E%E4%BE%8B"><span class="nav-text">3.3 实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-1-InjectDllByRemoteThread-%E5%87%BD%E6%95%B0"><span class="nav-text">3.3.1 InjectDllByRemoteThread 函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-2-EjectDllByRemoteThread-%E5%87%BD%E6%95%B0"><span class="nav-text">3.3.2 EjectDllByRemoteThread 函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-3-DllMain-%E5%87%BD%E6%95%B0"><span class="nav-text">3.3.3 DllMain 函数</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="border-box website-info-box default">
+        
+            <div class="copyright-info info-item default">
+                &copy;&nbsp;<span>2017</span>&nbsp;-&nbsp;2024
+                
+                    &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">江雪桥</a>
+                
+            </div>
+
+            
+                <div class="icp-info info-item default">
+                    <a class=""
+                       target="_blank"
+                       href="https://beian.miit.gov.cn"
+                    >
+                        鄂ICP备2020015399号-6
+                    </a>
+                </div>
+            
+
+            
+        
+
+        <div class="count-item info-item default">
+            
+
+            
+
+            
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="tools-list border-box">
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+            <li class="tools-item flex-center go-to-comments">
+                <i class="fas fa-comment"></i>
+                <span class="post-comments-count"></span>
+            </li>
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-toggle-theme-mode flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+            <li class="tools-item go-to-comments-tablet flex-center">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E4%BD%BF%E7%94%A8%E6%B3%A8%E5%86%8C%E8%A1%A8%E6%96%B9%E5%BC%8F%E6%B3%A8%E5%85%A5"><span class="nav-text">一、使用注册表方式注入</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E6%B3%A8%E5%85%A5%E6%96%B9%E6%B3%95"><span class="nav-text">1.1 注入方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-1-%E6%B3%A8%E5%85%A5-64-%E4%BD%8D%E7%B3%BB%E7%BB%9F%E4%B8%8A%E7%9A%84-32-%E4%BD%8D%E8%BF%9B%E7%A8%8B"><span class="nav-text">1.1.1 注入 64 位系统上的 32 位进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-2-%E6%B3%A8%E5%85%A5-64-%E4%BD%8D%E8%BF%9B%E7%A8%8B"><span class="nav-text">1.1.2 注入 64 位进程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%AF%E4%BB%A5%E8%BF%99%E4%B9%88%E5%81%9A%EF%BC%9F"><span class="nav-text">1.2 为什么可以这么做？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-%E8%BF%99%E4%B9%88%E5%81%9A%E6%9C%89%E4%BB%80%E4%B9%88%E5%BC%8A%E7%AB%AF%EF%BC%9F"><span class="nav-text">1.3 这么做有什么弊端？</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E4%BD%BF%E7%94%A8%E9%92%A9%E5%AD%90%E6%96%B9%E5%BC%8F%E6%B3%A8%E5%85%A5"><span class="nav-text">二、使用钩子方式注入</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E9%92%A9%E5%AD%90%E6%8A%80%E6%9C%AF%E4%BB%8B%E7%BB%8D"><span class="nav-text">2.1 钩子技术介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-1-SetWindowsHookEx"><span class="nav-text">2.1.1 SetWindowsHookEx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-2-CallNextHookEx"><span class="nav-text">2.1.2 CallNextHookEx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-3-UnhookWindowsHookEx"><span class="nav-text">2.1.3 UnhookWindowsHookEx</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E9%92%A9%E5%AD%90%E5%AE%9E%E4%BE%8B"><span class="nav-text">2.2 钩子实例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E4%BD%BF%E7%94%A8%E8%BF%9C%E7%A8%8B%E7%BA%BF%E7%A8%8B%E6%96%B9%E5%BC%8F%E6%B3%A8%E5%85%A5"><span class="nav-text">三、使用远程线程方式注入</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E8%BF%9C%E7%A8%8B%E7%BA%BF%E7%A8%8B%E6%B3%A8%E5%85%A5%E5%8E%9F%E7%90%86"><span class="nav-text">3.1 远程线程注入原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-text">3.2 注意事项</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-1-LoadLibrary-%E5%87%BD%E6%95%B0%E5%9C%B0%E5%9D%80%E9%97%AE%E9%A2%98"><span class="nav-text">3.2.1 LoadLibrary 函数地址问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-2-DLL-%E8%B7%AF%E5%BE%84%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%9C%B0%E5%9D%80%E9%97%AE%E9%A2%98"><span class="nav-text">3.2.2 DLL 路径字符串地址问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-3-%E5%8F%96%E6%B6%88%E6%B3%A8%E5%85%A5%E9%97%AE%E9%A2%98"><span class="nav-text">3.2.3 取消注入问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-%E5%AE%9E%E4%BE%8B"><span class="nav-text">3.3 实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-1-InjectDllByRemoteThread-%E5%87%BD%E6%95%B0"><span class="nav-text">3.3.1 InjectDllByRemoteThread 函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-2-EjectDllByRemoteThread-%E5%87%BD%E6%95%B0"><span class="nav-text">3.3.2 EjectDllByRemoteThread 函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-3-DllMain-%E5%87%BD%E6%95%B0"><span class="nav-text">3.3.3 DllMain 函数</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+<!-- common -->
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+
+<!-- local-search -->
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+<!-- lazyload -->
+
+    
+<script src="/js/lazyload.js"></script>
+
+
+
+<div class="">
+    
+        <!-- post-helper -->
+        
+<script src="/js/post/post-helper.js"></script>
+
+
+        <!-- toc -->
+        
+            
+<script src="/js/post/toc.js"></script>
+
+        
+
+        <!-- copyright-info -->
+        
+            
+<script src="/js/post/copyright-info.js"></script>
+
+        
+
+        <!-- share -->
+        
+            
+<script src="/js/post/share.js"></script>
+
+        
+    
+
+    <!-- category-page -->
+    
+
+    <!-- links-page -->
+    
+
+    <!-- photos-page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+</body>
+</html>
