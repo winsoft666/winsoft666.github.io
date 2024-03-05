@@ -6,7 +6,7 @@
   <link href="https://jiangxueqiao.com/atom.xml" rel="self"/>
   
   <link href="https://jiangxueqiao.com/"/>
-  <updated>2024-03-02T09:21:54.922Z</updated>
+  <updated>2024-03-05T10:29:22.677Z</updated>
   <id>https://jiangxueqiao.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>不同操作系统所集成的字体</title>
+    <link href="https://jiangxueqiao.com/post/1759569674.html"/>
+    <id>https://jiangxueqiao.com/post/1759569674.html</id>
+    <published>2024-03-05T10:00:55.000Z</published>
+    <updated>2024-03-05T10:29:22.677Z</updated>
+    
+    <content type="html"><![CDATA[<p>如果界面所指定的字体在用户系统上未安装，则会自动降级到系统默认字体，这样会导致界面显示异常或达不到预期效果。</p><p>对于特殊字体我们通常会集成到软件安装包内，但对于汉字这样的语言，它的文字比较多，因此字体文件比较大，如果集成到安装包内会导致安装包体积变大，所以对于类似中文这样字符比较多的语言字体，我们通常会选择系统自带的字体。</p><p>而不同操作系统（如Windows和macOS）所自带的字体不一样，甚至同一操作系统不同的版本（如Windows 7和Windows 11）自带的字体也不一样，因此在选择采用什么字体前，需要弄清我们应用程序支持的操作系统所自带的字体都有哪些，才能更好的做选择。</p><blockquote><p>操作系统的新版本通常只会新增字体，不会移除老的字体。</p></blockquote><span id="more"></span><h2 id="Windows系统"><a href="#Windows系统" class="headerlink" title="Windows系统"></a>Windows系统</h2><p>见维基百科：<a class="link" href="https://en.wikipedia.org/wiki/List_of_typefaces_included_with_Microsoft_Windows">List_of_typefaces_included_with_Microsoft_Windows<i class="fas fa-external-link-alt"></i></a></p><h2 id="macOS和iOS系统"><a href="#macOS和iOS系统" class="headerlink" title="macOS和iOS系统"></a>macOS和iOS系统</h2><p>见apple官网：<a class="link" href="https://developer.apple.com/fonts/system-fonts/">system-fonts<i class="fas fa-external-link-alt"></i></a></p><h2 id="中文字体的英文名称对照表"><a href="#中文字体的英文名称对照表" class="headerlink" title="中文字体的英文名称对照表"></a>中文字体的英文名称对照表</h2><p><strong>macOS系统部分字体</strong></p><table><thead><tr><th>中文名</th><th>英文名</th></tr></thead><tbody><tr><td>华文细黑</td><td>STHeiti Light</td></tr><tr><td>华文黑体</td><td>STHeiti</td></tr><tr><td>华文楷体</td><td>STKaiti</td></tr><tr><td>华文宋体</td><td>STSong</td></tr><tr><td>华文仿宋</td><td>STFangsong</td></tr><tr><td>俪黑 Pro</td><td>LiHei Pro Medium</td></tr><tr><td>俪宋 Pro</td><td>LiSong Pro Light</td></tr><tr><td>标楷体</td><td>BiauKai</td></tr><tr><td>苹果俪中黑</td><td>Apple LiGothic Medium</td></tr><tr><td>苹果俪细宋</td><td>Apple LiSung Light</td></tr></tbody></table><p><strong>Windows系统部分字体</strong></p><table><thead><tr><th>中文名</th><th>英文名</th></tr></thead><tbody><tr><td>新细明体</td><td>PMingLiU</td></tr><tr><td>细明体</td><td>MingLiU</td></tr><tr><td>标楷体</td><td>DFKai-SB</td></tr><tr><td>黑体</td><td>SimHei</td></tr><tr><td>宋体</td><td>SimSun</td></tr><tr><td>新宋体</td><td>NSimSun</td></tr><tr><td>仿宋</td><td>FangSong</td></tr><tr><td>楷体</td><td>KaiTi</td></tr><tr><td>仿宋_GB2312</td><td>FangSong_GB2312</td></tr><tr><td>楷体_GB2312</td><td>KaiTi_GB2312</td></tr><tr><td>微软正黑体</td><td>Microsoft JhengHei</td></tr><tr><td>微软雅黑体</td><td>Microsoft YaHei</td></tr><tr><td>隶书</td><td>LiSu</td></tr><tr><td>幼圆</td><td>YouYuan</td></tr><tr><td>华文细黑</td><td>STXihei</td></tr><tr><td>华文楷体</td><td>STKaiti</td></tr><tr><td>华文宋体</td><td>STSong</td></tr><tr><td>华文中宋</td><td>STZhongsong</td></tr><tr><td>华文仿宋</td><td>STFangsong</td></tr><tr><td>方正舒体</td><td>FZShuTi</td></tr><tr><td>方正姚体</td><td>FZYaoti</td></tr><tr><td>华文彩云</td><td>STCaiyun</td></tr><tr><td>华文琥珀</td><td>STHupo</td></tr><tr><td>华文隶书</td><td>STLiti</td></tr><tr><td>华文行楷</td><td>STXingkai</td></tr><tr><td>华文新魏</td><td>STXinwei</td></tr></tbody></table>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;如果界面所指定的字体在用户系统上未安装，则会自动降级到系统默认字体，这样会导致界面显示异常或达不到预期效果。&lt;/p&gt;
+&lt;p&gt;对于特殊字体我们通常会集成到软件安装包内，但对于汉字这样的语言，它的文字比较多，因此字体文件比较大，如果集成到安装包内会导致安装包体积变大，所以对于类似中文这样字符比较多的语言字体，我们通常会选择系统自带的字体。&lt;/p&gt;
+&lt;p&gt;而不同操作系统（如Windows和macOS）所自带的字体不一样，甚至同一操作系统不同的版本（如Windows 7和Windows 11）自带的字体也不一样，因此在选择采用什么字体前，需要弄清我们应用程序支持的操作系统所自带的字体都有哪些，才能更好的做选择。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;操作系统的新版本通常只会新增字体，不会移除老的字体。&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="⑩ 编程基础" scheme="https://jiangxueqiao.com/categories/%E2%91%A9-%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
+    
+    
+    <category term="字体" scheme="https://jiangxueqiao.com/tags/%E5%AD%97%E4%BD%93/"/>
+    
+  </entry>
   
   <entry>
     <title>基于共享内存的跨平台RPC框架-Veigar</title>
@@ -480,28 +506,6 @@
     <category term="Vcpkg" scheme="https://jiangxueqiao.com/tags/Vcpkg/"/>
     
     <category term="Github" scheme="https://jiangxueqiao.com/tags/Github/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CMake按目录层级进行分组</title>
-    <link href="https://jiangxueqiao.com/post/1531265402.html"/>
-    <id>https://jiangxueqiao.com/post/1531265402.html</id>
-    <published>2023-10-04T00:09:36.000Z</published>
-    <updated>2023-10-27T04:54:07.994Z</updated>
-    
-    <content type="html"><![CDATA[<p>为了提高项目的可维护性，我们通常会将不同用途的代码文件放到不同的文件夹中，如头文件放到include目录，源文件放到src目录，第三方库放到3rd目录等。</p><p>当使用CMake生成Visual Studio工程时，我们亦希望在Visual Studio中能看到这样的文件结构。当然，我们可以使用<code>source_group</code>指令进行添加，但当目录和层级很多时，这样添加起来就显得比较繁琐了，本文介绍一种懒人方法。</p><span id="more"></span><p>函数<code>group_sources</code>用于遍历传入文件并根据文件所在目录添加<code>source_group</code>指令。</p><figure class="highlight cmake"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span>(group_sources)</span><br><span class="line">  <span class="keyword">foreach</span>(_source IN ITEMS <span class="variable">${ARGN}</span>)</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">IS_ABSOLUTE</span> <span class="string">"${_source}"</span>)</span><br><span class="line">        <span class="keyword">file</span>(RELATIVE_PATH _source_rel <span class="string">"${CMAKE_CURRENT_SOURCE_DIR}"</span> <span class="string">"${_source}"</span>)</span><br><span class="line">    <span class="keyword">else</span>()</span><br><span class="line">        <span class="keyword">set</span>(_source_rel <span class="string">"${_source}"</span>)</span><br><span class="line">    <span class="keyword">endif</span>()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 获取文件所在目录</span></span><br><span class="line">    <span class="keyword">get_filename_component</span>(_source_path <span class="string">"${_source_rel}"</span> PATH)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 替换为Windows路径样式</span></span><br><span class="line">    <span class="keyword">string</span>(REPLACE <span class="string">"/"</span> <span class="string">"\\"</span> _source_path_msvc <span class="string">"${_source_path}"</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">source_group</span>(<span class="string">"${_source_path_msvc}"</span> FILES <span class="string">"${_source}"</span>)</span><br><span class="line">  <span class="keyword">endforeach</span>()</span><br><span class="line"><span class="keyword">endfunction</span>(group_sources)</span><br></pre></td></tr></tbody></table></figure><p>函数<code>group_sources</code>支持传入多个参数，使用方法如下：</p><figure class="highlight cmake"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">file</span>(GLOB_RECURSE HEADER_FILES       ./<span class="keyword">include</span>/*.hpp ./<span class="keyword">include</span>/*.h)</span><br><span class="line"><span class="keyword">file</span>(GLOB_RECURSE SOURCE_FILES       ./src/*.cc ./src/*.cpp)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装目录层级对${HEADER_FILES}和${SOURCE_FILES}中的文件进行分组</span></span><br><span class="line">group_sources(<span class="variable">${HEADER_FILES}</span> <span class="variable">${SOURCE_FILES}</span>)</span><br></pre></td></tr></tbody></table></figure>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;为了提高项目的可维护性，我们通常会将不同用途的代码文件放到不同的文件夹中，如头文件放到include目录，源文件放到src目录，第三方库放到3rd目录等。&lt;/p&gt;
-&lt;p&gt;当使用CMake生成Visual Studio工程时，我们亦希望在Visual Studio中能看到这样的文件结构。当然，我们可以使用&lt;code&gt;source_group&lt;/code&gt;指令进行添加，但当目录和层级很多时，这样添加起来就显得比较繁琐了，本文介绍一种懒人方法。&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="⑩ 编程基础" scheme="https://jiangxueqiao.com/categories/%E2%91%A9-%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
-    
-    <category term="CMake" scheme="https://jiangxueqiao.com/categories/%E2%91%A9-%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/CMake/"/>
-    
     
   </entry>
   
