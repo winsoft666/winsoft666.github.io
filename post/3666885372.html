@@ -35,7 +35,7 @@
     <script class="keep-theme-configurations">
     const KEEP = window.KEEP || {}
     KEEP.hexo_config = {"hostname":"jiangxueqiao.com","root":"/","language":"zh-CN","path":"search.xml"}
-    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"代码派","author":"江雪桥","avatar":"/images/avatar.png","logo":"/images/logo.png","favicon":"/images/favicon.png"},"menu":{"Archives":"/archives","Categories":"/categories","About":"/about","Github":"https://github.com/winsoft666"},"first_screen":{"enable":false,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/winsoft666","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":true,"hide_header":true},"home":{"category":false,"tag":true,"announcement":null},"post":{"author_badge":{"enable":false,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":false},"comment":{"enable":true,"use":"twikoo","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":"https://twikoo.jiangxueqiao.com","region":"zh-CN","version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2017,"word_count":false,"icp":{"enable":true,"record_code":"鄂ICP备2020015399号-6","url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null,"/css/custom.css"],"js":[null]},"root":"","version":"4.0.7"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"代码派","author":"江雪桥","avatar":"/images/avatar.png","logo":"/images/logo.png","favicon":"/images/favicon.png"},"menu":{"Archives":"/archives","Categories":"/categories","Tags":"/tags","About":"/about","Github":"https://github.com/winsoft666"},"first_screen":{"enable":false,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/winsoft666","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":true,"hide_header":true},"home":{"category":true,"tag":true,"announcement":null},"post":{"author_badge":{"enable":false,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":false},"comment":{"enable":true,"use":"twikoo","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":"https://twikoo.jiangxueqiao.com","region":"zh-CN","version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2017,"word_count":false,"icp":{"enable":true,"record_code":"鄂ICP备2020015399号-6","url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null,"/css/custom.css"],"js":[null]},"root":"","version":"4.0.7"}
     KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
     KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
     KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
@@ -100,6 +100,12 @@
                     
                         <li class="menu-item">
                             <a class=""
+                               href="/tags"
+                            >标签</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
                                href="/about"
                             >关于</a>
                         </li>
@@ -146,6 +152,12 @@
                     <a class=""
                        href="/categories"
                     >分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags"
+                    >标签</a>
                 </li>
             
                 <li class="drawer-menu-item flex-center">
@@ -215,7 +227,7 @@
 
             <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Fri Oct 27 2023 12:54:07 GMT+0800">2023-10-27 12:54:07</span>
+                <span class="datetime" data-updated="Tue Mar 12 2024 15:45:41 GMT+0800">2024-03-12 15:45:41</span>
             </span>
         
 
@@ -223,7 +235,7 @@
             <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
                 <ul class="post-category-ul">
                     
-                            <li class="category-item"><a href="/categories/%E2%91%A4-%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E7%A8%8B/">⑤ 音视频编程</a></li>
+                            <li class="category-item"><a href="/categories/%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E7%A8%8B/">音视频编程</a></li>
                         
                     
                 </ul>
@@ -259,17 +271,16 @@
                 <div class="post-content keep-markdown-body">
                     
 
-                    <h1 id="一-WAVE-简介"><a href="#一-WAVE-简介" class="headerlink" title="一. WAVE 简介"></a>一. WAVE 简介</h1><p>WAV格式是微软公司（Microsoft)开发的一种声音文件格式，它符合 RIFF(Resource Interchange File Format)文件规范，用于保存 Windows 平台的音频信息资源，被 Windows 平台及其应用程序所广泛支持。</p>
+                    <h1 id="一-WAVE-简介"><a href="#一-WAVE-简介" class="headerlink" title="一. WAVE 简介"></a>一. WAVE 简介</h1><p>WAV格式是微软公司（Microsoft）开发的一种声音文件格式，它符合 RIFF(Resource Interchange File Format)文件规范，用于保存 Windows 平台的音频信息资源，被 Windows 平台及其应用程序所广泛支持。</p>
 <p>WAVE 是录音时用的标准的 WINDOWS 文件格式，文件的扩展名为“WAV”，数据本身的格式为 PCM 或其他压缩数据，属于无损音乐格式的一种。</p>
 <p>所有的 WAV 都有一个文件头，这个文件头记录了音频流的编码参数。<code>WAV文件 = WAV头 + PCM数据</code>。</p>
 <span id="more"></span>
 
 <h1 id="二-音频编码参数"><a href="#二-音频编码参数" class="headerlink" title="二. 音频编码参数"></a>二. 音频编码参数</h1><p>在介绍 WAVE 文件头之前，需要了解下音频编码的各个参数的含义：</p>
 <ul>
-<li>声道数量(NumChannels)<br>声道数是指支持能不同发声的音响的个数，它是衡量音响设备的重要指标之一。我们戴的耳机因为只有左右 2 个喇叭，所以最多只能支持 2 个声道数量。<br>单声道（mono）的声道数为 1；立体声道（stereo）的声道数默认为 2，即左右声道；四声道即前左、前右，后左、后右供 4 个发音点；目前还有 5.1 声道、7.1 声道。</li>
-</ul>
-<p>对于我们音频编码存储来说，每多一个声道，就要多存储一份数据。</p>
-<ul>
+<li><p>声道数量(NumChannels)<br>声道数是指支持能不同发声的音响的个数，它是衡量音响设备的重要指标之一。我们戴的耳机因为只有左右 2 个喇叭，所以最多只能支持 2 个声道数量。<br>单声道（mono）的声道数为 1；立体声道（stereo）的声道数默认为 2，即左右声道；四声道即前左、前右，后左、后右供 4 个发音点；目前还有 5.1 声道、7.1 声道。</p>
+<p>对于音频编码存储来说，每多一个声道，就要多存储一份数据。</p>
+</li>
 <li><p>采样率(SampleRate)<br>表示每秒采样的次数，常见的有 8000, 16000, 32000, 44100, 48000。</p>
 </li>
 <li><p>采样精度(BitPerSample)<br>表示每次从每个声道采样的数据的大小，以比特位单位。一般为 16,32。16 即 16 比特，也就是 2 个字节。</p>

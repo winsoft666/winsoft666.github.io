@@ -33,7 +33,7 @@
     <script class="keep-theme-configurations">
     const KEEP = window.KEEP || {}
     KEEP.hexo_config = {"hostname":"jiangxueqiao.com","root":"/","language":"zh-CN","path":"search.xml"}
-    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"代码派","author":"江雪桥","avatar":"/images/avatar.png","logo":"/images/logo.png","favicon":"/images/favicon.png"},"menu":{"Archives":"/archives","Categories":"/categories","About":"/about","Github":"https://github.com/winsoft666"},"first_screen":{"enable":false,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/winsoft666","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":true,"hide_header":true},"home":{"category":false,"tag":true,"announcement":null},"post":{"author_badge":{"enable":false,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":false},"comment":{"enable":true,"use":"twikoo","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":"https://twikoo.jiangxueqiao.com","region":"zh-CN","version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2017,"word_count":false,"icp":{"enable":true,"record_code":"鄂ICP备2020015399号-6","url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null,"/css/custom.css"],"js":[null]},"root":"","version":"4.0.7"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"代码派","author":"江雪桥","avatar":"/images/avatar.png","logo":"/images/logo.png","favicon":"/images/favicon.png"},"menu":{"Archives":"/archives","Categories":"/categories","Tags":"/tags","About":"/about","Github":"https://github.com/winsoft666"},"first_screen":{"enable":false,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/winsoft666","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":true,"hide_header":true},"home":{"category":true,"tag":true,"announcement":null},"post":{"author_badge":{"enable":false,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":false},"comment":{"enable":true,"use":"twikoo","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":"https://twikoo.jiangxueqiao.com","region":"zh-CN","version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2017,"word_count":false,"icp":{"enable":true,"record_code":"鄂ICP备2020015399号-6","url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null,"/css/custom.css"],"js":[null]},"root":"","version":"4.0.7"}
     KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
     KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
     KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
@@ -98,6 +98,12 @@
                     
                         <li class="menu-item">
                             <a class=""
+                               href="/tags"
+                            >标签</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
                                href="/about"
                             >关于</a>
                         </li>
@@ -144,6 +150,12 @@
                     <a class=""
                        href="/categories"
                     >分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags"
+                    >标签</a>
                 </li>
             
                 <li class="drawer-menu-item flex-center">
@@ -201,12 +213,21 @@
     <div class="post-meta-info border-box">
         
             <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Wed Nov 01 2023 11:49:10 GMT+0800">2023-11-01 11:49:10</span>
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Tue Mar 12 2024 15:47:06 GMT+0800">2024-03-12 15:47:06</span>
             </span>
         
 
         
 
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/C-%E8%AF%AD%E8%A8%80/">C++语言</a></li>
+                        
+                    
+                </ul>
+            </span>
         
 
         
@@ -249,9 +270,10 @@
 
                     <div class="home-post-content keep-markdown-body">
                         
-                            <h1 id="一、项目介绍"><a href="#一、项目介绍" class="headerlink" title="一、项目介绍"></a>一、项目介绍</h1><p>介绍一个我开发的开源NSIS UI插件NSIS-UI-Plugin，基于NSIS-UI-Plugin插件我们可以快速的制作出NSIS安装包。</p>
+                            <h1 id="一、项目介绍"><a href="#一、项目介绍" class="headerlink" title="一、项目介绍"></a>一、项目介绍</h1><p>介绍一个我开发的开源NSIS UI插件NSIS-UI-Plugin，基于NSIS-UI-Plugin插件我们可以快速使用NSIS制作类似QQ等软件那样的安装包。</p>
 <p>该插件默认使用Qt作为界面库（不需要编译Qt静态库，可以使用Qt动态库），但也可以很方便的切换使用其他界面库，如<a class="link" target="_blank" rel="noopener" href="https://github.com/winsoft666/duilib2">DuiLib<i class="fas fa-external-link-alt"></i></a>等。</p>
-<p>项目地址：<a class="link" target="_blank" rel="noopener" href="https://github.com/winsoft666/NSIS-UI-Plugin">https://github.com/winsoft666/NSIS-UI-Plugin<i class="fas fa-external-link-alt"></i></a></p>
+<p>项目地址：</p>
+<p><a class="link" target="_blank" rel="noopener" href="https://github.com/winsoft666/NSIS-UI-Plugin">https://github.com/winsoft666/NSIS-UI-Plugin<i class="fas fa-external-link-alt"></i></a></p>
                         
                     </div>
 
@@ -261,60 +283,21 @@
     <div class="post-meta-info border-box">
         
             <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Fri Oct 27 2023 12:54:07 GMT+0800">2023-10-27 12:54:07</span>
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Tue Mar 12 2024 15:41:48 GMT+0800">2024-03-12 15:41:48</span>
             </span>
         
 
         
 
         
-
-        
-
-        
-        
-        
-        
-    </div>
-
-    
-        <a class="home-read-more" href="/post/2584392152.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
-    
-</div>
-
-                </div>
-            </li>
-        
-            <li class="home-post-item">
-
-                
-
-                <div class="home-post-item-bottom border-box">
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
                     
-                    <h3 class="home-post-title border-box">
-                        <a href="/post/1855436935.html">
-                            白酒入门
-                        </a>
-                    </h3>
-
-                    <div class="home-post-content keep-markdown-body">
+                            <li class="category-item"><a href="/categories/%E4%B8%93%E6%A0%8F%E3%80%8A%E6%89%93%E5%8C%85%E7%8B%82%E9%AD%94%E4%B9%8BNSIS%E3%80%8B/">专栏《打包狂魔之NSIS》</a></li>
                         
-                            <p>正值 9 月 9 全球酒水节，各大电商都在做活动，趁机网购了一批酒水。在享受这大自然馈赠的礼物的同时，也说一说自己对白酒的理解。希望在了解了白酒的这些知识后能明明白白喝酒。</p>
-                        
-                    </div>
-
                     
-
-<div class="post-meta-info-container border-box home">
-    <div class="post-meta-info border-box">
-        
-            <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Fri Oct 27 2023 12:54:07 GMT+0800">2023-10-27 12:54:07</span>
+                </ul>
             </span>
-        
-
-        
-
         
 
         
@@ -322,7 +305,7 @@
                 <i class="icon fas fa-tags"></i>&nbsp;
                 <ul class="post-tag-ul">
                     
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E7%99%BD%E9%85%92/">白酒</a></li>
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/NSIS/">NSIS</a></li>
                         
                     
                 </ul>
@@ -336,7 +319,7 @@
     </div>
 
     
-        <a class="home-read-more" href="/post/1855436935.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+        <a class="home-read-more" href="/post/2584392152.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
     
 </div>
 
@@ -368,14 +351,33 @@
     <div class="post-meta-info border-box">
         
             <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Fri Oct 27 2023 12:54:07 GMT+0800">2023-10-27 12:54:07</span>
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Tue Mar 12 2024 15:55:21 GMT+0800">2024-03-12 15:55:21</span>
             </span>
         
 
         
 
         
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E4%B8%93%E6%A0%8F%E3%80%8AWindows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B%E3%80%8B/">专栏《Windows核心编程》</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
 
+        
+            <span class="post-tag meta-info-item border-box">
+                <i class="icon fas fa-tags"></i>&nbsp;
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/UIPI/">UIPI</a></li>
+                        
+                    
+                </ul>
+            </span>
         
 
         
@@ -416,12 +418,21 @@
     <div class="post-meta-info border-box">
         
             <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Tue Nov 07 2023 12:21:19 GMT+0800">2023-11-07 12:21:19</span>
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Tue Mar 12 2024 15:48:38 GMT+0800">2024-03-12 15:48:38</span>
             </span>
         
 
         
 
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E4%B8%93%E6%A0%8F%E3%80%8AWindows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B%E3%80%8B/">专栏《Windows核心编程》</a></li>
+                        
+                    
+                </ul>
+            </span>
         
 
         
@@ -472,12 +483,21 @@
     <div class="post-meta-info border-box">
         
             <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Wed Nov 01 2023 11:48:54 GMT+0800">2023-11-01 11:48:54</span>
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Tue Mar 12 2024 15:47:06 GMT+0800">2024-03-12 15:47:06</span>
             </span>
         
 
         
 
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/C-%E8%AF%AD%E8%A8%80/">C++语言</a></li>
+                        
+                    
+                </ul>
+            </span>
         
 
         
@@ -520,12 +540,21 @@
     <div class="post-meta-info border-box">
         
             <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Fri Oct 27 2023 12:54:07 GMT+0800">2023-10-27 12:54:07</span>
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Tue Mar 12 2024 15:53:32 GMT+0800">2024-03-12 15:53:32</span>
             </span>
         
 
         
 
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/Qt/">Qt</a></li>
+                        
+                    
+                </ul>
+            </span>
         
 
         
@@ -568,12 +597,21 @@
     <div class="post-meta-info border-box">
         
             <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Tue Sep 26 2023 14:26:15 GMT+0800">2023-09-26 14:26:15</span>
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Tue Mar 12 2024 15:44:39 GMT+0800">2024-03-12 15:44:39</span>
             </span>
         
 
         
 
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84/">软件架构</a></li>
+                        
+                    
+                </ul>
+            </span>
         
 
         
@@ -586,6 +624,63 @@
 
     
         <a class="home-read-more" href="/post/128186902.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-post-item">
+
+                
+
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
+                        <a href="/post/14744864.html">
+                            Windows内核对象
+                        </a>
+                    </h3>
+
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            <h2 id="一、什么是内核对象"><a href="#一、什么是内核对象" class="headerlink" title="一、什么是内核对象"></a>一、什么是内核对象</h2><p>我们在 windows 开发中经常会遇到内核对象，如事件(Event)，管道(Pipe)，互斥量(Mutex)，完成端口(IOCP)，进程(Process)，线程(Thread)等，他们都是内核对象。这些内核对象虽然通过不同的系统 API 来创建，但这些 API 都有一个共同特点，就是都需要传入<code>SECURITY_ATTRIBUTES</code>安全描述符结构体指针，并且返回句柄(HANDLE)。依据这个特点，我们有一个简单方法来判断对象是否是内核对象，就是看创建它的函数是否允许传入<code>SECURITY_ATTRIBUTES</code>安全描述符。</p>
+                        
+                    </div>
+
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Tue Mar 12 2024 15:48:38 GMT+0800">2024-03-12 15:48:38</span>
+            </span>
+        
+
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E4%B8%93%E6%A0%8F%E3%80%8AWindows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B%E3%80%8B/">专栏《Windows核心编程》</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+        <a class="home-read-more" href="/post/14744864.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
     
 </div>
 

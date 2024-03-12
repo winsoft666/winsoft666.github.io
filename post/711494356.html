@@ -35,7 +35,7 @@
     <script class="keep-theme-configurations">
     const KEEP = window.KEEP || {}
     KEEP.hexo_config = {"hostname":"jiangxueqiao.com","root":"/","language":"zh-CN","path":"search.xml"}
-    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"代码派","author":"江雪桥","avatar":"/images/avatar.png","logo":"/images/logo.png","favicon":"/images/favicon.png"},"menu":{"Archives":"/archives","Categories":"/categories","About":"/about","Github":"https://github.com/winsoft666"},"first_screen":{"enable":false,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/winsoft666","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":true,"hide_header":true},"home":{"category":false,"tag":true,"announcement":null},"post":{"author_badge":{"enable":false,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":false},"comment":{"enable":true,"use":"twikoo","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":"https://twikoo.jiangxueqiao.com","region":"zh-CN","version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2017,"word_count":false,"icp":{"enable":true,"record_code":"鄂ICP备2020015399号-6","url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null,"/css/custom.css"],"js":[null]},"root":"","version":"4.0.7"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"代码派","author":"江雪桥","avatar":"/images/avatar.png","logo":"/images/logo.png","favicon":"/images/favicon.png"},"menu":{"Archives":"/archives","Categories":"/categories","Tags":"/tags","About":"/about","Github":"https://github.com/winsoft666"},"first_screen":{"enable":false,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/winsoft666","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":true,"hide_header":true},"home":{"category":true,"tag":true,"announcement":null},"post":{"author_badge":{"enable":false,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":false},"comment":{"enable":true,"use":"twikoo","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":"https://twikoo.jiangxueqiao.com","region":"zh-CN","version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2017,"word_count":false,"icp":{"enable":true,"record_code":"鄂ICP备2020015399号-6","url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null,"/css/custom.css"],"js":[null]},"root":"","version":"4.0.7"}
     KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
     KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
     KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
@@ -100,6 +100,12 @@
                     
                         <li class="menu-item">
                             <a class=""
+                               href="/tags"
+                            >标签</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
                                href="/about"
                             >关于</a>
                         </li>
@@ -146,6 +152,12 @@
                     <a class=""
                        href="/categories"
                     >分类</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags"
+                    >标签</a>
                 </li>
             
                 <li class="drawer-menu-item flex-center">
@@ -215,7 +227,7 @@
 
             <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Tue Nov 07 2023 12:17:59 GMT+0800">2023-11-07 12:17:59</span>
+                <span class="datetime" data-updated="Tue Mar 12 2024 16:08:27 GMT+0800">2024-03-12 16:08:27</span>
             </span>
         
 
@@ -223,16 +235,23 @@
             <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
                 <ul class="post-category-ul">
                     
-                            <li class="category-item"><a href="/categories/%E2%91%A1-C/">② C++</a></li>
-                        
-                    
-                            <li class="category-item">&nbsp;<i class="icon fas fa-angle-right"></i>&nbsp;<a href="/categories/%E2%91%A1-C/Qt/">Qt</a></li>
+                            <li class="category-item"><a href="/categories/Qt/">Qt</a></li>
                         
                     
                 </ul>
             </span>
         
 
+        
+            <span class="post-tag meta-info-item border-box">
+                <i class="icon fas fa-tags"></i>&nbsp;
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/QMenu/">QMenu</a></li>
+                        
+                    
+                </ul>
+            </span>
         
 
         
@@ -252,10 +271,10 @@
                 <div class="post-content keep-markdown-body">
                     
 
-                    <p>在Qt中可以通过QSS对菜单进行样式设置，而且对于非标准菜单项我也可以通过自定义Widget的方法来实现，本文讲述在Qt中菜单的这些常用方法。</p>
+                    <p>在Qt中可以通过QSS对菜单进行样式设置，而且对于非标准菜单项我也可以通过自定义Widget的方法来实现，本文讲述在Qt中QMenu的使用方法。</p>
 <span id="more"></span>
 
-<h2 id="一、菜单基本使用方法"><a href="#一、菜单基本使用方法" class="headerlink" title="一、菜单基本使用方法"></a>一、菜单基本使用方法</h2><p>下面示例演示了右键菜单的创建方法，该菜单包含了图标、选中/未选中状态、二级菜单、互斥选择等常用菜单特性，代码如下：</p>
+<h2 id="一、菜单基本使用"><a href="#一、菜单基本使用" class="headerlink" title="一、菜单基本使用"></a>一、菜单基本使用</h2><p>下面示例演示了右键菜单的创建方法，该菜单包含了图标、选中/未选中状态、二级菜单、互斥选择等常用菜单特性，代码如下：</p>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">QIcon <span class="title">settingIcon</span><span class="params">(<span class="string">":/MenuBeauty/setting.png"</span>)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义Actions</span></span><br><span class="line">QAction* action1 = <span class="keyword">new</span> <span class="built_in">QAction</span>(<span class="string">"动作1"</span>);</span><br><span class="line">QAction* action2 = <span class="keyword">new</span> <span class="built_in">QAction</span>(settingIcon, <span class="string">"动作2 有图标"</span>);</span><br><span class="line"></span><br><span class="line">QAction* action3 = <span class="keyword">new</span> <span class="built_in">QAction</span>(<span class="string">"动作3 [未选中]"</span>);</span><br><span class="line">action3-&gt;<span class="built_in">setCheckable</span>(<span class="literal">true</span>);</span><br><span class="line">action3-&gt;<span class="built_in">setChecked</span>(<span class="literal">false</span>);</span><br><span class="line"><span class="built_in">connect</span>(action3, &amp;QAction::triggered, <span class="keyword">this</span>, [action3](<span class="type">bool</span> checked) {</span><br><span class="line">    action3-&gt;<span class="built_in">setText</span>(checked ? <span class="string">"动作3 [选中]"</span> : <span class="string">"动作3 [未选中]"</span>);</span><br><span class="line">});</span><br><span class="line"></span><br><span class="line">QAction* action4 = <span class="keyword">new</span> <span class="built_in">QAction</span>(<span class="string">"Action4 动作四测试"</span>);</span><br><span class="line"></span><br><span class="line">QAction* action5 = <span class="keyword">new</span> <span class="built_in">QAction</span>(settingIcon, <span class="string">"动作5 禁用"</span>);</span><br><span class="line">action5-&gt;<span class="built_in">setEnabled</span>(<span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">QAction* action6 = <span class="keyword">new</span> <span class="built_in">QAction</span>(settingIcon, <span class="string">"动作6 子菜单"</span>);</span><br><span class="line">{</span><br><span class="line">    <span class="comment">// 动作6的子动作</span></span><br><span class="line">    QAction* action6_1 = <span class="keyword">new</span> <span class="built_in">QAction</span>(<span class="string">"动作6.1"</span>);</span><br><span class="line">    action6_1-&gt;<span class="built_in">setCheckable</span>(<span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">    QAction* action6_2 = <span class="keyword">new</span> <span class="built_in">QAction</span>(<span class="string">"动作6.1"</span>);</span><br><span class="line">    action6_2-&gt;<span class="built_in">setCheckable</span>(<span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">    QAction* action6_3 = <span class="keyword">new</span> <span class="built_in">QAction</span>(<span class="string">"动作6.1"</span>);</span><br><span class="line">    action6_3-&gt;<span class="built_in">setCheckable</span>(<span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 动作6的子菜单</span></span><br><span class="line">    QMenu* action6SubMenu = <span class="keyword">new</span> <span class="built_in">QMenu</span>(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">    action6SubMenu-&gt;<span class="built_in">addAction</span>(action6_1);</span><br><span class="line">    action6SubMenu-&gt;<span class="built_in">addAction</span>(action6_2);</span><br><span class="line">    action6SubMenu-&gt;<span class="built_in">addAction</span>(action6_3);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 互斥子菜单项，同时只能选择一个</span></span><br><span class="line">    QActionGroup* action6Group = <span class="keyword">new</span> <span class="built_in">QActionGroup</span>(<span class="keyword">this</span>);</span><br><span class="line">    action6Group-&gt;<span class="built_in">setExclusive</span>(<span class="literal">true</span>);</span><br><span class="line">    action6Group-&gt;<span class="built_in">addAction</span>(action6_1);</span><br><span class="line">    action6Group-&gt;<span class="built_in">addAction</span>(action6_2);</span><br><span class="line">    action6Group-&gt;<span class="built_in">addAction</span>(action6_3);</span><br><span class="line"></span><br><span class="line">    action6-&gt;<span class="built_in">setMenu</span>(action6SubMenu);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义菜单</span></span><br><span class="line">QMenu* menu = <span class="keyword">new</span> <span class="built_in">QMenu</span>(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 添加Action</span></span><br><span class="line">menu-&gt;<span class="built_in">addActions</span>({action1, action2, action3});</span><br><span class="line">menu-&gt;<span class="built_in">addSeparator</span>();</span><br><span class="line">menu-&gt;<span class="built_in">addActions</span>({action4, action5, action6});</span><br><span class="line"></span><br><span class="line"><span class="comment">// 鼠标右键弹出菜单</span></span><br><span class="line"><span class="keyword">this</span>-&gt;<span class="built_in">setContextMenuPolicy</span>(Qt::CustomContextMenu);</span><br><span class="line"><span class="built_in">connect</span>(<span class="keyword">this</span>, &amp;QWidget::customContextMenuRequested, <span class="keyword">this</span>, [<span class="keyword">this</span>, menu](<span class="type">const</span> QPoint&amp; pos) {</span><br><span class="line">    menu-&gt;<span class="built_in">exec</span>(<span class="keyword">this</span>-&gt;<span class="built_in">mapToGlobal</span>(pos));</span><br><span class="line">});</span><br></pre></td></tr></tbody></table></figure>
 
 <p>上述菜单未经过任何美化，样式如下图所示：<br><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/default-menu-style.png"></p>
@@ -267,7 +286,7 @@
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">menu-&gt;<span class="built_in">setWindowFlags</span>(action6SubMenu-&gt;<span class="built_in">windowFlags</span>() |</span><br><span class="line">                                Qt::FramelessWindowHint |   <span class="comment">// 无边框</span></span><br><span class="line">                                Qt::NoDropShadowWindowHint  <span class="comment">// 移除系统阴影</span></span><br><span class="line">);</span><br><span class="line">menu-&gt;<span class="built_in">setAttribute</span>(Qt::WA_TranslucentBackground); <span class="comment">// 背景透明</span></span><br></pre></td></tr></tbody></table></figure>
 
 <p>美化后的菜单如下图所示：<br><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/after-qss-menu-style.png"></p>
-<h3 id="QSS可定制的QMenu部分"><a href="#QSS可定制的QMenu部分" class="headerlink" title="QSS可定制的QMenu部分"></a>QSS可定制的QMenu部分</h3><p>QMenu支持QSS盒子模型，其通用属性如下：</p>
+<h3 id="QSS美好QMenu"><a href="#QSS美好QMenu" class="headerlink" title="QSS美好QMenu"></a>QSS美好QMenu</h3><p>QMenu支持QSS盒子模型，其通用属性如下：</p>
 <figure class="highlight txt"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">border</span><br><span class="line">border-radius</span><br><span class="line">margin</span><br><span class="line">padding</span><br><span class="line">background</span><br><span class="line">color</span><br><span class="line">font</span><br><span class="line">border-image</span><br></pre></td></tr></tbody></table></figure>
 
 <p>QSS还可以对QMenu的子控件进行设置，支持QMenu子控件如下：</p>
@@ -277,7 +296,7 @@
 <figure class="highlight txt"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">default</span><br><span class="line">selected</span><br><span class="line">exclusive</span><br><span class="line">non-exclusive</span><br></pre></td></tr></tbody></table></figure>
 
 <p>具体的子控件和伪状态的含义，可以参考 <a href="/post/749849405.html" title="QSS基本使用方法">QSS基本使用方法</a> 文章。</p>
-<h2 id="三、自定义菜单项"><a href="#三、自定义菜单项" class="headerlink" title="三、自定义菜单项"></a>三、自定义菜单项</h2><p>大多数情况，上述常规的菜单项就可以满足要求，但有些情况下，我们的菜单项可能是更加复杂的Widget组合，比如下面播放器的菜单：<br><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/music-menu-sample.png"></p>
+<h2 id="三、自定义菜单项"><a href="#三、自定义菜单项" class="headerlink" title="三、自定义菜单项"></a>三、自定义菜单项</h2><p>大多数情况下，上述常规的菜单项就可以满足要求，但在有些情况下，我们的菜单项可能由更加复杂的Widget组合而成，比如下面播放器的菜单：<br><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/music-menu-sample.png"></p>
 <p>我们可以使用<code>QWidgetAction</code>来实现上述菜单效果，<code>QWidgetAction</code>可以将一个QWidget放入菜单项的容器内，从而实现自定义菜单项。</p>
 <p>下面代码定义了一个包含3个按钮的菜单项，点击按钮会弹出对话框：</p>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">QWidgetAction* action7 = <span class="keyword">new</span> <span class="built_in">QWidgetAction</span>(<span class="keyword">this</span>);</span><br><span class="line">{</span><br><span class="line">    QWidget* widget = <span class="keyword">new</span> <span class="built_in">QWidget</span>();</span><br><span class="line">    QHBoxLayout* hl = <span class="keyword">new</span> <span class="built_in">QHBoxLayout</span>(widget);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">auto</span> createPushButtonFn = [<span class="keyword">this</span>](QString title) {</span><br><span class="line">        QPushButton* btn = <span class="keyword">new</span> <span class="built_in">QPushButton</span>(title);</span><br><span class="line">        <span class="built_in">connect</span>(btn, &amp;QPushButton::clicked, <span class="keyword">this</span>, [<span class="keyword">this</span>]() {</span><br><span class="line">            QMessageBox::<span class="built_in">information</span>(<span class="keyword">this</span>, <span class="string">"Clicked"</span>, ((QPushButton*)<span class="built_in">sender</span>())-&gt;<span class="built_in">text</span>());</span><br><span class="line">        });</span><br><span class="line">        <span class="keyword">return</span> btn;</span><br><span class="line">    };</span><br><span class="line"></span><br><span class="line">    hl-&gt;<span class="built_in">addWidget</span>(<span class="built_in">createPushButtonFn</span>(<span class="string">"Button1"</span>));</span><br><span class="line">    hl-&gt;<span class="built_in">addWidget</span>(<span class="built_in">createPushButtonFn</span>(<span class="string">"Button2"</span>));</span><br><span class="line">    hl-&gt;<span class="built_in">addWidget</span>(<span class="built_in">createPushButtonFn</span>(<span class="string">"Button3"</span>));</span><br><span class="line"></span><br><span class="line">    action7-&gt;<span class="built_in">setDefaultWidget</span>(widget);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">menu-&gt;<span class="built_in">addAction</span>(action7);</span><br></pre></td></tr></tbody></table></figure>
@@ -286,13 +305,20 @@
 <p>我们也可以使用QSS对菜单项内的控件进行样式设置，如：</p>
 <figure class="highlight css"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">QMenu QPushButton {</span><br><span class="line">    <span class="attribute">border</span>: none;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: black;</span><br><span class="line">    <span class="attribute">color</span>: white;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
-
                 </div>
 
                 
 
                 <div class="post-bottom-tags-and-share border-box">
                     <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/QMenu/">QMenu</a>
+                                    </li>
+                                
+                            </ul>
                         
                     </div>
                     <div>
@@ -452,7 +478,7 @@
             <div class="pc-post-toc right-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E8%8F%9C%E5%8D%95%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-text">一、菜单基本使用方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E4%BD%BF%E7%94%A8QSS%E7%BE%8E%E5%8C%96%E8%8F%9C%E5%8D%95"><span class="nav-text">二、使用QSS美化菜单</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#QSS%E5%8F%AF%E5%AE%9A%E5%88%B6%E7%9A%84QMenu%E9%83%A8%E5%88%86"><span class="nav-text">QSS可定制的QMenu部分</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E8%87%AA%E5%AE%9A%E4%B9%89%E8%8F%9C%E5%8D%95%E9%A1%B9"><span class="nav-text">三、自定义菜单项</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E8%8F%9C%E5%8D%95%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="nav-text">一、菜单基本使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E4%BD%BF%E7%94%A8QSS%E7%BE%8E%E5%8C%96%E8%8F%9C%E5%8D%95"><span class="nav-text">二、使用QSS美化菜单</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#QSS%E7%BE%8E%E5%A5%BDQMenu"><span class="nav-text">QSS美好QMenu</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E8%87%AA%E5%AE%9A%E4%B9%89%E8%8F%9C%E5%8D%95%E9%A1%B9"><span class="nav-text">三、自定义菜单项</span></a></li></ol>
     </div>
 </div>
 
@@ -634,7 +660,7 @@
             <div class="tablet-post-toc">
                 <div class="post-toc-wrap border-box">
     <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E8%8F%9C%E5%8D%95%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-text">一、菜单基本使用方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E4%BD%BF%E7%94%A8QSS%E7%BE%8E%E5%8C%96%E8%8F%9C%E5%8D%95"><span class="nav-text">二、使用QSS美化菜单</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#QSS%E5%8F%AF%E5%AE%9A%E5%88%B6%E7%9A%84QMenu%E9%83%A8%E5%88%86"><span class="nav-text">QSS可定制的QMenu部分</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E8%87%AA%E5%AE%9A%E4%B9%89%E8%8F%9C%E5%8D%95%E9%A1%B9"><span class="nav-text">三、自定义菜单项</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E8%8F%9C%E5%8D%95%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="nav-text">一、菜单基本使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E4%BD%BF%E7%94%A8QSS%E7%BE%8E%E5%8C%96%E8%8F%9C%E5%8D%95"><span class="nav-text">二、使用QSS美化菜单</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#QSS%E7%BE%8E%E5%A5%BDQMenu"><span class="nav-text">QSS美好QMenu</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E8%87%AA%E5%AE%9A%E4%B9%89%E8%8F%9C%E5%8D%95%E9%A1%B9"><span class="nav-text">三、自定义菜单项</span></a></li></ol>
     </div>
 </div>
 

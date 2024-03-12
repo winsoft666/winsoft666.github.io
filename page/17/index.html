@@ -33,7 +33,7 @@
     <script class="keep-theme-configurations">
     const KEEP = window.KEEP || {}
     KEEP.hexo_config = {"hostname":"jiangxueqiao.com","root":"/","language":"zh-CN","path":"search.xml"}
-    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"代码派","author":"江雪桥","avatar":"/images/avatar.png","logo":"/images/logo.png","favicon":"/images/favicon.png"},"menu":{"Archives":"/archives","Categories":"/categories","About":"/about","Github":"https://github.com/winsoft666"},"first_screen":{"enable":false,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/winsoft666","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":true,"hide_header":true},"home":{"category":false,"tag":true,"announcement":null},"post":{"author_badge":{"enable":false,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":false},"comment":{"enable":true,"use":"twikoo","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":"https://twikoo.jiangxueqiao.com","region":"zh-CN","version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2017,"word_count":false,"icp":{"enable":true,"record_code":"鄂ICP备2020015399号-6","url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null,"/css/custom.css"],"js":[null]},"root":"","version":"4.0.7"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"代码派","author":"江雪桥","avatar":"/images/avatar.png","logo":"/images/logo.png","favicon":"/images/favicon.png"},"menu":{"Archives":"/archives","Categories":"/categories","Tags":"/tags","About":"/about","Github":"https://github.com/winsoft666"},"first_screen":{"enable":false,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/winsoft666","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":true,"hide_header":true},"home":{"category":true,"tag":true,"announcement":null},"post":{"author_badge":{"enable":false,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":false},"comment":{"enable":true,"use":"twikoo","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":"https://twikoo.jiangxueqiao.com","region":"zh-CN","version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2017,"word_count":false,"icp":{"enable":true,"record_code":"鄂ICP备2020015399号-6","url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null,"/css/custom.css"],"js":[null]},"root":"","version":"4.0.7"}
     KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
     KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
     KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
@@ -98,6 +98,12 @@
                     
                         <li class="menu-item">
                             <a class=""
+                               href="/tags"
+                            >标签</a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
                                href="/about"
                             >关于</a>
                         </li>
@@ -148,6 +154,12 @@
             
                 <li class="drawer-menu-item flex-center">
                     <a class=""
+                       href="/tags"
+                    >标签</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
                        href="/about"
                     >关于</a>
                 </li>
@@ -184,54 +196,6 @@
                 <div class="home-post-item-bottom border-box">
                     
                     <h3 class="home-post-title border-box">
-                        <a href="/post/3937624737.html">
-                            Windows内存体系(7)--使用std::string跨MT模块传参
-                        </a>
-                    </h3>
-
-                    <div class="home-post-content keep-markdown-body">
-                        
-                            <p>前面的<a href="/post/213040252.html" title="Windows内存体系(6)--跨模块内存分配释放">Windows内存体系(6)--跨模块内存分配释放</a>文章解释了跨 MT 模块分配的内存相互释放为什么会崩溃的问题，本文介绍如何解决该问题。</p>
-                        
-                    </div>
-
-                    
-
-<div class="post-meta-info-container border-box home">
-    <div class="post-meta-info border-box">
-        
-            <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Fri Oct 27 2023 12:54:07 GMT+0800">2023-10-27 12:54:07</span>
-            </span>
-        
-
-        
-
-        
-
-        
-
-        
-        
-        
-        
-    </div>
-
-    
-        <a class="home-read-more" href="/post/3937624737.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
-    
-</div>
-
-                </div>
-            </li>
-        
-            <li class="home-post-item">
-
-                
-
-                <div class="home-post-item-bottom border-box">
-                    
-                    <h3 class="home-post-title border-box">
                         <a href="/post/3666885372.html">
                             Wav音频编码
                         </a>
@@ -239,7 +203,7 @@
 
                     <div class="home-post-content keep-markdown-body">
                         
-                            <h1 id="一-WAVE-简介"><a href="#一-WAVE-简介" class="headerlink" title="一. WAVE 简介"></a>一. WAVE 简介</h1><p>WAV格式是微软公司（Microsoft)开发的一种声音文件格式，它符合 RIFF(Resource Interchange File Format)文件规范，用于保存 Windows 平台的音频信息资源，被 Windows 平台及其应用程序所广泛支持。</p>
+                            <h1 id="一-WAVE-简介"><a href="#一-WAVE-简介" class="headerlink" title="一. WAVE 简介"></a>一. WAVE 简介</h1><p>WAV格式是微软公司（Microsoft）开发的一种声音文件格式，它符合 RIFF(Resource Interchange File Format)文件规范，用于保存 Windows 平台的音频信息资源，被 Windows 平台及其应用程序所广泛支持。</p>
 <p>WAVE 是录音时用的标准的 WINDOWS 文件格式，文件的扩展名为“WAV”，数据本身的格式为 PCM 或其他压缩数据，属于无损音乐格式的一种。</p>
 <p>所有的 WAV 都有一个文件头，这个文件头记录了音频流的编码参数。<code>WAV文件 = WAV头 + PCM数据</code>。</p>
                         
@@ -251,12 +215,21 @@
     <div class="post-meta-info border-box">
         
             <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Fri Oct 27 2023 12:54:07 GMT+0800">2023-10-27 12:54:07</span>
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Tue Mar 12 2024 15:45:41 GMT+0800">2024-03-12 15:45:41</span>
             </span>
         
 
         
 
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E7%A8%8B/">音视频编程</a></li>
+                        
+                    
+                </ul>
+            </span>
         
 
         
@@ -311,12 +284,21 @@
     <div class="post-meta-info border-box">
         
             <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Fri Oct 27 2023 12:54:07 GMT+0800">2023-10-27 12:54:07</span>
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Tue Mar 12 2024 15:48:54 GMT+0800">2024-03-12 15:48:54</span>
             </span>
         
 
         
 
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E4%B8%93%E6%A0%8F%E3%80%8AWindows%E5%86%85%E5%AD%98%E4%BD%93%E7%B3%BB%E3%80%8B/">专栏《Windows内存体系》</a></li>
+                        
+                    
+                </ul>
+            </span>
         
 
         
@@ -362,12 +344,21 @@
     <div class="post-meta-info border-box">
         
             <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Fri Oct 27 2023 12:54:07 GMT+0800">2023-10-27 12:54:07</span>
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Tue Mar 12 2024 15:48:54 GMT+0800">2024-03-12 15:48:54</span>
             </span>
         
 
         
 
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E4%B8%93%E6%A0%8F%E3%80%8AWindows%E5%86%85%E5%AD%98%E4%BD%93%E7%B3%BB%E3%80%8B/">专栏《Windows内存体系》</a></li>
+                        
+                    
+                </ul>
+            </span>
         
 
         
@@ -414,12 +405,21 @@
     <div class="post-meta-info border-box">
         
             <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Fri Oct 27 2023 12:54:07 GMT+0800">2023-10-27 12:54:07</span>
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Tue Mar 12 2024 15:48:54 GMT+0800">2024-03-12 15:48:54</span>
             </span>
         
 
         
 
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E4%B8%93%E6%A0%8F%E3%80%8AWindows%E5%86%85%E5%AD%98%E4%BD%93%E7%B3%BB%E3%80%8B/">专栏《Windows内存体系》</a></li>
+                        
+                    
+                </ul>
+            </span>
         
 
         
@@ -464,12 +464,21 @@
     <div class="post-meta-info border-box">
         
             <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Fri Oct 27 2023 12:54:07 GMT+0800">2023-10-27 12:54:07</span>
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Tue Mar 12 2024 15:48:54 GMT+0800">2024-03-12 15:48:54</span>
             </span>
         
 
         
 
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E4%B8%93%E6%A0%8F%E3%80%8AWindows%E5%86%85%E5%AD%98%E4%BD%93%E7%B3%BB%E3%80%8B/">专栏《Windows内存体系》</a></li>
+                        
+                    
+                </ul>
+            </span>
         
 
         
@@ -514,12 +523,21 @@
     <div class="post-meta-info border-box">
         
             <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Fri Oct 27 2023 12:54:07 GMT+0800">2023-10-27 12:54:07</span>
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Tue Mar 12 2024 15:48:54 GMT+0800">2024-03-12 15:48:54</span>
             </span>
         
 
         
 
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E4%B8%93%E6%A0%8F%E3%80%8AWindows%E5%86%85%E5%AD%98%E4%BD%93%E7%B3%BB%E3%80%8B/">专栏《Windows内存体系》</a></li>
+                        
+                    
+                </ul>
+            </span>
         
 
         
@@ -563,12 +581,21 @@
     <div class="post-meta-info border-box">
         
             <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Fri Oct 27 2023 12:54:07 GMT+0800">2023-10-27 12:54:07</span>
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Tue Mar 12 2024 15:48:54 GMT+0800">2024-03-12 15:48:54</span>
             </span>
         
 
         
 
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E4%B8%93%E6%A0%8F%E3%80%8AWindows%E5%86%85%E5%AD%98%E4%BD%93%E7%B3%BB%E3%80%8B/">专栏《Windows内存体系》</a></li>
+                        
+                    
+                </ul>
+            </span>
         
 
         
@@ -581,6 +608,75 @@
 
     
         <a class="home-read-more" href="/post/2494475058.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-post-item">
+
+                
+
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
+                        <a href="/post/3298681169.html">
+                            初识WebRTC
+                        </a>
+                    </h3>
+
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            <p>WebRTC （Web Real-Time Communications） 是一项实时通讯技术，它允许网络应用或者站点在不借助中间媒介的情况下，建立浏览器之间点对点（Peer-to-Peer）的连接，实现视频流和（或）音频流或者其他任意数据的传输。WebRTC包含的这些标准使用户在无需安装任何插件或者第三方的软件的情况下，创建点对点（Peer-to-Peer）的数据分享和电话会议成为可能。</p>
+<p>它并不是单一的协议，包含了媒体、加密、传输层等在内的多个协议标准以及一套基于 JavaScript 的 API。通过简单易用的 JavaScript API ，在不安装任何插件的情况下，让浏览器拥有了 P2P音视频和数据分享的能力。同时WebRTC 并不是一个孤立的协议，它拥有灵活的信令，可以便捷的对接现有的SIP 和电话网络的系统。</p>
+<p>不同技术领域的人都可以从WebRTC中获取到需要的东西。</p>
+                        
+                    </div>
+
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Tue Mar 12 2024 16:11:26 GMT+0800">2024-03-12 16:11:26</span>
+            </span>
+        
+
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E7%A8%8B/">音视频编程</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <i class="icon fas fa-tags"></i>&nbsp;
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/WebRTC/">WebRTC</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+        <a class="home-read-more" href="/post/3298681169.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
     
 </div>
 
