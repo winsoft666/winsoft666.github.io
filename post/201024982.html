@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Windows,Linux,C/C++,Golang,Qt,Node.js,Electron,Vue,WebRTC">
+    <meta name="description" content="除注明转载以外，所有文章均为原创">
+    <meta name="author" content="江雪桥">
+    
+    <title>
+        
+            WebRTC官方示例apprtc搭建 |
+        
+        代码派
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/favicon.png">
+    
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"jiangxueqiao.com","root":"/","language":"zh-CN","path":"search.xml"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"代码派","author":"江雪桥","avatar":"/images/avatar.png","logo":"/images/logo.png","favicon":"/images/favicon.png"},"menu":{"home":"/ || fa-solid fa-home","archives":"/archives || fa-solid fa-layer-group","categories":"/categories || fa-solid fa-box-archive","tags":"/tags || fa-solid fa-tags","about":"/about || fa-solid fa-user-graduate","Github":"https://github.com/winsoft666"},"first_screen":{"enable":false,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/winsoft666","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":true,"hide_header":true},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":false,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":false},"comment":{"enable":true,"use":"twikoo","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":"https://twikoo.jiangxueqiao.com","region":"zh-CN","version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2017,"word_count":false,"icp":{"enable":true,"record_code":"鄂ICP备2020015399号-6","url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null,"/css/custom.css"],"js":[null]},"root":"","source_data":{},"version":"4.1.0"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="CodeSilo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/logo.png">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               代码派
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-home"></i>
+                                
+                                首页
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-layer-group"></i>
+                                
+                                归档
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-box-archive"></i>
+                                
+                                分类
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-tags"></i>
+                                
+                                标签
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-user-graduate"></i>
+                                
+                                关于
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               target="_blank" rel="noopener" href="https://github.com/winsoft666"
+                            >
+                                
+                                GITHUB
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/"
+                    >首页</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives"
+                    >归档</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories"
+                    >分类</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags"
+                    >标签</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about"
+                    >关于</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       target="_blank" rel="noopener" href="https://github.com/winsoft666"
+                    >GITHUB</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        WebRTC官方示例apprtc搭建
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="/images/avatar.png">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">江雪桥</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2018-04-26 12:41:31</span>
+            </span>
+
+            <span class="meta-info-item post-update-date">
+                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                <span class="datetime" data-updated="Fri Mar 15 2024 12:15:56 GMT+0800">2024-03-15 12:15:56</span>
+            </span>
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E7%A8%8B/">音视频编程</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/WebRTC/">WebRTC</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body">
+                    
+
+                    <blockquote>
+<p>系统环境 Ubuntu 16.04，在搭建之前建议关闭系统防火墙。</p>
+</blockquote>
+<h1 id="一-房间服务器搭建"><a href="#一-房间服务器搭建" class="headerlink" title="一. 房间服务器搭建"></a>一. 房间服务器搭建</h1><h2 id="1-1-安装依赖程序"><a href="#1-1-安装依赖程序" class="headerlink" title="1.1 安装依赖程序"></a>1.1 安装依赖程序</h2><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install git unzip  lrzsz  nodejs npm automake autoconf libtool nodejs-legacy python-webtest golang –y</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="1-2-安装jdk8"><a href="#1-2-安装jdk8" class="headerlink" title="1.2 安装jdk8"></a>1.2 安装jdk8</h2><h3 id="1-2-1-下载jdk8"><a href="#1-2-1-下载jdk8" class="headerlink" title="1.2.1 下载jdk8"></a>1.2.1 下载jdk8</h3><p>从<a class="link" target="_blank" rel="noopener" href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">此处<i class="fas fa-external-link-alt"></i></a>下载对应的版本到<code>/usr/lib/jvm</code>目录，然后解压到当前目录：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar zxf jdk-8u151-linux-x64.tar.gz</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="1-2-2-设置环境变量"><a href="#1-2-2-设置环境变量" class="headerlink" title="1.2.2 设置环境变量"></a>1.2.2 设置环境变量</h3><p>编辑<code>/etc/source</code>文件，在文件尾添加如下内容（因为jdk版本不同，文件夹名称可能会有差别）：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> JAVA_HOME=/usr/lib/jvm/jdk1.8.0_151</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$JAVA_HOME</span>/bin:<span class="variable">$PATH</span> </span><br><span class="line"><span class="built_in">export</span> CLASSPATH=.:<span class="variable">$JAVA_HOME</span>/lib/dt.jar:<span class="variable">$JAVA_HOME</span>/lib/tools.jar</span><br></pre></td></tr></tbody></table></figure>
+
+<p>执行<code>source /etc/profile</code>命令让设置生效。</p>
+<h2 id="1-3-apprtc获取和安装"><a href="#1-3-apprtc获取和安装" class="headerlink" title="1.3 apprtc获取和安装"></a>1.3 apprtc获取和安装</h2><h3 id="1-3-1-获取apprtc源码"><a href="#1-3-1-获取apprtc源码" class="headerlink" title="1.3.1 获取apprtc源码"></a>1.3.1 获取apprtc源码</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/webrtc/apprtc.git</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="1-3-2-安装apprtc"><a href="#1-3-2-安装apprtc" class="headerlink" title="1.3.2 安装apprtc"></a>1.3.2 安装apprtc</h3><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> apprtc</span><br><span class="line">npm -g install grunt-cli</span><br><span class="line">npm install</span><br><span class="line">grunt build --force</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="1-3-3-修改源码"><a href="#1-3-3-修改源码" class="headerlink" title="1.3.3 修改源码"></a>1.3.3 修改源码</h3><p>使用<code>ifconfig</code>命令查看本机IP信息：</p>
+<p><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/webrtc-sample-build-1.jpg"></p>
+<p>我使用的阿里云的云服器，服务器在NAT之后，所以<code>172.18.163.203</code>是本地IP，即内网IP；从云服务器的管理页面可以看到该服务器的外网IP，如<code>120.79.164.111</code>。如果使用的是阿里云等服务器还需要在安全策略中设置将<strong>所有</strong>进/出端口都映射到<code>172.18.163.203</code>。</p>
+<p><strong>下面以外网IP <code>120.79.164.111</code>为例，根据实际外网IP进行对应修改。</strong></p>
+<h4 id="修改constants-py"><a href="#修改constants-py" class="headerlink" title="修改constants.py"></a>修改constants.py</h4><p>constants.py路径：apprtc/out/app_engine/constants.py</p>
+<p>设置ICE服务器的IP端口、信令服务器(collider)的IP端口，修改之后的constants.py文件完整内容如下：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Copyright 2015 Google Inc. All Rights Reserved.</span></span><br><span class="line"></span><br><span class="line"><span class="string">"""AppRTC Constants.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">This module contains the constants used in AppRTC Python modules.</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="comment"># Deprecated domains which we should to redirect to REDIRECT_URL.</span></span><br><span class="line">REDIRECT_DOMAINS =  [</span><br><span class="line">  <span class="string">'apprtc.appspot.com'</span>, <span class="string">'apprtc.webrtc.org'</span>, <span class="string">'www.appr.tc'</span></span><br><span class="line">]</span><br><span class="line"><span class="comment"># URL which we should redirect to if matching in REDIRECT_DOMAINS.</span></span><br><span class="line">REDIRECT_URL = <span class="string">'https://appr.tc'</span></span><br><span class="line"></span><br><span class="line">ROOM_MEMCACHE_EXPIRATION_SEC = <span class="number">60</span> * <span class="number">60</span> * <span class="number">24</span></span><br><span class="line">MEMCACHE_RETRY_LIMIT = <span class="number">100</span></span><br><span class="line"></span><br><span class="line">LOOPBACK_CLIENT_ID = <span class="string">'LOOPBACK_CLIENT_ID'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Turn/Stun server override. This allows AppRTC to connect to turn servers</span></span><br><span class="line"><span class="comment"># directly rather than retrieving them from an ICE server provider.</span></span><br><span class="line">ICE_SERVER_OVERRIDE = <span class="literal">None</span></span><br><span class="line"><span class="comment"># Enable by uncomment below and comment out above, then specify turn and stun</span></span><br><span class="line"><span class="comment"># ICE_SERVER_OVERRIDE  = [</span></span><br><span class="line"><span class="comment">#   {</span></span><br><span class="line"><span class="comment">#     "urls": [</span></span><br><span class="line"><span class="comment">#       "turn:hostname/IpToTurnServer:19305?transport=udp",</span></span><br><span class="line"><span class="comment">#       "turn:hostname/IpToTurnServer:19305?transport=tcp"</span></span><br><span class="line"><span class="comment">#     ],</span></span><br><span class="line"><span class="comment">#     "username": "TurnServerUsername",</span></span><br><span class="line"><span class="comment">#     "credential": "TurnServerCredentials"</span></span><br><span class="line"><span class="comment">#   },</span></span><br><span class="line"><span class="comment">#   {</span></span><br><span class="line"><span class="comment">#     "urls": [</span></span><br><span class="line"><span class="comment">#       "stun:hostname/IpToStunServer:19302"</span></span><br><span class="line"><span class="comment">#     ]</span></span><br><span class="line"><span class="comment">#   }</span></span><br><span class="line"><span class="comment"># ]</span></span><br><span class="line"></span><br><span class="line">ICE_SERVER_BASE_URL = <span class="string">'http://120.79.164.111:3033'</span></span><br><span class="line">ICE_SERVER_URL_TEMPLATE = <span class="string">'%s/v1alpha/iceconfig?key=%s'</span></span><br><span class="line">ICE_SERVER_API_KEY = os.environ.get(<span class="string">'ICE_SERVER_API_KEY'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Dictionary keys in the collider instance info constant.</span></span><br><span class="line">WSS_INSTANCE_HOST_KEY = <span class="string">'host_port_pair'</span></span><br><span class="line">WSS_INSTANCE_NAME_KEY = <span class="string">'vm_name'</span></span><br><span class="line">WSS_INSTANCE_ZONE_KEY = <span class="string">'zone'</span></span><br><span class="line">WSS_INSTANCES = [{</span><br><span class="line">    WSS_INSTANCE_HOST_KEY: <span class="string">'120.79.164.111:8089'</span>,</span><br><span class="line">    WSS_INSTANCE_NAME_KEY: <span class="string">'wsserver-std'</span>,</span><br><span class="line">    WSS_INSTANCE_ZONE_KEY: <span class="string">'us-central1-a'</span></span><br><span class="line">}, {</span><br><span class="line">    WSS_INSTANCE_HOST_KEY: <span class="string">'120.79.164.111:8089'</span>,</span><br><span class="line">    WSS_INSTANCE_NAME_KEY: <span class="string">'wsserver-std-2'</span>,</span><br><span class="line">    WSS_INSTANCE_ZONE_KEY: <span class="string">'us-central1-f'</span></span><br><span class="line">}]</span><br><span class="line"></span><br><span class="line">WSS_HOST_PORT_PAIRS = [ins[WSS_INSTANCE_HOST_KEY] <span class="keyword">for</span> ins <span class="keyword">in</span> WSS_INSTANCES]</span><br><span class="line"></span><br><span class="line"><span class="comment"># memcache key for the active collider host.</span></span><br><span class="line">WSS_HOST_ACTIVE_HOST_KEY = <span class="string">'wss_host_active_host'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Dictionary keys in the collider probing result.</span></span><br><span class="line">WSS_HOST_IS_UP_KEY = <span class="string">'is_up'</span></span><br><span class="line">WSS_HOST_STATUS_CODE_KEY = <span class="string">'status_code'</span></span><br><span class="line">WSS_HOST_ERROR_MESSAGE_KEY = <span class="string">'error_message'</span></span><br><span class="line"></span><br><span class="line">RESPONSE_ERROR = <span class="string">'ERROR'</span></span><br><span class="line">RESPONSE_ROOM_FULL = <span class="string">'FULL'</span></span><br><span class="line">RESPONSE_UNKNOWN_ROOM = <span class="string">'UNKNOWN_ROOM'</span></span><br><span class="line">RESPONSE_UNKNOWN_CLIENT = <span class="string">'UNKNOWN_CLIENT'</span></span><br><span class="line">RESPONSE_DUPLICATE_CLIENT = <span class="string">'DUPLICATE_CLIENT'</span></span><br><span class="line">RESPONSE_SUCCESS = <span class="string">'SUCCESS'</span></span><br><span class="line">RESPONSE_INVALID_REQUEST = <span class="string">'INVALID_REQUEST'</span></span><br><span class="line"></span><br><span class="line">IS_DEV_SERVER = os.environ.get(<span class="string">'APPLICATION_ID'</span>, <span class="string">''</span>).startswith(<span class="string">'dev'</span>)</span><br><span class="line"></span><br><span class="line">BIGQUERY_URL = <span class="string">'https://www.googleapis.com/auth/bigquery'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Dataset used in production.</span></span><br><span class="line">BIGQUERY_DATASET_PROD = <span class="string">'prod'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Dataset used when running locally.</span></span><br><span class="line">BIGQUERY_DATASET_LOCAL = <span class="string">'dev'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># BigQuery table within the dataset.</span></span><br><span class="line">BIGQUERY_TABLE = <span class="string">'analytics'</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="修改apprtc-py"><a href="#修改apprtc-py" class="headerlink" title="修改apprtc.py"></a>修改apprtc.py</h4><p>apprtc.py路径：apprtc/out/app_engine/apprtc.py</p>
+<p>将<br><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/webrtc-sample-build-2.jpg"><br>修改为<br><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/webrtc-sample-build-3.jpg"><br>（大约位于146行左右）</p>
+<h4 id="修改index-template-html"><a href="#修改index-template-html" class="headerlink" title="修改index_template.html"></a>修改index_template.html</h4><p>index_template.html路径：apprtc/out/app_engine/index_template.html</p>
+<p>设置TURN服务器信息，在javascript脚本中添加servers变量：</p>
+<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> servers=[{</span><br><span class="line">        <span class="attr">credential</span>:<span class="string">"helloword"</span>,</span><br><span class="line">        <span class="attr">username</span>:<span class="string">"helloword"</span>,</span><br><span class="line">        <span class="attr">urls</span>:[</span><br><span class="line">        <span class="string">"turn:120.79.164.111:3478?transport=udp"</span>,</span><br><span class="line">        <span class="string">"turn:120.79.164.111:3478?transport=tcp"</span></span><br><span class="line">        ]</span><br><span class="line">        }];</span><br></pre></td></tr></tbody></table></figure>
+
+<p>并将<code>peerConnectionConfig: {{ pc_config | safe }}</code>修改为使用上面声明的servers变量；</p>
+<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">peerConnectionConfig</span>: { <span class="string">"rtcpMuxPolicy"</span>:<span class="string">"require"</span>,<span class="string">"iceServers"</span>:servers,<span class="string">"bundlePolicy"</span>:<span class="string">"max-bundle"</span>},<span class="attr">iceServerRequestUrl</span>: <span class="string">'{{ ice_server_url }}'</span>,</span><br><span class="line"><span class="comment">//      peerConnectionConfig: {{ pc_config | safe }},</span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/webrtc-sample-build-4.jpg"></p>
+<p>##1.4 获取google_appengine<br>从<a class="link" target="_blank" rel="noopener" href="https://download.csdn.net/download/china_jeffery/10375696">https://download.csdn.net/download/china_jeffery/10375696<i class="fas fa-external-link-alt"></i></a>下载<code>google_appengine.tar</code>，并使用<code>tar</code>命令解压：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line">unzip  google_appengine.tar</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="1-5-启动房间服务器"><a href="#1-5-启动房间服务器" class="headerlink" title="1.5 启动房间服务器"></a>1.5 启动房间服务器</h2><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line">./google_appengine/dev_appserver.py  --host 172.18.163.203  ./apprtc/out/app_engine --skip_sdk_update_check</span><br></pre></td></tr></tbody></table></figure>
+
+<blockquote>
+<p><code>172.18.163.203</code>为内网IP。</p>
+</blockquote>
+<h1 id="二-信令服务器搭建"><a href="#二-信令服务器搭建" class="headerlink" title="二. 信令服务器搭建"></a>二. 信令服务器搭建</h1><h2 id="2-1-collider源码"><a href="#2-1-collider源码" class="headerlink" title="2.1 collider源码"></a>2.1 collider源码</h2><p>Webrtc信令服务可以使用的apprtc自带的collider，这个服务是使用go语言开发。collider已经位于<code>apprtc/src</code>目录中，我们将其拷贝到<code>~/collider/src</code>目录中：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line"><span class="built_in">mkdir</span> collider/src -p</span><br><span class="line"><span class="built_in">cp</span> apprtc/src/collider/ collider/src/ -r</span><br></pre></td></tr></tbody></table></figure>
+
+<p>编辑<code>~/collider/src/collidermain/main.go</code>文件，将room-server修改为服务器的外网IP和端口8080:</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var roomSrv = flag.String(<span class="string">"room-server"</span>, <span class="string">"http://120.79.164.111:8080"</span>, <span class="string">"The origin of the room server"</span>)</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="2-2-安装go"><a href="#2-2-安装go" class="headerlink" title="2.2 安装go"></a>2.2 安装go</h2><p>在安装go之前最好先卸载掉系统上已经安装的go版本：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apt-get remove golang</span><br><span class="line">apt-get remove golang*</span><br><span class="line">apt-get autoremove</span><br></pre></td></tr></tbody></table></figure>
+
+<p>然后使用<code>wget</code>命令下载go：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://storage.googleapis.com/golang/go1.5.1.linux-amd64.tar.gz</span><br></pre></td></tr></tbody></table></figure>
+<p>或者从<a class="link" target="_blank" rel="noopener" href="https://download.csdn.net/download/china_jeffery/10375936">https://download.csdn.net/download/china_jeffery/10375936<i class="fas fa-external-link-alt"></i></a>下载。然后解压<code>tar zxf go1.5.1.linux-amd64.tar.gz</code>。</p>
+<p>添加如下环境变量到<code>/etc/source</code>文件尾，并使用<code>source /etc/source</code>是环境变量生效：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> GOROOT=/root/go</span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$GOROOT</span>/bin</span><br><span class="line"><span class="built_in">export</span> GOPATH=/root/collider/</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="2-3-collider安装"><a href="#2-3-collider安装" class="headerlink" title="2.3 collider安装"></a>2.3 collider安装</h2><p>使用go命令进行collider安装：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/collider</span><br><span class="line">go get collidermain</span><br><span class="line">go install collidermain</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="2-4-启动信令服务器"><a href="#2-4-启动信令服务器" class="headerlink" title="2.4 启动信令服务器"></a>2.4 启动信令服务器</h2><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line">./collider/bin/collidermain -port=8089 -tls=<span class="literal">false</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h1 id="三-TURN服务器搭建"><a href="#三-TURN服务器搭建" class="headerlink" title="三. TURN服务器搭建"></a>三. TURN服务器搭建</h1><p>webrtc的turn服务是为提供NAT穿透或者中转使用的，因为webrtc客户端可能会在不同的路由器后面或者多层路由器后面，那么他们如何通讯呢？都需要穿透，穿透的服务就是turn服务，webrtc推荐使用的coturn（以前也叫turnserver）,它支STUN和Relay。</p>
+<h2 id="3-1-安装依赖"><a href="#3-1-安装依赖" class="headerlink" title="3.1 安装依赖"></a>3.1 安装依赖</h2><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libssl-dev</span><br><span class="line">sudo apt-get install libevent-dev</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="3-2-下载并编译源码"><a href="#3-2-下载并编译源码" class="headerlink" title="3.2 下载并编译源码"></a>3.2 下载并编译源码</h2><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/coturn/coturn.git</span><br><span class="line"><span class="built_in">cd</span> coturn</span><br><span class="line">configure &amp;&amp; make &amp;&amp; make install</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="3-3-启动TURN服务"><a href="#3-3-启动TURN服务" class="headerlink" title="3.3 启动TURN服务"></a>3.3 启动TURN服务</h2><figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./coturn/bin/turnserver --syslog -a -X 120.79.164.111 -E 172.18.163.203 -f --min-port=32355 --max-port=65535 --user=helloword:helloword -r helloword --cert=turn_server_cert.pem --pkey=turn_server_pkey.pem --log-file=stdout -v</span><br></pre></td></tr></tbody></table></figure>
+
+<blockquote>
+<p><code>120.79.164.111</code>为外网IP，<code>172.18.163.203</code>为本地IP。<br>turnserver的参数见：</p>
+<p><a class="link" target="_blank" rel="noopener" href="https://github.com/coturn/coturn/wiki/turnserver">https://github.com/coturn/coturn/wiki/turnserver<i class="fas fa-external-link-alt"></i></a></p>
+<p>本文最初发布在我的CSDN博客：<a class="link" target="_blank" rel="noopener" href="https://winsoft666.blog.csdn.net/article/details/80092309">《WebRTC – 官方apprtc示例搭建》<i class="fas fa-external-link-alt"></i></a></p>
+</blockquote>
+
+                </div>
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/WebRTC/">WebRTC</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                            <div class="post-share-container border-box">
+    <ul class="share-list-wrap border-box">
+        <li class="qq share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到 QQ"
+        >
+            <i class="fa-brands fa-qq"></i>
+        </li>
+        <li class="wechat share-item border-box flex-center tooltip tooltip-img"
+            data-tooltip-content="分享到微信"
+            data-tooltip-img-tip="微信扫一扫"
+            data-tooltip-img-style="background-color: #fff; top: -10px; padding: 0.6rem 0.6rem 0.1rem 0.6rem;"
+        >
+            <i class="fa-brands fa-weixin"></i>
+        </li>
+        <li class="weibo share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到微博"
+        >
+            <i class="fa-brands fa-weibo"></i>
+        </li>
+    </ul>
+</div>
+
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/post/213040252.html"
+                                   title="Windows内存体系(6)--跨模块内存分配释放"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">Windows内存体系(6)--跨模块内存分配释放</span>
+                                        <span class="post-nav-item">上一篇</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/post/3599385732.html"
+                                   title="Windows内存体系(5)--堆"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">Windows内存体系(5)--堆</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+    <div class="comments-container border-box">
+        <div id="comments-anchor" class="comment-area-title border-box">
+            <i class="fas fa-comments"></i>&nbsp;评论
+        </div>
+        <div class="comment-plugin-fail border-box">
+    <span class="fail-tip">评论插件加载失败</span>
+    <button class="reload keep-button">点击重新加载</button>
+</div>
+<div class="comment-plugin-loading flex-center border-box">
+    <i class="loading-icon fa-solid fa-spinner fa-spin"></i>
+    <span class="load-tip">正在加载评论插件</span>
+</div>
+<script data-pjax>
+  window.KeepCommentPlugin = {}
+  window.KeepCommentPlugin.hideLoading = () => {
+    const cplDom = document.querySelector('.comments-container .comment-plugin-loading')
+    cplDom.style.display = 'none'
+  }
+  window.KeepCommentPlugin.loadFailHandle = () => {
+    window.KeepCommentPlugin.hideLoading()
+    const cpfDom = document.querySelector('.comments-container .comment-plugin-fail')
+    cpfDom.style.display = 'flex'
+    cpfDom.querySelector('.reload').addEventListener('click', () => {
+      window.location.reload()
+    })
+  }
+</script>
+
+        
+            
+
+    <div class="twikoo-container">
+        <div id="twikoo-comment"></div>
+        <script 
+                src="//cdn.jsdelivr.net/npm/twikoo@1.6.21/dist/twikoo.all.min.js"
+                async
+                onerror="window.KeepCommentPlugin.loadFailHandle()"
+        ></script>
+        <script 
+                async
+                onerror="window.KeepCommentPlugin.loadFailHandle()"
+        >
+          window.KeepCommentPlugin.initTwikoo = () => {
+            if (window?.twikoo) {
+              twikoo.init({
+                el: '#twikoo-comment',
+                envId: 'https://twikoo.jiangxueqiao.com',
+                region: 'zh-CN',
+                lang: 'zh-CN' || 'zh-CN'
+              })
+              window.KeepCommentPlugin.hideLoading()
+            } else {
+              setTimeout(() => {
+                window.KeepCommentPlugin.initTwikoo()
+              }, 1000)
+            }
+          }
+
+          if ('false' === 'true') {
+            setTimeout(() => {
+              window.KeepCommentPlugin.initTwikoo()
+            }, 1200)
+          } else {
+            window.addEventListener('DOMContentLoaded', window.KeepCommentPlugin.initTwikoo)
+          }
+        </script>
+    </div>
+
+
+        
+    </div>
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80-%E6%88%BF%E9%97%B4%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA"><span class="nav-text">一. 房间服务器搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96%E7%A8%8B%E5%BA%8F"><span class="nav-text">1.1 安装依赖程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E5%AE%89%E8%A3%85jdk8"><span class="nav-text">1.2 安装jdk8</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-1-%E4%B8%8B%E8%BD%BDjdk8"><span class="nav-text">1.2.1 下载jdk8</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-2-%E8%AE%BE%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-text">1.2.2 设置环境变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-apprtc%E8%8E%B7%E5%8F%96%E5%92%8C%E5%AE%89%E8%A3%85"><span class="nav-text">1.3 apprtc获取和安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-1-%E8%8E%B7%E5%8F%96apprtc%E6%BA%90%E7%A0%81"><span class="nav-text">1.3.1 获取apprtc源码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-2-%E5%AE%89%E8%A3%85apprtc"><span class="nav-text">1.3.2 安装apprtc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-3-%E4%BF%AE%E6%94%B9%E6%BA%90%E7%A0%81"><span class="nav-text">1.3.3 修改源码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9constants-py"><span class="nav-text">修改constants.py</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9apprtc-py"><span class="nav-text">修改apprtc.py</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9index-template-html"><span class="nav-text">修改index_template.html</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-%E5%90%AF%E5%8A%A8%E6%88%BF%E9%97%B4%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-text">1.5 启动房间服务器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C-%E4%BF%A1%E4%BB%A4%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA"><span class="nav-text">二. 信令服务器搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-collider%E6%BA%90%E7%A0%81"><span class="nav-text">2.1 collider源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E5%AE%89%E8%A3%85go"><span class="nav-text">2.2 安装go</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-collider%E5%AE%89%E8%A3%85"><span class="nav-text">2.3 collider安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-%E5%90%AF%E5%8A%A8%E4%BF%A1%E4%BB%A4%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-text">2.4 启动信令服务器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89-TURN%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA"><span class="nav-text">三. TURN服务器搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96"><span class="nav-text">3.1 安装依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E4%B8%8B%E8%BD%BD%E5%B9%B6%E7%BC%96%E8%AF%91%E6%BA%90%E7%A0%81"><span class="nav-text">3.2 下载并编译源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-%E5%90%AF%E5%8A%A8TURN%E6%9C%8D%E5%8A%A1"><span class="nav-text">3.3 启动TURN服务</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="border-box website-info-box default">
+        
+            <div class="copyright-info info-item default">
+                &copy;&nbsp;<span>2017</span>&nbsp;-&nbsp;2024
+                
+                    &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">江雪桥</a>
+                
+            </div>
+
+            <div class="copyright-info info-item default">
+                本站文章均为原创（少数注明转载的除外），转载前请注明出处！
+            </div>
+
+            <div class="copyright-info info-item default">
+                <a target="_blank" rel="noopener" href="https://blog.csdn.net/china_jeffery">【CSDN】</a>
+                &nbsp;&nbsp;
+                <a target="_blank" rel="noopener" href="https://github.com/winsoft666/">【Github】</a>
+                &nbsp;&nbsp;
+                <a target="_blank" rel="noopener" href="https://1key.run">【1key.run】</a>
+                &nbsp;&nbsp;
+                <a target="_blank" rel="noopener" href="https://github.com/winsoft666/TinyTu-Setup/releases">【TinyTu】</a>
+                &nbsp;&nbsp;
+                <a target="_blank" rel="noopener" href="https://github.com/winsoft666/winspyplus-bin">【WinSpyPlus】</a>
+            </div>
+
+            
+                <div class="icp-info info-item default">
+                    <a class=""
+                       target="_blank"
+                       href="https://beian.miit.gov.cn"
+                    >
+                        鄂ICP备2020015399号-6
+                    </a>
+                </div>
+            
+
+            
+        
+
+        <div class="count-item info-item default">
+            
+
+            
+
+            
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="tools-list border-box">
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+            <li class="tools-item flex-center go-to-comments">
+                <i class="fas fa-comment"></i>
+                <span class="post-comments-count"></span>
+            </li>
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-toggle-theme-mode flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+            <li class="tools-item go-to-comments-tablet flex-center">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80-%E6%88%BF%E9%97%B4%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA"><span class="nav-text">一. 房间服务器搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96%E7%A8%8B%E5%BA%8F"><span class="nav-text">1.1 安装依赖程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E5%AE%89%E8%A3%85jdk8"><span class="nav-text">1.2 安装jdk8</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-1-%E4%B8%8B%E8%BD%BDjdk8"><span class="nav-text">1.2.1 下载jdk8</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-2-%E8%AE%BE%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-text">1.2.2 设置环境变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-apprtc%E8%8E%B7%E5%8F%96%E5%92%8C%E5%AE%89%E8%A3%85"><span class="nav-text">1.3 apprtc获取和安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-1-%E8%8E%B7%E5%8F%96apprtc%E6%BA%90%E7%A0%81"><span class="nav-text">1.3.1 获取apprtc源码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-2-%E5%AE%89%E8%A3%85apprtc"><span class="nav-text">1.3.2 安装apprtc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-3-%E4%BF%AE%E6%94%B9%E6%BA%90%E7%A0%81"><span class="nav-text">1.3.3 修改源码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9constants-py"><span class="nav-text">修改constants.py</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9apprtc-py"><span class="nav-text">修改apprtc.py</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9index-template-html"><span class="nav-text">修改index_template.html</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-%E5%90%AF%E5%8A%A8%E6%88%BF%E9%97%B4%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-text">1.5 启动房间服务器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C-%E4%BF%A1%E4%BB%A4%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA"><span class="nav-text">二. 信令服务器搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-collider%E6%BA%90%E7%A0%81"><span class="nav-text">2.1 collider源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E5%AE%89%E8%A3%85go"><span class="nav-text">2.2 安装go</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-collider%E5%AE%89%E8%A3%85"><span class="nav-text">2.3 collider安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-%E5%90%AF%E5%8A%A8%E4%BF%A1%E4%BB%A4%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-text">2.4 启动信令服务器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89-TURN%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA"><span class="nav-text">三. TURN服务器搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96"><span class="nav-text">3.1 安装依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E4%B8%8B%E8%BD%BD%E5%B9%B6%E7%BC%96%E8%AF%91%E6%BA%90%E7%A0%81"><span class="nav-text">3.2 下载并编译源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-%E5%90%AF%E5%8A%A8TURN%E6%9C%8D%E5%8A%A1"><span class="nav-text">3.3 启动TURN服务</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+<!-- common -->
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+
+<!-- local-search -->
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+<!-- lazyload -->
+
+    
+<script src="/js/lazyload.js"></script>
+
+
+
+<div class="">
+    
+        <!-- post-helper -->
+        
+<script src="/js/post/post-helper.js"></script>
+
+
+        <!-- toc -->
+        
+            
+<script src="/js/post/toc.js"></script>
+
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+            
+<script src="/js/post/share.js"></script>
+
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+</body>
+</html>

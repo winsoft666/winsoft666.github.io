@@ -33,7 +33,7 @@
     <script class="keep-theme-configurations">
     const KEEP = window.KEEP || {}
     KEEP.hexo_config = {"hostname":"jiangxueqiao.com","root":"/","language":"zh-CN","path":"search.xml"}
-    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"代码派","author":"江雪桥","avatar":"/images/avatar.png","logo":"/images/logo.png","favicon":"/images/favicon.png"},"menu":{"Archives":"/archives","Categories":"/categories","Tags":"/tags","About":"/about","Github":"https://github.com/winsoft666"},"first_screen":{"enable":false,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/winsoft666","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":true,"hide_header":true},"home":{"category":true,"tag":true,"announcement":null},"post":{"author_badge":{"enable":false,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":false},"comment":{"enable":true,"use":"twikoo","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":"https://twikoo.jiangxueqiao.com","region":"zh-CN","version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2017,"word_count":false,"icp":{"enable":true,"record_code":"鄂ICP备2020015399号-6","url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null,"/css/custom.css"],"js":[null]},"root":"","version":"4.0.7"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"代码派","author":"江雪桥","avatar":"/images/avatar.png","logo":"/images/logo.png","favicon":"/images/favicon.png"},"menu":{"home":"/ || fa-solid fa-home","archives":"/archives || fa-solid fa-layer-group","categories":"/categories || fa-solid fa-box-archive","tags":"/tags || fa-solid fa-tags","about":"/about || fa-solid fa-user-graduate","Github":"https://github.com/winsoft666"},"first_screen":{"enable":false,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/winsoft666","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":true,"hide_header":true},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":false,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":false},"comment":{"enable":true,"use":"twikoo","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":"https://twikoo.jiangxueqiao.com","region":"zh-CN","version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2017,"word_count":false,"icp":{"enable":true,"record_code":"鄂ICP备2020015399号-6","url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null,"/css/custom.css"],"js":[null]},"root":"","source_data":{},"version":"4.1.0"}
     KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
     KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
     KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
@@ -52,8 +52,8 @@
 </div>
 
 
-<main class="page-container border-box">
 
+<main class="page-container border-box">
     <!-- home first screen  -->
     
 
@@ -78,40 +78,75 @@
         <div class="right border-box">
             <div class="pc">
                 <ul class="menu-list">
-                    <li class="menu-item">
-                        <a class="active"
-                           href="/"
-                        >首页</a>
-                    </li>
                     
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-home"></i>
+                                
+                                首页
+                            </a>
+                        </li>
+                    
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/archives"
-                            >归档</a>
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-layer-group"></i>
+                                
+                                归档
+                            </a>
                         </li>
                     
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/categories"
-                            >分类</a>
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-box-archive"></i>
+                                
+                                分类
+                            </a>
                         </li>
                     
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/tags"
-                            >标签</a>
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-tags"></i>
+                                
+                                标签
+                            </a>
                         </li>
                     
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/about"
-                            >关于</a>
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-user-graduate"></i>
+                                
+                                关于
+                            </a>
                         </li>
                     
+                        
                         <li class="menu-item">
                             <a class=""
                                target="_blank" rel="noopener" href="https://github.com/winsoft666"
-                            >GITHUB</a>
+                            >
+                                
+                                GITHUB
+                            </a>
                         </li>
                     
                     
@@ -134,36 +169,43 @@
 
     <div class="header-drawer">
         <ul class="drawer-menu-list">
-            <li class="drawer-menu-item flex-center">
-                <a class="active"
-                   href="/"
-                >首页</a>
-            </li>
             
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/"
+                    >首页</a>
+                </li>
+            
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
                        href="/archives"
                     >归档</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
                        href="/categories"
                     >分类</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
                        href="/tags"
                     >标签</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
                        href="/about"
                     >关于</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
                        target="_blank" rel="noopener" href="https://github.com/winsoft666"
@@ -196,6 +238,258 @@
                 <div class="home-post-item-bottom border-box">
                     
                     <h3 class="home-post-title border-box">
+                        <a href="/post/3938269003.html">
+                            Windows内存体系(3)--内存映射文件
+                        </a>
+                    </h3>
+
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            <h1 id="一、为什么需要内存映射"><a href="#一、为什么需要内存映射" class="headerlink" title="一、为什么需要内存映射"></a>一、为什么需要内存映射</h1><p><code>“内存映射文件”</code>可以将硬盘上的文件映射到<code>虚拟地址空间</code>，这样就不需要将所有东西都放入到页交换文件中，比如系统有许多程序同时运行时，如果将这些程序文件都加载到页交换文件中，<code>页交换文件</code>将会变得非常大。事实上，Windows 也并没有将硬盘上的程序文件复制到<code>页交换文件</code>中，因为这样不仅会让<code>页交换文件</code>将会变得非常大，也会浪费很多时间，特别是可执行程序非常大的时候。</p>
+<p>当用户要求执行一个应用程序时，系统会打开该应用程序的<code>.exe</code>文件，并计算出应用程序的代码和数据的大小，然后系统会在进程的虚拟地址空间预定一块地址空间，并注明与该区域相关联的物理存储器就是<code>.exe</code>文件本身。</p>
+<p>当把一个位于硬盘上的文件（可以是<code>.exe</code>，<code>.dll</code>也可以是普通文件）映像用作地址空间区域对应的物理存储器时，我们称这个文件映像为<code>“内存映射文件”</code>。</p>
+                        
+                    </div>
+
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fa-solid fa-history"></i>&nbsp;<span class="home-post-history"
+                                                                                data-updated="Tue Mar 12 2024 15:48:54 GMT+0800"
+                >2024-03-12 15:48:54</span>
+            </span>
+        
+
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E4%B8%93%E6%A0%8F%E3%80%8AWindows%E5%86%85%E5%AD%98%E4%BD%93%E7%B3%BB%E3%80%8B/">专栏《Windows内存体系》</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+        <a class="home-read-more" href="/post/3938269003.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-post-item">
+
+                
+
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
+                        <a href="/post/595856315.html">
+                            Windows内存体系(2)--虚拟内存
+                        </a>
+                    </h3>
+
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            <h2 id="一、页交换文件"><a href="#一、页交换文件" class="headerlink" title="一、页交换文件"></a>一、页交换文件</h2><p><code>虚拟地址空间</code>只是操作系统为进程“虚拟”出来的一块地址区域，并不代表任何实际的空间。而<code>“页交换文件”</code>却对应了实际的空间，这个空间一般是磁盘上名为<code>“pagefile.sys”</code>的文件。</p>
+<p><code>“页交换文件”</code>的大小和位置可以在系统设置（<code>系统属性 -&gt; 高级 -&gt; 性能 -&gt; 设置 -&gt; 高级</code> ）中进行设置：<br><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/windows-nctx-xnnc-1.jpg"></p>
+<p>从微软的官方文档来看，<code>“虚拟内存”</code>等于<code>“物理内存”+“分页文件”</code>总和。可以把<code>“虚拟内存”</code>理解为 Windows 的一种内存管理机制。</p>
+                        
+                    </div>
+
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fa-solid fa-history"></i>&nbsp;<span class="home-post-history"
+                                                                                data-updated="Tue Mar 12 2024 15:48:54 GMT+0800"
+                >2024-03-12 15:48:54</span>
+            </span>
+        
+
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E4%B8%93%E6%A0%8F%E3%80%8AWindows%E5%86%85%E5%AD%98%E4%BD%93%E7%B3%BB%E3%80%8B/">专栏《Windows内存体系》</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+        <a class="home-read-more" href="/post/595856315.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-post-item">
+
+                
+
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
+                        <a href="/post/2494475058.html">
+                            Windows内存体系(1)--虚拟地址空间
+                        </a>
+                    </h3>
+
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            <h2 id="一、实模式下内存分配机制"><a href="#一、实模式下内存分配机制" class="headerlink" title="一、实模式下内存分配机制"></a>一、实模式下内存分配机制</h2><p>在 8086 或者 80186 以前，程序运行时，操作系统会把程序全都装入内存，程序都是直接运行在物理内存上的。也就是说程序中访问的内存地址都是实际的物理内存地址。当计算机同时运行多个程序时，必须保证这些程序用到的内存总量要小于计算机实际物理内存的大小。</p>
+<p>例如某台计算机总的内存大小是<code>128M</code> ，现在同时运行两个程序 A 和 B ，A 需占用内存<code>10M</code> ， B 需占用内存<code>110M</code> 。计算机在给程序分配内存时会采取这样的方法：先将内存中的前<code>10M</code>分配给程序 A ，接着再从内存中剩余的<code>118M</code>中划分出 <code>110M</code>分配给程序 B 。这种分配方法虽然可以保证程序 A 和程序 B 都能运行，但是这种简单的内存分配策略会导致很多问题：</p>
+                        
+                    </div>
+
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fa-solid fa-history"></i>&nbsp;<span class="home-post-history"
+                                                                                data-updated="Tue Mar 12 2024 15:48:54 GMT+0800"
+                >2024-03-12 15:48:54</span>
+            </span>
+        
+
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E4%B8%93%E6%A0%8F%E3%80%8AWindows%E5%86%85%E5%AD%98%E4%BD%93%E7%B3%BB%E3%80%8B/">专栏《Windows内存体系》</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+        <a class="home-read-more" href="/post/2494475058.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-post-item">
+
+                
+
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
+                        <a href="/post/3298681169.html">
+                            初识WebRTC
+                        </a>
+                    </h3>
+
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            <p>WebRTC （Web Real-Time Communications） 是一项实时通讯技术，它允许网络应用或者站点在不借助中间媒介的情况下，建立浏览器之间点对点（Peer-to-Peer）的连接，实现视频流和（或）音频流或者其他任意数据的传输。WebRTC包含的这些标准使用户在无需安装任何插件或者第三方的软件的情况下，创建点对点（Peer-to-Peer）的数据分享和电话会议成为可能。</p>
+<p>它并不是单一的协议，包含了媒体、加密、传输层等在内的多个协议标准以及一套基于 JavaScript 的 API。通过简单易用的 JavaScript API ，在不安装任何插件的情况下，让浏览器拥有了 P2P音视频和数据分享的能力。同时WebRTC 并不是一个孤立的协议，它拥有灵活的信令，可以便捷的对接现有的SIP 和电话网络的系统。</p>
+<p>不同技术领域的人都可以从WebRTC中获取到需要的东西。</p>
+                        
+                    </div>
+
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fa-solid fa-history"></i>&nbsp;<span class="home-post-history"
+                                                                                data-updated="Tue Mar 12 2024 16:11:26 GMT+0800"
+                >2024-03-12 16:11:26</span>
+            </span>
+        
+
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E7%A8%8B/">音视频编程</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/WebRTC/">WebRTC</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+        <a class="home-read-more" href="/post/3298681169.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-post-item">
+
+                
+
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
                         <a href="/post/2172509399.html">
                             SDP格式解析
                         </a>
@@ -215,7 +509,9 @@
     <div class="post-meta-info border-box">
         
             <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Tue Mar 12 2024 15:48:20 GMT+0800">2024-03-12 15:48:20</span>
+                <i class="icon fa-solid fa-history"></i>&nbsp;<span class="home-post-history"
+                                                                                data-updated="Tue Mar 12 2024 15:48:20 GMT+0800"
+                >2024-03-12 15:48:20</span>
             </span>
         
 
@@ -234,7 +530,6 @@
 
         
             <span class="post-tag meta-info-item border-box">
-                <i class="icon fas fa-tags"></i>&nbsp;
                 <ul class="post-tag-ul">
                     
                             <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/WebRTC/">WebRTC</a></li>
@@ -285,7 +580,9 @@
     <div class="post-meta-info border-box">
         
             <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Tue Mar 12 2024 15:45:23 GMT+0800">2024-03-12 15:45:23</span>
+                <i class="icon fa-solid fa-history"></i>&nbsp;<span class="home-post-history"
+                                                                                data-updated="Tue Mar 12 2024 15:45:23 GMT+0800"
+                >2024-03-12 15:45:23</span>
             </span>
         
 
@@ -304,7 +601,6 @@
 
         
             <span class="post-tag meta-info-item border-box">
-                <i class="icon fas fa-tags"></i>&nbsp;
                 <ul class="post-tag-ul">
                     
                             <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/HTTP/">HTTP</a></li>
@@ -355,7 +651,9 @@
     <div class="post-meta-info border-box">
         
             <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Wed Oct 18 2023 18:25:55 GMT+0800">2023-10-18 18:25:55</span>
+                <i class="icon fa-solid fa-history"></i>&nbsp;<span class="home-post-history"
+                                                                                data-updated="Wed Oct 18 2023 18:25:55 GMT+0800"
+                >2023-10-18 18:25:55</span>
             </span>
         
 
@@ -374,7 +672,6 @@
 
         
             <span class="post-tag meta-info-item border-box">
-                <i class="icon fas fa-tags"></i>&nbsp;
                 <ul class="post-tag-ul">
                     
                             <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/TCP/">TCP</a></li>
@@ -405,14 +702,15 @@
                 <div class="home-post-item-bottom border-box">
                     
                     <h3 class="home-post-title border-box">
-                        <a href="/post/4190400644.html">
-                            网络协议(5)--UDP协议
+                        <a href="/post/4206756384.html">
+                            Windows的消息机制
                         </a>
                     </h3>
 
                     <div class="home-post-content keep-markdown-body">
                         
-                            <h2 id="一、什么是-UDP-协议？"><a href="#一、什么是-UDP-协议？" class="headerlink" title="一、什么是 UDP 协议？"></a>一、什么是 UDP 协议？</h2><p>UDP 是 User Datagram Protocol 的简称，中文名是用户数据报协议，是 OSI 参考模型中的传输层协议，它是一种无连接的传输层协议，提供面向事务的简单不可靠信息传送服务。</p>
+                            一、消息队列首先我们要明确一个观点：窗口是和线程相关联的，消息队列也是和线程相关联的，这个线程无论是主线程还是子线程。
+当一个线程被创建时，系统假定该线程不会被用于任何与用户界面相关的任务，所以不会为它分配相应的资源（如消息队列等），因为这样可以减少...
                         
                     </div>
 
@@ -422,7 +720,9 @@
     <div class="post-meta-info border-box">
         
             <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Tue Mar 12 2024 15:45:23 GMT+0800">2024-03-12 15:45:23</span>
+                <i class="icon fa-solid fa-history"></i>&nbsp;<span class="home-post-history"
+                                                                                data-updated="Fri Mar 15 2024 11:38:21 GMT+0800"
+                >2024-03-15 11:38:21</span>
             </span>
         
 
@@ -432,7 +732,7 @@
             <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
                 <ul class="post-category-ul">
                     
-                            <li class="category-item"><a href="/categories/%E4%B8%93%E6%A0%8F%E3%80%8A%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E3%80%8B/">专栏《网络协议》</a></li>
+                            <li class="category-item"><a href="/categories/%E4%B8%93%E6%A0%8F%E3%80%8AWindows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B%E3%80%8B/">专栏《Windows核心编程》</a></li>
                         
                     
                 </ul>
@@ -441,10 +741,9 @@
 
         
             <span class="post-tag meta-info-item border-box">
-                <i class="icon fas fa-tags"></i>&nbsp;
                 <ul class="post-tag-ul">
                     
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/UDP/">UDP</a></li>
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Windows%E6%B6%88%E6%81%AF/">Windows消息</a></li>
                         
                     
                 </ul>
@@ -458,270 +757,7 @@
     </div>
 
     
-        <a class="home-read-more" href="/post/4190400644.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
-    
-</div>
-
-                </div>
-            </li>
-        
-            <li class="home-post-item">
-
-                
-
-                <div class="home-post-item-bottom border-box">
-                    
-                    <h3 class="home-post-title border-box">
-                        <a href="/post/349088656.html">
-                            网络协议(4)--ICMP协议
-                        </a>
-                    </h3>
-
-                    <div class="home-post-content keep-markdown-body">
-                        
-                            <p>互联网控制消息协议（英文：<code>Internet Control Message Protocol</code>，ICMP）是互联网协议族的核心协议之一。定义在 RFC 792 文档中。<br>ICMP 的消息大致可以分为两类：一类是差错报文，即通知出错原因的错误消息（如<code>traceroute</code>），另一类是查询报文，即用于诊断的查询消息（如<code>ping</code>）。<br>使用 ICMP 协议的典型应用有<code>ping</code>和<code>traceroute</code>（windows 上叫<code>tracert</code>）。</p>
-                        
-                    </div>
-
-                    
-
-<div class="post-meta-info-container border-box home">
-    <div class="post-meta-info border-box">
-        
-            <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Tue Mar 12 2024 15:45:23 GMT+0800">2024-03-12 15:45:23</span>
-            </span>
-        
-
-        
-
-        
-            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
-                <ul class="post-category-ul">
-                    
-                            <li class="category-item"><a href="/categories/%E4%B8%93%E6%A0%8F%E3%80%8A%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E3%80%8B/">专栏《网络协议》</a></li>
-                        
-                    
-                </ul>
-            </span>
-        
-
-        
-            <span class="post-tag meta-info-item border-box">
-                <i class="icon fas fa-tags"></i>&nbsp;
-                <ul class="post-tag-ul">
-                    
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/ICMP/">ICMP</a></li>
-                        
-                    
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Ping/">Ping</a></li>
-                        
-                    
-                </ul>
-            </span>
-        
-
-        
-        
-        
-        
-    </div>
-
-    
-        <a class="home-read-more" href="/post/349088656.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
-    
-</div>
-
-                </div>
-            </li>
-        
-            <li class="home-post-item">
-
-                
-
-                <div class="home-post-item-bottom border-box">
-                    
-                    <h3 class="home-post-title border-box">
-                        <a href="/post/2274025898.html">
-                            网络协议(3)--IP协议
-                        </a>
-                    </h3>
-
-                    <div class="home-post-content keep-markdown-body">
-                        
-                            <p>IP 协议是 TCP/IP 协议族中最核心的协议。所有的 TCP、UDP、ICMP、IGMP 数据都以 IP 数据报的格式传输。</p>
-                        
-                    </div>
-
-                    
-
-<div class="post-meta-info-container border-box home">
-    <div class="post-meta-info border-box">
-        
-            <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Tue Mar 12 2024 15:45:23 GMT+0800">2024-03-12 15:45:23</span>
-            </span>
-        
-
-        
-
-        
-            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
-                <ul class="post-category-ul">
-                    
-                            <li class="category-item"><a href="/categories/%E4%B8%93%E6%A0%8F%E3%80%8A%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E3%80%8B/">专栏《网络协议》</a></li>
-                        
-                    
-                </ul>
-            </span>
-        
-
-        
-            <span class="post-tag meta-info-item border-box">
-                <i class="icon fas fa-tags"></i>&nbsp;
-                <ul class="post-tag-ul">
-                    
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/IP/">IP</a></li>
-                        
-                    
-                </ul>
-            </span>
-        
-
-        
-        
-        
-        
-    </div>
-
-    
-        <a class="home-read-more" href="/post/2274025898.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
-    
-</div>
-
-                </div>
-            </li>
-        
-            <li class="home-post-item">
-
-                
-
-                <div class="home-post-item-bottom border-box">
-                    
-                    <h3 class="home-post-title border-box">
-                        <a href="/post/3034381124.html">
-                            网络协议(2)--ARP和RARP协议
-                        </a>
-                    </h3>
-
-                    <div class="home-post-content keep-markdown-body">
-                        
-                            <p><code>ARP</code>(<code>Address Resolution Protocol</code>)地址解析协议，位于 TCP/IP 协议栈中的链路层。当局域网内主机间（或者是主机与网关间）需要通信时，通过使用<code>ARP协议</code>获取<code>目标IP地址</code>对应的<code>硬件MAC地址</code>，然后主机间通过该<code>硬件MAC地址</code>完成数据包发送和接收。</p>
-                        
-                    </div>
-
-                    
-
-<div class="post-meta-info-container border-box home">
-    <div class="post-meta-info border-box">
-        
-            <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Tue Mar 12 2024 15:45:23 GMT+0800">2024-03-12 15:45:23</span>
-            </span>
-        
-
-        
-
-        
-            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
-                <ul class="post-category-ul">
-                    
-                            <li class="category-item"><a href="/categories/%E4%B8%93%E6%A0%8F%E3%80%8A%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E3%80%8B/">专栏《网络协议》</a></li>
-                        
-                    
-                </ul>
-            </span>
-        
-
-        
-            <span class="post-tag meta-info-item border-box">
-                <i class="icon fas fa-tags"></i>&nbsp;
-                <ul class="post-tag-ul">
-                    
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/ARP/">ARP</a></li>
-                        
-                    
-                </ul>
-            </span>
-        
-
-        
-        
-        
-        
-    </div>
-
-    
-        <a class="home-read-more" href="/post/3034381124.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
-    
-</div>
-
-                </div>
-            </li>
-        
-            <li class="home-post-item">
-
-                
-
-                <div class="home-post-item-bottom border-box">
-                    
-                    <h3 class="home-post-title border-box">
-                        <a href="/post/3886809266.html">
-                            网络协议(1)--基础概念
-                        </a>
-                    </h3>
-
-                    <div class="home-post-content keep-markdown-body">
-                        
-                            一、TCP/IP 协议栈
-二、IP 地址、子网掩码、网关2.1 IP 地址及分类IP 地址相当于互联网上的门牌号，计算机在启动的时候可以从磁盘（无盘系统例外）上读取该主机的 IP 配置。
-IP 地址由 4 个字节（也就是 32 位）的二进制码组成，包...
-                        
-                    </div>
-
-                    
-
-<div class="post-meta-info-container border-box home">
-    <div class="post-meta-info border-box">
-        
-            <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Tue Mar 12 2024 15:45:23 GMT+0800">2024-03-12 15:45:23</span>
-            </span>
-        
-
-        
-
-        
-            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
-                <ul class="post-category-ul">
-                    
-                            <li class="category-item"><a href="/categories/%E4%B8%93%E6%A0%8F%E3%80%8A%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E3%80%8B/">专栏《网络协议》</a></li>
-                        
-                    
-                </ul>
-            </span>
-        
-
-        
-
-        
-        
-        
-        
-    </div>
-
-    
-        <a class="home-read-more" href="/post/3886809266.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+        <a class="home-read-more" href="/post/4206756384.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
     
 </div>
 
@@ -743,8 +779,8 @@ IP 地址由 4 个字节（也就是 32 位）的二进制码组成，包...
                    type="number"
                    value="18"
                    min="1"
-                   max="21"
-            ><span class="delimiter base-color-size">/</span><span class="base-color-size">21</span>
+                   max="22"
+            ><span class="delimiter base-color-size">/</span><span class="base-color-size">22</span>
         </div>
 
 
@@ -763,7 +799,6 @@ IP 地址由 4 个字节（也就是 32 位）的二进制码组成，包...
 
                 
             </div>
-
         </div>
 
         <div class="page-main-content-bottom border-box">
@@ -776,6 +811,22 @@ IP 地址由 4 个字节（也就是 32 位）的二进制码组成，包...
                 
                     &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">江雪桥</a>
                 
+            </div>
+
+            <div class="copyright-info info-item default">
+                本站文章均为原创（少数注明转载的除外），转载前请注明出处！
+            </div>
+
+            <div class="copyright-info info-item default">
+                <a target="_blank" rel="noopener" href="https://blog.csdn.net/china_jeffery">【CSDN】</a>
+                &nbsp;&nbsp;
+                <a target="_blank" rel="noopener" href="https://github.com/winsoft666/">【Github】</a>
+                &nbsp;&nbsp;
+                <a target="_blank" rel="noopener" href="https://1key.run">【1key.run】</a>
+                &nbsp;&nbsp;
+                <a target="_blank" rel="noopener" href="https://github.com/winsoft666/TinyTu-Setup/releases">【TinyTu】</a>
+                &nbsp;&nbsp;
+                <a target="_blank" rel="noopener" href="https://github.com/winsoft666/winspyplus-bin">【WinSpyPlus】</a>
             </div>
 
             
@@ -938,13 +989,16 @@ IP 地址由 4 个字节（也就是 32 位）的二进制码组成，包...
 <div class="">
     
 
-    <!-- category-page -->
+    <!-- categories page -->
     
 
-    <!-- links-page -->
+    <!-- links page -->
     
 
-    <!-- photos-page -->
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
     
 </div>
 

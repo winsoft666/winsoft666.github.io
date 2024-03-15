@@ -33,7 +33,7 @@
     <script class="keep-theme-configurations">
     const KEEP = window.KEEP || {}
     KEEP.hexo_config = {"hostname":"jiangxueqiao.com","root":"/","language":"zh-CN","path":"search.xml"}
-    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"代码派","author":"江雪桥","avatar":"/images/avatar.png","logo":"/images/logo.png","favicon":"/images/favicon.png"},"menu":{"Archives":"/archives","Categories":"/categories","Tags":"/tags","About":"/about","Github":"https://github.com/winsoft666"},"first_screen":{"enable":false,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/winsoft666","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":true,"hide_header":true},"home":{"category":true,"tag":true,"announcement":null},"post":{"author_badge":{"enable":false,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":false},"comment":{"enable":true,"use":"twikoo","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":"https://twikoo.jiangxueqiao.com","region":"zh-CN","version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2017,"word_count":false,"icp":{"enable":true,"record_code":"鄂ICP备2020015399号-6","url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null,"/css/custom.css"],"js":[null]},"root":"","version":"4.0.7"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"代码派","author":"江雪桥","avatar":"/images/avatar.png","logo":"/images/logo.png","favicon":"/images/favicon.png"},"menu":{"home":"/ || fa-solid fa-home","archives":"/archives || fa-solid fa-layer-group","categories":"/categories || fa-solid fa-box-archive","tags":"/tags || fa-solid fa-tags","about":"/about || fa-solid fa-user-graduate","Github":"https://github.com/winsoft666"},"first_screen":{"enable":false,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/winsoft666","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":true,"hide_header":true},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":false,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":false},"comment":{"enable":true,"use":"twikoo","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":"https://twikoo.jiangxueqiao.com","region":"zh-CN","version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2017,"word_count":false,"icp":{"enable":true,"record_code":"鄂ICP备2020015399号-6","url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null,"/css/custom.css"],"js":[null]},"root":"","source_data":{},"version":"4.1.0"}
     KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
     KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
     KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
@@ -52,8 +52,8 @@
 </div>
 
 
-<main class="page-container border-box">
 
+<main class="page-container border-box">
     <!-- home first screen  -->
     
 
@@ -78,40 +78,75 @@
         <div class="right border-box">
             <div class="pc">
                 <ul class="menu-list">
-                    <li class="menu-item">
-                        <a class="active"
-                           href="/"
-                        >首页</a>
-                    </li>
                     
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-home"></i>
+                                
+                                首页
+                            </a>
+                        </li>
+                    
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/archives"
-                            >归档</a>
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-layer-group"></i>
+                                
+                                归档
+                            </a>
                         </li>
                     
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/categories"
-                            >分类</a>
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-box-archive"></i>
+                                
+                                分类
+                            </a>
                         </li>
                     
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/tags"
-                            >标签</a>
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-tags"></i>
+                                
+                                标签
+                            </a>
                         </li>
                     
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/about"
-                            >关于</a>
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-user-graduate"></i>
+                                
+                                关于
+                            </a>
                         </li>
                     
+                        
                         <li class="menu-item">
                             <a class=""
                                target="_blank" rel="noopener" href="https://github.com/winsoft666"
-                            >GITHUB</a>
+                            >
+                                
+                                GITHUB
+                            </a>
                         </li>
                     
                     
@@ -134,36 +169,43 @@
 
     <div class="header-drawer">
         <ul class="drawer-menu-list">
-            <li class="drawer-menu-item flex-center">
-                <a class="active"
-                   href="/"
-                >首页</a>
-            </li>
             
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/"
+                    >首页</a>
+                </li>
+            
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
                        href="/archives"
                     >归档</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
                        href="/categories"
                     >分类</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
                        href="/tags"
                     >标签</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
                        href="/about"
                     >关于</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
                        target="_blank" rel="noopener" href="https://github.com/winsoft666"
@@ -196,6 +238,342 @@
                 <div class="home-post-item-bottom border-box">
                     
                     <h3 class="home-post-title border-box">
+                        <a href="/post/4190400644.html">
+                            网络协议(5)--UDP协议
+                        </a>
+                    </h3>
+
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            <h2 id="一、什么是-UDP-协议？"><a href="#一、什么是-UDP-协议？" class="headerlink" title="一、什么是 UDP 协议？"></a>一、什么是 UDP 协议？</h2><p>UDP 是 User Datagram Protocol 的简称，中文名是用户数据报协议，是 OSI 参考模型中的传输层协议，它是一种无连接的传输层协议，提供面向事务的简单不可靠信息传送服务。</p>
+                        
+                    </div>
+
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fa-solid fa-history"></i>&nbsp;<span class="home-post-history"
+                                                                                data-updated="Tue Mar 12 2024 15:45:23 GMT+0800"
+                >2024-03-12 15:45:23</span>
+            </span>
+        
+
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E4%B8%93%E6%A0%8F%E3%80%8A%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E3%80%8B/">专栏《网络协议》</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/UDP/">UDP</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+        <a class="home-read-more" href="/post/4190400644.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-post-item">
+
+                
+
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
+                        <a href="/post/349088656.html">
+                            网络协议(4)--ICMP协议
+                        </a>
+                    </h3>
+
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            <p>互联网控制消息协议（英文：<code>Internet Control Message Protocol</code>，ICMP）是互联网协议族的核心协议之一。定义在 RFC 792 文档中。<br>ICMP 的消息大致可以分为两类：一类是差错报文，即通知出错原因的错误消息（如<code>traceroute</code>），另一类是查询报文，即用于诊断的查询消息（如<code>ping</code>）。<br>使用 ICMP 协议的典型应用有<code>ping</code>和<code>traceroute</code>（windows 上叫<code>tracert</code>）。</p>
+                        
+                    </div>
+
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fa-solid fa-history"></i>&nbsp;<span class="home-post-history"
+                                                                                data-updated="Tue Mar 12 2024 15:45:23 GMT+0800"
+                >2024-03-12 15:45:23</span>
+            </span>
+        
+
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E4%B8%93%E6%A0%8F%E3%80%8A%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E3%80%8B/">专栏《网络协议》</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/ICMP/">ICMP</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Ping/">Ping</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+        <a class="home-read-more" href="/post/349088656.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-post-item">
+
+                
+
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
+                        <a href="/post/2274025898.html">
+                            网络协议(3)--IP协议
+                        </a>
+                    </h3>
+
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            <p>IP 协议是 TCP/IP 协议族中最核心的协议。所有的 TCP、UDP、ICMP、IGMP 数据都以 IP 数据报的格式传输。</p>
+                        
+                    </div>
+
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fa-solid fa-history"></i>&nbsp;<span class="home-post-history"
+                                                                                data-updated="Tue Mar 12 2024 15:45:23 GMT+0800"
+                >2024-03-12 15:45:23</span>
+            </span>
+        
+
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E4%B8%93%E6%A0%8F%E3%80%8A%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E3%80%8B/">专栏《网络协议》</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/IP/">IP</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+        <a class="home-read-more" href="/post/2274025898.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-post-item">
+
+                
+
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
+                        <a href="/post/3034381124.html">
+                            网络协议(2)--ARP和RARP协议
+                        </a>
+                    </h3>
+
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            <p><code>ARP</code>(<code>Address Resolution Protocol</code>)地址解析协议，位于 TCP/IP 协议栈中的链路层。当局域网内主机间（或者是主机与网关间）需要通信时，通过使用<code>ARP协议</code>获取<code>目标IP地址</code>对应的<code>硬件MAC地址</code>，然后主机间通过该<code>硬件MAC地址</code>完成数据包发送和接收。</p>
+                        
+                    </div>
+
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fa-solid fa-history"></i>&nbsp;<span class="home-post-history"
+                                                                                data-updated="Tue Mar 12 2024 15:45:23 GMT+0800"
+                >2024-03-12 15:45:23</span>
+            </span>
+        
+
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E4%B8%93%E6%A0%8F%E3%80%8A%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E3%80%8B/">专栏《网络协议》</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/ARP/">ARP</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+        <a class="home-read-more" href="/post/3034381124.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-post-item">
+
+                
+
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
+                        <a href="/post/3886809266.html">
+                            网络协议(1)--基础概念
+                        </a>
+                    </h3>
+
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            一、TCP/IP 协议栈
+二、IP 地址、子网掩码、网关2.1 IP 地址及分类IP 地址相当于互联网上的门牌号，计算机在启动的时候可以从磁盘（无盘系统例外）上读取该主机的 IP 配置。
+IP 地址由 4 个字节（也就是 32 位）的二进制码组成，包...
+                        
+                    </div>
+
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fa-solid fa-history"></i>&nbsp;<span class="home-post-history"
+                                                                                data-updated="Tue Mar 12 2024 15:45:23 GMT+0800"
+                >2024-03-12 15:45:23</span>
+            </span>
+        
+
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E4%B8%93%E6%A0%8F%E3%80%8A%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E3%80%8B/">专栏《网络协议》</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+        <a class="home-read-more" href="/post/3886809266.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-post-item">
+
+                
+
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
                         <a href="/post/2414867920.html">
                             使用WinDbg查看调用堆栈
                         </a>
@@ -214,7 +592,9 @@
     <div class="post-meta-info border-box">
         
             <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Tue Mar 12 2024 15:44:28 GMT+0800">2024-03-12 15:44:28</span>
+                <i class="icon fa-solid fa-history"></i>&nbsp;<span class="home-post-history"
+                                                                                data-updated="Tue Mar 12 2024 15:44:28 GMT+0800"
+                >2024-03-12 15:44:28</span>
             </span>
         
 
@@ -233,7 +613,6 @@
 
         
             <span class="post-tag meta-info-item border-box">
-                <i class="icon fas fa-tags"></i>&nbsp;
                 <ul class="post-tag-ul">
                     
                             <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Windbg/">Windbg</a></li>
@@ -284,7 +663,9 @@
     <div class="post-meta-info border-box">
         
             <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Tue Mar 12 2024 15:44:53 GMT+0800">2024-03-12 15:44:53</span>
+                <i class="icon fa-solid fa-history"></i>&nbsp;<span class="home-post-history"
+                                                                                data-updated="Tue Mar 12 2024 15:44:53 GMT+0800"
+                >2024-03-12 15:44:53</span>
             </span>
         
 
@@ -303,7 +684,6 @@
 
         
             <span class="post-tag meta-info-item border-box">
-                <i class="icon fas fa-tags"></i>&nbsp;
                 <ul class="post-tag-ul">
                     
                             <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/MySQL/">MySQL</a></li>
@@ -334,18 +714,17 @@
                 <div class="home-post-item-bottom border-box">
                     
                     <h3 class="home-post-title border-box">
-                        <a href="/post/3177767322.html">
-                            使用WinDbg调试关键区死锁
+                        <a href="/post/3534906950.html">
+                            最不像干货的33条干货【转载】
                         </a>
                     </h3>
 
                     <div class="home-post-content keep-markdown-body">
                         
-                            <p>本文通过一个实例来讲解如何使用WinDbg来调试Windows CriticalSection死锁的问题。</p>
-<h1 id="一-演示示例"><a href="#一-演示示例" class="headerlink" title="一. 演示示例"></a>一. 演示示例</h1><p>这里有一个关键区锁死问题的程序，运行之后依次点击“CS锁死”按钮、右上角退出按钮，程序就会卡死。</p>
-<p><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/windbg-debug-cs-1.png"></p>
-<p>对于眼下的这个问题，界面完全失去响应，这说明负责消息处理的UI线程阻塞了。</p>
-<p>对于几乎所有的windows GUI程序，编号为0的初始线程就是UI线程，windows发现该界面一段时间没有消息响应之后就会在标题后面加上“（未响应）”。</p>
+                            
+成功的唯一秘诀就是钻空子。钻职场人际关系的空子、钻市场监管的空子、钻信息不对称的空子，钻你发现的一切空子的空子。当然，坚持、努力、选择这些因素，对于成功也很重要，但算不上秘诀。只有钻空子才是唯一的秘诀。
+
+不要做永远正确的穷人。少跟人争辩，你觉得对...
                         
                     </div>
 
@@ -355,7 +734,9 @@
     <div class="post-meta-info border-box">
         
             <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Tue Mar 12 2024 15:44:27 GMT+0800">2024-03-12 15:44:27</span>
+                <i class="icon fa-solid fa-history"></i>&nbsp;<span class="home-post-history"
+                                                                                data-updated="Fri Mar 15 2024 11:48:14 GMT+0800"
+                >2024-03-15 11:48:14</span>
             </span>
         
 
@@ -365,7 +746,7 @@
             <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
                 <ul class="post-category-ul">
                     
-                            <li class="category-item"><a href="/categories/%E8%BD%AF%E4%BB%B6%E8%B0%83%E8%AF%95/">软件调试</a></li>
+                            <li class="category-item"><a href="/categories/%E7%BE%8E%E6%96%87%E8%B5%8F%E6%9E%90/">美文赏析</a></li>
                         
                     
                 </ul>
@@ -374,13 +755,9 @@
 
         
             <span class="post-tag meta-info-item border-box">
-                <i class="icon fas fa-tags"></i>&nbsp;
                 <ul class="post-tag-ul">
                     
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Windbg/">Windbg</a></li>
-                        
-                    
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Deadlock/">Deadlock</a></li>
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E8%BD%AC%E8%BD%BD/">转载</a></li>
                         
                     
                 </ul>
@@ -394,326 +771,7 @@
     </div>
 
     
-        <a class="home-read-more" href="/post/3177767322.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
-    
-</div>
-
-                </div>
-            </li>
-        
-            <li class="home-post-item">
-
-                
-
-                <div class="home-post-item-bottom border-box">
-                    
-                    <h3 class="home-post-title border-box">
-                        <a href="/post/1092140776.html">
-                            使用WinDbg调试互斥体死锁
-                        </a>
-                    </h3>
-
-                    <div class="home-post-content keep-markdown-body">
-                        
-                            <p>本文通过一个实例来讲解如何使用WinDbg来调试Windows Mutex死锁的问题。</p>
-                        
-                    </div>
-
-                    
-
-<div class="post-meta-info-container border-box home">
-    <div class="post-meta-info border-box">
-        
-            <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Tue Mar 12 2024 15:44:27 GMT+0800">2024-03-12 15:44:27</span>
-            </span>
-        
-
-        
-
-        
-            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
-                <ul class="post-category-ul">
-                    
-                            <li class="category-item"><a href="/categories/%E8%BD%AF%E4%BB%B6%E8%B0%83%E8%AF%95/">软件调试</a></li>
-                        
-                    
-                </ul>
-            </span>
-        
-
-        
-            <span class="post-tag meta-info-item border-box">
-                <i class="icon fas fa-tags"></i>&nbsp;
-                <ul class="post-tag-ul">
-                    
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Windbg/">Windbg</a></li>
-                        
-                    
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Deadlock/">Deadlock</a></li>
-                        
-                    
-                </ul>
-            </span>
-        
-
-        
-        
-        
-        
-    </div>
-
-    
-        <a class="home-read-more" href="/post/1092140776.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
-    
-</div>
-
-                </div>
-            </li>
-        
-            <li class="home-post-item">
-
-                
-
-                <div class="home-post-item-bottom border-box">
-                    
-                    <h3 class="home-post-title border-box">
-                        <a href="/post/254517042.html">
-                            一个MySQL存储过程模板
-                        </a>
-                    </h3>
-
-                    <div class="home-post-content keep-markdown-body">
-                        
-                            <p>在进行数据库开发时，我们可能需要写很多存储过程，本文提供一个存储过程的模板，通过该模板可以简化存储过程的开发。</p>
-                        
-                    </div>
-
-                    
-
-<div class="post-meta-info-container border-box home">
-    <div class="post-meta-info border-box">
-        
-            <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Tue Mar 12 2024 15:44:53 GMT+0800">2024-03-12 15:44:53</span>
-            </span>
-        
-
-        
-
-        
-            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
-                <ul class="post-category-ul">
-                    
-                            <li class="category-item"><a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li>
-                        
-                    
-                </ul>
-            </span>
-        
-
-        
-            <span class="post-tag meta-info-item border-box">
-                <i class="icon fas fa-tags"></i>&nbsp;
-                <ul class="post-tag-ul">
-                    
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/MySQL/">MySQL</a></li>
-                        
-                    
-                </ul>
-            </span>
-        
-
-        
-        
-        
-        
-    </div>
-
-    
-        <a class="home-read-more" href="/post/254517042.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
-    
-</div>
-
-                </div>
-            </li>
-        
-            <li class="home-post-item">
-
-                
-
-                <div class="home-post-item-bottom border-box">
-                    
-                    <h3 class="home-post-title border-box">
-                        <a href="/post/326824759.html">
-                            Windows套接字I/O模型(5)-完成端口模型
-                        </a>
-                    </h3>
-
-                    <div class="home-post-content keep-markdown-body">
-                        
-                            一、写在前面前面的文章已经介绍了套接字I/O的同步模型、WSAAsyncSelect模型、WSAEventSelect模型，到目前为止套接字I/O还剩下2个模型没有介绍：重叠模型，完成端口模型。 
-如果程序对性能和并发要求不高，可以使用前面介绍的WS...
-                        
-                    </div>
-
-                    
-
-<div class="post-meta-info-container border-box home">
-    <div class="post-meta-info border-box">
-        
-            <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Tue Mar 12 2024 15:49:17 GMT+0800">2024-03-12 15:49:17</span>
-            </span>
-        
-
-        
-
-        
-            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
-                <ul class="post-category-ul">
-                    
-                            <li class="category-item"><a href="/categories/%E4%B8%93%E6%A0%8F%E3%80%8AWindows%E5%A5%97%E6%8E%A5%E5%AD%97I-O%E6%A8%A1%E5%9E%8B%E3%80%8B/">专栏《Windows套接字I/O模型》</a></li>
-                        
-                    
-                </ul>
-            </span>
-        
-
-        
-
-        
-        
-        
-        
-    </div>
-
-    
-        <a class="home-read-more" href="/post/326824759.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
-    
-</div>
-
-                </div>
-            </li>
-        
-            <li class="home-post-item">
-
-                
-
-                <div class="home-post-item-bottom border-box">
-                    
-                    <h3 class="home-post-title border-box">
-                        <a href="/post/432875265.html">
-                            由字符串格式化函数引起的崩溃
-                        </a>
-                    </h3>
-
-                    <div class="home-post-content keep-markdown-body">
-                        
-                            <p>本文记录一个由错误使用StringCchVPrintf等格式化函数所导致的崩溃问题。</p>
-                        
-                    </div>
-
-                    
-
-<div class="post-meta-info-container border-box home">
-    <div class="post-meta-info border-box">
-        
-            <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Tue Mar 12 2024 15:44:27 GMT+0800">2024-03-12 15:44:27</span>
-            </span>
-        
-
-        
-
-        
-            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
-                <ul class="post-category-ul">
-                    
-                            <li class="category-item"><a href="/categories/%E8%BD%AF%E4%BB%B6%E8%B0%83%E8%AF%95/">软件调试</a></li>
-                        
-                    
-                </ul>
-            </span>
-        
-
-        
-            <span class="post-tag meta-info-item border-box">
-                <i class="icon fas fa-tags"></i>&nbsp;
-                <ul class="post-tag-ul">
-                    
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Crash/">Crash</a></li>
-                        
-                    
-                </ul>
-            </span>
-        
-
-        
-        
-        
-        
-    </div>
-
-    
-        <a class="home-read-more" href="/post/432875265.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
-    
-</div>
-
-                </div>
-            </li>
-        
-            <li class="home-post-item">
-
-                
-
-                <div class="home-post-item-bottom border-box">
-                    
-                    <h3 class="home-post-title border-box">
-                        <a href="/post/547434843.html">
-                            Windows套接字I/O模型(4)-WSAEventSelect模型
-                        </a>
-                    </h3>
-
-                    <div class="home-post-content keep-markdown-body">
-                        
-                            <h1 id="一、WSAEventSelect模型介绍"><a href="#一、WSAEventSelect模型介绍" class="headerlink" title="一、WSAEventSelect模型介绍"></a>一、WSAEventSelect模型介绍</h1><p>WSAEventSelect模型和WSAAsyncSelect模型类似，但WSAEventSelect模型允许应用程序在一个或多个套接字上面接收以<strong>事件</strong>为基础的网络事件通知。该模型和WSAAsyncSelect模型的最主要的区别在于网络事件是由事件对象句柄完成的，而不是通过窗口消息完成的。</p>
-                        
-                    </div>
-
-                    
-
-<div class="post-meta-info-container border-box home">
-    <div class="post-meta-info border-box">
-        
-            <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Tue Mar 12 2024 15:49:17 GMT+0800">2024-03-12 15:49:17</span>
-            </span>
-        
-
-        
-
-        
-            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
-                <ul class="post-category-ul">
-                    
-                            <li class="category-item"><a href="/categories/%E4%B8%93%E6%A0%8F%E3%80%8AWindows%E5%A5%97%E6%8E%A5%E5%AD%97I-O%E6%A8%A1%E5%9E%8B%E3%80%8B/">专栏《Windows套接字I/O模型》</a></li>
-                        
-                    
-                </ul>
-            </span>
-        
-
-        
-
-        
-        
-        
-        
-    </div>
-
-    
-        <a class="home-read-more" href="/post/547434843.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+        <a class="home-read-more" href="/post/3534906950.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
     
 </div>
 
@@ -735,8 +793,8 @@
                    type="number"
                    value="19"
                    min="1"
-                   max="21"
-            ><span class="delimiter base-color-size">/</span><span class="base-color-size">21</span>
+                   max="22"
+            ><span class="delimiter base-color-size">/</span><span class="base-color-size">22</span>
         </div>
 
 
@@ -755,7 +813,6 @@
 
                 
             </div>
-
         </div>
 
         <div class="page-main-content-bottom border-box">
@@ -768,6 +825,22 @@
                 
                     &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">江雪桥</a>
                 
+            </div>
+
+            <div class="copyright-info info-item default">
+                本站文章均为原创（少数注明转载的除外），转载前请注明出处！
+            </div>
+
+            <div class="copyright-info info-item default">
+                <a target="_blank" rel="noopener" href="https://blog.csdn.net/china_jeffery">【CSDN】</a>
+                &nbsp;&nbsp;
+                <a target="_blank" rel="noopener" href="https://github.com/winsoft666/">【Github】</a>
+                &nbsp;&nbsp;
+                <a target="_blank" rel="noopener" href="https://1key.run">【1key.run】</a>
+                &nbsp;&nbsp;
+                <a target="_blank" rel="noopener" href="https://github.com/winsoft666/TinyTu-Setup/releases">【TinyTu】</a>
+                &nbsp;&nbsp;
+                <a target="_blank" rel="noopener" href="https://github.com/winsoft666/winspyplus-bin">【WinSpyPlus】</a>
             </div>
 
             
@@ -930,13 +1003,16 @@
 <div class="">
     
 
-    <!-- category-page -->
+    <!-- categories page -->
     
 
-    <!-- links-page -->
+    <!-- links page -->
     
 
-    <!-- photos-page -->
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
     
 </div>
 

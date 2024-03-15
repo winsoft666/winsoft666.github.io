@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Windows,Linux,C/C++,Golang,Qt,Node.js,Electron,Vue,WebRTC">
+    <meta name="description" content="除注明转载以外，所有文章均为原创">
+    <meta name="author" content="江雪桥">
+    
+    <title>
+        
+            Windows的消息机制 |
+        
+        代码派
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/favicon.png">
+    
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"jiangxueqiao.com","root":"/","language":"zh-CN","path":"search.xml"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"代码派","author":"江雪桥","avatar":"/images/avatar.png","logo":"/images/logo.png","favicon":"/images/favicon.png"},"menu":{"home":"/ || fa-solid fa-home","archives":"/archives || fa-solid fa-layer-group","categories":"/categories || fa-solid fa-box-archive","tags":"/tags || fa-solid fa-tags","about":"/about || fa-solid fa-user-graduate","Github":"https://github.com/winsoft666"},"first_screen":{"enable":false,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/winsoft666","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":true,"hide_header":true},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":false,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":false},"comment":{"enable":true,"use":"twikoo","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":"https://twikoo.jiangxueqiao.com","region":"zh-CN","version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2017,"word_count":false,"icp":{"enable":true,"record_code":"鄂ICP备2020015399号-6","url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null,"/css/custom.css"],"js":[null]},"root":"","source_data":{},"version":"4.1.0"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="CodeSilo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/logo.png">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               代码派
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-home"></i>
+                                
+                                首页
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-layer-group"></i>
+                                
+                                归档
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-box-archive"></i>
+                                
+                                分类
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-tags"></i>
+                                
+                                标签
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-user-graduate"></i>
+                                
+                                关于
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               target="_blank" rel="noopener" href="https://github.com/winsoft666"
+                            >
+                                
+                                GITHUB
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/"
+                    >首页</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives"
+                    >归档</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories"
+                    >分类</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags"
+                    >标签</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about"
+                    >关于</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       target="_blank" rel="noopener" href="https://github.com/winsoft666"
+                    >GITHUB</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        Windows的消息机制
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="/images/avatar.png">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">江雪桥</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2018-03-14 12:20:32</span>
+            </span>
+
+            <span class="meta-info-item post-update-date">
+                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                <span class="datetime" data-updated="Fri Mar 15 2024 11:38:21 GMT+0800">2024-03-15 11:38:21</span>
+            </span>
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E4%B8%93%E6%A0%8F%E3%80%8AWindows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B%E3%80%8B/">专栏《Windows核心编程》</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/Windows%E6%B6%88%E6%81%AF/">Windows消息</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body">
+                    
+
+                    <h2 id="一、消息队列"><a href="#一、消息队列" class="headerlink" title="一、消息队列"></a>一、消息队列</h2><p>首先我们要明确一个观点：<strong>窗口是和线程相关联的，消息队列也是和线程相关联的，这个线程无论是主线程还是子线程</strong>。</p>
+<p>当一个线程被创建时，系统假定该线程不会被用于任何与用户界面相关的任务，所以不会为它分配相应的资源（如消息队列等），因为这样可以减少线程对系统资源的占用。</p>
+<p>但是，一旦这个线程调用一个与图形用户界面有关的函数（例如检查它的消息队列或建立一个窗口），系统就会为该线程分配一些额外的资源，以便它能够执行与用户界面有关的任务。特别是，系统会分配一个<code>THREADINFO</code>结构，并将这个数据结构与线程关联起来。</p>
+<p><code>THREADINFO</code>结构是微软内部的、没有被公开的数据结构，我们无法找到这个结构体的准确的定义。但从其他文档中可以得知，<code>THREADINFO</code>结构包含：</p>
+<ul>
+<li>一组成员变量，利用这组成员，线程可以认为它是在自己独占的环境中运行。</li>
+<li>登记消息队列（posted-message queue） </li>
+<li>发送消息队列（ send-message queue）</li>
+<li>应答消息队列（ reply -message queue）</li>
+<li>虚拟输入队列（virtualized-input queue）</li>
+<li>唤醒标志（wake flag）</li>
+<li>用来描述线程局部输入状态的若干变量。</li>
+</ul>
+<p><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/20180313233042657.png"></p>
+<p>上图描述了<code>THREADINFO</code>结构中的各个成员。线程拥有了<code>THREADINFO</code>结构也就有了各种消息队列。</p>
+<h2 id="二、窗口消息处理函数"><a href="#二、窗口消息处理函数" class="headerlink" title="二、窗口消息处理函数"></a>二、窗口消息处理函数</h2><p>下面是一个完整的、简单的创建Windows窗体的C++代码：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;windows.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function">LRESULT CALLBACK <span class="title">WndProc</span><span class="params">(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)</span> </span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">  <span class="keyword">switch</span> (message) {</span><br><span class="line">  <span class="keyword">case</span> WM_DESTROY:</span><br><span class="line">    <span class="built_in">PostQuitMessage</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">DefWindowProc</span>(hwnd, message, wParam, lParam);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> WINAPI <span class="title">WinMain</span><span class="params">(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR szCmdLine, <span class="type">int</span> iCmdShow)</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">  WNDCLASS wndclass;</span><br><span class="line">  wndclass.style = CS_HREDRAW | CS_VREDRAW;</span><br><span class="line">  wndclass.cbClsExtra = <span class="number">0</span>;</span><br><span class="line">  wndclass.cbWndExtra = <span class="number">0</span>;</span><br><span class="line">  wndclass.hInstance = hInstance;</span><br><span class="line">  wndclass.hIcon = <span class="built_in">LoadIcon</span>(<span class="literal">NULL</span>, IDI_APPLICATION);</span><br><span class="line">  wndclass.hCursor = <span class="built_in">LoadCursor</span>(<span class="literal">NULL</span>, IDC_ARROW);</span><br><span class="line">  wndclass.hbrBackground = (HBRUSH)<span class="built_in">GetStockObject</span>(WHITE_BRUSH);</span><br><span class="line">  wndclass.lpszMenuName = <span class="literal">NULL</span>;</span><br><span class="line">  wndclass.lpfnWndProc = WndProc; <span class="comment">//设置窗体消息处理函数</span></span><br><span class="line">  wndclass.lpszClassName = <span class="built_in">TEXT</span>(<span class="string">"SimpleWindow"</span>);</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">RegisterClass</span>(&amp;wndclass)) {  <span class="comment">//注册窗体类</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  };</span><br><span class="line"></span><br><span class="line">  HWND hwnd = <span class="built_in">CreateWindow</span>(<span class="built_in">TEXT</span>(<span class="string">"SimpleWindow"</span>), <span class="comment">// window class name</span></span><br><span class="line">    <span class="built_in">TEXT</span>(<span class="string">"SimpleWindow"</span>),   <span class="comment">// window caption</span></span><br><span class="line">    WS_OVERLAPPEDWINDOW, <span class="comment">// window style</span></span><br><span class="line">    CW_USEDEFAULT,<span class="comment">// initial x position</span></span><br><span class="line">    CW_USEDEFAULT,<span class="comment">// initial y position</span></span><br><span class="line">    CW_USEDEFAULT,<span class="comment">// initial x size</span></span><br><span class="line">    CW_USEDEFAULT,<span class="comment">// initial y size</span></span><br><span class="line">    <span class="literal">NULL</span>, <span class="comment">// parent window handle</span></span><br><span class="line">    <span class="literal">NULL</span>, <span class="comment">// window menu handle</span></span><br><span class="line">    hInstance, <span class="comment">// program instance handle</span></span><br><span class="line">    <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">ShowWindow</span>(hwnd, SW_SHOW);</span><br><span class="line"></span><br><span class="line">  MSG msg;</span><br><span class="line">  <span class="keyword">while</span> (<span class="built_in">GetMessage</span>(&amp;msg, <span class="literal">NULL</span>, <span class="number">0</span>, <span class="number">0</span>)) {</span><br><span class="line">    <span class="built_in">TranslateMessage</span>(&amp;msg);</span><br><span class="line">    <span class="built_in">DispatchMessage</span>(&amp;msg);</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> msg.wParam;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>上面代码中的<code>WndProc</code>函数就是窗口消息处理函数。消息循环中的<code>DispatchMessage</code>函数派发消息时，系统就会调用这个函数对消息进行处理。</p>
+<h2 id="三、消息循环"><a href="#三、消息循环" class="headerlink" title="三、消息循环"></a>三、消息循环</h2><p>消息循环是程序员自己编写的从线程消息队列中循环获取（Get或Peek）消息的循环体，代码大致如下：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(<span class="built_in">GetMessage</span>(&amp;Msg, <span class="literal">NULL</span>, <span class="number">0</span>, <span class="number">0</span>))   </span><br><span class="line">{   </span><br><span class="line">    <span class="built_in">TranslateMessage</span>(&amp;Msg);</span><br><span class="line">    <span class="built_in">DispatchMessage</span>(&amp;Msg);</span><br><span class="line">}   </span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="3-1-循环何时结束？"><a href="#3-1-循环何时结束？" class="headerlink" title="3.1 循环何时结束？"></a>3.1 循环何时结束？</h4><p><code>GetMessage</code>函数的返回值如下：</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">收到WM_QUIT消息，返回0</span><br><span class="line">收到非WM_QUIT消息，返回非0</span><br><span class="line">错误，返回-1</span><br></pre></td></tr></tbody></table></figure>
+
+<p>利用<code>GetMessage</code>函数返回值的特性，在收到<code>WM_QUIT</code>消息之后，消息循环就会结束。</p>
+<h4 id="3-2-TranslateMessage"><a href="#3-2-TranslateMessage" class="headerlink" title="3.2 TranslateMessage"></a>3.2 TranslateMessage</h4><p><code>TranslateMessage</code>函数的作用就是将虚拟键值信息转换为字符信息。这一步并不是必须的。</p>
+<h4 id="3-3-DispatchMessage"><a href="#3-3-DispatchMessage" class="headerlink" title="3.3 DispatchMessage"></a>3.3 DispatchMessage</h4><p>将消息派发到窗口的消息处理函数（如第2节中的<code>WndProc</code>函数）。</p>
+<h2 id="四、PostMessage"><a href="#四、PostMessage" class="headerlink" title="四、PostMessage"></a>四、PostMessage</h2><h3 id="4-1-PostMessage原理"><a href="#4-1-PostMessage原理" class="headerlink" title="4.1 PostMessage原理"></a>4.1 PostMessage原理</h3><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">BOOL <span class="title">PostMessage</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">   HWND hwnd,</span></span></span><br><span class="line"><span class="params"><span class="function">   UINT uMsg,</span></span></span><br><span class="line"><span class="params"><span class="function">   WPARAM wParam,</span></span></span><br><span class="line"><span class="params"><span class="function">   LPARAM lParam)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
+<p>当一个线程调用这个函数时，系统要确定是哪一个线程建立了用<code>hwnd</code>参数标识的窗口。然后系统分配一块内存，将这个消息参数存储在这块内存中，并将这块内存增加到相应线程的登记消息队列中。并且，这个函数还设置<code>QS_POSTMESSAGE</code>唤醒位。<code>PostMessage</code>函数在登记了消息之后立即返回，调用该函数的线程不知道登记的消息是否被指定窗口的窗口过程所处理。实际上，有可能这个指定的窗口永远不会收到登记的消息。</p>
+<h3 id="4-2-PostThreadMessage"><a href="#4-2-PostThreadMessage" class="headerlink" title="4.2 PostThreadMessage"></a>4.2 PostThreadMessage</h3><p>还可以通过调用<code>PostThreadMessage</code>将消息放置在线程的登记消息队列中。</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">BOOL PostThreadMessage(</span><br><span class="line">   DWORD dwThreadId,</span><br><span class="line">   UINT uMsg,</span><br><span class="line">   WPARAM wParam,</span><br><span class="line">   LPARAM lParam);</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="4-3-PostQuitMessage"><a href="#4-3-PostQuitMessage" class="headerlink" title="4.3 PostQuitMessage"></a>4.3 PostQuitMessage</h3><p>为了终止线程的消息循环，可以调用<code>PostQuitMessage</code>函数。<code>PostQuitMessage</code>函数类似于：<br><code>PostThreadMessage(GetCurrentThreadId(), WM_QUIT, nExitCode, 0);</code><br>但是，<code>PostQuitMessage</code>并不实际登记一个消息到任何一个<code>THREADINFO</code>结构的消息队列。只是在内部，<code>PostQuitMessage</code>会设定<code>QS_QUIT</code>唤醒标志，并对<code>THREADINFO</code>结构的<code>nExitCode</code>成员进行设置。因为这些操作永远不会失败，所以<code>PostQuitMessage</code>的原型被定义成<code>VOID</code>返回类型。</p>
+<h2 id="五、SendMessage"><a href="#五、SendMessage" class="headerlink" title="五、SendMessage"></a>五、SendMessage</h2><p><code>SendMessage</code>的实现分为2种情况：向本线程的窗口发送消息、向其他线程的窗口发送消息。</p>
+<h3 id="5-1-向本线程的窗口发送消息"><a href="#5-1-向本线程的窗口发送消息" class="headerlink" title="5.1 向本线程的窗口发送消息"></a>5.1 向本线程的窗口发送消息</h3><p>如果调用<code>SendMessage</code>的线程向本线程所建立的一个窗口发送一个消息，<code>SendMessage</code>的做法很简单：直接调用指定窗口的“窗口消息处理函数”，将其作为一个子例程。当“窗口消息处理函数”完成对消息的处理后，该函数会返回一个值给<code>SendMessage</code>，<code>SendMessage</code>再将这个值返回给调用线程。</p>
+<h3 id="5-2-向其他线程的窗口发送消息"><a href="#5-2-向其他线程的窗口发送消息" class="headerlink" title="5.2 向其他线程的窗口发送消息"></a>5.2 向其他线程的窗口发送消息</h3><p>但是，当调用<code>SendMessage</code>的线程向其他线程所建立的窗口发送消息时，<code>SendMessage</code>的内部工作就复杂得多（即使两个线程在同一进程中也是如此）。</p>
+<p>Windows要求建立窗口的线程来处理该窗口的消息。所以当一个线程调用<code>SendMessage</code>向一个由其他进程所建立的窗口发送一个消息，也就是向其他的线程发送消息，发送线程不可能处理窗口消息，因为发送线程不是运行在接收进程的地址空间中，因此不能访问相应窗口过程的代码和数据。实际上，发送线程要挂起，而由另外的线程处理消息。所以为了向其他线程建立的窗口发送一个窗口消息，系统必须执行下面的动作：</p>
+<p>首先，发送的消息要追加到接收线程的发送消息队列，同时还为这个线程设定<code>QS_SENDMESSAGE</code>标志（后面将讨论）。<br>其次，如果接收线程已经在执行代码并且没有等待消息（等待消息是指：如调用<code>GetMessage</code>、<code>PeekMessage</code>或<code>WaitMessage</code>等），发送的消息不会被处理，系统不能中断线程来立即处理消息。当接收进程在等待消息时，系统首先检查线程的<code>QS_SENDMESSAGE</code>唤醒标志是否被设定，如果是，系统扫描发送消息队列中消息的列表，并找到第一个发送的消息。有可能在这个队列中有几个发送的消息。例如，几个线程可以同时向一个窗口分别发送消息。当发生这样的事时，系统只是将这些消息追加到接收线程的发送消息队列中。</p>
+<p>当接收线程等待消息时，系统从发送消息队列中取出第一个消息并调用适当的窗口过程来处理消息。如果在发送消息队列中再没有消息了，则<code>QS_SENDMESSAGE</code>唤醒标志被关闭。当接收线程处理消息的时候，调用<code>SendMessage</code>的线程被设置成空闲状态（idle），等待一个消息出现在它的应答消息队列中。在发送的消息处理之后，窗口过程的返回值被登记到发送线程的应答消息队列中。发送线程现在被唤醒，取出包含在应答消息队列中的返回值。这个返回值就是<code>SendMessage</code>的返回值。这时，发送线程继续正常执行。</p>
+<p>当一个线程等待<code>SendMessage</code>返回时，它基本上是处于空闲状态。但它可以执行一个任务：如果系统中另外一个线程向一个窗口发送消息，这个窗口是由这个等待<code>SendMessage</code>返回的线程所建立的，则系统要立即处理发送的消息。在这种情况下，系统不必等待线程去调用<code>GetMessage</code>、<code>PeekMessage</code>或<code>WaitMessage</code>。</p>
+<p>由于Windows使用上述方法处理线程之间发送的消息，所以有可能造成线程挂起。例如，当处理发送消息的线程含有错误时，会导致进入死循环。那么对于调用<code>SendMessage</code>的线程会发生什么事呢？它会恢复执行吗？这是否意味着一个程序中的bug会导致另一个程序挂起？答案是确实有这种可能。</p>
+<p>利用4个函数—— <code>SendMessageTimeOut</code>、<code>SendMessageCallback</code>、<code>SendNotifyMessage</code>和<code>ReplayMessage</code>，可以编写保护性代码防止出现这种情况。</p>
+
+                </div>
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/Windows%E6%B6%88%E6%81%AF/">Windows消息</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                            <div class="post-share-container border-box">
+    <ul class="share-list-wrap border-box">
+        <li class="qq share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到 QQ"
+        >
+            <i class="fa-brands fa-qq"></i>
+        </li>
+        <li class="wechat share-item border-box flex-center tooltip tooltip-img"
+            data-tooltip-content="分享到微信"
+            data-tooltip-img-tip="微信扫一扫"
+            data-tooltip-img-style="background-color: #fff; top: -10px; padding: 0.6rem 0.6rem 0.1rem 0.6rem;"
+        >
+            <i class="fa-brands fa-weixin"></i>
+        </li>
+        <li class="weibo share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到微博"
+        >
+            <i class="fa-brands fa-weibo"></i>
+        </li>
+    </ul>
+</div>
+
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/post/1504706832.html"
+                                   title="网络协议(6)--TCP协议"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">网络协议(6)--TCP协议</span>
+                                        <span class="post-nav-item">上一篇</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/post/4190400644.html"
+                                   title="网络协议(5)--UDP协议"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">网络协议(5)--UDP协议</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+    <div class="comments-container border-box">
+        <div id="comments-anchor" class="comment-area-title border-box">
+            <i class="fas fa-comments"></i>&nbsp;评论
+        </div>
+        <div class="comment-plugin-fail border-box">
+    <span class="fail-tip">评论插件加载失败</span>
+    <button class="reload keep-button">点击重新加载</button>
+</div>
+<div class="comment-plugin-loading flex-center border-box">
+    <i class="loading-icon fa-solid fa-spinner fa-spin"></i>
+    <span class="load-tip">正在加载评论插件</span>
+</div>
+<script data-pjax>
+  window.KeepCommentPlugin = {}
+  window.KeepCommentPlugin.hideLoading = () => {
+    const cplDom = document.querySelector('.comments-container .comment-plugin-loading')
+    cplDom.style.display = 'none'
+  }
+  window.KeepCommentPlugin.loadFailHandle = () => {
+    window.KeepCommentPlugin.hideLoading()
+    const cpfDom = document.querySelector('.comments-container .comment-plugin-fail')
+    cpfDom.style.display = 'flex'
+    cpfDom.querySelector('.reload').addEventListener('click', () => {
+      window.location.reload()
+    })
+  }
+</script>
+
+        
+            
+
+    <div class="twikoo-container">
+        <div id="twikoo-comment"></div>
+        <script 
+                src="//cdn.jsdelivr.net/npm/twikoo@1.6.21/dist/twikoo.all.min.js"
+                async
+                onerror="window.KeepCommentPlugin.loadFailHandle()"
+        ></script>
+        <script 
+                async
+                onerror="window.KeepCommentPlugin.loadFailHandle()"
+        >
+          window.KeepCommentPlugin.initTwikoo = () => {
+            if (window?.twikoo) {
+              twikoo.init({
+                el: '#twikoo-comment',
+                envId: 'https://twikoo.jiangxueqiao.com',
+                region: 'zh-CN',
+                lang: 'zh-CN' || 'zh-CN'
+              })
+              window.KeepCommentPlugin.hideLoading()
+            } else {
+              setTimeout(() => {
+                window.KeepCommentPlugin.initTwikoo()
+              }, 1000)
+            }
+          }
+
+          if ('false' === 'true') {
+            setTimeout(() => {
+              window.KeepCommentPlugin.initTwikoo()
+            }, 1200)
+          } else {
+            window.addEventListener('DOMContentLoaded', window.KeepCommentPlugin.initTwikoo)
+          }
+        </script>
+    </div>
+
+
+        
+    </div>
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97"><span class="nav-text">一、消息队列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E7%AA%97%E5%8F%A3%E6%B6%88%E6%81%AF%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0"><span class="nav-text">二、窗口消息处理函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E6%B6%88%E6%81%AF%E5%BE%AA%E7%8E%AF"><span class="nav-text">三、消息循环</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-%E5%BE%AA%E7%8E%AF%E4%BD%95%E6%97%B6%E7%BB%93%E6%9D%9F%EF%BC%9F"><span class="nav-text">3.1 循环何时结束？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-TranslateMessage"><span class="nav-text">3.2 TranslateMessage</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-DispatchMessage"><span class="nav-text">3.3 DispatchMessage</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81PostMessage"><span class="nav-text">四、PostMessage</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-PostMessage%E5%8E%9F%E7%90%86"><span class="nav-text">4.1 PostMessage原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-PostThreadMessage"><span class="nav-text">4.2 PostThreadMessage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-PostQuitMessage"><span class="nav-text">4.3 PostQuitMessage</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81SendMessage"><span class="nav-text">五、SendMessage</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-%E5%90%91%E6%9C%AC%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%AA%97%E5%8F%A3%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF"><span class="nav-text">5.1 向本线程的窗口发送消息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-%E5%90%91%E5%85%B6%E4%BB%96%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%AA%97%E5%8F%A3%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF"><span class="nav-text">5.2 向其他线程的窗口发送消息</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="border-box website-info-box default">
+        
+            <div class="copyright-info info-item default">
+                &copy;&nbsp;<span>2017</span>&nbsp;-&nbsp;2024
+                
+                    &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">江雪桥</a>
+                
+            </div>
+
+            <div class="copyright-info info-item default">
+                本站文章均为原创（少数注明转载的除外），转载前请注明出处！
+            </div>
+
+            <div class="copyright-info info-item default">
+                <a target="_blank" rel="noopener" href="https://blog.csdn.net/china_jeffery">【CSDN】</a>
+                &nbsp;&nbsp;
+                <a target="_blank" rel="noopener" href="https://github.com/winsoft666/">【Github】</a>
+                &nbsp;&nbsp;
+                <a target="_blank" rel="noopener" href="https://1key.run">【1key.run】</a>
+                &nbsp;&nbsp;
+                <a target="_blank" rel="noopener" href="https://github.com/winsoft666/TinyTu-Setup/releases">【TinyTu】</a>
+                &nbsp;&nbsp;
+                <a target="_blank" rel="noopener" href="https://github.com/winsoft666/winspyplus-bin">【WinSpyPlus】</a>
+            </div>
+
+            
+                <div class="icp-info info-item default">
+                    <a class=""
+                       target="_blank"
+                       href="https://beian.miit.gov.cn"
+                    >
+                        鄂ICP备2020015399号-6
+                    </a>
+                </div>
+            
+
+            
+        
+
+        <div class="count-item info-item default">
+            
+
+            
+
+            
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="tools-list border-box">
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+            <li class="tools-item flex-center go-to-comments">
+                <i class="fas fa-comment"></i>
+                <span class="post-comments-count"></span>
+            </li>
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-toggle-theme-mode flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+            <li class="tools-item go-to-comments-tablet flex-center">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97"><span class="nav-text">一、消息队列</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E7%AA%97%E5%8F%A3%E6%B6%88%E6%81%AF%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0"><span class="nav-text">二、窗口消息处理函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E6%B6%88%E6%81%AF%E5%BE%AA%E7%8E%AF"><span class="nav-text">三、消息循环</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-%E5%BE%AA%E7%8E%AF%E4%BD%95%E6%97%B6%E7%BB%93%E6%9D%9F%EF%BC%9F"><span class="nav-text">3.1 循环何时结束？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-TranslateMessage"><span class="nav-text">3.2 TranslateMessage</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-DispatchMessage"><span class="nav-text">3.3 DispatchMessage</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81PostMessage"><span class="nav-text">四、PostMessage</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-PostMessage%E5%8E%9F%E7%90%86"><span class="nav-text">4.1 PostMessage原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-PostThreadMessage"><span class="nav-text">4.2 PostThreadMessage</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-PostQuitMessage"><span class="nav-text">4.3 PostQuitMessage</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81SendMessage"><span class="nav-text">五、SendMessage</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-%E5%90%91%E6%9C%AC%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%AA%97%E5%8F%A3%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF"><span class="nav-text">5.1 向本线程的窗口发送消息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-%E5%90%91%E5%85%B6%E4%BB%96%E7%BA%BF%E7%A8%8B%E7%9A%84%E7%AA%97%E5%8F%A3%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF"><span class="nav-text">5.2 向其他线程的窗口发送消息</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+<!-- common -->
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+
+<!-- local-search -->
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+<!-- lazyload -->
+
+    
+<script src="/js/lazyload.js"></script>
+
+
+
+<div class="">
+    
+        <!-- post-helper -->
+        
+<script src="/js/post/post-helper.js"></script>
+
+
+        <!-- toc -->
+        
+            
+<script src="/js/post/toc.js"></script>
+
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+            
+<script src="/js/post/share.js"></script>
+
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+</body>
+</html>

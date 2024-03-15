@@ -33,7 +33,7 @@
     <script class="keep-theme-configurations">
     const KEEP = window.KEEP || {}
     KEEP.hexo_config = {"hostname":"jiangxueqiao.com","root":"/","language":"zh-CN","path":"search.xml"}
-    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"代码派","author":"江雪桥","avatar":"/images/avatar.png","logo":"/images/logo.png","favicon":"/images/favicon.png"},"menu":{"Archives":"/archives","Categories":"/categories","Tags":"/tags","About":"/about","Github":"https://github.com/winsoft666"},"first_screen":{"enable":false,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/winsoft666","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":true,"hide_header":true},"home":{"category":true,"tag":true,"announcement":null},"post":{"author_badge":{"enable":false,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":false},"comment":{"enable":true,"use":"twikoo","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":"https://twikoo.jiangxueqiao.com","region":"zh-CN","version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2017,"word_count":false,"icp":{"enable":true,"record_code":"鄂ICP备2020015399号-6","url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null,"/css/custom.css"],"js":[null]},"root":"","version":"4.0.7"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"代码派","author":"江雪桥","avatar":"/images/avatar.png","logo":"/images/logo.png","favicon":"/images/favicon.png"},"menu":{"home":"/ || fa-solid fa-home","archives":"/archives || fa-solid fa-layer-group","categories":"/categories || fa-solid fa-box-archive","tags":"/tags || fa-solid fa-tags","about":"/about || fa-solid fa-user-graduate","Github":"https://github.com/winsoft666"},"first_screen":{"enable":false,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/winsoft666","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":true,"hide_header":true},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":false,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":false},"comment":{"enable":true,"use":"twikoo","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":"https://twikoo.jiangxueqiao.com","region":"zh-CN","version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2017,"word_count":false,"icp":{"enable":true,"record_code":"鄂ICP备2020015399号-6","url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null,"/css/custom.css"],"js":[null]},"root":"","source_data":{},"version":"4.1.0"}
     KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
     KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
     KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
@@ -52,8 +52,8 @@
 </div>
 
 
-<main class="page-container border-box">
 
+<main class="page-container border-box">
     <!-- home first screen  -->
     
 
@@ -78,40 +78,75 @@
         <div class="right border-box">
             <div class="pc">
                 <ul class="menu-list">
-                    <li class="menu-item">
-                        <a class="active"
-                           href="/"
-                        >首页</a>
-                    </li>
                     
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-home"></i>
+                                
+                                首页
+                            </a>
+                        </li>
+                    
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/archives"
-                            >归档</a>
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-layer-group"></i>
+                                
+                                归档
+                            </a>
                         </li>
                     
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/categories"
-                            >分类</a>
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-box-archive"></i>
+                                
+                                分类
+                            </a>
                         </li>
                     
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/tags"
-                            >标签</a>
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-tags"></i>
+                                
+                                标签
+                            </a>
                         </li>
                     
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/about"
-                            >关于</a>
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-user-graduate"></i>
+                                
+                                关于
+                            </a>
                         </li>
                     
+                        
                         <li class="menu-item">
                             <a class=""
                                target="_blank" rel="noopener" href="https://github.com/winsoft666"
-                            >GITHUB</a>
+                            >
+                                
+                                GITHUB
+                            </a>
                         </li>
                     
                     
@@ -134,36 +169,43 @@
 
     <div class="header-drawer">
         <ul class="drawer-menu-list">
-            <li class="drawer-menu-item flex-center">
-                <a class="active"
-                   href="/"
-                >首页</a>
-            </li>
             
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/"
+                    >首页</a>
+                </li>
+            
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
                        href="/archives"
                     >归档</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
                        href="/categories"
                     >分类</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
                        href="/tags"
                     >标签</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
                        href="/about"
                     >关于</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
                        target="_blank" rel="noopener" href="https://github.com/winsoft666"
@@ -196,6 +238,65 @@
                 <div class="home-post-item-bottom border-box">
                     
                     <h3 class="home-post-title border-box">
+                        <a href="/post/14744864.html">
+                            Windows内核对象
+                        </a>
+                    </h3>
+
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            <h2 id="一、什么是内核对象"><a href="#一、什么是内核对象" class="headerlink" title="一、什么是内核对象"></a>一、什么是内核对象</h2><p>我们在 windows 开发中经常会遇到内核对象，如事件(Event)，管道(Pipe)，互斥量(Mutex)，完成端口(IOCP)，进程(Process)，线程(Thread)等，他们都是内核对象。这些内核对象虽然通过不同的系统 API 来创建，但这些 API 都有一个共同特点，就是都需要传入<code>SECURITY_ATTRIBUTES</code>安全描述符结构体指针，并且返回句柄(HANDLE)。依据这个特点，我们有一个简单方法来判断对象是否是内核对象，就是看创建它的函数是否允许传入<code>SECURITY_ATTRIBUTES</code>安全描述符。</p>
+                        
+                    </div>
+
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fa-solid fa-history"></i>&nbsp;<span class="home-post-history"
+                                                                                data-updated="Tue Mar 12 2024 15:48:38 GMT+0800"
+                >2024-03-12 15:48:38</span>
+            </span>
+        
+
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E4%B8%93%E6%A0%8F%E3%80%8AWindows%E6%A0%B8%E5%BF%83%E7%BC%96%E7%A8%8B%E3%80%8B/">专栏《Windows核心编程》</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+        <a class="home-read-more" href="/post/14744864.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-post-item">
+
+                
+
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
                         <a href="/post/4155207961.html">
                             C++实现编译时断言
                         </a>
@@ -214,7 +315,9 @@
     <div class="post-meta-info border-box">
         
             <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Tue Mar 12 2024 15:47:06 GMT+0800">2024-03-12 15:47:06</span>
+                <i class="icon fa-solid fa-history"></i>&nbsp;<span class="home-post-history"
+                                                                                data-updated="Tue Mar 12 2024 15:47:06 GMT+0800"
+                >2024-03-12 15:47:06</span>
             </span>
         
 
@@ -255,16 +358,14 @@
                     
                     <h3 class="home-post-title border-box">
                         <a href="/post/2804470458.html">
-                            Windows注入与拦截(3)--挂载窗口到目标控件
+                            Windows注入与拦截(3)-窗口挂载
                         </a>
                     </h3>
 
                     <div class="home-post-content keep-markdown-body">
                         
                             <p>本文主要介绍如何通过 DLL 注入的方式来实现在指定窗口的控件上挂载一个自定义窗口。</p>
-<blockquote>
 <p>何谓挂载？和舰载机挂载导弹类似，将我们自己的窗口挂到原有程序的窗口之上，可以实现对原有窗口功能的覆盖和扩展。</p>
-</blockquote>
                         
                     </div>
 
@@ -274,7 +375,9 @@
     <div class="post-meta-info border-box">
         
             <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Tue Mar 12 2024 15:49:32 GMT+0800">2024-03-12 15:49:32</span>
+                <i class="icon fa-solid fa-history"></i>&nbsp;<span class="home-post-history"
+                                                                                data-updated="Thu Mar 14 2024 15:30:40 GMT+0800"
+                >2024-03-14 15:30:40</span>
             </span>
         
 
@@ -331,7 +434,9 @@
     <div class="post-meta-info border-box">
         
             <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Tue Mar 12 2024 15:48:38 GMT+0800">2024-03-12 15:48:38</span>
+                <i class="icon fa-solid fa-history"></i>&nbsp;<span class="home-post-history"
+                                                                                data-updated="Tue Mar 12 2024 15:48:38 GMT+0800"
+                >2024-03-12 15:48:38</span>
             </span>
         
 
@@ -372,14 +477,14 @@
                     
                     <h3 class="home-post-title border-box">
                         <a href="/post/721636578.html">
-                            Windows注入与拦截(2)--DLL注入的方式
+                            Windows注入与拦截(2)-注入方式
                         </a>
                     </h3>
 
                     <div class="home-post-content keep-markdown-body">
                         
-                            <h1 id="一、使用注册表方式注入"><a href="#一、使用注册表方式注入" class="headerlink" title="一、使用注册表方式注入"></a>一、使用注册表方式注入</h1><h2 id="1-1-注入方法"><a href="#1-1-注入方法" class="headerlink" title="1.1 注入方法"></a>1.1 注入方法</h2><p>如题，通过注册表的方式来实现 DLL 注入，我们只需要针对特定的注册表项进行修改即可，有一点需要注意的是：<strong>如果被注入的进程是 64 位进程，则注入的 DLL 也需要是 64 位的，同理，注入 32 位的进程也需要是 32 位的 DLL。</strong></p>
-<p>另外，根据被注入进程的位数（32 或 64）不同，注册表的位置也不同。</p>
+                            <h1 id="一、注册表方式"><a href="#一、注册表方式" class="headerlink" title="一、注册表方式"></a>一、注册表方式</h1><h2 id="1-1-注入方法"><a href="#1-1-注入方法" class="headerlink" title="1.1 注入方法"></a>1.1 注入方法</h2><p>如题，通过注册表的方式来实现 DLL 注入，我们只需要针对特定的注册表项进行修改即可，有一点需要注意的是：<strong>如果被注入的进程是 64 位进程，则注入的 DLL 也需要是 64 位的。同理，注入到 32 位的进程也需要是 32 位的 DLL。</strong></p>
+<p>另外，根据被注入目标进程的位数（32 或 64）不同，注册表的位置也不同。</p>
                         
                     </div>
 
@@ -389,7 +494,9 @@
     <div class="post-meta-info border-box">
         
             <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Tue Mar 12 2024 15:49:32 GMT+0800">2024-03-12 15:49:32</span>
+                <i class="icon fa-solid fa-history"></i>&nbsp;<span class="home-post-history"
+                                                                                data-updated="Thu Mar 14 2024 15:31:26 GMT+0800"
+                >2024-03-14 15:31:26</span>
             </span>
         
 
@@ -430,13 +537,23 @@
                     
                     <h3 class="home-post-title border-box">
                         <a href="/post/1504192511.html">
-                            Windows注入与拦截(1)--DLL注入基础
+                            Windows注入与拦截(1)-注入基础
                         </a>
                     </h3>
 
                     <div class="home-post-content keep-markdown-body">
                         
-                            一、DLL 注入技术的用途从Windows内存体系(1)--虚拟地址空间文章中我们可以知道，在 Windows 系统中，每个进程都有自己私有的地址空间。当我们用指针来引用内存的时候，指针的值表示的是进程自己的地址空间的一个虚拟的内存地址。进程不能通过...
+                            <h2 id="一、注入技术的用途"><a href="#一、注入技术的用途" class="headerlink" title="一、注入技术的用途"></a>一、注入技术的用途</h2><p>从<a href="/post/2494475058.html" title="Windows内存体系(1)--虚拟地址空间">Windows内存体系(1)--虚拟地址空间</a>文章中我们可以知道：</p>
+<p>在 Windows 系统中，每个进程都有自己私有的地址空间。当我们用指针来引用内存时，指针的值表示的是进程自己的地址空间的一个虚拟的内存地址。<strong>进程不能通过指针来引用其他进程地址空间的内存。</strong> 这种设计提升了操作系统的健壮性和安全性，比如一个进程存在缺陷，可能会引用和覆盖随机地址处的内存数据，那么我们就不用担心这个缺陷会影响到操作系统及其他进程。</p>
+<p>独立的地址空间有利于系统的稳定性。但也带来了诸多不便，下面列举了需要跨越进程的边界来访问另一个进程地址空间的情况：</p>
+<ul>
+<li>我们要从另一个进程创建的窗口来派生子类窗口，比如附着在 Windows 资源管理器上的一些小插件等。</li>
+<li>我们需要假借其他进程之名做某些事情。</li>
+<li>我们需要获取其他进程的更多详细信息，如加载了哪些 dll 等。</li>
+<li>我们需要对其他进程的某些函数进行HOOK。</li>
+<li>以及干一些羞羞的事情…</li>
+</ul>
+<p>为了满足上述需求，我们可以使用 DLL 注入的技术，将我们自己开发的 DLL 注入到另一个进程的地址空间中，这样 DLL 中的代码就可以在该进程地址空间中执行。</p>
                         
                     </div>
 
@@ -446,7 +563,9 @@
     <div class="post-meta-info border-box">
         
             <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Tue Mar 12 2024 15:49:33 GMT+0800">2024-03-12 15:49:33</span>
+                <i class="icon fa-solid fa-history"></i>&nbsp;<span class="home-post-history"
+                                                                                data-updated="Thu Mar 14 2024 15:30:12 GMT+0800"
+                >2024-03-14 15:30:12</span>
             </span>
         
 
@@ -504,7 +623,9 @@
     <div class="post-meta-info border-box">
         
             <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Tue Mar 12 2024 15:54:29 GMT+0800">2024-03-12 15:54:29</span>
+                <i class="icon fa-solid fa-history"></i>&nbsp;<span class="home-post-history"
+                                                                                data-updated="Wed Mar 13 2024 11:06:31 GMT+0800"
+                >2024-03-13 11:06:31</span>
             </span>
         
 
@@ -523,7 +644,6 @@
 
         
             <span class="post-tag meta-info-item border-box">
-                <i class="icon fas fa-tags"></i>&nbsp;
                 <ul class="post-tag-ul">
                     
                             <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/DPI/">DPI</a></li>
@@ -571,7 +691,9 @@
     <div class="post-meta-info border-box">
         
             <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Tue Mar 12 2024 15:48:55 GMT+0800">2024-03-12 15:48:55</span>
+                <i class="icon fa-solid fa-history"></i>&nbsp;<span class="home-post-history"
+                                                                                data-updated="Tue Mar 12 2024 15:48:55 GMT+0800"
+                >2024-03-12 15:48:55</span>
             </span>
         
 
@@ -604,63 +726,6 @@
                 </div>
             </li>
         
-            <li class="home-post-item">
-
-                
-
-                <div class="home-post-item-bottom border-box">
-                    
-                    <h3 class="home-post-title border-box">
-                        <a href="/post/253039952.html">
-                            《网络协议》
-                        </a>
-                    </h3>
-
-                    <div class="home-post-content keep-markdown-body">
-                        
-                            <p>本栏目系统性的介绍了常用的网络协议（如 ARP, IP, TCP, UDP, HTTP 等），并深入剖析协议的原理。让读者不仅可以知其然，而且可以知其所以然。在这其中也覆盖面试中的一些常见问题。</p>
-                        
-                    </div>
-
-                    
-
-<div class="post-meta-info-container border-box home">
-    <div class="post-meta-info border-box">
-        
-            <span class="meta-info-item border-box">
-                <i class="icon fas fa-history"></i>&nbsp;<span class="home-post-history" data-updated="Tue Mar 12 2024 15:45:23 GMT+0800">2024-03-12 15:45:23</span>
-            </span>
-        
-
-        
-
-        
-            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
-                <ul class="post-category-ul">
-                    
-                            <li class="category-item"><a href="/categories/%E4%B8%93%E6%A0%8F%E3%80%8A%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E3%80%8B/">专栏《网络协议》</a></li>
-                        
-                    
-                </ul>
-            </span>
-        
-
-        
-
-        
-        
-        
-        
-    </div>
-
-    
-        <a class="home-read-more" href="/post/253039952.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
-    
-</div>
-
-                </div>
-            </li>
-        
     </ul>
     
     <div class="paginator border-box flex-center">
@@ -676,8 +741,8 @@
                    type="number"
                    value="13"
                    min="1"
-                   max="21"
-            ><span class="delimiter base-color-size">/</span><span class="base-color-size">21</span>
+                   max="22"
+            ><span class="delimiter base-color-size">/</span><span class="base-color-size">22</span>
         </div>
 
 
@@ -696,7 +761,6 @@
 
                 
             </div>
-
         </div>
 
         <div class="page-main-content-bottom border-box">
@@ -709,6 +773,22 @@
                 
                     &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">江雪桥</a>
                 
+            </div>
+
+            <div class="copyright-info info-item default">
+                本站文章均为原创（少数注明转载的除外），转载前请注明出处！
+            </div>
+
+            <div class="copyright-info info-item default">
+                <a target="_blank" rel="noopener" href="https://blog.csdn.net/china_jeffery">【CSDN】</a>
+                &nbsp;&nbsp;
+                <a target="_blank" rel="noopener" href="https://github.com/winsoft666/">【Github】</a>
+                &nbsp;&nbsp;
+                <a target="_blank" rel="noopener" href="https://1key.run">【1key.run】</a>
+                &nbsp;&nbsp;
+                <a target="_blank" rel="noopener" href="https://github.com/winsoft666/TinyTu-Setup/releases">【TinyTu】</a>
+                &nbsp;&nbsp;
+                <a target="_blank" rel="noopener" href="https://github.com/winsoft666/winspyplus-bin">【WinSpyPlus】</a>
             </div>
 
             
@@ -871,13 +951,16 @@
 <div class="">
     
 
-    <!-- category-page -->
+    <!-- categories page -->
     
 
-    <!-- links-page -->
+    <!-- links page -->
     
 
-    <!-- photos-page -->
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
     
 </div>
 

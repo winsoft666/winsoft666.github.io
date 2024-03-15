@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Windows,Linux,C/C++,Golang,Qt,Node.js,Electron,Vue,WebRTC">
+    <meta name="description" content="除注明转载以外，所有文章均为原创">
+    <meta name="author" content="江雪桥">
+    
+    <title>
+        
+            WebRTC线程模型 |
+        
+        代码派
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/favicon.png">
+    
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"jiangxueqiao.com","root":"/","language":"zh-CN","path":"search.xml"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"代码派","author":"江雪桥","avatar":"/images/avatar.png","logo":"/images/logo.png","favicon":"/images/favicon.png"},"menu":{"home":"/ || fa-solid fa-home","archives":"/archives || fa-solid fa-layer-group","categories":"/categories || fa-solid fa-box-archive","tags":"/tags || fa-solid fa-tags","about":"/about || fa-solid fa-user-graduate","Github":"https://github.com/winsoft666"},"first_screen":{"enable":false,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/winsoft666","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":true,"hide_header":true},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":false,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":false},"comment":{"enable":true,"use":"twikoo","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":"https://twikoo.jiangxueqiao.com","region":"zh-CN","version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2017,"word_count":false,"icp":{"enable":true,"record_code":"鄂ICP备2020015399号-6","url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null,"/css/custom.css"],"js":[null]},"root":"","source_data":{},"version":"4.1.0"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="CodeSilo" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/logo.png">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               代码派
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-home"></i>
+                                
+                                首页
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-layer-group"></i>
+                                
+                                归档
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-box-archive"></i>
+                                
+                                分类
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-tags"></i>
+                                
+                                标签
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-user-graduate"></i>
+                                
+                                关于
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               target="_blank" rel="noopener" href="https://github.com/winsoft666"
+                            >
+                                
+                                GITHUB
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/"
+                    >首页</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives"
+                    >归档</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories"
+                    >分类</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags"
+                    >标签</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about"
+                    >关于</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       target="_blank" rel="noopener" href="https://github.com/winsoft666"
+                    >GITHUB</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        WebRTC线程模型
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="/images/avatar.png">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">江雪桥</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2019-12-25 17:26:31</span>
+            </span>
+
+            <span class="meta-info-item post-update-date">
+                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                <span class="datetime" data-updated="Fri Mar 15 2024 12:19:08 GMT+0800">2024-03-15 12:19:08</span>
+            </span>
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/%E9%9F%B3%E8%A7%86%E9%A2%91%E7%BC%96%E7%A8%8B/">音视频编程</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/WebRTC/">WebRTC</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body">
+                    
+
+                    <p>在介绍WebRTC的线程模型之前，先介绍Webrtc线程模型中用到的几个简单、常用的模块或函数。</p>
+<h1 id="一、-设置线程名"><a href="#一、-设置线程名" class="headerlink" title="一、 设置线程名"></a>一、 设置线程名</h1><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//platform_thread.cc</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">SetCurrentThreadName</span><span class="params">(<span class="type">const</span> <span class="type">char</span>* name)</span> </span>{</span><br><span class="line"><span class="meta">#<span class="keyword">if</span> defined(WEBRTC_WIN)</span></span><br><span class="line">  <span class="keyword">struct</span> {</span><br><span class="line">    DWORD dwType;</span><br><span class="line">    LPCSTR szName;</span><br><span class="line">    DWORD dwThreadID;</span><br><span class="line">    DWORD dwFlags;</span><br><span class="line">  } threadname_info = {<span class="number">0x1000</span>, name, <span class="built_in">static_cast</span>&lt;DWORD&gt;(<span class="number">-1</span>), <span class="number">0</span>};</span><br><span class="line"></span><br><span class="line">  __try {</span><br><span class="line">    ::<span class="built_in">RaiseException</span>(<span class="number">0x406D1388</span>, <span class="number">0</span>, <span class="built_in">sizeof</span>(threadname_info) / <span class="built_in">sizeof</span>(DWORD),</span><br><span class="line">                     <span class="built_in">reinterpret_cast</span>&lt;ULONG_PTR*&gt;(&amp;threadname_info));</span><br><span class="line">  } __except (EXCEPTION_EXECUTE_HANDLER) {</span><br><span class="line">  }</span><br><span class="line"><span class="meta">#<span class="keyword">elif</span> defined(WEBRTC_LINUX) || defined(WEBRTC_ANDROID)</span></span><br><span class="line">  <span class="built_in">prctl</span>(PR_SET_NAME, <span class="built_in">reinterpret_cast</span>&lt;<span class="type">unsigned</span> <span class="type">long</span>&gt;(name));</span><br><span class="line"><span class="meta">#<span class="keyword">elif</span> defined(WEBRTC_MAC) || defined(WEBRTC_IOS)</span></span><br><span class="line">  <span class="built_in">pthread_setname_np</span>(name);</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/20171123141204087.jpg"></p>
+<h1 id="二、-原子操作"><a href="#二、-原子操作" class="headerlink" title="二、 原子操作"></a>二、 原子操作</h1><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//atomicops.h</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">AtomicOps</span> {</span><br><span class="line"> <span class="keyword">public</span>:</span><br><span class="line"><span class="meta">#<span class="keyword">if</span> defined(WEBRTC_WIN)</span></span><br><span class="line">  <span class="comment">// Assumes sizeof(int) == sizeof(LONG), which it is on Win32 and Win64.</span></span><br><span class="line">  <span class="function"><span class="type">static</span> <span class="type">int</span> <span class="title">Increment</span><span class="params">(<span class="keyword">volatile</span> <span class="type">int</span>* i)</span> </span>{</span><br><span class="line">    <span class="keyword">return</span> ::<span class="built_in">InterlockedIncrement</span>(<span class="built_in">reinterpret_cast</span>&lt;<span class="keyword">volatile</span> LONG*&gt;(i));</span><br><span class="line">  }</span><br><span class="line">  <span class="function"><span class="type">static</span> <span class="type">int</span> <span class="title">Decrement</span><span class="params">(<span class="keyword">volatile</span> <span class="type">int</span>* i)</span> </span>{</span><br><span class="line">    <span class="keyword">return</span> ::<span class="built_in">InterlockedDecrement</span>(<span class="built_in">reinterpret_cast</span>&lt;<span class="keyword">volatile</span> LONG*&gt;(i));</span><br><span class="line">  }</span><br><span class="line">  <span class="function"><span class="type">static</span> <span class="type">int</span> <span class="title">AcquireLoad</span><span class="params">(<span class="keyword">volatile</span> <span class="type">const</span> <span class="type">int</span>* i)</span> </span>{</span><br><span class="line">    <span class="keyword">return</span> *i;</span><br><span class="line">  }</span><br><span class="line">  <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">ReleaseStore</span><span class="params">(<span class="keyword">volatile</span> <span class="type">int</span>* i, <span class="type">int</span> value)</span> </span>{</span><br><span class="line">    *i = value;</span><br><span class="line">  }</span><br><span class="line">  <span class="function"><span class="type">static</span> <span class="type">int</span> <span class="title">CompareAndSwap</span><span class="params">(<span class="keyword">volatile</span> <span class="type">int</span>* i, <span class="type">int</span> old_value, <span class="type">int</span> new_value)</span> </span>{</span><br><span class="line">    <span class="keyword">return</span> ::<span class="built_in">InterlockedCompareExchange</span>(<span class="built_in">reinterpret_cast</span>&lt;<span class="keyword">volatile</span> LONG*&gt;(i),</span><br><span class="line">                                        new_value,</span><br><span class="line">                                        old_value);</span><br><span class="line">  }</span><br><span class="line">  <span class="comment">// Pointer variants.</span></span><br><span class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">  <span class="function"><span class="type">static</span> T* <span class="title">AcquireLoadPtr</span><span class="params">(T* <span class="keyword">volatile</span>* ptr)</span> </span>{</span><br><span class="line">    <span class="keyword">return</span> *ptr;</span><br><span class="line">  }</span><br><span class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">  <span class="function"><span class="type">static</span> T* <span class="title">CompareAndSwapPtr</span><span class="params">(T* <span class="keyword">volatile</span>* ptr, T* old_value, T* new_value)</span> </span>{</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">static_cast</span>&lt;T*&gt;(::<span class="built_in">InterlockedCompareExchangePointer</span>(</span><br><span class="line">        <span class="built_in">reinterpret_cast</span>&lt;PVOID <span class="keyword">volatile</span>*&gt;(ptr), new_value, old_value));</span><br><span class="line">  }</span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line">  <span class="function"><span class="type">static</span> <span class="type">int</span> <span class="title">Increment</span><span class="params">(<span class="keyword">volatile</span> <span class="type">int</span>* i)</span> </span>{</span><br><span class="line">    <span class="keyword">return</span> __sync_add_and_fetch(i, <span class="number">1</span>);</span><br><span class="line">  }</span><br><span class="line">  <span class="function"><span class="type">static</span> <span class="type">int</span> <span class="title">Decrement</span><span class="params">(<span class="keyword">volatile</span> <span class="type">int</span>* i)</span> </span>{</span><br><span class="line">    <span class="keyword">return</span> __sync_sub_and_fetch(i, <span class="number">1</span>);</span><br><span class="line">  }</span><br><span class="line">  <span class="function"><span class="type">static</span> <span class="type">int</span> <span class="title">AcquireLoad</span><span class="params">(<span class="keyword">volatile</span> <span class="type">const</span> <span class="type">int</span>* i)</span> </span>{</span><br><span class="line">    <span class="keyword">return</span> __atomic_load_n(i, __ATOMIC_ACQUIRE);</span><br><span class="line">  }</span><br><span class="line">  <span class="function"><span class="type">static</span> <span class="type">void</span> <span class="title">ReleaseStore</span><span class="params">(<span class="keyword">volatile</span> <span class="type">int</span>* i, <span class="type">int</span> value)</span> </span>{</span><br><span class="line">    __atomic_store_n(i, value, __ATOMIC_RELEASE);</span><br><span class="line">  }</span><br><span class="line">  <span class="function"><span class="type">static</span> <span class="type">int</span> <span class="title">CompareAndSwap</span><span class="params">(<span class="keyword">volatile</span> <span class="type">int</span>* i, <span class="type">int</span> old_value, <span class="type">int</span> new_value)</span> </span>{</span><br><span class="line">    <span class="keyword">return</span> __sync_val_compare_and_swap(i, old_value, new_value);</span><br><span class="line">  }</span><br><span class="line">  <span class="comment">// Pointer variants.</span></span><br><span class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">  <span class="function"><span class="type">static</span> T* <span class="title">AcquireLoadPtr</span><span class="params">(T* <span class="keyword">volatile</span>* ptr)</span> </span>{</span><br><span class="line">    <span class="keyword">return</span> __atomic_load_n(ptr, __ATOMIC_ACQUIRE);</span><br><span class="line">  }</span><br><span class="line">  <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">  <span class="function"><span class="type">static</span> T* <span class="title">CompareAndSwapPtr</span><span class="params">(T* <span class="keyword">volatile</span>* ptr, T* old_value, T* new_value)</span> </span>{</span><br><span class="line">    <span class="keyword">return</span> __sync_val_compare_and_swap(ptr, old_value, new_value);</span><br><span class="line">  }</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">};</span><br></pre></td></tr></tbody></table></figure>
+
+<p><strong>使用示例</strong></p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">MessageQueue::IsQuitting</span><span class="params">()</span> </span>{</span><br><span class="line">  <span class="keyword">return</span> AtomicOps::<span class="built_in">AcquireLoad</span>(&amp;stop_) != <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h1 id="三、线程模型原理"><a href="#三、线程模型原理" class="headerlink" title="三、线程模型原理"></a>三、线程模型原理</h1><p>WebRTC的线程功能由<code>Thread</code>类提供。Thread继承于消息队列<code>MessageQueue</code>，这样WebRTC中的每个线程都有了自己的消息循环，外部可以向该线程的消息循环Post消息<code>Message</code>，然后该线程轮询从消息循环<code>Get</code>到消息后处理消息。</p>
+<p>UML如下：</p>
+<p><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/webrtc-thread-model-1.jpg"></p>
+<p><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/webrtc-thread-model-2.jpg"></p>
+<p><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/webrtc-thread-model-3.jpg"></p>
+<h1 id="四、Message和MessageQueue"><a href="#四、Message和MessageQueue" class="headerlink" title="四、Message和MessageQueue"></a>四、Message和MessageQueue</h1><p><code>Message</code>用于定义单个消息：</p>
+<ul>
+<li>posted_from<br>标记改条消息发送自哪个函数，一般都是直接用<code>RTC_FROM_HERE</code>宏来赋值；</li>
+<li>message_id<br>32位整数，消息ID；</li>
+<li>pdata<br>消息携带的数据指针，虽然定义<code>MessageData*</code>类型，但也可以等同于<code>void*</code>。</li>
+<li>ts_sensitive<br>消息的敏感时间点。在使用<code>MessageQueue::Post</code>等方法发送消息时，若<code>time_sensitive == true</code>则设置<code>ts_sensitive = TimeMillis() + kMaxMsgLatency</code> 即当前时间 + 最大消息延迟时间。当消息被从队列中取出的时间大于该时间，则会打印警告日志。</li>
+<li>phandler<br>消息处理器，MessageHandler接口的指针。用户需要继承该类，并重写其<code>OnMessage</code>虚函数。</li>
+</ul>
+<p><code>MessageQueue</code>实现了WebRTC中消息队列的功能，如<code>Post</code>方法用于添加消息；<code>Get</code>方法用于从队列取出消息，若队列没有消息则一直等待，具体的等待和唤醒的方式通过<code>SocketServer</code>的<code>Wait</code>和<code>WakeUp</code>来实现。</p>
+<p><code>SocketServer</code>是一个纯抽象类，<code>NullSocketServer</code>和<code>PhysicalSocketServer</code>都派生自该类。<code>NullSocketServer</code>比较简单，没有创建SOCKET，只处理本地事件（CreateEvent系列函数）；<code>PhysicalSocketServer</code>会创建SOCKET，并可以处理网络事件（WSACreateEvent系列函数）。在单纯的线程模型中，<code>SocketServer</code>只用于处理等待和唤醒操作。</p>
+<h1 id="五、-Thread"><a href="#五、-Thread" class="headerlink" title="五、 Thread"></a>五、 Thread</h1><p>Thread类提供了2个静态函数（<code>Create</code>, <code>CreateWithSocketServer</code>）来构造Thread实例。</p>
+<p>不建议使用<code>new Thread()</code>调用默认构造函数的方式，代码注释中已经给出了解释：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// DEPRECATED.</span></span><br><span class="line"><span class="comment">// The default constructor should not be used because it hides whether or</span></span><br><span class="line"><span class="comment">// not a socket server will be associated with the thread. Most instances</span></span><br><span class="line"><span class="comment">// of Thread do actually not need one, so please use either of the Create*</span></span><br><span class="line"><span class="comment">// methods to construct an instance of Thread.</span></span><br><span class="line"><span class="built_in">Thread</span>();</span><br></pre></td></tr></tbody></table></figure>
+
+
+<p>下面是Thread类构造的大致过程：</p>
+<figure class="highlight txt"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">+-----------------------------+</span><br><span class="line">|                             |</span><br><span class="line">|  new Thread(SocketServer*)  |</span><br><span class="line">|                             |</span><br><span class="line">+---+-------------------------+</span><br><span class="line">    |</span><br><span class="line">    |</span><br><span class="line">    |         +-----------------------------------+</span><br><span class="line">    |         |                                   |</span><br><span class="line">    +---------&gt;  new MessageQueue(SocketServer*)  |</span><br><span class="line">              |                                   |</span><br><span class="line">              +-----------------------------------+</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+
+
+<p>构造完Thread实例之后，调用<code>Start</code>来启动线程，框架会根据Start函数的Runnable参数是否为NULL来判断是需要运行用户自定义的<code>Runnable-&gt;Run()</code>, 还是运行默认<code>ProcessMessage</code>去循环从消息队列中获取消息来处理。</p>
+<ul>
+<li>若运行用户自定义的<code>Runnable-&gt;Run()</code>，则用户需要继承<code>rtc::Runnable</code>去重载<code>Run()</code>；</li>
+<li>若运行默认的<code>ProcessMessage</code>，则用户则需要定义<code>Message</code>，向线程中<code>Post</code>该<code>Message</code>，让线程来执行。</li>
+</ul>
+<p>流程如下：</p>
+<figure class="highlight txt"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">+---------------------------+</span><br><span class="line">|                           |</span><br><span class="line">| Thread-&gt;Start(Runnable*)  |</span><br><span class="line">|                           |</span><br><span class="line">+-+-------------------------+</span><br><span class="line">  |</span><br><span class="line">  |       +-------------------------+</span><br><span class="line">  |       |                         |</span><br><span class="line">  +-------&gt; CreateThrad(PreRun)     |</span><br><span class="line">          |                         |</span><br><span class="line">          +-------------------------+</span><br><span class="line">            |Runnable* is NULL?</span><br><span class="line">            |</span><br><span class="line">            |           +------------------+</span><br><span class="line">            |           |                  |</span><br><span class="line">            +-----------&gt;  Runnable-&gt;Run() |</span><br><span class="line">            |           |                  |</span><br><span class="line">            |           +------------------+</span><br><span class="line">            |</span><br><span class="line">            |</span><br><span class="line">            |           +------------------+</span><br><span class="line">            |           |                  |</span><br><span class="line">            +-----------&gt;  Thread-&gt;Run()   |</span><br><span class="line">                        |                  |</span><br><span class="line">                        +-+----------------+</span><br><span class="line">                          |</span><br><span class="line">                          |</span><br><span class="line">                          |    +--------------------------+</span><br><span class="line">                          |    |                          |</span><br><span class="line">                          +----&gt; Thread-&gt;ProcessMessage() |</span><br><span class="line">                               |                          |</span><br><span class="line">                               +--+-----------------------+</span><br><span class="line">                                  |</span><br><span class="line">                                  |     +--------------------------------+</span><br><span class="line">                                  |     |                                |</span><br><span class="line">                                  +-----&gt; Loop call MessageQueue-&gt;Get()  |</span><br><span class="line">                                        |                                |</span><br><span class="line">                                        +--------------------------------+</span><br></pre></td></tr></tbody></table></figure>
+
+<h1 id="六、-示例"><a href="#六、-示例" class="headerlink" title="六、 示例"></a>六、 示例</h1><h2 id="6-1-实现Runnbale"><a href="#6-1-实现Runnbale" class="headerlink" title="6.1 实现Runnbale"></a>6.1 实现Runnbale</h2><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">"rtc_base/thread.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MyTask</span> : <span class="keyword">public</span> rtc::Runnable {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="built_in">MyTask</span>(<span class="type">const</span> std::string &amp;name) : <span class="built_in">name_</span>(name) {</span><br><span class="line">  }</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">Run</span><span class="params">(Thread* thread)</span> </span>{</span><br><span class="line">    std::cout &lt;&lt; <span class="string">"task name: "</span> &lt;&lt; name_ &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">"my thread id: "</span> &lt;&lt; thread-&gt;<span class="built_in">GetId</span>() &lt;&lt; std::endl;</span><br><span class="line">  }</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">  std::string name_;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">  std::unique_ptr&lt;rtc::Thread&gt; thread = rtc::Thread::<span class="built_in">Create</span>();</span><br><span class="line">  thread-&gt;<span class="built_in">Start</span>(<span class="keyword">new</span> <span class="built_in">MyTask</span>(<span class="string">"task1"</span>));</span><br><span class="line"></span><br><span class="line">  <span class="built_in">getchar</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="6-2-发送Message"><a href="#6-2-发送Message" class="headerlink" title="6.2 发送Message"></a>6.2 发送Message</h2><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyTaskHandler</span> : <span class="keyword">public</span> rtc::MessageHandler {</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">  <span class="built_in">MyTaskHandler</span>(<span class="type">const</span> std::string &amp;name) : <span class="built_in">name_</span>(name) {</span><br><span class="line"></span><br><span class="line">  }</span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">  <span class="function"><span class="type">void</span> <span class="title">OnMessage</span><span class="params">(Message* msg)</span> </span>{</span><br><span class="line">    std::cout &lt;&lt; <span class="string">"task name: "</span> &lt;&lt; name_ &lt;&lt; std::endl;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">"my thread id: "</span> &lt;&lt; Thread::<span class="built_in">Current</span>()-&gt;<span class="built_in">GetId</span>() &lt;&lt; std::endl;</span><br><span class="line">  }</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">  std::string name_;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">  std::unique_ptr&lt;rtc::Thread&gt; thread = rtc::Thread::<span class="built_in">Create</span>();</span><br><span class="line">  thread-&gt;<span class="built_in">Start</span>(<span class="literal">nullptr</span>);</span><br><span class="line"></span><br><span class="line">  thread-&gt;<span class="built_in">Post</span>(RTC_FROM_HERE, <span class="keyword">new</span> <span class="built_in">MyTaskHandler</span>(<span class="string">"task2"</span>), <span class="number">0</span>, <span class="literal">nullptr</span>, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">getchar</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+                </div>
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/WebRTC/">WebRTC</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                            <div class="post-share-container border-box">
+    <ul class="share-list-wrap border-box">
+        <li class="qq share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到 QQ"
+        >
+            <i class="fa-brands fa-qq"></i>
+        </li>
+        <li class="wechat share-item border-box flex-center tooltip tooltip-img"
+            data-tooltip-content="分享到微信"
+            data-tooltip-img-tip="微信扫一扫"
+            data-tooltip-img-style="background-color: #fff; top: -10px; padding: 0.6rem 0.6rem 0.1rem 0.6rem;"
+        >
+            <i class="fa-brands fa-weixin"></i>
+        </li>
+        <li class="weibo share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到微博"
+        >
+            <i class="fa-brands fa-weibo"></i>
+        </li>
+    </ul>
+</div>
+
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/post/409779091.html"
+                                   title="NSIS教程(1)-基础语法"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">NSIS教程(1)-基础语法</span>
+                                        <span class="post-nav-item">上一篇</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/post/3773107387.html"
+                                   title="Janus的编译部署及配置"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">Janus的编译部署及配置</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+    <div class="comments-container border-box">
+        <div id="comments-anchor" class="comment-area-title border-box">
+            <i class="fas fa-comments"></i>&nbsp;评论
+        </div>
+        <div class="comment-plugin-fail border-box">
+    <span class="fail-tip">评论插件加载失败</span>
+    <button class="reload keep-button">点击重新加载</button>
+</div>
+<div class="comment-plugin-loading flex-center border-box">
+    <i class="loading-icon fa-solid fa-spinner fa-spin"></i>
+    <span class="load-tip">正在加载评论插件</span>
+</div>
+<script data-pjax>
+  window.KeepCommentPlugin = {}
+  window.KeepCommentPlugin.hideLoading = () => {
+    const cplDom = document.querySelector('.comments-container .comment-plugin-loading')
+    cplDom.style.display = 'none'
+  }
+  window.KeepCommentPlugin.loadFailHandle = () => {
+    window.KeepCommentPlugin.hideLoading()
+    const cpfDom = document.querySelector('.comments-container .comment-plugin-fail')
+    cpfDom.style.display = 'flex'
+    cpfDom.querySelector('.reload').addEventListener('click', () => {
+      window.location.reload()
+    })
+  }
+</script>
+
+        
+            
+
+    <div class="twikoo-container">
+        <div id="twikoo-comment"></div>
+        <script 
+                src="//cdn.jsdelivr.net/npm/twikoo@1.6.21/dist/twikoo.all.min.js"
+                async
+                onerror="window.KeepCommentPlugin.loadFailHandle()"
+        ></script>
+        <script 
+                async
+                onerror="window.KeepCommentPlugin.loadFailHandle()"
+        >
+          window.KeepCommentPlugin.initTwikoo = () => {
+            if (window?.twikoo) {
+              twikoo.init({
+                el: '#twikoo-comment',
+                envId: 'https://twikoo.jiangxueqiao.com',
+                region: 'zh-CN',
+                lang: 'zh-CN' || 'zh-CN'
+              })
+              window.KeepCommentPlugin.hideLoading()
+            } else {
+              setTimeout(() => {
+                window.KeepCommentPlugin.initTwikoo()
+              }, 1000)
+            }
+          }
+
+          if ('false' === 'true') {
+            setTimeout(() => {
+              window.KeepCommentPlugin.initTwikoo()
+            }, 1200)
+          } else {
+            window.addEventListener('DOMContentLoaded', window.KeepCommentPlugin.initTwikoo)
+          }
+        </script>
+    </div>
+
+
+        
+    </div>
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E8%AE%BE%E7%BD%AE%E7%BA%BF%E7%A8%8B%E5%90%8D"><span class="nav-text">一、 设置线程名</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81-%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C"><span class="nav-text">二、 原子操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B%E5%8E%9F%E7%90%86"><span class="nav-text">三、线程模型原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81Message%E5%92%8CMessageQueue"><span class="nav-text">四、Message和MessageQueue</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94%E3%80%81-Thread"><span class="nav-text">五、 Thread</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AD%E3%80%81-%E7%A4%BA%E4%BE%8B"><span class="nav-text">六、 示例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1-%E5%AE%9E%E7%8E%B0Runnbale"><span class="nav-text">6.1 实现Runnbale</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-%E5%8F%91%E9%80%81Message"><span class="nav-text">6.2 发送Message</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="border-box website-info-box default">
+        
+            <div class="copyright-info info-item default">
+                &copy;&nbsp;<span>2017</span>&nbsp;-&nbsp;2024
+                
+                    &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">江雪桥</a>
+                
+            </div>
+
+            <div class="copyright-info info-item default">
+                本站文章均为原创（少数注明转载的除外），转载前请注明出处！
+            </div>
+
+            <div class="copyright-info info-item default">
+                <a target="_blank" rel="noopener" href="https://blog.csdn.net/china_jeffery">【CSDN】</a>
+                &nbsp;&nbsp;
+                <a target="_blank" rel="noopener" href="https://github.com/winsoft666/">【Github】</a>
+                &nbsp;&nbsp;
+                <a target="_blank" rel="noopener" href="https://1key.run">【1key.run】</a>
+                &nbsp;&nbsp;
+                <a target="_blank" rel="noopener" href="https://github.com/winsoft666/TinyTu-Setup/releases">【TinyTu】</a>
+                &nbsp;&nbsp;
+                <a target="_blank" rel="noopener" href="https://github.com/winsoft666/winspyplus-bin">【WinSpyPlus】</a>
+            </div>
+
+            
+                <div class="icp-info info-item default">
+                    <a class=""
+                       target="_blank"
+                       href="https://beian.miit.gov.cn"
+                    >
+                        鄂ICP备2020015399号-6
+                    </a>
+                </div>
+            
+
+            
+        
+
+        <div class="count-item info-item default">
+            
+
+            
+
+            
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="tools-list border-box">
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+            <li class="tools-item flex-center go-to-comments">
+                <i class="fas fa-comment"></i>
+                <span class="post-comments-count"></span>
+            </li>
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-toggle-theme-mode flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+            <li class="tools-item go-to-comments-tablet flex-center">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81-%E8%AE%BE%E7%BD%AE%E7%BA%BF%E7%A8%8B%E5%90%8D"><span class="nav-text">一、 设置线程名</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81-%E5%8E%9F%E5%AD%90%E6%93%8D%E4%BD%9C"><span class="nav-text">二、 原子操作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E7%BA%BF%E7%A8%8B%E6%A8%A1%E5%9E%8B%E5%8E%9F%E7%90%86"><span class="nav-text">三、线程模型原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81Message%E5%92%8CMessageQueue"><span class="nav-text">四、Message和MessageQueue</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94%E3%80%81-Thread"><span class="nav-text">五、 Thread</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AD%E3%80%81-%E7%A4%BA%E4%BE%8B"><span class="nav-text">六、 示例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1-%E5%AE%9E%E7%8E%B0Runnbale"><span class="nav-text">6.1 实现Runnbale</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-%E5%8F%91%E9%80%81Message"><span class="nav-text">6.2 发送Message</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+<!-- common -->
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+
+<!-- local-search -->
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+<!-- lazyload -->
+
+    
+<script src="/js/lazyload.js"></script>
+
+
+
+<div class="">
+    
+        <!-- post-helper -->
+        
+<script src="/js/post/post-helper.js"></script>
+
+
+        <!-- toc -->
+        
+            
+<script src="/js/post/toc.js"></script>
+
+        
+
+        <!-- copyright-info -->
+        
+
+        <!-- share -->
+        
+            
+<script src="/js/post/share.js"></script>
+
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+</body>
+</html>

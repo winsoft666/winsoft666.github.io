@@ -35,7 +35,7 @@
     <script class="keep-theme-configurations">
     const KEEP = window.KEEP || {}
     KEEP.hexo_config = {"hostname":"jiangxueqiao.com","root":"/","language":"zh-CN","path":"search.xml"}
-    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"代码派","author":"江雪桥","avatar":"/images/avatar.png","logo":"/images/logo.png","favicon":"/images/favicon.png"},"menu":{"Archives":"/archives","Categories":"/categories","Tags":"/tags","About":"/about","Github":"https://github.com/winsoft666"},"first_screen":{"enable":false,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/winsoft666","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":true,"hide_header":true},"home":{"category":true,"tag":true,"announcement":null},"post":{"author_badge":{"enable":false,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":false},"comment":{"enable":true,"use":"twikoo","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":"https://twikoo.jiangxueqiao.com","region":"zh-CN","version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2017,"word_count":false,"icp":{"enable":true,"record_code":"鄂ICP备2020015399号-6","url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null,"/css/custom.css"],"js":[null]},"root":"","version":"4.0.7"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"代码派","author":"江雪桥","avatar":"/images/avatar.png","logo":"/images/logo.png","favicon":"/images/favicon.png"},"menu":{"home":"/ || fa-solid fa-home","archives":"/archives || fa-solid fa-layer-group","categories":"/categories || fa-solid fa-box-archive","tags":"/tags || fa-solid fa-tags","about":"/about || fa-solid fa-user-graduate","Github":"https://github.com/winsoft666"},"first_screen":{"enable":false,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/winsoft666","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":true,"hide_header":true},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":false,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":false},"comment":{"enable":true,"use":"twikoo","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":"https://twikoo.jiangxueqiao.com","region":"zh-CN","version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2017,"word_count":false,"icp":{"enable":true,"record_code":"鄂ICP备2020015399号-6","url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null,"/css/custom.css"],"js":[null]},"root":"","source_data":{},"version":"4.1.0"}
     KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
     KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
     KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
@@ -54,8 +54,8 @@
 </div>
 
 
-<main class="page-container border-box">
 
+<main class="page-container border-box">
     <!-- home first screen  -->
     
 
@@ -80,40 +80,75 @@
         <div class="right border-box">
             <div class="pc">
                 <ul class="menu-list">
-                    <li class="menu-item">
-                        <a class=""
-                           href="/"
-                        >首页</a>
-                    </li>
                     
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-home"></i>
+                                
+                                首页
+                            </a>
+                        </li>
+                    
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/archives"
-                            >归档</a>
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-layer-group"></i>
+                                
+                                归档
+                            </a>
                         </li>
                     
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/categories"
-                            >分类</a>
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-box-archive"></i>
+                                
+                                分类
+                            </a>
                         </li>
                     
+                        
                         <li class="menu-item">
                             <a class="active"
                                href="/tags"
-                            >标签</a>
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-tags"></i>
+                                
+                                标签
+                            </a>
                         </li>
                     
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/about"
-                            >关于</a>
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-user-graduate"></i>
+                                
+                                关于
+                            </a>
                         </li>
                     
+                        
                         <li class="menu-item">
                             <a class=""
                                target="_blank" rel="noopener" href="https://github.com/winsoft666"
-                            >GITHUB</a>
+                            >
+                                
+                                GITHUB
+                            </a>
                         </li>
                     
                     
@@ -136,36 +171,43 @@
 
     <div class="header-drawer">
         <ul class="drawer-menu-list">
-            <li class="drawer-menu-item flex-center">
-                <a class=""
-                   href="/"
-                >首页</a>
-            </li>
             
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/"
+                    >首页</a>
+                </li>
+            
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
                        href="/archives"
                     >归档</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
                        href="/categories"
                     >分类</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class="active"
                        href="/tags"
                     >标签</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
                        href="/about"
                     >关于</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
                        target="_blank" rel="noopener" href="https://github.com/winsoft666"
@@ -191,7 +233,7 @@
     <div class="tagcloud-container">
         
             <div class="tagcloud-content">
-                <a href="/tags/1key-run/" style="font-size: 1rem;">1key.run</a> <a href="/tags/ABI/" style="font-size: 1rem;">ABI</a> <a href="/tags/ARP/" style="font-size: 1rem;">ARP</a> <a href="/tags/CMake/" style="font-size: 1.1rem;">CMake</a> <a href="/tags/CentOS/" style="font-size: 1.1rem;">CentOS</a> <a href="/tags/Crash/" style="font-size: 1rem;">Crash</a> <a href="/tags/DPI/" style="font-size: 1rem;">DPI</a> <a href="/tags/Deadlock/" style="font-size: 1.1rem;">Deadlock</a> <a href="/tags/Docker/" style="font-size: 1.1rem;">Docker</a> <a href="/tags/Electron/" style="font-size: 1.4rem;">Electron</a> <a href="/tags/GDB/" style="font-size: 1rem;">GDB</a> <a href="/tags/Git/" style="font-size: 1rem;">Git</a> <a href="/tags/Github/" style="font-size: 1.1rem;">Github</a> <a href="/tags/HTTP/" style="font-size: 1rem;">HTTP</a> <a href="/tags/HTTPS/" style="font-size: 1rem;">HTTPS</a> <a href="/tags/Hexo/" style="font-size: 1rem;">Hexo</a> <a href="/tags/ICMP/" style="font-size: 1rem;">ICMP</a> <a href="/tags/IP/" style="font-size: 1rem;">IP</a> <a href="/tags/Janus/" style="font-size: 1rem;">Janus</a> <a href="/tags/Joplin/" style="font-size: 1rem;">Joplin</a> <a href="/tags/Lamada/" style="font-size: 1rem;">Lamada</a> <a href="/tags/LetsEncrypt/" style="font-size: 1rem;">LetsEncrypt</a> <a href="/tags/MySQL/" style="font-size: 1.4rem;">MySQL</a> <a href="/tags/NSIS/" style="font-size: 1.6rem;">NSIS</a> <a href="/tags/Node-API/" style="font-size: 1.1rem;">Node-API</a> <a href="/tags/P2P/" style="font-size: 1rem;">P2P</a> <a href="/tags/Ping/" style="font-size: 1rem;">Ping</a> <a href="/tags/QMenu/" style="font-size: 1rem;">QMenu</a> <a href="/tags/QPixmap/" style="font-size: 1rem;">QPixmap</a> <a href="/tags/QSS/" style="font-size: 1.2rem;">QSS</a> <a href="/tags/RPC/" style="font-size: 1rem;">RPC</a> <a href="/tags/Redis/" style="font-size: 1.1rem;">Redis</a> <a href="/tags/SDP/" style="font-size: 1rem;">SDP</a> <a href="/tags/SQL/" style="font-size: 1rem;">SQL</a> <a href="/tags/SSL/" style="font-size: 1rem;">SSL</a> <a href="/tags/TCP/" style="font-size: 1rem;">TCP</a> <a href="/tags/TURN/" style="font-size: 1rem;">TURN</a> <a href="/tags/Thread/" style="font-size: 1.1rem;">Thread</a> <a href="/tags/TinyTu/" style="font-size: 1rem;">TinyTu</a> <a href="/tags/UDP/" style="font-size: 1rem;">UDP</a> <a href="/tags/UIPI/" style="font-size: 1rem;">UIPI</a> <a href="/tags/Vcpkg/" style="font-size: 1.3rem;">Vcpkg</a> <a href="/tags/Veigar/" style="font-size: 1rem;">Veigar</a> <a href="/tags/Watch%C2%ADtower/" style="font-size: 1rem;">Watch­tower</a> <a href="/tags/Wav/" style="font-size: 1rem;">Wav</a> <a href="/tags/WebRTC/" style="font-size: 1.5rem;">WebRTC</a> <a href="/tags/Windbg/" style="font-size: 1.3rem;">Windbg</a> <a href="/tags/nlohmann-json/" style="font-size: 1rem;">nlohmann-json</a> <a href="/tags/spdlog/" style="font-size: 1rem;">spdlog</a> <a href="/tags/%E5%86%85%E5%AD%98%E6%B1%A0/" style="font-size: 1rem;">内存池</a> <a href="/tags/%E5%8F%B2%E9%93%81%E7%94%9F/" style="font-size: 1rem;">史铁生</a> <a href="/tags/%E5%AD%97%E4%BD%93/" style="font-size: 1rem;">字体</a> <a href="/tags/%E6%88%B4%E5%BB%BA%E4%B8%9A/" style="font-size: 1rem;">戴建业</a> <a href="/tags/%E6%89%B9%E5%A4%84%E7%90%86/" style="font-size: 1.3rem;">批处理</a> <a href="/tags/%E6%AD%A3%E5%88%99/" style="font-size: 1rem;">正则</a> <a href="/tags/%E6%B5%81%E5%AA%92%E4%BD%93/" style="font-size: 1rem;">流媒体</a> <a href="/tags/%E7%99%BD%E9%85%92/" style="font-size: 1rem;">白酒</a> <a href="/tags/%E8%BD%AC%E8%BD%BD/" style="font-size: 1.3rem;">转载</a>
+                <a href="/tags/1key-run/" style="font-size: 1rem;">1key.run</a> <a href="/tags/ABI/" style="font-size: 1rem;">ABI</a> <a href="/tags/ARP/" style="font-size: 1rem;">ARP</a> <a href="/tags/CMake/" style="font-size: 1.09rem;">CMake</a> <a href="/tags/CentOS/" style="font-size: 1.09rem;">CentOS</a> <a href="/tags/Crash/" style="font-size: 1rem;">Crash</a> <a href="/tags/DPI/" style="font-size: 1rem;">DPI</a> <a href="/tags/Deadlock/" style="font-size: 1.09rem;">Deadlock</a> <a href="/tags/Docker/" style="font-size: 1.09rem;">Docker</a> <a href="/tags/Electron/" style="font-size: 1.34rem;">Electron</a> <a href="/tags/GDB/" style="font-size: 1rem;">GDB</a> <a href="/tags/Git/" style="font-size: 1rem;">Git</a> <a href="/tags/Github/" style="font-size: 1.09rem;">Github</a> <a href="/tags/HTTP/" style="font-size: 1rem;">HTTP</a> <a href="/tags/HTTPS/" style="font-size: 1rem;">HTTPS</a> <a href="/tags/Hexo/" style="font-size: 1rem;">Hexo</a> <a href="/tags/ICMP/" style="font-size: 1rem;">ICMP</a> <a href="/tags/IP/" style="font-size: 1rem;">IP</a> <a href="/tags/Icon-Overlay/" style="font-size: 1rem;">Icon Overlay</a> <a href="/tags/Janus/" style="font-size: 1rem;">Janus</a> <a href="/tags/Joplin/" style="font-size: 1rem;">Joplin</a> <a href="/tags/Lamada/" style="font-size: 1rem;">Lamada</a> <a href="/tags/LetsEncrypt/" style="font-size: 1rem;">LetsEncrypt</a> <a href="/tags/MySQL/" style="font-size: 1.34rem;">MySQL</a> <a href="/tags/NSIS/" style="font-size: 1.6rem;">NSIS</a> <a href="/tags/Node-API/" style="font-size: 1.09rem;">Node-API</a> <a href="/tags/P2P/" style="font-size: 1rem;">P2P</a> <a href="/tags/Ping/" style="font-size: 1rem;">Ping</a> <a href="/tags/QMenu/" style="font-size: 1rem;">QMenu</a> <a href="/tags/QPixmap/" style="font-size: 1rem;">QPixmap</a> <a href="/tags/QSS/" style="font-size: 1.17rem;">QSS</a> <a href="/tags/RPC/" style="font-size: 1rem;">RPC</a> <a href="/tags/Redis/" style="font-size: 1.09rem;">Redis</a> <a href="/tags/SDP/" style="font-size: 1rem;">SDP</a> <a href="/tags/SQL/" style="font-size: 1rem;">SQL</a> <a href="/tags/SSL/" style="font-size: 1rem;">SSL</a> <a href="/tags/TCP/" style="font-size: 1rem;">TCP</a> <a href="/tags/TURN/" style="font-size: 1rem;">TURN</a> <a href="/tags/Thread/" style="font-size: 1.09rem;">Thread</a> <a href="/tags/TinyTu/" style="font-size: 1rem;">TinyTu</a> <a href="/tags/UDP/" style="font-size: 1rem;">UDP</a> <a href="/tags/UIPI/" style="font-size: 1rem;">UIPI</a> <a href="/tags/Vcpkg/" style="font-size: 1.26rem;">Vcpkg</a> <a href="/tags/Veigar/" style="font-size: 1rem;">Veigar</a> <a href="/tags/Watch%C2%ADtower/" style="font-size: 1rem;">Watch­tower</a> <a href="/tags/Wav/" style="font-size: 1rem;">Wav</a> <a href="/tags/WebRTC/" style="font-size: 1.51rem;">WebRTC</a> <a href="/tags/Windbg/" style="font-size: 1.26rem;">Windbg</a> <a href="/tags/Windows%E6%B6%88%E6%81%AF/" style="font-size: 1.09rem;">Windows消息</a> <a href="/tags/nlohmann-json/" style="font-size: 1rem;">nlohmann-json</a> <a href="/tags/spdlog/" style="font-size: 1rem;">spdlog</a> <a href="/tags/%E5%86%85%E5%AD%98%E6%B1%A0/" style="font-size: 1rem;">内存池</a> <a href="/tags/%E5%8C%BF%E5%90%8D%E5%AF%B9%E8%B1%A1/" style="font-size: 1rem;">匿名对象</a> <a href="/tags/%E5%8F%B2%E9%93%81%E7%94%9F/" style="font-size: 1rem;">史铁生</a> <a href="/tags/%E5%AD%97%E4%BD%93/" style="font-size: 1rem;">字体</a> <a href="/tags/%E6%88%B4%E5%BB%BA%E4%B8%9A/" style="font-size: 1rem;">戴建业</a> <a href="/tags/%E6%89%B9%E5%A4%84%E7%90%86/" style="font-size: 1.26rem;">批处理</a> <a href="/tags/%E6%AD%A3%E5%88%99/" style="font-size: 1rem;">正则</a> <a href="/tags/%E6%B5%81%E5%AA%92%E4%BD%93/" style="font-size: 1rem;">流媒体</a> <a href="/tags/%E7%99%BD%E9%85%92/" style="font-size: 1rem;">白酒</a> <a href="/tags/%E8%BD%AC%E8%BD%BD/" style="font-size: 1.43rem;">转载</a>
             </div>
         
         
@@ -201,7 +243,6 @@
 
                 
             </div>
-
         </div>
 
         <div class="page-main-content-bottom border-box">
@@ -214,6 +255,22 @@
                 
                     &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">江雪桥</a>
                 
+            </div>
+
+            <div class="copyright-info info-item default">
+                本站文章均为原创（少数注明转载的除外），转载前请注明出处！
+            </div>
+
+            <div class="copyright-info info-item default">
+                <a target="_blank" rel="noopener" href="https://blog.csdn.net/china_jeffery">【CSDN】</a>
+                &nbsp;&nbsp;
+                <a target="_blank" rel="noopener" href="https://github.com/winsoft666/">【Github】</a>
+                &nbsp;&nbsp;
+                <a target="_blank" rel="noopener" href="https://1key.run">【1key.run】</a>
+                &nbsp;&nbsp;
+                <a target="_blank" rel="noopener" href="https://github.com/winsoft666/TinyTu-Setup/releases">【TinyTu】</a>
+                &nbsp;&nbsp;
+                <a target="_blank" rel="noopener" href="https://github.com/winsoft666/winspyplus-bin">【WinSpyPlus】</a>
             </div>
 
             
@@ -375,13 +432,16 @@
 <div class="">
     
 
-    <!-- category-page -->
+    <!-- categories page -->
     
 
-    <!-- links-page -->
+    <!-- links page -->
     
 
-    <!-- photos-page -->
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
     
 </div>
 

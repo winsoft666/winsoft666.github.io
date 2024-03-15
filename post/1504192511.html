@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="keywords" content="Windows,Linux,C/C++,Golang,Qt,Node.js,Electron,Vue,WebRTC">
-    <meta name="description" content=" ">
+    <meta name="description" content="除注明转载以外，所有文章均为原创">
     <meta name="author" content="江雪桥">
     
     <title>
         
-            Windows注入与拦截(1)--DLL注入基础 |
+            Windows注入与拦截(1)-注入基础 |
         
         代码派
     </title>
@@ -35,7 +35,7 @@
     <script class="keep-theme-configurations">
     const KEEP = window.KEEP || {}
     KEEP.hexo_config = {"hostname":"jiangxueqiao.com","root":"/","language":"zh-CN","path":"search.xml"}
-    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"代码派","author":"江雪桥","avatar":"/images/avatar.png","logo":"/images/logo.png","favicon":"/images/favicon.png"},"menu":{"Archives":"/archives","Categories":"/categories","Tags":"/tags","About":"/about","Github":"https://github.com/winsoft666"},"first_screen":{"enable":false,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/winsoft666","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":true,"hide_header":true},"home":{"category":true,"tag":true,"announcement":null},"post":{"author_badge":{"enable":false,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":false},"comment":{"enable":true,"use":"twikoo","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":"https://twikoo.jiangxueqiao.com","region":"zh-CN","version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2017,"word_count":false,"icp":{"enable":true,"record_code":"鄂ICP备2020015399号-6","url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null,"/css/custom.css"],"js":[null]},"root":"","version":"4.0.7"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"代码派","author":"江雪桥","avatar":"/images/avatar.png","logo":"/images/logo.png","favicon":"/images/favicon.png"},"menu":{"home":"/ || fa-solid fa-home","archives":"/archives || fa-solid fa-layer-group","categories":"/categories || fa-solid fa-box-archive","tags":"/tags || fa-solid fa-tags","about":"/about || fa-solid fa-user-graduate","Github":"https://github.com/winsoft666"},"first_screen":{"enable":false,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/winsoft666","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":true,"hide_header":true},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":false,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":false},"comment":{"enable":true,"use":"twikoo","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":"https://twikoo.jiangxueqiao.com","region":"zh-CN","version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2017,"word_count":false,"icp":{"enable":true,"record_code":"鄂ICP备2020015399号-6","url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null,"/css/custom.css"],"js":[null]},"root":"","source_data":{},"version":"4.1.0"}
     KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
     KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
     KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
@@ -54,8 +54,8 @@
 </div>
 
 
-<main class="page-container border-box">
 
+<main class="page-container border-box">
     <!-- home first screen  -->
     
 
@@ -80,40 +80,75 @@
         <div class="right border-box">
             <div class="pc">
                 <ul class="menu-list">
-                    <li class="menu-item">
-                        <a class=""
-                           href="/"
-                        >首页</a>
-                    </li>
                     
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-home"></i>
+                                
+                                首页
+                            </a>
+                        </li>
+                    
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/archives"
-                            >归档</a>
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-layer-group"></i>
+                                
+                                归档
+                            </a>
                         </li>
                     
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/categories"
-                            >分类</a>
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-box-archive"></i>
+                                
+                                分类
+                            </a>
                         </li>
                     
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/tags"
-                            >标签</a>
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-tags"></i>
+                                
+                                标签
+                            </a>
                         </li>
                     
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/about"
-                            >关于</a>
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-user-graduate"></i>
+                                
+                                关于
+                            </a>
                         </li>
                     
+                        
                         <li class="menu-item">
                             <a class=""
                                target="_blank" rel="noopener" href="https://github.com/winsoft666"
-                            >GITHUB</a>
+                            >
+                                
+                                GITHUB
+                            </a>
                         </li>
                     
                     
@@ -136,36 +171,43 @@
 
     <div class="header-drawer">
         <ul class="drawer-menu-list">
-            <li class="drawer-menu-item flex-center">
-                <a class=""
-                   href="/"
-                >首页</a>
-            </li>
             
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/"
+                    >首页</a>
+                </li>
+            
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
                        href="/archives"
                     >归档</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
                        href="/categories"
                     >分类</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
                        href="/tags"
                     >标签</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
                        href="/about"
                     >关于</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
                        target="_blank" rel="noopener" href="https://github.com/winsoft666"
@@ -196,7 +238,7 @@
             <div class="post-content-bottom border-box">
                 
                     <div class="post-title">
-                        Windows注入与拦截(1)--DLL注入基础
+                        Windows注入与拦截(1)-注入基础
                     </div>
                 
 
@@ -227,7 +269,7 @@
 
             <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Tue Mar 12 2024 15:49:33 GMT+0800">2024-03-12 15:49:33</span>
+                <span class="datetime" data-updated="Thu Mar 14 2024 15:30:12 GMT+0800">2024-03-14 15:30:12</span>
             </span>
         
 
@@ -261,28 +303,29 @@
                 <div class="post-content keep-markdown-body">
                     
 
-                    <h2 id="一、DLL-注入技术的用途"><a href="#一、DLL-注入技术的用途" class="headerlink" title="一、DLL 注入技术的用途"></a>一、DLL 注入技术的用途</h2><p>从<a href="/post/2494475058.html" title="Windows内存体系(1)--虚拟地址空间">Windows内存体系(1)--虚拟地址空间</a>文章中我们可以知道，在 Windows 系统中，每个进程都有自己私有的地址空间。当我们用指针来引用内存的时候，指针的值表示的是进程自己的地址空间的一个虚拟的内存地址。<strong>进程不能通过指针来引用其他进程地址空间的内存。</strong>因此，如果一个进程有缺陷会导致其引用和覆盖随机地址处的内存，那么这个缺陷的影响就会不会扩散到其他的进程。</p>
-<p>独立的地址空间有利于系统的稳定性。但很多时候我们还是需要跨越进程的边界来访问另一个进程地址空间，比如：</p>
+                    <h2 id="一、注入技术的用途"><a href="#一、注入技术的用途" class="headerlink" title="一、注入技术的用途"></a>一、注入技术的用途</h2><p>从<a href="/post/2494475058.html" title="Windows内存体系(1)--虚拟地址空间">Windows内存体系(1)--虚拟地址空间</a>文章中我们可以知道：</p>
+<p>在 Windows 系统中，每个进程都有自己私有的地址空间。当我们用指针来引用内存时，指针的值表示的是进程自己的地址空间的一个虚拟的内存地址。<strong>进程不能通过指针来引用其他进程地址空间的内存。</strong> 这种设计提升了操作系统的健壮性和安全性，比如一个进程存在缺陷，可能会引用和覆盖随机地址处的内存数据，那么我们就不用担心这个缺陷会影响到操作系统及其他进程。</p>
+<p>独立的地址空间有利于系统的稳定性。但也带来了诸多不便，下面列举了需要跨越进程的边界来访问另一个进程地址空间的情况：</p>
 <ul>
-<li>我们要从另一个进程创建的窗口来派生子类窗口。比如附着在 windows 资源管理器上的一些小插件等。</li>
+<li>我们要从另一个进程创建的窗口来派生子类窗口，比如附着在 Windows 资源管理器上的一些小插件等。</li>
 <li>我们需要假借其他进程之名做某些事情。</li>
 <li>我们需要获取其他进程的更多详细信息，如加载了哪些 dll 等。</li>
-<li>我们需要对其他进程的某些操作进程拦截。</li>
-<li>干一些羞羞的事情…</li>
+<li>我们需要对其他进程的某些函数进行HOOK。</li>
+<li>以及干一些羞羞的事情…</li>
 </ul>
-<p>为了满足上面的这些需求，我们可以使用 DLL 注入的技术，将我们自己开发的 dll 注入到另一个进程的地址空间中，让 dll 中的代码在该进程的地址空间中执行，那么我们就可以在那个中进程为所欲为了。</p>
-<h2 id="二、什么样的-DLL-可以被注入？"><a href="#二、什么样的-DLL-可以被注入？" class="headerlink" title="二、什么样的 DLL 可以被注入？"></a>二、什么样的 DLL 可以被注入？</h2><p>理论上任何 DLL 都可以被注入到其他进程之中，但是大多数情况下，我们注入到其他进程之中是为了实现某些功能、做某些事情的，所以我们需要在我们的 DLL 被注入之后，DLL 中的功能代码能够被调用执行。</p>
-<p>我们知道 DLL 被<strong>首次</strong>载入到进程中时，会收到<code>DLL_PROCESS_ATTACH</code>的通知，即调用<code>DllMain</code>函数，并且参数<code>fdwReason</code>的值被设为<code>DLL_PROCESS_ATTACH</code>。我们可以在收到<code>DLL_PROCESS_ATTACH</code>通知时开始我们的业务逻辑。</p>
+<p>为了满足上述需求，我们可以使用 DLL 注入的技术，将我们自己开发的 DLL 注入到另一个进程的地址空间中，这样 DLL 中的代码就可以在该进程地址空间中执行。</p>
+<span id="more"></span>
+
+<h2 id="二、什么样的-DLL-可以被注入"><a href="#二、什么样的-DLL-可以被注入" class="headerlink" title="二、什么样的 DLL 可以被注入"></a>二、什么样的 DLL 可以被注入</h2><p>理论上任何 DLL 都可以被注入到其他进程之中，但是大多数情况下，我们注入到其他进程之中是为了实现某些功能、做某些事情的，所以我们需要在 DLL 被注入之后，DLL 中的功能代码能够被自动执行。</p>
+<p>DLL 被<strong>首次</strong>载入到进程中时，会收到<code>DLL_PROCESS_ATTACH</code>通知，即调用<code>DllMain</code>函数，并且参数<code>fdwReason</code>的值被设为<code>DLL_PROCESS_ATTACH</code>。</p>
+<p>我们可以在收到<code>DLL_PROCESS_ATTACH</code>通知时开始我们的业务逻辑。</p>
 <p>下面是一个最简单的 dll 的源码，在被注入成功后（即收到<code>DLL_PROCESS_ATTACH</code>通知时）弹出消息提示框：</p>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">BOOL APIENTRY <span class="title">DllMain</span><span class="params">(HMODULE hModule, DWORD fdwReason, LPVOID lpReserved )</span> </span>{</span><br><span class="line">    <span class="keyword">switch</span>(fdwReason) {</span><br><span class="line">        <span class="keyword">case</span> DLL_PROCESS_ATTACH:</span><br><span class="line">        {</span><br><span class="line">      <span class="built_in">MessageBox</span>(<span class="literal">NULL</span>, <span class="built_in">TEXT</span>(<span class="string">"我已经被注入啦"</span>), <span class="built_in">TEXT</span>(<span class="string">"信息"</span>), MB_ICONINFORMATION);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">case</span> DLL_THREAD_ATTACH:</span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">case</span> DLL_THREAD_DETACH:</span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">case</span> DLL_PROCESS_DETACH:</span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> TRUE;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
-<p>但是，如果<code>DLL_PROCESS_ATTACH</code>通知处理过程中的操作被挂起（如消息提示框）或者被阻塞（如用户创建了一个消息循环），这样就会导致目标进程中的<code>LoadLibrary(Ex)</code>函数一直无法返回（dll 都是通过<code>LoadLibrary(Ex)</code>函数来加载的），所以我们一般会在<code>DLL_PROCESS_ATTACH</code>通知处理过程中创建一个子线程，将业务逻辑放置到该子线程中执行，代码如下：</p>
-<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;tchar.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;process.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">unsigned</span> <span class="type">int</span> __stdcall <span class="title">PluginProc</span><span class="params">(LPVOID pArg)</span> </span>{</span><br><span class="line">  <span class="built_in">MessageBox</span>(<span class="literal">NULL</span>, <span class="built_in">TEXT</span>(<span class="string">"我已经被注入啦"</span>), <span class="built_in">TEXT</span>(<span class="string">"信息"</span>), MB_OK | MB_ICONASTERISK);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function">BOOL APIENTRY <span class="title">DllMain</span><span class="params">(HMODULE hModule, DWORD  fdwReason, LPVOID lpReserved)</span> </span>{</span><br><span class="line">  HANDLE hThread = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">switch</span>(fdwReason) {</span><br><span class="line">        <span class="keyword">case</span> DLL_PROCESS_ATTACH:</span><br><span class="line">        {</span><br><span class="line">      hThread = (HANDLE)_beginthreadex(<span class="literal">NULL</span>, <span class="number">0</span>, PluginProc, <span class="literal">NULL</span>, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">      <span class="keyword">if</span> (hThread) {</span><br><span class="line">        <span class="built_in">CloseHandle</span>(hThread); <span class="comment">// 关闭句柄，防止句柄泄漏</span></span><br><span class="line">      }</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">case</span> DLL_THREAD_ATTACH:</span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">case</span> DLL_THREAD_DETACH:</span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">case</span> DLL_PROCESS_DETACH:</span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> TRUE;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
-<p>另外，当 DLL 被从目标进程卸载时，DLL 会收到<code>DLL_PROCESS_DETACH</code>通知，我们需要在该通知的处理过程中做好最后的善后工作，防止资源泄漏、程序崩溃等问题出现。</p>
+<p>另外，当 DLL 被从目标进程卸载时，DLL 会收到<code>DLL_PROCESS_DETACH</code>通知，我们可以在该通知的处理过程中做最后的善后工作，防止出现资源泄漏、程序崩溃等问题。</p>
 
                 </div>
-
                 
 
                 <div class="post-bottom-tags-and-share border-box">
@@ -326,13 +369,13 @@
                                 <a class="prev"
                                    rel="prev"
                                    href="/post/721636578.html"
-                                   title="Windows注入与拦截(2)--DLL注入的方式"
+                                   title="Windows注入与拦截(2)-注入方式"
                                 >
                                     <span class="left arrow-icon flex-center">
                                         <i class="fas fa-chevron-left"></i>
                                     </span>
                                     <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">Windows注入与拦截(2)--DLL注入的方式</span>
+                                        <span class="post-nav-title-item text-ellipsis">Windows注入与拦截(2)-注入方式</span>
                                         <span class="post-nav-item">上一篇</span>
                                     </span>
                                 </a>
@@ -443,22 +486,12 @@
         </div>
 
         
-            <div class="pc-post-toc right-toc">
-                <div class="post-toc-wrap border-box">
-    <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81DLL-%E6%B3%A8%E5%85%A5%E6%8A%80%E6%9C%AF%E7%9A%84%E7%94%A8%E9%80%94"><span class="nav-text">一、DLL 注入技术的用途</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84-DLL-%E5%8F%AF%E4%BB%A5%E8%A2%AB%E6%B3%A8%E5%85%A5%EF%BC%9F"><span class="nav-text">二、什么样的 DLL 可以被注入？</span></a></li></ol>
-    </div>
-</div>
-
-            </div>
-        
     </div>
 </div>
 
 
                 
             </div>
-
         </div>
 
         <div class="page-main-content-bottom border-box">
@@ -471,6 +504,22 @@
                 
                     &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">江雪桥</a>
                 
+            </div>
+
+            <div class="copyright-info info-item default">
+                本站文章均为原创（少数注明转载的除外），转载前请注明出处！
+            </div>
+
+            <div class="copyright-info info-item default">
+                <a target="_blank" rel="noopener" href="https://blog.csdn.net/china_jeffery">【CSDN】</a>
+                &nbsp;&nbsp;
+                <a target="_blank" rel="noopener" href="https://github.com/winsoft666/">【Github】</a>
+                &nbsp;&nbsp;
+                <a target="_blank" rel="noopener" href="https://1key.run">【1key.run】</a>
+                &nbsp;&nbsp;
+                <a target="_blank" rel="noopener" href="https://github.com/winsoft666/TinyTu-Setup/releases">【TinyTu】</a>
+                &nbsp;&nbsp;
+                <a target="_blank" rel="noopener" href="https://github.com/winsoft666/winspyplus-bin">【WinSpyPlus】</a>
             </div>
 
             
@@ -507,10 +556,6 @@
     <ul class="tools-list border-box">
         <!-- PC TOC show toggle -->
         
-            <li class="tools-item flex-center toggle-show-toc">
-                <i class="fas fa-list"></i>
-            </li>
-        
 
         <!-- PC go comment -->
         
@@ -519,6 +564,11 @@
                 <span class="post-comments-count"></span>
             </li>
         
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
     </ul>
 </div>
 
@@ -559,10 +609,6 @@
     </ul>
 
     <ul class="exposed-tools-list border-box">
-        
-            <li class="tools-item toggle-show-toc-tablet flex-center">
-                <i class="fas fa-list"></i>
-            </li>
         
 
         
@@ -624,17 +670,6 @@
 
     <!-- tablet toc -->
     
-        <div class="tablet-post-toc-mask">
-            <div class="tablet-post-toc">
-                <div class="post-toc-wrap border-box">
-    <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81DLL-%E6%B3%A8%E5%85%A5%E6%8A%80%E6%9C%AF%E7%9A%84%E7%94%A8%E9%80%94"><span class="nav-text">一、DLL 注入技术的用途</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E4%BB%80%E4%B9%88%E6%A0%B7%E7%9A%84-DLL-%E5%8F%AF%E4%BB%A5%E8%A2%AB%E6%B3%A8%E5%85%A5%EF%BC%9F"><span class="nav-text">二、什么样的 DLL 可以被注入？</span></a></li></ol>
-    </div>
-</div>
-
-            </div>
-        </div>
-    
 </main>
 
 
@@ -695,13 +730,16 @@
         
     
 
-    <!-- category-page -->
+    <!-- categories page -->
     
 
-    <!-- links-page -->
+    <!-- links page -->
     
 
-    <!-- photos-page -->
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
     
 </div>
 

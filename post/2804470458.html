@@ -9,7 +9,7 @@
     
     <title>
         
-            Windows注入与拦截(3)--挂载窗口到目标控件 |
+            Windows注入与拦截(3)-窗口挂载 |
         
         代码派
     </title>
@@ -35,7 +35,7 @@
     <script class="keep-theme-configurations">
     const KEEP = window.KEEP || {}
     KEEP.hexo_config = {"hostname":"jiangxueqiao.com","root":"/","language":"zh-CN","path":"search.xml"}
-    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"代码派","author":"江雪桥","avatar":"/images/avatar.png","logo":"/images/logo.png","favicon":"/images/favicon.png"},"menu":{"Archives":"/archives","Categories":"/categories","Tags":"/tags","About":"/about","Github":"https://github.com/winsoft666"},"first_screen":{"enable":false,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/winsoft666","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":true,"hide_header":true},"home":{"category":true,"tag":true,"announcement":null},"post":{"author_badge":{"enable":false,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":false},"comment":{"enable":true,"use":"twikoo","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":"https://twikoo.jiangxueqiao.com","region":"zh-CN","version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2017,"word_count":false,"icp":{"enable":true,"record_code":"鄂ICP备2020015399号-6","url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null,"/css/custom.css"],"js":[null]},"root":"","version":"4.0.7"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"代码派","author":"江雪桥","avatar":"/images/avatar.png","logo":"/images/logo.png","favicon":"/images/favicon.png"},"menu":{"home":"/ || fa-solid fa-home","archives":"/archives || fa-solid fa-layer-group","categories":"/categories || fa-solid fa-box-archive","tags":"/tags || fa-solid fa-tags","about":"/about || fa-solid fa-user-graduate","Github":"https://github.com/winsoft666"},"first_screen":{"enable":false,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/winsoft666","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":true,"hide_header":true},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":false,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":false},"comment":{"enable":true,"use":"twikoo","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":"https://twikoo.jiangxueqiao.com","region":"zh-CN","version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2017,"word_count":false,"icp":{"enable":true,"record_code":"鄂ICP备2020015399号-6","url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null,"/css/custom.css"],"js":[null]},"root":"","source_data":{},"version":"4.1.0"}
     KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
     KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
     KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
@@ -54,8 +54,8 @@
 </div>
 
 
-<main class="page-container border-box">
 
+<main class="page-container border-box">
     <!-- home first screen  -->
     
 
@@ -80,40 +80,75 @@
         <div class="right border-box">
             <div class="pc">
                 <ul class="menu-list">
-                    <li class="menu-item">
-                        <a class=""
-                           href="/"
-                        >首页</a>
-                    </li>
                     
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-home"></i>
+                                
+                                首页
+                            </a>
+                        </li>
+                    
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/archives"
-                            >归档</a>
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-layer-group"></i>
+                                
+                                归档
+                            </a>
                         </li>
                     
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/categories"
-                            >分类</a>
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-box-archive"></i>
+                                
+                                分类
+                            </a>
                         </li>
                     
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/tags"
-                            >标签</a>
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-tags"></i>
+                                
+                                标签
+                            </a>
                         </li>
                     
+                        
                         <li class="menu-item">
                             <a class=""
                                href="/about"
-                            >关于</a>
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-user-graduate"></i>
+                                
+                                关于
+                            </a>
                         </li>
                     
+                        
                         <li class="menu-item">
                             <a class=""
                                target="_blank" rel="noopener" href="https://github.com/winsoft666"
-                            >GITHUB</a>
+                            >
+                                
+                                GITHUB
+                            </a>
                         </li>
                     
                     
@@ -136,36 +171,43 @@
 
     <div class="header-drawer">
         <ul class="drawer-menu-list">
-            <li class="drawer-menu-item flex-center">
-                <a class=""
-                   href="/"
-                >首页</a>
-            </li>
             
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/"
+                    >首页</a>
+                </li>
+            
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
                        href="/archives"
                     >归档</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
                        href="/categories"
                     >分类</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
                        href="/tags"
                     >标签</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
                        href="/about"
                     >关于</a>
                 </li>
             
+                
                 <li class="drawer-menu-item flex-center">
                     <a class=""
                        target="_blank" rel="noopener" href="https://github.com/winsoft666"
@@ -196,7 +238,7 @@
             <div class="post-content-bottom border-box">
                 
                     <div class="post-title">
-                        Windows注入与拦截(3)--挂载窗口到目标控件
+                        Windows注入与拦截(3)-窗口挂载
                     </div>
                 
 
@@ -227,7 +269,7 @@
 
             <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Tue Mar 12 2024 15:49:32 GMT+0800">2024-03-12 15:49:32</span>
+                <span class="datetime" data-updated="Thu Mar 14 2024 15:30:40 GMT+0800">2024-03-14 15:30:40</span>
             </span>
         
 
@@ -262,26 +304,26 @@
                     
 
                     <p>本文主要介绍如何通过 DLL 注入的方式来实现在指定窗口的控件上挂载一个自定义窗口。</p>
-<blockquote>
 <p>何谓挂载？和舰载机挂载导弹类似，将我们自己的窗口挂到原有程序的窗口之上，可以实现对原有窗口功能的覆盖和扩展。</p>
-</blockquote>
 <span id="more"></span>
 
-<h1 id="一、挂载的原理"><a href="#一、挂载的原理" class="headerlink" title="一、挂载的原理"></a>一、挂载的原理</h1><p>挂载的实现过程如下：</p>
+<h1 id="一、实现过程"><a href="#一、实现过程" class="headerlink" title="一、实现过程"></a>一、实现过程</h1><p>挂载的实现过程如下：</p>
 <ol>
 <li>通过远程线程的方式（其他方式也可以）将 DLL 注入到指定的进程（当然是被挂载窗口所属的进程）。</li>
 <li>在<code>DllMain</code>的<code>DLL_PROCESS_ATTACH</code>条件分支中创建一个新线程 NewThread，后面的处理逻辑将放到 NewThread 中，防止<code>DllMain</code>阻塞。</li>
-<li>在 NewThread 线程中查找被挂载的<strong>窗口</strong>（注意是窗口不是窗口上的控件）的句柄（查找方式：<code>EnumWindows</code>结合<code>FindWindowEx</code>实现，详见<code>FindProcessWindow</code>函数）。</li>
+<li>在 NewThread 线程中查找被挂载的<strong>窗口</strong>（注意是窗口不是窗口上的控件）的句柄（查找方式：EnumWindows结合FindWindowEx实现，详见FindProcessWindow函数）。</li>
 <li>使用<code>SetWindowLong</code>修改窗体的默认的消息处理过程（假设将窗口处理过程修改为我们 DLL 中的<code>WndProc_Trampoline</code>函数），然后向窗体发送一个自定义消息，这时<code>WndProc_Trampoline</code>函数就可以获取到该消息通知，我们在收到该消息通知后就可以开始我们的挂载逻辑了。之所以要通过发送一个自定义消息的方式来做，而不是直接在新线程 NewThread 中开始我们的挂载逻辑，是因为这样做可以保证我们的挂载逻辑（如创建窗口）是在主线程中进行的。</li>
 <li>挂载逻辑主要包含：查找需要挂载<strong>控件</strong>的句柄、创建挂载窗口。创建挂载窗口的时候要设置<code>WS_CHILD</code>子窗口属性，并设置父窗体的<code>WS_CLIPCHILDREN</code>属性来裁剪子窗口，防止我们挂载的子窗口闪烁。</li>
 <li>在<code>WndProc_Trampoline</code>函数的最后不要忘记调用之前老的消息处理过程，否则原窗口的消息将无法得到正确的响应。</li>
 </ol>
-<h1 id="二、实例代码"><a href="#二、实例代码" class="headerlink" title="二、实例代码"></a>二、实例代码</h1><h2 id="2-1-DllInjecter-工程"><a href="#2-1-DllInjecter-工程" class="headerlink" title="2.1 DllInjecter 工程"></a>2.1 DllInjecter 工程</h2><p><code>DllInjecter.exe</code>实现将 DLL 注入到指定的进程之中，该 exe 是一个通用的 DLL 注入器。包含了对前面文章介绍的“使用远程线程的方式注入”和“使用钩子方式注入”这两种注入方式的实现。</p>
+<h1 id="二、实例代码"><a href="#二、实例代码" class="headerlink" title="二、实例代码"></a>二、实例代码</h1><h2 id="2-1-DllInjecter-工程"><a href="#2-1-DllInjecter-工程" class="headerlink" title="2.1 DllInjecter 工程"></a>2.1 DllInjecter 工程</h2><p>DllInjecter.exe 实现将 DLL 注入到指定的进程之中，该 exe 是一个通用的 DLL 注入器。包含了对前面文章介绍的“使用远程线程的方式注入”和“使用钩子方式注入”这两种注入方式的实现。</p>
 <p><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/windows-zhuru-lanjie-1.jpg"></p>
-<h2 id="2-2-Test-工程"><a href="#2-2-Test-工程" class="headerlink" title="2.2 Test 工程"></a>2.2 Test 工程</h2><p><code>Test.exe</code>是一个模拟的被挂载程序，程序非常简单，只包含一个窗体和大按钮，不包含任何逻辑。本实例主要是将我们的窗口挂载到这个大按钮之上。<br>挂载前如图：<br><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/windows-zhuru-lanjie-3.jpg"></p>
-<p>挂载后效果如图：<br><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/windows-zhuru-lanjie-2.jpg"></p>
-<h2 id="2-3-Troy-工程"><a href="#2-3-Troy-工程" class="headerlink" title="2.3 Troy 工程"></a>2.3 Troy 工程</h2><p><code>Troy.dll</code>就是被注入到<code>Test.exe</code>中的 DLL 文件（名称来源于“特洛伊木马”）。挂载的主要逻辑大都在该工程之中。</p>
-<p>在<code>WndProc_Trampoline</code>函数的<code>WUM_CREATE_USER_WINDOW</code>消息处理分支中<code>CreateUserWindowByDuilib</code>函数来创建挂载窗口，<code>CreateUserWindowByDuilib</code>使用<code>duilib</code>界面库来创建挂载窗口。</p>
+<h2 id="2-2-Test-工程"><a href="#2-2-Test-工程" class="headerlink" title="2.2 Test 工程"></a>2.2 Test 工程</h2><p>Test.exe是一个模拟的被挂载程序，程序非常简单，只包含一个窗体和大按钮，不包含任何逻辑。本实例主要是将我们的窗口挂载到这个大按钮之上。<br>挂载前如图：</p>
+<p><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/windows-zhuru-lanjie-3.jpg"></p>
+<p>挂载后效果如图：</p>
+<p><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/windows-zhuru-lanjie-2.jpg"></p>
+<h2 id="2-3-Troy-工程"><a href="#2-3-Troy-工程" class="headerlink" title="2.3 Troy 工程"></a>2.3 Troy 工程</h2><p>Troy.dll 就是被注入到 Test.exe 中的 DLL 文件，挂载的主要逻辑大都在该工程之中。</p>
+<p>在<code>WndProc_Trampoline</code>函数的<code>WUM_CREATE_USER_WINDOW</code>消息处理分支中调用<code>CreateUserWindowByDuilib</code>函数来创建挂载窗口，CreateUserWindowByDuilib 使用<code>duilib</code>界面库来创建挂载窗口。</p>
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">LRESULT CALLBACK <span class="title">WndProc_Trampoline</span><span class="params">(HWND hwnd, UINT message, WPARAM wParam, LPARAM lParam)</span> </span>{</span><br><span class="line">  <span class="keyword">switch</span> (message) {</span><br><span class="line">  <span class="keyword">case</span> WUM_CREATE_USER_WINDOW:</span><br><span class="line">    <span class="built_in">CreateUserWindowByDuilib</span>();</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">CallWindowProc</span>(g_oldProc, hwnd, message, wParam, lParam);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 线程处理函数</span></span><br><span class="line"><span class="function"><span class="type">unsigned</span> <span class="type">int</span> __stdcall <span class="title">PluginProc</span><span class="params">(LPVOID pArg)</span> </span>{</span><br><span class="line">  <span class="built_in">MessageBox</span>(<span class="literal">NULL</span>, <span class="built_in">TEXT</span>(<span class="string">"我已经被注入啦"</span>), <span class="built_in">TEXT</span>(<span class="string">"信息"</span>), MB_OK | MB_ICONASTERISK);</span><br><span class="line"></span><br><span class="line">  HWND hMainWindow = InjectHelper::<span class="built_in">FindProcessWindow</span>(<span class="built_in">GetCurrentProcessId</span>(), <span class="built_in">TEXT</span>(<span class="string">"#32770"</span>), <span class="built_in">TEXT</span>(<span class="string">"Test"</span>), TRUE);</span><br><span class="line"></span><br><span class="line">  g_oldProc = (WNDPROC)<span class="built_in">SetWindowLong</span>(hMainWindow, DWL_DLGPROC, (LONG)WndProc_Trampoline);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  ::<span class="built_in">PostMessage</span>(hMainWindow, WUM_CREATE_USER_WINDOW, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
@@ -289,11 +331,11 @@
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">BOOL APIENTRY <span class="title">DllMain</span><span class="params">(HMODULE hModule, DWORD  fdwReason, LPVOID lpReserved)</span> </span>{</span><br><span class="line">  HANDLE hThread = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">switch</span>(fdwReason) {</span><br><span class="line">        <span class="keyword">case</span> DLL_PROCESS_ATTACH:</span><br><span class="line">        {</span><br><span class="line">      g_hDllModule = hModule;</span><br><span class="line">      <span class="comment">// 使用注册表方式和CreateRemoteThread方式注入时，一般在此处创建线程</span></span><br><span class="line">      <span class="comment">//</span></span><br><span class="line"></span><br><span class="line">      hThread = (HANDLE)_beginthreadex(<span class="literal">NULL</span>, <span class="number">0</span>, PluginProc, <span class="literal">NULL</span>, <span class="number">0</span>, <span class="literal">NULL</span>);</span><br><span class="line">      <span class="keyword">if</span> (hThread) {</span><br><span class="line">        <span class="built_in">CloseHandle</span>(hThread); <span class="comment">// 关闭句柄，防止句柄泄漏</span></span><br><span class="line">      }</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">case</span> DLL_THREAD_ATTACH:</span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">case</span> DLL_THREAD_DETACH:</span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">case</span> DLL_PROCESS_DETACH:</span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> TRUE;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <blockquote>
-<p>完整的示例代码见：<a class="link" target="_blank" rel="noopener" href="https://github.com/winsoft666/InjectSample">https://github.com/winsoft666/InjectSample<i class="fas fa-external-link-alt"></i></a></p>
+<p>完整的示例代码见：</p>
+<p><a class="link" target="_blank" rel="noopener" href="https://github.com/winsoft666/InjectSample">https://github.com/winsoft666/InjectSample<i class="fas fa-external-link-alt"></i></a></p>
 </blockquote>
 
                 </div>
-
                 
 
                 <div class="post-bottom-tags-and-share border-box">
@@ -454,22 +496,12 @@
         </div>
 
         
-            <div class="pc-post-toc right-toc">
-                <div class="post-toc-wrap border-box">
-    <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%8C%82%E8%BD%BD%E7%9A%84%E5%8E%9F%E7%90%86"><span class="nav-text">一、挂载的原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%AE%9E%E4%BE%8B%E4%BB%A3%E7%A0%81"><span class="nav-text">二、实例代码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-DllInjecter-%E5%B7%A5%E7%A8%8B"><span class="nav-text">2.1 DllInjecter 工程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-Test-%E5%B7%A5%E7%A8%8B"><span class="nav-text">2.2 Test 工程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-Troy-%E5%B7%A5%E7%A8%8B"><span class="nav-text">2.3 Troy 工程</span></a></li></ol></li></ol>
-    </div>
-</div>
-
-            </div>
-        
     </div>
 </div>
 
 
                 
             </div>
-
         </div>
 
         <div class="page-main-content-bottom border-box">
@@ -482,6 +514,22 @@
                 
                     &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">江雪桥</a>
                 
+            </div>
+
+            <div class="copyright-info info-item default">
+                本站文章均为原创（少数注明转载的除外），转载前请注明出处！
+            </div>
+
+            <div class="copyright-info info-item default">
+                <a target="_blank" rel="noopener" href="https://blog.csdn.net/china_jeffery">【CSDN】</a>
+                &nbsp;&nbsp;
+                <a target="_blank" rel="noopener" href="https://github.com/winsoft666/">【Github】</a>
+                &nbsp;&nbsp;
+                <a target="_blank" rel="noopener" href="https://1key.run">【1key.run】</a>
+                &nbsp;&nbsp;
+                <a target="_blank" rel="noopener" href="https://github.com/winsoft666/TinyTu-Setup/releases">【TinyTu】</a>
+                &nbsp;&nbsp;
+                <a target="_blank" rel="noopener" href="https://github.com/winsoft666/winspyplus-bin">【WinSpyPlus】</a>
             </div>
 
             
@@ -518,10 +566,6 @@
     <ul class="tools-list border-box">
         <!-- PC TOC show toggle -->
         
-            <li class="tools-item flex-center toggle-show-toc">
-                <i class="fas fa-list"></i>
-            </li>
-        
 
         <!-- PC go comment -->
         
@@ -530,6 +574,11 @@
                 <span class="post-comments-count"></span>
             </li>
         
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
     </ul>
 </div>
 
@@ -570,10 +619,6 @@
     </ul>
 
     <ul class="exposed-tools-list border-box">
-        
-            <li class="tools-item toggle-show-toc-tablet flex-center">
-                <i class="fas fa-list"></i>
-            </li>
         
 
         
@@ -635,17 +680,6 @@
 
     <!-- tablet toc -->
     
-        <div class="tablet-post-toc-mask">
-            <div class="tablet-post-toc">
-                <div class="post-toc-wrap border-box">
-    <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%8C%82%E8%BD%BD%E7%9A%84%E5%8E%9F%E7%90%86"><span class="nav-text">一、挂载的原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%AE%9E%E4%BE%8B%E4%BB%A3%E7%A0%81"><span class="nav-text">二、实例代码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-DllInjecter-%E5%B7%A5%E7%A8%8B"><span class="nav-text">2.1 DllInjecter 工程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-Test-%E5%B7%A5%E7%A8%8B"><span class="nav-text">2.2 Test 工程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-Troy-%E5%B7%A5%E7%A8%8B"><span class="nav-text">2.3 Troy 工程</span></a></li></ol></li></ol>
-    </div>
-</div>
-
-            </div>
-        </div>
-    
 </main>
 
 
@@ -706,13 +740,16 @@
         
     
 
-    <!-- category-page -->
+    <!-- categories page -->
     
 
-    <!-- links-page -->
+    <!-- links page -->
     
 
-    <!-- photos-page -->
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
     
 </div>
 
