@@ -3,15 +3,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="keywords" content="Windows,Linux,C/C++,Golang,Qt,Node.js,Electron,Vue,WebRTC">
-    <meta name="description" content="除注明转载以外，所有文章均为原创">
+    <meta name="keywords" content="Windows,Linux,C/C++,Golang,Qt,Node.js,Electron,Vue,WebRTC,NSIS,HTTP">
+    <meta name="description" content="分享与跨平台客户端相关的技术方案和实现">
     <meta name="author" content="江雪桥">
     
     <title>
         
             Windows套接字I/O模型(2)-Select模型 |
         
-        代码派
+        JiangXueqiao の Blog
     </title>
     
 <link rel="stylesheet" href="/css/style.css">
@@ -32,17 +32,27 @@
 <link rel="stylesheet" href="/font/css/brands.min.css">
 
     
+        
+            
+        
+            
+                
+<link rel="stylesheet" href="/css/custom.css">
+
+            
+        
+    
     <script class="keep-theme-configurations">
     const KEEP = window.KEEP || {}
     KEEP.hexo_config = {"hostname":"jiangxueqiao.com","root":"/","language":"zh-CN","path":"search.xml"}
-    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"代码派","author":"江雪桥","avatar":"/images/avatar.png","logo":"/images/logo.png","favicon":"/images/favicon.png"},"menu":{"home":"/ || fa-solid fa-home","archives":"/archives || fa-solid fa-layer-group","categories":"/categories || fa-solid fa-box-archive","tags":"/tags || fa-solid fa-tags","about":"/about || fa-solid fa-user-graduate","匠心之作":"/post/3416050985.html || fa-solid fa-rocket","Github":"https://github.com/winsoft666"},"first_screen":{"enable":false,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/winsoft666","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":true,"hide_header":true},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":false,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":false},"comment":{"enable":true,"use":"twikoo","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":"https://twikoo.jiangxueqiao.com","region":"zh-CN","version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2017,"word_count":false,"icp":{"enable":true,"record_code":"鄂ICP备2020015399号-6","url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null,"/css/custom.css"],"js":[null]},"root":"","source_data":{},"version":"4.1.0"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"JiangXueqiao の Blog","author":"江雪桥","avatar":"/images/avatar.png","logo":null,"favicon":"/images/favicon.png"},"menu":{"home":"/ || fa-solid fa-home","archives":"/archives || fa-solid fa-layer-group","categories":"/categories || fa-solid fa-box-archive","tags":"/tags || fa-solid fa-tags","about":"/about || fa-solid fa-user-graduate","匠心之作":"/post/3416050985.html || fa-solid fa-rocket","Github":"https://github.com/winsoft666"},"first_screen":{"enable":false,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"social_contact":{"enable":true,"links":{"github":null,"weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":true,"hide_header":true},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":false,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":true,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":false},"comment":{"enable":true,"use":"twikoo","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":"https://twikoo.jiangxueqiao.com","region":"zh-CN","version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2017,"word_count":false,"icp":{"enable":true,"record_code":"鄂ICP备2020015399号-6","url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":true,"css":[null,"/css/custom.css"],"js":[null]},"root":"","source_data":{},"version":"4.1.0"}
     KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
     KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
     KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
   </script>
 <meta name="generator" content="Hexo 6.3.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="CodeSilo" type="application/atom+xml">
+<link rel="alternate" href="/atom.xml" title="江雪桥的技术博客 - CodeSilo" type="application/atom+xml">
 </head>
 
 
@@ -68,12 +78,8 @@
     <div class="border-box header-content">
         <div class="left border-box">
             
-                <a class="logo-image border-box" href="/">
-                    <img src="/images/logo.png">
-                </a>
-            
             <a class="site-name border-box" href="/">
-               代码派
+               JiangXueqiao の Blog
             </a>
         </div>
 
@@ -361,6 +367,60 @@
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;winsock2.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;assert.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;vector&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">pragma</span> comment(lib, <span class="string">"Ws2_32.lib"</span>)</span></span><br><span class="line"></span><br><span class="line"><span class="type">const</span> std::string kIP = <span class="string">"127.0.0.1"</span>;</span><br><span class="line"><span class="type">const</span> u_short kPort = <span class="number">10001</span>;</span><br><span class="line"><span class="type">const</span> std::string kHelloClient = <span class="string">"hello, I'm client."</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">  WSADATA wsaData;</span><br><span class="line">  WORD wVersionRequested = <span class="built_in">MAKEWORD</span>(<span class="number">2</span>, <span class="number">2</span>);</span><br><span class="line">  <span class="built_in">WSAStartup</span>(wVersionRequested, &amp;wsaData);</span><br><span class="line"></span><br><span class="line">  SOCKET socket_ = INVALID_SOCKET;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">do</span></span><br><span class="line">  {</span><br><span class="line">    <span class="comment">// (1)</span></span><br><span class="line">    socket_ = ::<span class="built_in">socket</span>(AF_INET, SOCK_STREAM, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">if</span> (socket_ == INVALID_SOCKET) {</span><br><span class="line">      std::cout &lt;&lt; <span class="string">"create socket failed, GLE: "</span> &lt;&lt; <span class="built_in">WSAGetLastError</span>() &lt;&lt; std::endl;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">// (2)</span></span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">sockaddr_in</span> addr = { <span class="number">0</span> };</span><br><span class="line">    addr.sin_family = AF_INET;</span><br><span class="line">    addr.sin_addr.s_addr = <span class="built_in">inet_addr</span>(kIP.<span class="built_in">c_str</span>());</span><br><span class="line">    addr.sin_port = <span class="built_in">htons</span>(kPort);</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">connect</span>(socket_, <span class="built_in">reinterpret_cast</span>&lt;<span class="type">const</span> sockaddr*&gt;(&amp;addr), <span class="built_in">sizeof</span>(addr)) == SOCKET_ERROR) {</span><br><span class="line">      std::cout &lt;&lt; <span class="string">"connect failed, GLE: "</span> &lt;&lt; <span class="built_in">WSAGetLastError</span>() &lt;&lt; std::endl;</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    fd_set fd_read;</span><br><span class="line">    <span class="keyword">while</span> (<span class="literal">true</span>)  <span class="comment">// TODO 未处理何时退出的问题</span></span><br><span class="line">    {</span><br><span class="line">      <span class="comment">// (3)</span></span><br><span class="line">      <span class="built_in">FD_ZERO</span>(&amp;fd_read);</span><br><span class="line">      <span class="built_in">FD_SET</span>(socket_, &amp;fd_read);</span><br><span class="line"></span><br><span class="line">      <span class="comment">// (4)</span></span><br><span class="line">      timeval timeout = { <span class="number">3</span>, <span class="number">0</span> };</span><br><span class="line">      <span class="type">int</span> ret = <span class="built_in">select</span>(<span class="number">0</span>, &amp;fd_read, <span class="literal">NULL</span>, <span class="literal">NULL</span>, &amp;timeout);</span><br><span class="line">      <span class="keyword">if</span> (ret == SOCKET_ERROR) {</span><br><span class="line">        std::cout &lt;&lt; <span class="string">"select failed, GLE: "</span> &lt;&lt; <span class="built_in">WSAGetLastError</span>() &lt;&lt; std::endl;</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      }</span><br><span class="line"></span><br><span class="line">      <span class="comment">// (5)</span></span><br><span class="line">      <span class="keyword">if</span> (<span class="built_in">FD_ISSET</span>(socket_, &amp;fd_read)) {</span><br><span class="line">        <span class="type">char</span> buf[<span class="number">100</span>] = { <span class="number">0</span> };</span><br><span class="line">        <span class="type">int</span> err = <span class="built_in">recv</span>(socket_, buf, <span class="number">100</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">if</span> (err &gt; <span class="number">0</span>) {</span><br><span class="line">          std::cout &lt;&lt; <span class="string">"recv: "</span> &lt;&lt; buf &lt;&lt; std::endl;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (err == <span class="number">0</span>) {</span><br><span class="line">          std::cout &lt;&lt; <span class="string">"connection closed."</span> &lt;&lt; std::endl;</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">else</span> {</span><br><span class="line">          std::cout &lt;&lt; <span class="string">"recv failed, GLE: "</span> &lt;&lt; <span class="built_in">WSAGetLastError</span>() &lt;&lt; std::endl;</span><br><span class="line">          <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">      }</span><br><span class="line">    } <span class="comment">// while</span></span><br><span class="line">  } <span class="keyword">while</span> (<span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="comment">// (6)</span></span><br><span class="line">  <span class="built_in">closesocket</span>(socket_);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">WSACleanup</span>();</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
                 </div>
+                
+                        
+<div class="post-copyright-info-container border-box">
+    <div class="copyright-info-content border-box">
+        <div class="copyright-info-top border-box">
+            <div class="copyright-post-title border-box text-ellipsis">
+                Windows套接字I/O模型(2)-Select模型
+            </div>
+
+            <div class="copyright-post-link border-box text-ellipsis">
+                post/640627104.html
+            </div>
+        </div>
+
+        <div class="copyright-info-bottom border-box">
+            <div class="copyright-post-author bottom-item">
+                <div class="type">
+                    作者
+                </div>
+                <div class="content">江雪桥</div>
+            </div>
+
+            <div class="post-time bottom-item">
+                <div class="type">
+                    发布于
+                </div>
+                <div class="content">2017-12-11 22:19</div>
+            </div>
+
+
+            <div class="post-license bottom-item">
+                <div class="type">
+                    许可
+                </div>
+                <div class="content tooltip" data-tooltip-content="CC BY-NC-SA 4.0">
+                    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" target="_blank">
+                        
+                            <i class="fa-brands fa-creative-commons"></i>
+                            <i class="fa-brands fa-creative-commons-by"></i>
+                            <i class="fa-brands fa-creative-commons-nc"></i>
+                            <i class="fa-brands fa-creative-commons-sa"></i>
+                        
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <i class="copyright-bg fa-solid fa-copyright"></i>
+    </div>
+    <div class="copy-copyright-info flex-center tooltip" data-tooltip-content="复制版权信息" data-tooltip-offset-y="-2px">
+        <i class="fa-solid fa-copy"></i>
+    </div>
+</div>
+
                 
 
                 <div class="post-bottom-tags-and-share border-box">
@@ -752,6 +812,10 @@
 
         <!-- copyright-info -->
         
+            
+<script src="/js/post/copyright-info.js"></script>
+
+        
 
         <!-- share -->
         
@@ -780,6 +844,10 @@
 <!-- pjax -->
 
 
+
+    
+        
+    
 
 </body>
 </html>

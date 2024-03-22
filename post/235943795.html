@@ -3,15 +3,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="keywords" content="Windows,Linux,C/C++,Golang,Qt,Node.js,Electron,Vue,WebRTC">
-    <meta name="description" content="除注明转载以外，所有文章均为原创">
+    <meta name="keywords" content="Windows,Linux,C/C++,Golang,Qt,Node.js,Electron,Vue,WebRTC,NSIS,HTTP">
+    <meta name="description" content="分享与跨平台客户端相关的技术方案和实现">
     <meta name="author" content="江雪桥">
     
     <title>
         
             Node插件开发(2)-不同的调用方式 |
         
-        代码派
+        JiangXueqiao の Blog
     </title>
     
 <link rel="stylesheet" href="/css/style.css">
@@ -32,17 +32,27 @@
 <link rel="stylesheet" href="/font/css/brands.min.css">
 
     
+        
+            
+        
+            
+                
+<link rel="stylesheet" href="/css/custom.css">
+
+            
+        
+    
     <script class="keep-theme-configurations">
     const KEEP = window.KEEP || {}
     KEEP.hexo_config = {"hostname":"jiangxueqiao.com","root":"/","language":"zh-CN","path":"search.xml"}
-    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"代码派","author":"江雪桥","avatar":"/images/avatar.png","logo":"/images/logo.png","favicon":"/images/favicon.png"},"menu":{"home":"/ || fa-solid fa-home","archives":"/archives || fa-solid fa-layer-group","categories":"/categories || fa-solid fa-box-archive","tags":"/tags || fa-solid fa-tags","about":"/about || fa-solid fa-user-graduate","匠心之作":"/post/3416050985.html || fa-solid fa-rocket","Github":"https://github.com/winsoft666"},"first_screen":{"enable":false,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/winsoft666","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":true,"hide_header":true},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":false,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":false},"comment":{"enable":true,"use":"twikoo","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":"https://twikoo.jiangxueqiao.com","region":"zh-CN","version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2017,"word_count":false,"icp":{"enable":true,"record_code":"鄂ICP备2020015399号-6","url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null,"/css/custom.css"],"js":[null]},"root":"","source_data":{},"version":"4.1.0"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"JiangXueqiao の Blog","author":"江雪桥","avatar":"/images/avatar.png","logo":null,"favicon":"/images/favicon.png"},"menu":{"home":"/ || fa-solid fa-home","archives":"/archives || fa-solid fa-layer-group","categories":"/categories || fa-solid fa-box-archive","tags":"/tags || fa-solid fa-tags","about":"/about || fa-solid fa-user-graduate","匠心之作":"/post/3416050985.html || fa-solid fa-rocket","Github":"https://github.com/winsoft666"},"first_screen":{"enable":false,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"social_contact":{"enable":true,"links":{"github":null,"weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":true,"hide_header":true},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":false,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":true,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":false},"comment":{"enable":true,"use":"twikoo","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":"https://twikoo.jiangxueqiao.com","region":"zh-CN","version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2017,"word_count":false,"icp":{"enable":true,"record_code":"鄂ICP备2020015399号-6","url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":true,"css":[null,"/css/custom.css"],"js":[null]},"root":"","source_data":{},"version":"4.1.0"}
     KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
     KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
     KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
   </script>
 <meta name="generator" content="Hexo 6.3.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="CodeSilo" type="application/atom+xml">
+<link rel="alternate" href="/atom.xml" title="江雪桥的技术博客 - CodeSilo" type="application/atom+xml">
 </head>
 
 
@@ -68,12 +78,8 @@
     <div class="border-box header-content">
         <div class="left border-box">
             
-                <a class="logo-image border-box" href="/">
-                    <img src="/images/logo.png">
-                </a>
-            
             <a class="site-name border-box" href="/">
-               代码派
+               JiangXueqiao の Blog
             </a>
         </div>
 
@@ -288,7 +294,7 @@
 
             <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Tue Mar 12 2024 15:47:18 GMT+0800">2024-03-12 15:47:18</span>
+                <span class="datetime" data-updated="Thu Mar 21 2024 10:37:27 GMT+0800">2024-03-21 10:37:27</span>
             </span>
         
 
@@ -365,10 +371,65 @@
 <figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">GetPower30</span><span class="params">(<span class="type">const</span> Napi::CallbackInfo&amp; info)</span> </span>{</span><br><span class="line">    Napi::Env env = info.<span class="built_in">Env</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (info.<span class="built_in">Length</span>() != <span class="number">2</span>)</span><br><span class="line">        <span class="keyword">throw</span> Napi::TypeError::<span class="built_in">New</span>(env, <span class="string">"Wrong number of arguments"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!info[<span class="number">0</span>].<span class="built_in">IsNumber</span>() || !info[<span class="number">1</span>].<span class="built_in">IsFunction</span>())</span><br><span class="line">        <span class="keyword">throw</span> Napi::TypeError::<span class="built_in">New</span>(env, <span class="string">"Wrong arguments"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="type">int32_t</span> n = info[<span class="number">0</span>].<span class="built_in">ToNumber</span>().<span class="built_in">Int32Value</span>();</span><br><span class="line">    Napi::Function callback = info[<span class="number">1</span>].<span class="built_in">As</span>&lt;Napi::Function&gt;();</span><br><span class="line"></span><br><span class="line">    std::thread* nativeThread = <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">    Napi::ThreadSafeFunction tsfn = Napi::ThreadSafeFunction::<span class="built_in">New</span>(</span><br><span class="line">        env,</span><br><span class="line">        callback,</span><br><span class="line">        <span class="string">"Resource Name"</span>,             <span class="comment">// Name</span></span><br><span class="line">        <span class="number">0</span>,                           <span class="comment">// Unlimited queue</span></span><br><span class="line">        <span class="number">1</span>,                           <span class="comment">// Only one thread will use this initially</span></span><br><span class="line">        [nativeThread](Napi::Env) {  <span class="comment">// Finalizer used to clean threads up</span></span><br><span class="line">            <span class="keyword">if</span> (nativeThread &amp;&amp; nativeThread-&gt;<span class="built_in">joinable</span>()) {</span><br><span class="line">                nativeThread-&gt;<span class="built_in">join</span>();</span><br><span class="line">            }</span><br><span class="line">        });</span><br><span class="line"></span><br><span class="line">    nativeThread = <span class="keyword">new</span> std::<span class="built_in">thread</span>([n, tsfn]() {</span><br><span class="line">        <span class="keyword">struct</span> CallParam {</span><br><span class="line">            std::string error;</span><br><span class="line">            <span class="type">int32_t</span> result = <span class="number">0</span>;</span><br><span class="line">        };</span><br><span class="line"></span><br><span class="line">        CallParam* param = <span class="keyword">new</span> <span class="built_in">CallParam</span>();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (n &gt; <span class="number">0</span>) {</span><br><span class="line">            param-&gt;result = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">30</span>; i++) {</span><br><span class="line">                param-&gt;result *= n;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">else</span> {</span><br><span class="line">            param-&gt;error = <span class="string">"N must larger than 0"</span>;</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="keyword">auto</span> callback = [](Napi::Env env, Napi::Function jsCallback, CallParam* param) {</span><br><span class="line">            <span class="keyword">if</span> (jsCallback &amp;&amp; param) {</span><br><span class="line">                <span class="keyword">try</span> {</span><br><span class="line">                    <span class="keyword">if</span> (param-&gt;error.<span class="built_in">empty</span>()) {</span><br><span class="line">                        jsCallback.<span class="built_in">Call</span>({env.<span class="built_in">Null</span>(), Napi::Number::<span class="built_in">New</span>(env, param-&gt;result)});</span><br><span class="line">                    }</span><br><span class="line">                    <span class="keyword">else</span> {</span><br><span class="line">                        Napi::Error err = Napi::Error::<span class="built_in">New</span>(env, param-&gt;error);</span><br><span class="line">                        jsCallback.<span class="built_in">Call</span>({err.<span class="built_in">Value</span>(), env.<span class="built_in">Null</span>()});</span><br><span class="line">                    }</span><br><span class="line">                } <span class="built_in">catch</span> (std::exception&amp; e) {</span><br><span class="line"><span class="meta">#<span class="keyword">if</span> (defined _WIN32 || defined WIN32)</span></span><br><span class="line">                    <span class="built_in">OutputDebugStringA</span>(e.<span class="built_in">what</span>());</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (param) {</span><br><span class="line">                <span class="keyword">delete</span> param;</span><br><span class="line">            }</span><br><span class="line">        };</span><br><span class="line"></span><br><span class="line">        napi_status status = tsfn.<span class="built_in">BlockingCall</span>(param, callback);</span><br><span class="line">        <span class="keyword">if</span> (status != napi_ok) {</span><br><span class="line">            <span class="comment">// TODO How to handle error</span></span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        tsfn.<span class="built_in">Release</span>();</span><br><span class="line">    });</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 <blockquote>
-<p>完整的示例代码以上传自Github：<a class="link" target="_blank" rel="noopener" href="https://github.com/winsoft666/node-addon-sample">https://github.com/winsoft666/node-addon-sample<i class="fas fa-external-link-alt"></i></a></p>
+<p>完整的示例代码以上传自Github：</p>
+<p><a class="link" target="_blank" rel="noopener" href="https://github.com/winsoft666/node-addon-sample">https://github.com/winsoft666/node-addon-sample<i class="fas fa-external-link-alt"></i></a></p>
 </blockquote>
 
                 </div>
+                
+                        
+<div class="post-copyright-info-container border-box">
+    <div class="copyright-info-content border-box">
+        <div class="copyright-info-top border-box">
+            <div class="copyright-post-title border-box text-ellipsis">
+                Node插件开发(2)-不同的调用方式
+            </div>
+
+            <div class="copyright-post-link border-box text-ellipsis">
+                post/235943795.html
+            </div>
+        </div>
+
+        <div class="copyright-info-bottom border-box">
+            <div class="copyright-post-author bottom-item">
+                <div class="type">
+                    作者
+                </div>
+                <div class="content">江雪桥</div>
+            </div>
+
+            <div class="post-time bottom-item">
+                <div class="type">
+                    发布于
+                </div>
+                <div class="content">2024-03-02 13:26</div>
+            </div>
+
+
+            <div class="post-license bottom-item">
+                <div class="type">
+                    许可
+                </div>
+                <div class="content tooltip" data-tooltip-content="CC BY-NC-SA 4.0">
+                    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" target="_blank">
+                        
+                            <i class="fa-brands fa-creative-commons"></i>
+                            <i class="fa-brands fa-creative-commons-by"></i>
+                            <i class="fa-brands fa-creative-commons-nc"></i>
+                            <i class="fa-brands fa-creative-commons-sa"></i>
+                        
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <i class="copyright-bg fa-solid fa-copyright"></i>
+    </div>
+    <div class="copy-copyright-info flex-center tooltip" data-tooltip-content="复制版权信息" data-tooltip-offset-y="-2px">
+        <i class="fa-solid fa-copy"></i>
+    </div>
+</div>
+
                 
 
                 <div class="post-bottom-tags-and-share border-box">
@@ -772,6 +833,10 @@
 
         <!-- copyright-info -->
         
+            
+<script src="/js/post/copyright-info.js"></script>
+
+        
 
         <!-- share -->
         
@@ -800,6 +865,10 @@
 <!-- pjax -->
 
 
+
+    
+        
+    
 
 </body>
 </html>

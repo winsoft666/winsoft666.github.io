@@ -3,15 +3,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="keywords" content="Windows,Linux,C/C++,Golang,Qt,Node.js,Electron,Vue,WebRTC">
-    <meta name="description" content="除注明转载以外，所有文章均为原创">
+    <meta name="keywords" content="Windows,Linux,C/C++,Golang,Qt,Node.js,Electron,Vue,WebRTC,NSIS,HTTP">
+    <meta name="description" content="分享与跨平台客户端相关的技术方案和实现">
     <meta name="author" content="江雪桥">
     
     <title>
         
             网络协议(2)--ARP和RARP协议 |
         
-        代码派
+        JiangXueqiao の Blog
     </title>
     
 <link rel="stylesheet" href="/css/style.css">
@@ -32,17 +32,27 @@
 <link rel="stylesheet" href="/font/css/brands.min.css">
 
     
+        
+            
+        
+            
+                
+<link rel="stylesheet" href="/css/custom.css">
+
+            
+        
+    
     <script class="keep-theme-configurations">
     const KEEP = window.KEEP || {}
     KEEP.hexo_config = {"hostname":"jiangxueqiao.com","root":"/","language":"zh-CN","path":"search.xml"}
-    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"代码派","author":"江雪桥","avatar":"/images/avatar.png","logo":"/images/logo.png","favicon":"/images/favicon.png"},"menu":{"home":"/ || fa-solid fa-home","archives":"/archives || fa-solid fa-layer-group","categories":"/categories || fa-solid fa-box-archive","tags":"/tags || fa-solid fa-tags","about":"/about || fa-solid fa-user-graduate","匠心之作":"/post/3416050985.html || fa-solid fa-rocket","Github":"https://github.com/winsoft666"},"first_screen":{"enable":false,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"social_contact":{"enable":true,"links":{"github":"https://github.com/winsoft666","weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":true,"hide_header":true},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":false,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":false,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":false},"comment":{"enable":true,"use":"twikoo","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":"https://twikoo.jiangxueqiao.com","region":"zh-CN","version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2017,"word_count":false,"icp":{"enable":true,"record_code":"鄂ICP备2020015399号-6","url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":false,"css":[null,"/css/custom.css"],"js":[null]},"root":"","source_data":{},"version":"4.1.0"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"JiangXueqiao の Blog","author":"江雪桥","avatar":"/images/avatar.png","logo":null,"favicon":"/images/favicon.png"},"menu":{"home":"/ || fa-solid fa-home","archives":"/archives || fa-solid fa-layer-group","categories":"/categories || fa-solid fa-box-archive","tags":"/tags || fa-solid fa-tags","about":"/about || fa-solid fa-user-graduate","匠心之作":"/post/3416050985.html || fa-solid fa-rocket","Github":"https://github.com/winsoft666"},"first_screen":{"enable":false,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"social_contact":{"enable":true,"links":{"github":null,"weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":true,"hide_header":true},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":false,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":true,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":false},"comment":{"enable":true,"use":"twikoo","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":"https://twikoo.jiangxueqiao.com","region":"zh-CN","version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2017,"word_count":false,"icp":{"enable":true,"record_code":"鄂ICP备2020015399号-6","url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":true,"css":[null,"/css/custom.css"],"js":[null]},"root":"","source_data":{},"version":"4.1.0"}
     KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
     KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
     KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
   </script>
 <meta name="generator" content="Hexo 6.3.0">
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="CodeSilo" type="application/atom+xml">
+<link rel="alternate" href="/atom.xml" title="江雪桥的技术博客 - CodeSilo" type="application/atom+xml">
 </head>
 
 
@@ -68,12 +78,8 @@
     <div class="border-box header-content">
         <div class="left border-box">
             
-                <a class="logo-image border-box" href="/">
-                    <img src="/images/logo.png">
-                </a>
-            
             <a class="site-name border-box" href="/">
-               代码派
+               JiangXueqiao の Blog
             </a>
         </div>
 
@@ -288,7 +294,7 @@
 
             <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Tue Mar 12 2024 15:45:23 GMT+0800">2024-03-12 15:45:23</span>
+                <span class="datetime" data-updated="Thu Mar 21 2024 14:28:58 GMT+0800">2024-03-21 14:28:58</span>
             </span>
         
 
@@ -331,10 +337,11 @@
                 <div class="post-content keep-markdown-body">
                     
 
-                    <p><code>ARP</code>(<code>Address Resolution Protocol</code>)地址解析协议，位于 TCP/IP 协议栈中的链路层。当局域网内主机间（或者是主机与网关间）需要通信时，通过使用<code>ARP协议</code>获取<code>目标IP地址</code>对应的<code>硬件MAC地址</code>，然后主机间通过该<code>硬件MAC地址</code>完成数据包发送和接收。</p>
+                    <p>ARP(Address Resolution Protocol)地址解析协议，位于 TCP/IP 协议栈中的链路层。</p>
+<p>当局域网内主机间（或者是主机与网关间）需要通信时，通过使用ARP协议获取目标IP地址所对应的硬件MAC地址，然后主机间通过该MAC地址完成数据包发送和接收。</p>
 <span id="more"></span>
 
-<h1 id="一、ARP-协议"><a href="#一、ARP-协议" class="headerlink" title="一、ARP 协议"></a>一、ARP 协议</h1><h2 id="1-1-ARP-协议介绍"><a href="#1-1-ARP-协议介绍" class="headerlink" title="1.1 ARP 协议介绍"></a>1.1 ARP 协议介绍</h2><p>通过使用<code>ARP协议</code>获取<code>目标IP地址</code>对应<code>硬件MAC地址</code>的具体过程如下：</p>
+<h1 id="一、ARP-协议"><a href="#一、ARP-协议" class="headerlink" title="一、ARP 协议"></a>一、ARP 协议</h1><h2 id="1-1-ARP-协议介绍"><a href="#1-1-ARP-协议介绍" class="headerlink" title="1.1 ARP 协议介绍"></a>1.1 ARP 协议介绍</h2><p>通过使用ARP协议获取目标IP地址所对应硬件MAC地址的具体过程如下：</p>
 <ol>
 <li>本地主机在局域网中<code>广播</code>ARP 请求，ARP 请求数据帧中包含目的主机的 IP 地址。意思是“如果你是这个 IP 地址的拥有者，请回答你的硬件 MAC 地址”。</li>
 <li>目的主机的 ARP 层解析这份<code>广播</code>报文，识别出是询问其硬件地址。于是发送（<code>单播</code>）ARP 应答包，里面包含 IP 地址及其对应的硬件地址。</li>
@@ -342,7 +349,7 @@
 </ol>
 <p><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/wangluoxieyi-arp-1.jpg"></p>
 <h2 id="1-2-ARP-缓存"><a href="#1-2-ARP-缓存" class="headerlink" title="1.2 ARP 缓存"></a>1.2 ARP 缓存</h2><p>如果像上面说的那样，每次发包之前都要发送 ARP 请求硬件地址会不会太慢，但是实际上 ARP 的运行是非常高效的。那是因为每一个主机上都有一个 ARP 高速缓存，我们可以通过命令<code>arp -a</code>获取本机 ARP 高速缓存的所有内容：</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">λ arp -a</span><br><span class="line"></span><br><span class="line">接口: 192.168.42.26 --- 0xb</span><br><span class="line">  Internet 地址         物理地址              类型</span><br><span class="line">  192.168.1.1           00-00-00-00-00-ff     静态</span><br><span class="line">  192.168.40.1          f8-75-88-c2-df-c1     动态</span><br><span class="line">  192.168.40.74         c8-5b-76-86-c6-06     动态</span><br><span class="line">  192.168.40.245        38-d5-47-e1-8a-2f     动态</span><br><span class="line">  192.168.42.131        60-a4-4c-65-9f-68     动态</span><br><span class="line">  224.14.51.28          01-00-5e-0e-33-1c     静态</span><br><span class="line">  224.19.133.150        01-00-5e-13-85-96     静态</span><br><span class="line">  224.49.6.212          01-00-5e-31-06-d4     静态</span><br><span class="line">  224.50.134.225        01-00-5e-32-86-e1     静态</span><br><span class="line">  224.68.111.100        01-00-5e-44-6f-64     静态</span><br><span class="line">  224.80.154.130        01-00-5e-50-9a-82     静态</span><br><span class="line">  224.88.174.75         01-00-5e-58-ae-4b     静态</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight txt"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">arp -a</span><br><span class="line"></span><br><span class="line">接口: 192.168.42.26 --- 0xb</span><br><span class="line">  Internet 地址         物理地址              类型</span><br><span class="line">  192.168.1.1           00-00-00-00-00-ff     静态</span><br><span class="line">  192.168.40.1          f8-75-88-c2-df-c1     动态</span><br><span class="line">  192.168.40.74         c8-5b-76-86-c6-06     动态</span><br><span class="line">  192.168.40.245        38-d5-47-e1-8a-2f     动态</span><br><span class="line">  192.168.42.131        60-a4-4c-65-9f-68     动态</span><br><span class="line">  224.14.51.28          01-00-5e-0e-33-1c     静态</span><br><span class="line">  224.19.133.150        01-00-5e-13-85-96     静态</span><br><span class="line">  224.49.6.212          01-00-5e-31-06-d4     静态</span><br><span class="line">  224.50.134.225        01-00-5e-32-86-e1     静态</span><br><span class="line">  224.68.111.100        01-00-5e-44-6f-64     静态</span><br><span class="line">  224.80.154.130        01-00-5e-50-9a-82     静态</span><br><span class="line">  224.88.174.75         01-00-5e-58-ae-4b     静态</span><br></pre></td></tr></tbody></table></figure>
 
 <p>通过命令<code>arp -d</code>清除 arp 缓存内容。</p>
 <h2 id="1-3-ARP-缓存生存周期"><a href="#1-3-ARP-缓存生存周期" class="headerlink" title="1.3 ARP 缓存生存周期"></a>1.3 ARP 缓存生存周期</h2><p>在默认情况下，Windows Server 2003 家族和 Windows XP 中，ARP 缓存中的表项仅存储 2 分钟。如果一个 ARP 缓存表项在 2 分钟内被用到，则其期限再延长 2 分钟，直到最大生命期限 10 分钟为止。超过 10 分钟的最大期限后，ARP 缓存表项将被移出，并且通过另外一个 ARP 请求来获得新的对应关系。</p>
@@ -353,7 +360,8 @@
 <figure class="highlight txt"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">以太网目的地址：目的主机的硬件地址。目的地址全为1的特殊地址是广播地址。</span><br><span class="line">以太网源地址：源主机的硬件地址。</span><br><span class="line">帧类型：对于ARP协议，该字段为0x0806。对于RARP协议，该字段为0x8035。</span><br><span class="line"></span><br><span class="line">硬件类型：表示硬件地址的类型。值为1时表示以太网地址。ARP协议不仅仅应用于以太网协议，还可以支持别的链路层协议。</span><br><span class="line">协议类型：表示要映射的协议地址类型。值为0x0800时表示IP协议。</span><br><span class="line">硬件地址长度：与硬件类型对应的硬件地址的长度，以字节为单位。如果是以太网，则是6字节（MAC长度）。</span><br><span class="line">协议地址长度：与协议类型对应的协议地址长度，以字节为单位。如果是IP协议，则是4字节（IP地址长度）。</span><br><span class="line">操作类型（op）：四种操作类型。ARP请求（1），ARP应答（2），RARP请求（3），RARP应答（4）。</span><br><span class="line">发送端硬件地址：如果是以太网，则是源主机以太网地址，此处和以太网头中的源地址对应。</span><br><span class="line">发送端协议地址：如果是IP协议，则表示源主机的IP地址。</span><br><span class="line">目的端硬件地址：如果是以太网，则是目的以太网地址，和以太网头中的目的地址对应。</span><br><span class="line">目的端协议地址：如果是IP协议，则表示源主机要请求硬件地址的IP地址。</span><br><span class="line"></span><br><span class="line">对应ARP请求包来说，目的端的硬件地址字段无须填充，其他字段都需要填充。对于ARP回复包来说，所有字段都需要填充。</span><br></pre></td></tr></tbody></table></figure>
 
 <h2 id="1-4-ARP-欺骗"><a href="#1-4-ARP-欺骗" class="headerlink" title="1.4 ARP 欺骗"></a>1.4 ARP 欺骗</h2><p>ARP 欺骗一般目的是通过某种方式把自己伪装成网关，从而欺骗目标机器，使本应发送到真实网关的数据包发送到欺骗者的机器。</p>
-<p>现有如下网络：<br><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/wangluoxieyi-arp-3.jpg"></p>
+<p>现有如下网络：</p>
+<p><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/wangluoxieyi-arp-3.jpg"></p>
 <h4 id="1-4-1-如何伪装成网关？"><a href="#1-4-1-如何伪装成网关？" class="headerlink" title="1.4.1 如何伪装成网关？"></a>1.4.1 如何伪装成网关？</h4><p>我们以主机 A 请求<code>www.csdn.net</code>网站为例，涉及到 ARP 的主要流程如下：</p>
 <ol>
 <li><p>主机 A 通过浏览器打开<code>www.csdn.net</code>（假设通过 DNS 得到的 IP 是<code>47.95.163.175</code>），然后组装需要发送 http 请求包。</p>
@@ -396,6 +404,60 @@
 </blockquote>
 
                 </div>
+                
+                        
+<div class="post-copyright-info-container border-box">
+    <div class="copyright-info-content border-box">
+        <div class="copyright-info-top border-box">
+            <div class="copyright-post-title border-box text-ellipsis">
+                网络协议(2)--ARP和RARP协议
+            </div>
+
+            <div class="copyright-post-link border-box text-ellipsis">
+                post/3034381124.html
+            </div>
+        </div>
+
+        <div class="copyright-info-bottom border-box">
+            <div class="copyright-post-author bottom-item">
+                <div class="type">
+                    作者
+                </div>
+                <div class="content">江雪桥</div>
+            </div>
+
+            <div class="post-time bottom-item">
+                <div class="type">
+                    发布于
+                </div>
+                <div class="content">2018-03-11 19:10</div>
+            </div>
+
+
+            <div class="post-license bottom-item">
+                <div class="type">
+                    许可
+                </div>
+                <div class="content tooltip" data-tooltip-content="CC BY-NC-SA 4.0">
+                    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" target="_blank">
+                        
+                            <i class="fa-brands fa-creative-commons"></i>
+                            <i class="fa-brands fa-creative-commons-by"></i>
+                            <i class="fa-brands fa-creative-commons-nc"></i>
+                            <i class="fa-brands fa-creative-commons-sa"></i>
+                        
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <i class="copyright-bg fa-solid fa-copyright"></i>
+    </div>
+    <div class="copy-copyright-info flex-center tooltip" data-tooltip-content="复制版权信息" data-tooltip-offset-y="-2px">
+        <i class="fa-solid fa-copy"></i>
+    </div>
+</div>
+
                 
 
                 <div class="post-bottom-tags-and-share border-box">
@@ -823,6 +885,10 @@
 
         <!-- copyright-info -->
         
+            
+<script src="/js/post/copyright-info.js"></script>
+
+        
 
         <!-- share -->
         
@@ -851,6 +917,10 @@
 <!-- pjax -->
 
 
+
+    
+        
+    
 
 </body>
 </html>
