@@ -21,10 +21,10 @@
     --header-backdrop-filter-blur: 6px;
 
     /* 设置 Header 头部的 Title 字体大小 */
-    --header-title-font-size: 18px;
+    --header-title-font-size: 20px;
 
     /* 设置 Header 头部的 Title 字体样式 */
-    /* --header-title-font-family: Helvetica, Tahoma, Arial, "Microsoft YaHei", "微软雅黑", sans-serif; */
+    --header-title-font-family: Pacifico, Helvetica, Tahoma, Arial, "Microsoft YaHei", sans-serif;
 
     /* 设置首页文章模块鼠标悬浮时的缩放级别（默认 1） */
     --home-post-hover-scale: 1.02;
@@ -45,4 +45,9 @@
 
     /* 设置页面内容区域的最大宽度（默认 928px） */
     --page-content-max-width: 928px;
+}
+
+@font-face {
+  font-family: Pacifico;
+  src: url(../font/webfonts/Pacifico-Regular.woff2);
 }
