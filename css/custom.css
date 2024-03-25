@@ -1,12 +1,15 @@
 :root {
+    /* 修改全局默认字体大小 */
+    --base-font-size: 14px;
+
     /* 修改全局默认字体样式 */
-    /* --base-font-family: Helvetica, Tahoma, Arial, "Microsoft YaHei", "微软雅黑", sans-serif; */
+    --base-font-family: NotoSansSC-Regular, "Microsoft YaHei", sans-serif;
 
     /* 隐藏文章内容页面的文章修改时间 */
    --post-update-datetime: none;
 
     /* 设置模块卡片的边框圆角 */
-    --box-border-radius: 10px;
+    --box-border-radius: 6px;
 
     /* 设置 Header 头部高度 */
     --header-height: 62px;
@@ -24,7 +27,7 @@
     --header-title-font-size: 20px;
 
     /* 设置 Header 头部的 Title 字体样式 */
-    --header-title-font-family: Pacifico, Helvetica, Tahoma, Arial, "Microsoft YaHei", sans-serif;
+    --header-title-font-family: Pacifico, NotoSansSC-Regular, "Microsoft YaHei", sans-serif;
 
     /* 设置首页文章模块鼠标悬浮时的缩放级别（默认 1） */
     --home-post-hover-scale: 1.02;
@@ -50,4 +53,9 @@
 @font-face {
   font-family: Pacifico;
   src: url(../font/webfonts/Pacifico-Regular.woff2);
+}
+
+@font-face {
+  font-family: NotoSansSC-Regular;
+  src: url(../font/webfonts/NotoSansSC-Regular.woff2);
 }
