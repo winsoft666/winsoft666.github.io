@@ -9,7 +9,7 @@
     
     <title>
         
-            Windows注入与拦截(1)-注入基础 |
+            玩转Qt 2D绘图之坐标系 |
         
         JiangXueqiao&#39;s Blog
     </title>
@@ -50,7 +50,119 @@
     KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
     KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
   </script>
-<meta name="generator" content="Hexo 6.3.0">
+<meta name="generator" content="Hexo 6.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style>
 <style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
 <link rel="alternate" href="/atom.xml" title="JiangXueqiao's Blog" type="application/atom+xml">
 </head>
@@ -263,7 +375,7 @@
             <div class="post-content-bottom border-box">
                 
                     <div class="post-title">
-                        Windows注入与拦截(1)-注入基础
+                        玩转Qt 2D绘图之坐标系
                     </div>
                 
 
@@ -289,12 +401,12 @@
         
             <span class="meta-info-item post-create-date">
                 <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
-                <span class="datetime">2021-05-01 18:41:58</span>
+                <span class="datetime">2024-03-25 20:55:02</span>
             </span>
 
             <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Thu Mar 14 2024 15:30:12 GMT+0800">2024-03-14 15:30:12</span>
+                <span class="datetime" data-updated="Sun Mar 31 2024 15:59:18 GMT+0800">2024-03-31 15:59:18</span>
             </span>
         
 
@@ -302,7 +414,7 @@
             <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
                 <ul class="post-category-ul">
                     
-                            <li class="category-item"><a href="/categories/%E4%B8%93%E6%A0%8F%E3%80%8AWindows%E6%B3%A8%E5%85%A5%E4%B8%8E%E6%8B%A6%E6%88%AA%E3%80%8B/">专栏《Windows注入与拦截》</a></li>
+                            <li class="category-item"><a href="/categories/Qt/">Qt</a></li>
                         
                     
                 </ul>
@@ -328,27 +440,68 @@
                 <div class="post-content keep-markdown-body">
                     
 
-                    <h2 id="一、注入技术的用途"><a href="#一、注入技术的用途" class="headerlink" title="一、注入技术的用途"></a>一、注入技术的用途</h2><p>从<a href="/post/2494475058.html" title="Windows内存体系(1)--虚拟地址空间">Windows内存体系(1)--虚拟地址空间</a>文章中我们可以知道：</p>
-<p>在 Windows 系统中，每个进程都有自己私有的地址空间。当我们用指针来引用内存时，指针的值表示的是进程自己的地址空间的一个虚拟的内存地址。<strong>进程不能通过指针来引用其他进程地址空间的内存。</strong> 这种设计提升了操作系统的健壮性和安全性，比如一个进程存在缺陷，可能会引用和覆盖随机地址处的内存数据，那么我们就不用担心这个缺陷会影响到操作系统及其他进程。</p>
-<p>独立的地址空间有利于系统的稳定性。但也带来了诸多不便，下面列举了需要跨越进程的边界来访问另一个进程地址空间的情况：</p>
+                    <img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/Qt-h-logo.png" style="width:100%;">
+
+<p>Qt中提供了强大的2D绘图系统，可以使用相同的API在屏幕和绘图设备上进行绘制，主要基于QPainter、QPaintDevice和 QPaintEngine 这三个类实现，其中：</p>
 <ul>
-<li>我们要从另一个进程创建的窗口来派生子类窗口，比如附着在 Windows 资源管理器上的一些小插件等。</li>
-<li>我们需要假借其他进程之名做某些事情。</li>
-<li>我们需要获取其他进程的更多详细信息，如加载了哪些 dll 等。</li>
-<li>我们需要对其他进程的某些函数进行HOOK。</li>
-<li>以及干一些羞羞的事情…</li>
+<li>QPainter执行具体的绘图操作，QPainter 类提供了大量的GUI编程所需的函数，如drawLine、drawImage等。</li>
+<li>QPaintDevice 是一个基类，提供绘图设备的抽象接口，它是一个二维空间的抽象，可以使用QPainter在其上进行绘制，常见的继承该类的绘图设备有QImage、QPixmap、QWidget、QOpenGLPaintDevice等。</li>
+<li>QPaintEngine 提供了一些抽象接口，用于实现QPainter在不同的设备上进行绘制。QPaintEngine 由 QPaintDevice 创建并管理。</li>
 </ul>
-<p>为了满足上述需求，我们可以使用 DLL 注入的技术，将我们自己开发的 DLL 注入到另一个进程的地址空间中，这样 DLL 中的代码就可以在该进程地址空间中执行。</p>
 <span id="more"></span>
 
-<h2 id="二、什么样的-DLL-可以被注入"><a href="#二、什么样的-DLL-可以被注入" class="headerlink" title="二、什么样的 DLL 可以被注入"></a>二、什么样的 DLL 可以被注入</h2><p>理论上任何 DLL 都可以被注入到其他进程之中，但是大多数情况下，我们注入到其他进程之中是为了实现某些功能、做某些事情的，所以我们需要在 DLL 被注入之后，DLL 中的功能代码能够被自动执行。</p>
-<p>DLL 被<strong>首次</strong>载入到进程中时，会收到<code>DLL_PROCESS_ATTACH</code>通知，即调用<code>DllMain</code>函数，并且参数<code>fdwReason</code>的值被设为<code>DLL_PROCESS_ATTACH</code>。</p>
-<p>我们可以在收到<code>DLL_PROCESS_ATTACH</code>通知时开始我们的业务逻辑。</p>
-<p>下面是一个最简单的 dll 的源码，在被注入成功后（即收到<code>DLL_PROCESS_ATTACH</code>通知时）弹出消息提示框：</p>
-<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">BOOL APIENTRY <span class="title">DllMain</span><span class="params">(HMODULE hModule, DWORD fdwReason, LPVOID lpReserved )</span> </span>{</span><br><span class="line">    <span class="keyword">switch</span>(fdwReason) {</span><br><span class="line">        <span class="keyword">case</span> DLL_PROCESS_ATTACH:</span><br><span class="line">        {</span><br><span class="line">      <span class="built_in">MessageBox</span>(<span class="literal">NULL</span>, <span class="built_in">TEXT</span>(<span class="string">"我已经被注入啦"</span>), <span class="built_in">TEXT</span>(<span class="string">"信息"</span>), MB_ICONINFORMATION);</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">case</span> DLL_THREAD_ATTACH:</span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">case</span> DLL_THREAD_DETACH:</span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">case</span> DLL_PROCESS_DETACH:</span><br><span class="line">        {</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> TRUE;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>在Qt官方文档中有一张图可以很好说明Qt各个坐标系变换方式（暂不用关注图上的坐标值）：</p>
+<p><img lazyload="" alt="Qt坐标关系图" data-src="https://blog-static.jiangxueqiao.com/blog/img/qt-coordination.jpeg"></p>
+<p>我们在使用QPainter绘图时需要传入坐标，传入的坐标就是图上的世界坐标系（World Coordinates），世界坐标经过矩阵后再传递给窗口坐标系（Window Coordinates），窗口坐标经过窗口到视口的坐标变换，最后在设备坐标系（Device Coordinates）的视口区域内绘制。</p>
+<h2 id="1-世界坐标系（World-Coordinates）"><a href="#1-世界坐标系（World-Coordinates）" class="headerlink" title="1. 世界坐标系（World Coordinates）"></a>1. 世界坐标系（World Coordinates）</h2><p>世界坐标也称之为逻辑坐标（下文都称作逻辑坐标），使用的单位叫逻辑单位。</p>
+<p>在真实的世界地理中，通常使用经纬度单位来表示某一个具体位置，如武汉的坐标为(东经114°,北纬30)，而在Qt绘图时使用的逻辑单位是像素。但Qt的像素支持非整数数量，如0.5个像素，而实际设备坐标（如显示器、打印机等）只支持整数数量的像素显示，因此从逻辑坐标到设备坐标需要经过一个转换过程。</p>
+<p>在Qt中，我们提供给 QPainter 的都是逻辑坐标，这种坐标与具体的设备类型无关。</p>
+<h2 id="2-窗口坐标系（Window-Coordinates）"><a href="#2-窗口坐标系（Window-Coordinates）" class="headerlink" title="2. 窗口坐标系（Window Coordinates）"></a>2. 窗口坐标系（Window Coordinates）</h2><p>上图中的窗口是打了引号的，这说明该窗口是实际不存在的，这个窗口指的是窗口坐标系左上角原点到右下角的一个虚拟矩形窗口。</p>
+<p>默认情况下，窗口坐标系和逻辑坐标系都等同于设备坐标系，三者重合，但我们可以使用<code>QPaintet::setWindow</code>方式重设窗口坐标系的原点和范围。</p>
+<p>在绘图时传递给 QPainter 的逻辑坐标需要先经过矩阵变换（QPainter 的 translate、scale、rotate、shear方法，后面文章会详细介绍），然后再传递给窗口坐标系。</p>
+<h2 id="3-设备坐标系（Device-Coordinates）"><a href="#3-设备坐标系（Device-Coordinates）" class="headerlink" title="3. 设备坐标系（Device Coordinates）"></a>3. 设备坐标系（Device Coordinates）</h2><p>也称之为物理坐标（Physical Coordinates），坐标原点位于左上角，X轴水平向右增长，Y轴垂直向下增长。</p>
+<p>不同的设备坐标单位通常不同，如显示器通常以像素为单位，而打印机通常以点为单位。</p>
+<p>需要注意的是设备坐标系的原点和范围始终等同于实际绘制设备，不会跟随逻辑坐标系、窗口坐标系以及视口（viewport）的改变而改变。</p>
+<h2 id="4-视口（viewport）"><a href="#4-视口（viewport）" class="headerlink" title="4. 视口（viewport）"></a>4. 视口（viewport）</h2><p>视口是设备环境中的一个矩形框，使用设备坐标系表示。默认情况下，视口左上角位置为设备坐标系的原点，大小为实际绘制目标设备的大小。</p>
+<p>视口存在的意义是为了指定在显示设备的什么位置，以多大的范围来<strong>完全显示</strong>指定的窗口内容，如果窗口内容超出了视口区域，超出部分将不会显示。</p>
+<p>我们可以用 <code>QPainter::setViewport</code> 方法来改变视口的位置和大小，<code>QPainter::setViewport</code> 的参数都是基于设备坐标系的，如果指定的视口区域超出了设备外，设备外的内容将不会显示。</p>
+<h2 id="5-实例讲解"><a href="#5-实例讲解" class="headerlink" title="5. 实例讲解"></a>5. 实例讲解</h2><p>为了更好说明各个坐标系及视口之间的关系，我们通过一个实例来具体说明。首先创建一个长宽为400x400的窗口，并且程序未开启DPI缩放特性：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">resize</span>(<span class="number">400</span>, <span class="number">400</span>);</span><br></pre></td></tr></tbody></table></figure>
 
+<p>绘制代码如下：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">Qt2DSample::paintEvent</span><span class="params">(QPaintEvent* e)</span> </span>{</span><br><span class="line">  <span class="function">QPainter <span class="title">painter</span><span class="params">(<span class="keyword">this</span>)</span></span>;</span><br><span class="line">  painter.<span class="built_in">translate</span>(<span class="number">100</span>, <span class="number">200</span>);</span><br><span class="line">  painter.<span class="built_in">setWindow</span>(<span class="built_in">QRect</span>(<span class="number">200</span>, <span class="number">300</span>, <span class="number">600</span>, <span class="number">600</span>));</span><br><span class="line">  painter.<span class="built_in">setViewport</span>(<span class="built_in">QRect</span>(<span class="number">100</span>, <span class="number">100</span>, <span class="number">300</span>, <span class="number">300</span>));</span><br><span class="line">  painter.<span class="built_in">drawRect</span>(<span class="built_in">QRect</span>(<span class="number">300</span>, <span class="number">100</span>, <span class="number">200</span>, <span class="number">200</span>));</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
-<p>另外，当 DLL 被从目标进程卸载时，DLL 会收到<code>DLL_PROCESS_DETACH</code>通知，我们可以在该通知的处理过程中做最后的善后工作，防止出现资源泄漏、程序崩溃等问题。</p>
+<p>下图使用不同的颜色绘制了不同的坐标系及视口、窗口的位置和区域：</p>
+<p><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/qt-3-zuobiaoxiguanxi.jpg"></p>
+<p><strong>第1行代码<code>QPainter painter(this)</code>：</strong></p>
+<p>表明我们是在当前 QWidget 实例上进行绘制，因此设备坐标系原点为(0,0)，坐标系的范围为QWidget的长宽400x400，坐标单位为像素，对应上图绿色部分。</p>
+<p>此时还未设置视口，因此视口默认等同于设备坐标系的范围，即(0,0,400,400)，该部分未在上图画出。</p>
+<p><strong>第2行代码<code>painter.translate(100, 200)</code>:</strong></p>
+<p>将逻辑坐标系的原点偏移(100,200)个像素。</p>
+<p>在进行偏移时，值为正表示向方向移动，值为负表示向负方向移动。</p>
+<p><strong>第3行代码<code>painter.setWindow(QRect(200, 300, 600, 600))</code>：</strong></p>
+<p>设置窗口坐标系原点为(200, 300)，窗口范围是600x600，对应上图红色部分。</p>
+<p><strong>第4行代码<code>painter.setViewport(QRect(100, 100, 300, 300))</code>：</strong></p>
+<p>设置视口为QRect(100, 100, 300, 300)，即在设备坐标系上的使用QRect(100, 100, 300, 300)区域来显示上面600x600的窗口，对应上图蓝色部分。</p>
+<blockquote>
+<p>第2、3、4行代码是没有先后顺序的，因为三个设置函数所影响的目标是不同的。</p>
+</blockquote>
+<p><strong>第5行代码<code>painter.drawRect(QRect(300, 100, 200, 200))</code>：</strong></p>
+<p>在 (300,100) 位置绘制 200x200 的正方形，此处传递的是逻辑坐标，而逻辑坐标系已在第2行代码处进行了偏移，因此根据新的逻辑坐标系，正方形左上角位置是 (300+100, 100+200) = (400, 300)，又因为此处逻辑坐标系未做缩放操作（缩放操作由 QPainter::scale 提供），因此正方形的长宽保持不变，仍为200x200，即 QRect(400,300,200,200)。</p>
+<p>然后将正方形 QRect(400,300,200,200) 传递给窗口坐标系，该正方形在窗口坐标系 (200,300,600,600) 上面的位置和大小对应上图粉红色部分。</p>
+<p>最后用设备坐标系上的视口区域来显示该窗口，由于窗口坐标系和设备坐标系的原点及范围不相同，因此还需要做线性转化：</p>
+<figure class="highlight txt"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">在(200, 300, 600, 600) 范围上显示的正方形 (400, 300, 200, 200)</span><br><span class="line"></span><br><span class="line">转化为</span><br><span class="line"></span><br><span class="line">在视口(100, 100, 300, 300) 范围上显示的正方形 (x, y, w, h)</span><br></pre></td></tr></tbody></table></figure>
+
+<p>从上面可以看出窗口范围是视口的<code>600 / 300 = 2</code>倍，因此：</p>
+<figure class="highlight txt"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">x = 100 + (400 - 200) / 2 = 200</span><br><span class="line"></span><br><span class="line">y = 100 + (300 - 300) / 2 = 100</span><br><span class="line"></span><br><span class="line">w = 200 / 2 = 100</span><br><span class="line"></span><br><span class="line">h = 200 / 2 = 100</span><br></pre></td></tr></tbody></table></figure>
+
+<p>计算得到需要在视口 (100, 100, 300, 300) 上绘制的正方形为 (200,100,100,100) ，实际绘制的正方形如下图所示：</p>
+<p><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/PxUDuO0cQO.png"></p>
+<hr>
+<blockquote>
+<p>限于政策原因，在您看到该文章时，博客可能已经关闭了评论功能🥺</p>
+<p>您可以通过在 <a class="link" target="_blank" rel="noopener" href="https://github.com/winsoft666/blog-comment">blog-comment<i class="fas fa-external-link-alt"></i></a> 项目中提交Issue来间接地发表评论🍀</p>
+</blockquote>
 
                 </div>
                 
@@ -357,11 +510,11 @@
     <div class="copyright-info-content border-box">
         <div class="copyright-info-top border-box">
             <div class="copyright-post-title border-box text-ellipsis">
-                Windows注入与拦截(1)-注入基础
+                玩转Qt 2D绘图之坐标系
             </div>
 
             <div class="copyright-post-link border-box text-ellipsis">
-                post/1504192511.html
+                post/847642761.html
             </div>
         </div>
 
@@ -377,7 +530,7 @@
                 <div class="type">
                     发布于
                 </div>
-                <div class="content">2021-05-01 18:41</div>
+                <div class="content">2024-03-25 20:55</div>
             </div>
 
 
@@ -444,31 +597,15 @@
                 
                     <div class="post-nav border-box">
                         
-                            <div class="prev-post">
-                                <a class="prev"
-                                   rel="prev"
-                                   href="/post/721636578.html"
-                                   title="Windows注入与拦截(2)-注入方式"
-                                >
-                                    <span class="left arrow-icon flex-center">
-                                        <i class="fas fa-chevron-left"></i>
-                                    </span>
-                                    <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">Windows注入与拦截(2)-注入方式</span>
-                                        <span class="post-nav-item">上一篇</span>
-                                    </span>
-                                </a>
-                            </div>
-                        
                         
                             <div class="next-post">
                                 <a class="next"
                                    rel="next"
-                                   href="/post/50218900.html"
-                                   title="了解DPI缩放"
+                                   href="/post/66759332.html"
+                                   title="回顾2D绘图的数学知识"
                                 >
                                     <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">了解DPI缩放</span>
+                                        <span class="post-nav-title-item text-ellipsis">回顾2D绘图的数学知识</span>
                                         <span class="post-nav-item">下一篇</span>
                                     </span>
                                     <span class="right arrow-icon flex-center">

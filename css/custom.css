@@ -6,7 +6,7 @@
     --base-font-family: NotoSansSC-Regular, "Microsoft YaHei", sans-serif;
 
     /* 隐藏文章内容页面的文章修改时间 */
-   --post-update-datetime: none;
+    /*--post-update-datetime: none;*/
 
     /* 设置模块卡片的边框圆角 */
     --box-border-radius: 6px;
