@@ -9,7 +9,7 @@
     
     <title>
         
-            MySQL获取字符串长度的几种方式 |
+            归档: 2024/4 |
         
         JiangXueqiao&#39;s Blog
     </title>
@@ -101,7 +101,7 @@
                     
                         
                         <li class="menu-item">
-                            <a class=""
+                            <a class="active"
                                href="/archives"
                             >
                                 
@@ -207,7 +207,7 @@
             
                 
                 <li class="drawer-menu-item flex-center">
-                    <a class=""
+                    <a class="active"
                        href="/archives"
                     >归档</a>
                 </li>
@@ -269,247 +269,36 @@
             <div class="main-content border-box">
                 
 
-                    
-<div class="fade-in-down-animation">
-    <div class="post-page-container border-box">
-        <div class="post-content-container border-box">
+                    <div class="fade-in-down-animation">
+    <div class="archives-container">
+        <div class="archives-timeline border-box">
             
-
-            <div class="post-content-bottom border-box">
+<div class="archive-list-container border-box">
+    
+        <section class="archive-item border-box">
+            <div class="archive-item-header border-box">
+                <span class="archive-year">2024</span>
+            </div>
+            <ul class="archive-item-body border-box">
                 
-                    <div class="post-title">
-                        MySQL获取字符串长度的几种方式
-                    </div>
+                    <li class="post-item border-box">
+                        <span class="post-date border-box">04-05</span>
+                        <a class="post-title border-box text-ellipsis"
+                           href="/post/1336811290.html"
+                        >玩转Qt 2D绘图之画家的工具</a>
+                    </li>
                 
-
-                
-                    <div class="post-header border-box">
-                        
-                            <div class="avatar-box border-box">
-                                <img src="/images/avatar.png">
-                            </div>
-                        
-                        <div class="info-box">
-                            <div class="author border-box">
-                                <span class="name">江雪桥</span>
-                                
-                            </div>
-                            <div class="meta-info border-box">
-                                
-
-<div class="post-meta-info-container border-box post">
-    <div class="post-meta-info border-box">
-        
-
-        
-            <span class="meta-info-item post-create-date">
-                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
-                <span class="datetime">2017-11-09 18:34:51</span>
-            </span>
-
-            <span class="meta-info-item post-update-date">
-                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Tue Mar 12 2024 15:44:53 GMT+0800">2024-03-12 15:44:53</span>
-            </span>
-        
-
-        
-            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
-                <ul class="post-category-ul">
-                    
-                            <li class="category-item"><a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a></li>
-                        
-                    
-                </ul>
-            </span>
-        
-
-        
-            <span class="post-tag meta-info-item border-box">
-                <ul class="post-tag-ul">
-                    
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/MySQL/">MySQL</a></li>
-                        
-                    
-                </ul>
-            </span>
-        
-
-        
-        
-        
-        
-    </div>
-
+            </ul>
+        </section>
     
 </div>
 
-                            </div>
-                        </div>
-                    </div>
-                
-
-                <div class="post-content keep-markdown-body">
-                    
-
-                    <p>常用函数有<code>char_length</code>、<code>length</code>、<code>bit_length</code>，它们针对不同的字符编码处理方式不一样。<br>总的来说：<br><code>char_length</code>字符显示的个数；<br><code>length</code> 字符在当前编码下存储，所占的字节数。<br><code>bit_length</code> 字符在当前编码下存储，所占的bit，也就是<code>length</code>*8</p>
-<span id="more"></span>
-
-<h2 id="GBK-编码"><a href="#GBK-编码" class="headerlink" title="GBK 编码"></a>GBK 编码</h2><figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">char_length</span>(<span class="string">'中国'</span>);  <span class="comment">-- 2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> length(<span class="string">'中国'</span>);  <span class="comment">-- 4</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> length(<span class="string">'china'</span>);  <span class="comment">-- 5</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> bit_length(<span class="string">'中国'</span>);  <span class="comment">--32</span></span><br></pre></td></tr></tbody></table></figure>
-
-<h2 id="UTF-8-编码"><a href="#UTF-8-编码" class="headerlink" title="UTF-8 编码"></a>UTF-8 编码</h2><figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> <span class="keyword">char_length</span>(<span class="string">'中国'</span>); <span class="comment">-- 2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> length(<span class="string">'中国'</span>);   <span class="comment">-- 6</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> length(<span class="string">'china'</span>);   <span class="comment">-- 5</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">select</span> bit_length(<span class="string">'中国'</span>);  <span class="comment">-- 48</span></span><br></pre></td></tr></tbody></table></figure>
-                </div>
-                
-                        
-<div class="post-copyright-info-container border-box">
-    <div class="copyright-info-content border-box">
-        <div class="copyright-info-top border-box">
-            <div class="copyright-post-title border-box text-ellipsis">
-                MySQL获取字符串长度的几种方式
-            </div>
-
-            <div class="copyright-post-link border-box text-ellipsis">
-                post/1446858454.html
-            </div>
         </div>
-
-        <div class="copyright-info-bottom border-box">
-            <div class="copyright-post-author bottom-item">
-                <div class="type">
-                    作者
-                </div>
-                <div class="content">江雪桥</div>
-            </div>
-
-            <div class="post-time bottom-item">
-                <div class="type">
-                    发布于
-                </div>
-                <div class="content">2017-11-09 18:34</div>
-            </div>
-
-
-            <div class="post-license bottom-item">
-                <div class="type">
-                    许可
-                </div>
-                <div class="content tooltip" data-tooltip-content="CC BY-NC-SA 4.0">
-                    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" target="_blank">
-                        
-                            <i class="fa-brands fa-creative-commons"></i>
-                            <i class="fa-brands fa-creative-commons-by"></i>
-                            <i class="fa-brands fa-creative-commons-nc"></i>
-                            <i class="fa-brands fa-creative-commons-sa"></i>
-                        
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <i class="copyright-bg fa-solid fa-copyright"></i>
     </div>
-    <div class="copy-copyright-info flex-center tooltip" data-tooltip-content="复制版权信息" data-tooltip-offset-y="-2px">
-        <i class="fa-solid fa-copy"></i>
-    </div>
-</div>
-
-                
-
-                <div class="post-bottom-tags-and-share border-box">
-                    <div>
-                        
-                            <ul class="post-tags-box border-box">
-                                
-                                    <li class="tag-item border-box">
-                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/MySQL/">MySQL</a>
-                                    </li>
-                                
-                            </ul>
-                        
-                    </div>
-                    <div>
-                        
-                            <div class="post-share-container border-box">
-    <ul class="share-list-wrap border-box">
-        <li class="qq share-item border-box flex-center tooltip"
-            data-tooltip-content="分享到 QQ"
-        >
-            <i class="fa-brands fa-qq"></i>
-        </li>
-        <li class="wechat share-item border-box flex-center tooltip tooltip-img"
-            data-tooltip-content="分享到微信"
-            data-tooltip-img-tip="微信扫一扫"
-            data-tooltip-img-style="background-color: #fff; top: -10px; padding: 0.6rem 0.6rem 0.1rem 0.6rem;"
-        >
-            <i class="fa-brands fa-weixin"></i>
-        </li>
-        <li class="weibo share-item border-box flex-center tooltip"
-            data-tooltip-content="分享到微博"
-        >
-            <i class="fa-brands fa-weibo"></i>
-        </li>
-    </ul>
-</div>
-
-                        
-                    </div>
-                </div>
-
-                
-
-                
-                    <div class="post-nav border-box">
-                        
-                            <div class="prev-post">
-                                <a class="prev"
-                                   rel="prev"
-                                   href="/post/3556253141.html"
-                                   title="MySQL获取时间和日期"
-                                >
-                                    <span class="left arrow-icon flex-center">
-                                        <i class="fas fa-chevron-left"></i>
-                                    </span>
-                                    <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">MySQL获取时间和日期</span>
-                                        <span class="post-nav-item">上一篇</span>
-                                    </span>
-                                </a>
-                            </div>
-                        
-                        
-                            <div class="next-post">
-                                <a class="next"
-                                   rel="next"
-                                   href="/post/1855436935.html"
-                                   title="白酒入门"
-                                >
-                                    <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">白酒入门</span>
-                                        <span class="post-nav-item">下一篇</span>
-                                    </span>
-                                    <span class="right arrow-icon flex-center">
-                                        <i class="fas fa-chevron-right"></i>
-                                    </span>
-                                </a>
-                            </div>
-                        
-                    </div>
-                
-
-                
-                    
+    
 
 
 
-
-
-
-                
-            </div>
-        </div>
-
-        
-    </div>
 </div>
 
 
@@ -569,24 +358,6 @@
     </div>
 
     <!-- post tools -->
-    
-        <div class="post-tools right-toc">
-            <div class="post-tools-container border-box">
-    <ul class="tools-list border-box">
-        <!-- PC TOC show toggle -->
-        
-
-        <!-- PC go comment -->
-        
-
-        <!-- PC full screen -->
-        <li class="tools-item flex-center full-screen">
-            <i class="fa-solid fa-expand"></i>
-        </li>
-    </ul>
-</div>
-
-        </div>
     
 
     <!-- side tools -->
@@ -716,32 +487,6 @@
 
 
 <div class="">
-    
-        <!-- post-helper -->
-        
-<script src="/js/post/post-helper.js"></script>
-
-
-        <!-- toc -->
-        
-            
-<script src="/js/post/toc.js"></script>
-
-        
-
-        <!-- copyright-info -->
-        
-            
-<script src="/js/post/copyright-info.js"></script>
-
-        
-
-        <!-- share -->
-        
-            
-<script src="/js/post/share.js"></script>
-
-        
     
 
     <!-- categories page -->

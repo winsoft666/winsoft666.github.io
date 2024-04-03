@@ -278,6 +278,67 @@
                 <div class="home-post-item-bottom border-box">
                     
                     <h3 class="home-post-title border-box">
+                        <a href="/post/2202762022.html">
+                            移除Qt控件虚线框
+                        </a>
+                    </h3>
+
+                    <div class="home-post-content keep-markdown-body">
+                        
+                            <h1 id="方式一：使用-StyleSheet"><a href="#方式一：使用-StyleSheet" class="headerlink" title="方式一：使用 StyleSheet"></a>方式一：使用 StyleSheet</h1><figure class="highlight css"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">QWidget<span class="selector-pseudo">:focus</span> {</span><br><span class="line">  <span class="attribute">outline</span>: none; <span class="comment">/* 去掉得到焦点时的虚线框 */</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h1 id="方式二：继承-QProxyStyle"><a href="#方式二：继承-QProxyStyle" class="headerlink" title="方式二：继承 QProxyStyle"></a>方式二：继承 QProxyStyle</h1><p>继承 QProxyStyle，PrimitiveElement 为 QStyle::PE_FrameFocusRect 时不绘制虚线框，然后在 main() 函数里调用 QApplication::setStyle() 使用新的样式。</p>
+                        
+                    </div>
+
+                    
+
+<div class="post-meta-info-container border-box home">
+    <div class="post-meta-info border-box">
+        
+            <span class="meta-info-item border-box">
+                <i class="icon fa-solid fa-history"></i>&nbsp;<span class="home-post-history"
+                                                                                data-updated="Tue Mar 12 2024 15:47:46 GMT+0800"
+                >2024-03-12 15:47:46</span>
+            </span>
+        
+
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/Qt/">Qt</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+        <a class="home-read-more" href="/post/2202762022.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
+    
+</div>
+
+                </div>
+            </li>
+        
+            <li class="home-post-item">
+
+                
+
+                <div class="home-post-item-bottom border-box">
+                    
+                    <h3 class="home-post-title border-box">
                         <a href="/post/2711697202.html">
                             Windbg基本使用方法
                         </a>
@@ -712,65 +773,6 @@
 
     
         <a class="home-read-more" href="/post/4168021185.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
-    
-</div>
-
-                </div>
-            </li>
-        
-            <li class="home-post-item">
-
-                
-
-                <div class="home-post-item-bottom border-box">
-                    
-                    <h3 class="home-post-title border-box">
-                        <a href="/post/3102005562.html">
-                            Windows程序如何删除自身
-                        </a>
-                    </h3>
-
-                    <div class="home-post-content keep-markdown-body">
-                        
-                            <p>本文介绍几种实现在程序退出后，从磁盘删除自身 exe 文件的方式。该技术通常应用于安装包卸载程序中。</p>
-                        
-                    </div>
-
-                    
-
-<div class="post-meta-info-container border-box home">
-    <div class="post-meta-info border-box">
-        
-            <span class="meta-info-item border-box">
-                <i class="icon fa-solid fa-history"></i>&nbsp;<span class="home-post-history"
-                                                                                data-updated="Sun Mar 31 2024 19:06:20 GMT+0800"
-                >2024-03-31 19:06:20</span>
-            </span>
-        
-
-        
-
-        
-            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
-                <ul class="post-category-ul">
-                    
-                            <li class="category-item"><a href="/categories/Windows%E7%BC%96%E7%A8%8B/">Windows编程</a></li>
-                        
-                    
-                </ul>
-            </span>
-        
-
-        
-
-        
-        
-        
-        
-    </div>
-
-    
-        <a class="home-read-more" href="/post/3102005562.html">阅读全文&nbsp;<i class="icon fas fa-angle-right"></i></a>
     
 </div>
 

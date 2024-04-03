@@ -309,7 +309,7 @@
 
             <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Sun Mar 31 2024 12:07:20 GMT+0800">2024-03-31 12:07:20</span>
+                <span class="datetime" data-updated="Mon Apr 01 2024 16:09:18 GMT+0800">2024-04-01 16:09:18</span>
             </span>
         
 
@@ -356,16 +356,13 @@
 <span id="more"></span>
 
 <p>本文提供了几个定义和判断程序运行环境的方法，开发者可以根据实际情况选取相应的方法。</p>
-<h1 id="1-根据是否打包来判断"><a href="#1-根据是否打包来判断" class="headerlink" title="1. 根据是否打包来判断"></a>1. 根据是否打包来判断</h1><p>Electron官方提供了<code>app.isPackaged</code>属性来判断应用是否是经过打包的。</p>
-<p>一般开发环境不打包，而非开发环境会打包，我们可以通过这个属性来判断当前运行环境是否是开发环境。</p>
-<h1 id="2-根据可执行文件名判断"><a href="#2-根据可执行文件名判断" class="headerlink" title="2. 根据可执行文件名判断"></a>2. 根据可执行文件名判断</h1><p>在开发环境中，我们通常使用如下命令启动程序：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">electron .</span><br></pre></td></tr></tbody></table></figure>
-
-<p>此时程序是通过<code>electron.exe</code>（非Windows操作系统上是<code>electron</code>）来启动的，而在打包后的生产环境是通过我们指定的exe启动的，因此我们可以通过判断可执行文件名是否为<code>electron.exe</code>来检查是否为生产环境。</p>
+<h2 id="1-app-isPackaged"><a href="#1-app-isPackaged" class="headerlink" title="1. app.isPackaged"></a>1. app.isPackaged</h2><p>Electron官方提供了<code>app.isPackaged</code>属性来判断应用是否是经过打包的。</p>
+<p>app.isPackaged 的原理是判断进程名称是否为 electron 或 electron.exe，如果名称匹配（不区分大小写）则是打包环境。</p>
+<p>通常将打包环境当作生产环境，但这并不是强制性的规则。</p>
+<p>我们也可以自己通过代码实现判断程序进程名：</p>
 <figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">isProduction</span>(<span class="params"></span>) {</span><br><span class="line">  <span class="keyword">if</span> (!process.<span class="property">versions</span>.<span class="property">electron</span>) {</span><br><span class="line">    <span class="comment">// Node.js process</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  }</span><br><span class="line">  <span class="keyword">if</span> (process.<span class="property">platform</span> === <span class="string">"darwin"</span>) {</span><br><span class="line">    <span class="keyword">return</span> !<span class="regexp">/\/Electron\.app\//</span>.<span class="title function_">test</span>(process.<span class="property">execPath</span>);</span><br><span class="line">  }</span><br><span class="line">  <span class="keyword">if</span> (process.<span class="property">platform</span> === <span class="string">"win32"</span>) {</span><br><span class="line">    <span class="keyword">return</span> !<span class="regexp">/\\electron\.exe$/</span>.<span class="title function_">test</span>(process.<span class="property">execPath</span>);</span><br><span class="line">  }</span><br><span class="line">  <span class="keyword">if</span> (process.<span class="property">platform</span> === <span class="string">"linux"</span>) {</span><br><span class="line">    <span class="keyword">return</span> !<span class="regexp">/\/electron$/</span>.<span class="title function_">test</span>(process.<span class="property">execPath</span>);</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
-<p>这种方式只能用来检查是否为生产环境，不能定义和判断开发、测试、预生产这些环境。</p>
-<h1 id="3-根据命令行参数判断"><a href="#3-根据命令行参数判断" class="headerlink" title="3. 根据命令行参数判断"></a>3. 根据命令行参数判断</h1><p>通过在不同环境中为程序添加不同的启动参数，然后在运行时校验这些命令行参数来判断当前的运行环境。</p>
+<h2 id="2-根据命令行参数判断"><a href="#2-根据命令行参数判断" class="headerlink" title="2. 根据命令行参数判断"></a>2. 根据命令行参数判断</h2><p>通过在不同环境中为程序添加不同的启动参数，然后在运行时校验这些命令行参数来判断当前的运行环境。</p>
 <p>在生产环境中不添加任何启动参数，因此没有启动参数的就为生产环境；如果有启动参数，再根据参数判断是否为测试或预发布等环境。</p>
 <p>值得注意的是不同的环境添加启动参数的方式不太一样，比如开发环境不需要打包，可以通过下面方式添加：</p>
 <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">electron . --<span class="built_in">env</span>=development</span><br></pre></td></tr></tbody></table></figure>
@@ -376,7 +373,7 @@
 <p>判断方法如下：</p>
 <figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">isProduction</span>(<span class="params"></span>) {</span><br><span class="line">  <span class="keyword">if</span> (!process.<span class="property">versions</span>.<span class="property">electron</span>) {</span><br><span class="line">    <span class="comment">// Node.js process</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">const</span> v <span class="keyword">of</span> process.<span class="property">argv</span>) {</span><br><span class="line">    <span class="keyword">if</span> (v === <span class="string">"--env=development"</span> || <span class="comment">// 开发环境</span></span><br><span class="line">      v === <span class="string">"--env=test"</span> <span class="comment">// 测试环境</span></span><br><span class="line">    ) {</span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
-<h1 id="4-通过环境变量判断"><a href="#4-通过环境变量判断" class="headerlink" title="4. 通过环境变量判断"></a>4. 通过环境变量判断</h1><p>这个判断方法与方法2类似，不做过多介绍。需要注意的是，Windows和Unix上添加环境变量的方式略有不同。</p>
+<h2 id="3-通过环境变量判断"><a href="#3-通过环境变量判断" class="headerlink" title="3. 通过环境变量判断"></a>3. 通过环境变量判断</h2><p>这个判断方法与方法2类似，不做过多介绍。需要注意的是，Windows和Unix上添加环境变量的方式略有不同。</p>
 <p>Windows:</p>
 <figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> APP_ENV=dev &amp;&amp; electron .</span><br></pre></td></tr></tbody></table></figure>
 

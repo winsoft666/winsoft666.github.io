@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Windows,Linux,C/C++,Golang,Qt,Node.js,Electron,Vue,WebRTC,NSIS,HTTP">
+    <meta name="description" content="深入跨平台客户端领域，持续构建完善的客户端技术体系">
+    <meta name="author" content="江雪桥">
+    
+    <title>
+        
+            玩转Qt 2D绘图之画家的工具 |
+        
+        JiangXueqiao&#39;s Blog
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/favicon.png">
+    
+    
+<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/regular.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/solid.min.css">
+
+    
+<link rel="stylesheet" href="/font/css/brands.min.css">
+
+    
+        
+            
+        
+            
+                
+<link rel="stylesheet" href="/css/custom.css">
+
+            
+        
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"jiangxueqiao.com","root":"/","language":"zh-CN","path":"search.xml"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"JiangXueqiao's Blog","author":"江雪桥","avatar":"/images/avatar.png","logo":null,"favicon":"/images/favicon.png"},"menu":{"home":"/ || fa-solid fa-home","archives":"/archives || fa-solid fa-layer-group","categories":"/categories || fa-solid fa-box-archive","tags":"/tags || fa-solid fa-tags","about":"/about || fa-solid fa-user-graduate","📘专栏":"/post/902225606.html","🔥匠心之作":"/post/3416050985.html","Github":"https://github.com/winsoft666"},"first_screen":{"enable":false,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"social_contact":{"enable":true,"links":{"github":null,"weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":true,"hide_header":true},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":false,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":true,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":false},"comment":{"enable":false,"use":"twikoo","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":"https://twikoo.jiangxueqiao.com","region":"zh-CN","version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2017,"word_count":false,"icp":{"enable":true,"record_code":"鄂ICP备2020015399号-6","url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":true,"css":[null,"/css/custom.css"],"js":[null]},"root":"","source_data":{},"version":"4.1.0"}
+    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
+    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
+    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
+  </script>
+<meta name="generator" content="Hexo 6.3.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="JiangXueqiao's Blog" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left border-box">
+            
+            <a class="site-name border-box" href="/">
+               JiangXueqiao&#39;s Blog
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-home"></i>
+                                
+                                首页
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-layer-group"></i>
+                                
+                                归档
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-box-archive"></i>
+                                
+                                分类
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/tags"
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-tags"></i>
+                                
+                                标签
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/about"
+                            >
+                                
+                                    <i class="menu-icon fa-solid fa-user-graduate"></i>
+                                
+                                关于
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/post/902225606.html"
+                            >
+                                
+                                📘专栏
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               href="/post/3416050985.html"
+                            >
+                                
+                                🔥匠心之作
+                            </a>
+                        </li>
+                    
+                        
+                        <li class="menu-item">
+                            <a class=""
+                               target="_blank" rel="noopener" href="https://github.com/winsoft666"
+                            >
+                                
+                                GITHUB
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/"
+                    >首页</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives"
+                    >归档</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories"
+                    >分类</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/tags"
+                    >标签</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/about"
+                    >关于</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/post/902225606.html"
+                    >📘专栏</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/post/3416050985.html"
+                    >🔥匠心之作</a>
+                </li>
+            
+                
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       target="_blank" rel="noopener" href="https://github.com/winsoft666"
+                    >GITHUB</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+
+            <div class="post-content-bottom border-box">
+                
+                    <div class="post-title">
+                        玩转Qt 2D绘图之画家的工具
+                    </div>
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="/images/avatar.png">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">江雪桥</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
+                <span class="datetime">2024-04-05 20:55:02</span>
+            </span>
+
+            <span class="meta-info-item post-update-date">
+                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
+                <span class="datetime" data-updated="Wed Apr 03 2024 19:20:32 GMT+0800">2024-04-03 19:20:32</span>
+            </span>
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/Qt/">Qt</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+
+        
+        
+        
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body">
+                    
+
+                    <img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/Grande-Odalisque-TinyTu.png" style="width:100%;">
+
+<p>软件是对现实世界的抽象，在设计软件接口时通常也会参考现实世界来进行设计。</p>
+<p>在现实世界中，画家使用宣纸、画笔、画刷这些工具作画，而在Qt中，画家是QPainter对象（画家的大脑则是QPaintEngine），纸张可以是QPaintDevice 的任何子类对象，如QWidget、QImage、QPixmap、QGLPixelBuffer 等；在 QPainter 选好纸张后，就可以使用画笔来勾勒物体的轮廓了，Qt中的画笔是 QPen 对象；画完轮廓后，可能还需要使用画刷来填充轮廓，Qt中的画刷是 QBrush 对象。</p>
+<span id="more"></span>
+
+<h1 id="一、QPaintDevice"><a href="#一、QPaintDevice" class="headerlink" title="一、QPaintDevice"></a>一、QPaintDevice</h1><p>本节介绍 QPaintDevice 的几个常用方法。</p>
+<p><strong>devicePixelRatio() 与 devicePixelRatioF()</strong></p>
+<p>用于获取DPI的缩放倍数，需要先在程序中开启DPI缩放特性：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span></span><br><span class="line"><span class="function"></span>{</span><br><span class="line">    QGuiApplication::<span class="built_in">setAttribute</span>(Qt::AA_EnableHighDpiScaling);</span><br><span class="line">    QGuiApplication::<span class="built_in">setAttribute</span>(Qt::AA_UseHighDpiPixmaps);</span><br><span class="line"><span class="meta">#<span class="keyword">if</span> (QT_VERSION &gt;= QT_VERSION_CHECK(5, 14, 0))</span></span><br><span class="line">    QGuiApplication::<span class="built_in">setHighDpiScaleFactorRoundingPolicy</span>(Qt::HighDpiScaleFactorRoundingPolicy::PassThrough);</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">    <span class="comment">// .......</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>从 Qt 5.14 版本开始，Qt可以支持小数位的 DPI 缩放，如 1.25、1.75 等。如需获取小数位DPI值，需要先设置<code>Qt::HighDpiScaleFactorRoundingPolicy::PassThrough</code>策略，然后通过 devicePixelRatioF 方法获取。</p>
+<p><strong>width() 与 height()</strong></p>
+<p>用于获取 QPaintDevice 的宽和高，这个数值不会随着坐标系的改变而改变，而且也不会随着 DPI 的改变而改变。</p>
+<p><strong>widthMM() 与 heightMM()</strong></p>
+<p>用于获取 QPaintDevice 在屏幕上实际显示的宽和高，单位为毫米。</p>
+<h1 id="二、QPen"><a href="#二、QPen" class="headerlink" title="二、QPen"></a>二、QPen</h1><p>画笔有宽度（width/widthF）、颜料（brush）、线条样式（Style）、一条线起笔和落笔的样式（CapStyle）、两条线相交处的样式（JoinStyle）等属性。</p>
+<h2 id="2-1-宽度"><a href="#2-1-宽度" class="headerlink" title="2.1 宽度"></a>2.1 宽度</h2><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">QPen::setWidth</span><span class="params">(<span class="type">int</span> width)</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">QPen::setWidthF</span><span class="params">(qreal width)</span></span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>如果指定的宽度小于 0，将不会绘制任何内容；如果指定的宽度等于 0，将被视为 1 个像素宽度；如果指定的宽度大于等于 1，则按指定的宽度来绘制。</p>
+<h2 id="2-2-QPen的画刷"><a href="#2-2-QPen的画刷" class="headerlink" title="2.2 QPen的画刷"></a>2.2 QPen的画刷</h2><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">QPen::setBrush</span><span class="params">(<span class="type">const</span> QBrush &amp;brush)</span></span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>QPen 有画刷属性，QPainter 对象也画刷属性（下面章节会介绍），二者都有填充之意，可以理解为 QPen 的画刷是用来填充画笔所画的线条（可以理解为画笔的颜料）的，而QPainter 的画刷是用来填充画笔所画的轮廓区域的，如填充矩形里面的区域。</p>
+<p>画刷可以是纯色、渐变色，也可以是图片。</p>
+<h2 id="2-3-线条样式"><a href="#2-3-线条样式" class="headerlink" title="2.3 线条样式"></a>2.3 线条样式</h2><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">QPen::setStyle</span><span class="params">(Qt::PenStyle style)</span></span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/6MkjpX6lBG-TinyTu.png"></p>
+<h2 id="2-4-起落笔样式"><a href="#2-4-起落笔样式" class="headerlink" title="2.4 起落笔样式"></a>2.4 起落笔样式</h2><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">QPen::setCapStyle</span><span class="params">(Qt::PenCapStyle style)</span></span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/2IXOuMMzxy-TinyTu.png"></p>
+<h2 id="2-5-相交样式"><a href="#2-5-相交样式" class="headerlink" title="2.5 相交样式"></a>2.5 相交样式</h2><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">QPen::setJoinStyle</span><span class="params">(Qt::PenJoinStyle style)</span></span></span><br></pre></td></tr></tbody></table></figure>
+
+<p><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/Oc0ypqQqIO-TinyTu.png"></p>
+<h2 id="2-6-实例"><a href="#2-6-实例" class="headerlink" title="2.6 实例"></a>2.6 实例</h2><p>下面示例指定了画笔的如下属性：</p>
+<ul>
+<li>画笔的宽度为 70px</li>
+<li>使用红色画刷</li>
+<li>线条样式为通过若干空格分割的点</li>
+<li>线条起笔和落笔处为圆形</li>
+<li>两条线交叉处也为圆形</li>
+</ul>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">Qt2DSample::paintEvent</span><span class="params">(QPaintEvent* e)</span> </span>{</span><br><span class="line">  <span class="function">QPainter <span class="title">painter</span><span class="params">(<span class="keyword">this</span>)</span></span>;</span><br><span class="line">  painter.<span class="built_in">setRenderHints</span>(QPainter::Antialiasing | QPainter::TextAntialiasing);</span><br><span class="line"></span><br><span class="line">  QPen pen;</span><br><span class="line">  pen.<span class="built_in">setWidth</span>(<span class="number">70</span>);</span><br><span class="line">  pen.<span class="built_in">setBrush</span>(Qt::red);</span><br><span class="line">  pen.<span class="built_in">setStyle</span>(Qt::DotLine);</span><br><span class="line">  pen.<span class="built_in">setCapStyle</span>(Qt::RoundCap);</span><br><span class="line">  pen.<span class="built_in">setJoinStyle</span>(Qt::RoundJoin);</span><br><span class="line"></span><br><span class="line">  painter.<span class="built_in">setPen</span>(pen);</span><br><span class="line"></span><br><span class="line">  painter.<span class="built_in">drawLine</span>(<span class="number">50</span>, <span class="number">50</span>, <span class="number">600</span>, <span class="number">50</span>);</span><br><span class="line"></span><br><span class="line">  painter.<span class="built_in">drawLine</span>(<span class="number">600</span>, <span class="number">50</span>, <span class="number">600</span>, <span class="number">600</span>);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>实际绘制出来的效果如下图所示：</p>
+<p><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/9Vuvj96Gel.png"></p>
+<p>上面画笔使用的红色作为颜料，我们也可以使用渐变色作为颜料，当然还可以使用图片作为颜料。</p>
+<p>下面我们将颜料改为一个红色的心形♥图片：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">Qt2DSample::paintEvent</span><span class="params">(QPaintEvent* e)</span> </span>{</span><br><span class="line">  <span class="function">QPainter <span class="title">painter</span><span class="params">(<span class="keyword">this</span>)</span></span>;</span><br><span class="line">  painter.<span class="built_in">setRenderHints</span>(QPainter::Antialiasing | QPainter::TextAntialiasing);</span><br><span class="line"></span><br><span class="line">  QPen pen;</span><br><span class="line">  pen.<span class="built_in">setWidth</span>(<span class="number">70</span>);</span><br><span class="line">  pen.<span class="built_in">setBrush</span>(<span class="built_in">QImage</span>(<span class="string">":/heart.png"</span>)); <span class="comment">// 仅修改了此行代码</span></span><br><span class="line">                    ~~~~~~~~~~~~~~</span><br><span class="line">  pen.<span class="built_in">setStyle</span>(Qt::DotLine);</span><br><span class="line">  pen.<span class="built_in">setCapStyle</span>(Qt::RoundCap);</span><br><span class="line">  pen.<span class="built_in">setJoinStyle</span>(Qt::RoundJoin);</span><br><span class="line"></span><br><span class="line">  painter.<span class="built_in">setPen</span>(pen);</span><br><span class="line"></span><br><span class="line">  painter.<span class="built_in">drawLine</span>(<span class="number">50</span>, <span class="number">50</span>, <span class="number">600</span>, <span class="number">50</span>);</span><br><span class="line"></span><br><span class="line">  painter.<span class="built_in">drawLine</span>(<span class="number">600</span>, <span class="number">50</span>, <span class="number">600</span>, <span class="number">600</span>);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>绘制的效果如下：</p>
+<p><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/fGqs5DBAuF.png"></p>
+<h1 id="三、QBrush"><a href="#三、QBrush" class="headerlink" title="三、QBrush"></a>三、QBrush</h1><p>QPen 与 QPainter 都有画刷属性，这里的 QBrush 是指的 QPainter 的画刷。虽然与 QPen 的画刷都为 QBrush 类型，但二者是有区别的，QPen 的画刷是用来填充画笔所画线条（可以理解为画笔的颜料）的，而 QPainter 的画刷是用来填充画笔所画的轮廓所包围的区域，如填充矩形里面的区域。</p>
+<p>如下面示例：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">Qt2DSample::paintEvent</span><span class="params">(QPaintEvent* e)</span> </span>{</span><br><span class="line">  <span class="function">QPainter <span class="title">painter</span><span class="params">(<span class="keyword">this</span>)</span></span>;</span><br><span class="line">  painter.<span class="built_in">setRenderHints</span>(QPainter::Antialiasing | QPainter::TextAntialiasing);</span><br><span class="line"></span><br><span class="line">  QPen pen;</span><br><span class="line">  pen.<span class="built_in">setWidth</span>(<span class="number">6</span>);</span><br><span class="line">  pen.<span class="built_in">setBrush</span>(Qt::red);</span><br><span class="line"></span><br><span class="line">  painter.<span class="built_in">setPen</span>(pen);</span><br><span class="line">  painter.<span class="built_in">setBrush</span>(Qt::blue);</span><br><span class="line"></span><br><span class="line">  painter.<span class="built_in">drawRect</span>(<span class="number">50</span>, <span class="number">50</span>, <span class="number">200</span>, <span class="number">200</span>);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>实际绘制的矩形如下图所示：</p>
+<p><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/U0528POfgW.png"></p>
+<p>QBrush 有样式（Style）、颜色（Color）、渐变色（Gradient）、纹理图片（Texture）等属性。</p>
+<h2 id="3-1-样式"><a href="#3-1-样式" class="headerlink" title="3.1 样式"></a>3.1 样式</h2><p>画刷的作用是填充区域，画刷的样式是用来指定通过什么模式来填充区域的。</p>
+<p>下图列出了 QBrush 支持的样式：</p>
+<p><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/79r3LYbpDc-TinyTu.png"></p>
+<p>QBrush的初始样式是 Qt::NoBrush，即不做填充操作，该值显然是没有任何意义的。</p>
+<p>我们可以通过构造函数和 setStyle 方法来设置样式：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">QBrush</span>(Qt::BrushStyle style)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">setStyle</span><span class="params">(Qt::BrushStyle style)</span></span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>当通过不同的方式构造 QBrush 对象时，QBrush 的样式也会自动被设置为不同的值：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 样式自动被设置为渐变样式：Qt::LinearGradientPattern, Qt::RadialGradientPattern 或 Qt::ConicalGradientPattern</span></span><br><span class="line"><span class="built_in">QBrush</span>(<span class="type">const</span> QGradient &amp;gradient) </span><br><span class="line"></span><br><span class="line"><span class="comment">// 样式自动被设置为纹理样式Qt::TexturePattern</span></span><br><span class="line"><span class="built_in">QBrush</span>(<span class="type">const</span> QImage &amp;image)          </span><br><span class="line"><span class="built_in">QBrush</span>(<span class="type">const</span> QPixmap &amp;pixmap)</span><br><span class="line"><span class="built_in">QBrush</span>(Qt::GlobalColor color, <span class="type">const</span> QPixmap &amp;pixmap)</span><br><span class="line"><span class="built_in">QBrush</span>(<span class="type">const</span> QColor &amp;color, <span class="type">const</span> QPixmap &amp;pixmap)</span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="3-2-纹理图片"><a href="#3-2-纹理图片" class="headerlink" title="3.2 纹理图片"></a>3.2 纹理图片</h2><p>在上面2.6节的实例中，在设置心形图片作为QPen的画刷时，使用的就是纹理图片。</p>
+<p>下面汇总了设置 QBrush 纹理图片的几种方法：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 通过构造函数</span></span><br><span class="line"><span class="built_in">QBrush</span>(<span class="type">const</span> QImage &amp;image)</span><br><span class="line"><span class="built_in">QBrush</span>(<span class="type">const</span> QPixmap &amp;pixmap)</span><br><span class="line"><span class="built_in">QBrush</span>(Qt::GlobalColor color, <span class="type">const</span> QPixmap &amp;pixmap)</span><br><span class="line"><span class="built_in">QBrush</span>(<span class="type">const</span> QColor &amp;color, <span class="type">const</span> QPixmap &amp;pixmap)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过成员方法</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">setTexture</span><span class="params">(<span class="type">const</span> QPixmap &amp;pixmap)</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">setTextureImage</span><span class="params">(<span class="type">const</span> QImage &amp;image)</span></span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>通过上面方式设置纹理图片后，QBrush 样式会被自动修改为 Qt::TexturePattern，因为纹理图片只能与 Qt::TexturePattern 样式配合使用，否则纹理图片将失效。</p>
+<h2 id="3-3-纯色"><a href="#3-3-纯色" class="headerlink" title="3.3 纯色"></a>3.3 纯色</h2><p>可以为画刷指定纯色或渐变色，纯色使用 QColor 对象表示。</p>
+<p>常用的构造 QColor 对象的方式有如下几种：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">QColor</span>(<span class="string">"#FFFFFF"</span>); <span class="comment">//  r g b</span></span><br><span class="line"><span class="built_in">QColor</span>(<span class="string">"#AAFFFFFF"</span>); <span class="comment">// a r g b</span></span><br><span class="line"><span class="built_in">QColor</span>(<span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>, <span class="number">255</span>); <span class="comment">// r g b a</span></span><br><span class="line"><span class="built_in">QColor</span>(Qt::red); <span class="comment">// Qt::GlobalColor 枚举值</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h2 id="3-4-渐变色"><a href="#3-4-渐变色" class="headerlink" title="3.4 渐变色"></a>3.4 渐变色</h2><p>为 QBrush 提供了一种方式来指定渐变色：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">QBrush</span>(<span class="type">const</span> QGradient &amp;gradient)</span><br></pre></td></tr></tbody></table></figure>
+
+<p>在Qt中，渐变色使用 QGradient 及其子类 QConicalGradient、QLinearGradient、QRadialGradient 表示，目前Qt支持三种类型的渐变：</p>
+<ul>
+<li>线性渐变，对应 QLinearGradient 类。</li>
+<li>锥形渐变，对应 QConicalGradient 类。</li>
+<li>径向渐变，分为简单径向渐变和扩展径向渐变，二者都对应 QRadialGradient 类。</li>
+</ul>
+<p>下图是一个从左到右，由白到黑的渐变过程：</p>
+<p><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/white-black-jianbian-TinyTu.png"></p>
+<p>填充方向既然可以从左到右，当然也可以是从右到左的，还可以是从里到外等等，不同的填充方向造就了不同类型的渐变，上述三种类型的渐变主要区别也在填充方向的不同。</p>
+<h3 id="3-4-1-线性渐变"><a href="#3-4-1-线性渐变" class="headerlink" title="3.4.1 线性渐变"></a>3.4.1 线性渐变</h3><p>QLinearGradient 构造函数如下：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">QLinearGradient</span>(qreal x1, qreal y1, qreal x2, qreal y2)</span><br><span class="line"><span class="built_in">QLinearGradient</span>(<span class="type">const</span> QPointF &amp;start, <span class="type">const</span> QPointF &amp;finalStop)</span><br></pre></td></tr></tbody></table></figure>
+
+<p>通过指定一个起点和一个终点就可以确定一条线段及其方向，这个方向就是填充方向，线性渐变由此而来。</p>
+<p>线性渐变的方向可以是水平的，也可以是垂直的，还可以是斜着的，具体方向由线段与X轴的夹角来决定。</p>
+<p>下面我们定义一个起点为(0,0)、终点为(0,400)，垂直方向的线性渐变，然后使用该渐变填充位置在 (0,0)，宽高为 200x400 的矩形（请注意矩形的位置和大小，这个与渐变的起止位置有关，后面会详细介绍）：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">Qt2DSample::paintEvent</span><span class="params">(QPaintEvent* e)</span> </span>{</span><br><span class="line">  <span class="function">QPainter <span class="title">painter</span><span class="params">(<span class="keyword">this</span>)</span></span>;</span><br><span class="line">  painter.<span class="built_in">setRenderHints</span>(QPainter::Antialiasing | QPainter::TextAntialiasing);</span><br><span class="line"></span><br><span class="line">  <span class="function">QLinearGradient <span class="title">linearGrad</span><span class="params">(QPointF(<span class="number">0</span>, <span class="number">0</span>), QPointF(<span class="number">0</span>, <span class="number">400</span>))</span></span>;</span><br><span class="line">  linearGrad.<span class="built_in">setColorAt</span>(<span class="number">0</span>, Qt::black);</span><br><span class="line">  linearGrad.<span class="built_in">setColorAt</span>(<span class="number">1</span>, Qt::white);</span><br><span class="line"></span><br><span class="line">  <span class="function">QBrush <span class="title">brush</span><span class="params">(linearGrad)</span></span>;</span><br><span class="line"></span><br><span class="line">  painter.<span class="built_in">setBrush</span>(brush);</span><br><span class="line"></span><br><span class="line">  painter.<span class="built_in">drawRect</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">200</span>, <span class="number">400</span>);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>效果如下图所示：</p>
+<p><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/9ySVUiYR7i.png"></p>
+<p>由于是垂直方面的渐变，所以渐变色从上到下变化的，颜色起始于黑色，终止于白色。</p>
+<p>渐变色的起止颜色由<code>setColorAt</code>方法设置，该方法原型如下：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">QGradient::setColorAt</span><span class="params">(qreal position, <span class="type">const</span> QColor &amp;color)</span></span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>setColorAt 不仅接受颜色参数，还支持 postion 参数，position 参数的范围是<code>[0,1]</code>。线性渐变通过起止位置确定了一条带方向的线段，而 position 参数则用于确定线段上的一个<strong>具体位置</strong>，结合position和color参数就可以表示在某一位置的颜色值。</p>
+<p>可以使用 setColorAt 方法指定多个在<code>[0,1]</code>之间的位置及该位置的颜色，Qt会自动在多个颜色之间插入过渡色，达到平滑过渡的效果。</p>
+<p>现在我们在 0.3 位置插入一个骚气的红色，0.5位置插入黄色，其他都保持不变：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">linearGrad.<span class="built_in">setColorAt</span>(<span class="number">0</span>, Qt::black);</span><br><span class="line">linearGrad.<span class="built_in">setColorAt</span>(<span class="number">0.3</span>, Qt::red);</span><br><span class="line">linearGrad.<span class="built_in">setColorAt</span>(<span class="number">0.8</span>, Qt::yellow);</span><br><span class="line">linearGrad.<span class="built_in">setColorAt</span>(<span class="number">1</span>, Qt::white);</span><br></pre></td></tr></tbody></table></figure>
+
+<p>效果如下图所示：</p>
+<p><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/mZ2gN4GO0n.png"></p>
+<h3 id="3-4-2-渐变范围"><a href="#3-4-2-渐变范围" class="headerlink" title="3.4.2 渐变范围"></a>3.4.2 渐变范围</h3><p>在上面一节，我们强调了所绘制的矩形的位置/大小与渐变的起止位置有关，而且又强调了 position 参数所确定是线段上的具体位置。<strong>其根本原因就在于渐变是有位置和范围的。</strong></p>
+<p>对于线性渐变而言，渐变的范围是起始点和终止点间的线段，但颜色在垂直于该线段的方向却是无限扩充的，下面示例可以很好的说明这一特性。</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Qt2DSample窗口长宽为600x600</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Qt2DSample::paintEvent</span><span class="params">(QPaintEvent* e)</span> </span>{</span><br><span class="line">  <span class="function">QPainter <span class="title">painter</span><span class="params">(<span class="keyword">this</span>)</span></span>;</span><br><span class="line">  painter.<span class="built_in">setRenderHints</span>(QPainter::Antialiasing | QPainter::TextAntialiasing);</span><br><span class="line"></span><br><span class="line">  <span class="function">QLinearGradient <span class="title">linearGrad</span><span class="params">(QPointF(<span class="number">150</span>, <span class="number">150</span>), QPointF(<span class="number">450</span>, <span class="number">450</span>))</span></span>;</span><br><span class="line">  linearGrad.<span class="built_in">setColorAt</span>(<span class="number">0</span>, Qt::yellow);</span><br><span class="line">  linearGrad.<span class="built_in">setColorAt</span>(<span class="number">0.5</span>, Qt::red);</span><br><span class="line">  linearGrad.<span class="built_in">setColorAt</span>(<span class="number">1</span>, Qt::white);</span><br><span class="line"></span><br><span class="line">  <span class="function">QBrush <span class="title">brush</span><span class="params">(linearGrad)</span></span>;</span><br><span class="line">  painter.<span class="built_in">setBrush</span>(brush);</span><br><span class="line">  painter.<span class="built_in">drawRect</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">600</span>, <span class="number">600</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 不使用画刷，绘制 左上角 -&gt; 右下角 为线性渐变起止点的矩形</span></span><br><span class="line">  painter.<span class="built_in">setBrush</span>(Qt::NoBrush);</span><br><span class="line">  painter.<span class="built_in">drawRect</span>(<span class="number">150</span>, <span class="number">150</span>, <span class="number">300</span>, <span class="number">300</span>);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>效果如下图所示：</p>
+<p><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/x7tCsdiv7V-TinyTu.png"></p>
+<p>从上图可以看到，渐变色在垂直于渐变线段（中间矩形的左上角和右下角连成的斜线）方向无限扩展，但为什么在渐变范围边界以外还有颜色呢？如左上角的黄色和右下角的白色，这个与渐变的另一个属性特性有关 – 渐变传播，后面章节有详细介绍。</p>
+<h3 id="3-4-3-锥向渐变"><a href="#3-4-3-锥向渐变" class="headerlink" title="3.4.3 锥向渐变"></a>3.4.3 锥向渐变</h3><p>QConicalGradient 类的构造函数如下：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">QConicalGradient</span>(qreal cx, qreal cy, qreal angle)</span><br><span class="line"><span class="built_in">QConicalGradient</span>(<span class="type">const</span> QPointF &amp;center, qreal angle)</span><br></pre></td></tr></tbody></table></figure>
+
+<p>锥向渐变通过中心点（center）和起始角度来（angle）来所连接的直线确定填充的初始方向，然后从该直线开始逆时针进行360度填充，而且每个角度的颜色都是无限向外传播的。</p>
+<p><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/DpOba08BDf-TinyTu.png"></p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Qt2DSample窗口长宽为200x200</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Qt2DSample::paintEvent</span><span class="params">(QPaintEvent* e)</span> </span>{</span><br><span class="line">  <span class="function">QPainter <span class="title">painter</span><span class="params">(<span class="keyword">this</span>)</span></span>;</span><br><span class="line">  painter.<span class="built_in">setRenderHints</span>(QPainter::Antialiasing | QPainter::TextAntialiasing);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 设定中心点刚好在窗口中心，起始角度为45度</span></span><br><span class="line">  <span class="function">QConicalGradient <span class="title">conicalGrad</span><span class="params">(QPointF(<span class="number">100</span>, <span class="number">100</span>), <span class="number">45</span>)</span></span>;</span><br><span class="line">  conicalGrad.<span class="built_in">setColorAt</span>(<span class="number">0</span>, Qt::yellow);</span><br><span class="line">  conicalGrad.<span class="built_in">setColorAt</span>(<span class="number">0.5</span>, Qt::red);</span><br><span class="line">  conicalGrad.<span class="built_in">setColorAt</span>(<span class="number">1</span>, Qt::white);</span><br><span class="line"></span><br><span class="line">  <span class="function">QBrush <span class="title">brush</span><span class="params">(conicalGrad)</span></span>;</span><br><span class="line">  painter.<span class="built_in">setBrush</span>(brush);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 绘制的矩形区域为整个窗口大小</span></span><br><span class="line">  painter.<span class="built_in">drawRect</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">200</span>, <span class="number">200</span>);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>效果如下图所示，渐变色从45度开始渐变，并且每个角度都无限向外传播，填充满了整个矩形：</p>
+<p><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/iXtwdxzf8d-TinyTu.png"></p>
+<h3 id="3-4-5-径向渐变"><a href="#3-4-5-径向渐变" class="headerlink" title="3.4.5 径向渐变"></a>3.4.5 径向渐变</h3><p>径向渐变分为简单径向渐变和扩展径向渐变，在介绍二者的不同之前，我们先看看QRadialGradient 类的构造函数可以大致分为以下三类：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 指定中心点、半径、焦点位置、焦半径</span></span><br><span class="line"><span class="built_in">QRadialGradient</span>(<span class="type">const</span> QPointF &amp;center, qreal centerRadius, <span class="type">const</span> QPointF &amp;focalPoint, qreal focalRadius)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 仅指定中心点、半径，此时焦点位置与中心点重合</span></span><br><span class="line"><span class="built_in">QRadialGradient</span>(<span class="type">const</span> QPointF &amp;center, qreal radius)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 指定中心点、半径、焦点位置</span></span><br><span class="line"><span class="built_in">QRadialGradient</span>(<span class="type">const</span> QPointF &amp;center, qreal radius, <span class="type">const</span> QPointF &amp;focalPoint)</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li><p>中心点（center）和半径（centerRadius）组成了一个圆，记为圆A，径向渐变的范围只限于圆A以内，圆A以外的区域按照指定的渐变传播方式进行传播；</p>
+</li>
+<li><p>焦点（focalPoint）为平面上的的一个点，简单径向渐变和扩展径向渐变对焦点的位置有不同的要求，这个区别在后面会介绍；</p>
+</li>
+<li><p>焦半径（focalRadius）则是围绕焦点所作的另外一个圆（记为圆B）的半径。</p>
+</li>
+</ul>
+<p>扩展径向渐变是在简单径向渐变的基础上额外使用了 <code>focalRadius</code>（焦点半径）这个参数。</p>
+<h4 id="简单径向渐变"><a href="#简单径向渐变" class="headerlink" title="简单径向渐变"></a>简单径向渐变</h4><p>焦点和圆A圆弧上的每一个点都可以组成一条线段，如果按照1度取一个点，就有360个线段，简单径向渐变就是对这360个线段都进行线性渐变。</p>
+<p>对于简单径向渐变而言，允许焦点位于圆弧上和圆外，如果焦点位于圆外，会自动将其退缩到圆弧上。</p>
+<p>下面是一个简单径向渐变的例子：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Qt2DSample窗口长宽为600x600</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Qt2DSample::paintEvent</span><span class="params">(QPaintEvent* e)</span> </span>{</span><br><span class="line">  <span class="function">QPainter <span class="title">painter</span><span class="params">(<span class="keyword">this</span>)</span></span>;</span><br><span class="line">  painter.<span class="built_in">setRenderHints</span>(QPainter::Antialiasing | QPainter::TextAntialiasing);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 焦点位于圆内右上角部分</span></span><br><span class="line">  <span class="function">QRadialGradient <span class="title">radialGrad</span><span class="params">(QPointF(<span class="number">300</span>, <span class="number">300</span>), <span class="number">200</span>, QPointF(<span class="number">400</span>, <span class="number">200</span>))</span></span>;</span><br><span class="line">  radialGrad.<span class="built_in">setColorAt</span>(<span class="number">0</span>, Qt::white);</span><br><span class="line">  radialGrad.<span class="built_in">setColorAt</span>(<span class="number">1</span>, Qt::black);</span><br><span class="line"></span><br><span class="line">  <span class="function">QBrush <span class="title">brush</span><span class="params">(radialGrad)</span></span>;</span><br><span class="line">  painter.<span class="built_in">setBrush</span>(brush);</span><br><span class="line"></span><br><span class="line">  painter.<span class="built_in">drawRect</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">600</span>, <span class="number">600</span>);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>效果如下图所示，径向渐变的范围只限于圆内，圆外的区域默认采用PadSpread方式传播：</p>
+<p><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/WUJFKPJWPc.png"></p>
+<h4 id="扩展径向渐变"><a href="#扩展径向渐变" class="headerlink" title="扩展径向渐变"></a>扩展径向渐变</h4><p>扩展径向渐变使用焦点和焦半径又组成了一个圆B，与简单径向渐变类似，也是通过对圆A圆弧上的每个点的连线做线性渐变来实现，但这次不是焦点与圆A圆弧上的点进行连线，而是“圆B圆弧上的点”与“圆A圆弧上的点”的连线，对这些连线做线性渐变。</p>
+<p>圆B始终填充起始颜色。</p>
+<p>与简单径向渐变不同的是，圆B必须完全在圆A里面。</p>
+<p>下面是一个扩展径向渐变的例子：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Qt2DSample窗口长宽为600x600</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Qt2DSample::paintEvent</span><span class="params">(QPaintEvent* e)</span> </span>{</span><br><span class="line">  <span class="function">QPainter <span class="title">painter</span><span class="params">(<span class="keyword">this</span>)</span></span>;</span><br><span class="line">  painter.<span class="built_in">setRenderHints</span>(QPainter::Antialiasing | QPainter::TextAntialiasing);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 焦点位于圆内右上角部分，焦半径为30</span></span><br><span class="line">  <span class="function">QRadialGradient <span class="title">radialGrad</span><span class="params">(QPointF(<span class="number">300</span>, <span class="number">300</span>), <span class="number">200</span>, QPointF(<span class="number">400</span>, <span class="number">200</span>), <span class="number">30</span>)</span></span>;</span><br><span class="line">  radialGrad.<span class="built_in">setColorAt</span>(<span class="number">0</span>, Qt::white);</span><br><span class="line">  radialGrad.<span class="built_in">setColorAt</span>(<span class="number">1</span>, Qt::black);</span><br><span class="line"></span><br><span class="line">  <span class="function">QBrush <span class="title">brush</span><span class="params">(radialGrad)</span></span>;</span><br><span class="line">  painter.<span class="built_in">setBrush</span>(brush);</span><br><span class="line"></span><br><span class="line">  painter.<span class="built_in">drawRect</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">600</span>, <span class="number">600</span>);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>效果如下图所示：</p>
+<p><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/cJLzQWuNsj.png"></p>
+<h3 id="3-4-6-渐变传播"><a href="#3-4-6-渐变传播" class="headerlink" title="3.4.6 渐变传播"></a>3.4.6 渐变传播</h3><p>在Qt中通过 setSpread 方法设置渐变传播方式：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">QGradient::setSpread</span><span class="params">(QGradient::Spread method)</span></span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>QGradient::Spread枚举定义了三种传播方式：</p>
+<ul>
+<li>QGradient::PadSpread</li>
+<li>QGradient::RepeatSpread</li>
+<li>QGradient::ReflectSpread</li>
+</ul>
+<p>默认为传播方式为 QGradient::PadSpread，而且由锥向渐变的行为可知，锥向渐变是没有渐变传播一说的，因此它始终都是360度渐变。</p>
+<p>下图形象说明了三种传播方式的差异：</p>
+<p><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/d4e6a2aa3e0b98bb2bacb9ea40d6185e.png"></p>
+<ul>
+<li>PadSpread 方式延续了起点与终点处各自的颜色，无限传播</li>
+<li>RepeatSpread 方式不断重复渐变边界内的这一颜色的渐变模式</li>
+<li>ReflectSpread 方式将渐变边界内的模式不断往外镜像反射</li>
+</ul>
+<h3 id="3-4-7-渐变主题"><a href="#3-4-7-渐变主题" class="headerlink" title="3.4.7 渐变主题"></a>3.4.7 渐变主题</h3><p>设计一个漂亮的渐变色并非易事，Qt提供了内置的渐变主题(Preset)，这些主题通过 QGradient::Preset 枚举类型提供（该枚举从 Qt 5.12 开始引入）。</p>
+<blockquote>
+<p>从Qt官方文档得知，QGradient::Preset预置渐变主题方案是基于<a class="link" target="_blank" rel="noopener" href="https://webgradients.com/">https://webgradients.com/<i class="fas fa-external-link-alt"></i></a>实现的。</p>
+</blockquote>
+<p>QGradient 类支持基于 QGradient::Preset 枚举类型构造：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QGradient::<span class="built_in">QGradient</span>(QGradient::Preset preset)</span><br></pre></td></tr></tbody></table></figure>
+
+<p>下面是使用QGradient::Preset的示例：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">Qt2DSample::paintEvent</span><span class="params">(QPaintEvent* e)</span> </span>{</span><br><span class="line">  <span class="function">QPainter <span class="title">painter</span><span class="params">(<span class="keyword">this</span>)</span></span>;</span><br><span class="line">  painter.<span class="built_in">setRenderHints</span>(QPainter::Antialiasing | QPainter::TextAntialiasing);</span><br><span class="line"></span><br><span class="line">  <span class="function">QGradient <span class="title">grad</span><span class="params">(QGradient::HealthyWater)</span></span>;</span><br><span class="line">  <span class="function">QBrush <span class="title">brush</span><span class="params">(grad)</span></span>;</span><br><span class="line"></span><br><span class="line">  painter.<span class="built_in">setBrush</span>(brush);</span><br><span class="line"></span><br><span class="line">  painter.<span class="built_in">drawRect</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">600</span>, <span class="number">600</span>);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="3-4-8-网站推荐"><a href="#3-4-8-网站推荐" class="headerlink" title="3.4.8 网站推荐"></a>3.4.8 网站推荐</h3><p>下面几个网站也提供了漂亮的渐变色方案，可以用作参考：</p>
+<ul>
+<li><a class="link" target="_blank" rel="noopener" href="https://www.grabient.com/">grabient.com<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link" target="_blank" rel="noopener" href="https://uigradients.com/">uigradients.com<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link" target="_blank" rel="noopener" href="https://webgradients.com/">webgradients.com<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+<hr>
+<blockquote>
+<p>限于政策原因，在您看到该文章时，博客可能已经关闭了评论功能🥺</p>
+<p>您可以通过在 <a class="link" target="_blank" rel="noopener" href="https://github.com/winsoft666/blog-comment">blog-comment<i class="fas fa-external-link-alt"></i></a> 项目中提交Issue来间接地发表评论🍀</p>
+</blockquote>
+
+                </div>
+                
+                        
+<div class="post-copyright-info-container border-box">
+    <div class="copyright-info-content border-box">
+        <div class="copyright-info-top border-box">
+            <div class="copyright-post-title border-box text-ellipsis">
+                玩转Qt 2D绘图之画家的工具
+            </div>
+
+            <div class="copyright-post-link border-box text-ellipsis">
+                post/1336811290.html
+            </div>
+        </div>
+
+        <div class="copyright-info-bottom border-box">
+            <div class="copyright-post-author bottom-item">
+                <div class="type">
+                    作者
+                </div>
+                <div class="content">江雪桥</div>
+            </div>
+
+            <div class="post-time bottom-item">
+                <div class="type">
+                    发布于
+                </div>
+                <div class="content">2024-04-05 20:55</div>
+            </div>
+
+
+            <div class="post-license bottom-item">
+                <div class="type">
+                    许可
+                </div>
+                <div class="content tooltip" data-tooltip-content="CC BY-NC-SA 4.0">
+                    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" target="_blank">
+                        
+                            <i class="fa-brands fa-creative-commons"></i>
+                            <i class="fa-brands fa-creative-commons-by"></i>
+                            <i class="fa-brands fa-creative-commons-nc"></i>
+                            <i class="fa-brands fa-creative-commons-sa"></i>
+                        
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <i class="copyright-bg fa-solid fa-copyright"></i>
+    </div>
+    <div class="copy-copyright-info flex-center tooltip" data-tooltip-content="复制版权信息" data-tooltip-offset-y="-2px">
+        <i class="fa-solid fa-copy"></i>
+    </div>
+</div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                    </div>
+                    <div>
+                        
+                            <div class="post-share-container border-box">
+    <ul class="share-list-wrap border-box">
+        <li class="qq share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到 QQ"
+        >
+            <i class="fa-brands fa-qq"></i>
+        </li>
+        <li class="wechat share-item border-box flex-center tooltip tooltip-img"
+            data-tooltip-content="分享到微信"
+            data-tooltip-img-tip="微信扫一扫"
+            data-tooltip-img-style="background-color: #fff; top: -10px; padding: 0.6rem 0.6rem 0.1rem 0.6rem;"
+        >
+            <i class="fa-brands fa-weixin"></i>
+        </li>
+        <li class="weibo share-item border-box flex-center tooltip"
+            data-tooltip-content="分享到微博"
+        >
+            <i class="fa-brands fa-weibo"></i>
+        </li>
+    </ul>
+</div>
+
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/post/902225606.html"
+                                   title="专栏汇总"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">专栏汇总</span>
+                                        <span class="post-nav-item">下一篇</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81QPaintDevice"><span class="nav-text">一、QPaintDevice</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81QPen"><span class="nav-text">二、QPen</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E5%AE%BD%E5%BA%A6"><span class="nav-text">2.1 宽度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-QPen%E7%9A%84%E7%94%BB%E5%88%B7"><span class="nav-text">2.2 QPen的画刷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-%E7%BA%BF%E6%9D%A1%E6%A0%B7%E5%BC%8F"><span class="nav-text">2.3 线条样式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-%E8%B5%B7%E8%90%BD%E7%AC%94%E6%A0%B7%E5%BC%8F"><span class="nav-text">2.4 起落笔样式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-%E7%9B%B8%E4%BA%A4%E6%A0%B7%E5%BC%8F"><span class="nav-text">2.5 相交样式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-6-%E5%AE%9E%E4%BE%8B"><span class="nav-text">2.6 实例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81QBrush"><span class="nav-text">三、QBrush</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E6%A0%B7%E5%BC%8F"><span class="nav-text">3.1 样式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E7%BA%B9%E7%90%86%E5%9B%BE%E7%89%87"><span class="nav-text">3.2 纹理图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-%E7%BA%AF%E8%89%B2"><span class="nav-text">3.3 纯色</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-%E6%B8%90%E5%8F%98%E8%89%B2"><span class="nav-text">3.4 渐变色</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-1-%E7%BA%BF%E6%80%A7%E6%B8%90%E5%8F%98"><span class="nav-text">3.4.1 线性渐变</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-2-%E6%B8%90%E5%8F%98%E8%8C%83%E5%9B%B4"><span class="nav-text">3.4.2 渐变范围</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-3-%E9%94%A5%E5%90%91%E6%B8%90%E5%8F%98"><span class="nav-text">3.4.3 锥向渐变</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-5-%E5%BE%84%E5%90%91%E6%B8%90%E5%8F%98"><span class="nav-text">3.4.5 径向渐变</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E5%BE%84%E5%90%91%E6%B8%90%E5%8F%98"><span class="nav-text">简单径向渐变</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E5%BE%84%E5%90%91%E6%B8%90%E5%8F%98"><span class="nav-text">扩展径向渐变</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-6-%E6%B8%90%E5%8F%98%E4%BC%A0%E6%92%AD"><span class="nav-text">3.4.6 渐变传播</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-7-%E6%B8%90%E5%8F%98%E4%B8%BB%E9%A2%98"><span class="nav-text">3.4.7 渐变主题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-8-%E7%BD%91%E7%AB%99%E6%8E%A8%E8%8D%90"><span class="nav-text">3.4.8 网站推荐</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="border-box website-info-box default">
+        
+            <div class="copyright-info info-item default">
+                &copy;&nbsp;<span>2017</span>&nbsp;-&nbsp;2024
+                
+                    &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">江雪桥</a>
+                
+            </div>
+
+            <div class="copyright-info info-item default">
+                本站文章均为原创（少数注明转载的除外），转载请注明出处！
+            </div>
+
+            <div class="copyright-info info-item default">
+                <a target="_blank" rel="noopener" href="https://blog.csdn.net/china_jeffery">My CSDN</a>
+                &nbsp;&nbsp;
+                <a target="_blank" rel="noopener" href="https://github.com/winsoft666/">My Github</a>
+                &nbsp;&nbsp;
+                <a href="/post/3416050985.html">匠心之作</a>
+            </div>
+
+            
+                <div class="icp-info info-item default">
+                    <a class=""
+                       target="_blank"
+                       href="https://beian.miit.gov.cn"
+                    >
+                        鄂ICP备2020015399号-6
+                    </a>
+                </div>
+            
+
+            
+        
+
+        <div class="count-item info-item default">
+            
+
+            
+
+            
+        </div>
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="tools-list border-box">
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-toggle-theme-mode flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="搜索..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81QPaintDevice"><span class="nav-text">一、QPaintDevice</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81QPen"><span class="nav-text">二、QPen</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E5%AE%BD%E5%BA%A6"><span class="nav-text">2.1 宽度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-QPen%E7%9A%84%E7%94%BB%E5%88%B7"><span class="nav-text">2.2 QPen的画刷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-%E7%BA%BF%E6%9D%A1%E6%A0%B7%E5%BC%8F"><span class="nav-text">2.3 线条样式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-%E8%B5%B7%E8%90%BD%E7%AC%94%E6%A0%B7%E5%BC%8F"><span class="nav-text">2.4 起落笔样式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-%E7%9B%B8%E4%BA%A4%E6%A0%B7%E5%BC%8F"><span class="nav-text">2.5 相交样式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-6-%E5%AE%9E%E4%BE%8B"><span class="nav-text">2.6 实例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81QBrush"><span class="nav-text">三、QBrush</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E6%A0%B7%E5%BC%8F"><span class="nav-text">3.1 样式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-%E7%BA%B9%E7%90%86%E5%9B%BE%E7%89%87"><span class="nav-text">3.2 纹理图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-%E7%BA%AF%E8%89%B2"><span class="nav-text">3.3 纯色</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-%E6%B8%90%E5%8F%98%E8%89%B2"><span class="nav-text">3.4 渐变色</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-1-%E7%BA%BF%E6%80%A7%E6%B8%90%E5%8F%98"><span class="nav-text">3.4.1 线性渐变</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-2-%E6%B8%90%E5%8F%98%E8%8C%83%E5%9B%B4"><span class="nav-text">3.4.2 渐变范围</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-3-%E9%94%A5%E5%90%91%E6%B8%90%E5%8F%98"><span class="nav-text">3.4.3 锥向渐变</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-5-%E5%BE%84%E5%90%91%E6%B8%90%E5%8F%98"><span class="nav-text">3.4.5 径向渐变</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E5%BE%84%E5%90%91%E6%B8%90%E5%8F%98"><span class="nav-text">简单径向渐变</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E5%BE%84%E5%90%91%E6%B8%90%E5%8F%98"><span class="nav-text">扩展径向渐变</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-6-%E6%B8%90%E5%8F%98%E4%BC%A0%E6%92%AD"><span class="nav-text">3.4.6 渐变传播</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-7-%E6%B8%90%E5%8F%98%E4%B8%BB%E9%A2%98"><span class="nav-text">3.4.7 渐变主题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-8-%E7%BD%91%E7%AB%99%E6%8E%A8%E8%8D%90"><span class="nav-text">3.4.8 网站推荐</span></a></li></ol></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+<!-- common -->
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/toggle-theme.js"></script>
+
+<script src="/js/code-block.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+
+<!-- local-search -->
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+<!-- lazyload -->
+
+    
+<script src="/js/lazyload.js"></script>
+
+
+
+<div class="">
+    
+        <!-- post-helper -->
+        
+<script src="/js/post/post-helper.js"></script>
+
+
+        <!-- toc -->
+        
+            
+<script src="/js/post/toc.js"></script>
+
+        
+
+        <!-- copyright-info -->
+        
+            
+<script src="/js/post/copyright-info.js"></script>
+
+        
+
+        <!-- share -->
+        
+            
+<script src="/js/post/share.js"></script>
+
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+
+
+    
+        
+    
+
+</body>
+</html>

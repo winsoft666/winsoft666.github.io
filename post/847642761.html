@@ -421,7 +421,7 @@ mjx-container[display="true"] + br {
 
             <span class="meta-info-item post-update-date">
                 <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Sun Mar 31 2024 15:59:18 GMT+0800">2024-03-31 15:59:18</span>
+                <span class="datetime" data-updated="Wed Apr 03 2024 18:56:49 GMT+0800">2024-04-03 18:56:49</span>
             </span>
         
 
@@ -467,17 +467,17 @@ mjx-container[display="true"] + br {
 
 <p>在Qt官方文档中有一张图可以很好说明Qt各个坐标系变换方式（暂不用关注图上的坐标值）：</p>
 <p><img lazyload="" alt="Qt坐标关系图" data-src="https://blog-static.jiangxueqiao.com/blog/img/qt-coordination.jpeg"></p>
-<p>我们在使用QPainter绘图时需要传入坐标，传入的坐标就是图上的世界坐标系（World Coordinates），世界坐标经过矩阵后再传递给窗口坐标系（Window Coordinates），窗口坐标经过窗口到视口的坐标变换，最后在设备坐标系（Device Coordinates）的视口区域内绘制。</p>
-<h2 id="1-世界坐标系（World-Coordinates）"><a href="#1-世界坐标系（World-Coordinates）" class="headerlink" title="1. 世界坐标系（World Coordinates）"></a>1. 世界坐标系（World Coordinates）</h2><p>世界坐标也称之为逻辑坐标（下文都称作逻辑坐标），使用的单位叫逻辑单位。</p>
-<p>在真实的世界地理中，通常使用经纬度单位来表示某一个具体位置，如武汉的坐标为(东经114°,北纬30)，而在Qt绘图时使用的逻辑单位是像素。但Qt的像素支持非整数数量，如0.5个像素，而实际设备坐标（如显示器、打印机等）只支持整数数量的像素显示，因此从逻辑坐标到设备坐标需要经过一个转换过程。</p>
+<p>我们在使用QPainter绘图时需要传入元素坐标，传入的坐标就是图上的世界坐标系（World Coordinates），世界坐标经过矩阵变换（这一步是可选的）后再传递给窗口坐标系（Window Coordinates），窗口坐标系上的元素的坐标还需经过窗口到视口的坐标变换（线性变换），最后在设备坐标系（Device Coordinates）的视口区域内绘制。</p>
+<h2 id="1-世界坐标系"><a href="#1-世界坐标系" class="headerlink" title="1. 世界坐标系"></a>1. 世界坐标系</h2><p>世界坐标系也称之为逻辑坐标系，使用的单位叫逻辑单位。</p>
+<p>在真实的世界地理中，通常使用经纬度单位来表示某一个具体位置，如武汉的坐标为(东经114°,北纬30)，而在Qt绘图时使用的逻辑单位是像素。但Qt的像素支持非整数数量，如0.5个像素，而实际设备坐标（如显示器、打印机等）只支持整数数量的像素显示，因此从逻辑坐标到设备坐标需要经过相应的转换过程。</p>
 <p>在Qt中，我们提供给 QPainter 的都是逻辑坐标，这种坐标与具体的设备类型无关。</p>
-<h2 id="2-窗口坐标系（Window-Coordinates）"><a href="#2-窗口坐标系（Window-Coordinates）" class="headerlink" title="2. 窗口坐标系（Window Coordinates）"></a>2. 窗口坐标系（Window Coordinates）</h2><p>上图中的窗口是打了引号的，这说明该窗口是实际不存在的，这个窗口指的是窗口坐标系左上角原点到右下角的一个虚拟矩形窗口。</p>
-<p>默认情况下，窗口坐标系和逻辑坐标系都等同于设备坐标系，三者重合，但我们可以使用<code>QPaintet::setWindow</code>方式重设窗口坐标系的原点和范围。</p>
-<p>在绘图时传递给 QPainter 的逻辑坐标需要先经过矩阵变换（QPainter 的 translate、scale、rotate、shear方法，后面文章会详细介绍），然后再传递给窗口坐标系。</p>
-<h2 id="3-设备坐标系（Device-Coordinates）"><a href="#3-设备坐标系（Device-Coordinates）" class="headerlink" title="3. 设备坐标系（Device Coordinates）"></a>3. 设备坐标系（Device Coordinates）</h2><p>也称之为物理坐标（Physical Coordinates），坐标原点位于左上角，X轴水平向右增长，Y轴垂直向下增长。</p>
+<h2 id="2-窗口坐标系"><a href="#2-窗口坐标系" class="headerlink" title="2. 窗口坐标系"></a>2. 窗口坐标系</h2><p>上图中的窗口是打了引号的，这说明该窗口是实际不存在的，这个窗口指的是窗口坐标系左上角原点到右下角的一个虚拟矩形窗口。</p>
+<p>默认情况下，窗口坐标系和逻辑坐标系都等同于设备坐标系，三者重合，但我们可以使用<code>QPaintet::setWindow</code>方法重设窗口坐标系的原点和范围，有了左上角原点和长/宽，也就得到一个新的“窗口”。</p>
+<p>在绘图时传递给 QPainter 的逻辑坐标需要先经过矩阵变换（常见的矩阵变换有QPainter 的 translate、scale、rotate、shear等方法，后面章节会介绍），然后再传递给窗口坐标系。</p>
+<h2 id="3-设备坐标系"><a href="#3-设备坐标系" class="headerlink" title="3. 设备坐标系"></a>3. 设备坐标系</h2><p>也称之为物理坐标（Physical Coordinates），坐标原点位于左上角，X轴水平向右增长，Y轴垂直向下增长。</p>
 <p>不同的设备坐标单位通常不同，如显示器通常以像素为单位，而打印机通常以点为单位。</p>
 <p>需要注意的是设备坐标系的原点和范围始终等同于实际绘制设备，不会跟随逻辑坐标系、窗口坐标系以及视口（viewport）的改变而改变。</p>
-<h2 id="4-视口（viewport）"><a href="#4-视口（viewport）" class="headerlink" title="4. 视口（viewport）"></a>4. 视口（viewport）</h2><p>视口是设备环境中的一个矩形框，使用设备坐标系表示。默认情况下，视口左上角位置为设备坐标系的原点，大小为实际绘制目标设备的大小。</p>
+<h2 id="4-视口"><a href="#4-视口" class="headerlink" title="4. 视口"></a>4. 视口</h2><p>视口（viewport）是设备环境中的一个矩形框，使用设备坐标系表示。默认情况下，视口左上角位置为设备坐标系的原点，大小为实际绘制目标设备的大小。</p>
 <p>视口存在的意义是为了指定在显示设备的什么位置，以多大的范围来<strong>完全显示</strong>指定的窗口内容，如果窗口内容超出了视口区域，超出部分将不会显示。</p>
 <p>我们可以用 <code>QPainter::setViewport</code> 方法来改变视口的位置和大小，<code>QPainter::setViewport</code> 的参数都是基于设备坐标系的，如果指定的视口区域超出了设备外，设备外的内容将不会显示。</p>
 <h2 id="5-实例讲解"><a href="#5-实例讲解" class="headerlink" title="5. 实例讲解"></a>5. 实例讲解</h2><p>为了更好说明各个坐标系及视口之间的关系，我们通过一个实例来具体说明。首先创建一个长宽为400x400的窗口，并且程序未开启DPI缩放特性：</p>
@@ -512,6 +512,53 @@ mjx-container[display="true"] + br {
 
 <p>计算得到需要在视口 (100, 100, 300, 300) 上绘制的正方形为 (200,100,100,100) ，实际绘制的正方形如下图所示：</p>
 <p><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/PxUDuO0cQO.png"></p>
+<h2 id="6-QRect遗留问题"><a href="#6-QRect遗留问题" class="headerlink" title="6. QRect遗留问题"></a>6. QRect遗留问题</h2><p>在介绍 QRect 的遗留问题之前，我们需要先了解Qt中锯齿与抗锯齿的相关内容。</p>
+<h3 id="6-1-抗锯齿"><a href="#6-1-抗锯齿" class="headerlink" title="6.1 抗锯齿"></a>6.1 抗锯齿</h3><p>下图展示了在绘制一条斜线时，未开启抗锯齿（左边）和开启了抗锯齿后（右边）两者的效果。</p>
+<p><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/qt-aliased-anti-aliased.jpg"></p>
+<p>抗锯齿就是绘图引擎通过在元素的边缘填充不同的颜色来实现平滑边缘的效果。</p>
+<p>Qt默认绘图的元素是有锯齿的，当使用1像素宽的画笔绘制时，实际像素将渲染到我们定义坐标的右下方，如下图所示：</p>
+<p><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/n3Rsmq1Lp2.png"></p>
+<p>当画笔宽度为偶数时，像素将围绕定义坐标进行对称渲染，如下图所示：</p>
+<p><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/ofglrvzxwM.png"></p>
+<p>当画笔宽度为奇数时，整除后多余的1像素将渲染到定义坐标的右下方，如下图所示：</p>
+<p><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/jeHIWzh62T.png"></p>
+<h3 id="6-2-QRect实际宽高"><a href="#6-2-QRect实际宽高" class="headerlink" title="6.2 QRect实际宽高"></a>6.2 QRect实际宽高</h3><p>基于上述原因，<code>QRect::right()</code> 和 <code>QRect::bottom()</code>的值并不等于矩形真正右下角的坐标。</p>
+<p>QRect::right() 返回 QRect::left() + QRect::width() - 1</p>
+<p>QRect::bottom() 返回 QRect::top() + QRect::height() - 1</p>
+<p>这属于QRect的历史遗留问题，Qt为了兼容之前老的代码，对该部分未作修改，我们可以使用下面方式获取QRect真实的宽和高：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">QRect::<span class="built_in">x</span>() + QRect::<span class="built_in">width</span>()</span><br><span class="line"></span><br><span class="line">QRect::<span class="built_in">y</span>() + QRect::<span class="built_in">height</span>()</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="6-2-开启抗锯齿"><a href="#6-2-开启抗锯齿" class="headerlink" title="6.2 开启抗锯齿"></a>6.2 开启抗锯齿</h3><p>在Qt中开启抗锯齿也非常简单，下面代码开启了抗锯齿：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">painter.<span class="built_in">setRenderHints</span>(</span><br><span class="line">    QPainter::Antialiasing |    <span class="comment">// 消除基础元素（如线、点）边缘的锯齿</span></span><br><span class="line">    QPainter::TextAntialiasing  <span class="comment">// 消除文字边缘的锯齿</span></span><br><span class="line">);</span><br></pre></td></tr></tbody></table></figure>
+
+<p>开启抗锯齿以后，像素将始终围绕定义坐标进行对称渲染，并且会自动在边缘填充颜色来平滑边缘，如下图所示：</p>
+<p><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/YSQWnZ7g8p-TinyTu.png"></p>
+<h2 id="7-逻辑坐标矩阵变换"><a href="#7-逻辑坐标矩阵变换" class="headerlink" title="7. 逻辑坐标矩阵变换"></a>7. 逻辑坐标矩阵变换</h2><p>Qt 提供了方法来直接对世界坐标（也可称为逻辑坐标）进行矩阵变换：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">QPainter::setWorldTransform</span><span class="params">(<span class="type">const</span> QTransform &amp;matrix, <span class="type">bool</span> combine = <span class="literal">false</span>)</span></span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>还提供方法来开启和关闭世界坐标的矩阵变换操作：</p>
+<figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">QPainter::setWorldMatrixEnabled</span><span class="params">(<span class="type">bool</span> enable)</span></span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>同时 QPainter 还是提供了 translate、scale、rotate、shear 等快捷方法实现对逻辑坐标的矩阵变换操作。</p>
+<p>需要注意的是在调用了translate、scale、rotate、shear方法后，QPainter 会自动开启对世界坐标的矩阵转换。</p>
+<p>为了更好的介绍是逻辑坐标的转化过程，现在假设在坐标变换之前存在 点A(x, y) 和 矩形B(x, y, w, h)</p>
+<h3 id="7-1-translate"><a href="#7-1-translate" class="headerlink" title="7.1 translate"></a>7.1 translate</h3><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">QPainter::translate</span><span class="params">(<span class="type">const</span> QPointF &amp;offset)</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">QPainter::translate</span><span class="params">(<span class="type">const</span> QPoint &amp;offset)</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">QPainter::translate</span><span class="params">(qreal dx, qreal dy)</span></span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>X和Y轴分别平移距离 m 和 n，平移后，点A的坐标为(x + m, y + n)，矩形B的坐标为(x + m, y + n, w, h)</p>
+<p>m 和 n 可以为负数。</p>
+<h3 id="7-2-scale"><a href="#7-2-scale" class="headerlink" title="7.2 scale"></a>7.2 scale</h3><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">QPainter::scale</span><span class="params">(qreal sx, qreal sy)</span></span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>X和Y轴分别缩放 m 和 n 倍 ，缩放后，点A的坐标为(x * m, y * n)，矩形B的坐标为 (x * m, y * n, w * m, h * n)</p>
+<p>m 和 n 可以为负数，如：</p>
+<p>点A(50,100) -&gt; scale(-10, 2) -&gt; (-500,200)</p>
+<p>点A(-50,100) -&gt; scale(-10, 2) -&gt; (500,200)</p>
+<h3 id="7-3-rotate"><a href="#7-3-rotate" class="headerlink" title="7.3 rotate"></a>7.3 rotate</h3><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">QPainter::rotate</span><span class="params">(qreal angle)</span></span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>按逆时针将X和Y轴同时旋转angle度（注意angle参数的单位是度，而不是弧度），其中<code>0度</code>为正三点钟方向。</p>
+<p>对于单个点进行旋转是没有意义的，</p>
+<h3 id="7-4-shear"><a href="#7-4-shear" class="headerlink" title="7.4 shear"></a>7.4 shear</h3><figure class="highlight cpp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">QPainter::shear</span><span class="params">(qreal sh, qreal sv)</span></span></span><br></pre></td></tr></tbody></table></figure>
+
+<p>对X和Y轴分别进行扭曲变换。</p>
 <hr>
 <blockquote>
 <p>限于政策原因，在您看到该文章时，博客可能已经关闭了评论功能🥺</p>
@@ -661,6 +708,15 @@ mjx-container[display="true"] + br {
         </div>
 
         
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%B8%96%E7%95%8C%E5%9D%90%E6%A0%87%E7%B3%BB"><span class="nav-text">1. 世界坐标系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E7%AA%97%E5%8F%A3%E5%9D%90%E6%A0%87%E7%B3%BB"><span class="nav-text">2. 窗口坐标系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E8%AE%BE%E5%A4%87%E5%9D%90%E6%A0%87%E7%B3%BB"><span class="nav-text">3. 设备坐标系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E8%A7%86%E5%8F%A3"><span class="nav-text">4. 视口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%AE%9E%E4%BE%8B%E8%AE%B2%E8%A7%A3"><span class="nav-text">5. 实例讲解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-QRect%E9%81%97%E7%95%99%E9%97%AE%E9%A2%98"><span class="nav-text">6. QRect遗留问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-%E6%8A%97%E9%94%AF%E9%BD%BF"><span class="nav-text">6.1 抗锯齿</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-QRect%E5%AE%9E%E9%99%85%E5%AE%BD%E9%AB%98"><span class="nav-text">6.2 QRect实际宽高</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-%E5%BC%80%E5%90%AF%E6%8A%97%E9%94%AF%E9%BD%BF"><span class="nav-text">6.2 开启抗锯齿</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E9%80%BB%E8%BE%91%E5%9D%90%E6%A0%87%E7%9F%A9%E9%98%B5%E5%8F%98%E6%8D%A2"><span class="nav-text">7. 逻辑坐标矩阵变换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-translate"><span class="nav-text">7.1 translate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-scale"><span class="nav-text">7.2 scale</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-3-rotate"><span class="nav-text">7.3 rotate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-4-shear"><span class="nav-text">7.4 shear</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
     </div>
 </div>
 
@@ -727,6 +783,10 @@ mjx-container[display="true"] + br {
     <ul class="tools-list border-box">
         <!-- PC TOC show toggle -->
         
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
 
         <!-- PC go comment -->
         
@@ -775,6 +835,10 @@ mjx-container[display="true"] + br {
     </ul>
 
     <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
         
 
         
@@ -831,6 +895,17 @@ mjx-container[display="true"] + br {
     
 
     <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E4%B8%96%E7%95%8C%E5%9D%90%E6%A0%87%E7%B3%BB"><span class="nav-text">1. 世界坐标系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E7%AA%97%E5%8F%A3%E5%9D%90%E6%A0%87%E7%B3%BB"><span class="nav-text">2. 窗口坐标系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E8%AE%BE%E5%A4%87%E5%9D%90%E6%A0%87%E7%B3%BB"><span class="nav-text">3. 设备坐标系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E8%A7%86%E5%8F%A3"><span class="nav-text">4. 视口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E5%AE%9E%E4%BE%8B%E8%AE%B2%E8%A7%A3"><span class="nav-text">5. 实例讲解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-QRect%E9%81%97%E7%95%99%E9%97%AE%E9%A2%98"><span class="nav-text">6. QRect遗留问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-%E6%8A%97%E9%94%AF%E9%BD%BF"><span class="nav-text">6.1 抗锯齿</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-QRect%E5%AE%9E%E9%99%85%E5%AE%BD%E9%AB%98"><span class="nav-text">6.2 QRect实际宽高</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-%E5%BC%80%E5%90%AF%E6%8A%97%E9%94%AF%E9%BD%BF"><span class="nav-text">6.2 开启抗锯齿</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-%E9%80%BB%E8%BE%91%E5%9D%90%E6%A0%87%E7%9F%A9%E9%98%B5%E5%8F%98%E6%8D%A2"><span class="nav-text">7. 逻辑坐标矩阵变换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-translate"><span class="nav-text">7.1 translate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-scale"><span class="nav-text">7.2 scale</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-3-rotate"><span class="nav-text">7.3 rotate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-4-shear"><span class="nav-text">7.4 shear</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
     
 </main>
 
