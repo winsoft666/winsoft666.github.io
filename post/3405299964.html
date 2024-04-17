@@ -119,12 +119,34 @@
 </article>
 <div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/post/3162890435.html">深入理解C++虚函数</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/post/3157704992.html">高速文件下载器的实现</a></div></section></div>
 
+<div class="related-wrap" id="related-posts">
+    <section class='header'>
+      <div class='title cap theme'>您可能感兴趣的文章</div>
+    </section>
+    <section class='body'>
+    <div class="related-posts"><a class="item" href="\post\4169328538.html" title="如何在批处理中执行SQL"><span class="title">如何在批处理中执行SQL</span></a><a class="item" href="\post\3801212176.html" title="批处理杂记"><span class="title">批处理杂记</span><span class="excerpt">1. exitexit命令用于退出当前的批处理脚本，并返回一个退出代码ExitCode（即返回值）。退出代码通常是一个整数，用于指示脚本执行的状态，例如成功（0）或失败（非零值）。
+exit命令的语法为：
+1exit [/b] [ex...</span></a><a class="item" href="\post\2372684836.html" title="批处理运行外部程序"><span class="title">批处理运行外部程序</span><span class="excerpt">本文介绍了批处理中启动外部程序和批处理的几种不同方法，以及如何获取命令返回值，最后还介绍了批处理中命令顺序执行的几种方法的区别。</span></a></div></section></div>
+
+
+  <div class="related-wrap md-text" id="comments">
+    <section class='header cmt-title cap theme'>
+      <p>快来参与讨论吧~</p>
+
+    </section>
+    <section class='body cmt-body beaudar'>
+      
+
+<svg class="loading" style="vertical-align:middle;fill:currentColor;overflow:hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2709"><path d="M832 512c0-176-144-320-320-320V128c211.2 0 384 172.8 384 384h-64zM192 512c0 176 144 320 320 320v64C300.8 896 128 723.2 128 512h64z" p-id="2710"></path></svg>
+
+<div id="beaudar" repo="winsoft666/blog-comment" issue-term="pathname" theme="preferred-color-scheme" label="comment" input-position="top" comment-order="desc" loading="false" branch="main"></div>
+
+    </section>
+  </div>
 
 
 
-
-
-<footer class="page-footer footnote"><hr><div class="sitemap"><div class="sitemap-group"><span class="fs15">博客</span><a href="/">近期</a><a href="/topic">专栏</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></div><div class="sitemap-group"><span class="fs15">产品</span><a href="/post/776574933.html">1key.run</a><a href="/post/2053741240.html">TinyTu</a><a href="/post/1533480858.html">WinSpyPlus</a></div><div class="sitemap-group"><span class="fs15">社交</span><a href="/">友链</a><a target="_blank" rel="noopener" href="https://github.com/winsoft666/blog-comment">留言板</a></div><div class="sitemap-group"><span class="fs15">更多</span><a href="/author">关于本站</a><a target="_blank" rel="noopener" href="https://github.com/winsoft666">GitHub</a></div></div><div class="text"><p>本站由 <a href="/">江雪桥</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.27.0">Stellar 1.27.0</a> 主题创建。<br>本博客所有文章除特别声明外均为原创，采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+<footer class="page-footer footnote"><hr><div class="sitemap"><div class="sitemap-group"><span class="fs15">博客</span><a href="/">近期</a><a href="/topic">专栏</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></div><div class="sitemap-group"><span class="fs15">产品</span><a href="/post/776574933.html">1key.run</a><a href="/post/2053741240.html">TinyTu</a><a href="/post/1533480858.html">WinSpyPlus</a></div><div class="sitemap-group"><span class="fs15">社交</span><a href="/friends">友链</a><a target="_blank" rel="noopener" href="https://github.com/winsoft666/blog-comment">留言板</a></div><div class="sitemap-group"><span class="fs15">更多</span><a href="/author">关于本站</a><a target="_blank" rel="noopener" href="https://github.com/winsoft666">GitHub</a></div></div><div class="text"><p>本站由 <a href="/">江雪桥</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.27.0">Stellar 1.27.0</a> 主题创建。<br>本博客所有文章除特别声明外均为原创，采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
 </div></footer>
 <div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
 </aside><div class='float-panel blur'>
@@ -357,6 +379,34 @@
 <script src="/js/main.js?v=1.27.0" async></script>
 
 <!-- optional -->
+
+  <script>
+  function loadBeaudar() {
+    const els = document.querySelectorAll("#comments #beaudar");
+    if (els.length === 0) return;
+    els.forEach((el, i) => {
+      try {
+        el.innerHTML = '';
+      } catch (error) {
+        console.error(error);
+      }
+      var script = document.createElement('script');
+      script.src = 'https://beaudar.lipk.org/client.js';
+      script.async = true;
+      for (let key of Object.keys(el.attributes)) {
+        let attr = el.attributes[key];
+        if (['class', 'id'].includes(attr.name) === false) {
+          script.setAttribute(attr.name, attr.value);
+        }
+      }
+      el.appendChild(script);
+    });
+  }
+  window.addEventListener('DOMContentLoaded', (event) => {
+      loadBeaudar();
+  });
+</script>
+
 
 
 
