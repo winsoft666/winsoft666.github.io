@@ -1,361 +1,85 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
+
+<!DOCTYPE html><html lang="zh-CN">
+
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="keywords" content="Windows,Linux,C/C++,Golang,Qt,Node.js,Electron,Vue,WebRTC,NSIS,HTTP">
-    <meta name="description" content="深入跨平台客户端领域，持续构建完善的客户端技术体系">
-    <meta name="author" content="江雪桥">
-    
-    <title>
-        
-            网络协议(7)--HTTP与HTTPS协议 |
-        
-        JiangXueqiao&#39;s Blog
-    </title>
-    
-<link rel="stylesheet" href="/css/style.css">
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.27.0" theme-name="Stellar" theme-version="1.27.0">
+  
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f9fafb">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  
+  <title>网络协议(7)--HTTP与HTTPS协议 - Jiang's Blog</title>
 
-    
-        <link rel="shortcut icon" href="/images/favicon.png">
-    
-    
-<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+  
+  <meta name="description" content="HTTP 是Hyper Text Transfer Protocol（超文本传输协议）的缩写。HTTP 协议位于 TCP&#x2F;IP 协议栈的应用层。">
+  
+  <meta name="keywords" content="数字证书,HTTP,HTTPS,TSL">
 
-    
-<link rel="stylesheet" href="/font/css/regular.min.css">
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="Jiang's Blog" type="application/atom+xml">
+  
 
-    
-<link rel="stylesheet" href="/font/css/solid.min.css">
+  <link rel="stylesheet" href="/css/main.css?v=1.27.0">
 
-    
-<link rel="stylesheet" href="/font/css/brands.min.css">
+  
+    <link rel="shortcut icon" href="/images/favicon.png">
+  
 
-    
-        
-            
-        
-            
-                
-<link rel="stylesheet" href="/css/custom.css">
+  
 
-            
-        
-    
-    <script class="keep-theme-configurations">
-    const KEEP = window.KEEP || {}
-    KEEP.hexo_config = {"hostname":"jiangxueqiao.com","root":"/","language":"zh-CN","path":"search.xml"}
-    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"JiangXueqiao's Blog","author":"江雪桥","avatar":"/images/avatar.png","logo":null,"favicon":"/images/favicon.png"},"menu":{"home":"/ || fa-solid fa-home","archives":"/archives || fa-solid fa-layer-group","categories":"/categories || fa-solid fa-box-archive","tags":"/tags || fa-solid fa-tags","about":"/about || fa-solid fa-user-graduate","📘专栏":"/post/902225606.html","🔥匠心之作":"/post/3416050985.html","Github":"https://github.com/winsoft666"},"first_screen":{"enable":false,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"social_contact":{"enable":true,"links":{"github":null,"weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":true,"hide_header":true},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":false,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":true,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":false},"comment":{"enable":false,"use":"twikoo","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":"https://twikoo.jiangxueqiao.com","region":"zh-CN","version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2017,"word_count":false,"icp":{"enable":true,"record_code":"鄂ICP备2020015399号-6","url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":true,"css":[null,"/css/custom.css"],"js":[null]},"root":"","source_data":{},"version":"4.1.0"}
-    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
-    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
-    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
-  </script>
-<meta name="generator" content="Hexo 6.3.0">
-<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="JiangXueqiao's Blog" type="application/atom+xml">
+  <script src="/js/baidu-tongji.js"></script>
 </head>
-
-
 <body>
-<div class="progress-bar-container">
-    
 
-    
+<div class="l_body s:aa content tech" id="start" layout="post" ><aside class="l_left"><div class="leftbar-container">
+
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/author/"><div class="bg" style="opacity:0;background-image:url(https://blog-static.jiangxueqiao.com/blog/stellar-theme/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/images/avatar.png" onerror="javascript:this.classList.add('error');this.src='https://blog-static.jiangxueqiao.com/blog/stellar-theme/default/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">Jiang's Blog</div></a></div></header>
+
+<div class="nav-area">
+<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" placeholder="站内搜索"></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
+
+
+<nav class="menu dis-select"><a class="nav-item active" title="文章" href="/" style="color:#1BCDFC"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.879 2.879C5 3.757 5 5.172 5 8v8c0 2.828 0 4.243.879 5.121C6.757 22 8.172 22 11 22h2c2.828 0 4.243 0 5.121-.879C19 20.243 19 18.828 19 16V8c0-2.828 0-4.243-.879-5.121C17.243 2 15.828 2 13 2h-2c-2.828 0-4.243 0-5.121.879M8.25 17a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75M9 12.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zM8.25 9A.75.75 0 0 1 9 8.25h6a.75.75 0 0 1 0 1.5H9A.75.75 0 0 1 8.25 9" clip-rule="evenodd"/><path fill="currentColor" d="M5.235 4.058C5 4.941 5 6.177 5 8v8c0 1.823 0 3.058.235 3.942L5 19.924c-.975-.096-1.631-.313-2.121-.803C2 18.243 2 16.828 2 14v-4c0-2.829 0-4.243.879-5.121c.49-.49 1.146-.707 2.121-.803zm13.53 15.884C19 19.058 19 17.822 19 16V8c0-1.823 0-3.059-.235-3.942l.235.018c.975.096 1.631.313 2.121.803C22 5.757 22 7.17 22 9.999v4c0 2.83 0 4.243-.879 5.122c-.49.49-1.146.707-2.121.803z" opacity=".5"/></svg></a><a class="nav-item" title="专栏" href="/topic" style="color:#3DC550"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M14.25 4.48v3.057c0 .111 0 .27.02.406a.936.936 0 0 0 .445.683a.96.96 0 0 0 .783.072c.13-.04.272-.108.378-.159L17 8.005l1.124.534c.106.05.248.119.378.16a.958.958 0 0 0 .783-.073a.936.936 0 0 0 .444-.683c.021-.136.021-.295.021-.406V3.031c.113-.005.224-.01.332-.013C21.154 2.98 22 3.86 22 4.933v11.21c0 1.112-.906 2.01-2.015 2.08c-.97.06-2.108.179-2.985.41c-1.082.286-1.99 1.068-3.373 1.436c-.626.167-1.324.257-1.627.323V5.174c.32-.079 1.382-.203 1.674-.371c.184-.107.377-.216.576-.323m5.478 8.338a.75.75 0 0 1-.546.91l-4 1a.75.75 0 0 1-.364-1.456l4-1a.75.75 0 0 1 .91.546" clip-rule="evenodd"/><path fill="currentColor" d="M18.25 3.151c-.62.073-1.23.18-1.75.336a8.2 8.2 0 0 0-.75.27v3.182l.75-.356l.008-.005a1.13 1.13 0 0 1 .492-.13c.047 0 .094.004.138.01c.175.029.315.1.354.12l.009.005l.749.356V3.647z"/><path fill="currentColor" d="M12 5.214c-.334-.064-1.057-.161-1.718-.339C8.938 4.515 8.05 3.765 7 3.487c-.887-.234-2.041-.352-3.018-.412C2.886 3.007 2 3.9 2 4.998v11.146c0 1.11.906 2.01 2.015 2.079c.97.06 2.108.179 2.985.41c.486.129 1.216.431 1.873.726c1.005.451 2.052.797 3.127 1.034z" opacity=".5"/><path fill="currentColor" d="M4.273 12.818a.75.75 0 0 1 .91-.545l4 1a.75.75 0 1 1-.365 1.455l-4-1a.75.75 0 0 1-.545-.91m.909-4.545a.75.75 0 1 0-.364 1.455l4 1a.75.75 0 0 0 .364-1.455z"/></svg></a><a class="nav-item" title="关于" href="/author" style="color:#FA6400"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M20 12a8 8 0 1 1-16 0a8 8 0 0 1 16 0" opacity=".5"/><path fill="currentColor" d="M17.712 5.453c1.047-.193 2.006-.259 2.797-.152c.77.103 1.536.393 1.956 1.064c.446.714.312 1.542-.012 2.258c-.33.728-.918 1.499-1.672 2.268c-1.516 1.547-3.836 3.226-6.597 4.697c-2.763 1.472-5.495 2.484-7.694 2.92c-1.095.217-2.098.299-2.923.201c-.8-.095-1.6-.383-2.032-1.075c-.47-.752-.296-1.63.07-2.379c.375-.768 1.032-1.586 1.872-2.403L4 12.416c0 .219.083.71.168 1.146c.045.23.09.444.123.596c-.652.666-1.098 1.263-1.339 1.756c-.277.567-.208.825-.145.925c.072.116.305.305.937.38c.609.073 1.44.018 2.455-.183c2.02-.4 4.613-1.351 7.28-2.772c2.667-1.42 4.85-3.015 6.23-4.423c.694-.707 1.15-1.334 1.377-1.836c.233-.515.167-.75.107-.844c-.07-.112-.289-.294-.883-.374c-.542-.072-1.272-.041-2.163.112L16.87 5.656c.338-.101.658-.17.842-.203"/></svg></a></nav>
+</div>
+<div class="widgets">
+<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">专栏：《网络协议》</span></div><div class="widget-body"><a class="item" href="/post/3886809266.html"><span class="title">网络协议(1)--基础概念</span></a><a class="item" href="/post/3034381124.html"><span class="title">网络协议(2)--ARP和RARP协议</span></a><a class="item" href="/post/2274025898.html"><span class="title">网络协议(3)--IP协议</span></a><a class="item" href="/post/349088656.html"><span class="title">网络协议(4)--ICMP协议</span></a><a class="item" href="/post/4190400644.html"><span class="title">网络协议(5)--UDP协议</span></a><a class="item" href="/post/1504706832.html"><span class="title">网络协议(6)--TCP协议</span></a><a class="item active" href="/post/3654006375.html"><span class="title">网络协议(7)--HTTP与HTTPS协议</span><svg class="active-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M21 11.098v4.993c0 3.096 0 4.645-.734 5.321c-.35.323-.792.526-1.263.58c-.987.113-2.14-.907-4.445-2.946c-1.02-.901-1.529-1.352-2.118-1.47a2.225 2.225 0 0 0-.88 0c-.59.118-1.099.569-2.118 1.47c-2.305 2.039-3.458 3.059-4.445 2.945a2.238 2.238 0 0 1-1.263-.579C3 20.736 3 19.188 3 16.091v-4.994C3 6.81 3 4.666 4.318 3.333C5.636 2 7.758 2 12 2c4.243 0 6.364 0 7.682 1.332C21 4.665 21 6.81 21 11.098" opacity=".5"/><path fill="currentColor" d="M9 5.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5z"/></svg></a></div></widget>
+
+<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/post/529732738.html"><span class="title">ABI兼容性</span></a><a class="item title" href="/post/3008752839.html"><span class="title">基于共享内存的跨平台RPC框架 - Veigar</span></a><a class="item title" href="/post/776574933.html"><span class="title">一键启动神器之1key.run</span></a><a class="item title" href="/post/1533480858.html"><span class="title">Windows窗口调试利器-WinSpyPlus</span></a><a class="item title" href="/post/1967189103.html"><span class="title">玩转Qt 2D绘图之画家</span></a><a class="item title" href="/post/235943795.html"><span class="title">Node插件开发(2)-不同的调用方式</span></a><a class="item title" href="/post/819381949.html"><span class="title">Node插件开发(1)-快速入门</span></a><a class="item title" href="/post/3437796039.html"><span class="title">MSVC版本的二进制兼容性</span></a><a class="item title" href="/post/333631906.html"><span class="title">Qt中图片按九宫格模式缩放</span></a><a class="item title" href="/post/711494356.html"><span class="title">Qt自定义和美化菜单</span></a></div></widget>
 </div>
 
+</div></aside><div class="l_main" id="main">
 
 
-<main class="page-container border-box">
-    <!-- home first screen  -->
+
+
+
+<div class="article banner top">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span><a class="cap breadcrumb" id="menu" href="/topic">专栏</a><span class="sep"></span><a class="cap breadcrumb" id="proj" href="/post/3886809266.html">《网络协议》</a></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2018-03-15T04:30:00.000Z">2018-03-15</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-04-14T04:22:31.689Z">2024-04-14</time></span></div></div></div>
     
-
-    <!-- page content -->
-    <div class="page-main-content border-box">
-        <div class="page-main-content-top">
-            
-<header class="header-wrapper">
-
-    <div class="border-box header-content">
-        <div class="left border-box">
-            
-            <a class="site-name border-box" href="/">
-               JiangXueqiao&#39;s Blog
-            </a>
-        </div>
-
-        <div class="right border-box">
-            <div class="pc">
-                <ul class="menu-list">
-                    
-                        
-                        <li class="menu-item">
-                            <a class=""
-                               href="/"
-                            >
-                                
-                                    <i class="menu-icon fa-solid fa-home"></i>
-                                
-                                首页
-                            </a>
-                        </li>
-                    
-                        
-                        <li class="menu-item">
-                            <a class=""
-                               href="/archives"
-                            >
-                                
-                                    <i class="menu-icon fa-solid fa-layer-group"></i>
-                                
-                                归档
-                            </a>
-                        </li>
-                    
-                        
-                        <li class="menu-item">
-                            <a class=""
-                               href="/categories"
-                            >
-                                
-                                    <i class="menu-icon fa-solid fa-box-archive"></i>
-                                
-                                分类
-                            </a>
-                        </li>
-                    
-                        
-                        <li class="menu-item">
-                            <a class=""
-                               href="/tags"
-                            >
-                                
-                                    <i class="menu-icon fa-solid fa-tags"></i>
-                                
-                                标签
-                            </a>
-                        </li>
-                    
-                        
-                        <li class="menu-item">
-                            <a class=""
-                               href="/about"
-                            >
-                                
-                                    <i class="menu-icon fa-solid fa-user-graduate"></i>
-                                
-                                关于
-                            </a>
-                        </li>
-                    
-                        
-                        <li class="menu-item">
-                            <a class=""
-                               href="/post/902225606.html"
-                            >
-                                
-                                📘专栏
-                            </a>
-                        </li>
-                    
-                        
-                        <li class="menu-item">
-                            <a class=""
-                               href="/post/3416050985.html"
-                            >
-                                
-                                🔥匠心之作
-                            </a>
-                        </li>
-                    
-                        
-                        <li class="menu-item">
-                            <a class=""
-                               target="_blank" rel="noopener" href="https://github.com/winsoft666"
-                            >
-                                
-                                GITHUB
-                            </a>
-                        </li>
-                    
-                    
-                        <li class="menu-item search search-popup-trigger">
-                            <i class="fas search fa-search"></i>
-                        </li>
-                    
-                </ul>
-            </div>
-            <div class="mobile">
-                
-                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
-                
-                <div class="icon-item menu-bar">
-                    <div class="menu-bar-middle"></div>
-                </div>
-            </div>
-        </div>
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>网络协议(7)--HTTP与HTTPS协议</span></h1>
+        
+      </div>
     </div>
-
-    <div class="header-drawer">
-        <ul class="drawer-menu-list">
-            
-                
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/"
-                    >首页</a>
-                </li>
-            
-                
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/archives"
-                    >归档</a>
-                </li>
-            
-                
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/categories"
-                    >分类</a>
-                </li>
-            
-                
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/tags"
-                    >标签</a>
-                </li>
-            
-                
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/about"
-                    >关于</a>
-                </li>
-            
-                
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/post/902225606.html"
-                    >📘专栏</a>
-                </li>
-            
-                
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/post/3416050985.html"
-                    >🔥匠心之作</a>
-                </li>
-            
-                
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       target="_blank" rel="noopener" href="https://github.com/winsoft666"
-                    >GITHUB</a>
-                </li>
-            
-        </ul>
-    </div>
-
-    <div class="window-mask"></div>
-
-</header>
-
-
-        </div>
-
-        <div class="page-main-content-middle border-box">
-
-            <div class="main-content border-box">
-                
-
-                    
-<div class="fade-in-down-animation">
-    <div class="post-page-container border-box">
-        <div class="post-content-container border-box">
-            
-
-            <div class="post-content-bottom border-box">
-                
-                    <div class="post-title">
-                        网络协议(7)--HTTP与HTTPS协议
-                    </div>
-                
-
-                
-                    <div class="post-header border-box">
-                        
-                            <div class="avatar-box border-box">
-                                <img src="/images/avatar.png">
-                            </div>
-                        
-                        <div class="info-box">
-                            <div class="author border-box">
-                                <span class="name">江雪桥</span>
-                                
-                            </div>
-                            <div class="meta-info border-box">
-                                
-
-<div class="post-meta-info-container border-box post">
-    <div class="post-meta-info border-box">
-        
-
-        
-            <span class="meta-info-item post-create-date">
-                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
-                <span class="datetime">2018-03-15 12:30:00</span>
-            </span>
-
-            <span class="meta-info-item post-update-date">
-                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Sun Mar 31 2024 19:02:21 GMT+0800">2024-03-31 19:02:21</span>
-            </span>
-        
-
-        
-            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
-                <ul class="post-category-ul">
-                    
-                            <li class="category-item"><a href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/">编程基础</a></li>
-                        
-                    
-                </ul>
-            </span>
-        
-
-        
-            <span class="post-tag meta-info-item border-box">
-                <ul class="post-tag-ul">
-                    
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/HTTP/">HTTP</a></li>
-                        
-                    
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/HTTPS/">HTTPS</a></li>
-                        
-                    
-                </ul>
-            </span>
-        
-
-        
-        
-        
-        
-    </div>
-
     
-</div>
-
-                            </div>
-                        </div>
-                    </div>
-                
-
-                <div class="post-content keep-markdown-body">
-                    
-
-                    <p>HTTP 是<code>Hyper Text Transfer Protocol</code>（超文本传输协议）的缩写。HTTP 协议位于 TCP/IP 协议栈的应用层。</p>
+  </div>
+  </div><article class="md-text content"><p>HTTP 是<code>Hyper Text Transfer Protocol</code>（超文本传输协议）的缩写。HTTP 协议位于 TCP&#x2F;IP 协议栈的应用层。</p>
 <span id="more"></span>
 
 <h1 id="一、HTTP-协议介绍"><a href="#一、HTTP-协议介绍" class="headerlink" title="一、HTTP 协议介绍"></a>一、HTTP 协议介绍</h1><h2 id="1-1-什么是-HTTP"><a href="#1-1-什么是-HTTP" class="headerlink" title="1.1 什么是 HTTP"></a>1.1 什么是 HTTP</h2><p>HTTP 是一个客户端和服务器端请求和应答的标准，主要用于从万维网（即<code>WWW</code>，全称 <code>World Wide Web</code>）服务器传输超文本到本地浏览器之间的请求数据和响应数据的协议。客户端通过使用网页浏览器或者其它的工具发起一个 HTTP 请求到服务器上指定端口（默认端口为<code>80</code>），服务器在收到请求之后，返回响应内容（文本、图片等）。</p>
@@ -364,42 +88,42 @@
 <ul>
 <li><p><strong>1.0 版本：</strong> HTTP 协议非常老的标准，为了提高系统的效率，HTTP 1.0 规定浏览器与服务器只保持短暂的连接，浏览器的每次请求都需要与服务器建立一个 TCP 连接，服务器完成请求处理后立即断开 TCP 连接，服务器不跟踪每个客户也不记录过去的请求。正式因为这种特性造成了一些性能上的缺陷。</p>
 </li>
-<li><p><strong>1.1 版本：</strong> 克服了 HTTP 1.0 的缺陷，HTTP 1.1 支持持久连接（HTTP/1.1 的默认模式使用带流水线的持久连接），在一个 TCP 连接上可以传送多个 HTTP 请求和响应，减少了建立和关闭连接的消耗和延迟。同时还增加更多的请求头和响应头来改进和扩充 HTTP 1.0 的功能（如 POST 请求头字段等）。</p>
+<li><p><strong>1.1 版本：</strong> 克服了 HTTP 1.0 的缺陷，HTTP 1.1 支持持久连接（HTTP&#x2F;1.1 的默认模式使用带流水线的持久连接），在一个 TCP 连接上可以传送多个 HTTP 请求和响应，减少了建立和关闭连接的消耗和延迟。同时还增加更多的请求头和响应头来改进和扩充 HTTP 1.0 的功能（如 POST 请求头字段等）。</p>
 </li>
 <li><p><strong>2.0 版本：</strong> 2015 年 5 月作为互联网标准正式发布。主要新增如下特性：多路复用，二进制分帧，首部压缩，服务端推送。</p>
 </li>
 </ul>
 <h1 id="二、HTTP-消息请求"><a href="#二、HTTP-消息请求" class="headerlink" title="二、HTTP 消息请求"></a>二、HTTP 消息请求</h1><h2 id="2-1-URI、URL、URN"><a href="#2-1-URI、URL、URN" class="headerlink" title="2.1 URI、URL、URN"></a>2.1 URI、URL、URN</h2><p>通过 HTTP 或者 HTTPS 协议请求的资源由统一资源标识符（<code>Uniform Resource Identifiers</code>，<code>URI</code>）来标识。我们常用的是 URL，那么 URI, URL, URN 之前有什么区别和联系了？</p>
-<figure class="highlight txt"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">URI = Uniform Resource Identifier 统一资源标识符</span><br><span class="line">URL = Uniform Resource Locator    统一资源定位符</span><br><span class="line">URN = Universal Resource Name     统一资源名称</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">URI = Uniform Resource Identifier 统一资源标识符</span><br><span class="line">URL = Uniform Resource Locator    统一资源定位符</span><br><span class="line">URN = Universal Resource Name     统一资源名称</span><br></pre></td></tr></table></figure>
 
-<p>三者关系如下图：<br><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/wangluoxieyi-http-1.png"></p>
+<p>三者关系如下图：<br><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/img/wangluoxieyi-http-1.png"></p>
 <p><code>URI</code>用来唯一标识符来标识一个资源，是一个通用的概念，<code>URI</code>由<code>URL</code>和<code>URN</code>两个子集组成。</p>
 <p><code>URL</code>通过描述资源的位置来标识资源。</p>
 <p><code>URN</code>通过资源的名字来标识资源，与其所处的位置无关，这样即使资源的位置发生变动，其<code>URN</code>也不会变化。</p>
 <p>HTTP 规范将更通用的概念 URI 作为其资源标识符，但是实际上，HTTP 应用程序处理的只是 URI 的 URL 子集.</p>
-<h2 id="2-2-消息请求格式"><a href="#2-2-消息请求格式" class="headerlink" title="2.2 消息请求格式"></a>2.2 消息请求格式</h2><p><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/wangluoxieyi-http-2.png"></p>
+<h2 id="2-2-消息请求格式"><a href="#2-2-消息请求格式" class="headerlink" title="2.2 消息请求格式"></a>2.2 消息请求格式</h2><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/img/wangluoxieyi-http-2.png"></p>
 <h2 id="2-3-HTTP-常见的请求方法"><a href="#2-3-HTTP-常见的请求方法" class="headerlink" title="2.3 HTTP 常见的请求方法"></a>2.3 HTTP 常见的请求方法</h2><p>HTTP 消息请求的第一个字段就是“请求方法”，HTTP 1.1 中定义的几种常见的请求方法如下（<strong>只列出了常用的</strong>）：</p>
 <ul>
-<li>GET<br>向服务器获取数据。使用 GET 请求方法时，消息 Body 中没有“请求数据”（见上面消息格式的图）部分，所以将需要提交到服务器的数据放在 URL 中，因此能够提交到服务器的数据会受到 URL 长度的限制。<br><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/wangluoxieyi-http-3.png"></li>
+<li>GET<br>向服务器获取数据。使用 GET 请求方法时，消息 Body 中没有“请求数据”（见上面消息格式的图）部分，所以将需要提交到服务器的数据放在 URL 中，因此能够提交到服务器的数据会受到 URL 长度的限制。<br><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/img/wangluoxieyi-http-3.png"></li>
 </ul>
-<figure class="highlight txt"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> 各个浏览器对URL长度的限制如下（这些限制值可能随着浏览器的版本的更新而发生改变，仅供参考）：</span><br><span class="line">1. IE浏览器（Microsoft Internet Explorer） 对URL长度限制是2083（2K+53），超过这个限制，则自动截断（若是form提交则提交按钮不起作用）。</span><br><span class="line">2. Firefox</span><br><span class="line">Firefox（火狐浏览器）对URL长度限制是65536字符，但实际上有效的URL最大长度不少于100,000个字符。</span><br><span class="line">3. Chrome</span><br><span class="line">chrome对URL长度限制是8182个字符。</span><br><span class="line">4. Safari</span><br><span class="line">Safari对URL长度限制是80000字符。</span><br><span class="line">5. Opera</span><br><span class="line">Opera浏览器对URL长度限制是190000 字符。</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> 各个浏览器对URL长度的限制如下（这些限制值可能随着浏览器的版本的更新而发生改变，仅供参考）：</span><br><span class="line">1. IE浏览器（Microsoft Internet Explorer） 对URL长度限制是2083（2K+53），超过这个限制，则自动截断（若是form提交则提交按钮不起作用）。</span><br><span class="line">2. Firefox</span><br><span class="line">Firefox（火狐浏览器）对URL长度限制是65536字符，但实际上有效的URL最大长度不少于100,000个字符。</span><br><span class="line">3. Chrome</span><br><span class="line">chrome对URL长度限制是8182个字符。</span><br><span class="line">4. Safari</span><br><span class="line">Safari对URL长度限制是80000字符。</span><br><span class="line">5. Opera</span><br><span class="line">Opera浏览器对URL长度限制是190000 字符。</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>POST<br>向服务器提交数据（例如提交表单或者上传文件）。提交的数据包含在 Body 中。<br><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/wangluoxieyi-http-4.png"></li>
+<li>POST<br>向服务器提交数据（例如提交表单或者上传文件）。提交的数据包含在 Body 中。<br><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/img/wangluoxieyi-http-4.png"></li>
 </ul>
-<h1 id="三、HTTP-消息响应"><a href="#三、HTTP-消息响应" class="headerlink" title="三、HTTP 消息响应"></a>三、HTTP 消息响应</h1><h2 id="3-1-消息响应格式"><a href="#3-1-消息响应格式" class="headerlink" title="3.1 消息响应格式"></a>3.1 消息响应格式</h2><p><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/wangluoxieyi-http-5.png"></p>
-<p><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/wangluoxieyi-http-6.png"></p>
+<h1 id="三、HTTP-消息响应"><a href="#三、HTTP-消息响应" class="headerlink" title="三、HTTP 消息响应"></a>三、HTTP 消息响应</h1><h2 id="3-1-消息响应格式"><a href="#3-1-消息响应格式" class="headerlink" title="3.1 消息响应格式"></a>3.1 消息响应格式</h2><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/img/wangluoxieyi-http-5.png"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/img/wangluoxieyi-http-6.png"></p>
 <h2 id="3-2-HTTP-状态码"><a href="#3-2-HTTP-状态码" class="headerlink" title="3.2 HTTP 状态码"></a>3.2 HTTP 状态码</h2><p>状态代码由三位数字组成，第一个数字定义了响应的类别，共分五种类别:</p>
-<figure class="highlight txt"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1xx消息—— 请求已被服务器接收，继续处理</span><br><span class="line">2xx成功 —— 请求已成功被服务器接收、理解、并接受</span><br><span class="line">3xx重定向 —— 需要后续操作才能完成这一请求</span><br><span class="line">4xx请求错误 —— 请求含有词法错误或者无法被执行</span><br><span class="line">5xx服务器错误 —— 服务器在处理某个正确请求时发生错误</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1xx消息—— 请求已被服务器接收，继续处理</span><br><span class="line">2xx成功 —— 请求已成功被服务器接收、理解、并接受</span><br><span class="line">3xx重定向 —— 需要后续操作才能完成这一请求</span><br><span class="line">4xx请求错误 —— 请求含有词法错误或者无法被执行</span><br><span class="line">5xx服务器错误 —— 服务器在处理某个正确请求时发生错误</span><br></pre></td></tr></table></figure>
 
 <p>常见的状态码有：</p>
-<figure class="highlight txt"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">200 OK                        //客户端请求成功</span><br><span class="line">400 Bad Request               //客户端请求有语法错误，不能被服务器所理解</span><br><span class="line">401 Unauthorized              //请求未经授权，这个状态代码必须和WWW-Authenticate报头域一起使用</span><br><span class="line">403 Forbidden                 //服务器收到请求，但是拒绝提供服务</span><br><span class="line">404 Not Found                 //请求资源不存在，比如：输入了错误的URL</span><br><span class="line">500 Internal Server Error     //服务器发生不可预期的错误</span><br><span class="line">503 Server Unavailable        //由于超载或系统维护，服务器暂时的无法处理客户端的请求</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">200 OK                        //客户端请求成功</span><br><span class="line">400 Bad Request               //客户端请求有语法错误，不能被服务器所理解</span><br><span class="line">401 Unauthorized              //请求未经授权，这个状态代码必须和WWW-Authenticate报头域一起使用</span><br><span class="line">403 Forbidden                 //服务器收到请求，但是拒绝提供服务</span><br><span class="line">404 Not Found                 //请求资源不存在，比如：输入了错误的URL</span><br><span class="line">500 Internal Server Error     //服务器发生不可预期的错误</span><br><span class="line">503 Server Unavailable        //由于超载或系统维护，服务器暂时的无法处理客户端的请求</span><br></pre></td></tr></table></figure>
 
 <blockquote>
-<p>关于 HTTP 状态码的完整定义见：<a class="link" target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc2616#page-39">https://tools.ietf.org/html/rfc2616#page-39<i class="fas fa-external-link-alt"></i></a></p>
+<p>关于 HTTP 状态码的完整定义见：<a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc2616#page-39">https://tools.ietf.org/html/rfc2616#page-39</a></p>
 </blockquote>
 <h1 id="四、HTTPS-之密码学基础"><a href="#四、HTTPS-之密码学基础" class="headerlink" title="四、HTTPS 之密码学基础"></a>四、HTTPS 之密码学基础</h1><h2 id="4-1-对称加密算法"><a href="#4-1-对称加密算法" class="headerlink" title="4.1 对称加密算法"></a>4.1 对称加密算法</h2><p>对称加密算法（英文：<code>Symmetric-key algorithm</code>）是指密码学中的一类加密算法，又称为：私钥加密、共享密钥加密。这类算法在加密和解密时使用相同的<strong>密钥</strong>（或者这 2 个密钥可以通过简单的规则相互推算）。<br>“对称加密算法”比“非对称加密算法”速度更快，但对称加密算法的主要缺点在于要求加密和解密的双方获取相同的密钥，这样只要密钥被泄漏，则密文将不再安全。</p>
-<p><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/wangluoxieyi-http-7.png"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/img/wangluoxieyi-http-7.png"></p>
 <p>常见的对称加密算法有：</p>
 <ul>
 <li>DES: <code>Data Encryption Standard</code>, 数据加密标准，速度较快，适用于加密大量数据的场合。</li>
@@ -414,7 +138,7 @@
 <p>“私钥”一般都是自己保留，不透露给他人；而“公钥”可以公开给他人。</p>
 <p>“非对称加密算法”比“对称加密算法”安全性更高，不用担心加密密钥的泄漏，因为“公钥”是公开的，不存在泄漏。但“私钥”还是要保存妥当，不能泄露给他人，因为我们不需要在网络上传输“私钥”，所以“私钥”泄露的可能性会小很多。</p>
 <p>但是“非对称加密算法”比“对称加密算法”的运算速度慢很多，一般在数据量比较少的时候采用“非对称加密算法”。</p>
-<p><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/wangluoxieyi-http-8.jpg"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/img/wangluoxieyi-http-8.jpg"></p>
 <p>如上图，因为李四的“公钥”是公开的，所以张三要给李四发送信息，可以使用李四的“公钥”来加密信息。李四收到密文信息之后就可以使用自己的“私钥”来解密信息。因为其他人没有李四的“私钥”，所以就算密文信息被他人截获也无法解密。</p>
 <p>常见的非对称加密算法有：</p>
 <ul>
@@ -426,7 +150,7 @@
 <p>非对称算法虽然安全，但运算速度很慢，而对称算法的速度虽快，但在管理和传输密钥方面会存在安全隐患。在实际的操作过程中，我们通常采用的方式是：采用“非对称加密算法”管理“对称加密算法”的密钥，然后用“对称加密算法”加密数据，这样我们就集成了两类加密算法的优点，既实现了加密速度快的优点，又实现了安全方便管理密钥的优点。</p>
 </blockquote>
 <p><strong>使用 OpenSSL 生成 RSA 公私钥对</strong></p>
-<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 生成1024位的私钥</span><br><span class="line">openssl genrsa -out d:\rsa_private.pem 1024</span><br><span class="line"></span><br><span class="line">// 生成私钥对应的公钥</span><br><span class="line">openssl rsa -<span class="keyword">in</span> d:\rsa_private.pem -pubout -out d:\ca_public.pem</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">// 生成1024位的私钥</span><br><span class="line">openssl genrsa -out d:\rsa_private.pem 1024</span><br><span class="line"></span><br><span class="line">// 生成私钥对应的公钥</span><br><span class="line">openssl rsa -<span class="keyword">in</span> d:\rsa_private.pem -pubout -out d:\ca_public.pem</span><br></pre></td></tr></table></figure>
 
 <p>git 客户端安装文件中的提供的<code>ssh-keygen.exe</code>工具也可以用来生产非对称加密的公私钥对。</p>
 <h2 id="4-3-散列函数"><a href="#4-3-散列函数" class="headerlink" title="4.3 散列函数"></a>4.3 散列函数</h2><p>散列函数（英文：<code>Hash Function</code>）是将任意长度的的输入转化为定长输出的算法。编程中对散列函数使用非常普遍，如<code>MD5</code>,但并不是所有的散列函数都适用于密码学。密码学的散列函数必须同时具有如下几个额外的特性：</p>
@@ -438,7 +162,7 @@
 <p>常见的散列函数：</p>
 <ul>
 <li><code>MD5：</code>1991 年对 MD4 的改进版本，该算法不可逆。2004 年王小云等人证明了完全碰撞，在理论上说明 MD5 可以被完全攻破，2005 年，Lenstra 等人证明了现实中的碰撞，展示了两张完全不同的证书却拥有同样的 MD5 散列值。所以，目前<code>MD5</code>已经不安全了。</li>
-<li><code> SHA-1：</code>SHA-1 在许多安全协议中广为使用，包括 TLS 和 SSL、PGP、SSH、S/MIME 和 IPsec，曾被视为是 MD5 的后继者，但因为在理论在已经证明 SHA1 可以被破解，但限制于计算机的计算能力所以 SHA-1 被破解还是很困难，所以 SHA-1 的安全性如今被密码学家严重质疑。</li>
+<li><code> SHA-1：</code>SHA-1 在许多安全协议中广为使用，包括 TLS 和 SSL、PGP、SSH、S&#x2F;MIME 和 IPsec，曾被视为是 MD5 的后继者，但因为在理论在已经证明 SHA1 可以被破解，但限制于计算机的计算能力所以 SHA-1 被破解还是很困难，所以 SHA-1 的安全性如今被密码学家严重质疑。</li>
 <li><code>SHA-256：</code>SHA-224、SHA-256、SHA-384、SHA-512 一起并称为 SHA-2，至今尚找出对 SHA-2 有效的破解方法。</li>
 </ul>
 <h1 id="五、数字签名与数字证书"><a href="#五、数字签名与数字证书" class="headerlink" title="五、数字签名与数字证书"></a>五、数字签名与数字证书</h1><h2 id="5-1-数字签名"><a href="#5-1-数字签名" class="headerlink" title="5.1 数字签名"></a>5.1 数字签名</h2><p>数字签名（英文：<code>Digital Signature</code>）类似于我们写在纸上的手写签名，它的诞生主要是为了解决如下问题：</p>
@@ -447,7 +171,7 @@
 <li>证明该文件（或信息）没有被他人篡改过。</li>
 </ol>
 <p>其实，我们生活中手写签名的纸质合同也是通过各种形式达到上面 2 个效果（如：合同一式多份，每份合同都有双方签名等）。</p>
-<p>数字签名利用了“非对称加密算法”，签名和验证签名的过程如下图（图中的“认证”部分不是数字签名必须的，在“数字证书”部分会介绍）：<br><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/wangluoxieyi-http-9.jpg"></p>
+<p>数字签名利用了“非对称加密算法”，签名和验证签名的过程如下图（图中的“认证”部分不是数字签名必须的，在“数字证书”部分会介绍）：<br><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/img/wangluoxieyi-http-9.jpg"></p>
 <p>假设“李四”要发送一份数据给“张三”：<br>发送者“李四”对数据生成摘要信息（<code>摘要明文A</code>），然后使用<code>“李四”的“私钥”</code>加密摘要信息；接收者“张三”收到加密的摘要信息之后：</p>
 <ol>
 <li><p>使用<code>“李四”的“公钥”</code>对加密的摘要信息进行解密。若能解密则证明签名是由“李四”所签，这是因为只有<code>“李四”的“私钥”</code>加密的数据才能由<code>“李四”的“公钥”</code>解密，而又只有“李四”才有<code>“李四”的“私钥”</code>。</p>
@@ -471,7 +195,7 @@
 </ul>
 <p>公钥基础设施（<code>public key infrastructure</code>, 简称<code>KPI</code>）就是为了解决这个问题而建立的。<code>PKI</code>的目标就是为了实现不同成员在不见面的情况下进行安全通信的，我们当前采用的 PKI 模型是基于可信的第三方机构，也就是“证书颁发机构”（<code>certification authority</code>，简称<code>CA</code>）签发的证书。证书中存储了使用“证书颁发机构”的私钥加密之后的申请者的公钥信息。</p>
 <h2 id="5-2-1-数字证书的申请"><a href="#5-2-1-数字证书的申请" class="headerlink" title="5.2.1 数字证书的申请"></a>5.2.1 数字证书的申请</h2><p>数字证书需要向“证书颁发机构”提交申请，并通过审核之后才能颁发。因为数字证书中存储的是申请者的公钥，所以如果申请者的私钥丢失或泄漏，就需要向“证书颁发机构”申请注销该证书。</p>
-<p><code>Web服务器</code>向<code>CA</code>申请证书的流程大致如图：<br><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/wangluoxieyi-http-10.jpg"></p>
+<p><code>Web服务器</code>向<code>CA</code>申请证书的流程大致如图：<br><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/img/wangluoxieyi-http-10.jpg"></p>
 <p>“证书”中主要包含了经过<code>“证书颁发机构”的私钥</code>加密过后的<code>申请者的“公钥”</code>、<code>“证书有效期”</code>、<code>“申请者信息（如域名等）”</code>。更详细的信息，可以参考《HTTPS 权威指南》第 3.3.1 章节。</p>
 <h2 id="5-2-2-数字证书的验证"><a href="#5-2-2-数字证书的验证" class="headerlink" title="5.2.2 数字证书的验证"></a>5.2.2 数字证书的验证</h2><p>以“Chrome 浏览器”为例：<br>浏览器会内置各大著名的“证书颁发机构”的<code>“公钥”</code>，当收到 Web 服务器返回的<code>“服务器证书”</code>后，Chrome 会尝试使用内置的该“证书颁发机构”的<code>“公钥”</code>来解密该证书，如果能解密则说明该证书是“证书颁发机构”颁发的，且没有被篡改过的。然后通过解密所得的“域名”、“证书有效期”来校验该证书是否为该网站所有，是否过期等。</p>
 <blockquote>
@@ -479,15 +203,15 @@
 </blockquote>
 <h1 id="六、HTTPS"><a href="#六、HTTPS" class="headerlink" title="六、HTTPS"></a>六、HTTPS</h1><p>在 HTTP 请求过程中，客户端与服务端之前没有进行身份确认，而且传输的数据都没有加密处理，所以很容易被劫持和篡改。</p>
 <p>基于 HTTP 协议的这些弊端，后面就出现了<code>HTTPS</code>（<strong>严格的说，HTTPS 并不是一个协议，所以前面文章都没有使用“HTTPS 协议”</strong>），HTTPS 是基于<code>SSL/TSL</code>协议的，说白了就是<code>HTTP+SSL/TSL</code>，可以把 HTTPS 大致理解为<code>“HTTP Over SSL”</code>或者<code>“HTTP Over TSL”</code>。</p>
-<p>HTTP, SSL/TSL, HTTPS 的关系如下图：<br><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/wangluoxieyi-http-11.jpg"></p>
-<h2 id="6-1-SSL-TSL-协议"><a href="#6-1-SSL-TSL-协议" class="headerlink" title="6.1 SSL/TSL 协议"></a>6.1 SSL/TSL 协议</h2><h3 id="6-1-1-SSL"><a href="#6-1-1-SSL" class="headerlink" title="6.1.1 SSL"></a>6.1.1 SSL</h3><p>SSL（英文：<code>Secure Sockets Layer</code>的缩写）中文叫“安全套接层”。最开始由 NetScape 公司研发，用以保障互联网上数据传输的安全，利用数据加密技术确保数据在网络上之传输过程中不会被截取及窃听。<br>SSL 协议在 TCP/IP 协议栈中位于<code>传输层</code>和<code>应用层</code>之间。以<code>HTTPS</code>为例，SSL 协议就位于 TCP 和 HTTP 之间：<br><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/wangluoxieyi-http-12.gif"></p>
-<h3 id="6-1-2-TLS"><a href="#6-1-2-TLS" class="headerlink" title="6.1.2 TLS"></a>6.1.2 TLS</h3><p>TLS（英文：<code>Transport Layer Security</code>的缩写）中文叫“传输层安全协议”，<code>TLS 1.0</code>是 IETF（Internet Engineering Task Force，Internet 工程任务组）制定的一种新的协议，它建立在<code>SSL 3.0协议</code>规范之上，是<code>SSL 3.0</code>的后续版本，可以理解为 SSL 3.1，它定义在<a class="link" target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc5246">RFC5246<i class="fas fa-external-link-alt"></i></a>中。</p>
+<p>HTTP, SSL&#x2F;TSL, HTTPS 的关系如下图：<br><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/img/wangluoxieyi-http-11.jpg"></p>
+<h2 id="6-1-SSL-TSL-协议"><a href="#6-1-SSL-TSL-协议" class="headerlink" title="6.1 SSL&#x2F;TSL 协议"></a>6.1 SSL&#x2F;TSL 协议</h2><h3 id="6-1-1-SSL"><a href="#6-1-1-SSL" class="headerlink" title="6.1.1 SSL"></a>6.1.1 SSL</h3><p>SSL（英文：<code>Secure Sockets Layer</code>的缩写）中文叫“安全套接层”。最开始由 NetScape 公司研发，用以保障互联网上数据传输的安全，利用数据加密技术确保数据在网络上之传输过程中不会被截取及窃听。<br>SSL 协议在 TCP&#x2F;IP 协议栈中位于<code>传输层</code>和<code>应用层</code>之间。以<code>HTTPS</code>为例，SSL 协议就位于 TCP 和 HTTP 之间：<br><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/img/wangluoxieyi-http-12.gif"></p>
+<h3 id="6-1-2-TLS"><a href="#6-1-2-TLS" class="headerlink" title="6.1.2 TLS"></a>6.1.2 TLS</h3><p>TLS（英文：<code>Transport Layer Security</code>的缩写）中文叫“传输层安全协议”，<code>TLS 1.0</code>是 IETF（Internet Engineering Task Force，Internet 工程任务组）制定的一种新的协议，它建立在<code>SSL 3.0协议</code>规范之上，是<code>SSL 3.0</code>的后续版本，可以理解为 SSL 3.1，它定义在<a target="_blank" rel="noopener" href="https://tools.ietf.org/html/rfc5246">RFC5246</a>中。</p>
 <p>因为 TLS 是基于 SSL 3.0 的，所以也可以认为 TLS 是 SSL 的加强版。</p>
 <p><strong>我们一般将二者并称为<code>SSL/TSL协议</code>，因为这二者可以视为同一个产品的不同阶段。</strong></p>
-<h2 id="6-2-SSL-TSL-协议的握手过程"><a href="#6-2-SSL-TSL-协议的握手过程" class="headerlink" title="6.2 SSL/TSL 协议的握手过程"></a>6.2 SSL/TSL 协议的握手过程</h2><blockquote>
-<p>在了解 SSL/TSL 协议的握手过程之前，需要先阅读关于 HTTPS 的前几篇文章，对相关预备知识有所了解。</p>
+<h2 id="6-2-SSL-TSL-协议的握手过程"><a href="#6-2-SSL-TSL-协议的握手过程" class="headerlink" title="6.2 SSL&#x2F;TSL 协议的握手过程"></a>6.2 SSL&#x2F;TSL 协议的握手过程</h2><blockquote>
+<p>在了解 SSL&#x2F;TSL 协议的握手过程之前，需要先阅读关于 HTTPS 的前几篇文章，对相关预备知识有所了解。</p>
 </blockquote>
-<p><img lazyload="" alt="image" data-src="https://blog-static.jiangxueqiao.com/blog/img/wangluoxieyi-http-13.jpg"></p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/img/wangluoxieyi-http-13.jpg"></p>
 <p>参考上面的流程图，握手过程可以分为 4 个步骤：</p>
 <p>1). 客户端发送 Client Hello 请求到服务端，包含如下内容：</p>
 <ul>
@@ -522,453 +246,420 @@
 </li>
 </ul>
 <blockquote>
-<p>参考：<br><a class="link" target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2014/02/ssl_tls.html">http://www.ruanyifeng.com/blog/2014/02/ssl_tls.html<i class="fas fa-external-link-alt"></i></a> &gt; <a class="link" target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2014/09/illustration-ssl.html">http://www.ruanyifeng.com/blog/2014/09/illustration-ssl.html<i class="fas fa-external-link-alt"></i></a></p>
+<p>参考：<br><a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2014/02/ssl_tls.html">http://www.ruanyifeng.com/blog/2014/02/ssl_tls.html</a> &gt; <a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2014/09/illustration-ssl.html">http://www.ruanyifeng.com/blog/2014/09/illustration-ssl.html</a></p>
 </blockquote>
 <blockquote>
-<p>文章图片带有“CSDN”水印的说明：<br>由于该文章和图片最初发表在我的<a class="link" target="_blank" rel="noopener" href="https://blog.csdn.net/china_jeffery">CSDN 博客<i class="fas fa-external-link-alt"></i></a>中，因此图片被 CSDN 自动添加了水印。</p>
+<p>文章图片带有“CSDN”水印的说明：<br>由于该文章和图片最初发表在我的<a target="_blank" rel="noopener" href="https://blog.csdn.net/china_jeffery">CSDN 博客</a>中，因此图片被 CSDN 自动添加了水印。</p>
 </blockquote>
 
-                </div>
-                
-                        
-<div class="post-copyright-info-container border-box">
-    <div class="copyright-info-content border-box">
-        <div class="copyright-info-top border-box">
-            <div class="copyright-post-title border-box text-ellipsis">
-                网络协议(7)--HTTP与HTTPS协议
-            </div>
-
-            <div class="copyright-post-link border-box text-ellipsis">
-                post/3654006375.html
-            </div>
+<div class="article-footer fs14">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section>
+    
+    <section id="share">
+      <div class="header"><span>分享文章</span></div>
+      <div class="body">
+        <div class="link"><input class="copy-area" readonly="true" id="copy-link" value="https://jiangxueqiao.com/post/3654006375.html" /></div>
+        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/b32ef3da1162a.svg" /></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://jiangxueqiao.com/post/3654006375.html&title=网络协议(7)--HTTP与HTTPS协议 - Jiang's Blog&summary=HTTP 是Hyper Text Transfer Protocol（超文本传输协议）的缩写。HTTP 协议位于 TCP&#x2F;IP 协议栈的应用层。"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/80c07e4dbb303.svg" /></a><a class="social share-item email" href="mailto:?subject=网络协议(7)--HTTP与HTTPS协议 - Jiang's Blog&amp;body=https://jiangxueqiao.com/post/3654006375.html"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/a1b00e20f425d.svg" /></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/8411ed322ced6.svg" /></a></div>
+        
+        <div class="qrcode" id="qrcode-wechat" style="opacity:0;height:0">
+          <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=https://jiangxueqiao.com/post/3654006375.html"/>
         </div>
-
-        <div class="copyright-info-bottom border-box">
-            <div class="copyright-post-author bottom-item">
-                <div class="type">
-                    作者
-                </div>
-                <div class="content">江雪桥</div>
-            </div>
-
-            <div class="post-time bottom-item">
-                <div class="type">
-                    发布于
-                </div>
-                <div class="content">2018-03-15 12:30</div>
-            </div>
-
-
-            <div class="post-license bottom-item">
-                <div class="type">
-                    许可
-                </div>
-                <div class="content tooltip" data-tooltip-content="CC BY-NC-SA 4.0">
-                    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" target="_blank">
-                        
-                            <i class="fa-brands fa-creative-commons"></i>
-                            <i class="fa-brands fa-creative-commons-by"></i>
-                            <i class="fa-brands fa-creative-commons-nc"></i>
-                            <i class="fa-brands fa-creative-commons-sa"></i>
-                        
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <i class="copyright-bg fa-solid fa-copyright"></i>
+        
+      </div>
+    </section>
     </div>
-    <div class="copy-copyright-info flex-center tooltip" data-tooltip-content="复制版权信息" data-tooltip-offset-y="-2px">
-        <i class="fa-solid fa-copy"></i>
-    </div>
+</article>
+<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/post/2172509399.html">SDP格式解析</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/post/1504706832.html">网络协议(6)--TCP协议</a></div></section></div>
+
+
+
+
+
+
+<footer class="page-footer footnote"><hr><div class="sitemap"><div class="sitemap-group"><span class="fs15">博客</span><a href="/">近期</a><a href="/topic">专栏</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></div><div class="sitemap-group"><span class="fs15">产品</span><a href="/post/776574933.html">1key.run</a><a href="/post/2053741240.html">TinyTu</a><a href="/post/1533480858.html">WinSpyPlus</a></div><div class="sitemap-group"><span class="fs15">社交</span><a href="/">友链</a><a target="_blank" rel="noopener" href="https://github.com/winsoft666/blog-comment">留言板</a></div><div class="sitemap-group"><span class="fs15">更多</span><a href="/author">关于本站</a><a target="_blank" rel="noopener" href="https://github.com/winsoft666">GitHub</a></div></div><div class="text"><p>本站由 <a href="/">江雪桥</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.27.0">Stellar 1.27.0</a> 主题创建。<br>本博客所有文章除特别声明外均为原创，采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
+<div class="widgets">
+
+
+
+<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81HTTP-%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D"><span class="toc-text">一、HTTP 协议介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E4%BB%80%E4%B9%88%E6%98%AF-HTTP"><span class="toc-text">1.1 什么是 HTTP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-HTTP-%E7%9A%84%E7%89%88%E6%9C%AC"><span class="toc-text">1.2 HTTP 的版本</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81HTTP-%E6%B6%88%E6%81%AF%E8%AF%B7%E6%B1%82"><span class="toc-text">二、HTTP 消息请求</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-URI%E3%80%81URL%E3%80%81URN"><span class="toc-text">2.1 URI、URL、URN</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E6%B6%88%E6%81%AF%E8%AF%B7%E6%B1%82%E6%A0%BC%E5%BC%8F"><span class="toc-text">2.2 消息请求格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-HTTP-%E5%B8%B8%E8%A7%81%E7%9A%84%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95"><span class="toc-text">2.3 HTTP 常见的请求方法</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81HTTP-%E6%B6%88%E6%81%AF%E5%93%8D%E5%BA%94"><span class="toc-text">三、HTTP 消息响应</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-%E6%B6%88%E6%81%AF%E5%93%8D%E5%BA%94%E6%A0%BC%E5%BC%8F"><span class="toc-text">3.1 消息响应格式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-HTTP-%E7%8A%B6%E6%80%81%E7%A0%81"><span class="toc-text">3.2 HTTP 状态码</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81HTTPS-%E4%B9%8B%E5%AF%86%E7%A0%81%E5%AD%A6%E5%9F%BA%E7%A1%80"><span class="toc-text">四、HTTPS 之密码学基础</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95"><span class="toc-text">4.1 对称加密算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95"><span class="toc-text">4.2 非对称加密算法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-%E6%95%A3%E5%88%97%E5%87%BD%E6%95%B0"><span class="toc-text">4.3 散列函数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D%E4%B8%8E%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6"><span class="toc-text">五、数字签名与数字证书</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D"><span class="toc-text">5.1 数字签名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6"><span class="toc-text">5.2 数字证书</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-1-%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E7%9A%84%E7%94%B3%E8%AF%B7"><span class="toc-text">5.2.1 数字证书的申请</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-2-%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E7%9A%84%E9%AA%8C%E8%AF%81"><span class="toc-text">5.2.2 数字证书的验证</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AD%E3%80%81HTTPS"><span class="toc-text">六、HTTPS</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-1-SSL-TSL-%E5%8D%8F%E8%AE%AE"><span class="toc-text">6.1 SSL&#x2F;TSL 协议</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-1-SSL"><span class="toc-text">6.1.1 SSL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-2-TLS"><span class="toc-text">6.1.2 TLS</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-2-SSL-TSL-%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%8F%A1%E6%89%8B%E8%BF%87%E7%A8%8B"><span class="toc-text">6.2 SSL&#x2F;TSL 协议的握手过程</span></a></li></ol></li></ol></div><div class="widget-footer">
+
+<a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2c4.714 0 7.071 0 8.535 1.464C22 4.93 22 7.286 22 12c0 4.714 0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12Z"/><path stroke-linecap="round" stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/></g></svg><span>回到顶部</span></a><a class="buttom" onclick="util.scrollComment()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M10.46 1.25h3.08c1.603 0 2.86 0 3.864.095c1.023.098 1.861.3 2.6.752a5.75 5.75 0 0 1 1.899 1.899c.452.738.654 1.577.752 2.6c.095 1.004.095 2.261.095 3.865v1.067c0 1.141 0 2.036-.05 2.759c-.05.735-.153 1.347-.388 1.913a5.75 5.75 0 0 1-3.112 3.112c-.805.334-1.721.408-2.977.43a10.81 10.81 0 0 0-.929.036c-.198.022-.275.054-.32.08c-.047.028-.112.078-.224.232c-.121.166-.258.396-.476.764l-.542.916c-.773 1.307-2.69 1.307-3.464 0l-.542-.916a10.605 10.605 0 0 0-.476-.764c-.112-.154-.177-.204-.224-.232c-.045-.026-.122-.058-.32-.08c-.212-.023-.49-.03-.93-.037c-1.255-.021-2.171-.095-2.976-.429A5.75 5.75 0 0 1 1.688 16.2c-.235-.566-.338-1.178-.389-1.913c-.049-.723-.049-1.618-.049-2.76v-1.066c0-1.604 0-2.86.095-3.865c.098-1.023.3-1.862.752-2.6a5.75 5.75 0 0 1 1.899-1.899c.738-.452 1.577-.654 2.6-.752C7.6 1.25 8.857 1.25 10.461 1.25M6.739 2.839c-.914.087-1.495.253-1.959.537A4.25 4.25 0 0 0 3.376 4.78c-.284.464-.45 1.045-.537 1.96c-.088.924-.089 2.11-.089 3.761v1c0 1.175 0 2.019.046 2.685c.045.659.131 1.089.278 1.441a4.25 4.25 0 0 0 2.3 2.3c.515.214 1.173.294 2.429.316h.031c.398.007.747.013 1.037.045c.311.035.616.104.909.274c.29.17.5.395.682.645c.169.232.342.525.538.856l.559.944a.52.52 0 0 0 .882 0l.559-.944c.196-.331.37-.624.538-.856c.182-.25.392-.476.682-.645c.293-.17.598-.24.909-.274c.29-.032.639-.038 1.037-.045h.032c1.255-.022 1.913-.102 2.428-.316a4.25 4.25 0 0 0 2.3-2.3c.147-.352.233-.782.278-1.441c.046-.666.046-1.51.046-2.685v-1c0-1.651 0-2.837-.089-3.762c-.087-.914-.253-1.495-.537-1.959a4.25 4.25 0 0 0-1.403-1.403c-.464-.284-1.045-.45-1.96-.537c-.924-.088-2.11-.089-3.761-.089h-3c-1.651 0-2.837 0-3.762.089" clip-rule="evenodd"/><path fill="currentColor" d="M9 11a1 1 0 1 1-2 0a1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0a1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0a1 1 0 0 1 2 0"/></svg><span>参与讨论</span></a></div></widget>
+</div></aside><div class='float-panel blur'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
 </div>
+</div><div class="scripts">
+<script type="text/javascript">
+  const ctx = {
+    date_suffix: {
+      just: `刚刚`,
+      min: `分钟前`,
+      hour: `小时前`,
+      day: `天前`,
+    },
+    root : `/`,
+  };
 
-                
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://blog-static.jiangxueqiao.com/blog/stellar-theme/default/3442075.svg`,
+    cover: `https://blog-static.jiangxueqiao.com/blog/stellar-theme/default/76b86c0226ffd.svg`,
+  };
+  const deps = {
+    jquery: `https://blog-static.jiangxueqiao.com/blog/stellar-theme/jquery-3.7.1.min.js`,
+    marked: `https://blog-static.jiangxueqiao.com/blog/stellar-theme/marked-4.0.18.min.js`
+  }
+  
 
-                <div class="post-bottom-tags-and-share border-box">
-                    <div>
-                        
-                            <ul class="post-tags-box border-box">
-                                
-                                    <li class="tag-item border-box">
-                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/HTTP/">HTTP</a>
-                                    </li>
-                                
-                                    <li class="tag-item border-box">
-                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/HTTPS/">HTTPS</a>
-                                    </li>
-                                
-                            </ul>
-                        
-                    </div>
-                    <div>
-                        
-                            <div class="post-share-container border-box">
-    <ul class="share-list-wrap border-box">
-        <li class="qq share-item border-box flex-center tooltip"
-            data-tooltip-content="分享到 QQ"
-        >
-            <i class="fa-brands fa-qq"></i>
-        </li>
-        <li class="wechat share-item border-box flex-center tooltip tooltip-img"
-            data-tooltip-content="分享到微信"
-            data-tooltip-img-tip="微信扫一扫"
-            data-tooltip-img-style="background-color: #fff; top: -10px; padding: 0.6rem 0.6rem 0.1rem 0.6rem;"
-        >
-            <i class="fa-brands fa-weixin"></i>
-        </li>
-        <li class="weibo share-item border-box flex-center tooltip"
-            data-tooltip-content="分享到微博"
-        >
-            <i class="fa-brands fa-weibo"></i>
-        </li>
-    </ul>
-</div>
+</script>
 
-                        
-                    </div>
-                </div>
+<script type="text/javascript">
+  const utils = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
 
-                
+    js: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = ctx.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
 
-                
-                    <div class="post-nav border-box">
-                        
-                            <div class="prev-post">
-                                <a class="prev"
-                                   rel="prev"
-                                   href="/post/2172509399.html"
-                                   title="SDP格式解析"
-                                >
-                                    <span class="left arrow-icon flex-center">
-                                        <i class="fas fa-chevron-left"></i>
-                                    </span>
-                                    <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">SDP格式解析</span>
-                                        <span class="post-nav-item">上一篇</span>
-                                    </span>
-                                </a>
-                            </div>
-                        
-                        
-                            <div class="next-post">
-                                <a class="next"
-                                   rel="next"
-                                   href="/post/1504706832.html"
-                                   title="网络协议(6)--TCP协议"
-                                >
-                                    <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">网络协议(6)--TCP协议</span>
-                                        <span class="post-nav-item">下一篇</span>
-                                    </span>
-                                    <span class="right arrow-icon flex-center">
-                                        <i class="fas fa-chevron-right"></i>
-                                    </span>
-                                </a>
-                            </div>
-                        
-                    </div>
-                
-
-                
-                    
-
-
-
-
-
-
-                
-            </div>
-        </div>
-
-        
-            <div class="pc-post-toc right-toc">
-                <div class="post-toc-wrap border-box">
-    <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81HTTP-%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D"><span class="nav-text">一、HTTP 协议介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E4%BB%80%E4%B9%88%E6%98%AF-HTTP"><span class="nav-text">1.1 什么是 HTTP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-HTTP-%E7%9A%84%E7%89%88%E6%9C%AC"><span class="nav-text">1.2 HTTP 的版本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81HTTP-%E6%B6%88%E6%81%AF%E8%AF%B7%E6%B1%82"><span class="nav-text">二、HTTP 消息请求</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-URI%E3%80%81URL%E3%80%81URN"><span class="nav-text">2.1 URI、URL、URN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E6%B6%88%E6%81%AF%E8%AF%B7%E6%B1%82%E6%A0%BC%E5%BC%8F"><span class="nav-text">2.2 消息请求格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-HTTP-%E5%B8%B8%E8%A7%81%E7%9A%84%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95"><span class="nav-text">2.3 HTTP 常见的请求方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81HTTP-%E6%B6%88%E6%81%AF%E5%93%8D%E5%BA%94"><span class="nav-text">三、HTTP 消息响应</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E6%B6%88%E6%81%AF%E5%93%8D%E5%BA%94%E6%A0%BC%E5%BC%8F"><span class="nav-text">3.1 消息响应格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-HTTP-%E7%8A%B6%E6%80%81%E7%A0%81"><span class="nav-text">3.2 HTTP 状态码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81HTTPS-%E4%B9%8B%E5%AF%86%E7%A0%81%E5%AD%A6%E5%9F%BA%E7%A1%80"><span class="nav-text">四、HTTPS 之密码学基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95"><span class="nav-text">4.1 对称加密算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95"><span class="nav-text">4.2 非对称加密算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-%E6%95%A3%E5%88%97%E5%87%BD%E6%95%B0"><span class="nav-text">4.3 散列函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D%E4%B8%8E%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6"><span class="nav-text">五、数字签名与数字证书</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D"><span class="nav-text">5.1 数字签名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6"><span class="nav-text">5.2 数字证书</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-1-%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E7%9A%84%E7%94%B3%E8%AF%B7"><span class="nav-text">5.2.1 数字证书的申请</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-2-%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E7%9A%84%E9%AA%8C%E8%AF%81"><span class="nav-text">5.2.2 数字证书的验证</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AD%E3%80%81HTTPS"><span class="nav-text">六、HTTPS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1-SSL-TSL-%E5%8D%8F%E8%AE%AE"><span class="nav-text">6.1 SSL&#x2F;TSL 协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-1-SSL"><span class="nav-text">6.1.1 SSL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-2-TLS"><span class="nav-text">6.1.2 TLS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-SSL-TSL-%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%8F%A1%E6%89%8B%E8%BF%87%E7%A8%8B"><span class="nav-text">6.2 SSL&#x2F;TSL 协议的握手过程</span></a></li></ol></li></ol>
-    </div>
-</div>
-
-            </div>
-        
-    </div>
-</div>
-
-
-                
-            </div>
-        </div>
-
-        <div class="page-main-content-bottom border-box">
-            
-<footer class="footer border-box">
-    <div class="border-box website-info-box default">
-        
-            <div class="copyright-info info-item default">
-                &copy;&nbsp;<span>2017</span>&nbsp;-&nbsp;2024
-                
-                    &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">江雪桥</a>
-                
-            </div>
-
-            <div class="copyright-info info-item default">
-                本站文章均为原创（少数注明转载的除外），转载请注明出处！
-            </div>
-
-            <div class="copyright-info info-item default">
-                <a target="_blank" rel="noopener" href="https://blog.csdn.net/china_jeffery">My CSDN</a>
-                &nbsp;&nbsp;
-                <a target="_blank" rel="noopener" href="https://github.com/winsoft666/">My Github</a>
-                &nbsp;&nbsp;
-                <a href="/post/3416050985.html">匠心之作</a>
-            </div>
-
-            
-                <div class="icp-info info-item default">
-                    <a class=""
-                       target="_blank"
-                       href="https://beian.miit.gov.cn"
-                    >
-                        鄂ICP备2020015399号-6
-                    </a>
-                </div>
-            
-
-            
-        
-
-        <div class="count-item info-item default">
-            
-
-            
-
-            
-        </div>
-    </div>
-</footer>
-
-        </div>
-    </div>
-
-    <!-- post tools -->
+    jq: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+    },
     
-        <div class="post-tools right-toc">
-            <div class="post-tools-container border-box">
-    <ul class="tools-list border-box">
-        <!-- PC TOC show toggle -->
-        
-            <li class="tools-item flex-center toggle-show-toc">
-                <i class="fas fa-list"></i>
-            </li>
-        
+    onLoading: (el) => {
+      if (el) {
+        $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
+      }
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      let retryTimes = 3;
+      utils.onLoading(el);
+      function req() {
+        return new Promise((resolve, reject) => {
+          let status = 0; // 0 等待 1 完成 2 超时
+          let timer = setTimeout(() => {
+            if (status === 0) {
+              status = 2;
+              timer = null;
+              reject('请求超时');
+              if (retryTimes == 0) {
+                onFailure();
+              }
+            }
+          }, 5000);
+          fetch(url).then(function(response) {
+            if (status !== 2) {
+              clearTimeout(timer);
+              resolve(response);
+              timer = null;
+              status = 1;
+            }
+            if (response.ok) {
+              return response.json();
+            }
+            throw new Error('Network response was not ok.');
+          }).then(function(data) {
+            retryTimes = 0;
+            utils.onLoadSuccess(el);
+            callback(data);
+          }).catch(function(error) {
+            if (retryTimes > 0) {
+              retryTimes -= 1;
+              setTimeout(() => {
+                req();
+              }, 5000);
+            } else {
+              utils.onLoadFailure(el);
+              onFailure();
+            }
+          });
+        });
+      }
+      req();
+    },
+  };
+</script>
 
-        <!-- PC go comment -->
-        
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
 
-        <!-- PC full screen -->
-        <li class="tools-item flex-center full-screen">
-            <i class="fa-solid fa-expand"></i>
-        </li>
-    </ul>
-</div>
+<!-- required -->
+<script src="/js/main.js?v=1.27.0" async></script>
 
-        </div>
-    
-
-    <!-- side tools -->
-    <div class="side-tools">
-        <div class="side-tools-container border-box ">
-    <ul class="side-tools-list side-tools-show-handle border-box">
-        <li class="tools-item tool-font-adjust-plus flex-center">
-            <i class="fas fa-search-plus"></i>
-        </li>
-
-        <li class="tools-item tool-font-adjust-minus flex-center">
-            <i class="fas fa-search-minus"></i>
-        </li>
-
-        <li class="tools-item tool-toggle-theme-mode flex-center">
-            <i class="fas fa-moon"></i>
-        </li>
-
-        <!-- rss -->
-        
-            <li class="tools-item rss flex-center">
-                <a class="flex-center"
-                   href="/atom.xml"
-                   target="_blank"
-                >
-                    <i class="fas fa-rss"></i>
-                </a>
-            </li>
-        
-
-        <li class="tools-item tool-scroll-to-bottom flex-center">
-            <i class="fas fa-arrow-down"></i>
-        </li>
-    </ul>
-
-    <ul class="exposed-tools-list border-box">
-        
-            <li class="tools-item toggle-show-toc-tablet flex-center">
-                <i class="fas fa-list"></i>
-            </li>
-        
-
-        
-
-        <li class="tools-item tool-toggle-show flex-center">
-            <i class="fas fa-cog fa-spin"></i>
-        </li>
-
-        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
-            <i class="arrow fas fa-arrow-up"></i>
-            <span class="percent"></span>
-        </li>
-    </ul>
-</div>
-
-    </div>
-
-    <!-- image mask -->
-    <div class="zoom-in-image-mask">
-    <img class="zoom-in-image">
-</div>
-
-
-    <!-- local search -->
-    
-        <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
-          <span class="search-input-field-pre">
-            <i class="fas fa-keyboard"></i>
-          </span>
-            <div class="search-input-container">
-                <input autocomplete="off"
-                       autocorrect="off"
-                       autocapitalize="off"
-                       placeholder="搜索..."
-                       spellcheck="false"
-                       type="search"
-                       class="search-input"
-                >
-            </div>
-            <span class="close-popup-btn">
-                <i class="fas fa-times"></i>
-            </span>
-        </div>
-        <div id="search-result">
-            <div id="no-result">
-                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
-            </div>
-        </div>
-    </div>
-</div>
-
-    
-
-    <!-- tablet toc -->
-    
-        <div class="tablet-post-toc-mask">
-            <div class="tablet-post-toc">
-                <div class="post-toc-wrap border-box">
-    <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81HTTP-%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D"><span class="nav-text">一、HTTP 协议介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E4%BB%80%E4%B9%88%E6%98%AF-HTTP"><span class="nav-text">1.1 什么是 HTTP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-HTTP-%E7%9A%84%E7%89%88%E6%9C%AC"><span class="nav-text">1.2 HTTP 的版本</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81HTTP-%E6%B6%88%E6%81%AF%E8%AF%B7%E6%B1%82"><span class="nav-text">二、HTTP 消息请求</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-URI%E3%80%81URL%E3%80%81URN"><span class="nav-text">2.1 URI、URL、URN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E6%B6%88%E6%81%AF%E8%AF%B7%E6%B1%82%E6%A0%BC%E5%BC%8F"><span class="nav-text">2.2 消息请求格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-HTTP-%E5%B8%B8%E8%A7%81%E7%9A%84%E8%AF%B7%E6%B1%82%E6%96%B9%E6%B3%95"><span class="nav-text">2.3 HTTP 常见的请求方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81HTTP-%E6%B6%88%E6%81%AF%E5%93%8D%E5%BA%94"><span class="nav-text">三、HTTP 消息响应</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-%E6%B6%88%E6%81%AF%E5%93%8D%E5%BA%94%E6%A0%BC%E5%BC%8F"><span class="nav-text">3.1 消息响应格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-HTTP-%E7%8A%B6%E6%80%81%E7%A0%81"><span class="nav-text">3.2 HTTP 状态码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81HTTPS-%E4%B9%8B%E5%AF%86%E7%A0%81%E5%AD%A6%E5%9F%BA%E7%A1%80"><span class="nav-text">四、HTTPS 之密码学基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95"><span class="nav-text">4.1 对称加密算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-%E9%9D%9E%E5%AF%B9%E7%A7%B0%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95"><span class="nav-text">4.2 非对称加密算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-%E6%95%A3%E5%88%97%E5%87%BD%E6%95%B0"><span class="nav-text">4.3 散列函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D%E4%B8%8E%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6"><span class="nav-text">五、数字签名与数字证书</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D"><span class="nav-text">5.1 数字签名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6"><span class="nav-text">5.2 数字证书</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-1-%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E7%9A%84%E7%94%B3%E8%AF%B7"><span class="nav-text">5.2.1 数字证书的申请</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-2-%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E7%9A%84%E9%AA%8C%E8%AF%81"><span class="nav-text">5.2.2 数字证书的验证</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%AD%E3%80%81HTTPS"><span class="nav-text">六、HTTPS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1-SSL-TSL-%E5%8D%8F%E8%AE%AE"><span class="nav-text">6.1 SSL&#x2F;TSL 协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-1-SSL"><span class="nav-text">6.1.1 SSL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-2-TLS"><span class="nav-text">6.1.2 TLS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-SSL-TSL-%E5%8D%8F%E8%AE%AE%E7%9A%84%E6%8F%A1%E6%89%8B%E8%BF%87%E7%A8%8B"><span class="nav-text">6.2 SSL&#x2F;TSL 协议的握手过程</span></a></li></ol></li></ol>
-    </div>
-</div>
-
-            </div>
-        </div>
-    
-</main>
+<!-- optional -->
 
 
 
-<!-- common -->
+<script defer>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        ctx.cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (ctx.cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(ctx.cardlinks);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || 'memos' || 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          });
+        }
+      }
+    }
+  });
+</script>
 
-<script src="/js/utils.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
+  });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/flying-pages-2.1.2.min.js"></script><script defer src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/lazyload-17.8.4.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+</script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img`,
+    css: `https://blog-static.jiangxueqiao.com/blog/stellar-theme/fancybox-5.0.22.min.css`,
+    js: `https://blog-static.jiangxueqiao.com/blog/stellar-theme/fancybox-5.0.22.umd.min.js`
+  };
+  var selector = '[data-fancybox]:not(.error)';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const els = document.getElementsByClassName('ds-memos');
+    if (els != undefined && els.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || null
+        }
+      });
+    })
+  }
+</script><script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://blog-static.jiangxueqiao.com/blog/stellar-theme/swiper-bundle-10.3.1.min.css`);
+      utils.js(`https://blog-static.jiangxueqiao.com/blog/stellar-theme/swiper-bundle-10.3.1.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.codeElements = document.querySelectorAll('.code');
+    if (window.codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `复制`,
+        success_text: `已复制`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js');
+    }
+  });
+</script>
 
-<script src="/js/header-shrink.js"></script>
 
-<script src="/js/back2top.js"></script>
+<!-- inject -->
 
-<script src="/js/toggle-theme.js"></script>
-
-<script src="/js/code-block.js"></script>
-
-<script src="/js/main.js"></script>
-
-<script src="/js/libs/anime.min.js"></script>
-
-
-<!-- local-search -->
-
-    
-<script src="/js/local-search.js"></script>
-
-
-
-<!-- lazyload -->
-
-    
-<script src="/js/lazyload.js"></script>
-
-
-
-<div class="">
-    
-        <!-- post-helper -->
-        
-<script src="/js/post/post-helper.js"></script>
-
-
-        <!-- toc -->
-        
-            
-<script src="/js/post/toc.js"></script>
-
-        
-
-        <!-- copyright-info -->
-        
-            
-<script src="/js/post/copyright-info.js"></script>
-
-        
-
-        <!-- share -->
-        
-            
-<script src="/js/post/share.js"></script>
-
-        
-    
-
-    <!-- categories page -->
-    
-
-    <!-- links page -->
-    
-
-    <!-- photos page -->
-    
-
-    <!-- tools page -->
-    
-</div>
-
-<!-- mermaid -->
-
-
-<!-- pjax -->
-
-
-
-    
-        
-    
-
-</body>
-</html>
+</div></body></html>

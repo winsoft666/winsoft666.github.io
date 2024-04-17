@@ -1,374 +1,101 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
+
+<!DOCTYPE html><html lang="zh-CN">
+
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta name="keywords" content="Windows,Linux,C/C++,Golang,Qt,Node.js,Electron,Vue,WebRTC,NSIS,HTTP">
-    <meta name="description" content="深入跨平台客户端领域，持续构建完善的客户端技术体系">
-    <meta name="author" content="江雪桥">
-    
-    <title>
-        
-            NSIS教程(2)-完整属性 |
-        
-        JiangXueqiao&#39;s Blog
-    </title>
-    
-<link rel="stylesheet" href="/css/style.css">
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.27.0" theme-name="Stellar" theme-version="1.27.0">
+  
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f9fafb">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  
+  <title>NSIS教程(2)-完整属性 - Jiang's Blog</title>
 
-    
-        <link rel="shortcut icon" href="/images/favicon.png">
-    
-    
-<link rel="stylesheet" href="/font/css/fontawesome.min.css">
+  
+  <meta name="description" content="本文列举了 NSIS 支持的所有属性，以供查阅。">
+  
+  <meta name="keywords" content="NSIS">
 
-    
-<link rel="stylesheet" href="/font/css/regular.min.css">
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="Jiang's Blog" type="application/atom+xml">
+  
 
-    
-<link rel="stylesheet" href="/font/css/solid.min.css">
+  <link rel="stylesheet" href="/css/main.css?v=1.27.0">
 
-    
-<link rel="stylesheet" href="/font/css/brands.min.css">
+  
+    <link rel="shortcut icon" href="/images/favicon.png">
+  
 
-    
-        
-            
-        
-            
-                
-<link rel="stylesheet" href="/css/custom.css">
+  
 
-            
-        
-    
-    <script class="keep-theme-configurations">
-    const KEEP = window.KEEP || {}
-    KEEP.hexo_config = {"hostname":"jiangxueqiao.com","root":"/","language":"zh-CN","path":"search.xml"}
-    KEEP.theme_config = {"base_info":{"primary_color":"#0066cc","title":"JiangXueqiao's Blog","author":"江雪桥","avatar":"/images/avatar.png","logo":null,"favicon":"/images/favicon.png"},"menu":{"home":"/ || fa-solid fa-home","archives":"/archives || fa-solid fa-layer-group","categories":"/categories || fa-solid fa-box-archive","tags":"/tags || fa-solid fa-tags","about":"/about || fa-solid fa-user-graduate","📘专栏":"/post/902225606.html","🔥匠心之作":"/post/3416050985.html","Github":"https://github.com/winsoft666"},"first_screen":{"enable":false,"background_img":"/images/bg.svg","background_img_dark":"/images/bg.svg","description":"Keep writing and Keep loving.","hitokoto":false},"social_contact":{"enable":true,"links":{"github":null,"weixin":null,"qq":null,"weibo":null,"zhihu":null,"twitter":null,"x":null,"facebook":null,"email":null}},"scroll":{"progress_bar":false,"percent":true,"hide_header":true},"home":{"announcement":null,"category":true,"tag":true,"post_datetime":"updated"},"post":{"author_badge":{"enable":false,"level_badge":true,"custom_badge":["One","Two","Three"]},"word_count":{"wordcount":false,"min2read":false},"datetime_format":"YYYY-MM-DD HH:mm:ss","copyright_info":true,"share":true,"reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"default"},"highlight_theme":"default"},"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":false,"site_uv":false,"site_pv":false,"page_pv":false}},"local_search":{"enable":true,"preload":false},"comment":{"enable":false,"use":"twikoo","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":"https://twikoo.jiangxueqiao.com","region":"zh-CN","version":"1.6.21"},"waline":{"server_url":null,"reaction":false,"version":2},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":false,"provider":"cdnjs"},"pjax":{"enable":false},"footer":{"since":2017,"word_count":false,"icp":{"enable":true,"record_code":"鄂ICP备2020015399号-6","url":"https://beian.miit.gov.cn"},"site_deploy":{"enable":false,"provider":"github","url":null},"shields_style":{"enable":false,"custom":[{"link_url":null,"img_url":null}]}},"inject":{"enable":true,"css":[null,"/css/custom.css"],"js":[null]},"root":"","source_data":{},"version":"4.1.0"}
-    KEEP.language_ago = {"second":"%s 秒前","minute":"%s 分钟前","hour":"%s 小时前","day":"%s 天前","week":"%s 周前","month":"%s 个月前","year":"%s 年前"}
-    KEEP.language_code_block = {"copy":"复制代码","copied":"已复制","fold":"折叠代码块","folded":"已折叠"}
-    KEEP.language_copy_copyright = {"copy":"复制版权信息","copied":"已复制","title":"原文标题","author":"原文作者","link":"原文链接"}
-  </script>
-<meta name="generator" content="Hexo 6.3.0">
-<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="JiangXueqiao's Blog" type="application/atom+xml">
+  <script src="/js/baidu-tongji.js"></script>
 </head>
-
-
 <body>
-<div class="progress-bar-container">
-    
 
-    
+<div class="l_body s:aa content tech" id="start" layout="post" ><aside class="l_left"><div class="leftbar-container">
+
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/author/"><div class="bg" style="opacity:0;background-image:url(https://blog-static.jiangxueqiao.com/blog/stellar-theme/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/images/avatar.png" onerror="javascript:this.classList.add('error');this.src='https://blog-static.jiangxueqiao.com/blog/stellar-theme/default/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">Jiang's Blog</div></a></div></header>
+
+<div class="nav-area">
+<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" placeholder="站内搜索"></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
+
+
+<nav class="menu dis-select"><a class="nav-item active" title="文章" href="/" style="color:#1BCDFC"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.879 2.879C5 3.757 5 5.172 5 8v8c0 2.828 0 4.243.879 5.121C6.757 22 8.172 22 11 22h2c2.828 0 4.243 0 5.121-.879C19 20.243 19 18.828 19 16V8c0-2.828 0-4.243-.879-5.121C17.243 2 15.828 2 13 2h-2c-2.828 0-4.243 0-5.121.879M8.25 17a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75M9 12.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zM8.25 9A.75.75 0 0 1 9 8.25h6a.75.75 0 0 1 0 1.5H9A.75.75 0 0 1 8.25 9" clip-rule="evenodd"/><path fill="currentColor" d="M5.235 4.058C5 4.941 5 6.177 5 8v8c0 1.823 0 3.058.235 3.942L5 19.924c-.975-.096-1.631-.313-2.121-.803C2 18.243 2 16.828 2 14v-4c0-2.829 0-4.243.879-5.121c.49-.49 1.146-.707 2.121-.803zm13.53 15.884C19 19.058 19 17.822 19 16V8c0-1.823 0-3.059-.235-3.942l.235.018c.975.096 1.631.313 2.121.803C22 5.757 22 7.17 22 9.999v4c0 2.83 0 4.243-.879 5.122c-.49.49-1.146.707-2.121.803z" opacity=".5"/></svg></a><a class="nav-item" title="专栏" href="/topic" style="color:#3DC550"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M14.25 4.48v3.057c0 .111 0 .27.02.406a.936.936 0 0 0 .445.683a.96.96 0 0 0 .783.072c.13-.04.272-.108.378-.159L17 8.005l1.124.534c.106.05.248.119.378.16a.958.958 0 0 0 .783-.073a.936.936 0 0 0 .444-.683c.021-.136.021-.295.021-.406V3.031c.113-.005.224-.01.332-.013C21.154 2.98 22 3.86 22 4.933v11.21c0 1.112-.906 2.01-2.015 2.08c-.97.06-2.108.179-2.985.41c-1.082.286-1.99 1.068-3.373 1.436c-.626.167-1.324.257-1.627.323V5.174c.32-.079 1.382-.203 1.674-.371c.184-.107.377-.216.576-.323m5.478 8.338a.75.75 0 0 1-.546.91l-4 1a.75.75 0 0 1-.364-1.456l4-1a.75.75 0 0 1 .91.546" clip-rule="evenodd"/><path fill="currentColor" d="M18.25 3.151c-.62.073-1.23.18-1.75.336a8.2 8.2 0 0 0-.75.27v3.182l.75-.356l.008-.005a1.13 1.13 0 0 1 .492-.13c.047 0 .094.004.138.01c.175.029.315.1.354.12l.009.005l.749.356V3.647z"/><path fill="currentColor" d="M12 5.214c-.334-.064-1.057-.161-1.718-.339C8.938 4.515 8.05 3.765 7 3.487c-.887-.234-2.041-.352-3.018-.412C2.886 3.007 2 3.9 2 4.998v11.146c0 1.11.906 2.01 2.015 2.079c.97.06 2.108.179 2.985.41c.486.129 1.216.431 1.873.726c1.005.451 2.052.797 3.127 1.034z" opacity=".5"/><path fill="currentColor" d="M4.273 12.818a.75.75 0 0 1 .91-.545l4 1a.75.75 0 1 1-.365 1.455l-4-1a.75.75 0 0 1-.545-.91m.909-4.545a.75.75 0 1 0-.364 1.455l4 1a.75.75 0 0 0 .364-1.455z"/></svg></a><a class="nav-item" title="关于" href="/author" style="color:#FA6400"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M20 12a8 8 0 1 1-16 0a8 8 0 0 1 16 0" opacity=".5"/><path fill="currentColor" d="M17.712 5.453c1.047-.193 2.006-.259 2.797-.152c.77.103 1.536.393 1.956 1.064c.446.714.312 1.542-.012 2.258c-.33.728-.918 1.499-1.672 2.268c-1.516 1.547-3.836 3.226-6.597 4.697c-2.763 1.472-5.495 2.484-7.694 2.92c-1.095.217-2.098.299-2.923.201c-.8-.095-1.6-.383-2.032-1.075c-.47-.752-.296-1.63.07-2.379c.375-.768 1.032-1.586 1.872-2.403L4 12.416c0 .219.083.71.168 1.146c.045.23.09.444.123.596c-.652.666-1.098 1.263-1.339 1.756c-.277.567-.208.825-.145.925c.072.116.305.305.937.38c.609.073 1.44.018 2.455-.183c2.02-.4 4.613-1.351 7.28-2.772c2.667-1.42 4.85-3.015 6.23-4.423c.694-.707 1.15-1.334 1.377-1.836c.233-.515.167-.75.107-.844c-.07-.112-.289-.294-.883-.374c-.542-.072-1.272-.041-2.163.112L16.87 5.656c.338-.101.658-.17.842-.203"/></svg></a></nav>
+</div>
+<div class="widgets">
+<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">专栏：《打包狂魔之NSIS》</span></div><div class="widget-body"><a class="item" href="/post/409779091.html"><span class="title">NSIS教程(1)-基础语法</span></a><a class="item active" href="/post/1923360270.html"><span class="title">NSIS教程(2)-完整属性</span><svg class="active-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M21 11.098v4.993c0 3.096 0 4.645-.734 5.321c-.35.323-.792.526-1.263.58c-.987.113-2.14-.907-4.445-2.946c-1.02-.901-1.529-1.352-2.118-1.47a2.225 2.225 0 0 0-.88 0c-.59.118-1.099.569-2.118 1.47c-2.305 2.039-3.458 3.059-4.445 2.945a2.238 2.238 0 0 1-1.263-.579C3 20.736 3 19.188 3 16.091v-4.994C3 6.81 3 4.666 4.318 3.333C5.636 2 7.758 2 12 2c4.243 0 6.364 0 7.682 1.332C21 4.665 21 6.81 21 11.098" opacity=".5"/><path fill="currentColor" d="M9 5.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5z"/></svg></a><a class="item" href="/post/2673115526.html"><span class="title">NSIS教程(3)-完整指令</span></a><a class="item" href="/post/275632694.html"><span class="title">NSIS教程(4)-传统界面示例</span></a><a class="item" href="/post/3798382521.html"><span class="title">NSIS教程(5)-现代界面示例</span></a><a class="item" href="/post/4172083706.html"><span class="title">NSIS教程(6)-静默安装</span></a><a class="item" href="/post/3031217406.html"><span class="title">NSIS教程(7)-插件使用</span></a><a class="item" href="/post/1273492093.html"><span class="title">NSIS教程(8)-插件开发</span></a><a class="item" href="/post/100006247.html"><span class="title">NSIS教程(9)-使用界面库制作安装界面</span></a><a class="item" href="/post/1597634702.html"><span class="title">NSIS教程(10)-MUI跳过指定安装步骤</span></a><a class="item" href="/post/2948643539.html"><span class="title">NSIS教程(11)-中文手册</span></a><a class="item" href="/post/2584392152.html"><span class="title">NSIS教程(12)-开源UI插件</span></a></div></widget>
+
+<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/post/529732738.html"><span class="title">ABI兼容性</span></a><a class="item title" href="/post/3008752839.html"><span class="title">基于共享内存的跨平台RPC框架 - Veigar</span></a><a class="item title" href="/post/776574933.html"><span class="title">一键启动神器之1key.run</span></a><a class="item title" href="/post/1533480858.html"><span class="title">Windows窗口调试利器-WinSpyPlus</span></a><a class="item title" href="/post/1967189103.html"><span class="title">玩转Qt 2D绘图之画家</span></a><a class="item title" href="/post/235943795.html"><span class="title">Node插件开发(2)-不同的调用方式</span></a><a class="item title" href="/post/819381949.html"><span class="title">Node插件开发(1)-快速入门</span></a><a class="item title" href="/post/3437796039.html"><span class="title">MSVC版本的二进制兼容性</span></a><a class="item title" href="/post/333631906.html"><span class="title">Qt中图片按九宫格模式缩放</span></a><a class="item title" href="/post/711494356.html"><span class="title">Qt自定义和美化菜单</span></a></div></widget>
 </div>
 
+</div></aside><div class="l_main" id="main">
 
 
-<main class="page-container border-box">
-    <!-- home first screen  -->
+
+
+
+<div class="article banner top">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span><a class="cap breadcrumb" id="menu" href="/topic">专栏</a><span class="sep"></span><a class="cap breadcrumb" id="proj" href="/post/409779091.html">《打包狂魔之NSIS》</a></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2020-08-01T23:21:34.000Z">2020-08-02</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-04-13T07:49:24.860Z">2024-04-13</time></span></div></div></div>
     
-
-    <!-- page content -->
-    <div class="page-main-content border-box">
-        <div class="page-main-content-top">
-            
-<header class="header-wrapper">
-
-    <div class="border-box header-content">
-        <div class="left border-box">
-            
-            <a class="site-name border-box" href="/">
-               JiangXueqiao&#39;s Blog
-            </a>
-        </div>
-
-        <div class="right border-box">
-            <div class="pc">
-                <ul class="menu-list">
-                    
-                        
-                        <li class="menu-item">
-                            <a class=""
-                               href="/"
-                            >
-                                
-                                    <i class="menu-icon fa-solid fa-home"></i>
-                                
-                                首页
-                            </a>
-                        </li>
-                    
-                        
-                        <li class="menu-item">
-                            <a class=""
-                               href="/archives"
-                            >
-                                
-                                    <i class="menu-icon fa-solid fa-layer-group"></i>
-                                
-                                归档
-                            </a>
-                        </li>
-                    
-                        
-                        <li class="menu-item">
-                            <a class=""
-                               href="/categories"
-                            >
-                                
-                                    <i class="menu-icon fa-solid fa-box-archive"></i>
-                                
-                                分类
-                            </a>
-                        </li>
-                    
-                        
-                        <li class="menu-item">
-                            <a class=""
-                               href="/tags"
-                            >
-                                
-                                    <i class="menu-icon fa-solid fa-tags"></i>
-                                
-                                标签
-                            </a>
-                        </li>
-                    
-                        
-                        <li class="menu-item">
-                            <a class=""
-                               href="/about"
-                            >
-                                
-                                    <i class="menu-icon fa-solid fa-user-graduate"></i>
-                                
-                                关于
-                            </a>
-                        </li>
-                    
-                        
-                        <li class="menu-item">
-                            <a class=""
-                               href="/post/902225606.html"
-                            >
-                                
-                                📘专栏
-                            </a>
-                        </li>
-                    
-                        
-                        <li class="menu-item">
-                            <a class=""
-                               href="/post/3416050985.html"
-                            >
-                                
-                                🔥匠心之作
-                            </a>
-                        </li>
-                    
-                        
-                        <li class="menu-item">
-                            <a class=""
-                               target="_blank" rel="noopener" href="https://github.com/winsoft666"
-                            >
-                                
-                                GITHUB
-                            </a>
-                        </li>
-                    
-                    
-                        <li class="menu-item search search-popup-trigger">
-                            <i class="fas search fa-search"></i>
-                        </li>
-                    
-                </ul>
-            </div>
-            <div class="mobile">
-                
-                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
-                
-                <div class="icon-item menu-bar">
-                    <div class="menu-bar-middle"></div>
-                </div>
-            </div>
-        </div>
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>NSIS教程(2)-完整属性</span></h1>
+        
+      </div>
     </div>
-
-    <div class="header-drawer">
-        <ul class="drawer-menu-list">
-            
-                
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/"
-                    >首页</a>
-                </li>
-            
-                
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/archives"
-                    >归档</a>
-                </li>
-            
-                
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/categories"
-                    >分类</a>
-                </li>
-            
-                
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/tags"
-                    >标签</a>
-                </li>
-            
-                
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/about"
-                    >关于</a>
-                </li>
-            
-                
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/post/902225606.html"
-                    >📘专栏</a>
-                </li>
-            
-                
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       href="/post/3416050985.html"
-                    >🔥匠心之作</a>
-                </li>
-            
-                
-                <li class="drawer-menu-item flex-center">
-                    <a class=""
-                       target="_blank" rel="noopener" href="https://github.com/winsoft666"
-                    >GITHUB</a>
-                </li>
-            
-        </ul>
-    </div>
-
-    <div class="window-mask"></div>
-
-</header>
-
-
-        </div>
-
-        <div class="page-main-content-middle border-box">
-
-            <div class="main-content border-box">
-                
-
-                    
-<div class="fade-in-down-animation">
-    <div class="post-page-container border-box">
-        <div class="post-content-container border-box">
-            
-
-            <div class="post-content-bottom border-box">
-                
-                    <div class="post-title">
-                        NSIS教程(2)-完整属性
-                    </div>
-                
-
-                
-                    <div class="post-header border-box">
-                        
-                            <div class="avatar-box border-box">
-                                <img src="/images/avatar.png">
-                            </div>
-                        
-                        <div class="info-box">
-                            <div class="author border-box">
-                                <span class="name">江雪桥</span>
-                                
-                            </div>
-                            <div class="meta-info border-box">
-                                
-
-<div class="post-meta-info-container border-box post">
-    <div class="post-meta-info border-box">
-        
-
-        
-            <span class="meta-info-item post-create-date">
-                <i class="icon fa-solid fa-calendar-plus"></i>&nbsp;
-                <span class="datetime">2020-08-02 07:21:34</span>
-            </span>
-
-            <span class="meta-info-item post-update-date">
-                <i class="icon fa-solid fa-file-pen"></i>&nbsp;
-                <span class="datetime" data-updated="Sun Mar 31 2024 18:59:55 GMT+0800">2024-03-31 18:59:55</span>
-            </span>
-        
-
-        
-            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
-                <ul class="post-category-ul">
-                    
-                            <li class="category-item"><a href="/categories/NSIS/">NSIS</a></li>
-                        
-                    
-                </ul>
-            </span>
-        
-
-        
-            <span class="post-tag meta-info-item border-box">
-                <ul class="post-tag-ul">
-                    
-                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/NSIS/">NSIS</a></li>
-                        
-                    
-                </ul>
-            </span>
-        
-
-        
-        
-        
-        
-    </div>
-
     
-</div>
-
-                            </div>
-                        </div>
-                    </div>
-                
-
-                <div class="post-content keep-markdown-body">
-                    
-
-                    <p>本文列举了 NSIS 支持的所有属性，以供查阅。</p>
+  </div>
+  </div><article class="md-text content"><p>本文列举了 NSIS 支持的所有属性，以供查阅。</p>
 <span id="more"></span>
 
 <blockquote>
 <p><strong>描黑加粗部分的为默认值。</strong></p>
 </blockquote>
-<h1 id="一、常规属性"><a href="#一、常规属性" class="headerlink" title="一、常规属性"></a>一、常规属性</h1><h2 id="AddBrandingImage"><a href="#AddBrandingImage" class="headerlink" title="AddBrandingImage"></a>AddBrandingImage</h2><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(left|right|top|bottom) (width|height) [填充]</span><br></pre></td></tr></tbody></table></figure>
+<h1 id="一、常规属性"><a href="#一、常规属性" class="headerlink" title="一、常规属性"></a>一、常规属性</h1><h2 id="AddBrandingImage"><a href="#AddBrandingImage" class="headerlink" title="AddBrandingImage"></a>AddBrandingImage</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(left|right|top|bottom) (width|height) [填充]</span><br></pre></td></tr></table></figure>
 
-<p>在安装程序顶部、底部、左边、右边添加一个标志图像。它的大小将由指定的宽/高、安装程序的宽/高和安装程序字体确定。最终的大小不一定就是你需要的，请看输出命令来得到实际大小。因为这取决于安装程序字体，所以你应该在 AddBrandingImage 前使用 SetFont。默认的填充值为 2。</p>
+<p>在安装程序顶部、底部、左边、右边添加一个标志图像。它的大小将由指定的宽&#x2F;高、安装程序的宽&#x2F;高和安装程序字体确定。最终的大小不一定就是你需要的，请看输出命令来得到实际大小。因为这取决于安装程序字体，所以你应该在 AddBrandingImage 前使用 SetFont。默认的填充值为 2。</p>
 <h2 id="AllowRootDirInstall"><a href="#AllowRootDirInstall" class="headerlink" title="AllowRootDirInstall"></a>AllowRootDirInstall</h2><p>true|<strong>false</strong><br>控制是否允许安装在驱动器根目录，或者共享网络。把它设为“true”可以改变这个安全行为，此安全行为可以防止用户选择 <code>C:\</code> 或 <code>\\Server\Share</code> 来作为安装(或卸载)目录。对于另外的可定制的目录选择页面。</p>
 <h2 id="AutoCloseWindow"><a href="#AutoCloseWindow" class="headerlink" title="AutoCloseWindow"></a>AutoCloseWindow</h2><p>true|<strong>false</strong><br>设置当安装完成的时候窗口是否自动关闭。该属性可以不理会一个使用了 SetAutoClose 的区段。</p>
 <h2 id="BGGradient"><a href="#BGGradient" class="headerlink" title="BGGradient"></a>BGGradient</h2><p>[<strong>off</strong>|(顶部颜色 底部颜色 [文本颜色|notext])]</p>
 <p>指定是否使用一个渐变的背景窗口。如果为“off”，安装程序将不显示背景窗口，如果无指定参数，则使用默认的黑蓝渐变，或者指定顶部颜色或底部颜色来得到一个渐变的背景。顶部颜色和底部颜色使用 RRGGBB 格式(十六进制，就像 HTML 那样，但略去了 #，因为 # 用于注释)。你也可以指定“文本颜色”，该颜色会显示“Name”指定的名称在左上角，或者你不需要文本时使用“notext”来关闭文本显示。</p>
-<h2 id="BrandingText"><a href="#BrandingText" class="headerlink" title="BrandingText"></a>BrandingText</h2><p>/TRIM(LEFT|RIGHT|CENTER) 文本设置显示在安装窗口底部的文本(默认为“Nullsoft Install System vX.XX”)。如果设为空字串(“”)则使用默认值；设为” “(一个空格)则显示空白。如果你不知道哪个适合你，那就保留默认值吧，这样可以使每个人知道你使用的 NSIS 版本。使用 /TRIMLEFT、/TRIMRIGHT 或 /TRIMCENTER 来裁剪控制大小到字串大小。</p>
+<h2 id="BrandingText"><a href="#BrandingText" class="headerlink" title="BrandingText"></a>BrandingText</h2><p>&#x2F;TRIM(LEFT|RIGHT|CENTER) 文本设置显示在安装窗口底部的文本(默认为“Nullsoft Install System vX.XX”)。如果设为空字串(“”)则使用默认值；设为” “(一个空格)则显示空白。如果你不知道哪个适合你，那就保留默认值吧，这样可以使每个人知道你使用的 NSIS 版本。使用 &#x2F;TRIMLEFT、&#x2F;TRIMRIGHT 或 &#x2F;TRIMCENTER 来裁剪控制大小到字串大小。</p>
 <h2 id="Caption"><a href="#Caption" class="headerlink" title="Caption"></a>Caption</h2><p>标题当使用一个外部的 PageEx 区块:设置安装程序标题条文本。默认为“Name 安装”，当使用了 Name 指令指定了名称时。你可以把它替换为“我的安装程序”或其他。如果你指定为空字串(“”)，则使用默认值(你也可以指定为” “来使用一个空白字串)。</p>
 <p>当使用一个内部的 PageEx 区块:设置当前页面的子标题。</p>
-<h2 id="ChangeUI"><a href="#ChangeUI" class="headerlink" title="ChangeUI"></a>ChangeUI</h2><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对话框 ui_file.exe</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="ChangeUI"><a href="#ChangeUI" class="headerlink" title="ChangeUI"></a>ChangeUI</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">对话框 ui_file.exe</span><br></pre></td></tr></table></figure>
 
 <p>使用 ui_file.exe 里相同资源 ID 的一个对话框替换对话框(IDD_LICENSE、IDD_DIR、IDD_SELCOM、IDD_INST、IDD_INSTFILES、IDD_UNINST 或 IDD_VERIFY)。你也可以指定“all”作为一个对话框，当你想从同一个 UI 文件里一次载入替换全部 7 个对话框时。一些 UI 的例子请看位于 NSIS 目录下的 Contrib\UIs。</p>
 <ul>
@@ -380,23 +107,23 @@
 <li>IDD_UNINST 必须包含 IDC_EDIT1 (编辑框)。</li>
 <li>IDD_VERIFY 必须包含 IDC_STR (静态文本框)。</li>
 </ul>
-<h2 id="CheckBitmap"><a href="#CheckBitmap" class="headerlink" title="CheckBitmap"></a>CheckBitmap</h2><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bitmap.bmp</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="CheckBitmap"><a href="#CheckBitmap" class="headerlink" title="CheckBitmap"></a>CheckBitmap</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bitmap.bmp</span><br></pre></td></tr></table></figure>
 
 <p>指定一个位图为用于组件选择页面树形列表选择框的图像。</p>
 <p>该位图应该为 96x16 像素大小，不能多于 8 位位深(256 色)且包括六个用于不同状态(次序为: 鼠标点击反白边缘、未选时、已选时、子区段未选时、未选且只读、已选且只读)的 16x16 图像。使用粉红色为覆盖颜色(该区域实际时为透明)。</p>
 <h2 id="CompletedText"><a href="#CompletedText" class="headerlink" title="CompletedText"></a>CompletedText</h2><p>文本当指定了参数时替换在安装结束时的默认文本(“完成”)。否则，使用默认值。</p>
-<h2 id="ComponentText"><a href="#ComponentText" class="headerlink" title="ComponentText"></a>ComponentText</h2><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[文本 [子文本] [子文本 2]]</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="ComponentText"><a href="#ComponentText" class="headerlink" title="ComponentText"></a>ComponentText</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[文本 [子文本] [子文本 2]]</span><br></pre></td></tr></table></figure>
 
 <p>用来更改组件选择页面的默认文本。</p>
 <p>文本: 控件上的文本，到安装图标的右边。</p>
 <p>子文本: 安装类型选择控件的文本。</p>
 <p>子文本 2: 安装类型选择控件下面、组件列表左边的文本。</p>
 <p>如果字串为空(“”)则使用默认文本。</p>
-<h2 id="CRCCheck"><a href="#CRCCheck" class="headerlink" title="CRCCheck"></a>CRCCheck</h2><p><strong>on</strong>|off|force<br>指定安装前安装程序是否对自身执行一个 CRC。注意，如果用户使用了 /NCRC 命令行参数，且你没有指定“force”参数时，不会执行 CRC，这样有可能导致用户安装一个损坏的安装程序。</p>
-<h2 id="DetailsButtonText"><a href="#DetailsButtonText" class="headerlink" title="DetailsButtonText"></a>DetailsButtonText</h2><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show details text</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="CRCCheck"><a href="#CRCCheck" class="headerlink" title="CRCCheck"></a>CRCCheck</h2><p><strong>on</strong>|off|force<br>指定安装前安装程序是否对自身执行一个 CRC。注意，如果用户使用了 &#x2F;NCRC 命令行参数，且你没有指定“force”参数时，不会执行 CRC，这样有可能导致用户安装一个损坏的安装程序。</p>
+<h2 id="DetailsButtonText"><a href="#DetailsButtonText" class="headerlink" title="DetailsButtonText"></a>DetailsButtonText</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show details text</span><br></pre></td></tr></table></figure>
 
 <p>指定参数时替换默认详细信息按钮文本“显示细节”，未指定参数时使用默认值。</p>
-<h2 id="DirText"><a href="#DirText" class="headerlink" title="DirText"></a>DirText</h2><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[文本] [子文本] [浏览按钮文本] [浏览对话框文本]</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="DirText"><a href="#DirText" class="headerlink" title="DirText"></a>DirText</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[文本] [子文本] [浏览按钮文本] [浏览对话框文本]</span><br></pre></td></tr></table></figure>
 
 <p>用来更改目录选择页面的默认文本。</p>
 <p>文本: 控件上面的文本，右延至安装图标。</p>
@@ -404,47 +131,47 @@
 <p>浏览按钮文本: 浏览按钮上的文本。</p>
 <p>浏览对话框文本: 在点击“浏览”按钮后“浏览目录”对话框上的文本。</p>
 <p>如果字串为空(“”)则使用默认文本。</p>
-<h2 id="DirVar"><a href="#DirVar" class="headerlink" title="DirVar"></a>DirVar</h2><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">用户变量(目录输入输出)</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="DirVar"><a href="#DirVar" class="headerlink" title="DirVar"></a>DirVar</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">用户变量(目录输入输出)</span><br></pre></td></tr></table></figure>
 
 <p>指定用哪个变量来保存所选的目录。该变量也会保存默认值。这样可以很方便的建立两个不同的目录选择页面而不需要频繁的读取、写入 $INSTDIR。默认的变量为 $INSTDIR。它只能用于 PageEx 来确定目录变量和 uninstConfirm 页面。</p>
 <h2 id="DirVerify"><a href="#DirVerify" class="headerlink" title="DirVerify"></a>DirVerify</h2><p><strong>auto</strong>|leave<br>如果使用了“DirVerify leave”，则当安装目录无效或磁盘空间不够用时下一步按钮将会被禁止并且你可以在离开函数里使用 GetInstDirError 来读取被设置的位标计。</p>
 <h2 id="FileErrorText"><a href="#FileErrorText" class="headerlink" title="FileErrorText"></a>FileErrorText</h2><p>文件错误文本替换当文件不能写入时显示的默认文本。该文本可以包含一个代表文件名的 $0($0 会被临时更改为该值)。例如: “文件 $0$\r$\n不能写入$\r$\n 祝你下次好运。”。</p>
-<h2 id="Icon"><a href="#Icon" class="headerlink" title="Icon"></a>Icon</h2><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[路径\]图标文件.ico</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="Icon"><a href="#Icon" class="headerlink" title="Icon"></a>Icon</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[路径\]图标文件.ico</span><br></pre></td></tr></table></figure>
 
 <p>设置安装程序的图标。在图标文件里的每一个图标将会被包含在图标文件里。注意如果你在安装程序和卸载程序里使用了不同的图标，那么它们的文件大小和结构必须匹配否则安装程序的构建将会失败。</p>
 <h2 id="InstallButtonText"><a href="#InstallButtonText" class="headerlink" title="InstallButtonText"></a>InstallButtonText</h2><p>安装按钮文本如果指定了参数，则会把默认的“安装”按钮文本替换为你指定的文本。</p>
-<h2 id="InstallColors"><a href="#InstallColors" class="headerlink" title="InstallColors"></a>InstallColors</h2><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/windows | (前景色 背景色)</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="InstallColors"><a href="#InstallColors" class="headerlink" title="InstallColors"></a>InstallColors</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/windows | (前景色 背景色)</span><br></pre></td></tr></table></figure>
 
-<p>设置安装信息屏幕颜色(默认为 00FF00 000000)。使用 RRGGBB 格式(十六进制，就像 HTML 那样，但略去了 #，因为 # 用于注释)。注意指定了 “/windows” 作为唯一的参数，将使用默认的 Windows 颜色。</p>
+<p>设置安装信息屏幕颜色(默认为 00FF00 000000)。使用 RRGGBB 格式(十六进制，就像 HTML 那样，但略去了 #，因为 # 用于注释)。注意指定了 “&#x2F;windows” 作为唯一的参数，将使用默认的 Windows 颜色。</p>
 <h2 id="InstallDir"><a href="#InstallDir" class="headerlink" title="InstallDir"></a>InstallDir</h2><p>默认安装目录设定默认的安装目录。查看变量一段得到可用于该字串的变量(尤其是 $PROGRAMFILES)。注意该字串中最后一个 \ 后面的部分会被保留，当用户在安装时选择“浏览”并取得新的目录字串时，该部分会自动附加在后面(要禁止该行为你需要在目录字串后面添加一个额外的 \ ，但是你要使用引号把目录字串括起来以避免被认为是断行处理)。如果没有起作用的话，还是使用浏览按钮吧。</p>
 <h2 id="InstallDirRegKey"><a href="#InstallDirRegKey" class="headerlink" title="InstallDirRegKey"></a>InstallDirRegKey</h2><p>根键 子键 键名该属性让安装程序去检测一注册表里的一个字串，如果该字串可用那么把它用来作为安装目录。如果预置了该属性，当指定的注册表键可用时它会越过 InstallDir 指定的字串，否则使用默认的 InstallDir 指定值。查询注册表时，该命令将自动截去引号(如“”C:\program files\poop” “%1””，可得“C:\program files\poop”)。如果该字串以“.exe”结尾，它还会自动移去字串里的文件名部分(如“C:\program files\poop\poop.exe”，将得到“C:\program files\poop”)。对于更多高级的安装目录配置，可在 .onInit 函数里设定 $INSTDIR。[译者注: 事实上它还可以自动截取如“”C:\program files\poop\poop.exe” “%1””而得到“C:\program files\poop”，这样你只要知道了某个程序关联的文件类型，就可以直接用它获得该程序的安装目录。比如 InstallDirRegKey HKCR “FlashGet.Document\shell\open\command” “” 即可获得网际快车的安装目录]</p>
-<h2 id="InstProgressFlags"><a href="#InstProgressFlags" class="headerlink" title="InstProgressFlags"></a>InstProgressFlags</h2><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[位标计 [...]]</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="InstProgressFlags"><a href="#InstProgressFlags" class="headerlink" title="InstProgressFlags"></a>InstProgressFlags</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[位标计 [...]]</span><br></pre></td></tr></table></figure>
 
 <p>有效的位标计值为“smooth”(平滑进度条)或“colored”(把进度条着色为 InstallColors 设定的颜色)。例如: “InstProgressFlags” (默认老式 Windows 外观)，”InstProgressFlags smooth” (新式平滑外观)，”InstProgressFlags smooth colored” (新式平滑外观并着色)。注意: 当安装程序运行在 Windows XP 且使用了新式主题时“smooth”或“colored”都不能与 XPStyle on 共用。</p>
-<h2 id="InstType"><a href="#InstType" class="headerlink" title="InstType"></a>InstType</h2><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">安装类型名称 | /NOCUSTOM | /CUSTOMSTRING=字串 | /COMPONENTSONLYONCUSTOM</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="InstType"><a href="#InstType" class="headerlink" title="InstType"></a>InstType</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">安装类型名称 | /NOCUSTOM | /CUSTOMSTRING=字串 | /COMPONENTSONLYONCUSTOM</span><br></pre></td></tr></table></figure>
 
-<p>把一个安装类型添加到安装类型列表里，或禁止自定义安装类型。最多可以增加到 32 类，每一个类型都需要指定安装类型名称。如果以“un.”作前缀那么它就是一个卸载程序安装类型。你可以使用在运行时可以处理的用户变量而不是难以改变的代码来作为安装类型名称，这样你可以动态的改变安装类型的名称。另一个在运行时更改 InstType 名称的方法是 InstTypeSetText 命令。所不同的是使用 InstTypeSetText 你可以保留你自己宝贵的用户变量。第一个类型为默认类型(通常为“常规”)。每一个类型都是以编号的，从 1 开始。查看 SectionIn 可以知道这些编号怎么使用。如果指定了 /NOCUSTOM 开关，那么“自定义”类型就会被禁止，那么用户就必须选择一个已经定义的安装类型。作为选择，如果指定了 /CUSTOMSTRING 开关，那么该开关的参数将会替代“自定义”安装类型文本。作为选择，如果指定了 /COMPONENTSONLYONCUSTOM 位标计，那么组件列表仅在选择了“自定义”安装类型的时候才显示。</p>
-<h2 id="LicenseBkColor"><a href="#LicenseBkColor" class="headerlink" title="LicenseBkColor"></a>LicenseBkColor</h2><p>颜色 | <strong>/gray</strong> | /windows<br>设置许可协议数据的背景颜色。颜色使用 RRGGBB 格式(十六进制，就像 HTML 那样，但略去了 #，因为 # 用于注释)。默认为“/gray”。你也可以使用“/windows”来使用 Windows 操作系统定义的颜色。</p>
-<h2 id="LicenseData"><a href="#LicenseData" class="headerlink" title="LicenseData"></a>LicenseData</h2><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">许可文件.(txt|rtf)</span><br></pre></td></tr></tbody></table></figure>
+<p>把一个安装类型添加到安装类型列表里，或禁止自定义安装类型。最多可以增加到 32 类，每一个类型都需要指定安装类型名称。如果以“un.”作前缀那么它就是一个卸载程序安装类型。你可以使用在运行时可以处理的用户变量而不是难以改变的代码来作为安装类型名称，这样你可以动态的改变安装类型的名称。另一个在运行时更改 InstType 名称的方法是 InstTypeSetText 命令。所不同的是使用 InstTypeSetText 你可以保留你自己宝贵的用户变量。第一个类型为默认类型(通常为“常规”)。每一个类型都是以编号的，从 1 开始。查看 SectionIn 可以知道这些编号怎么使用。如果指定了 &#x2F;NOCUSTOM 开关，那么“自定义”类型就会被禁止，那么用户就必须选择一个已经定义的安装类型。作为选择，如果指定了 &#x2F;CUSTOMSTRING 开关，那么该开关的参数将会替代“自定义”安装类型文本。作为选择，如果指定了 &#x2F;COMPONENTSONLYONCUSTOM 位标计，那么组件列表仅在选择了“自定义”安装类型的时候才显示。</p>
+<h2 id="LicenseBkColor"><a href="#LicenseBkColor" class="headerlink" title="LicenseBkColor"></a>LicenseBkColor</h2><p>颜色 | <strong>&#x2F;gray</strong> | &#x2F;windows<br>设置许可协议数据的背景颜色。颜色使用 RRGGBB 格式(十六进制，就像 HTML 那样，但略去了 #，因为 # 用于注释)。默认为“&#x2F;gray”。你也可以使用“&#x2F;windows”来使用 Windows 操作系统定义的颜色。</p>
+<h2 id="LicenseData"><a href="#LicenseData" class="headerlink" title="LicenseData"></a>LicenseData</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">许可文件.(txt|rtf)</span><br></pre></td></tr></table></figure>
 
 <p>指定一个用户读取许可协议的文本文件或 RTF 文件。如果没有许可协议需要显示那么可以忽略它。注意该文件必须是 DOS 文本格式(\r\n)。要定义多语言许可协议请使用 LicenseLangString。</p>
 <p>如果你使用 RTF 文件来显示许可协议推荐使用写字板来编辑 RTF 文件而不是使用微软的 Word。使用写字板可以得到更小的文件。</p>
 <h2 id="LicenseForceSelection"><a href="#LicenseForceSelection" class="headerlink" title="LicenseForceSelection"></a>LicenseForceSelection</h2><p>(checkbox [接受文本] | radiobuttons [接受文本] [拒绝文本] | <strong>off</strong>)</p>
 <p>指定显示的许可协议是否必须被接受。可以使用单选框或互斥按钮的形式。默认情况下“下一步”按钮是禁止的并且只能在钩选了单选框选择了正确的互斥按钮后才可以进入下一步。如果指定了 off 则默认情况下“下一步：按钮是可用的。</p>
-<h2 id="LicenseText"><a href="#LicenseText" class="headerlink" title="LicenseText"></a>LicenseText</h2><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[文本 [按钮文本]]</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="LicenseText"><a href="#LicenseText" class="headerlink" title="LicenseText"></a>LicenseText</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[文本 [按钮文本]]</span><br></pre></td></tr></table></figure>
 
 <p>用来更改许可协议页面的默认文本。</p>
 <p>文本: 控件上方的文本，右延至安装图标。</p>
 <p>按钮文本: “我同意”按钮上的文本。</p>
 <p>如果字串为空(“”)则使用默认文本。</p>
-<h2 id="MiscButtonText"><a href="#MiscButtonText" class="headerlink" title="MiscButtonText"></a>MiscButtonText</h2><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[上一步文本 [下一步文本] [退出按钮文本] [关闭按钮文本]]</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="MiscButtonText"><a href="#MiscButtonText" class="headerlink" title="MiscButtonText"></a>MiscButtonText</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[上一步文本 [下一步文本] [退出按钮文本] [关闭按钮文本]]</span><br></pre></td></tr></table></figure>
 
 <p>替换这四个(上一步、下一步、退出、关闭)按钮的默认文本。如果留空参数，将使用默认值代替。</p>
-<h2 id="Name"><a href="#Name" class="headerlink" title="Name"></a>Name</h2><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">名称 [双与名称]</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="Name"><a href="#Name" class="headerlink" title="Name"></a>Name</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">名称 [双与名称]</span><br></pre></td></tr></table></figure>
 
 <p>设置安装程序的名称。名称通常用来显示产品的名称比如“我的程序”或“蓝色网际的程序”。如果在名称里有一个或多个与符号(&amp;)，把第二个参数设为与第一个相同，有 &amp; 的地方使用两个 &amp; 来表示。例如你的产品名称为“foo &amp; bar2000”，那么使用:</p>
 <p>Name “foo &amp; bar2000” “foo &amp;&amp; bar2000”<br>如果你的安装程序名称里有 &amp; 符号并且对名称使用了一个 LangString，那么你还需要创建另一个含有双 &amp; 字符的名称作为第二个参数。</p>
-<h2 id="OutFile"><a href="#OutFile" class="headerlink" title="OutFile"></a>OutFile</h2><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[路径\]安装程序.exe</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="OutFile"><a href="#OutFile" class="headerlink" title="OutFile"></a>OutFile</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[路径\]安装程序.exe</span><br></pre></td></tr></table></figure>
 
 <p>指定 MakeNSIS 要写入安装程序的输出文件。仅仅是 MakeNSIS 要写入的文件，它不会对安装程序的内容有任何影响。</p>
 <h2 id="SetFont"><a href="#SetFont" class="headerlink" title="SetFont"></a>SetFont</h2><p>字体名 字体大小设置安装程序字体大小。请记住你选择的字体在用户的机器上也要有，不要使用只有你自己有的字体。</p>
@@ -452,23 +179,23 @@
 <p>设置是否显示安装详细信息。你可以设为“hide”来默认隐藏详细信息但用户可以查看，或“show”来默认显示详细信息，或“nevershow”来阻止用户查看任何信息。注意区段里可以使用 SetDetailsView 来越过它的设置。</p>
 <h2 id="ShowUninstDetails"><a href="#ShowUninstDetails" class="headerlink" title="ShowUninstDetails"></a>ShowUninstDetails</h2><p><strong>hide</strong>|show|nevershow<br>设置是否显示卸载详细信息。你可以设为“hide”来默认隐藏详细信息但用户可以查看，或“show”来默认显示详细信息，或“nevershow”来阻止用户查看任何信息。注意区段里可以使用 SetDetailsView 来越过它的设置。</p>
 <h2 id="SilentInstall"><a href="#SilentInstall" class="headerlink" title="SilentInstall"></a>SilentInstall</h2><p><strong>normal</strong>|silent|silentlog</p>
-<p>指定安装程序是否静默安装。如果它为“silent”或“silentlog”，所有位标计为 SF_SELECTED 的区段都会被安装而不做提示(你可以使用 SectionSetFlags 来设定区段的位标计)，安装程序本身没有任何屏幕输出(而脚本仍可以显示某些特定的输出，使用 MessageBox 的 /SD 参数来指定静默安装时默认的返回值)。注意如果设置为“normal”且用户运行时使用了 /S (区分大小写)命令行参数时就相当于 SilentInstall 设置为“silent”一样。注意: 也可以看 LogSet。</p>
-<h2 id="SilentUnInstall"><a href="#SilentUnInstall" class="headerlink" title="SilentUnInstall"></a>SilentUnInstall</h2><p><strong>normal</strong>|silent<br>指定卸载程序是否静默安装。如果它为“silent”，卸载区段会被运行而不做提示，卸载程序本身没有任何屏幕输出(而脚本仍可以显示某些特定的输出，使用 MessageBox 的 /SD 参数来指定静默安装时默认的返回值)。注意如果设置为“normal”且用户运行时使用了 /S (区分大小写)命令行参数时就相当于 SilentUnInstall 设置为“silent”一样。注意: 也可以看 LogSet。</p>
-<h2 id="SpaceTexts"><a href="#SpaceTexts" class="headerlink" title="SpaceTexts"></a>SpaceTexts</h2><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[需要空间文本 [可用空间文本]]</span><br></pre></td></tr></tbody></table></figure>
+<p>指定安装程序是否静默安装。如果它为“silent”或“silentlog”，所有位标计为 SF_SELECTED 的区段都会被安装而不做提示(你可以使用 SectionSetFlags 来设定区段的位标计)，安装程序本身没有任何屏幕输出(而脚本仍可以显示某些特定的输出，使用 MessageBox 的 &#x2F;SD 参数来指定静默安装时默认的返回值)。注意如果设置为“normal”且用户运行时使用了 &#x2F;S (区分大小写)命令行参数时就相当于 SilentInstall 设置为“silent”一样。注意: 也可以看 LogSet。</p>
+<h2 id="SilentUnInstall"><a href="#SilentUnInstall" class="headerlink" title="SilentUnInstall"></a>SilentUnInstall</h2><p><strong>normal</strong>|silent<br>指定卸载程序是否静默安装。如果它为“silent”，卸载区段会被运行而不做提示，卸载程序本身没有任何屏幕输出(而脚本仍可以显示某些特定的输出，使用 MessageBox 的 &#x2F;SD 参数来指定静默安装时默认的返回值)。注意如果设置为“normal”且用户运行时使用了 &#x2F;S (区分大小写)命令行参数时就相当于 SilentUnInstall 设置为“silent”一样。注意: 也可以看 LogSet。</p>
+<h2 id="SpaceTexts"><a href="#SpaceTexts" class="headerlink" title="SpaceTexts"></a>SpaceTexts</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[需要空间文本 [可用空间文本]]</span><br></pre></td></tr></table></figure>
 
 <p>如果指定了参数，将会取代所需空间和可用空间文本(默认为“所需空间: ”和“可用空间: ”)。如果指定了“none”则不会显示空间提示文本。</p>
-<h2 id="SubCaption"><a href="#SubCaption" class="headerlink" title="SubCaption"></a>SubCaption</h2><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[页面代号 子标题]</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="SubCaption"><a href="#SubCaption" class="headerlink" title="SubCaption"></a>SubCaption</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[页面代号 子标题]</span><br></pre></td></tr></table></figure>
 
-<p>取代每一个安装程序页面(0=”: 许可协议”,1=”: 安装选项”,2=”: 安装目录”, 3=”: 正在安装”, 4=”: 安装完成”)的子标题。如果指定了空字串(“”)，将使用默认值(你也可以指定 “ “ 来使用一个空白字串)。</p>
+<p>取代每一个安装程序页面(0&#x3D;”: 许可协议”,1&#x3D;”: 安装选项”,2&#x3D;”: 安装目录”, 3&#x3D;”: 正在安装”, 4&#x3D;”: 安装完成”)的子标题。如果指定了空字串(“”)，将使用默认值(你也可以指定 “ “ 来使用一个空白字串)。</p>
 <p>你也可以在一个 PageEx 区块内部使用 Caption 来设置一个子标题(或取代默认值)。</p>
 <h2 id="UninstallButtonText"><a href="#UninstallButtonText" class="headerlink" title="UninstallButtonText"></a>UninstallButtonText</h2><p>文本替换卸载程序上默认为“卸载”的按钮文本。如果无指定参数，将使用默认的文本。也可以看 WriteUninstaller (替换 UninstallEXEName)。</p>
 <h2 id="UninstallCaption"><a href="#UninstallCaption" class="headerlink" title="UninstallCaption"></a>UninstallCaption</h2><p>标题设置卸载程序标题条上显示的文本。默认情况下，它为由 Name 命令指定的“卸载名称”。你可以取代它为“我的应用程序卸载”或其他。如果指定了空字串(“”)，将使用默认值(你也可以指定 “ “ 来使用一个空白字串)。</p>
-<h2 id="UninstallIcon"><a href="#UninstallIcon" class="headerlink" title="UninstallIcon"></a>UninstallIcon</h2><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[路径\]图标.ico</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="UninstallIcon"><a href="#UninstallIcon" class="headerlink" title="UninstallIcon"></a>UninstallIcon</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[路径\]图标.ico</span><br></pre></td></tr></table></figure>
 
 <p>设置卸载程序的图标。这个图标文件必须和安装程序的图标结构一致。</p>
-<h2 id="UninstallSubCaption"><a href="#UninstallSubCaption" class="headerlink" title="UninstallSubCaption"></a>UninstallSubCaption</h2><p>页面代号 子标题取代每一个卸载程序页面(0=”: 卸载确认”,1=”: 正在卸载”,2=”: 卸载完成”)的子标题。如果指定了空字串(“”)，将使用默认值(你也可以指定 “ “ 来使用一个空白字串)。</p>
+<h2 id="UninstallSubCaption"><a href="#UninstallSubCaption" class="headerlink" title="UninstallSubCaption"></a>UninstallSubCaption</h2><p>页面代号 子标题取代每一个卸载程序页面(0&#x3D;”: 卸载确认”,1&#x3D;”: 正在卸载”,2&#x3D;”: 卸载完成”)的子标题。如果指定了空字串(“”)，将使用默认值(你也可以指定 “ “ 来使用一个空白字串)。</p>
 <p>你也可以在一个 PageEx 区块内部使用 Caption 来设置一个子标题(或取代默认值)。</p>
-<h2 id="UninstallText"><a href="#UninstallText" class="headerlink" title="UninstallText"></a>UninstallText</h2><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">文本 [子文本]</span><br></pre></td></tr></tbody></table></figure>
+<h2 id="UninstallText"><a href="#UninstallText" class="headerlink" title="UninstallText"></a>UninstallText</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">文本 [子文本]</span><br></pre></td></tr></table></figure>
 
 <p>指定卸载程序确认页面上的文本。</p>
 <p>文本: 控件上方的文本</p>
@@ -485,7 +212,7 @@
 <p>支持三种压缩方式: ZLIB，BZIP2 和 LZMA。</p>
 <p>ZLIB (默认值) 使用收缩算法，是一个快速简单的方法。默认的压缩级别它消耗大约 300 KB 内存。</p>
 <p>BZIP2 通常比 ZLIB 的压缩率好，但是稍微慢了一点并且内存的使用也多一点。默认的压缩级别它消耗大约 4 MB 内存。</p>
-<p>LZMA 是一个压缩率比较理想的新式压缩方式。它的解压速度非常快(在 2 GHz 的 CPU 上能达到 10-20 MB/s 的速度)，但是压缩速度很慢。解压时内存的使用量是字典的大小加上一些 KB，默认值为 8 MB。</p>
+<p>LZMA 是一个压缩率比较理想的新式压缩方式。它的解压速度非常快(在 2 GHz 的 CPU 上能达到 10-20 MB&#x2F;s 的速度)，但是压缩速度很慢。解压时内存的使用量是字典的大小加上一些 KB，默认值为 8 MB。</p>
 <h2 id="SetCompressorDictSize"><a href="#SetCompressorDictSize" class="headerlink" title="SetCompressorDictSize"></a>SetCompressorDictSize</h2><p>字典大小以 MB 为单位设置使用 LZMA 压缩器时的字典大小(默认为 8 MB)。</p>
 <h2 id="SetDatablockOptimize"><a href="#SetDatablockOptimize" class="headerlink" title="SetDatablockOptimize"></a>SetDatablockOptimize</h2><p><strong>on</strong>|off<br>该命令决定编译器是否优化数据区块。数据区块的优化首先由编译器检查要添加到数据区块的数据是否已经存在了，如果已存在，只需要简单的作为引用来添加(会保留一小部分大小)。非常强烈的推荐保留该选项为 on。</p>
 <h2 id="SetDateSave"><a href="#SetDateSave" class="headerlink" title="SetDateSave"></a>SetDateSave</h2><p><strong>on</strong>|off<br>该命令设置了由 File 命令使用的保存文件日期、时间位标计来决定是否保留最后上次写入文件的日期和时间，它可以在安装时储存下来。有效的位标计为“on”和“off”。“on”为默认。</p>
@@ -493,8 +220,8 @@
 <p>该命令设置了由 File 命令使用的覆盖位标计来决定目标文件已存在时是否覆盖。如果覆盖位标计为“on”，则目标文件被覆盖(这个是默认值)。如果覆盖位标计为“off”,则已存在的文件不会被覆盖。如果覆盖位标计为“try”，文件仅当可以被覆盖时(就是说假如文件不能写入，它会自动略过而不需要用户决定)才会覆盖目标文件。如果覆盖位标计为“ifnewer”，则仅当已存在的文件比新文件旧时才会覆盖目标文件。如果覆盖位标计为“ifdiff”，则仅当已存在的文件比新文件旧或新时才会覆盖目标文件。注意在“ifnewer”或“ifdiff”模式下，目标文件的日期都会被设为新文件的日期，而不管 SetDateSave 是怎么设置的。</p>
 <h2 id="SetPluginUnload"><a href="#SetPluginUnload" class="headerlink" title="SetPluginUnload"></a>SetPluginUnload</h2><p><strong>manual</strong>|alwaysoff</p>
 <p>该命令设置了 CallInstDLL 和插件调用(插件名::函数)的不卸载插件位标计。</p>
-<p>该命令设为“alwaysoff”相当于每个 CallInstDLL 和插件调用都使用了 /NOUNLOAD 参数。该命令设为“manual”则仅当你指定了 /NOUNLOAD 参数时才不卸载。</p>
-<h3 id="版本信息"><a href="#版本信息" class="headerlink" title="版本信息"></a>版本信息</h3><h3 id="VIAddVersionKey"><a href="#VIAddVersionKey" class="headerlink" title="VIAddVersionKey"></a>VIAddVersionKey</h3><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[/LANG=语言 ID] 键名 值</span><br></pre></td></tr></tbody></table></figure>
+<p>该命令设为“alwaysoff”相当于每个 CallInstDLL 和插件调用都使用了 &#x2F;NOUNLOAD 参数。该命令设为“manual”则仅当你指定了 &#x2F;NOUNLOAD 参数时才不卸载。</p>
+<h3 id="版本信息"><a href="#版本信息" class="headerlink" title="版本信息"></a>版本信息</h3><h3 id="VIAddVersionKey"><a href="#VIAddVersionKey" class="headerlink" title="VIAddVersionKey"></a>VIAddVersionKey</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[/LANG=语言 ID] 键名 值</span><br></pre></td></tr></table></figure>
 
 <p>在文件属性的版本表格里添加一个字段。既可以是由系统提供的的一个字段也可以是一个用户定义的字段。随后的这些字段由系统提供:</p>
 <ul>
@@ -512,447 +239,418 @@
 <li>SpecialBuild</li>
 </ul>
 <p>这些字段名称由目标系统翻译，而用户自定义的字段则无翻译。</p>
-<h3 id="VIProductVersion"><a href="#VIProductVersion" class="headerlink" title="VIProductVersion"></a>VIProductVersion</h3><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[版本字串_X.X.X.X]</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="VIProductVersion"><a href="#VIProductVersion" class="headerlink" title="VIProductVersion"></a>VIProductVersion</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[版本字串_X.X.X.X]</span><br></pre></td></tr></table></figure>
 
 <p>在文件属性版本表格的顶部添加产品版本号。</p>
 
-                </div>
-                
-                        
-<div class="post-copyright-info-container border-box">
-    <div class="copyright-info-content border-box">
-        <div class="copyright-info-top border-box">
-            <div class="copyright-post-title border-box text-ellipsis">
-                NSIS教程(2)-完整属性
-            </div>
-
-            <div class="copyright-post-link border-box text-ellipsis">
-                post/1923360270.html
-            </div>
+<div class="article-footer fs14">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section>
+    
+    <section id="share">
+      <div class="header"><span>分享文章</span></div>
+      <div class="body">
+        <div class="link"><input class="copy-area" readonly="true" id="copy-link" value="https://jiangxueqiao.com/post/1923360270.html" /></div>
+        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/b32ef3da1162a.svg" /></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://jiangxueqiao.com/post/1923360270.html&title=NSIS教程(2)-完整属性 - Jiang's Blog&summary=本文列举了 NSIS 支持的所有属性，以供查阅。"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/80c07e4dbb303.svg" /></a><a class="social share-item email" href="mailto:?subject=NSIS教程(2)-完整属性 - Jiang's Blog&amp;body=https://jiangxueqiao.com/post/1923360270.html"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/a1b00e20f425d.svg" /></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/8411ed322ced6.svg" /></a></div>
+        
+        <div class="qrcode" id="qrcode-wechat" style="opacity:0;height:0">
+          <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=https://jiangxueqiao.com/post/1923360270.html"/>
         </div>
-
-        <div class="copyright-info-bottom border-box">
-            <div class="copyright-post-author bottom-item">
-                <div class="type">
-                    作者
-                </div>
-                <div class="content">江雪桥</div>
-            </div>
-
-            <div class="post-time bottom-item">
-                <div class="type">
-                    发布于
-                </div>
-                <div class="content">2020-08-02 07:21</div>
-            </div>
-
-
-            <div class="post-license bottom-item">
-                <div class="type">
-                    许可
-                </div>
-                <div class="content tooltip" data-tooltip-content="CC BY-NC-SA 4.0">
-                    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" target="_blank">
-                        
-                            <i class="fa-brands fa-creative-commons"></i>
-                            <i class="fa-brands fa-creative-commons-by"></i>
-                            <i class="fa-brands fa-creative-commons-nc"></i>
-                            <i class="fa-brands fa-creative-commons-sa"></i>
-                        
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <i class="copyright-bg fa-solid fa-copyright"></i>
+        
+      </div>
+    </section>
     </div>
-    <div class="copy-copyright-info flex-center tooltip" data-tooltip-content="复制版权信息" data-tooltip-offset-y="-2px">
-        <i class="fa-solid fa-copy"></i>
-    </div>
+</article>
+<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/post/2673115526.html">NSIS教程(3)-完整指令</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/post/409779091.html">NSIS教程(1)-基础语法</a></div></section></div>
+
+
+
+
+
+
+<footer class="page-footer footnote"><hr><div class="sitemap"><div class="sitemap-group"><span class="fs15">博客</span><a href="/">近期</a><a href="/topic">专栏</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></div><div class="sitemap-group"><span class="fs15">产品</span><a href="/post/776574933.html">1key.run</a><a href="/post/2053741240.html">TinyTu</a><a href="/post/1533480858.html">WinSpyPlus</a></div><div class="sitemap-group"><span class="fs15">社交</span><a href="/">友链</a><a target="_blank" rel="noopener" href="https://github.com/winsoft666/blog-comment">留言板</a></div><div class="sitemap-group"><span class="fs15">更多</span><a href="/author">关于本站</a><a target="_blank" rel="noopener" href="https://github.com/winsoft666">GitHub</a></div></div><div class="text"><p>本站由 <a href="/">江雪桥</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.27.0">Stellar 1.27.0</a> 主题创建。<br>本博客所有文章除特别声明外均为原创，采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
+<div class="widgets">
+
+
+
+<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%B8%B8%E8%A7%84%E5%B1%9E%E6%80%A7"><span class="toc-text">一、常规属性</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#AddBrandingImage"><span class="toc-text">AddBrandingImage</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AllowRootDirInstall"><span class="toc-text">AllowRootDirInstall</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#AutoCloseWindow"><span class="toc-text">AutoCloseWindow</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BGGradient"><span class="toc-text">BGGradient</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BrandingText"><span class="toc-text">BrandingText</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Caption"><span class="toc-text">Caption</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ChangeUI"><span class="toc-text">ChangeUI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CheckBitmap"><span class="toc-text">CheckBitmap</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CompletedText"><span class="toc-text">CompletedText</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ComponentText"><span class="toc-text">ComponentText</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CRCCheck"><span class="toc-text">CRCCheck</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DetailsButtonText"><span class="toc-text">DetailsButtonText</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DirText"><span class="toc-text">DirText</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DirVar"><span class="toc-text">DirVar</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DirVerify"><span class="toc-text">DirVerify</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FileErrorText"><span class="toc-text">FileErrorText</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Icon"><span class="toc-text">Icon</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#InstallButtonText"><span class="toc-text">InstallButtonText</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#InstallColors"><span class="toc-text">InstallColors</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#InstallDir"><span class="toc-text">InstallDir</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#InstallDirRegKey"><span class="toc-text">InstallDirRegKey</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#InstProgressFlags"><span class="toc-text">InstProgressFlags</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#InstType"><span class="toc-text">InstType</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LicenseBkColor"><span class="toc-text">LicenseBkColor</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LicenseData"><span class="toc-text">LicenseData</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LicenseForceSelection"><span class="toc-text">LicenseForceSelection</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#LicenseText"><span class="toc-text">LicenseText</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MiscButtonText"><span class="toc-text">MiscButtonText</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Name"><span class="toc-text">Name</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OutFile"><span class="toc-text">OutFile</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SetFont"><span class="toc-text">SetFont</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ShowInstDetails"><span class="toc-text">ShowInstDetails</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ShowUninstDetails"><span class="toc-text">ShowUninstDetails</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SilentInstall"><span class="toc-text">SilentInstall</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SilentUnInstall"><span class="toc-text">SilentUnInstall</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SpaceTexts"><span class="toc-text">SpaceTexts</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SubCaption"><span class="toc-text">SubCaption</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UninstallButtonText"><span class="toc-text">UninstallButtonText</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UninstallCaption"><span class="toc-text">UninstallCaption</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UninstallIcon"><span class="toc-text">UninstallIcon</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UninstallSubCaption"><span class="toc-text">UninstallSubCaption</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UninstallText"><span class="toc-text">UninstallText</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#WindowIcon"><span class="toc-text">WindowIcon</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#XPStyle"><span class="toc-text">XPStyle</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E7%BC%96%E8%AF%91%E5%99%A8%E4%BD%8D%E6%A0%87%E8%AE%A1"><span class="toc-text">二、编译器位标计</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#AllowSkipFiles"><span class="toc-text">AllowSkipFiles</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FileBufSize"><span class="toc-text">FileBufSize</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SetCompress"><span class="toc-text">SetCompress</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SetCompressor"><span class="toc-text">SetCompressor</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SetCompressorDictSize"><span class="toc-text">SetCompressorDictSize</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SetDatablockOptimize"><span class="toc-text">SetDatablockOptimize</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SetDateSave"><span class="toc-text">SetDateSave</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SetOverwrite"><span class="toc-text">SetOverwrite</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SetPluginUnload"><span class="toc-text">SetPluginUnload</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%88%E6%9C%AC%E4%BF%A1%E6%81%AF"><span class="toc-text">版本信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#VIAddVersionKey"><span class="toc-text">VIAddVersionKey</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#VIProductVersion"><span class="toc-text">VIProductVersion</span></a></li></ol></li></ol></li></ol></div><div class="widget-footer">
+
+<a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2c4.714 0 7.071 0 8.535 1.464C22 4.93 22 7.286 22 12c0 4.714 0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12Z"/><path stroke-linecap="round" stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/></g></svg><span>回到顶部</span></a><a class="buttom" onclick="util.scrollComment()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M10.46 1.25h3.08c1.603 0 2.86 0 3.864.095c1.023.098 1.861.3 2.6.752a5.75 5.75 0 0 1 1.899 1.899c.452.738.654 1.577.752 2.6c.095 1.004.095 2.261.095 3.865v1.067c0 1.141 0 2.036-.05 2.759c-.05.735-.153 1.347-.388 1.913a5.75 5.75 0 0 1-3.112 3.112c-.805.334-1.721.408-2.977.43a10.81 10.81 0 0 0-.929.036c-.198.022-.275.054-.32.08c-.047.028-.112.078-.224.232c-.121.166-.258.396-.476.764l-.542.916c-.773 1.307-2.69 1.307-3.464 0l-.542-.916a10.605 10.605 0 0 0-.476-.764c-.112-.154-.177-.204-.224-.232c-.045-.026-.122-.058-.32-.08c-.212-.023-.49-.03-.93-.037c-1.255-.021-2.171-.095-2.976-.429A5.75 5.75 0 0 1 1.688 16.2c-.235-.566-.338-1.178-.389-1.913c-.049-.723-.049-1.618-.049-2.76v-1.066c0-1.604 0-2.86.095-3.865c.098-1.023.3-1.862.752-2.6a5.75 5.75 0 0 1 1.899-1.899c.738-.452 1.577-.654 2.6-.752C7.6 1.25 8.857 1.25 10.461 1.25M6.739 2.839c-.914.087-1.495.253-1.959.537A4.25 4.25 0 0 0 3.376 4.78c-.284.464-.45 1.045-.537 1.96c-.088.924-.089 2.11-.089 3.761v1c0 1.175 0 2.019.046 2.685c.045.659.131 1.089.278 1.441a4.25 4.25 0 0 0 2.3 2.3c.515.214 1.173.294 2.429.316h.031c.398.007.747.013 1.037.045c.311.035.616.104.909.274c.29.17.5.395.682.645c.169.232.342.525.538.856l.559.944a.52.52 0 0 0 .882 0l.559-.944c.196-.331.37-.624.538-.856c.182-.25.392-.476.682-.645c.293-.17.598-.24.909-.274c.29-.032.639-.038 1.037-.045h.032c1.255-.022 1.913-.102 2.428-.316a4.25 4.25 0 0 0 2.3-2.3c.147-.352.233-.782.278-1.441c.046-.666.046-1.51.046-2.685v-1c0-1.651 0-2.837-.089-3.762c-.087-.914-.253-1.495-.537-1.959a4.25 4.25 0 0 0-1.403-1.403c-.464-.284-1.045-.45-1.96-.537c-.924-.088-2.11-.089-3.761-.089h-3c-1.651 0-2.837 0-3.762.089" clip-rule="evenodd"/><path fill="currentColor" d="M9 11a1 1 0 1 1-2 0a1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0a1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0a1 1 0 0 1 2 0"/></svg><span>参与讨论</span></a></div></widget>
+</div></aside><div class='float-panel blur'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
 </div>
+</div><div class="scripts">
+<script type="text/javascript">
+  const ctx = {
+    date_suffix: {
+      just: `刚刚`,
+      min: `分钟前`,
+      hour: `小时前`,
+      day: `天前`,
+    },
+    root : `/`,
+  };
 
-                
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://blog-static.jiangxueqiao.com/blog/stellar-theme/default/3442075.svg`,
+    cover: `https://blog-static.jiangxueqiao.com/blog/stellar-theme/default/76b86c0226ffd.svg`,
+  };
+  const deps = {
+    jquery: `https://blog-static.jiangxueqiao.com/blog/stellar-theme/jquery-3.7.1.min.js`,
+    marked: `https://blog-static.jiangxueqiao.com/blog/stellar-theme/marked-4.0.18.min.js`
+  }
+  
 
-                <div class="post-bottom-tags-and-share border-box">
-                    <div>
-                        
-                            <ul class="post-tags-box border-box">
-                                
-                                    <li class="tag-item border-box">
-                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/NSIS/">NSIS</a>
-                                    </li>
-                                
-                            </ul>
-                        
-                    </div>
-                    <div>
-                        
-                            <div class="post-share-container border-box">
-    <ul class="share-list-wrap border-box">
-        <li class="qq share-item border-box flex-center tooltip"
-            data-tooltip-content="分享到 QQ"
-        >
-            <i class="fa-brands fa-qq"></i>
-        </li>
-        <li class="wechat share-item border-box flex-center tooltip tooltip-img"
-            data-tooltip-content="分享到微信"
-            data-tooltip-img-tip="微信扫一扫"
-            data-tooltip-img-style="background-color: #fff; top: -10px; padding: 0.6rem 0.6rem 0.1rem 0.6rem;"
-        >
-            <i class="fa-brands fa-weixin"></i>
-        </li>
-        <li class="weibo share-item border-box flex-center tooltip"
-            data-tooltip-content="分享到微博"
-        >
-            <i class="fa-brands fa-weibo"></i>
-        </li>
-    </ul>
-</div>
+</script>
 
-                        
-                    </div>
-                </div>
+<script type="text/javascript">
+  const utils = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
 
-                
+    js: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = ctx.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
 
-                
-                    <div class="post-nav border-box">
-                        
-                            <div class="prev-post">
-                                <a class="prev"
-                                   rel="prev"
-                                   href="/post/2673115526.html"
-                                   title="NSIS教程(3)-完整指令"
-                                >
-                                    <span class="left arrow-icon flex-center">
-                                        <i class="fas fa-chevron-left"></i>
-                                    </span>
-                                    <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">NSIS教程(3)-完整指令</span>
-                                        <span class="post-nav-item">上一篇</span>
-                                    </span>
-                                </a>
-                            </div>
-                        
-                        
-                            <div class="next-post">
-                                <a class="next"
-                                   rel="next"
-                                   href="/post/409779091.html"
-                                   title="NSIS教程(1)-基础语法"
-                                >
-                                    <span class="title flex-center">
-                                        <span class="post-nav-title-item text-ellipsis">NSIS教程(1)-基础语法</span>
-                                        <span class="post-nav-item">下一篇</span>
-                                    </span>
-                                    <span class="right arrow-icon flex-center">
-                                        <i class="fas fa-chevron-right"></i>
-                                    </span>
-                                </a>
-                            </div>
-                        
-                    </div>
-                
-
-                
-                    
-
-
-
-
-
-
-                
-            </div>
-        </div>
-
-        
-            <div class="pc-post-toc right-toc">
-                <div class="post-toc-wrap border-box">
-    <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%B8%B8%E8%A7%84%E5%B1%9E%E6%80%A7"><span class="nav-text">一、常规属性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#AddBrandingImage"><span class="nav-text">AddBrandingImage</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AllowRootDirInstall"><span class="nav-text">AllowRootDirInstall</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AutoCloseWindow"><span class="nav-text">AutoCloseWindow</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BGGradient"><span class="nav-text">BGGradient</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BrandingText"><span class="nav-text">BrandingText</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Caption"><span class="nav-text">Caption</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ChangeUI"><span class="nav-text">ChangeUI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CheckBitmap"><span class="nav-text">CheckBitmap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CompletedText"><span class="nav-text">CompletedText</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ComponentText"><span class="nav-text">ComponentText</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CRCCheck"><span class="nav-text">CRCCheck</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DetailsButtonText"><span class="nav-text">DetailsButtonText</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DirText"><span class="nav-text">DirText</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DirVar"><span class="nav-text">DirVar</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DirVerify"><span class="nav-text">DirVerify</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FileErrorText"><span class="nav-text">FileErrorText</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Icon"><span class="nav-text">Icon</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#InstallButtonText"><span class="nav-text">InstallButtonText</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#InstallColors"><span class="nav-text">InstallColors</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#InstallDir"><span class="nav-text">InstallDir</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#InstallDirRegKey"><span class="nav-text">InstallDirRegKey</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#InstProgressFlags"><span class="nav-text">InstProgressFlags</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#InstType"><span class="nav-text">InstType</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LicenseBkColor"><span class="nav-text">LicenseBkColor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LicenseData"><span class="nav-text">LicenseData</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LicenseForceSelection"><span class="nav-text">LicenseForceSelection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LicenseText"><span class="nav-text">LicenseText</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MiscButtonText"><span class="nav-text">MiscButtonText</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Name"><span class="nav-text">Name</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OutFile"><span class="nav-text">OutFile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SetFont"><span class="nav-text">SetFont</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ShowInstDetails"><span class="nav-text">ShowInstDetails</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ShowUninstDetails"><span class="nav-text">ShowUninstDetails</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SilentInstall"><span class="nav-text">SilentInstall</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SilentUnInstall"><span class="nav-text">SilentUnInstall</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SpaceTexts"><span class="nav-text">SpaceTexts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SubCaption"><span class="nav-text">SubCaption</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UninstallButtonText"><span class="nav-text">UninstallButtonText</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UninstallCaption"><span class="nav-text">UninstallCaption</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UninstallIcon"><span class="nav-text">UninstallIcon</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UninstallSubCaption"><span class="nav-text">UninstallSubCaption</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UninstallText"><span class="nav-text">UninstallText</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WindowIcon"><span class="nav-text">WindowIcon</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XPStyle"><span class="nav-text">XPStyle</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E7%BC%96%E8%AF%91%E5%99%A8%E4%BD%8D%E6%A0%87%E8%AE%A1"><span class="nav-text">二、编译器位标计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#AllowSkipFiles"><span class="nav-text">AllowSkipFiles</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FileBufSize"><span class="nav-text">FileBufSize</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SetCompress"><span class="nav-text">SetCompress</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SetCompressor"><span class="nav-text">SetCompressor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SetCompressorDictSize"><span class="nav-text">SetCompressorDictSize</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SetDatablockOptimize"><span class="nav-text">SetDatablockOptimize</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SetDateSave"><span class="nav-text">SetDateSave</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SetOverwrite"><span class="nav-text">SetOverwrite</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SetPluginUnload"><span class="nav-text">SetPluginUnload</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%88%E6%9C%AC%E4%BF%A1%E6%81%AF"><span class="nav-text">版本信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VIAddVersionKey"><span class="nav-text">VIAddVersionKey</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VIProductVersion"><span class="nav-text">VIProductVersion</span></a></li></ol></li></ol></li></ol>
-    </div>
-</div>
-
-            </div>
-        
-    </div>
-</div>
-
-
-                
-            </div>
-        </div>
-
-        <div class="page-main-content-bottom border-box">
-            
-<footer class="footer border-box">
-    <div class="border-box website-info-box default">
-        
-            <div class="copyright-info info-item default">
-                &copy;&nbsp;<span>2017</span>&nbsp;-&nbsp;2024
-                
-                    &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">江雪桥</a>
-                
-            </div>
-
-            <div class="copyright-info info-item default">
-                本站文章均为原创（少数注明转载的除外），转载请注明出处！
-            </div>
-
-            <div class="copyright-info info-item default">
-                <a target="_blank" rel="noopener" href="https://blog.csdn.net/china_jeffery">My CSDN</a>
-                &nbsp;&nbsp;
-                <a target="_blank" rel="noopener" href="https://github.com/winsoft666/">My Github</a>
-                &nbsp;&nbsp;
-                <a href="/post/3416050985.html">匠心之作</a>
-            </div>
-
-            
-                <div class="icp-info info-item default">
-                    <a class=""
-                       target="_blank"
-                       href="https://beian.miit.gov.cn"
-                    >
-                        鄂ICP备2020015399号-6
-                    </a>
-                </div>
-            
-
-            
-        
-
-        <div class="count-item info-item default">
-            
-
-            
-
-            
-        </div>
-    </div>
-</footer>
-
-        </div>
-    </div>
-
-    <!-- post tools -->
+    jq: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+    },
     
-        <div class="post-tools right-toc">
-            <div class="post-tools-container border-box">
-    <ul class="tools-list border-box">
-        <!-- PC TOC show toggle -->
-        
-            <li class="tools-item flex-center toggle-show-toc">
-                <i class="fas fa-list"></i>
-            </li>
-        
+    onLoading: (el) => {
+      if (el) {
+        $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
+      }
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      let retryTimes = 3;
+      utils.onLoading(el);
+      function req() {
+        return new Promise((resolve, reject) => {
+          let status = 0; // 0 等待 1 完成 2 超时
+          let timer = setTimeout(() => {
+            if (status === 0) {
+              status = 2;
+              timer = null;
+              reject('请求超时');
+              if (retryTimes == 0) {
+                onFailure();
+              }
+            }
+          }, 5000);
+          fetch(url).then(function(response) {
+            if (status !== 2) {
+              clearTimeout(timer);
+              resolve(response);
+              timer = null;
+              status = 1;
+            }
+            if (response.ok) {
+              return response.json();
+            }
+            throw new Error('Network response was not ok.');
+          }).then(function(data) {
+            retryTimes = 0;
+            utils.onLoadSuccess(el);
+            callback(data);
+          }).catch(function(error) {
+            if (retryTimes > 0) {
+              retryTimes -= 1;
+              setTimeout(() => {
+                req();
+              }, 5000);
+            } else {
+              utils.onLoadFailure(el);
+              onFailure();
+            }
+          });
+        });
+      }
+      req();
+    },
+  };
+</script>
 
-        <!-- PC go comment -->
-        
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
 
-        <!-- PC full screen -->
-        <li class="tools-item flex-center full-screen">
-            <i class="fa-solid fa-expand"></i>
-        </li>
-    </ul>
-</div>
+<!-- required -->
+<script src="/js/main.js?v=1.27.0" async></script>
 
-        </div>
-    
-
-    <!-- side tools -->
-    <div class="side-tools">
-        <div class="side-tools-container border-box ">
-    <ul class="side-tools-list side-tools-show-handle border-box">
-        <li class="tools-item tool-font-adjust-plus flex-center">
-            <i class="fas fa-search-plus"></i>
-        </li>
-
-        <li class="tools-item tool-font-adjust-minus flex-center">
-            <i class="fas fa-search-minus"></i>
-        </li>
-
-        <li class="tools-item tool-toggle-theme-mode flex-center">
-            <i class="fas fa-moon"></i>
-        </li>
-
-        <!-- rss -->
-        
-            <li class="tools-item rss flex-center">
-                <a class="flex-center"
-                   href="/atom.xml"
-                   target="_blank"
-                >
-                    <i class="fas fa-rss"></i>
-                </a>
-            </li>
-        
-
-        <li class="tools-item tool-scroll-to-bottom flex-center">
-            <i class="fas fa-arrow-down"></i>
-        </li>
-    </ul>
-
-    <ul class="exposed-tools-list border-box">
-        
-            <li class="tools-item toggle-show-toc-tablet flex-center">
-                <i class="fas fa-list"></i>
-            </li>
-        
-
-        
-
-        <li class="tools-item tool-toggle-show flex-center">
-            <i class="fas fa-cog fa-spin"></i>
-        </li>
-
-        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
-            <i class="arrow fas fa-arrow-up"></i>
-            <span class="percent"></span>
-        </li>
-    </ul>
-</div>
-
-    </div>
-
-    <!-- image mask -->
-    <div class="zoom-in-image-mask">
-    <img class="zoom-in-image">
-</div>
-
-
-    <!-- local search -->
-    
-        <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
-          <span class="search-input-field-pre">
-            <i class="fas fa-keyboard"></i>
-          </span>
-            <div class="search-input-container">
-                <input autocomplete="off"
-                       autocorrect="off"
-                       autocapitalize="off"
-                       placeholder="搜索..."
-                       spellcheck="false"
-                       type="search"
-                       class="search-input"
-                >
-            </div>
-            <span class="close-popup-btn">
-                <i class="fas fa-times"></i>
-            </span>
-        </div>
-        <div id="search-result">
-            <div id="no-result">
-                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
-            </div>
-        </div>
-    </div>
-</div>
-
-    
-
-    <!-- tablet toc -->
-    
-        <div class="tablet-post-toc-mask">
-            <div class="tablet-post-toc">
-                <div class="post-toc-wrap border-box">
-    <div class="post-toc border-box">
-        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%B8%B8%E8%A7%84%E5%B1%9E%E6%80%A7"><span class="nav-text">一、常规属性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#AddBrandingImage"><span class="nav-text">AddBrandingImage</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AllowRootDirInstall"><span class="nav-text">AllowRootDirInstall</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AutoCloseWindow"><span class="nav-text">AutoCloseWindow</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BGGradient"><span class="nav-text">BGGradient</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BrandingText"><span class="nav-text">BrandingText</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Caption"><span class="nav-text">Caption</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ChangeUI"><span class="nav-text">ChangeUI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CheckBitmap"><span class="nav-text">CheckBitmap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CompletedText"><span class="nav-text">CompletedText</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ComponentText"><span class="nav-text">ComponentText</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CRCCheck"><span class="nav-text">CRCCheck</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DetailsButtonText"><span class="nav-text">DetailsButtonText</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DirText"><span class="nav-text">DirText</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DirVar"><span class="nav-text">DirVar</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DirVerify"><span class="nav-text">DirVerify</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FileErrorText"><span class="nav-text">FileErrorText</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Icon"><span class="nav-text">Icon</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#InstallButtonText"><span class="nav-text">InstallButtonText</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#InstallColors"><span class="nav-text">InstallColors</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#InstallDir"><span class="nav-text">InstallDir</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#InstallDirRegKey"><span class="nav-text">InstallDirRegKey</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#InstProgressFlags"><span class="nav-text">InstProgressFlags</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#InstType"><span class="nav-text">InstType</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LicenseBkColor"><span class="nav-text">LicenseBkColor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LicenseData"><span class="nav-text">LicenseData</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LicenseForceSelection"><span class="nav-text">LicenseForceSelection</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LicenseText"><span class="nav-text">LicenseText</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MiscButtonText"><span class="nav-text">MiscButtonText</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Name"><span class="nav-text">Name</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OutFile"><span class="nav-text">OutFile</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SetFont"><span class="nav-text">SetFont</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ShowInstDetails"><span class="nav-text">ShowInstDetails</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ShowUninstDetails"><span class="nav-text">ShowUninstDetails</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SilentInstall"><span class="nav-text">SilentInstall</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SilentUnInstall"><span class="nav-text">SilentUnInstall</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SpaceTexts"><span class="nav-text">SpaceTexts</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SubCaption"><span class="nav-text">SubCaption</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UninstallButtonText"><span class="nav-text">UninstallButtonText</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UninstallCaption"><span class="nav-text">UninstallCaption</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UninstallIcon"><span class="nav-text">UninstallIcon</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UninstallSubCaption"><span class="nav-text">UninstallSubCaption</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UninstallText"><span class="nav-text">UninstallText</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WindowIcon"><span class="nav-text">WindowIcon</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XPStyle"><span class="nav-text">XPStyle</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E7%BC%96%E8%AF%91%E5%99%A8%E4%BD%8D%E6%A0%87%E8%AE%A1"><span class="nav-text">二、编译器位标计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#AllowSkipFiles"><span class="nav-text">AllowSkipFiles</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#FileBufSize"><span class="nav-text">FileBufSize</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SetCompress"><span class="nav-text">SetCompress</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SetCompressor"><span class="nav-text">SetCompressor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SetCompressorDictSize"><span class="nav-text">SetCompressorDictSize</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SetDatablockOptimize"><span class="nav-text">SetDatablockOptimize</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SetDateSave"><span class="nav-text">SetDateSave</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SetOverwrite"><span class="nav-text">SetOverwrite</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SetPluginUnload"><span class="nav-text">SetPluginUnload</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%89%88%E6%9C%AC%E4%BF%A1%E6%81%AF"><span class="nav-text">版本信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VIAddVersionKey"><span class="nav-text">VIAddVersionKey</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VIProductVersion"><span class="nav-text">VIProductVersion</span></a></li></ol></li></ol></li></ol>
-    </div>
-</div>
-
-            </div>
-        </div>
-    
-</main>
+<!-- optional -->
 
 
 
-<!-- common -->
+<script defer>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        ctx.cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (ctx.cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(ctx.cardlinks);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || 'memos' || 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          });
+        }
+      }
+    }
+  });
+</script>
 
-<script src="/js/utils.js"></script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
+  });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/flying-pages-2.1.2.min.js"></script><script defer src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/lazyload-17.8.4.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+</script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img`,
+    css: `https://blog-static.jiangxueqiao.com/blog/stellar-theme/fancybox-5.0.22.min.css`,
+    js: `https://blog-static.jiangxueqiao.com/blog/stellar-theme/fancybox-5.0.22.umd.min.js`
+  };
+  var selector = '[data-fancybox]:not(.error)';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const els = document.getElementsByClassName('ds-memos');
+    if (els != undefined && els.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || null
+        }
+      });
+    })
+  }
+</script><script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://blog-static.jiangxueqiao.com/blog/stellar-theme/swiper-bundle-10.3.1.min.css`);
+      utils.js(`https://blog-static.jiangxueqiao.com/blog/stellar-theme/swiper-bundle-10.3.1.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.codeElements = document.querySelectorAll('.code');
+    if (window.codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `复制`,
+        success_text: `已复制`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js');
+    }
+  });
+</script>
 
-<script src="/js/header-shrink.js"></script>
 
-<script src="/js/back2top.js"></script>
+<!-- inject -->
 
-<script src="/js/toggle-theme.js"></script>
-
-<script src="/js/code-block.js"></script>
-
-<script src="/js/main.js"></script>
-
-<script src="/js/libs/anime.min.js"></script>
-
-
-<!-- local-search -->
-
-    
-<script src="/js/local-search.js"></script>
-
-
-
-<!-- lazyload -->
-
-    
-<script src="/js/lazyload.js"></script>
-
-
-
-<div class="">
-    
-        <!-- post-helper -->
-        
-<script src="/js/post/post-helper.js"></script>
-
-
-        <!-- toc -->
-        
-            
-<script src="/js/post/toc.js"></script>
-
-        
-
-        <!-- copyright-info -->
-        
-            
-<script src="/js/post/copyright-info.js"></script>
-
-        
-
-        <!-- share -->
-        
-            
-<script src="/js/post/share.js"></script>
-
-        
-    
-
-    <!-- categories page -->
-    
-
-    <!-- links page -->
-    
-
-    <!-- photos page -->
-    
-
-    <!-- tools page -->
-    
-</div>
-
-<!-- mermaid -->
-
-
-<!-- pjax -->
-
-
-
-    
-        
-    
-
-</body>
-</html>
+</div></body></html>

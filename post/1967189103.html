@@ -1,0 +1,828 @@
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.27.0" theme-name="Stellar" theme-version="1.27.0">
+  
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f9fafb">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  
+  <title>玩转Qt 2D绘图之画家 - Jiang's Blog</title>
+
+  
+  <meta name="description" content="在 Qt 2D 世界中，图形基本都由点、线、矩形、多边形、椭圆、圆、折线、曲线、文本、贴图等基本元素辅以着色而构成，而且 QPainter 类已经提供了这些元素的绘制方法，花点时间掌握这些方法，也就掌握了 Qt 2D图形控件的制作，余下的就是勤学多练、孰能生巧了。">
+  
+  <meta name="keywords" content="Qt">
+
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="Jiang's Blog" type="application/atom+xml">
+  
+
+  <link rel="stylesheet" href="/css/main.css?v=1.27.0">
+
+  
+    <link rel="shortcut icon" href="/images/favicon.png">
+  
+
+  
+
+  <script src="/js/baidu-tongji.js"></script>
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+<body>
+
+<div class="l_body s:aa content tech" id="start" layout="post" ><aside class="l_left"><div class="leftbar-container">
+
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/author/"><div class="bg" style="opacity:0;background-image:url(https://blog-static.jiangxueqiao.com/blog/stellar-theme/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/images/avatar.png" onerror="javascript:this.classList.add('error');this.src='https://blog-static.jiangxueqiao.com/blog/stellar-theme/default/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">Jiang's Blog</div></a></div></header>
+
+<div class="nav-area">
+<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" placeholder="站内搜索"></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
+
+
+<nav class="menu dis-select"><a class="nav-item active" title="文章" href="/" style="color:#1BCDFC"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M5.879 2.879C5 3.757 5 5.172 5 8v8c0 2.828 0 4.243.879 5.121C6.757 22 8.172 22 11 22h2c2.828 0 4.243 0 5.121-.879C19 20.243 19 18.828 19 16V8c0-2.828 0-4.243-.879-5.121C17.243 2 15.828 2 13 2h-2c-2.828 0-4.243 0-5.121.879M8.25 17a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 0 1.5H9a.75.75 0 0 1-.75-.75M9 12.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5zM8.25 9A.75.75 0 0 1 9 8.25h6a.75.75 0 0 1 0 1.5H9A.75.75 0 0 1 8.25 9" clip-rule="evenodd"/><path fill="currentColor" d="M5.235 4.058C5 4.941 5 6.177 5 8v8c0 1.823 0 3.058.235 3.942L5 19.924c-.975-.096-1.631-.313-2.121-.803C2 18.243 2 16.828 2 14v-4c0-2.829 0-4.243.879-5.121c.49-.49 1.146-.707 2.121-.803zm13.53 15.884C19 19.058 19 17.822 19 16V8c0-1.823 0-3.059-.235-3.942l.235.018c.975.096 1.631.313 2.121.803C22 5.757 22 7.17 22 9.999v4c0 2.83 0 4.243-.879 5.122c-.49.49-1.146.707-2.121.803z" opacity=".5"/></svg></a><a class="nav-item" title="专栏" href="/topic" style="color:#3DC550"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M14.25 4.48v3.057c0 .111 0 .27.02.406a.936.936 0 0 0 .445.683a.96.96 0 0 0 .783.072c.13-.04.272-.108.378-.159L17 8.005l1.124.534c.106.05.248.119.378.16a.958.958 0 0 0 .783-.073a.936.936 0 0 0 .444-.683c.021-.136.021-.295.021-.406V3.031c.113-.005.224-.01.332-.013C21.154 2.98 22 3.86 22 4.933v11.21c0 1.112-.906 2.01-2.015 2.08c-.97.06-2.108.179-2.985.41c-1.082.286-1.99 1.068-3.373 1.436c-.626.167-1.324.257-1.627.323V5.174c.32-.079 1.382-.203 1.674-.371c.184-.107.377-.216.576-.323m5.478 8.338a.75.75 0 0 1-.546.91l-4 1a.75.75 0 0 1-.364-1.456l4-1a.75.75 0 0 1 .91.546" clip-rule="evenodd"/><path fill="currentColor" d="M18.25 3.151c-.62.073-1.23.18-1.75.336a8.2 8.2 0 0 0-.75.27v3.182l.75-.356l.008-.005a1.13 1.13 0 0 1 .492-.13c.047 0 .094.004.138.01c.175.029.315.1.354.12l.009.005l.749.356V3.647z"/><path fill="currentColor" d="M12 5.214c-.334-.064-1.057-.161-1.718-.339C8.938 4.515 8.05 3.765 7 3.487c-.887-.234-2.041-.352-3.018-.412C2.886 3.007 2 3.9 2 4.998v11.146c0 1.11.906 2.01 2.015 2.079c.97.06 2.108.179 2.985.41c.486.129 1.216.431 1.873.726c1.005.451 2.052.797 3.127 1.034z" opacity=".5"/><path fill="currentColor" d="M4.273 12.818a.75.75 0 0 1 .91-.545l4 1a.75.75 0 1 1-.365 1.455l-4-1a.75.75 0 0 1-.545-.91m.909-4.545a.75.75 0 1 0-.364 1.455l4 1a.75.75 0 0 0 .364-1.455z"/></svg></a><a class="nav-item" title="关于" href="/author" style="color:#FA6400"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M20 12a8 8 0 1 1-16 0a8 8 0 0 1 16 0" opacity=".5"/><path fill="currentColor" d="M17.712 5.453c1.047-.193 2.006-.259 2.797-.152c.77.103 1.536.393 1.956 1.064c.446.714.312 1.542-.012 2.258c-.33.728-.918 1.499-1.672 2.268c-1.516 1.547-3.836 3.226-6.597 4.697c-2.763 1.472-5.495 2.484-7.694 2.92c-1.095.217-2.098.299-2.923.201c-.8-.095-1.6-.383-2.032-1.075c-.47-.752-.296-1.63.07-2.379c.375-.768 1.032-1.586 1.872-2.403L4 12.416c0 .219.083.71.168 1.146c.045.23.09.444.123.596c-.652.666-1.098 1.263-1.339 1.756c-.277.567-.208.825-.145.925c.072.116.305.305.937.38c.609.073 1.44.018 2.455-.183c2.02-.4 4.613-1.351 7.28-2.772c2.667-1.42 4.85-3.015 6.23-4.423c.694-.707 1.15-1.334 1.377-1.836c.233-.515.167-.75.107-.844c-.07-.112-.289-.294-.883-.374c-.542-.072-1.272-.041-2.163.112L16.87 5.656c.338-.101.658-.17.842-.203"/></svg></a></nav>
+</div>
+<div class="widgets">
+
+
+<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/post/529732738.html"><span class="title">ABI兼容性</span></a><a class="item title" href="/post/3008752839.html"><span class="title">基于共享内存的跨平台RPC框架 - Veigar</span></a><a class="item title" href="/post/776574933.html"><span class="title">一键启动神器之1key.run</span></a><a class="item title" href="/post/1533480858.html"><span class="title">Windows窗口调试利器-WinSpyPlus</span></a><a class="item title" href="/post/1967189103.html"><span class="title">玩转Qt 2D绘图之画家</span></a><a class="item title" href="/post/235943795.html"><span class="title">Node插件开发(2)-不同的调用方式</span></a><a class="item title" href="/post/819381949.html"><span class="title">Node插件开发(1)-快速入门</span></a><a class="item title" href="/post/3437796039.html"><span class="title">MSVC版本的二进制兼容性</span></a><a class="item title" href="/post/333631906.html"><span class="title">Qt中图片按九宫格模式缩放</span></a><a class="item title" href="/post/711494356.html"><span class="title">Qt自定义和美化菜单</span></a></div></widget>
+</div>
+
+</div></aside><div class="l_main" id="main">
+
+
+
+
+
+<div class="article banner top">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Qt/">Qt</a></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2024-04-08T12:55:02.000Z">2024-04-08</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-04-17T07:03:41.295Z">2024-04-17</time></span></div></div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>玩转Qt 2D绘图之画家</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div><article class="md-text content"><p>在 Qt 2D 世界中，图形基本都由点、线、矩形、多边形、椭圆、圆、折线、曲线、文本、贴图等基本元素辅以着色而构成，而且 QPainter 类已经提供了这些元素的绘制方法，花点时间掌握这些方法，也就掌握了 Qt 2D图形控件的制作，余下的就是勤学多练、孰能生巧了。</p>
+<span id="more"></span>
+
+<h1 id="一、点"><a href="#一、点" class="headerlink" title="一、点"></a>一、点</h1><p>在 Qt 中使用 QPoint 或 QPointF 类型表示一个点的坐标。</p>
+<p>QPoint 和 QPointF 的区别在于：QPoint 使用整型表示 X 和 Y 坐标，而 QPointF 使用 qreal 浮点类型表示X和Y坐标。下面如无特殊说明，所介绍的方法都适用于两个类型。</p>
+<p>QPoint 类型虽然提供了 <code>isNull</code> 方法来判断对象是否为空，在 X 和 Y 坐标均为 0 时，isNull 返回 true，其他情况返回 false。在使用 QPoint::isNull 方法时要留意这个情况。</p>
+<p>可以使用 QPoint::manhattanLength 方法返回 x 和 y 坐标的绝对值之和（也叫曼哈顿距离），如：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">QPoint <span class="title">pt</span><span class="params">(<span class="number">-2</span>, <span class="number">4</span>)</span></span>;</span><br><span class="line">pt.<span class="built_in">manhattanLength</span>(); <span class="comment">// 6</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="1-1-两点距离"><a href="#1-1-两点距离" class="headerlink" title="1.1 两点距离"></a>1.1 两点距离</h2><p>使用两点间的距离公式可以快速计算两点的距离：</p>
+<p><mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -1.094ex;" xmlns="http://www.w3.org/2000/svg" width="33.12ex" height="4.208ex" role="img" focusable="false" viewBox="0 -1376.5 14639 1860"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mrow"><g data-mml-node="mo" transform="translate(0 -0.5)"><path data-c="7C" d="M139 -249H137Q125 -249 119 -235V251L120 737Q130 750 139 750Q152 750 159 735V-235Q151 -249 141 -249H139Z"></path></g><g data-mml-node="mi" transform="translate(278,0)"><path data-c="1D434" d="M208 74Q208 50 254 46Q272 46 272 35Q272 34 270 22Q267 8 264 4T251 0Q249 0 239 0T205 1T141 2Q70 2 50 0H42Q35 7 35 11Q37 38 48 46H62Q132 49 164 96Q170 102 345 401T523 704Q530 716 547 716H555H572Q578 707 578 706L606 383Q634 60 636 57Q641 46 701 46Q726 46 726 36Q726 34 723 22Q720 7 718 4T704 0Q701 0 690 0T651 1T578 2Q484 2 455 0H443Q437 6 437 9T439 27Q443 40 445 43L449 46H469Q523 49 533 63L521 213H283L249 155Q208 86 208 74ZM516 260Q516 271 504 416T490 562L463 519Q447 492 400 412L310 260L413 259Q516 259 516 260Z"></path></g><g data-mml-node="mi" transform="translate(1028,0)"><path data-c="1D435" d="M231 637Q204 637 199 638T194 649Q194 676 205 682Q206 683 335 683Q594 683 608 681Q671 671 713 636T756 544Q756 480 698 429T565 360L555 357Q619 348 660 311T702 219Q702 146 630 78T453 1Q446 0 242 0Q42 0 39 2Q35 5 35 10Q35 17 37 24Q42 43 47 45Q51 46 62 46H68Q95 46 128 49Q142 52 147 61Q150 65 219 339T288 628Q288 635 231 637ZM649 544Q649 574 634 600T585 634Q578 636 493 637Q473 637 451 637T416 636H403Q388 635 384 626Q382 622 352 506Q352 503 351 500L320 374H401Q482 374 494 376Q554 386 601 434T649 544ZM595 229Q595 273 572 302T512 336Q506 337 429 337Q311 337 310 336Q310 334 293 263T258 122L240 52Q240 48 252 48T333 46Q422 46 429 47Q491 54 543 105T595 229Z"></path></g><g data-mml-node="mo" transform="translate(1787,0) translate(0 -0.5)"><path data-c="7C" d="M139 -249H137Q125 -249 119 -235V251L120 737Q130 750 139 750Q152 750 159 735V-235Q151 -249 141 -249H139Z"></path></g></g><g data-mml-node="mo" transform="translate(2342.8,0)"><path data-c="3D" d="M56 347Q56 360 70 367H707Q722 359 722 347Q722 336 708 328L390 327H72Q56 332 56 347ZM56 153Q56 168 72 173H708Q722 163 722 153Q722 140 707 133H70Q56 140 56 153Z"></path></g><g data-mml-node="msqrt" transform="translate(3398.6,0)"><g transform="translate(1020,0)"><g data-mml-node="msup"><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><g data-mml-node="mo"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mi" transform="translate(389,0)"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g><g data-mml-node="mn" transform="translate(961,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g><g data-mml-node="mo" transform="translate(1683.2,0)"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="mi" transform="translate(2683.4,0)"><path data-c="1D465" d="M52 289Q59 331 106 386T222 442Q257 442 286 424T329 379Q371 442 430 442Q467 442 494 420T522 361Q522 332 508 314T481 292T458 288Q439 288 427 299T415 328Q415 374 465 391Q454 404 425 404Q412 404 406 402Q368 386 350 336Q290 115 290 78Q290 50 306 38T341 26Q378 26 414 59T463 140Q466 150 469 151T485 153H489Q504 153 504 145Q504 144 502 134Q486 77 440 33T333 -11Q263 -11 227 52Q186 -10 133 -10H127Q78 -10 57 16T35 71Q35 103 54 123T99 143Q142 143 142 101Q142 81 130 66T107 46T94 41L91 40Q91 39 97 36T113 29T132 26Q168 26 194 71Q203 87 217 139T245 247T261 313Q266 340 266 352Q266 380 251 392T217 404Q177 404 142 372T93 290Q91 281 88 280T72 278H58Q52 284 52 289Z"></path></g><g data-mml-node="mn" transform="translate(3255.4,0)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g><g data-mml-node="mo" transform="translate(3755.4,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g><g data-mml-node="mn" transform="translate(4177.4,477.1) scale(0.707)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g></g><g data-mml-node="mo" transform="translate(4803.2,0)"><path data-c="2B" d="M56 237T56 250T70 270H369V420L370 570Q380 583 389 583Q402 583 409 568V270H707Q722 262 722 250T707 230H409V-68Q401 -82 391 -82H389H387Q375 -82 369 -68V230H70Q56 237 56 250Z"></path></g><g data-mml-node="msup" transform="translate(5803.4,0)"><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><g data-mml-node="mo"><path data-c="28" d="M94 250Q94 319 104 381T127 488T164 576T202 643T244 695T277 729T302 750H315H319Q333 750 333 741Q333 738 316 720T275 667T226 581T184 443T167 250T184 58T225 -81T274 -167T316 -220T333 -241Q333 -250 318 -250H315H302L274 -226Q180 -141 137 -14T94 250Z"></path></g><g data-mml-node="mi" transform="translate(389,0)"><path data-c="1D466" d="M21 287Q21 301 36 335T84 406T158 442Q199 442 224 419T250 355Q248 336 247 334Q247 331 231 288T198 191T182 105Q182 62 196 45T238 27Q261 27 281 38T312 61T339 94Q339 95 344 114T358 173T377 247Q415 397 419 404Q432 431 462 431Q475 431 483 424T494 412T496 403Q496 390 447 193T391 -23Q363 -106 294 -155T156 -205Q111 -205 77 -183T43 -117Q43 -95 50 -80T69 -58T89 -48T106 -45Q150 -45 150 -87Q150 -107 138 -122T115 -142T102 -147L99 -148Q101 -153 118 -160T152 -167H160Q177 -167 186 -165Q219 -156 247 -127T290 -65T313 -9T321 21L315 17Q309 13 296 6T270 -6Q250 -11 231 -11Q185 -11 150 11T104 82Q103 89 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mn" transform="translate(879,0)"><path data-c="31" d="M213 578L200 573Q186 568 160 563T102 556H83V602H102Q149 604 189 617T245 641T273 663Q275 666 285 666Q294 666 302 660V361L303 61Q310 54 315 52T339 48T401 46H427V0H416Q395 3 257 3Q121 3 100 0H88V46H114Q136 46 152 46T177 47T193 50T201 52T207 57T213 61V578Z"></path></g><g data-mml-node="mo" transform="translate(1601.2,0)"><path data-c="2212" d="M84 237T84 250T98 270H679Q694 262 694 250T679 230H98Q84 237 84 250Z"></path></g><g data-mml-node="mi" transform="translate(2601.4,0)"><path data-c="1D466" d="M21 287Q21 301 36 335T84 406T158 442Q199 442 224 419T250 355Q248 336 247 334Q247 331 231 288T198 191T182 105Q182 62 196 45T238 27Q261 27 281 38T312 61T339 94Q339 95 344 114T358 173T377 247Q415 397 419 404Q432 431 462 431Q475 431 483 424T494 412T496 403Q496 390 447 193T391 -23Q363 -106 294 -155T156 -205Q111 -205 77 -183T43 -117Q43 -95 50 -80T69 -58T89 -48T106 -45Q150 -45 150 -87Q150 -107 138 -122T115 -142T102 -147L99 -148Q101 -153 118 -160T152 -167H160Q177 -167 186 -165Q219 -156 247 -127T290 -65T313 -9T321 21L315 17Q309 13 296 6T270 -6Q250 -11 231 -11Q185 -11 150 11T104 82Q103 89 103 113Q103 170 138 262T173 379Q173 380 173 381Q173 390 173 393T169 400T158 404H154Q131 404 112 385T82 344T65 302T57 280Q55 278 41 278H27Q21 284 21 287Z"></path></g><g data-mml-node="mn" transform="translate(3091.4,0)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g><g data-mml-node="mo" transform="translate(3591.4,0)"><path data-c="29" d="M60 749L64 750Q69 750 74 750H86L114 726Q208 641 251 514T294 250Q294 182 284 119T261 12T224 -76T186 -143T145 -194T113 -227T90 -246Q87 -249 86 -250H74Q66 -250 63 -250T58 -247T55 -238Q56 -237 66 -225Q221 -64 221 250T66 725Q56 737 55 738Q55 746 60 749Z"></path></g></g><g data-mml-node="mn" transform="translate(4013.4,477.1) scale(0.707)"><path data-c="32" d="M109 429Q82 429 66 447T50 491Q50 562 103 614T235 666Q326 666 387 610T449 465Q449 422 429 383T381 315T301 241Q265 210 201 149L142 93L218 92Q375 92 385 97Q392 99 409 186V189H449V186Q448 183 436 95T421 3V0H50V19V31Q50 38 56 46T86 81Q115 113 136 137Q145 147 170 174T204 211T233 244T261 278T284 308T305 340T320 369T333 401T340 431T343 464Q343 527 309 573T212 619Q179 619 154 602T119 569T109 550Q109 549 114 549Q132 549 151 535T170 489Q170 464 154 447T109 429Z"></path></g></g></g><g data-mml-node="mo" transform="translate(0,166.5)"><path data-c="221A" d="M1001 1150Q1017 1150 1020 1132Q1020 1127 741 244L460 -643Q453 -650 436 -650H424Q423 -647 423 -645T421 -640T419 -631T415 -617T408 -594T399 -560T385 -512T367 -448T343 -364T312 -259L203 119L138 41L111 67L212 188L264 248L472 -474L983 1140Q988 1150 1001 1150Z"></path></g><rect width="10220.4" height="60" x="1020" y="1256.5"></rect></g></g></g></svg></mjx-container></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;QtMath&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function">QPointF <span class="title">pt1</span><span class="params">(<span class="number">-2</span>, <span class="number">4</span>)</span></span>;</span><br><span class="line"><span class="function">QPointF <span class="title">pt2</span><span class="params">(<span class="number">4</span>, <span class="number">8</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">qreal distance = <span class="built_in">qSqrt</span>(<span class="built_in">qPow</span>(pt1.<span class="built_in">x</span>() - pt2.<span class="built_in">x</span>(), <span class="number">2.0</span>) + <span class="built_in">qPow</span>(pt1.<span class="built_in">y</span>() - pt2.<span class="built_in">y</span>(), <span class="number">2.0</span>)); <span class="comment">// 7.21</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="1-2-drawPoint-与-drawPoints"><a href="#1-2-drawPoint-与-drawPoints" class="headerlink" title="1.2 drawPoint 与 drawPoints"></a>1.2 drawPoint 与 drawPoints</h2><p>drawPoint 用于绘制单个点：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">drawPoint</span><span class="params">(<span class="type">const</span> QPointF &amp;position)</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">drawPoint</span><span class="params">(<span class="type">const</span> QPoint &amp;position)</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">drawPoint</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>drawPoints 用于一次性绘制多个点：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">drawPoints</span><span class="params">(<span class="type">const</span> QPointF *points, <span class="type">int</span> pointCount)</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">drawPoints</span><span class="params">(<span class="type">const</span> QPolygonF &amp;points)</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">drawPoints</span><span class="params">(<span class="type">const</span> QPoint *points, <span class="type">int</span> pointCount)</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">drawPoints</span><span class="params">(<span class="type">const</span> QPolygon &amp;points)</span></span></span><br></pre></td></tr></table></figure>
+
+<p><code>QPolygon</code>继承自 <code>QVector&lt;QPoint&gt;</code>，而<code>QPolygonF</code>继承自 <code>QVector&lt;QPointF&gt;</code>。</p>
+<h1 id="二、折线"><a href="#二、折线" class="headerlink" title="二、折线"></a>二、折线</h1><p>折线是由多个点相连组成的非闭合线条（相邻的两个点连接成直线，但首位不相连）。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">drawPolyline</span><span class="params">(<span class="type">const</span> QPointF *points, <span class="type">int</span> pointCount)</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">drawPolyline</span><span class="params">(<span class="type">const</span> QPolygonF &amp;points)</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">drawPolyline</span><span class="params">(<span class="type">const</span> QPoint *points, <span class="type">int</span> pointCount)</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">drawPolyline</span><span class="params">(<span class="type">const</span> QPolygon &amp;points)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>下面示例演示了折线的一种绘制方法，为了使线条更加圆润，我们还设置了线条的起落笔样式和相交点样式。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">Qt2DSample::paintEvent</span><span class="params">(QPaintEvent* e)</span> </span>{</span><br><span class="line">  <span class="function">QPainter <span class="title">painter</span><span class="params">(<span class="keyword">this</span>)</span></span>;</span><br><span class="line">  painter.<span class="built_in">setRenderHints</span>(QPainter::Antialiasing | QPainter::TextAntialiasing);</span><br><span class="line"></span><br><span class="line">  painter.<span class="built_in">setPen</span>(<span class="built_in">QPen</span>(Qt::red, <span class="number">6</span>, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));</span><br><span class="line"></span><br><span class="line">  QPolygon pg;</span><br><span class="line">  pg &lt;&lt; <span class="built_in">QPoint</span>(<span class="number">20</span>, <span class="number">200</span>) &lt;&lt; <span class="built_in">QPoint</span>(<span class="number">80</span>, <span class="number">10</span>) &lt;&lt; <span class="built_in">QPoint</span>(<span class="number">140</span>, <span class="number">200</span>) &lt;&lt; <span class="built_in">QPoint</span>(<span class="number">200</span>, <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">  painter.<span class="built_in">drawPolyline</span>(pg);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/img/62W7Gt1Q3h.png"></p>
+<h1 id="三、多边形"><a href="#三、多边形" class="headerlink" title="三、多边形"></a>三、多边形</h1><p>多边形是在折线的基础上首尾相连而来，并且可以使用画刷对多边形的闭合区域进行填充。</p>
+<p>仍然使用上面示例中定义的点来绘制多边形，设置 QPainter 画刷颜色为蓝色：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">Qt2DSample::paintEvent</span><span class="params">(QPaintEvent* e)</span> </span>{</span><br><span class="line">  <span class="function">QPainter <span class="title">painter</span><span class="params">(<span class="keyword">this</span>)</span></span>;</span><br><span class="line">  painter.<span class="built_in">setRenderHints</span>(QPainter::Antialiasing | QPainter::TextAntialiasing);</span><br><span class="line"></span><br><span class="line">  painter.<span class="built_in">setPen</span>(<span class="built_in">QPen</span>(Qt::red, <span class="number">6</span>, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin));</span><br><span class="line"></span><br><span class="line">  QPolygon pg;</span><br><span class="line">  pg &lt;&lt; <span class="built_in">QPoint</span>(<span class="number">20</span>, <span class="number">200</span>) &lt;&lt; <span class="built_in">QPoint</span>(<span class="number">80</span>, <span class="number">10</span>) &lt;&lt; <span class="built_in">QPoint</span>(<span class="number">140</span>, <span class="number">200</span>) &lt;&lt; <span class="built_in">QPoint</span>(<span class="number">200</span>, <span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">  painter.<span class="built_in">setBrush</span>(Qt::blue);</span><br><span class="line">  painter.<span class="built_in">drawPolygon</span>(pg);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/img/xbITvSAD7q.png"></p>
+<h1 id="四、线"><a href="#四、线" class="headerlink" title="四、线"></a>四、线</h1><p>两点（QPoint 或 QPointF）可以确定一条直线，Qt 提供了 QLine 和 QLineF 类型来描述线段。</p>
+<p>使用 drawLine 方法可以绘制一条直线，使用 drawLines 方法则可以一次性绘制多条直线。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">drawLine</span><span class="params">(<span class="type">const</span> QLineF &amp;line)</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">drawLine</span><span class="params">(<span class="type">const</span> QLine &amp;line)</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">drawLine</span><span class="params">(<span class="type">int</span> x1, <span class="type">int</span> y1, <span class="type">int</span> x2, <span class="type">int</span> y2)</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">drawLine</span><span class="params">(<span class="type">const</span> QPoint &amp;p1, <span class="type">const</span> QPoint &amp;p2)</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">drawLine</span><span class="params">(<span class="type">const</span> QPointF &amp;p1, <span class="type">const</span> QPointF &amp;p2)</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">drawLines</span><span class="params">(<span class="type">const</span> QLineF *lines, <span class="type">int</span> lineCount)</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">drawLines</span><span class="params">(<span class="type">const</span> QVector&lt;QLineF&gt; &amp;lines)</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">drawLines</span><span class="params">(<span class="type">const</span> QPointF *pointPairs, <span class="type">int</span> lineCount)</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">drawLines</span><span class="params">(<span class="type">const</span> QVector&lt;QPointF&gt; &amp;pointPairs)</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">drawLines</span><span class="params">(<span class="type">const</span> QLine *lines, <span class="type">int</span> lineCount)</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">drawLines</span><span class="params">(<span class="type">const</span> QVector&lt;QLine&gt; &amp;lines)</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">drawLines</span><span class="params">(<span class="type">const</span> QPoint *pointPairs, <span class="type">int</span> lineCount)</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">drawLines</span><span class="params">(<span class="type">const</span> QVector&lt;QPoint&gt; &amp;pointPairs)</span></span></span><br></pre></td></tr></table></figure>
+
+<h1 id="五、椭圆与圆"><a href="#五、椭圆与圆" class="headerlink" title="五、椭圆与圆"></a>五、椭圆与圆</h1><h2 id="5-1-椭圆"><a href="#5-1-椭圆" class="headerlink" title="5.1 椭圆"></a>5.1 椭圆</h2><p>椭圆有长轴、短轴、焦点等概念，建议在学习绘制椭圆之前先了解椭圆的这些概念，可以参考之前的文章 <a href="/post/66759332.html" title="回顾2D绘图的数学知识">回顾2D绘图的数学知识</a> 中的“椭圆”章节。</p>
+<p>Qt提供了 QPainter::drawEllipse 方法绘制椭圆，方法原型如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">drawEllipse</span><span class="params">(<span class="type">const</span> QRectF &amp;rectangle)</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">drawEllipse</span><span class="params">(<span class="type">const</span> QRect &amp;rectangle)</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">drawEllipse</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y, <span class="type">int</span> width, <span class="type">int</span> height)</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">drawEllipse</span><span class="params">(<span class="type">const</span> QPointF &amp;center, qreal rx, qreal ry)</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">drawEllipse</span><span class="params">(<span class="type">const</span> QPoint &amp;center, <span class="type">int</span> rx, <span class="type">int</span> ry)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>drawEllipse 方法虽然有5种重载形式，但总体来说，都是传递一个矩形区域给 drawEllipse方法，因为根据传入的矩形可以确定椭圆的长轴、短轴和焦点，其中长轴等于矩形的长，短轴等于矩形的高，2个焦点分别位于2个长半轴的中间。</p>
+<p>下面示例先绘制了一个浅灰色的矩形（用于观察椭圆的绘制），然后在使用该矩形绘制椭圆。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">Qt2DSample::paintEvent</span><span class="params">(QPaintEvent* e)</span> </span>{</span><br><span class="line">  <span class="function">QPainter <span class="title">painter</span><span class="params">(<span class="keyword">this</span>)</span></span>;</span><br><span class="line">  painter.<span class="built_in">setRenderHints</span>(QPainter::Antialiasing | QPainter::TextAntialiasing);</span><br><span class="line"></span><br><span class="line">  <span class="function">QRectF <span class="title">rect</span><span class="params">(<span class="number">50</span>, <span class="number">50</span>, <span class="number">300</span>, <span class="number">200</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 浅灰色的矩形</span></span><br><span class="line">  painter.<span class="built_in">setPen</span>(Qt::lightGray);</span><br><span class="line">  painter.<span class="built_in">drawRect</span>(rect);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 红色椭圆</span></span><br><span class="line">  painter.<span class="built_in">setPen</span>(Qt::red);</span><br><span class="line">  painter.<span class="built_in">drawEllipse</span>(rect);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/img/cPTivgqulV-TinyTu.png"></p>
+<h2 id="5-2-圆"><a href="#5-2-圆" class="headerlink" title="5.2 圆"></a>5.2 圆</h2><p>圆是椭圆的一种特殊情况，当椭圆的长轴等于短轴时，所绘制出来的就是圆了。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">Qt2DSample::paintEvent</span><span class="params">(QPaintEvent* e)</span> </span>{</span><br><span class="line">  <span class="function">QPainter <span class="title">painter</span><span class="params">(<span class="keyword">this</span>)</span></span>;</span><br><span class="line">  painter.<span class="built_in">setRenderHints</span>(QPainter::Antialiasing | QPainter::TextAntialiasing);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 宽 = 高</span></span><br><span class="line">  <span class="function">QRectF <span class="title">rect</span><span class="params">(<span class="number">50</span>, <span class="number">50</span>, <span class="number">300</span>, <span class="number">300</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">  painter.<span class="built_in">drawEllipse</span>(rect);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<h1 id="六、矩形"><a href="#六、矩形" class="headerlink" title="六、矩形"></a>六、矩形</h1><p>在 Qt中使用 QRect 和 QRectF 类型来表示矩形，在使用 QRect 时需要关注 QRect 的历史遗留问题，详见：<a href="/post/847642761.html" title="玩转Qt 2D绘图之坐标系">玩转Qt 2D绘图之坐标系</a> 的“QRect遗留问题”章节。</p>
+<h2 id="6-1-矩形的合法性"><a href="#6-1-矩形的合法性" class="headerlink" title="6.1 矩形的合法性"></a>6.1 矩形的合法性</h2><p>QRect和QRectF类型均提供了isEmpty、isNull、isValid方法，但 QRect 由于历史遗留问题，官方文档中对各个方法的定义看起来比较怪异，进行逻辑下面对其进行了逻辑运算，方便理解。</p>
+<p><strong>QRect</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">isEmpty</span>() == <span class="built_in">left</span>() &gt; <span class="built_in">right</span>() || <span class="built_in">top</span>() &gt; <span class="built_in">bottom</span>()</span><br><span class="line">            == <span class="built_in">left</span>() &gt; <span class="built_in">left</span>() + <span class="built_in">width</span>() - <span class="number">1</span> || <span class="built_in">top</span>() &gt; <span class="built_in">top</span>() + <span class="built_in">height</span>() - <span class="number">1</span></span><br><span class="line">            == <span class="number">1</span> &gt; <span class="built_in">width</span>() || <span class="number">1</span> &gt; <span class="built_in">height</span>()</span><br><span class="line"></span><br><span class="line"><span class="built_in">isNull</span>()  == (<span class="built_in">right</span>() == <span class="built_in">left</span>() - <span class="number">1</span> &amp;&amp; <span class="built_in">bottom</span>() == <span class="built_in">top</span>() - <span class="number">1</span>)</span><br><span class="line">            == (<span class="built_in">left</span>() + <span class="built_in">width</span>() - <span class="number">1</span> == <span class="built_in">left</span>() - <span class="number">1</span> &amp;&amp; <span class="built_in">top</span>() + <span class="built_in">height</span>() - <span class="number">1</span> == <span class="built_in">top</span>() - <span class="number">1</span>)</span><br><span class="line">            == (<span class="built_in">width</span>() == <span class="number">0</span> &amp;&amp; <span class="built_in">height</span>() == <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">isValid</span>() == <span class="built_in">left</span>() &lt;= <span class="built_in">right</span>() &amp;&amp; <span class="built_in">top</span>() &lt;= <span class="built_in">bottom</span>()</span><br><span class="line">            == <span class="built_in">left</span>() &lt;= <span class="built_in">left</span>() + <span class="built_in">width</span>() - <span class="number">1</span> &amp;&amp; <span class="built_in">top</span>() &lt;= <span class="built_in">top</span>() + <span class="built_in">height</span>() - <span class="number">1</span></span><br><span class="line">            == <span class="number">1</span> &lt;= <span class="built_in">width</span>() &amp;&amp; <span class="number">1</span> &lt;= <span class="built_in">height</span>()</span><br></pre></td></tr></table></figure>
+
+<p><strong>QRectF</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">isEmpty</span>() == <span class="built_in">width</span>() &lt;= <span class="number">0</span> || <span class="built_in">height</span>() &lt;= <span class="number">0</span></span><br><span class="line"><span class="built_in">isNull</span>()  == <span class="built_in">width</span>() == <span class="number">0</span> &amp;&amp; <span class="built_in">height</span>() == <span class="number">0</span></span><br><span class="line"><span class="built_in">isValid</span>() == <span class="built_in">width</span>() &gt; <span class="number">0</span> &amp;&amp; <span class="built_in">height</span>() &gt; <span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p>从上述定义可以发现，当前矩形的宽或高为负数时，isNull 返回的却是 false。</p>
+<h2 id="6-2-drawRect-与-drawRects"><a href="#6-2-drawRect-与-drawRects" class="headerlink" title="6.2 drawRect 与 drawRects"></a>6.2 drawRect 与 drawRects</h2><p>使用 drawRect 方法绘制单个矩形，使用 drawRects 方法一次性绘制多个矩形。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">drawRect</span><span class="params">(<span class="type">const</span> QRectF &amp;rectangle)</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">drawRect</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y, <span class="type">int</span> width, <span class="type">int</span> height)</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">drawRect</span><span class="params">(<span class="type">const</span> QRect &amp;rectangle)</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">drawRects</span><span class="params">(<span class="type">const</span> QRectF *rectangles, <span class="type">int</span> rectCount)</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">drawRects</span><span class="params">(<span class="type">const</span> QVector&lt;QRectF&gt; &amp;rectangles)</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">drawRects</span><span class="params">(<span class="type">const</span> QRect *rectangles, <span class="type">int</span> rectCount)</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">drawRects</span><span class="params">(<span class="type">const</span> QVector&lt;QRect&gt; &amp;rectangles)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>下面是一个简单的使用示例：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">Qt2DSample::paintEvent</span><span class="params">(QPaintEvent* e)</span> </span>{</span><br><span class="line">  <span class="function">QPainter <span class="title">painter</span><span class="params">(<span class="keyword">this</span>)</span></span>;</span><br><span class="line">  painter.<span class="built_in">setRenderHints</span>(QPainter::Antialiasing | QPainter::TextAntialiasing);</span><br><span class="line"></span><br><span class="line">  painter.<span class="built_in">drawRect</span>(<span class="built_in">QRect</span>(<span class="number">20</span>, <span class="number">20</span>, <span class="number">200</span>, <span class="number">200</span>));</span><br><span class="line"></span><br><span class="line">  painter.<span class="built_in">setPen</span>(Qt::red);</span><br><span class="line"></span><br><span class="line">  QVector&lt;QRect&gt; rects;</span><br><span class="line">  rects &lt;&lt; <span class="built_in">QRect</span>(<span class="number">60</span>, <span class="number">60</span>, <span class="number">200</span>, <span class="number">200</span>)</span><br><span class="line">        &lt;&lt; <span class="built_in">QRect</span>(<span class="number">100</span>, <span class="number">100</span>, <span class="number">200</span>, <span class="number">200</span>);</span><br><span class="line">  painter.<span class="built_in">drawRects</span>(rects);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/img/nMkJV3hBOE.png"></p>
+<h2 id="6-3-圆角矩形"><a href="#6-3-圆角矩形" class="headerlink" title="6.3 圆角矩形"></a>6.3 圆角矩形</h2><p>上面绘制的矩形都不是圆角，在Qt中绘制圆角矩形有两种方式：</p>
+<ul>
+<li><p>QPainter::drawRoundedRect，本节主要介绍这种方法，这种方法绘制的圆角矩形的4个角的曲度一样。  </p>
+<p>QPainter还提供了 drawRoundRect 方法也可以绘制圆角矩形，但该方法已经被标记为弃用，因此不建议继续使用。</p>
+</li>
+<li><p>QPainter::drawPath 通过路径的方式来绘制圆角矩形，这种方法绘制的圆角矩形的4个角的曲度可以不一样，该方法会在下面章节介绍。</p>
+</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">QPainter::drawRoundedRect</span><span class="params">(<span class="type">const</span> QRectF &amp;rect, qreal xRadius, qreal yRadius, Qt::SizeMode mode = Qt::AbsoluteSize)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>下面示例为了演示圆角矩形和普通的直角矩形的不同，先绘制了一个浅灰色直角矩形，然后再相同区域绘制了一个红色圆角矩形。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">Qt2DSample::paintEvent</span><span class="params">(QPaintEvent* e)</span> </span>{</span><br><span class="line">  <span class="function">QPainter <span class="title">painter</span><span class="params">(<span class="keyword">this</span>)</span></span>;</span><br><span class="line">  painter.<span class="built_in">setRenderHints</span>(QPainter::Antialiasing | QPainter::TextAntialiasing);</span><br><span class="line"></span><br><span class="line">  <span class="function">QRectF <span class="title">rect</span><span class="params">(<span class="number">50</span>, <span class="number">50</span>, <span class="number">300</span>, <span class="number">200</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 先绘制一个浅灰色的矩形</span></span><br><span class="line">  painter.<span class="built_in">setPen</span>(Qt::lightGray);</span><br><span class="line">  painter.<span class="built_in">drawRect</span>(rect);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 然后绘制一个红色圆角矩形</span></span><br><span class="line">  <span class="comment">//</span></span><br><span class="line">  qreal xRadius = <span class="number">20</span>;</span><br><span class="line">  qreal yRadius = <span class="number">40</span>;</span><br><span class="line"></span><br><span class="line">  painter.<span class="built_in">setPen</span>(<span class="built_in">QPen</span>(Qt::red, <span class="number">1</span>, Qt::DashDotLine));</span><br><span class="line">  painter.<span class="built_in">drawRoundedRect</span>(rect, xRadius, yRadius);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/img/JPvz0pEZK9.png"></p>
+<h3 id="7-4-xRadius-与-yRadius"><a href="#7-4-xRadius-与-yRadius" class="headerlink" title="7.4 xRadius 与 yRadius"></a>7.4 xRadius 与 yRadius</h3><p>xRadius 与 yRadius 参数决定了圆角的曲度，drawRoundedRect 方法绘制的圆角矩形的四个角采用同一个曲度。那么 xRadius 与 yRadius 具体是如何决定圆角的曲度的呢？</p>
+<p>xRadius 参数为椭圆的长半轴，yRadius 参数为椭圆的短半轴。</p>
+<blockquote>
+<p>关于椭圆的相关知识，可以参考之前的文章 <a href="/post/66759332.html" title="回顾2D绘图的数学知识">回顾2D绘图的数学知识</a> 中的“椭圆”章节。</p>
+</blockquote>
+<p>通过 xRadius 和 yRadius 参数确定了椭圆的长轴和短轴，那么在什么位置画椭圆呢？答案是：贴着四个顶角分别画 4 个椭圆来确定曲度。</p>
+<p>下面代码在上面示例的基础上，分别在左上角和右下角位置画了2个深黄色的椭圆，可以看到椭圆与圆角是相重合的。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">Qt2DSample::paintEvent</span><span class="params">(QPaintEvent* e)</span> </span>{</span><br><span class="line">  <span class="function">QPainter <span class="title">painter</span><span class="params">(<span class="keyword">this</span>)</span></span>;</span><br><span class="line">  painter.<span class="built_in">setRenderHints</span>(QPainter::Antialiasing | QPainter::TextAntialiasing);</span><br><span class="line"></span><br><span class="line">  <span class="function">QRectF <span class="title">rect</span><span class="params">(<span class="number">50</span>, <span class="number">50</span>, <span class="number">300</span>, <span class="number">200</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 先绘制一个浅灰色的矩形</span></span><br><span class="line">  painter.<span class="built_in">setPen</span>(Qt::lightGray);</span><br><span class="line">  painter.<span class="built_in">drawRect</span>(rect);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 然后绘制一个红色圆角矩形</span></span><br><span class="line">  <span class="comment">//</span></span><br><span class="line">  qreal xRadius = <span class="number">20</span>;</span><br><span class="line">  qreal yRadius = <span class="number">40</span>;</span><br><span class="line"></span><br><span class="line">  painter.<span class="built_in">setPen</span>(<span class="built_in">QPen</span>(Qt::red, <span class="number">1</span>, Qt::DashDotLine));</span><br><span class="line">  painter.<span class="built_in">drawRoundedRect</span>(rect, xRadius, yRadius);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// ~~~ 新增如下代码 ~~~</span></span><br><span class="line">  painter.<span class="built_in">setPen</span>(<span class="built_in">QPen</span>(Qt::darkYellow, <span class="number">1</span>, Qt::DashLine));</span><br><span class="line">  painter.<span class="built_in">drawEllipse</span>(<span class="built_in">QRectF</span>(rect.<span class="built_in">left</span>(), rect.<span class="built_in">top</span>(), xRadius * <span class="number">2</span>, yRadius * <span class="number">2</span>));</span><br><span class="line"></span><br><span class="line">  painter.<span class="built_in">drawEllipse</span>(<span class="built_in">QRectF</span>(rect.<span class="built_in">right</span>() - xRadius * <span class="number">2</span>, rect.<span class="built_in">bottom</span>() - yRadius * <span class="number">2</span>, xRadius * <span class="number">2</span>, yRadius * <span class="number">2</span>));</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/img/CcDGmFkvxa.png"></p>
+<h1 id="七、椭圆上的一段线"><a href="#七、椭圆上的一段线" class="headerlink" title="七、椭圆上的一段线"></a>七、椭圆上的一段线</h1><h2 id="7-1-弧线（Arc）"><a href="#7-1-弧线（Arc）" class="headerlink" title="7.1 弧线（Arc）"></a>7.1 弧线（Arc）</h2><p>使用 drawArc 方法可以绘制一段弧线：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">drawArc</span><span class="params">(<span class="type">const</span> QRectF &amp;rectangle, <span class="type">int</span> startAngle, <span class="type">int</span> spanAngle)</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">drawArc</span><span class="params">(<span class="type">const</span> QRect &amp;rectangle, <span class="type">int</span> startAngle, <span class="type">int</span> spanAngle)</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">drawArc</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y, <span class="type">int</span> width, <span class="type">int</span> height, <span class="type">int</span> startAngle, <span class="type">int</span> spanAngle)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>在前面介绍的椭圆绘制方法中，我们通过指定一个矩形区域就可以绘制一个椭圆，而 drawArc 方法绘制曲线的则是该椭圆上的某一段弧线。通过 startAngle 参数指定弧线的起始角度，spanAngle 参数指定弧线所跨越的角度。</p>
+<p><strong>需要注意：</strong></p>
+<p><strong>在 QPainter 的绘图函数中指定角度（不是弧度）时，以正三点钟方向为 0 度，角度按逆时针方向增长，整个圆按 5760 度计算（即 16 * 360）。</strong></p>
+<p>下面的示例绘制一段红色的弧线，弧线从 30 度方向开始，弧线跨越了 120 度。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">Qt2DSample::paintEvent</span><span class="params">(QPaintEvent* e)</span> </span>{</span><br><span class="line">  <span class="function">QPainter <span class="title">painter</span><span class="params">(<span class="keyword">this</span>)</span></span>;</span><br><span class="line">  painter.<span class="built_in">setRenderHints</span>(QPainter::Antialiasing | QPainter::TextAntialiasing);</span><br><span class="line"></span><br><span class="line">  <span class="function">QRectF <span class="title">rect</span><span class="params">(<span class="number">50</span>, <span class="number">50</span>, <span class="number">300</span>, <span class="number">200</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 浅灰色的矩形</span></span><br><span class="line">  painter.<span class="built_in">setPen</span>(Qt::lightGray);</span><br><span class="line">  painter.<span class="built_in">drawRect</span>(rect);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 蓝色的椭圆</span></span><br><span class="line">  painter.<span class="built_in">setPen</span>(Qt::blue);</span><br><span class="line">  painter.<span class="built_in">drawEllipse</span>(rect);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 红色的弧线</span></span><br><span class="line">  painter.<span class="built_in">setPen</span>(Qt::red);</span><br><span class="line">  painter.<span class="built_in">drawArc</span>(rect, <span class="number">30</span> * <span class="number">16</span>, <span class="number">120</span> * <span class="number">16</span>);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>实际绘制效果如下图所示：</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/img/kbPavNdJMU-TinyTu.png"></p>
+<p>从上图可以看到，弧线实际是椭圆上的某一段曲线。</p>
+<h2 id="7-2-饼状图（Pie）"><a href="#7-2-饼状图（Pie）" class="headerlink" title="7.2 饼状图（Pie）"></a>7.2 饼状图（Pie）</h2><p>使用 drawPie 可以绘制饼状图，饼状图是在上面弧线（Arc）的基础上，分别将弧线的首尾与中心点相连而来，因此 drawPie 方法的参数也与 drawArc 方法一样。</p>
+<p>QPainter 在绘制饼状图时，会使用当前的画刷填充饼状图。</p>
+<p>下面的示例绘制了一个具有红色轮廓、黄色填充的饼状图。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">Qt2DSample::paintEvent</span><span class="params">(QPaintEvent* e)</span> </span>{</span><br><span class="line">  <span class="function">QPainter <span class="title">painter</span><span class="params">(<span class="keyword">this</span>)</span></span>;</span><br><span class="line">  painter.<span class="built_in">setRenderHints</span>(QPainter::Antialiasing | QPainter::TextAntialiasing);</span><br><span class="line"></span><br><span class="line">  <span class="function">QRectF <span class="title">rect</span><span class="params">(<span class="number">50</span>, <span class="number">50</span>, <span class="number">300</span>, <span class="number">200</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 浅灰色的矩形</span></span><br><span class="line">  painter.<span class="built_in">setPen</span>(Qt::lightGray);</span><br><span class="line">  painter.<span class="built_in">drawRect</span>(rect);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 蓝色的椭圆</span></span><br><span class="line">  painter.<span class="built_in">setPen</span>(Qt::blue);</span><br><span class="line">  painter.<span class="built_in">drawEllipse</span>(rect);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 饼状图：红色的轮廓，黄色的填充</span></span><br><span class="line">  painter.<span class="built_in">setPen</span>(Qt::red);</span><br><span class="line">  painter.<span class="built_in">setBrush</span>(Qt::yellow);</span><br><span class="line">  painter.<span class="built_in">drawPie</span>(rect, <span class="number">30</span> * <span class="number">16</span>, <span class="number">120</span> * <span class="number">16</span>);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/img/2EEdcr6yvl-TinyTu.png"></p>
+<h2 id="7-3-和弦图（Chrod）"><a href="#7-3-和弦图（Chrod）" class="headerlink" title="7.3 和弦图（Chrod）"></a>7.3 和弦图（Chrod）</h2><blockquote>
+<p>此处将Chrod按照英文直译成“和弦”可能不太准确</p>
+</blockquote>
+<p>和弦图（Chrod）与饼状图（Pie）一样，也是在弧线的基础上变化而来，将弧线的首尾相接就可得到和弦图（Chrod）。</p>
+<p>QPainter 在绘制和弦图时，也会使用当前的画刷填充饼状图。</p>
+<p>使用 drawChord 方法可以绘制和弦图，drawChord 方法的参数也与 drawArc 方法一样。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">Qt2DSample::paintEvent</span><span class="params">(QPaintEvent* e)</span> </span>{</span><br><span class="line">  <span class="function">QPainter <span class="title">painter</span><span class="params">(<span class="keyword">this</span>)</span></span>;</span><br><span class="line">  painter.<span class="built_in">setRenderHints</span>(QPainter::Antialiasing | QPainter::TextAntialiasing);</span><br><span class="line"></span><br><span class="line">  <span class="function">QRectF <span class="title">rect</span><span class="params">(<span class="number">50</span>, <span class="number">50</span>, <span class="number">300</span>, <span class="number">200</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 浅灰色的矩形</span></span><br><span class="line">  painter.<span class="built_in">setPen</span>(Qt::lightGray);</span><br><span class="line">  painter.<span class="built_in">drawRect</span>(rect);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 蓝色的椭圆</span></span><br><span class="line">  painter.<span class="built_in">setPen</span>(Qt::blue);</span><br><span class="line">  painter.<span class="built_in">drawEllipse</span>(rect);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 和弦图：红色的轮廓，黄色的填充</span></span><br><span class="line">  painter.<span class="built_in">setPen</span>(Qt::red);</span><br><span class="line">  painter.<span class="built_in">setBrush</span>(Qt::yellow);</span><br><span class="line">  painter.<span class="built_in">drawChord</span>(rect, <span class="number">30</span> * <span class="number">16</span>, <span class="number">120</span> * <span class="number">16</span>);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/img/7IE8i958tn-TinyTu.png"></p>
+<h1 id="八、路径"><a href="#八、路径" class="headerlink" title="八、路径"></a>八、路径</h1><p>前面介绍了线、矩形、椭圆、圆、弧线、饼状图等形状，路径则是由若干个这些形状（不限于这些形状）组成的一个集合，路径可以是闭合的，也可以不闭合。</p>
+<p>在Qt中使用<a target="_blank" rel="noopener" href="https://doc.qt.io/qt-6/qpainterpath.html">QPainterPath</a>对象来定义一个路径，并使用如下方法向路径中添加形状：</p>
+<ul>
+<li>addEllipse 添加一个椭圆或圆到路径中</li>
+<li>addRect 添加一个矩形到路径中</li>
+<li>addRoundedRect 添加一个圆角矩形到路径中</li>
+<li>addText 将用指定字体绘制的文件所形成的闭合形状添加到路径中</li>
+<li>lineTo 添加一条直线到路径中</li>
+<li>arcTo 添加一段圆弧到路径中<br>arcTo 的原型如下，和 drawArc 方法类似，也需要指定起始角度和跨越角度，但与drawArc 方法不同的是，arcTo 方法指定的角度是以360度整圆计算的，因此不需要乘以 16。<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">QPainterPath::arcTo</span><span class="params">(<span class="type">const</span> QRectF &amp;rectangle, qreal startAngle, qreal sweepLength)</span></span></span><br></pre></td></tr></table></figure></li>
+<li>cubicTo 添加一个三次贝塞尔曲线到路径中</li>
+<li>quadTo 添加一个二次贝塞尔曲线到路径中</li>
+</ul>
+<p>在上面方法中，命名格式为“*To”的方法，如lineTo、arcTo、quadTo等，都是基于“当前位置”来添加形状的，默认的当前位置在(0,0)处，可以使用<code>QPainterPath::currentPosition</code>方法获取当前位置。</p>
+<p>在使用lineTo添加直线到路径中时，只有指定直线的结束点，会自动将当前位置与结束点相连，形成一条直线，并重设当前位置为该结束点。</p>
+<p>在使用arcTo、cubicTo、quadTo添加曲线到到路径中时，会自动将当前位置与曲线起点相连，并重设当前位置为曲线结束点。</p>
+<p>我们使用一个示例来说明当前位置和结束点的关系，下面示例先添加一条直线，然后添加一个曲线，最好再添加一条直线：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 示例：当前位置</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Qt2DSample::paintEvent</span><span class="params">(QPaintEvent* e)</span> </span>{</span><br><span class="line">  <span class="function">QPainter <span class="title">painter</span><span class="params">(<span class="keyword">this</span>)</span></span>;</span><br><span class="line">  painter.<span class="built_in">setRenderHints</span>(QPainter::Antialiasing | QPainter::TextAntialiasing);</span><br><span class="line"></span><br><span class="line">  QPainterPath path;</span><br><span class="line">  path.<span class="built_in">lineTo</span>(<span class="number">80</span>, <span class="number">50</span>);</span><br><span class="line">  path.<span class="built_in">arcTo</span>(<span class="built_in">QRectF</span>(<span class="number">50</span>, <span class="number">50</span>, <span class="number">300</span>, <span class="number">200</span>), <span class="number">30</span>, <span class="number">120</span>);</span><br><span class="line">  path.<span class="built_in">lineTo</span>(<span class="number">200</span>, <span class="number">200</span>);</span><br><span class="line"></span><br><span class="line">  painter.<span class="built_in">drawPath</span>(path);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>实际效果如下图所示：</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/img/AD2v1fc6Xg.png"></p>
+<h2 id="8-1-填充规则"><a href="#8-1-填充规则" class="headerlink" title="8.1 填充规则"></a>8.1 填充规则</h2><p>路径可以是闭合的也可以是非闭合的，例如上面的当前位置示例中的路径是非闭合的，但如果为 QPainter 指定了画刷，QPainter 会自动使用一条直线连接该非闭合形状的首尾，使其闭合，进而使用画刷对其填充。</p>
+<p>QPainterPath 有两种填充规则，可以通过<code>QPainterPath::setFillRule</code>方法来设置填充规则：</p>
+<ul>
+<li><p>Qt::OddEvenFill</p>
+<p> 奇偶填充规则，从一点向图形外引一条水平线，该线和图形的边线相交，如果交点的个数为奇数，则该点在图形中。</p>
+</li>
+<li><p>Qt::WindingFill<br>非零弯曲规则，从一点向图形外引一条水平线，该线与图形的边线相交。如果边线是顺时针绘制的，则记为1，如果边线是逆时针绘制的，则记为-1。最后将所有结果相加的和为0则该点在图形中。（矩形和椭圆都按顺时针绘制）</p>
+</li>
+</ul>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/img/9201b1278bef4070ad39deed5a087825.png"></p>
+<h1 id="九、文本"><a href="#九、文本" class="headerlink" title="九、文本"></a>九、文本</h1><p>文字有颜色、字体等属性，颜色可以通过为 QPainter 设置画笔（QPen）的方式来修改，这种方式只能设置纯色，如果需要绘制渐变色的文字，需要先将文字转变成路径（参考<code>QPainterPath::addText</code>），然后使用渐变画刷填充该路径。</p>
+<p>通过为 QPainter 设置 QFont 对象的方式来修改字体，字体有字体族、字号、粗体、斜体、下划线、删除线等样式或效果：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">QFont font;</span><br><span class="line">font.<span class="built_in">setFamilies</span>({<span class="string">"Microsoft YaHei"</span>, <span class="string">"Arial"</span>});  <span class="comment">// 字体族</span></span><br><span class="line">font.<span class="built_in">setPixelSize</span>(<span class="number">26</span>);                  <span class="comment">// 字号</span></span><br><span class="line">font.<span class="built_in">setBold</span>(<span class="literal">true</span>);                     <span class="comment">// 粗体</span></span><br><span class="line">font.<span class="built_in">setItalic</span>(<span class="literal">true</span>);                   <span class="comment">// 斜体</span></span><br><span class="line">font.<span class="built_in">setUnderline</span>(<span class="literal">true</span>);                <span class="comment">// 下划线</span></span><br><span class="line">font.<span class="built_in">setStrikeOut</span>(<span class="literal">true</span>);                <span class="comment">// 删除线</span></span><br><span class="line"></span><br><span class="line">painter.<span class="built_in">setFont</span>(font);</span><br></pre></td></tr></table></figure>
+
+<p>使用 QPainter::drawText 方法绘制文本，方法原型有很多，大多是通过下面2个原型进行重载而来的：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">QPainter::drawText</span><span class="params">(<span class="type">const</span> QRectF &amp;rectangle, <span class="type">int</span> flags, <span class="type">const</span> QString &amp;text, QRectF *boundingRect = <span class="literal">nullptr</span>)</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">QPainter::drawText</span><span class="params">(<span class="type">const</span> QRectF &amp;rectangle, <span class="type">const</span> QString &amp;text, <span class="type">const</span> QTextOption &amp;option = QTextOption())</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="9-1-间距"><a href="#9-1-间距" class="headerlink" title="9.1 间距"></a>9.1 间距</h2><p>间距分为两种情况：</p>
+<ul>
+<li>每个字符的间距，如单个英文字母或单个汉字的间距，称为Letter Spacing。</li>
+<li>每个英文单词的间距，称为Word Spacing。</li>
+</ul>
+<p>使用 QFont::setWordSpacing 和 QFont::wordSpacing 方法设置和获取单词的间距。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">QFont::setWordSpacing</span><span class="params">(qreal spacing)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>当 setWordSpacing 参数大于0时，单词间距增加相应的像素；小于0时，间距减少相应的像素。</p>
+<p>使用 QFont::setLetterSpacing 和 QFont::letterSpacing 方法设置和获取字符的间距。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">QFont::setLetterSpacing</span><span class="params">(QFont::SpacingType type, qreal spacing)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>字符间距支持百分比和绝对值两种设置方法，通过QFont::SpacingType枚举类型指定。</p>
+<ul>
+<li><p>QFont::PercentageSpacing</p>
+<p>百分比方式。值为100时表示不做任何改变，200表示间距扩大到原来的一倍，-200表示间距缩小到原来的一倍。</p>
+</li>
+<li><p>QFont::AbsoluteSpacing</p>
+<p>绝对值方式，与设置单词间距的方式一样。</p>
+</li>
+</ul>
+<h2 id="9-2-小型大写字母"><a href="#9-2-小型大写字母" class="headerlink" title="9.2 小型大写字母"></a>9.2 小型大写字母</h2><p>小型大写字母（英语：small capitals，简称 small caps）是西文字体设计中的一种字符形式。这些字母的形状（字形）和大写字母相同但尺寸较小，比如在表示键盘快捷键的时候也常用小型大写字母。</p>
+<p>在 Qt 中通过设置 QFont 的 Capitalization 样式为 SmallCaps 风格来使用小型大写字母，如：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">Qt2DSample::paintEvent</span><span class="params">(QPaintEvent* e)</span> </span>{</span><br><span class="line">  <span class="function">QPainter <span class="title">painter</span><span class="params">(<span class="keyword">this</span>)</span></span>;</span><br><span class="line">  painter.<span class="built_in">setRenderHints</span>(QPainter::Antialiasing | QPainter::TextAntialiasing);</span><br><span class="line"></span><br><span class="line">  QPen pen;</span><br><span class="line">  pen.<span class="built_in">setBrush</span>(Qt::red);</span><br><span class="line">  pen.<span class="built_in">setWidthF</span>(<span class="number">20</span>);</span><br><span class="line"></span><br><span class="line">  QFont font;</span><br><span class="line">  font.<span class="built_in">setPixelSize</span>(<span class="number">26</span>);</span><br><span class="line">  font.<span class="built_in">setCapitalization</span>(QFont::SmallCaps);</span><br><span class="line">                            ^^^^^^^^^^^^^</span><br><span class="line"></span><br><span class="line">  painter.<span class="built_in">setFont</span>(font);</span><br><span class="line">  painter.<span class="built_in">drawText</span>(<span class="number">10</span>, <span class="number">30</span>, <span class="string">"The Keyboard Shortcut is Ctrl + Shift + K"</span>);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>效果如下图所示（留意全小写的“is”和其他首字母大写的单词）：</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/img/1acIT3tRje-TinyTu.png"></p>
+<p>Capitalization 还支持设置如下风格：</p>
+<ul>
+<li>QFont::MixedCase  默认，不做更改</li>
+<li>QFont::AllUppercase 全部小写</li>
+<li>QFont::AllLowercase 全部大写</li>
+<li>QFont::Capitalize 首字母大写</li>
+</ul>
+<h2 id="9-3-计算绘制文本所需空间"><a href="#9-3-计算绘制文本所需空间" class="headerlink" title="9.3 计算绘制文本所需空间"></a>9.3 计算绘制文本所需空间</h2><p>有两种方式可以计算按指定字体绘制文本所需的空间。</p>
+<p>**方式一：使用 QPainter::drawText **</p>
+<p>使用如下函数原型：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">QPainter::drawText</span><span class="params">(<span class="type">const</span> QRectF &amp;rectangle, <span class="type">int</span> flags, <span class="type">const</span> QString &amp;text, QRectF *boundingRect = <span class="literal">nullptr</span>)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>将参数 rectangle 的 宽和高都设置为 0，函数会通过 boundingRect 参数返回绘制文本所需要的宽和高。</p>
+<p><strong>方式二：使用 QFontMetricsF</strong></p>
+<p>QFontMetrics 或 QFontMetricsF 可以按照指定字体来计算给定字符和字符串的宽和高。</p>
+<p>这种方式的弊端在于：不能将绘制风格（如居中对齐、多行文本）带入其中进行计算，只能计算给定的单行字符串按照指定的字体显示所需的宽高。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">QFont font;</span><br><span class="line">font.<span class="built_in">setPixelSize</span>(<span class="number">36</span>);</span><br><span class="line"></span><br><span class="line"><span class="function">QFontMetricsF <span class="title">fm</span><span class="params">(font)</span></span>;</span><br><span class="line"><span class="built_in">qDebug</span>() &lt;&lt; fm.<span class="built_in">horizontalAdvance</span>(<span class="string">"Hello World"</span>); <span class="comment">// 字符串所占宽度</span></span><br><span class="line"><span class="built_in">qDebug</span>() &lt;&lt; fm.<span class="built_in">height</span>(); <span class="comment">// 字体的高度</span></span><br></pre></td></tr></table></figure>
+
+
+<hr>
+<blockquote>
+<p>限于政策原因，在您看到该文章时，博客可能已经关闭了评论功能🥺</p>
+<p>您可以通过在 <a target="_blank" rel="noopener" href="https://github.com/winsoft666/blog-comment">blog-comment</a> 项目中提交Issue来间接地发表评论🍀</p>
+</blockquote>
+
+<div class="article-footer fs14">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section>
+    
+    <section id="share">
+      <div class="header"><span>分享文章</span></div>
+      <div class="body">
+        <div class="link"><input class="copy-area" readonly="true" id="copy-link" value="https://jiangxueqiao.com/post/1967189103.html" /></div>
+        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/b32ef3da1162a.svg" /></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://jiangxueqiao.com/post/1967189103.html&title=玩转Qt 2D绘图之画家 - Jiang's Blog&pics=https://blog-static.jiangxueqiao.com/blog/banner/hor-banner-z6AuBst6cM.jpg&summary=在 Qt 2D 世界中，图形基本都由点、线、矩形、多边形、椭圆、圆、折线、曲线、文本、贴图等基本元素辅以着色而构成，而且 QPainter 类已经提供了这些元素的绘制方法，花点时间掌握这些方法，也就掌握了 Qt 2D图形控件的制作，余..."><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/80c07e4dbb303.svg" /></a><a class="social share-item email" href="mailto:?subject=玩转Qt 2D绘图之画家 - Jiang's Blog&amp;body=https://jiangxueqiao.com/post/1967189103.html"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/a1b00e20f425d.svg" /></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.12/social/8411ed322ced6.svg" /></a></div>
+        
+        <div class="qrcode" id="qrcode-wechat" style="opacity:0;height:0">
+          <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=https://jiangxueqiao.com/post/1967189103.html"/>
+        </div>
+        
+      </div>
+    </section>
+    </div>
+</article>
+<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"></div><div class="item" id="next"><div class="note">较早文章</div><a href="/post/1336811290.html">玩转Qt 2D绘图之画家的工具</a></div></section></div>
+
+
+
+
+
+
+<footer class="page-footer footnote"><hr><div class="sitemap"><div class="sitemap-group"><span class="fs15">博客</span><a href="/">近期</a><a href="/topic">专栏</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></div><div class="sitemap-group"><span class="fs15">产品</span><a href="/post/776574933.html">1key.run</a><a href="/post/2053741240.html">TinyTu</a><a href="/post/1533480858.html">WinSpyPlus</a></div><div class="sitemap-group"><span class="fs15">社交</span><a href="/">友链</a><a target="_blank" rel="noopener" href="https://github.com/winsoft666/blog-comment">留言板</a></div><div class="sitemap-group"><span class="fs15">更多</span><a href="/author">关于本站</a><a target="_blank" rel="noopener" href="https://github.com/winsoft666">GitHub</a></div></div><div class="text"><p>本站由 <a href="/">江雪桥</a> 使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.27.0">Stellar 1.27.0</a> 主题创建。<br>本博客所有文章除特别声明外均为原创，采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
+<div class="widgets">
+
+
+
+<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E7%82%B9"><span class="toc-text">一、点</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-%E4%B8%A4%E7%82%B9%E8%B7%9D%E7%A6%BB"><span class="toc-text">1.1 两点距离</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-drawPoint-%E4%B8%8E-drawPoints"><span class="toc-text">1.2 drawPoint 与 drawPoints</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%8A%98%E7%BA%BF"><span class="toc-text">二、折线</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%A4%9A%E8%BE%B9%E5%BD%A2"><span class="toc-text">三、多边形</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E7%BA%BF"><span class="toc-text">四、线</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E6%A4%AD%E5%9C%86%E4%B8%8E%E5%9C%86"><span class="toc-text">五、椭圆与圆</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-%E6%A4%AD%E5%9C%86"><span class="toc-text">5.1 椭圆</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-%E5%9C%86"><span class="toc-text">5.2 圆</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E7%9F%A9%E5%BD%A2"><span class="toc-text">六、矩形</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-1-%E7%9F%A9%E5%BD%A2%E7%9A%84%E5%90%88%E6%B3%95%E6%80%A7"><span class="toc-text">6.1 矩形的合法性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-2-drawRect-%E4%B8%8E-drawRects"><span class="toc-text">6.2 drawRect 与 drawRects</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-3-%E5%9C%86%E8%A7%92%E7%9F%A9%E5%BD%A2"><span class="toc-text">6.3 圆角矩形</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-4-xRadius-%E4%B8%8E-yRadius"><span class="toc-text">7.4 xRadius 与 yRadius</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E6%A4%AD%E5%9C%86%E4%B8%8A%E7%9A%84%E4%B8%80%E6%AE%B5%E7%BA%BF"><span class="toc-text">七、椭圆上的一段线</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#7-1-%E5%BC%A7%E7%BA%BF%EF%BC%88Arc%EF%BC%89"><span class="toc-text">7.1 弧线（Arc）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-2-%E9%A5%BC%E7%8A%B6%E5%9B%BE%EF%BC%88Pie%EF%BC%89"><span class="toc-text">7.2 饼状图（Pie）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-3-%E5%92%8C%E5%BC%A6%E5%9B%BE%EF%BC%88Chrod%EF%BC%89"><span class="toc-text">7.3 和弦图（Chrod）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E8%B7%AF%E5%BE%84"><span class="toc-text">八、路径</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#8-1-%E5%A1%AB%E5%85%85%E8%A7%84%E5%88%99"><span class="toc-text">8.1 填充规则</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B9%9D%E3%80%81%E6%96%87%E6%9C%AC"><span class="toc-text">九、文本</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#9-1-%E9%97%B4%E8%B7%9D"><span class="toc-text">9.1 间距</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-2-%E5%B0%8F%E5%9E%8B%E5%A4%A7%E5%86%99%E5%AD%97%E6%AF%8D"><span class="toc-text">9.2 小型大写字母</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-3-%E8%AE%A1%E7%AE%97%E7%BB%98%E5%88%B6%E6%96%87%E6%9C%AC%E6%89%80%E9%9C%80%E7%A9%BA%E9%97%B4"><span class="toc-text">9.3 计算绘制文本所需空间</span></a></li></ol></li></ol></div><div class="widget-footer">
+
+<a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2c4.714 0 7.071 0 8.535 1.464C22 4.93 22 7.286 22 12c0 4.714 0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12Z"/><path stroke-linecap="round" stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/></g></svg><span>回到顶部</span></a><a class="buttom" onclick="util.scrollComment()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M10.46 1.25h3.08c1.603 0 2.86 0 3.864.095c1.023.098 1.861.3 2.6.752a5.75 5.75 0 0 1 1.899 1.899c.452.738.654 1.577.752 2.6c.095 1.004.095 2.261.095 3.865v1.067c0 1.141 0 2.036-.05 2.759c-.05.735-.153 1.347-.388 1.913a5.75 5.75 0 0 1-3.112 3.112c-.805.334-1.721.408-2.977.43a10.81 10.81 0 0 0-.929.036c-.198.022-.275.054-.32.08c-.047.028-.112.078-.224.232c-.121.166-.258.396-.476.764l-.542.916c-.773 1.307-2.69 1.307-3.464 0l-.542-.916a10.605 10.605 0 0 0-.476-.764c-.112-.154-.177-.204-.224-.232c-.045-.026-.122-.058-.32-.08c-.212-.023-.49-.03-.93-.037c-1.255-.021-2.171-.095-2.976-.429A5.75 5.75 0 0 1 1.688 16.2c-.235-.566-.338-1.178-.389-1.913c-.049-.723-.049-1.618-.049-2.76v-1.066c0-1.604 0-2.86.095-3.865c.098-1.023.3-1.862.752-2.6a5.75 5.75 0 0 1 1.899-1.899c.738-.452 1.577-.654 2.6-.752C7.6 1.25 8.857 1.25 10.461 1.25M6.739 2.839c-.914.087-1.495.253-1.959.537A4.25 4.25 0 0 0 3.376 4.78c-.284.464-.45 1.045-.537 1.96c-.088.924-.089 2.11-.089 3.761v1c0 1.175 0 2.019.046 2.685c.045.659.131 1.089.278 1.441a4.25 4.25 0 0 0 2.3 2.3c.515.214 1.173.294 2.429.316h.031c.398.007.747.013 1.037.045c.311.035.616.104.909.274c.29.17.5.395.682.645c.169.232.342.525.538.856l.559.944a.52.52 0 0 0 .882 0l.559-.944c.196-.331.37-.624.538-.856c.182-.25.392-.476.682-.645c.293-.17.598-.24.909-.274c.29-.032.639-.038 1.037-.045h.032c1.255-.022 1.913-.102 2.428-.316a4.25 4.25 0 0 0 2.3-2.3c.147-.352.233-.782.278-1.441c.046-.666.046-1.51.046-2.685v-1c0-1.651 0-2.837-.089-3.762c-.087-.914-.253-1.495-.537-1.959a4.25 4.25 0 0 0-1.403-1.403c-.464-.284-1.045-.45-1.96-.537c-.924-.088-2.11-.089-3.761-.089h-3c-1.651 0-2.837 0-3.762.089" clip-rule="evenodd"/><path fill="currentColor" d="M9 11a1 1 0 1 1-2 0a1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0a1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0a1 1 0 0 1 2 0"/></svg><span>参与讨论</span></a></div></widget>
+</div></aside><div class='float-panel blur'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+</div><div class="scripts">
+<script type="text/javascript">
+  const ctx = {
+    date_suffix: {
+      just: `刚刚`,
+      min: `分钟前`,
+      hour: `小时前`,
+      day: `天前`,
+    },
+    root : `/`,
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://blog-static.jiangxueqiao.com/blog/stellar-theme/default/3442075.svg`,
+    cover: `https://blog-static.jiangxueqiao.com/blog/stellar-theme/default/76b86c0226ffd.svg`,
+  };
+  const deps = {
+    jquery: `https://blog-static.jiangxueqiao.com/blog/stellar-theme/jquery-3.7.1.min.js`,
+    marked: `https://blog-static.jiangxueqiao.com/blog/stellar-theme/marked-4.0.18.min.js`
+  }
+  
+
+</script>
+
+<script type="text/javascript">
+  const utils = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    js: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = ctx.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    jq: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+    },
+    
+    onLoading: (el) => {
+      if (el) {
+        $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
+      }
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      let retryTimes = 3;
+      utils.onLoading(el);
+      function req() {
+        return new Promise((resolve, reject) => {
+          let status = 0; // 0 等待 1 完成 2 超时
+          let timer = setTimeout(() => {
+            if (status === 0) {
+              status = 2;
+              timer = null;
+              reject('请求超时');
+              if (retryTimes == 0) {
+                onFailure();
+              }
+            }
+          }, 5000);
+          fetch(url).then(function(response) {
+            if (status !== 2) {
+              clearTimeout(timer);
+              resolve(response);
+              timer = null;
+              status = 1;
+            }
+            if (response.ok) {
+              return response.json();
+            }
+            throw new Error('Network response was not ok.');
+          }).then(function(data) {
+            retryTimes = 0;
+            utils.onLoadSuccess(el);
+            callback(data);
+          }).catch(function(error) {
+            if (retryTimes > 0) {
+              retryTimes -= 1;
+              setTimeout(() => {
+                req();
+              }, 5000);
+            } else {
+              utils.onLoadFailure(el);
+              onFailure();
+            }
+          });
+        });
+      }
+      req();
+    },
+  };
+</script>
+
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+
+<!-- required -->
+<script src="/js/main.js?v=1.27.0" async></script>
+
+<!-- optional -->
+
+
+
+<script defer>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        ctx.cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (ctx.cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(ctx.cardlinks);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || 'memos' || 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          });
+        }
+      }
+    }
+  });
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
+  });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/flying-pages-2.1.2.min.js"></script><script defer src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/lazyload-17.8.4.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+</script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img`,
+    css: `https://blog-static.jiangxueqiao.com/blog/stellar-theme/fancybox-5.0.22.min.css`,
+    js: `https://blog-static.jiangxueqiao.com/blog/stellar-theme/fancybox-5.0.22.umd.min.js`
+  };
+  var selector = '[data-fancybox]:not(.error)';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const els = document.getElementsByClassName('ds-memos');
+    if (els != undefined && els.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || null
+        }
+      });
+    })
+  }
+</script><script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://blog-static.jiangxueqiao.com/blog/stellar-theme/swiper-bundle-10.3.1.min.css`);
+      utils.js(`https://blog-static.jiangxueqiao.com/blog/stellar-theme/swiper-bundle-10.3.1.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  });
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+    processEscapes: true
+  }
+});
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  }
+});
+MathJax.Hub.Queue(function() {
+  var all = MathJax.Hub.getAllJax(), i;
+  for(i=0; i < all.length; i += 1) {
+    all[i].SourceElement().parentNode.className += ' has-jax';
+  }
+});
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.codeElements = document.querySelectorAll('.code');
+    if (window.codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `复制`,
+        success_text: `已复制`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js');
+    }
+  });
+</script>
+
+
+<!-- inject -->
+
+</div></body></html>
