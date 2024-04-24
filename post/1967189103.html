@@ -167,7 +167,7 @@ mjx-container[display="true"] + br {
 <div class="widgets">
 
 
-<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/post/776574933.html"><span class="title">一键启动神器之1key.run</span></a><a class="item title" href="/post/818165951.html"><span class="title">C++ 默认构造函数</span></a><a class="item title" href="/post/100006247.html"><span class="title">NSIS教程(9)-使用界面库制作安装界面</span></a><a class="item title" href="/post/409779091.html"><span class="title">NSIS教程(1)-基础语法</span></a><a class="item title" href="/post/529732738.html"><span class="title">ABI兼容性</span></a><a class="item title" href="/post/3008752839.html"><span class="title">基于共享内存的跨平台RPC框架 - Veigar</span></a><a class="item title" href="/post/1533480858.html"><span class="title">Windows窗口调试利器-WinSpyPlus</span></a><a class="item title" href="/post/1967189103.html"><span class="title">玩转Qt 2D绘图之画家</span></a><a class="item title" href="/post/235943795.html"><span class="title">Node插件开发(2)-不同的调用方式</span></a><a class="item title" href="/post/819381949.html"><span class="title">Node插件开发(1)-快速入门</span></a></div></widget>
+<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/post/749849405.html"><span class="title">QSS基本使用方法</span></a><a class="item title" href="/post/2842059394.html"><span class="title">SQL批量添加更新和删除</span></a><a class="item title" href="/post/1446858454.html"><span class="title">MySQL获取字符串长度的几种方式</span></a><a class="item title" href="/post/3556253141.html"><span class="title">MySQL获取时间和日期</span></a><a class="item title" href="/post/3457369310.html"><span class="title">MySQL的DECLARE...HANDLER使用</span></a><a class="item title" href="/post/254517042.html"><span class="title">一个MySQL存储过程模板</span></a><a class="item title" href="/post/1485983255.html"><span class="title">生活家【转载】</span></a><a class="item title" href="/post/1967189103.html"><span class="title">玩转Qt 2D绘图之画家</span></a><a class="item title" href="/post/847642761.html"><span class="title">玩转Qt 2D绘图之坐标系</span></a><a class="item title" href="/post/776574933.html"><span class="title">一键启动神器之1key.run</span></a></div></widget>
 </div>
 
 </div></aside><div class="l_main" id="main">
@@ -180,7 +180,7 @@ mjx-container[display="true"] + br {
   <div class="content">
     <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
 <span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Qt/">Qt</a></div>
-<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2024-04-08T12:55:02.000Z">2024-04-08</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-04-17T07:03:41.295Z">2024-04-17</time></span></div></div></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2024-04-08T12:55:02.000Z">2024-04-08</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-04-19T09:49:11.226Z">2024-04-19</time></span></div></div></div>
     
     <div class="bottom only-title">
       
@@ -318,9 +318,12 @@ mjx-container[display="true"] + br {
 <li>cubicTo 添加一个三次贝塞尔曲线到路径中</li>
 <li>quadTo 添加一个二次贝塞尔曲线到路径中</li>
 </ul>
-<p>在上面方法中，命名格式为“*To”的方法，如lineTo、arcTo、quadTo等，都是基于“当前位置”来添加形状的，默认的当前位置在(0,0)处，可以使用<code>QPainterPath::currentPosition</code>方法获取当前位置。</p>
-<p>在使用lineTo添加直线到路径中时，只有指定直线的结束点，会自动将当前位置与结束点相连，形成一条直线，并重设当前位置为该结束点。</p>
-<p>在使用arcTo、cubicTo、quadTo添加曲线到到路径中时，会自动将当前位置与曲线起点相连，并重设当前位置为曲线结束点。</p>
+<p>在上面方法中，命名格式为“<em>To”的方法，如 lineTo、arcTo、quadTo 等，都是基于“当前位置”来添加形状的，默认的当前位置为当前的*<em>坐标原点</em></em> (0,0) 处，我们可以使用 <code>QPainterPath::currentPosition</code> 方法获取当前位置。</p>
+<blockquote>
+<p>我们知道可以通过 QPainter::translate 等方法变换逻辑坐标，QPainterPath 的当前位置也会受逻辑坐标变换的影响。</p>
+</blockquote>
+<p>在使用 lineTo 添加直线到路径中时，只有指定直线的结束点，会自动将当前位置与结束点相连，形成一条直线，并重设当前位置为该结束点。</p>
+<p>在使用 arcTo、cubicTo、quadTo 添加曲线到到路径中时，会自动将当前位置与曲线起点相连，并重设当前位置为曲线结束点。</p>
 <p>我们使用一个示例来说明当前位置和结束点的关系，下面示例先添加一条直线，然后添加一个曲线，最好再添加一条直线：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 示例：当前位置</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Qt2DSample::paintEvent</span><span class="params">(QPaintEvent* e)</span> </span>{</span><br><span class="line">  <span class="function">QPainter <span class="title">painter</span><span class="params">(<span class="keyword">this</span>)</span></span>;</span><br><span class="line">  painter.<span class="built_in">setRenderHints</span>(QPainter::Antialiasing | QPainter::TextAntialiasing);</span><br><span class="line"></span><br><span class="line">  QPainterPath path;</span><br><span class="line">  path.<span class="built_in">lineTo</span>(<span class="number">80</span>, <span class="number">50</span>);</span><br><span class="line">  path.<span class="built_in">arcTo</span>(<span class="built_in">QRectF</span>(<span class="number">50</span>, <span class="number">50</span>, <span class="number">300</span>, <span class="number">200</span>), <span class="number">30</span>, <span class="number">120</span>);</span><br><span class="line">  path.<span class="built_in">lineTo</span>(<span class="number">200</span>, <span class="number">200</span>);</span><br><span class="line"></span><br><span class="line">  painter.<span class="built_in">drawPath</span>(path);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
 
@@ -416,15 +419,15 @@ mjx-container[display="true"] + br {
     </section>
     </div>
 </article>
-<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"></div><div class="item" id="next"><div class="note">较早文章</div><a href="/post/1336811290.html">玩转Qt 2D绘图之画家的工具</a></div></section></div>
+<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/post/1485983255.html">生活家【转载】</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/post/1336811290.html">玩转Qt 2D绘图之画家的工具</a></div></section></div>
 
 <div class="related-wrap" id="related-posts">
     <section class='header'>
       <div class='title cap theme'>您可能感兴趣的文章</div>
     </section>
     <section class='body'>
-    <div class="related-posts"><a class="item" href="\post\3168359900.html" title="QListWidget使用记录"><span class="title">QListWidget使用记录</span><span class="excerpt">1. 解决无法拖入文件到QListWidget一般而言，只需要做如下操作，QWidget即可支持拖入文件：
-12345678setDragDropMode(QAbstractItemView::DropOnly); // 仅支持拖入文...</span></a><a class="item" href="\post\170290456.html" title="QPixmap使用要点"><span class="title">QPixmap使用要点</span><span class="excerpt">本文记录在使用 QPixmap 时容易感到困惑和犯错的地方，方便自己查阅，亦希望能成人之美。</span></a><a class="item" href="\post\749849405.html" title="QSS基本使用方法"><span class="title">QSS基本使用方法</span><span class="excerpt">Qt QSS 选择器和 CSS2、CSS3 的选择器类似，建议先学习或者复习CSS 选择器的语法。QSS 来源与 CSS ，但有也稍许不同，而且支持的语法也没 CSS 那么多。</span></a><a class="item" href="\post\830332637.html" title="QSS的几种图片设置方法"><span class="title">QSS的几种图片设置方法</span><span class="excerpt">大家在使用 QSS 进行图片设置时，也许被image, border-image, background-image这几个属性的差异困扰过。本文就来讲解一下这个几个属性的异同点。</span></a><a class="item" href="\post\140071237.html" title="QSS设置滚动条样式"><span class="title">QSS设置滚动条样式</span><span class="excerpt">本文简单记录如何使用 QSS 设置滚动条的样式。</span></a></div></section></div>
+    <div class="related-posts"><a class="item" href="\post\170290456.html" title="QPixmap使用要点"><span class="title">QPixmap使用要点</span><span class="excerpt">本文记录在使用 QPixmap 时容易感到困惑和犯错的地方，方便自己查阅，亦希望能成人之美。</span></a><a class="item" href="\post\3168359900.html" title="QListWidget使用记录"><span class="title">QListWidget使用记录</span><span class="excerpt">1. 解决无法拖入文件到QListWidget一般而言，只需要做如下操作，QWidget即可支持拖入文件：
+12345678setDragDropMode(QAbstractItemView::DropOnly); // 仅支持拖入文...</span></a><a class="item" href="\post\830332637.html" title="QSS的几种图片设置方法"><span class="title">QSS的几种图片设置方法</span><span class="excerpt">大家在使用 QSS 进行图片设置时，也许被image, border-image, background-image这几个属性的差异困扰过。本文就来讲解一下这个几个属性的异同点。</span></a><a class="item" href="\post\749849405.html" title="QSS基本使用方法"><span class="title">QSS基本使用方法</span><span class="excerpt">Qt QSS 选择器和 CSS2、CSS3 的选择器类似，建议先学习或者复习CSS 选择器的语法。QSS 来源与 CSS ，但有也稍许不同，而且支持的语法也没 CSS 那么多。</span></a><a class="item" href="\post\140071237.html" title="QSS设置滚动条样式"><span class="title">QSS设置滚动条样式</span><span class="excerpt">本文简单记录如何使用 QSS 设置滚动条的样式。</span></a></div></section></div>
 
 
   <div class="related-wrap md-text" id="comments">
