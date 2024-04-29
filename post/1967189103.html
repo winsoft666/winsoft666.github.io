@@ -167,7 +167,7 @@ mjx-container[display="true"] + br {
 <div class="widgets">
 
 
-<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/post/1967189103.html"><span class="title">玩转Qt 2D绘图之画家</span></a><a class="item title" href="/post/749849405.html"><span class="title">QSS基本使用方法</span></a><a class="item title" href="/post/2842059394.html"><span class="title">SQL批量添加更新和删除</span></a><a class="item title" href="/post/1446858454.html"><span class="title">MySQL获取字符串长度的几种方式</span></a><a class="item title" href="/post/3556253141.html"><span class="title">MySQL获取时间和日期</span></a><a class="item title" href="/post/3457369310.html"><span class="title">MySQL的DECLARE...HANDLER使用</span></a><a class="item title" href="/post/254517042.html"><span class="title">一个MySQL存储过程模板</span></a><a class="item title" href="/post/1485983255.html"><span class="title">生活家【转载】</span></a><a class="item title" href="/post/847642761.html"><span class="title">玩转Qt 2D绘图之坐标系</span></a><a class="item title" href="/post/776574933.html"><span class="title">一键启动神器之1key.run</span></a></div></widget>
+<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/post/3984616957.html"><span class="title">有趣的Unicode表情符号</span></a><a class="item title" href="/post/1967189103.html"><span class="title">玩转Qt 2D绘图之画家</span></a><a class="item title" href="/post/749849405.html"><span class="title">QSS基本使用方法</span></a><a class="item title" href="/post/2842059394.html"><span class="title">SQL批量添加更新和删除</span></a><a class="item title" href="/post/1446858454.html"><span class="title">MySQL获取字符串长度的几种方式</span></a><a class="item title" href="/post/3556253141.html"><span class="title">MySQL获取时间和日期</span></a><a class="item title" href="/post/3457369310.html"><span class="title">MySQL的DECLARE...HANDLER使用</span></a><a class="item title" href="/post/254517042.html"><span class="title">一个MySQL存储过程模板</span></a><a class="item title" href="/post/1485983255.html"><span class="title">生活家【转载】</span></a><a class="item title" href="/post/847642761.html"><span class="title">玩转Qt 2D绘图之坐标系</span></a></div></widget>
 </div>
 
 </div></aside><div class="l_main" id="main">
@@ -180,7 +180,7 @@ mjx-container[display="true"] + br {
   <div class="content">
     <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
 <span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Qt/">Qt</a></div>
-<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2024-04-08T12:55:02.000Z">2024-04-08</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-04-28T07:50:41.638Z">2024-04-28</time></span></div></div></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2024-04-08T12:55:02.000Z">2024-04-08</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-04-28T09:44:10.310Z">2024-04-28</time></span></div></div></div>
     
     <div class="bottom only-title">
       
@@ -391,7 +391,13 @@ mjx-container[display="true"] + br {
 <p>这种方式的弊端在于：不能将绘制风格（如居中对齐、多行文本）带入其中进行计算，只能计算给定的单行字符串按照指定的字体显示所需的宽高。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">QFont font;</span><br><span class="line">font.<span class="built_in">setPixelSize</span>(<span class="number">36</span>);</span><br><span class="line"></span><br><span class="line"><span class="function">QFontMetricsF <span class="title">fm</span><span class="params">(font)</span></span>;</span><br><span class="line"><span class="built_in">qDebug</span>() &lt;&lt; fm.<span class="built_in">horizontalAdvance</span>(<span class="string">"Hello World"</span>); <span class="comment">// 字符串所占宽度</span></span><br><span class="line"><span class="built_in">qDebug</span>() &lt;&lt; fm.<span class="built_in">height</span>(); <span class="comment">// 字体的高度</span></span><br></pre></td></tr></table></figure>
 
-<h1 id="十、贴图"><a href="#十、贴图" class="headerlink" title="十、贴图"></a>十、贴图</h1><p>TODO</p>
+<h1 id="十、贴图"><a href="#十、贴图" class="headerlink" title="十、贴图"></a>十、贴图</h1><p>QPainter 提供了 drawPixmap 和 drawImage 两个常用的贴图函数，drawPixmap 用于绘制 QPixmap 对象，而 drawImage 用于绘制 QImage 对象，QImage 与 QPixmap 间是可以相互转化，因此 drawPixmap 和 drawImage 方法的效果是一样的。</p>
+<p>drawPixmap 方法在屏幕上绘制速度更快，而 drawImage 方法则在 QPrinter 和其他设备上绘制的更快。</p>
+<p>需要注意：QPicture 对象用于记录绘制步骤，而 QPainter::drawPicture 方法用于重复 QPicture 对象所记录的步骤。</p>
+<p>drawPixmap 和 drawImage 方法有多个重载的原型，其参数从左到右依次为：</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">目标区域 -&gt; QPixmap/QImage -&gt; 源区域</span><br></pre></td></tr></table></figure>
+
+<p>目标区域会应用当前 QWidget 的 devicePixelRatio，而源区域则与 devicePixelRatio 无关，具体参考 <a href="/post/170290456.html" title="QPixmap使用要点">QPixmap使用要点</a></p>
 <hr>
 <blockquote>
 <p>限于政策原因，在您看到该文章时，博客可能已经关闭了评论功能🥺</p>
@@ -447,7 +453,7 @@ mjx-container[display="true"] + br {
 
 
 
-<footer class="page-footer footnote"><hr><div class="sitemap"><div class="sitemap-group"><span class="fs15">博客</span><a href="/">近期</a><a href="/topic">专栏</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></div><div class="sitemap-group"><span class="fs15">产品</span><a href="/post/776574933.html">1key.run</a><a href="/post/2053741240.html">TinyTu</a><a href="/post/1533480858.html">WinSpyPlus</a></div><div class="sitemap-group"><span class="fs15">社交</span><a href="/friends">友链</a><a target="_blank" rel="noopener" href="https://github.com/winsoft666/blog-comment">留言</a></div><div class="sitemap-group"><span class="fs15">更多</span><a href="/author">关于本站</a><a target="_blank" rel="noopener" href="https://github.com/winsoft666">GitHub</a></div></div><div class="text"><p>本博客所有文章除特别声明外均为原创，采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。<br>ICP备案号: <a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">鄂ICP备2020015399号-6</a></p>
+<footer class="page-footer footnote"><hr><div class="sitemap"><div class="sitemap-group"><span class="fs15">博客</span><a href="/">近期</a><a href="/topic">专栏</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></div><div class="sitemap-group"><span class="fs15">产品</span><a href="/post/776574933.html">1key.run</a><a href="/post/2053741240.html">TinyTu</a><a href="/post/1533480858.html">WinSpyPlus</a></div><div class="sitemap-group"><span class="fs15">社交</span><a href="/friends">友链</a><a target="_blank" rel="noopener" href="https://github.com/winsoft666/blog-comment">留言</a></div><div class="sitemap-group"><span class="fs15">更多</span><a href="/author">关于本站</a><a target="_blank" rel="noopener" href="https://github.com/winsoft666">GitHub</a></div></div><div class="text"><p>本博客所有文章除特别声明外均为原创，采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。<br><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">鄂ICP备2020015399号-6</a></p>
 </div></footer>
 <div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
 <div class="widgets">
