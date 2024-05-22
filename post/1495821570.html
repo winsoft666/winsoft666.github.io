@@ -57,7 +57,7 @@
 <div class="widgets">
 
 
-<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/post/1495821570.html"><span class="title">谈一谈Qt的布局技巧</span></a><a class="item title" href="/post/3886809266.html"><span class="title">网络协议(1)--基础概念</span></a><a class="item title" href="/post/1336811290.html"><span class="title">玩转Qt 2D绘图之画家的工具</span></a><a class="item title" href="/post/1967189103.html"><span class="title">玩转Qt 2D绘图之画家</span></a><a class="item title" href="/post/1878135693.html"><span class="title">C++异常之我所见</span></a><a class="item title" href="/post/3984616957.html"><span class="title">有趣的Unicode表情符号</span></a><a class="item title" href="/post/749849405.html"><span class="title">QSS基本使用方法</span></a><a class="item title" href="/post/2842059394.html"><span class="title">SQL批量添加更新和删除</span></a><a class="item title" href="/post/1446858454.html"><span class="title">MySQL获取字符串长度的几种方式</span></a><a class="item title" href="/post/3556253141.html"><span class="title">MySQL获取时间和日期</span></a></div></widget>
+<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/post/1495821570.html"><span class="title">谈一谈Qt的布局技巧</span></a><a class="item title" href="/post/1878135693.html"><span class="title">C++异常之我所见</span></a><a class="item title" href="/post/3886809266.html"><span class="title">网络协议(1)--基础概念</span></a><a class="item title" href="/post/1336811290.html"><span class="title">玩转Qt 2D绘图之画家的工具</span></a><a class="item title" href="/post/1967189103.html"><span class="title">玩转Qt 2D绘图之画家</span></a><a class="item title" href="/post/3984616957.html"><span class="title">有趣的Unicode表情符号</span></a><a class="item title" href="/post/749849405.html"><span class="title">QSS基本使用方法</span></a><a class="item title" href="/post/2842059394.html"><span class="title">SQL批量添加更新和删除</span></a><a class="item title" href="/post/1446858454.html"><span class="title">MySQL获取字符串长度的几种方式</span></a><a class="item title" href="/post/3556253141.html"><span class="title">MySQL获取时间和日期</span></a></div></widget>
 </div>
 
 </div></aside><div class="l_main" id="main">
@@ -70,7 +70,7 @@
   <div class="content">
     <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
 <span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Qt/">Qt</a></div>
-<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2024-05-17T11:00:00.000Z">2024-05-17</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-05-17T10:34:14.179Z">2024-05-17</time></span></div></div></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2024-05-17T11:00:00.000Z">2024-05-17</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-05-22T10:29:53.499Z">2024-05-22</time></span></div></div></div>
     
     <div class="bottom only-title">
       
@@ -93,9 +93,9 @@
 <p>从上面的代码行数来看，通过代码布局的确比拖动控件所花的时间更多，但这种方式的好处也非常明显，比如灵活性更大，后期调整和维护也更方便，而且对于自定义控件比较多的界面，这种方式可以直接创建对应类型的实例，不需要在设计器上进行类型提升。</p>
 <h1 id="3-布局描述语言"><a href="#3-布局描述语言" class="headerlink" title="3. 布局描述语言"></a>3. 布局描述语言</h1><p>我在此不是为了创造一种新的语言，而是受到了 Flutter 界面布局方式的启发，对 Qt 的布局进行了封装，简化了上述布局代码。</p>
 <p>下面是简化后的布局代码：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> layout = <span class="built_in">MakeLayout</span>&lt;QVBoxLayout&gt;(</span><br><span class="line">    <span class="built_in">MakeLayout</span>&lt;QHBoxLayout&gt;(lblUserName, editUserName),</span><br><span class="line">    <span class="built_in">MakeLayout</span>&lt;QHBoxLayout&gt;(lblPassword, editPassword),</span><br><span class="line">    <span class="built_in">Stretch</span>(),</span><br><span class="line">    <span class="built_in">MakeLayout</span>&lt;QHBoxLayout&gt;(<span class="built_in">Stretch</span>(), btnRegister, btnLogin, <span class="built_in">Stretch</span>()));</span><br><span class="line"></span><br><span class="line"><span class="built_in">setLayout</span>(layout);</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> layout = <span class="built_in">VBox</span>(</span><br><span class="line">    <span class="built_in">HBox</span>(lblUserName, editUserName),</span><br><span class="line">    <span class="built_in">HBox</span>(lblPassword, editPassword),</span><br><span class="line">    <span class="built_in">Stretch</span>(),</span><br><span class="line">    <span class="built_in">HBox</span>(<span class="built_in">Stretch</span>(), btnRegister, btnLogin, <span class="built_in">Stretch</span>()));</span><br><span class="line"></span><br><span class="line"><span class="built_in">setLayout</span>(layout);</span><br></pre></td></tr></table></figure>
 
-<p>可以看到，代码量明显少了很多，还可以通过代码结构体现出界面的层次结构。</p>
+<p>代码量明显少了很多，而且还还可以通过代码的层次结构来体现出界面的布局结构。</p>
 <p>如果您对上述 Qt 布局的具体实现感兴趣，可以在下面留言或者联系我。</p>
 
 <div class="article-footer fs14">
