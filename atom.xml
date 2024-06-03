@@ -6,7 +6,7 @@
   <link href="https://jiangxueqiao.com/atom.xml" rel="self"/>
   
   <link href="https://jiangxueqiao.com/"/>
-  <updated>2024-05-28T01:40:28.825Z</updated>
+  <updated>2024-06-03T08:12:07.974Z</updated>
   <id>https://jiangxueqiao.com/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>如何建立专属的安全易记的账号密码体系</title>
+    <link href="https://jiangxueqiao.com/post/737594544.html"/>
+    <id>https://jiangxueqiao.com/post/737594544.html</id>
+    <published>2024-06-03T04:53:19.000Z</published>
+    <updated>2024-06-03T08:12:07.974Z</updated>
+    
+    <content type="html"><![CDATA[<p>在日常生活中，我们需要不仅设置6位数字的银行卡密码，还需要注册各种各样的账号，如各式各样网站和应用，可能我们自己都不记得注册过多少网站和应用了。既然账号和密码如此繁多，那么如何来管理这些账号和密码呢，这着实是一个让人头疼的问题。</p><p>最原始的方法是将密码写纸上，放在一个安全的地方，这样固然安全，但不方便存取。</p><p>改进版则是将纸张电子化，如使用 Excel 表格来记录密码，并辅以云盘实现多端同步，这样虽然存取便利性上有一定的改善，但安全性却降低了很多，如果云盘没有历史版本功能，在编辑时稍有失误，可能导致密码全部丢失，另外如果云盘密码泄露、电脑中毒或系统损坏，也可能导致密码泄露或丢失。</p><p>目前已经有很多账号密码管理软件，来帮助人们管理账号和密码，如 1Password、KeePass 等，但它们也或多或少存在一些缺陷：</p><span id="more"></span><ul><li>支持各个系统和平台（Windows、Linux、macOS、安卓、iOS等）的工具大多需要收费，而且费用不便宜。</li><li>免费的工具通常对系统和平台的支持不够完善，不好用。</li><li>在多端同步方面，收费软件通常支持云端同步，但这样将账号密码存储在他人服务器总归不放心；免费软件通常不支持云端不同，需要自己使用云盘来同步，操作麻烦。</li><li>软件可能存在后门，导致账号密码泄露。</li></ul><p>综上所述，我认为只有记在大脑中的密码才是最安全和方便的。那么，对于大多数没有什么密码学基础的普通人来说，如何形成一套自己的个人账号密码设置体系呢？</p><p>账号密码体系由账号和密码二者构成，一一对应，需要明确的是，我们可能忘记密码，同样我们也可能忘记账号，因此账号和密码同样重要。</p><h2 id="1-账号"><a href="#1-账号" class="headerlink" title="1. 账号"></a>1. 账号</h2><p>根据使用场景（国内、网站）和系统注册要求的不同，通常需要准备如下类型的账号。</p><h3 id="1-1-手机号码"><a href="#1-1-手机号码" class="headerlink" title="1.1 手机号码"></a>1.1 手机号码</h3><p>现在基本每个人都有手机号码，而且国内手机号都已实名认证，注册国内网站、应用时优先使用手机号码进行注册，如果支持短信验证码登录，则优先使用短信验证码登录。</p><h3 id="1-2-电子邮件"><a href="#1-2-电子邮件" class="headerlink" title="1.2 电子邮件"></a>1.2 电子邮件</h3><p>需要准备国内和国外两个电子邮件，分别用于注册国内、外的网站和应用。因为国外平台可能不支持国内的邮件服务商，而如果使用国外邮件服务注册国内平台，又可能导致邮件收取缓慢或无法收取，因此建议根据国内外应用分别使用不同的国内外邮件服务。</p><p>国内邮件服务推荐：</p><ul><li>163</li><li>QQ</li></ul><p>国外邮件服务推荐：</p><ul><li>Gmail</li><li>Outlook</li></ul><p>不建议使用小众邮箱，这些公司可能随时因为经营不善倒闭或停止服务。</p><h3 id="1-3-英文数字账号"><a href="#1-3-英文数字账号" class="headerlink" title="1.3 英文数字账号"></a>1.3 英文数字账号</h3><p>有的网站支持使用“英文+数字”形式的账号进行注册（当然后期可能因为账号安全性，要求绑定手机号或邮箱），建议使用统一的、不暴露隐私的英文数字账号。</p><p>不建议在账号中使用中文、下划线、横线，因为虽然有些的网站支持这些特殊字符，但无法保证所有网站都支持这些字符。</p><h3 id="1-4-隐私性"><a href="#1-4-隐私性" class="headerlink" title="1.4 隐私性"></a>1.4 隐私性</h3><p>在注册国内网站&#x2F;应用时，不需要纠结使用国内手机号、邮箱的隐私性，因为根据国内目前的政策和现状，国内网站和应用基本没有隐私性可言。</p><h2 id="2-密码"><a href="#2-密码" class="headerlink" title="2. 密码"></a>2. 密码</h2><p>最安全的密码方案肯定是不同的网站和应用使用不同的随机字符串作为密码，但是这样不方便记忆，而且大多数情况下也不需要这么高强度的安全性。</p><p>现提供一种折中的密码生成方案，生成的密码可以符合绝大多数应用的要求，该方案还可以在保证密码安全的前提下，方便记忆，如下图所示：</p><p><img src="https://blog-static.jiangxueqiao.com/blog/img/xCPR0qeOuY.png"></p><p>固定前缀和特殊字符后缀需要根据自己喜好来设定，如固定字符前缀为“he”，特殊字符后缀为“?”。</p><p>混淆码则根据应用名称缩写长度（补零之前的长度）的不同而不同，需要自己定义一套规则，如：</p><table><thead><tr><th>长度</th><th>混淆码</th></tr></thead><tbody><tr><td>1 ~ 2</td><td>1111</td></tr><tr><td>3 ~ 4</td><td>2222</td></tr><tr><td>5 ~ 7</td><td>3333</td></tr><tr><td>8 ~ 10</td><td>4444</td></tr><tr><td>10 以上</td><td>5555</td></tr></tbody></table><p>上表仅用作示例，抛砖引玉。</p><p>根据上述示例规则，下面列举几个网站的密码示例。</p><figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">知乎</span><br><span class="line">heZ00H1111?</span><br><span class="line"></span><br><span class="line">今日头条</span><br><span class="line">heJrtT2222?</span><br><span class="line"></span><br><span class="line">Chrome</span><br><span class="line">heChromE3333?</span><br></pre></td></tr></table></figure><h1 id="3-不重要的账号密码"><a href="#3-不重要的账号密码" class="headerlink" title="3. 不重要的账号密码"></a>3. 不重要的账号密码</h1><p>为了防止账号和密码泄露，从而被他人猜测出密码的生成规则，因此在注册小型、非正规、不重要的网站和应用时，建议使用一个专门的账号和密码，即便密码泄露也无关紧要。</p>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;在日常生活中，我们需要不仅设置6位数字的银行卡密码，还需要注册各种各样的账号，如各式各样网站和应用，可能我们自己都不记得注册过多少网站和应用了。既然账号和密码如此繁多，那么如何来管理这些账号和密码呢，这着实是一个让人头疼的问题。&lt;/p&gt;
+&lt;p&gt;最原始的方法是将密码写纸上，放在一个安全的地方，这样固然安全，但不方便存取。&lt;/p&gt;
+&lt;p&gt;改进版则是将纸张电子化，如使用 Excel 表格来记录密码，并辅以云盘实现多端同步，这样虽然存取便利性上有一定的改善，但安全性却降低了很多，如果云盘没有历史版本功能，在编辑时稍有失误，可能导致密码全部丢失，另外如果云盘密码泄露、电脑中毒或系统损坏，也可能导致密码泄露或丢失。&lt;/p&gt;
+&lt;p&gt;目前已经有很多账号密码管理软件，来帮助人们管理账号和密码，如 1Password、KeePass 等，但它们也或多或少存在一些缺陷：&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="爱折腾" scheme="https://jiangxueqiao.com/categories/%E7%88%B1%E6%8A%98%E8%85%BE/"/>
+    
+    
+    <category term="密码" scheme="https://jiangxueqiao.com/tags/%E5%AF%86%E7%A0%81/"/>
+    
+  </entry>
   
   <entry>
     <title>谈一谈Qt的布局技巧</title>
@@ -504,32 +528,6 @@
     
     <category term="Power By Me" scheme="https://jiangxueqiao.com/categories/Power-By-Me/"/>
     
-    
-  </entry>
-  
-  <entry>
-    <title>Windows API的不同返回状态</title>
-    <link href="https://jiangxueqiao.com/post/2510508225.html"/>
-    <id>https://jiangxueqiao.com/post/2510508225.html</id>
-    <published>2023-11-26T09:39:23.000Z</published>
-    <updated>2024-04-17T04:06:20.587Z</updated>
-    
-    <content type="html"><![CDATA[<p>在Windows编程中，我们经常接触到的Windows API返回值类型有：</p><ul><li>BOOL</li><li>HRESULT</li><li>LSTATUS</li></ul><span id="more"></span><h1 id="1-错误码"><a href="#1-错误码" class="headerlink" title="1. 错误码"></a>1. 错误码</h1><p>BOOL类型通常是0表示失败，非0表示成功，在BOOL类型返回失败时，通常还可以通过<code>GetLastError</code>函数获取错误码。错误码与调用线程相关联，每个线程的错误码是独立的，在调用完Windows API后，如下获取错误码，则需要立即获取，否则可能会被后面调用API所设置的错误码所覆盖。</p><p>应用程序也可以通过<code>SetLastError</code>函数来设置错误码。</p><p>Windows API通常在没有错误发生时，将错误码设置为0，有错误发生时，视具体错误而设置为其他非0值。</p><blockquote><p>微软官方文档：<a href="https://learn.microsoft.com/en-us/windows/win32/debug/system-error-codes">Debug system error codes</a></p></blockquote><h2 id="常见的错误码"><a href="#常见的错误码" class="headerlink" title="常见的错误码"></a>常见的错误码</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ERROR_SUCCESS = <span class="number">0</span>  <span class="comment">// 成功</span></span><br><span class="line">ERROR_OUTOFMEMORY  <span class="comment">// 内存不足</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure><h1 id="2-HRESULT"><a href="#2-HRESULT" class="headerlink" title="2. HRESULT"></a>2. HRESULT</h1><h2 id="2-1-HRESULT结构"><a href="#2-1-HRESULT结构" class="headerlink" title="2.1 HRESULT结构"></a>2.1 HRESULT结构</h2><p>HRESULT是COM返回的错误码，总共32位，它由三个基本部分组成：</p><ul><li>高1位表示成功或失败（0表示成功，1表示失败）。</li><li>中间11位编码指示错误来源的设施&#x2F;设备。</li><li>低16位编码错误编号。</li></ul><p>0~32位的作用分别如下：<br><img src="https://blog-static.jiangxueqiao.com/blog/img/hresult-bit.png"></p><figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">S - 严重度 - 表示成功/失败</span><br><span class="line"></span><br><span class="line">    0 - 成功</span><br><span class="line">    1 - 失败 (COERROR)</span><br><span class="line"></span><br><span class="line">R - reserved portion of the facility code, corresponds to NT&#x27;s second severity bit.</span><br><span class="line"></span><br><span class="line">C - reserved portion of the facility code, corresponds to NT&#x27;s C field.</span><br><span class="line"></span><br><span class="line">N - reserved portion of the facility code. Used to indicate a mapped NT status value.</span><br><span class="line"></span><br><span class="line">r - reserved portion of the facility code. Reserved for internal</span><br><span class="line">        use. Used to indicate HRESULT values that are not status</span><br><span class="line">        values, but are instead message ids for display strings.</span><br><span class="line"></span><br><span class="line">Facility - 设备/设施码</span><br><span class="line"></span><br><span class="line">Code - 设备/设施的状态码</span><br></pre></td></tr></table></figure><p>在实际开发中，通常不需要关心其每一位的具体作用，我们使用更多的是下面的几个宏：</p><ul><li>使用<code>SUCCEEDED(hr)</code>宏判断是否成功（即hr&gt;&#x3D; 0），<code>FAILED(hr)</code>判断是否失败(即hr&lt; 0)。</li><li>使用<code>HRESULT_CODE(hr)</code>宏获取错误码。</li><li>使用<code>HRESULT_FACILITY(hr)</code>宏获取设备码。</li></ul><blockquote><p>4字节（32位）整数能表示的最大正整数为<code>7FFF FFFFF</code>（最高位为0），当最高位为1时，则为负数。所以HRESULT能通过是否为负数来判断成功与否。</p></blockquote><h2 id="2-2-常见的HRESULT值"><a href="#2-2-常见的HRESULT值" class="headerlink" title="2.2 常见的HRESULT值"></a>2.2 常见的HRESULT值</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">S_OK     <span class="comment">// 成功</span></span><br><span class="line">S_FALSE  <span class="comment">// 失败</span></span><br><span class="line">E_FAIL   <span class="comment">// 失败</span></span><br></pre></td></tr></table></figure><h2 id="2-3-API错误码与HRESULT"><a href="#2-3-API错误码与HRESULT" class="headerlink" title="2.3 API错误码与HRESULT"></a>2.3 API错误码与HRESULT</h2><p>我们可以使用<code>HRESULT_FROM_WIN32</code>宏将上一节介绍的“Windows API的错误码”转成HRESULT。</p><h1 id="3-LSTATUS"><a href="#3-LSTATUS" class="headerlink" title="3. LSTATUS"></a>3. LSTATUS</h1><p>在Windows API中对LSTATUS的定义比较模糊，比如注册表API（如RegCreateEx等）返回的LSTATUS实际就是第一节介绍的Windows错误码。</p><p>所以当遇到返回LSTATUS类型的API时，需要参考API的文档说明。</p>]]></content>
-    
-    
-    <summary type="html">&lt;p&gt;在Windows编程中，我们经常接触到的Windows API返回值类型有：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;BOOL&lt;/li&gt;
-&lt;li&gt;HRESULT&lt;/li&gt;
-&lt;li&gt;LSTATUS&lt;/li&gt;
-&lt;/ul&gt;</summary>
-    
-    
-    
-    <category term="Windows编程" scheme="https://jiangxueqiao.com/categories/Windows%E7%BC%96%E7%A8%8B/"/>
-    
-    
-    <category term="Windows" scheme="https://jiangxueqiao.com/tags/Windows/"/>
     
   </entry>
   
