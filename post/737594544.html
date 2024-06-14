@@ -20,8 +20,9 @@
   <title>如何建立专属的安全易记的账号密码体系 - Jiang's Blog</title>
 
   
-  <meta name="description" content="在日常生活中，我们需要不仅设置6位数字的银行卡密码，还需要注册各种各样的账号，如各式各样网站和应用，可能我们自己都不记得注册过多少网站和应用了。既然账号和密码如此繁多，那么如何来管理这些账号和密码呢，这着实是一个让人头疼的问题。
-最原始的方法是将密码写纸上，放在一个安全的地方，这样固然安全，但...">
+  <meta name="description" content="在日常生活中，我们不仅需要记忆6位数字的银行卡密码，还需要记忆各式各样网站和应用的账号密码，可能我们自己也不记得曾经注册过多少个账号。账号和密码如此繁多，管理这些账号和密码，也是一个让人头疼的问题。
+最原始的方法是将密码写纸上，放在一个安全的地方，但纸张存在丢失、损坏的风险，而且不方便存取。
+...">
   
   <meta name="keywords" content="密码">
 
@@ -56,7 +57,7 @@
 <div class="widgets">
 
 
-<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/post/3008752839.html"><span class="title">基于共享内存的跨平台RPC框架 - Veigar</span></a><a class="item title" href="/post/749849405.html"><span class="title">QSS基本使用方法</span></a><a class="item title" href="/post/170290456.html"><span class="title">QPixmap使用要点</span></a><a class="item title" href="/post/2711697202.html"><span class="title">Windbg调试入门</span></a><a class="item title" href="/post/66759332.html"><span class="title">回顾2D绘图的数学知识</span></a><a class="item title" href="/post/737594544.html"><span class="title">如何建立专属的安全易记的账号密码体系</span></a><a class="item title" href="/post/908211703.html"><span class="title">NPM和Yarn设置国内源</span></a><a class="item title" href="/post/2289160283.html"><span class="title">C++标准库线程的启动与退出</span></a><a class="item title" href="/post/3984616957.html"><span class="title">有趣的Unicode表情符号</span></a><a class="item title" href="/post/1495821570.html"><span class="title">谈一谈Qt的布局技巧</span></a></div></widget>
+<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/post/1967189103.html"><span class="title">玩转Qt 2D绘图之画家</span></a><a class="item title" href="/post/66759332.html"><span class="title">回顾2D绘图的数学知识</span></a><a class="item title" href="/post/737594544.html"><span class="title">如何建立专属的安全易记的账号密码体系</span></a><a class="item title" href="/post/2501563677.html"><span class="title">小懒（转载）</span></a><a class="item title" href="/post/1173742882.html"><span class="title">史铁生：职业事业（节选）</span></a><a class="item title" href="/post/1485983255.html"><span class="title">生活家（转载）</span></a><a class="item title" href="/post/1878076142.html"><span class="title">戴建业：阅读习惯与人生未来（转载）</span></a><a class="item title" href="/post/618632730.html"><span class="title">程序员如何提升自身价值（转载）</span></a><a class="item title" href="/post/3534906950.html"><span class="title">最不像干货的33条干货（转载）</span></a><a class="item title" href="/post/2737986840.html"><span class="title">基于Hexo搭建静态博客</span></a></div></widget>
 </div>
 
 </div></aside><div class="l_main" id="main">
@@ -69,7 +70,7 @@
   <div class="content">
     <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
 <span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E7%88%B1%E6%8A%98%E8%85%BE/">爱折腾</a></div>
-<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2024-06-03T04:53:19.000Z">2024-06-03</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-06-05T01:42:09.984Z">2024-06-05</time></span></div></div></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2024-06-03T04:53:19.000Z">2024-06-03</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-06-14T04:17:27.852Z">2024-06-14</time></span></div></div></div>
     
     <div class="bottom only-title">
       
@@ -80,17 +81,17 @@
     </div>
     
   </div>
-  </div><article class="md-text content"><p>在日常生活中，我们需要不仅设置6位数字的银行卡密码，还需要注册各种各样的账号，如各式各样网站和应用，可能我们自己都不记得注册过多少网站和应用了。既然账号和密码如此繁多，那么如何来管理这些账号和密码呢，这着实是一个让人头疼的问题。</p>
-<p>最原始的方法是将密码写纸上，放在一个安全的地方，这样固然安全，但不方便存取。</p>
-<p>改进版则是将纸张电子化，如使用 Excel 表格来记录密码，并辅以云盘实现多端同步，这样虽然存取便利性上有一定的改善，但安全性却降低了很多，如果云盘没有历史版本功能，在编辑时稍有失误，可能导致密码全部丢失，另外如果云盘密码泄露、电脑中毒或系统损坏，也可能导致密码泄露或丢失。</p>
+  </div><article class="md-text content"><p>在日常生活中，我们不仅需要记忆6位数字的银行卡密码，还需要记忆各式各样网站和应用的账号密码，可能我们自己也不记得曾经注册过多少个账号。账号和密码如此繁多，管理这些账号和密码，也是一个让人头疼的问题。</p>
+<p>最原始的方法是将密码写纸上，放在一个安全的地方，但纸张存在丢失、损坏的风险，而且不方便存取。</p>
+<p>改进版则是将纸张电子化，如 Excel，并辅以云盘实现多端同步，这样虽然存取便利性上有一定的改善，但安全性却降低了很多，如果云盘没有历史版本功能，在编辑时稍有失误，可能导致密码全部丢失，另外如果云盘密码泄露、电脑中毒或系统损坏，也可能导致密码泄露或丢失。如果某一天云盘软件突然倒闭了，该怎么办呢？</p>
 <p>目前已经有很多账号密码管理软件，来帮助人们管理账号和密码，如 1Password、KeePass 等，但它们也或多或少存在一些缺陷：</p>
 <span id="more"></span>
 
 <ul>
-<li>支持各个系统和平台（Windows、Linux、macOS、安卓、iOS等）的工具大多需要收费，而且费用不便宜。</li>
-<li>免费的工具通常对系统和平台的支持不够完善，不好用。</li>
+<li>对系统和平台（Windows、Linux、macOS、安卓、iOS等）支持完善的工具大多需要收费，而且费用不便宜；免费的工具通常对系统和平台的支持不够完善，也不好用。</li>
 <li>在多端同步方面，收费软件通常支持云端同步，但这样将账号密码存储在他人服务器总归不放心；免费软件通常不支持云端不同，需要自己使用云盘来同步，操作麻烦。</li>
 <li>软件可能存在后门，导致账号密码泄露。</li>
+<li>软件可能随时停止运营或无法打开。</li>
 </ul>
 <p>综上所述，我认为只有记在大脑中的密码才是最安全和方便的。那么，对于大多数没有什么密码学基础的普通人来说，如何形成一套自己的个人账号密码设置体系呢？</p>
 <p>账号密码体系由账号和密码二者构成，一一对应，需要明确的是，我们可能忘记密码，同样我们也可能忘记账号，因此账号和密码同样重要。</p>
@@ -107,7 +108,7 @@
 <li>Gmail</li>
 <li>Outlook</li>
 </ul>
-<p>不建议使用小众邮箱，这些公司可能随时因为经营不善倒闭或停止服务。</p>
+<p>不建议使用小众邮箱，这些邮箱可能随时因为公司经营不善而倒闭或停止服务。</p>
 <h3 id="1-3-英文数字账号"><a href="#1-3-英文数字账号" class="headerlink" title="1.3 英文数字账号"></a>1.3 英文数字账号</h3><p>有的网站支持使用“英文+数字”形式的账号进行注册（当然后期可能因为账号安全性，要求绑定手机号或邮箱），建议使用统一的、不暴露隐私的英文数字账号。</p>
 <p>不建议在账号中使用中文、下划线、横线，因为虽然有些的网站支持这些特殊字符，但无法保证所有网站都支持这些字符。</p>
 <h3 id="1-4-隐私性"><a href="#1-4-隐私性" class="headerlink" title="1.4 隐私性"></a>1.4 隐私性</h3><p>在注册国内网站&#x2F;应用时，不需要纠结使用国内手机号、邮箱的隐私性，因为根据国内目前的政策和现状，国内网站和应用基本没有隐私性可言。</p>
@@ -166,8 +167,8 @@
       <div class="header"><span>分享文章</span></div>
       <div class="body">
         <div class="link"><input class="copy-area" readonly="true" id="copy-link" value="https://jiangxueqiao.com/post/737594544.html" /></div>
-        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/b32ef3da1162a.svg" /></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://jiangxueqiao.com/post/737594544.html&title=如何建立专属的安全易记的账号密码体系 - Jiang's Blog&pics=https://blog-static.jiangxueqiao.com/blog/banner/hor-banner-ants.jpg&summary=在日常生活中，我们需要不仅设置6位数字的银行卡密码，还需要注册各种各样的账号，如各式各样网站和应用，可能我们自己都不记得注册过多少网站和应用了。既然账号和密码如此繁多，那么如何来管理这些账号和密码呢，这着实是一个让人头疼的问题。
-最原..."><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/80c07e4dbb303.svg" /></a><a class="social share-item email" href="mailto:?subject=如何建立专属的安全易记的账号密码体系 - Jiang's Blog&amp;body=https://jiangxueqiao.com/post/737594544.html"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/a1b00e20f425d.svg" /></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/8411ed322ced6.svg" /></a></div>
+        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/b32ef3da1162a.svg" /></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://jiangxueqiao.com/post/737594544.html&title=如何建立专属的安全易记的账号密码体系 - Jiang's Blog&pics=https://blog-static.jiangxueqiao.com/blog/banner/hor-banner-ants.jpg&summary=在日常生活中，我们不仅需要记忆6位数字的银行卡密码，还需要记忆各式各样网站和应用的账号密码，可能我们自己也不记得曾经注册过多少个账号。账号和密码如此繁多，管理这些账号和密码，也是一个让人头疼的问题。
+最原始的方法是将密码写纸上，放在一..."><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/80c07e4dbb303.svg" /></a><a class="social share-item email" href="mailto:?subject=如何建立专属的安全易记的账号密码体系 - Jiang's Blog&amp;body=https://jiangxueqiao.com/post/737594544.html"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/a1b00e20f425d.svg" /></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/8411ed322ced6.svg" /></a></div>
         
         <div class="qrcode" id="qrcode-wechat" style="opacity:0;height:0">
           <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=https://jiangxueqiao.com/post/737594544.html"/>
