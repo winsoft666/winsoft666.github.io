@@ -59,6 +59,18 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'JiMoChinese';
+  src: url("/font/JiMo.woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'YouSheBiaoTiHeiChinese';
+  src: url("/font/YouSheBiaoTiHei-Chinese.woff2");
+  font-weight: normal;
+  font-style: normal;
+}
 :root {
   --theme-link: #2094f3;
 }
@@ -217,7 +229,7 @@ table:not([class]) tr:hover {
   background: var(--block);
 }
 *[ff=title] {
-  font-family: Inter, "Microsoft Yahei", "Segoe UI", -apple-system, Roboto, Ubuntu, "Helvetica Neue", Arial, "WenQuanYi Micro Hei", sans-serif;
+  font-family: YouSheBiaoTiHeiChinese, "Microsoft Yahei", "Segoe UI", -apple-system, Roboto, Ubuntu, "Helvetica Neue", Arial, "WenQuanYi Micro Hei", sans-serif;
 }
 blockquote {
   display: block;
@@ -4785,8 +4797,8 @@ details.toc[open] >div.body section .header+.doc_tree {
   animation-timing-function: linear;
 }
 .logo-wrap a.title {
-  font-size: 1.3rem;
-  font-weight: 600;
+  font-size: 2rem;
+  font-weight: 500;
   color: inherit;
   line-height: 1.2;
   display: block;

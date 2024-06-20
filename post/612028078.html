@@ -17,7 +17,7 @@
   <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
   <meta name="theme-color" content="#f9fafb">
   
-  <title>Electron判断程序运行环境 - Jiang's Reflections</title>
+  <title>Electron判断程序运行环境 - 独钓寒江雪</title>
 
   
   <meta name="description" content="Electron官方未提供判断当前程序运行环境的方法。我认为官方不提供这个方法也是说的过去的，因为Electron扮演的是应用开发框架的角色，而运行环境这些东西本身属于开发者自己的事情，有的开发者喜欢定义“开发、测试、预生产、生成”四个环境，而有的开发者却只定义了一个生产环境，这些都不是框架需...">
@@ -26,7 +26,7 @@
 
   <!-- feed -->
   
-    <link rel="alternate" href="/atom.xml" title="Jiang's Reflections" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="独钓寒江雪" type="application/atom+xml">
   
 
   <link rel="stylesheet" href="/css/main.css?v=1.29.0">
@@ -44,7 +44,7 @@
 <div class="l_body s:aa content tech" id="start" layout="post" ><aside class="l_left"><div class="leftbar-container">
 
 
-<header class="header"><div class="logo-wrap"><a class="avatar" href="/author/"><div class="bg" style="opacity:0;background-image:url(https://blog-static.jiangxueqiao.com/blog/stellar-theme/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/images/avatar.png" onerror="javascript:this.classList.add('error');this.src='https://blog-static.jiangxueqiao.com/blog/stellar-theme/default/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">Jiang's Reflections</div></a></div></header>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/author/"><div class="bg" style="opacity:0;background-image:url(https://blog-static.jiangxueqiao.com/blog/stellar-theme/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/images/avatar.png" onerror="javascript:this.classList.add('error');this.src='https://blog-static.jiangxueqiao.com/blog/stellar-theme/default/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">独钓寒江雪</div></a></div></header>
 
 <div class="nav-area">
 <div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" placeholder="站内搜索"></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
@@ -120,7 +120,7 @@
       <div class="header"><span>分享文章</span></div>
       <div class="body">
         <div class="link"><input class="copy-area" readonly="true" id="copy-link" value="https://jiangxueqiao.com/post/612028078.html" /></div>
-        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/b32ef3da1162a.svg" /></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://jiangxueqiao.com/post/612028078.html&title=Electron判断程序运行环境 - Jiang's Reflections&summary=Electron官方未提供判断当前程序运行环境的方法。我认为官方不提供这个方法也是说的过去的，因为Electron扮演的是应用开发框架的角色，而运行环境这些东西本身属于开发者自己的事情，有的开发者喜欢定义“开发、测试、预生产、生成”四..."><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/80c07e4dbb303.svg" /></a><a class="social share-item email" href="mailto:?subject=Electron判断程序运行环境 - Jiang's Reflections&amp;body=https://jiangxueqiao.com/post/612028078.html"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/a1b00e20f425d.svg" /></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/8411ed322ced6.svg" /></a></div>
+        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/b32ef3da1162a.svg" /></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://jiangxueqiao.com/post/612028078.html&title=Electron判断程序运行环境 - 独钓寒江雪&summary=Electron官方未提供判断当前程序运行环境的方法。我认为官方不提供这个方法也是说的过去的，因为Electron扮演的是应用开发框架的角色，而运行环境这些东西本身属于开发者自己的事情，有的开发者喜欢定义“开发、测试、预生产、生成”四..."><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/80c07e4dbb303.svg" /></a><a class="social share-item email" href="mailto:?subject=Electron判断程序运行环境 - 独钓寒江雪&amp;body=https://jiangxueqiao.com/post/612028078.html"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/a1b00e20f425d.svg" /></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/8411ed322ced6.svg" /></a></div>
         
         <div class="qrcode" id="qrcode-wechat" style="opacity:0;height:0">
           <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=https://jiangxueqiao.com/post/612028078.html"/>
@@ -137,15 +137,15 @@
       <div class='title cap theme'>您可能感兴趣的文章</div>
     </section>
     <section class='body'>
-    <div class="related-posts"><a class="item" href="\post\2191045165.html" title="Electron启动和禁用调试工具的方法"><span class="title">Electron启动和禁用调试工具的方法</span><span class="excerpt">1. 启用调试工具Electron中打开调试窗口的方法有多种，但前提都需要在创建Browser Window时启用devTools特性，如：
+    <div class="related-posts"><a class="item" href="\post\946276004.html" title="产品级的Electron项目模板"><span class="title">产品级的Electron项目模板</span><span class="excerpt">写在前面已经有了那么多的 Electron 项目模板，为什么还要再造一个？是重复造轮子吗？
+我相信大多数人选择使用 Electron 开发客户端时，或多或少都看上了 Web 开发的高效率，但Web开发人员在客户端和系统编程方面的经验相...</span></a><a class="item" href="\post\2191045165.html" title="Electron启动和禁用调试工具的方法"><span class="title">Electron启动和禁用调试工具的方法</span><span class="excerpt">1. 启用调试工具Electron中打开调试窗口的方法有多种，但前提都需要在创建Browser Window时启用devTools特性，如：
 12345678const win = new BrowserWindow(&#123;  ...</span></a><a class="item" href="\post\235943795.html" title="Node插件开发(2)-不同的调用方式"><span class="title">Node插件开发(2)-不同的调用方式</span><span class="excerpt">本文主要介绍如何在 Node-API 中实现不同的类型的接口，如：
 
 同步调用
 基于 Napi::AsyncWorker 的异步调用，通过回调函数返回
 异步调用，返回 Promise
 基于 Napi::ThreadSafeFuncti...</span></a><a class="item" href="\post\819381949.html" title="Node插件开发(1)-快速入门"><span class="title">Node插件开发(1)-快速入门</span><span class="excerpt">在使用Electron开发客户端时，如果现有Node模块所提供的功能无法满足需求，我们可以使用C++开发自定义的Node模块，也称插件（addon）。
-Node.js插件的扩展名为.node，是二进制文件，其本质上是动态链接库重命名而...</span></a><a class="item" href="\post\946276004.html" title="产品级的Electron项目模板"><span class="title">产品级的Electron项目模板</span><span class="excerpt">写在前面已经有了那么多的 Electron 项目模板，为什么还要再造一个？是重复造轮子吗？
-我相信大多数人选择使用 Electron 开发客户端时，或多或少都看上了 Web 开发的高效率，但Web开发人员在客户端和系统编程方面的经验相...</span></a></div></section></div>
+Node.js插件的扩展名为.node，是二进制文件，其本质上是动态链接库重命名而...</span></a></div></section></div>
 
 
   <div class="related-wrap md-text" id="comments">

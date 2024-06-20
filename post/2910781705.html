@@ -17,7 +17,7 @@
   <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
   <meta name="theme-color" content="#f9fafb">
   
-  <title>Windows平台编译WebRTC源码 - Jiang's Reflections</title>
+  <title>Windows平台编译WebRTC源码 - 独钓寒江雪</title>
 
   
   <meta name="description" content="
@@ -29,7 +29,7 @@
 
   <!-- feed -->
   
-    <link rel="alternate" href="/atom.xml" title="Jiang's Reflections" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="独钓寒江雪" type="application/atom+xml">
   
 
   <link rel="stylesheet" href="/css/main.css?v=1.29.0">
@@ -47,7 +47,7 @@
 <div class="l_body s:aa content tech" id="start" layout="post" ><aside class="l_left"><div class="leftbar-container">
 
 
-<header class="header"><div class="logo-wrap"><a class="avatar" href="/author/"><div class="bg" style="opacity:0;background-image:url(https://blog-static.jiangxueqiao.com/blog/stellar-theme/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/images/avatar.png" onerror="javascript:this.classList.add('error');this.src='https://blog-static.jiangxueqiao.com/blog/stellar-theme/default/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">Jiang's Reflections</div></a></div></header>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/author/"><div class="bg" style="opacity:0;background-image:url(https://blog-static.jiangxueqiao.com/blog/stellar-theme/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/images/avatar.png" onerror="javascript:this.classList.add('error');this.src='https://blog-static.jiangxueqiao.com/blog/stellar-theme/default/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">独钓寒江雪</div></a></div></header>
 
 <div class="nav-area">
 <div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" placeholder="站内搜索"></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
@@ -147,10 +147,10 @@
       <div class="header"><span>分享文章</span></div>
       <div class="body">
         <div class="link"><input class="copy-area" readonly="true" id="copy-link" value="https://jiangxueqiao.com/post/2910781705.html" /></div>
-        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/b32ef3da1162a.svg" /></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://jiangxueqiao.com/post/2910781705.html&title=Windows平台编译WebRTC源码 - Jiang's Reflections&summary=
+        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/b32ef3da1162a.svg" /></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://jiangxueqiao.com/post/2910781705.html&title=Windows平台编译WebRTC源码 - 独钓寒江雪&summary=
 写作本文时使用的 webrtc 版本为：branch heads/67
 
-一、 准备工作1.0 请确保可以访问国外网站1.1 系统语言切换到英文系统 Windows 7&#x2F;10 都可以，在“控制面板”–&gt;”区域和语言”..."><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/80c07e4dbb303.svg" /></a><a class="social share-item email" href="mailto:?subject=Windows平台编译WebRTC源码 - Jiang's Reflections&amp;body=https://jiangxueqiao.com/post/2910781705.html"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/a1b00e20f425d.svg" /></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/8411ed322ced6.svg" /></a></div>
+一、 准备工作1.0 请确保可以访问国外网站1.1 系统语言切换到英文系统 Windows 7&#x2F;10 都可以，在“控制面板”–&gt;”区域和语言”..."><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/80c07e4dbb303.svg" /></a><a class="social share-item email" href="mailto:?subject=Windows平台编译WebRTC源码 - 独钓寒江雪&amp;body=https://jiangxueqiao.com/post/2910781705.html"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/a1b00e20f425d.svg" /></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/8411ed322ced6.svg" /></a></div>
         
         <div class="qrcode" id="qrcode-wechat" style="opacity:0;height:0">
           <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=https://jiangxueqiao.com/post/2910781705.html"/>
@@ -171,7 +171,7 @@
 1234template &lt;typename T&gt;std::unique_ptr&lt;T&gt; WrapUnique(T* ptr) &#123;  return std::uniq...</span></a><a class="item" href="\post\3773107387.html" title="Janus的编译部署及配置"><span class="title">Janus的编译部署及配置</span><span class="excerpt">
 Janus是一个开源的 WebRTC SFU 服务器，可以作为 WebRTC 的一个端将其收到的数据进行转发，同时提供了一些的控制能力。Janus 是基于插件架构的，其功能都是通过一个个插件来提供，我们可以为 Janus 开发插件，...</span></a><a class="item" href="\post\2172509399.html" title="SDP格式解析"><span class="title">SDP格式解析</span><span class="excerpt">会话描述协议（Session Description Protocol 或简写 SDP）描述的是流媒体的初始化参数。此协议由 IETF 发表为 RFC 2327。
 SDP 完全是一种会话描述格式，它不属于传输协议。
-SDP 用于描述多...</span></a><a class="item" href="\post\2016855525.html" title="WebRTC在直播领域应用的可行性分析"><span class="title">WebRTC在直播领域应用的可行性分析</span><span class="excerpt">一、目前流行的直播技术架构目前主流的直播方案一般采用RTMP架构，首先客户端采集音视频流（如obs studio客户端），然后通过 RTMP 协议将流推到流媒体服务器，最后流媒体服务器将流处理后分发给各个直播客户端。</span></a><a class="item" href="\post\2441416675.html" title="P2P及NAT穿透技术介绍"><span class="title">P2P及NAT穿透技术介绍</span><span class="excerpt">一、 P2P（peer to peer）P2P 是一个“点对点传输技术”，也就是 2 台计算机之间不需要第三台机器作为服务端就能实现数据的传输。每台计算机即是客户端又是服务端。如果每台计算机都有自己的独立的公网 IP，那么 P2P 技...</span></a></div></section></div>
+SDP 用于描述多...</span></a><a class="item" href="\post\2441416675.html" title="P2P及NAT穿透技术介绍"><span class="title">P2P及NAT穿透技术介绍</span><span class="excerpt">一、 P2P（peer to peer）P2P 是一个“点对点传输技术”，也就是 2 台计算机之间不需要第三台机器作为服务端就能实现数据的传输。每台计算机即是客户端又是服务端。如果每台计算机都有自己的独立的公网 IP，那么 P2P 技...</span></a><a class="item" href="\post\201024982.html" title="WebRTC官方示例apprtc搭建"><span class="title">WebRTC官方示例apprtc搭建</span></a></div></section></div>
 
 
   <div class="related-wrap md-text" id="comments">
