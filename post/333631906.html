@@ -20,8 +20,9 @@
   <title>Qt中图片按九宫格模式缩放 - 独钓寒江雪</title>
 
   
-  <meta name="description" content="我们在缩放图片时都期望能保持原长宽比不变，这样可以防止图片变形，但事与愿违，有些时候我们没办法保持原图的长宽比不变，比如需要在保持图片高度不变的情况下仅横向拉伸等，此时就会导致图片变形。为了解决这种问题，我们可以考虑使用九宫格模式进行图片的缩放。
-九宫格模式就是将图片切分为九块（不强制等分）。...">
+  <meta name="description" content="我们在缩放图片时，都期望能保持图片的原长宽比，因为这样可以防止图片变形，但往往事与愿违，有些时候我们没办法保持原图的长宽比不变，比如需要在保持图片高度不变的情况下，仅横向拉伸图片，此时就会导致图片变形。
+为了解决这种问题，我们可以考虑使用九宫格模式进行图片的缩放。
+九宫格模式就是将图片切分为九...">
   
   <meta name="keywords" content="Qt,九宫格">
 
@@ -33,7 +34,7 @@
   <link rel="stylesheet" href="/css/main.css?v=1.29.0">
 
   
-    <link rel="shortcut icon" href="/images/favicon.png">
+    <link rel="shortcut icon" href="/images/logo.png">
   
 
   
@@ -45,7 +46,7 @@
 <div class="l_body s:aa content tech" id="start" layout="post" ><aside class="l_left"><div class="leftbar-container">
 
 
-<header class="header"><div class="logo-wrap"><a class="avatar" href="/author/"><div class="bg" style="opacity:0;background-image:url(https://blog-static.jiangxueqiao.com/blog/stellar-theme/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/images/avatar.png" onerror="javascript:this.classList.add('error');this.src='https://blog-static.jiangxueqiao.com/blog/stellar-theme/default/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">独钓寒江雪</div></a></div></header>
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/author/"><div class="bg" style="opacity:0;background-image:url(https://blog-static.jiangxueqiao.com/blog/stellar-theme/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/images/logo.png" onerror="javascript:this.classList.add('error');this.src='https://blog-static.jiangxueqiao.com/blog/stellar-theme/default/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">独钓寒江雪</div></a></div></header>
 
 <div class="nav-area">
 <div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" placeholder="站内搜索"></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
@@ -56,7 +57,7 @@
 <div class="widgets">
 
 
-<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/post/3462229631.html"><span class="title">了解数字证书</span></a><a class="item title" href="/post/128186902.html"><span class="title">C++的API设计规范</span></a><a class="item title" href="/post/1719474789.html"><span class="title">做人做事做管理【转载】</span></a><a class="item title" href="/post/3110746169.html"><span class="title">聊聊桌面客户端开发的技术选型</span></a><a class="item title" href="/post/3666245140.html"><span class="title">获取其他进程的命令行参数</span></a><a class="item title" href="/post/776574933.html"><span class="title">一键启动神器之1key.run</span></a><a class="item title" href="/post/3924191794.html"><span class="title">互联网的黑话</span></a><a class="item title" href="/post/29874871.html"><span class="title">玩转Qt 2D绘图之仪表盘实例</span></a><a class="item title" href="/post/737594544.html"><span class="title">建立专属的账号密码体系</span></a><a class="item title" href="/post/409779091.html"><span class="title">NSIS教程(1)-基础语法</span></a></div></widget>
+<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/post/333631906.html"><span class="title">Qt中图片按九宫格模式缩放</span></a><a class="item title" href="/post/3064318708.html"><span class="title">编译器基础概念</span></a><a class="item title" href="/post/3462229631.html"><span class="title">了解数字证书</span></a><a class="item title" href="/post/128186902.html"><span class="title">C++的API设计规范</span></a><a class="item title" href="/post/1719474789.html"><span class="title">做人做事做管理【转载】</span></a><a class="item title" href="/post/3110746169.html"><span class="title">聊聊桌面客户端开发的技术选型</span></a><a class="item title" href="/post/3666245140.html"><span class="title">获取其他进程的命令行参数</span></a><a class="item title" href="/post/776574933.html"><span class="title">一键启动神器之1key.run</span></a><a class="item title" href="/post/3924191794.html"><span class="title">互联网的黑话</span></a><a class="item title" href="/post/29874871.html"><span class="title">玩转Qt 2D绘图之仪表盘实例</span></a></div></widget>
 </div>
 
 </div></aside><div class="l_main" id="main">
@@ -69,7 +70,7 @@
   <div class="content">
     <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
 <span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Qt/">Qt</a></div>
-<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2023-10-22T15:12:21.000Z">2023-10-22</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-04-17T04:06:57.969Z">2024-04-17</time></span></div></div></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2023-10-22T15:12:21.000Z">2023-10-22</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-07-24T03:49:41.541Z">2024-07-24</time></span></div></div></div>
     
     <div class="bottom only-title">
       
@@ -80,11 +81,12 @@
     </div>
     
   </div>
-  </div><article class="md-text content"><p>我们在缩放图片时都期望能保持原长宽比不变，这样可以防止图片变形，但事与愿违，有些时候我们没办法保持原图的长宽比不变，比如需要在保持图片高度不变的情况下仅横向拉伸等，此时就会导致图片变形。为了解决这种问题，我们可以考虑使用九宫格模式进行图片的缩放。</p>
-<p>九宫格模式就是将图片切分为九块（不强制等分）。如下图所示，在图片缩放时，我们通常保持1、3、7、9四个顶点位置的图片不变，对2、4、5、6、8五个区域进行缩放。</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/img/jiugongge.png"></p>
+  </div><article class="md-text content"><p>我们在缩放图片时，都期望能保持图片的原长宽比，因为这样可以防止图片变形，但往往事与愿违，有些时候我们没办法保持原图的长宽比不变，比如需要在保持图片高度不变的情况下，仅横向拉伸图片，此时就会导致图片变形。</p>
+<p>为了解决这种问题，我们可以考虑使用九宫格模式进行图片的缩放。</p>
+<p>九宫格模式就是将图片切分为九块（不强制切分的每一块必须等分），如下图所示，在图片缩放时，我们通常保持1、3、7、9四个顶点位置的图片不变，对2、4、5、6、8五个区域进行缩放。</p>
 <span id="more"></span>
 
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/img/jiugongge.png"></p>
 <h2 id="1-使用QSS实现"><a href="#1-使用QSS实现" class="headerlink" title="1. 使用QSS实现"></a>1. 使用QSS实现</h2><p>在Qt中实现图片按九宫格缩放最简单的方法是使用QSS的<code>border-image</code>属性来实现，通过上下左右四个边框的宽度或高度来设置1、3、7、9四个顶点的大小。</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">border-image</span>: <span class="built_in">url</span>(<span class="string">:/Sample/image/NinePatchTest.png</span>);</span><br><span class="line"><span class="attribute">border-left</span>: <span class="number">210px</span>;</span><br><span class="line"><span class="attribute">border-top</span>: <span class="number">180px</span>;</span><br><span class="line"><span class="attribute">border-right</span>: <span class="number">300px</span>;</span><br><span class="line"><span class="attribute">border-bottom</span>: <span class="number">227px</span>;</span><br></pre></td></tr></table></figure>
 
@@ -95,7 +97,7 @@
 <p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/img/feiyuqitupiansuofang-1.png"></p>
 <p>这种弊端还会体现在支持高DPI缩放的Qt程序中，例如在一个支持DPI缩放的程序中，为宽高为<code>640*360</code>的QWidget设置背景图片，我们知道不同的 devicePixelRatio 会导致实际渲染的图片宽高不同，如devicePixelRatio为1时，图片渲染区域为<code>640*360</code>， 而devicePixelRatio为2时，实际渲染区域为<code>1280*720</code>，为了保证程序在不同DPI的环境下都有比较好的界面呈现，我们通常简单得指定一个倍图（如2倍图）让程序自动进行图片缩放（当然也可以使用SVG或针对不同DPI使用不同的图片）。</p>
 <p>而使用 border-left 等属性指定的宽度是固定的，顶点图片无法参与到自动缩放中来，从而会导致这一 DPI 适配机制失效。下一节介绍的方法可以解决这一弊端。</p>
-<h2 id="2-使用代码实现九宫格缩放"><a href="#2-使用代码实现九宫格缩放" class="headerlink" title="2. 使用代码实现九宫格缩放"></a>2. 使用代码实现九宫格缩放</h2><p>本节介绍如何使用代码实现图片九宫格模式缩放，实现原理大致如下：</p>
+<h2 id="2-使用代码实现九宫格缩放"><a href="#2-使用代码实现九宫格缩放" class="headerlink" title="2. 使用代码实现九宫格缩放"></a>2. 使用代码实现九宫格缩放</h2><p>本节介绍如何使用代码来实现九宫格模式缩放图片，实现原理大致如下：</p>
 <p>提取九个区域的图片，保持1、3、7、9四个图片不变，对2、4、5、6、8五个区域图片进行缩放，分别得到新的图片，最后再将九个区域的图片合并成一张图。</p>
 <p>为了解决上述QSS方案的弊端，我们可以采取先将图片在保持长宽比的情况缩放到相应尺寸：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QPixmap keepRatioScaledPix = src.<span class="built_in">scaled</span>(destSize, Qt::KeepAspectRatio, Qt::SmoothTransformation);</span><br></pre></td></tr></table></figure>
@@ -125,7 +127,8 @@
       <div class="header"><span>分享文章</span></div>
       <div class="body">
         <div class="link"><input class="copy-area" readonly="true" id="copy-link" value="https://jiangxueqiao.com/post/333631906.html" /></div>
-        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/b32ef3da1162a.svg" /></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://jiangxueqiao.com/post/333631906.html&title=Qt中图片按九宫格模式缩放 - 独钓寒江雪&pics=https://blog-static.jiangxueqiao.com/blog/banner/hor-banner-Qt-logo.png&summary=我们在缩放图片时都期望能保持原长宽比不变，这样可以防止图片变形，但事与愿违，有些时候我们没办法保持原图的长宽比不变，比如需要在保持图片高度不变的情况下仅横向拉伸等，此时就会导致图片变形。为了解决这种问题，我们可以考虑使用九宫格模式进行..."><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/80c07e4dbb303.svg" /></a><a class="social share-item email" href="mailto:?subject=Qt中图片按九宫格模式缩放 - 独钓寒江雪&amp;body=https://jiangxueqiao.com/post/333631906.html"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/a1b00e20f425d.svg" /></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/8411ed322ced6.svg" /></a></div>
+        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/b32ef3da1162a.svg" /></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://jiangxueqiao.com/post/333631906.html&title=Qt中图片按九宫格模式缩放 - 独钓寒江雪&pics=https://blog-static.jiangxueqiao.com/blog/banner/hor-banner-Qt-logo.png&summary=我们在缩放图片时，都期望能保持图片的原长宽比，因为这样可以防止图片变形，但往往事与愿违，有些时候我们没办法保持原图的长宽比不变，比如需要在保持图片高度不变的情况下，仅横向拉伸图片，此时就会导致图片变形。
+为了解决这种问题，我们可以考虑..."><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/80c07e4dbb303.svg" /></a><a class="social share-item email" href="mailto:?subject=Qt中图片按九宫格模式缩放 - 独钓寒江雪&amp;body=https://jiangxueqiao.com/post/333631906.html"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/a1b00e20f425d.svg" /></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/8411ed322ced6.svg" /></a></div>
         
         <div class="qrcode" id="qrcode-wechat" style="opacity:0;height:0">
           <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=https://jiangxueqiao.com/post/333631906.html"/>
@@ -143,8 +146,8 @@
     </section>
     <section class='body'>
     <div class="related-posts"><a class="item" href="\post\3168359900.html" title="QListWidget使用记录"><span class="title">QListWidget使用记录</span><span class="excerpt">1. 解决无法拖入文件到QListWidget一般而言，只需要做如下操作，QWidget即可支持拖入文件：
-12345678setDragDropMode(QAbstractItemView::DropOnly); // 仅支持拖入文...</span></a><a class="item" href="\post\170290456.html" title="QPixmap使用要点"><span class="title">QPixmap使用要点</span><span class="excerpt">本文记录在使用 QPixmap 时容易感到困惑和犯错的地方，方便自己查阅，亦希望能成人之美。</span></a><a class="item" href="\post\749849405.html" title="QSS基本使用方法"><span class="title">QSS基本使用方法</span><span class="excerpt">Qt QSS 选择器和 CSS2、CSS3 的选择器类似，建议先学习或者复习 CSS 选择器的语法。
-QSS 虽然源自 CSS ，但也有稍许不同，而且支持的语法也没 CSS 那么多。</span></a><a class="item" href="\post\140071237.html" title="QSS设置滚动条样式"><span class="title">QSS设置滚动条样式</span><span class="excerpt">本文简单记录如何使用 QSS 设置滚动条的样式。</span></a><a class="item" href="\post\10890071.html" title="QWidget子类无法应用QSS样式的问题"><span class="title">QWidget子类无法应用QSS样式的问题</span><span class="excerpt">这是一个老生常谈的问题，在使用Qt进行界面开发时，我们经常会继承自QWidget来实现自定义控件（当然这里说的是非顶级窗口），此时我们发现在该自定义控件上应用QSS样式会无效。
+12345678setDragDropMode(QAbstractItemView::DropOnly); // 仅支持拖入文...</span></a><a class="item" href="\post\170290456.html" title="QPixmap使用要点"><span class="title">QPixmap使用要点</span><span class="excerpt">本文记录在使用 QPixmap 时容易感到困惑和犯错的地方，方便自己查阅，亦希望能成人之美。</span></a><a class="item" href="\post\140071237.html" title="QSS设置滚动条样式"><span class="title">QSS设置滚动条样式</span><span class="excerpt">本文简单记录如何使用 QSS 设置滚动条的样式。</span></a><a class="item" href="\post\749849405.html" title="QSS基本使用方法"><span class="title">QSS基本使用方法</span><span class="excerpt">Qt QSS 选择器和 CSS2、CSS3 的选择器类似，建议先学习或者复习 CSS 选择器的语法。
+QSS 虽然源自 CSS ，但也有稍许不同，而且支持的语法也没 CSS 那么多。</span></a><a class="item" href="\post\10890071.html" title="QWidget子类无法应用QSS样式的问题"><span class="title">QWidget子类无法应用QSS样式的问题</span><span class="excerpt">这是一个老生常谈的问题，在使用Qt进行界面开发时，我们经常会继承自QWidget来实现自定义控件（当然这里说的是非顶级窗口），此时我们发现在该自定义控件上应用QSS样式会无效。
 导致这个问题的主要原因是QWidget的paintEve...</span></a></div></section></div>
 
 
