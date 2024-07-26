@@ -6,7 +6,7 @@
   <link href="https://jiangxueqiao.com/atom.xml" rel="self"/>
   
   <link href="https://jiangxueqiao.com/"/>
-  <updated>2024-07-17T07:09:06.716Z</updated>
+  <updated>2024-07-25T07:31:34.397Z</updated>
   <id>https://jiangxueqiao.com/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>C99柔性数组</title>
+    <link href="https://jiangxueqiao.com/post/2984623496.html"/>
+    <id>https://jiangxueqiao.com/post/2984623496.html</id>
+    <published>2024-08-21T08:00:03.000Z</published>
+    <updated>2024-07-25T07:31:34.397Z</updated>
+    
+    <content type="html"><![CDATA[<p>在讲述柔性数组（Flexible Array）之前，首先要介绍一下不完整类型 (Incomplete Type)。不完全类型是暂时没有完全定义好的类型，缺乏足够的信息（例如长度、类型）去描述一个完整的类型。在C&#x2F;C++中不完全类型有三种不同形式：void、未指定长度的数组以及具有非指定内容的结构和类。</p><span id="more"></span><p>比如通过使用不完整类型可以在头文件中隐藏结构体定义的具体细节，如：</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ring_buffer.h</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> _<span class="title">ring_buffer_type</span> <span class="title">ringbuf_t</span>;</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">ring_buffer_create</span><span class="params">(<span class="type">ringbuf_t</span> **rcb, <span class="type">size_t</span> size)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">ring_buffer_write</span><span class="params">(<span class="type">ringbuf_t</span> * rcb, <span class="type">uint8_t</span> *pdata, <span class="type">size_t</span> len)</span>;</span><br></pre></td></tr></table></figure><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ring_buffer.c</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> _<span class="title">ring_buffer_type</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="type">uint8_t</span>* data;</span><br><span class="line">    <span class="type">size_t</span>   size;    </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p>在C++中经常使用的向前声明也是不完整类型的应用。</p><p>关于柔性数组所使用的不完整类型是“未指定长度的数组”：</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> str[];</span><br></pre></td></tr></table></figure><p>C99 将柔性数组纳入了标准之中，根据 C99 规定，柔性数组需要满足如下条件：</p><ol><li>柔性数组必须应用在结构体中。</li><li>结构体中不能只有柔性数组成员，且柔性数组必须是结构体的最后一个成员。</li><li>柔性数组没有指定大小，不占用存储空间。</li></ol><p>如下面结构体中的 data 数组就是柔性数组：</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Package</span> &#123;</span></span><br><span class="line">  <span class="type">int</span> len;</span><br><span class="line">  <span class="type">char</span>* data[];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>由于 data 数组的长度为0，因此不占用存储空间：</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">sizeof</span>(Package) == <span class="keyword">sizeof</span>(<span class="type">int</span>)</span><br></pre></td></tr></table></figure><p>包含柔性数组成员的结构体需要使用 <code>malloc()</code> 函数进行内存的动态分配，并且分配的内存通常大于结构体的大小，多余的空间自动分配给了柔性数组，这样就可以用柔性数组来存储额外的数据了。</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Package* pck = (Package*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Package) + dataLen);</span><br><span class="line"><span class="keyword">if</span> (pck) &#123;</span><br><span class="line">    pck-&gt;len = dataLen;</span><br><span class="line">    <span class="built_in">memcpy</span>(pck-&gt;data, data, dataLen);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">free</span>(pck);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;在讲述柔性数组（Flexible Array）之前，首先要介绍一下不完整类型 (Incomplete Type)。不完全类型是暂时没有完全定义好的类型，缺乏足够的信息（例如长度、类型）去描述一个完整的类型。在C&amp;#x2F;C++中不完全类型有三种不同形式：void、未指定长度的数组以及具有非指定内容的结构和类。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="C++语言" scheme="https://jiangxueqiao.com/categories/C-%E8%AF%AD%E8%A8%80/"/>
+    
+    
+    <category term="C99" scheme="https://jiangxueqiao.com/tags/C99/"/>
+    
+    <category term="柔性数组" scheme="https://jiangxueqiao.com/tags/%E6%9F%94%E6%80%A7%E6%95%B0%E7%BB%84/"/>
+    
+  </entry>
   
   <entry>
     <title>了解数字证书</title>
@@ -491,32 +514,6 @@
     
     
     <category term="Electron" scheme="https://jiangxueqiao.com/tags/Electron/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>🐉2024龙行龘龘</title>
-    <link href="https://jiangxueqiao.com/post/1391804423.html"/>
-    <id>https://jiangxueqiao.com/post/1391804423.html</id>
-    <published>2024-02-20T01:25:38.000Z</published>
-    <updated>2024-04-14T04:23:15.874Z</updated>
-    
-    <content type="html"><![CDATA[<p>写下这一行预示着2024年的工作开始了，加油！</p><hr><p>物来顺应，未来不迎。</p><p>当时不杂，既过不恋。</p>]]></content>
-    
-    
-      
-      
-    <summary type="html">&lt;p&gt;写下这一行预示着2024年的工作开始了，加油！&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;物来顺应，未来不迎。&lt;/p&gt;
-&lt;p&gt;当时不杂，既过不恋。&lt;/p&gt;
-</summary>
-      
-    
-    
-    
-    <category term="杂念" scheme="https://jiangxueqiao.com/categories/%E6%9D%82%E5%BF%B5/"/>
-    
     
   </entry>
   
