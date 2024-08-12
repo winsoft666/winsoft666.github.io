@@ -6,7 +6,7 @@
   <link href="https://jiangxueqiao.com/atom.xml" rel="self"/>
   
   <link href="https://jiangxueqiao.com/"/>
-  <updated>2024-07-26T16:12:53.296Z</updated>
+  <updated>2024-08-12T10:26:23.497Z</updated>
   <id>https://jiangxueqiao.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>折腾开发环境的一天</title>
+    <link href="https://jiangxueqiao.com/post/2133505170.html"/>
+    <id>https://jiangxueqiao.com/post/2133505170.html</id>
+    <published>2024-08-12T01:52:55.000Z</published>
+    <updated>2024-08-12T10:26:23.497Z</updated>
+    
+    <content type="html"><![CDATA[<p>之前一直使用 Visual Studio Code 来将就着看 Qt 源码，至于体验也只能说是将就着能看，跳转和调试功能基本处于停摆状态。</p><p>之前很少使用 Qt Creator，大多使用 Visual Studio 开发 Qt 项目。因为在接触 Qt 之前，我已使用 VS 多年，VS 也可以满足 Qt 项目开发的需求，何况 Qt 对我而言更多的只是一个UI库，工作重心也没有全部在 Qt 上面，所以没有动力去花时间熟悉另一个 IDE 了。</p><p>今天心血来潮想折腾一下 Qt Creator，后面就用它来看 Qt 源码了。 </p><p>虽然 Qt6 的源码已经改成使用 CMakeList 来管理了，但 Qt5 源码依然使用的是 QMake，并提供了 Qt Creator 项目文件，使用 Qt Creator 来阅读 Qt5 源码会更加便利。</p><span id="more"></span>]]></content>
+    
+    
+    <summary type="html">&lt;p&gt;之前一直使用 Visual Studio Code 来将就着看 Qt 源码，至于体验也只能说是将就着能看，跳转和调试功能基本处于停摆状态。&lt;/p&gt;
+&lt;p&gt;之前很少使用 Qt Creator，大多使用 Visual Studio 开发 Qt 项目。因为在接触 Qt 之前，我已使用 VS 多年，VS 也可以满足 Qt 项目开发的需求，何况 Qt 对我而言更多的只是一个UI库，工作重心也没有全部在 Qt 上面，所以没有动力去花时间熟悉另一个 IDE 了。&lt;/p&gt;
+&lt;p&gt;今天心血来潮想折腾一下 Qt Creator，后面就用它来看 Qt 源码了。 &lt;/p&gt;
+&lt;p&gt;虽然 Qt6 的源码已经改成使用 CMakeList 来管理了，但 Qt5 源码依然使用的是 QMake，并提供了 Qt Creator 项目文件，使用 Qt Creator 来阅读 Qt5 源码会更加便利。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="编程基础" scheme="https://jiangxueqiao.com/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/"/>
+    
+    
+    <category term="Qt" scheme="https://jiangxueqiao.com/tags/Qt/"/>
+    
+    <category term="Visual Studio" scheme="https://jiangxueqiao.com/tags/Visual-Studio/"/>
+    
+  </entry>
   
   <entry>
     <title>C99柔性数组</title>
@@ -489,31 +515,6 @@
     <category term="Electron" scheme="https://jiangxueqiao.com/tags/Electron/"/>
     
     <category term="Node-API" scheme="https://jiangxueqiao.com/tags/Node-API/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>产品级的Electron项目模板</title>
-    <link href="https://jiangxueqiao.com/post/946276004.html"/>
-    <id>https://jiangxueqiao.com/post/946276004.html</id>
-    <published>2024-02-25T05:53:19.000Z</published>
-    <updated>2024-04-17T04:02:57.261Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h1><p>已经有了那么多的 Electron 项目模板，为什么还要再造一个？是重复造轮子吗？</p><p>我相信大多数人选择使用 Electron 开发客户端时，或多或少都看上了 Web 开发的高效率，但Web开发人员在客户端和系统编程方面的经验相对缺乏，又加上 Electron 和前端框架（如 Vue ）结合起来也不是那么的轻而易举，开发人员大多会选择基于模板来快速上手搭建Electron项目。</p><p>目前，Electron 的模板项目已经有很多，比较流行的有electron-vite、electron-vite-vue等。在这些模板中，有的功能过于完善，代码太复杂，远远超过了很多 Electron 客户端项目本身的代码量，需要花很多时间来熟悉模板，不适合新手快速上手和修改，一旦出现问题也难以维护；有的模板又年久失修，使用的技术早已被淘汰，也不适合用来开发线上产品，而且这些模板都有一个通病，都是在用Web开发的思维来开发客户端。</p><p>基于上述原因，我开发了这个 Electron 项目模板，在开发过程中，我一直遵循稳定、易于维护的初衷。</p><p>项目地址：<br><a href="https://github.com/winsoft666/electron-vue3-boilerplate">https://github.com/winsoft666/electron-vue3-boilerplate</a></p><span id="more"></span><h1 id="项目介绍"><a href="#项目介绍" class="headerlink" title="项目介绍"></a>项目介绍</h1><p>基于<strong>Vue3</strong> + <strong>Electron</strong> + <strong>TypeScript</strong>的客户端程序模板，使用<strong>Vite</strong>和<strong>Electron Forge</strong>构建和打包。</p><p>真正做到开箱即用，面向跨平台客户端设计，产品级的项目模板。</p><h1 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h1><ul><li>使用 <a href="https://vitejs.dev/">ViteJS</a> 构建和驱动前端页面，支持热加载（HMR），使开发和调试变得更加高效 ⚡</li><li>支持Electron窗口创建指令，并且可隔离不同窗口的IPC事件 💖</li><li>封装简化了IPC的调用方式，并提供了IPC函数快速创建指令，主进程与渲染进程的相互调用从未如此简单 👍</li><li>主进程和渲染进程支持热加载 ⚡</li><li>精选依赖包，提升项目稳定性</li><li>代码简洁，易掌控，可定制性强</li><li>日志文件，主进程和渲染进程可以直接写文件日志</li><li>配置文件</li><li>主进程和渲染进程均支持axios HTTP请求</li><li>文件下载（含哈希校验、进度反馈），渲染进程可直接异步调用 👍</li><li>功能完善的无边框窗口</li><li>托盘图标和右键菜单，窗口关闭时程序最小化到托盘</li><li>客户端程序单实例</li><li>基于ESLint的代码规范和自动格式化</li><li>使用Electron官方推荐的<a href="https://www.electronforge.io/">Electron Forge</a>进行客户端构建和打包</li><li>支持NSIS安装包 😎</li><li>……</li></ul><h1 id="快速开始-🌈"><a href="#快速开始-🌈" class="headerlink" title="快速开始 🌈"></a>快速开始 🌈</h1><p>点击右上角绿色的 <strong>Use this template</strong> 按钮，使用该模板创建一个新的仓库并克隆到本地。</p><p><strong>或者..</strong></p><p>直接克隆该项目: </p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/winsoft666/electron-vue3-boilerplate.git</span><br></pre></td></tr></table></figure><h3 id="Visual-Studio-Code"><a href="#Visual-Studio-Code" class="headerlink" title="Visual Studio Code"></a>Visual Studio Code</h3><p>推荐使用<code>Visual Studio Code</code>进行项目开发，并安装如下插件：</p><ul><li>ESLint</li><li>Vue Language Features (Volar)</li></ul><h3 id="安装依赖-⏬"><a href="#安装依赖-⏬" class="headerlink" title="安装依赖 ⏬"></a>安装依赖 ⏬</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn install</span><br></pre></td></tr></table></figure><h3 id="开发-⚒️"><a href="#开发-⚒️" class="headerlink" title="开发 ⚒️"></a>开发 ⚒️</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn run dev</span><br></pre></td></tr></table></figure><h3 id="其他命令"><a href="#其他命令" class="headerlink" title="其他命令"></a>其他命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">yarn run dev <span class="comment"># 启动应用并支持热加载</span></span><br><span class="line">yarn run build <span class="comment"># 构建应用，可发布的包位于&quot;out\make&quot;目录</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">yarn run build:win32 <span class="comment"># 构建Windows平台 32位应用</span></span><br><span class="line">yarn run build:win64 <span class="comment"># 构建Windows平台 64位应用</span></span><br><span class="line">yarn run build:mac <span class="comment"># 构建macOS平台应用</span></span><br><span class="line">yarn run build:linux <span class="comment"># 构建Linux平台应用</span></span><br><span class="line"></span><br><span class="line">yarn run new:page  <span class="comment"># 创建新的Vue页面</span></span><br><span class="line">yarn run new:window <span class="comment"># 创建新的Electron窗口</span></span><br></pre></td></tr></table></figure><p>更多的可选配置项可以参考 <a href="https://www.electronforge.io/cli">Electron Forge CLI docs</a>。</p><p>更多介绍可以访问项目主页：</p><p><a href="https://github.com/winsoft666/electron-vue3-boilerplate">https://github.com/winsoft666/electron-vue3-boilerplate</a></p><hr><blockquote><p>限于政策原因，在您看到该文章时，博客可能已经关闭了评论功能🥺</p><p>您可以通过在 <a href="https://github.com/winsoft666/blog-comment">blog-comment</a> 项目中提交Issue来间接地发表评论🍀</p></blockquote>]]></content>
-    
-    
-    <summary type="html">&lt;h1 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot; title=&quot;写在前面&quot;&gt;&lt;/a&gt;写在前面&lt;/h1&gt;&lt;p&gt;已经有了那么多的 Electron 项目模板，为什么还要再造一个？是重复造轮子吗？&lt;/p&gt;
-&lt;p&gt;我相信大多数人选择使用 Electron 开发客户端时，或多或少都看上了 Web 开发的高效率，但Web开发人员在客户端和系统编程方面的经验相对缺乏，又加上 Electron 和前端框架（如 Vue ）结合起来也不是那么的轻而易举，开发人员大多会选择基于模板来快速上手搭建Electron项目。&lt;/p&gt;
-&lt;p&gt;目前，Electron 的模板项目已经有很多，比较流行的有electron-vite、electron-vite-vue等。在这些模板中，有的功能过于完善，代码太复杂，远远超过了很多 Electron 客户端项目本身的代码量，需要花很多时间来熟悉模板，不适合新手快速上手和修改，一旦出现问题也难以维护；有的模板又年久失修，使用的技术早已被淘汰，也不适合用来开发线上产品，而且这些模板都有一个通病，都是在用Web开发的思维来开发客户端。&lt;/p&gt;
-&lt;p&gt;基于上述原因，我开发了这个 Electron 项目模板，在开发过程中，我一直遵循稳定、易于维护的初衷。&lt;/p&gt;
-&lt;p&gt;项目地址：&lt;br&gt;&lt;a href=&quot;https://github.com/winsoft666/electron-vue3-boilerplate&quot;&gt;https://github.com/winsoft666/electron-vue3-boilerplate&lt;/a&gt;&lt;/p&gt;</summary>
-    
-    
-    
-    <category term="Power By Me" scheme="https://jiangxueqiao.com/categories/Power-By-Me/"/>
-    
-    
-    <category term="Electron" scheme="https://jiangxueqiao.com/tags/Electron/"/>
     
   </entry>
   
