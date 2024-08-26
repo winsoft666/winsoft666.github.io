@@ -6,7 +6,7 @@
   <link href="https://jiangxueqiao.com/atom.xml" rel="self"/>
   
   <link href="https://jiangxueqiao.com/"/>
-  <updated>2024-08-12T10:26:23.497Z</updated>
+  <updated>2024-08-26T02:02:55.855Z</updated>
   <id>https://jiangxueqiao.com/</id>
   
   <author>
@@ -21,15 +21,13 @@
     <link href="https://jiangxueqiao.com/post/2133505170.html"/>
     <id>https://jiangxueqiao.com/post/2133505170.html</id>
     <published>2024-08-12T01:52:55.000Z</published>
-    <updated>2024-08-12T10:26:23.497Z</updated>
+    <updated>2024-08-26T02:02:55.855Z</updated>
     
-    <content type="html"><![CDATA[<p>之前一直使用 Visual Studio Code 来将就着看 Qt 源码，至于体验也只能说是将就着能看，跳转和调试功能基本处于停摆状态。</p><p>之前很少使用 Qt Creator，大多使用 Visual Studio 开发 Qt 项目。因为在接触 Qt 之前，我已使用 VS 多年，VS 也可以满足 Qt 项目开发的需求，何况 Qt 对我而言更多的只是一个UI库，工作重心也没有全部在 Qt 上面，所以没有动力去花时间熟悉另一个 IDE 了。</p><p>今天心血来潮想折腾一下 Qt Creator，后面就用它来看 Qt 源码了。 </p><p>虽然 Qt6 的源码已经改成使用 CMakeList 来管理了，但 Qt5 源码依然使用的是 QMake，并提供了 Qt Creator 项目文件，使用 Qt Creator 来阅读 Qt5 源码会更加便利。</p><span id="more"></span>]]></content>
+    <content type="html"><![CDATA[<p>一直使用 Visual Studio Code 来将就着阅读 Qt 源码，至于体验也只能说是将就着能看，跳转和调试功能基本处于停摆状态。之前很少使用 Qt Creator，大多使用 Visual Studio 开发 Qt 项目，因为在接触 Qt 之前，已使用 VS 多年，VS 也可以满足 Qt 项目开发的需求，何况 Qt 对我而言更多的只是一个 UI 库，重心也没有全部在 Qt 上面，所以也没有动力去花时间熟悉另一个 IDE 了。</p><p>今日心血来潮，想折腾一下 Qt Creator，后面用它来看 Qt 源码也许会方便些。 我想虽然 Qt6 已经改用 CMakeList 管理源码，但 Qt5 的源码依然使用的是 QMake，并提供了 Qt Creator 项目文件，使用 Qt Creator 来阅读 Qt5 源码也许会更加便利。</p><span id="more"></span><h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><h4 id="Visual-Studio"><a href="#Visual-Studio" class="headerlink" title="Visual Studio"></a>Visual Studio</h4><ul><li>Visual Assist X</li><li>VsVim</li></ul><h4 id="Qt-Creator"><a href="#Qt-Creator" class="headerlink" title="Qt Creator"></a>Qt Creator</h4><ul><li>Beautifier 支持根据<code>.clang-format</code>文件进行格式化</li></ul><h2 id="统一快捷键"><a href="#统一快捷键" class="headerlink" title="统一快捷键"></a>统一快捷键</h2><p>未特殊说明的，Qt Creator 和 Visual Studio 均支持。</p><figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">转到定义                 F12 或 Alt+G (依赖VAX插件)</span><br><span class="line">头文件和源代码切换       Alt+I</span><br><span class="line">书签切换                 Ctrl+M</span><br><span class="line">跳转到指定行             Ctrl+G</span><br><span class="line">创建函数定义             Alt+Enter</span><br><span class="line">删除当前行               Ctrl+L</span><br><span class="line">当前文件方法列表         Alt+M</span><br><span class="line">格式化当前文件           Ctrl+; （依赖Beautifier插件）</span><br><span class="line"></span><br><span class="line">开始调试                 F5</span><br><span class="line">停止调试                 Shift+F5</span><br><span class="line">断点切换                 F9</span><br><span class="line">逐过程                   F10</span><br><span class="line">逐语句                   F11</span><br><span class="line">跳出当前过程             Shift+F11</span><br></pre></td></tr></table></figure>]]></content>
     
     
-    <summary type="html">&lt;p&gt;之前一直使用 Visual Studio Code 来将就着看 Qt 源码，至于体验也只能说是将就着能看，跳转和调试功能基本处于停摆状态。&lt;/p&gt;
-&lt;p&gt;之前很少使用 Qt Creator，大多使用 Visual Studio 开发 Qt 项目。因为在接触 Qt 之前，我已使用 VS 多年，VS 也可以满足 Qt 项目开发的需求，何况 Qt 对我而言更多的只是一个UI库，工作重心也没有全部在 Qt 上面，所以没有动力去花时间熟悉另一个 IDE 了。&lt;/p&gt;
-&lt;p&gt;今天心血来潮想折腾一下 Qt Creator，后面就用它来看 Qt 源码了。 &lt;/p&gt;
-&lt;p&gt;虽然 Qt6 的源码已经改成使用 CMakeList 来管理了，但 Qt5 源码依然使用的是 QMake，并提供了 Qt Creator 项目文件，使用 Qt Creator 来阅读 Qt5 源码会更加便利。&lt;/p&gt;</summary>
+    <summary type="html">&lt;p&gt;一直使用 Visual Studio Code 来将就着阅读 Qt 源码，至于体验也只能说是将就着能看，跳转和调试功能基本处于停摆状态。之前很少使用 Qt Creator，大多使用 Visual Studio 开发 Qt 项目，因为在接触 Qt 之前，已使用 VS 多年，VS 也可以满足 Qt 项目开发的需求，何况 Qt 对我而言更多的只是一个 UI 库，重心也没有全部在 Qt 上面，所以也没有动力去花时间熟悉另一个 IDE 了。&lt;/p&gt;
+&lt;p&gt;今日心血来潮，想折腾一下 Qt Creator，后面用它来看 Qt 源码也许会方便些。 我想虽然 Qt6 已经改用 CMakeList 管理源码，但 Qt5 的源码依然使用的是 QMake，并提供了 Qt Creator 项目文件，使用 Qt Creator 来阅读 Qt5 源码也许会更加便利。&lt;/p&gt;</summary>
     
     
     
