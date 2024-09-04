@@ -20,7 +20,7 @@
   <title>折腾开发环境的一天 - 独钓寒江雪</title>
 
   
-  <meta name="description" content="一直使用 Visual Studio Code 来将就着阅读 Qt 源码，至于体验也只能说是将就着能看，跳转和调试功能基本处于停摆状态。之前很少使用 Qt Creator，大多使用 Visual Studio 开发 Qt 项目，因为在接触 Qt 之前，已使用 VS 多年，VS 也可以满足 Qt...">
+  <meta name="description" content="日常使用的 IDE 主要有 Visual Studio、Qt Creator，代码查看工具有 Source Insight、Visual Studio Code。每个工具的使用方式不太一样，今天想花点时间折腾一下，统一下各个工具的快捷键，记录下它们的使用差异。">
   
   <meta name="keywords" content="Visual Studio,Qt">
 
@@ -59,7 +59,7 @@
 
 
 
-<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/post/213040252.html"><span class="title">Windows内存体系(6)--跨模块内存分配释放</span></a><a class="item title" href="/post/2133505170.html"><span class="title">折腾开发环境的一天</span></a><a class="item title" href="/post/1967189103.html"><span class="title">玩转Qt 2D绘图之画家</span></a><a class="item title" href="/post/782629701.html"><span class="title">理解C/C++运行时库</span></a><a class="item title" href="/post/529732738.html"><span class="title">ABI兼容性</span></a><a class="item title" href="/post/3437796039.html"><span class="title">MSVC版本的二进制兼容性</span></a><a class="item title" href="/post/3110746169.html"><span class="title">聊聊桌面客户端开发的技术选型</span></a><a class="item title" href="/post/2185523635.html"><span class="title">开源库spdlog使用备忘</span></a><a class="item title" href="/post/1963116418.html"><span class="title">开源库rpclib使用备忘</span></a><a class="item title" href="/post/1128187204.html"><span class="title">开源库nlohmann json使用备忘</span></a></div></widget>
+<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/post/2133505170.html"><span class="title">折腾开发环境的一天</span></a><a class="item title" href="/post/4077884774.html"><span class="title">禁用F12作为调试热键</span></a><a class="item title" href="/post/213040252.html"><span class="title">Windows内存体系(6)--跨模块内存分配释放</span></a><a class="item title" href="/post/1967189103.html"><span class="title">玩转Qt 2D绘图之画家</span></a><a class="item title" href="/post/782629701.html"><span class="title">理解C/C++运行时库</span></a><a class="item title" href="/post/529732738.html"><span class="title">ABI兼容性</span></a><a class="item title" href="/post/3437796039.html"><span class="title">MSVC版本的二进制兼容性</span></a><a class="item title" href="/post/3110746169.html"><span class="title">聊聊桌面客户端开发的技术选型</span></a><a class="item title" href="/post/2185523635.html"><span class="title">开源库spdlog使用备忘</span></a><a class="item title" href="/post/1963116418.html"><span class="title">开源库rpclib使用备忘</span></a></div></widget>
 </div>
 
 </div></aside><div class="l_main" id="main">
@@ -72,7 +72,7 @@
   <div class="content">
     <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
 <span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/">编程基础</a></div>
-<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2024-08-12T01:52:55.000Z">2024-08-12</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-08-26T02:02:55.855Z">2024-08-26</time></span></div></div></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2024-08-12T01:52:55.000Z">2024-08-12</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-08-27T07:00:42.154Z">2024-08-27</time></span></div></div></div>
     
     <div class="bottom only-title">
       
@@ -83,8 +83,7 @@
     </div>
     
   </div>
-  </div><article class="md-text content"><p>一直使用 Visual Studio Code 来将就着阅读 Qt 源码，至于体验也只能说是将就着能看，跳转和调试功能基本处于停摆状态。之前很少使用 Qt Creator，大多使用 Visual Studio 开发 Qt 项目，因为在接触 Qt 之前，已使用 VS 多年，VS 也可以满足 Qt 项目开发的需求，何况 Qt 对我而言更多的只是一个 UI 库，重心也没有全部在 Qt 上面，所以也没有动力去花时间熟悉另一个 IDE 了。</p>
-<p>今日心血来潮，想折腾一下 Qt Creator，后面用它来看 Qt 源码也许会方便些。 我想虽然 Qt6 已经改用 CMakeList 管理源码，但 Qt5 的源码依然使用的是 QMake，并提供了 Qt Creator 项目文件，使用 Qt Creator 来阅读 Qt5 源码也许会更加便利。</p>
+  </div><article class="md-text content"><p>日常使用的 IDE 主要有 Visual Studio、Qt Creator，代码查看工具有 Source Insight、Visual Studio Code。每个工具的使用方式不太一样，今天想花点时间折腾一下，统一下各个工具的快捷键，记录下它们的使用差异。</p>
 <span id="more"></span>
 
 <h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><h4 id="Visual-Studio"><a href="#Visual-Studio" class="headerlink" title="Visual Studio"></a>Visual Studio</h4><ul>
@@ -92,10 +91,168 @@
 <li>VsVim</li>
 </ul>
 <h4 id="Qt-Creator"><a href="#Qt-Creator" class="headerlink" title="Qt Creator"></a>Qt Creator</h4><ul>
-<li>Beautifier 支持根据<code>.clang-format</code>文件进行格式化</li>
+<li>Beautifier 支持根据<code>.clang-format</code>文件进行格式化。</li>
 </ul>
-<h2 id="统一快捷键"><a href="#统一快捷键" class="headerlink" title="统一快捷键"></a>统一快捷键</h2><p>未特殊说明的，Qt Creator 和 Visual Studio 均支持。</p>
-<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">转到定义                 F12 或 Alt+G (依赖VAX插件)</span><br><span class="line">头文件和源代码切换       Alt+I</span><br><span class="line">书签切换                 Ctrl+M</span><br><span class="line">跳转到指定行             Ctrl+G</span><br><span class="line">创建函数定义             Alt+Enter</span><br><span class="line">删除当前行               Ctrl+L</span><br><span class="line">当前文件方法列表         Alt+M</span><br><span class="line">格式化当前文件           Ctrl+; （依赖Beautifier插件）</span><br><span class="line"></span><br><span class="line">开始调试                 F5</span><br><span class="line">停止调试                 Shift+F5</span><br><span class="line">断点切换                 F9</span><br><span class="line">逐过程                   F10</span><br><span class="line">逐语句                   F11</span><br><span class="line">跳出当前过程             Shift+F11</span><br></pre></td></tr></table></figure>
+<h2 id="统一快捷键"><a href="#统一快捷键" class="headerlink" title="统一快捷键"></a>统一快捷键</h2><p>下面是一些常用功能在不同的工具中的快捷键列表，有的功能快捷键是默认的，如Visual Studio的转的定义F12快捷键，有的功能快捷键需要自定义设置。</p>
+<p>能设置成统一快捷键的都会优先设置成统一的。</p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>Visual Studio</th>
+<th>Qt Creator</th>
+<th>Source Insight</th>
+<th>Visual Studio Code</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>转到定义</td>
+<td>F12或Alt+G (VAX插件)</td>
+<td>F12</td>
+<td>F12</td>
+<td></td>
+</tr>
+<tr>
+<td>头文件和源代码切换</td>
+<td>Alt+I</td>
+<td>Alt+I</td>
+<td>Alt+I</td>
+<td>-</td>
+</tr>
+<tr>
+<td>书签切换</td>
+<td>Ctrl+M</td>
+<td>Ctrl+M</td>
+<td>Ctrl+M打开书签窗口</td>
+<td>-</td>
+</tr>
+<tr>
+<td>跳转到指定行</td>
+<td>Ctrl+G</td>
+<td>Ctrl+G</td>
+<td>Ctrl+G</td>
+<td></td>
+</tr>
+<tr>
+<td>创建函数定义</td>
+<td>Alt+Enter</td>
+<td>Alt+Enter</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>删除当前行</td>
+<td>Ctrl+L</td>
+<td>Ctrl+L</td>
+<td>Ctrl+L</td>
+<td></td>
+</tr>
+<tr>
+<td>当前文件方法列表</td>
+<td>Alt+M</td>
+<td>Alt+M</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>格式化当前文件</td>
+<td>Ctrl+;</td>
+<td>Ctrl+;（Beautifier插件）</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>后退</td>
+<td>Alt+Left</td>
+<td>Alt+Left</td>
+<td>Alt+Left</td>
+<td></td>
+</tr>
+<tr>
+<td>前进</td>
+<td>Alt+Right</td>
+<td>Alt+Right</td>
+<td>Alt+Right</td>
+<td></td>
+</tr>
+<tr>
+<td>当前文件查找</td>
+<td>Ctrl+F</td>
+<td>Ctrl+F</td>
+<td>Ctrl+F</td>
+<td>Ctrl+F</td>
+</tr>
+<tr>
+<td>所有文件查找</td>
+<td>Ctrl+Shift+F</td>
+<td>Ctrl+Shift+F</td>
+<td>Ctrl+Shift+F</td>
+<td>Ctrl+Shift+F</td>
+</tr>
+<tr>
+<td>当前文件替换</td>
+<td>Ctrl+H</td>
+<td>Ctrl+H</td>
+<td>Ctrl+H</td>
+<td>Ctrl+H</td>
+</tr>
+<tr>
+<td>所有文件查找</td>
+<td>Ctrl+Shift+H</td>
+<td>-</td>
+<td>Ctrl+Shift+F</td>
+<td>Ctrl+Shift+F</td>
+</tr>
+<tr>
+<td>查找引用</td>
+<td>Shift+Alt+F（VAX插件）</td>
+<td>Shift+Alt+F</td>
+<td>Shift+Alt+F</td>
+<td>-</td>
+</tr>
+<tr>
+<td>开始调试</td>
+<td>F5</td>
+<td>F5</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>停止调试</td>
+<td>Shift+F5</td>
+<td>Shift+F5</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>断点切换</td>
+<td>F9</td>
+<td>F9</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>逐过程</td>
+<td>F10</td>
+<td>F10</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>逐语句</td>
+<td>F11</td>
+<td>F11</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>跳出当前过程</td>
+<td>Shift+F11</td>
+<td>Shift+F11</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody></table>
 
 <div class="article-footer fs14">
     <section id="license">
@@ -108,7 +265,7 @@
       <div class="header"><span>分享文章</span></div>
       <div class="body">
         <div class="link"><input class="copy-area" readonly="true" id="copy-link" value="https://jiangxueqiao.com/post/2133505170.html" /></div>
-        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/b32ef3da1162a.svg" /></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://jiangxueqiao.com/post/2133505170.html&title=折腾开发环境的一天 - 独钓寒江雪&summary=一直使用 Visual Studio Code 来将就着阅读 Qt 源码，至于体验也只能说是将就着能看，跳转和调试功能基本处于停摆状态。之前很少使用 Qt Creator，大多使用 Visual Studio 开发 Qt 项目，因为在..."><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/80c07e4dbb303.svg" /></a><a class="social share-item email" href="mailto:?subject=折腾开发环境的一天 - 独钓寒江雪&amp;body=https://jiangxueqiao.com/post/2133505170.html"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/a1b00e20f425d.svg" /></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/8411ed322ced6.svg" /></a></div>
+        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/b32ef3da1162a.svg" /></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://jiangxueqiao.com/post/2133505170.html&title=折腾开发环境的一天 - 独钓寒江雪&summary=日常使用的 IDE 主要有 Visual Studio、Qt Creator，代码查看工具有 Source Insight、Visual Studio Code。每个工具的使用方式不太一样，今天想花点时间折腾一下，统一下各个工具的快捷..."><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/80c07e4dbb303.svg" /></a><a class="social share-item email" href="mailto:?subject=折腾开发环境的一天 - 独钓寒江雪&amp;body=https://jiangxueqiao.com/post/2133505170.html"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/a1b00e20f425d.svg" /></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/8411ed322ced6.svg" /></a></div>
         
         <div class="qrcode" id="qrcode-wechat" style="opacity:0;height:0">
           <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=https://jiangxueqiao.com/post/2133505170.html"/>
@@ -118,15 +275,15 @@
     </section>
     </div>
 </article>
-<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"></div><div class="item" id="next"><div class="note">较早文章</div><a href="/post/2984623496.html">C99柔性数组</a></div></section></div>
+<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/post/4077884774.html">禁用F12作为调试热键</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/post/2984623496.html">C99柔性数组</a></div></section></div>
 
 <div class="related-wrap" id="related-posts">
     <section class='header'>
       <div class='title cap theme'>您可能感兴趣的文章</div>
     </section>
     <section class='body'>
-    <div class="related-posts"><a class="item" href="\post\3437796039.html" title="MSVC版本的二进制兼容性"><span class="title">MSVC版本的二进制兼容性</span><span class="excerpt">Visual Studio 2013 及更早版本中的 Microsoft C++ (MSVC) 编译器工具集不保证主版本间的二进制兼容性，无法链接由不同版本工具集生成的对象文件、静态库、动态库和可执行文件，因为ABI、对象格式和运行时...</span></a><a class="item" href="\post\3168359900.html" title="QListWidget使用记录"><span class="title">QListWidget使用记录</span><span class="excerpt">1. 解决无法拖入文件到QListWidget一般而言，只需要做如下操作，QWidget即可支持拖入文件：
-12345678setDragDropMode(QAbstractItemView::DropOnly); // 仅支持拖入文...</span></a><a class="item" href="\post\170290456.html" title="QPixmap使用要点"><span class="title">QPixmap使用要点</span><span class="excerpt">本文记录在使用 QPixmap 时容易感到困惑和犯错的地方，方便自己查阅，亦希望能成人之美。</span></a><a class="item" href="\post\140071237.html" title="QSS设置滚动条样式"><span class="title">QSS设置滚动条样式</span><span class="excerpt">本文简单记录如何使用 QSS 设置滚动条的样式。</span></a><a class="item" href="\post\2042033077.html" title="Git杂记"><span class="title">Git杂记</span><span class="excerpt">本文记录 Git 使用中的一些零碎知识，方便自己查阅，亦希望成人之美。</span></a></div></section></div>
+    <div class="related-posts"><a class="item" href="\post\3437796039.html" title="MSVC版本的二进制兼容性"><span class="title">MSVC版本的二进制兼容性</span><span class="excerpt">Visual Studio 2013 及更早版本中的 Microsoft C++ (MSVC) 编译器工具集不保证主版本间的二进制兼容性，无法链接由不同版本工具集生成的对象文件、静态库、动态库和可执行文件，因为ABI、对象格式和运行时...</span></a><a class="item" href="\post\4077884774.html" title="禁用F12作为调试热键"><span class="title">禁用F12作为调试热键</span></a><a class="item" href="\post\3168359900.html" title="QListWidget使用记录"><span class="title">QListWidget使用记录</span><span class="excerpt">1. 解决无法拖入文件到QListWidget一般而言，只需要做如下操作，QWidget即可支持拖入文件：
+12345678setDragDropMode(QAbstractItemView::DropOnly); // 仅支持拖入文...</span></a><a class="item" href="\post\170290456.html" title="QPixmap使用要点"><span class="title">QPixmap使用要点</span><span class="excerpt">本文记录在使用 QPixmap 时容易感到困惑和犯错的地方，方便自己查阅，亦希望能成人之美。</span></a><a class="item" href="\post\2042033077.html" title="Git杂记"><span class="title">Git杂记</span><span class="excerpt">本文记录 Git 使用中的一些零碎知识，方便自己查阅，亦希望成人之美。</span></a></div></section></div>
 
 
   <div class="related-wrap md-text" id="comments">
