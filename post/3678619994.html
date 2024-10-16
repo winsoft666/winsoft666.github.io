@@ -1,0 +1,1156 @@
+
+<!DOCTYPE html><html lang="zh-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.29.0" theme-name="Stellar" theme-version="1.29.0">
+  
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  
+  <title>Modern CMake 简明教程（上） - 独钓寒江雪</title>
+
+  
+  <meta name="description" content="CMake 是一个开源、跨平台的构建系统生成器（Build-system Generator）。
+CMake 是构建系统生成器，而不是构建系统，CMake 支持生成不同构建系统所支持的工程文件，如 Visual Studio，XCode，Makefile 等。
+本教程作为 CMake 的简明教...">
+  
+  <meta name="keywords" content="CMake">
+
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="独钓寒江雪" type="application/atom+xml">
+  
+
+  <link rel="stylesheet" href="/css/main.css?v=1.29.0">
+
+  
+    <link rel="shortcut icon" href="/images/logo.png">
+  
+
+  
+
+  <script src="/js/baidu-tongji.js"></script>
+</head>
+<body>
+
+<div class="l_body s:aa content tech" id="start" layout="post" ><aside class="l_left"><div class="leftbar-container">
+
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/author/"><div class="bg" style="opacity:0;background-image:url(https://blog-static.jiangxueqiao.com/blog/stellar-theme/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/images/logo.png" onerror="javascript:this.classList.add('error');this.src='https://blog-static.jiangxueqiao.com/blog/stellar-theme/default/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">独钓寒江雪</div></a></div></header>
+
+<div class="nav-area">
+<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" placeholder="站内搜索"></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
+
+
+<nav class="menu dis-select"><a class="nav-item active" title="最新" href="/" style="color:#000000"><span>最新</span></a><a class="nav-item" title="专栏" href="/topic" style="color:#000000"><span>专栏</span></a><a class="nav-item" title="分类" href="/categories" style="color:#000000"><span>分类</span></a><a class="nav-item" title="关于" href="/author" style="color:#000000"><span>关于</span></a></nav>
+</div>
+<div class="widgets">
+<widget class="widget-wrapper linklist"><div class="widget-body fs14">
+<div class="linklist center" style="grid-template-columns:repeat(1,1fr);">
+<a class="link" title="👉实用网址导航💯" href="/sites"><div class="flex"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M20 12a8 8 0 1 1-16 0a8 8 0 0 1 16 0" opacity=".5"/><path fill="currentColor" d="M17.712 5.453c1.047-.193 2.006-.259 2.797-.152c.77.103 1.536.393 1.956 1.064c.446.714.312 1.542-.012 2.258c-.33.728-.918 1.499-1.672 2.268c-1.516 1.547-3.836 3.226-6.597 4.697c-2.763 1.472-5.495 2.484-7.694 2.92c-1.095.217-2.098.299-2.923.201c-.8-.095-1.6-.383-2.032-1.075c-.47-.752-.296-1.63.07-2.379c.375-.768 1.032-1.586 1.872-2.403L4 12.416c0 .219.083.71.168 1.146c.045.23.09.444.123.596c-.652.666-1.098 1.263-1.339 1.756c-.277.567-.208.825-.145.925c.072.116.305.305.937.38c.609.073 1.44.018 2.455-.183c2.02-.4 4.613-1.351 7.28-2.772c2.667-1.42 4.85-3.015 6.23-4.423c.694-.707 1.15-1.334 1.377-1.836c.233-.515.167-.75.107-.844c-.07-.112-.289-.294-.883-.374c-.542-.072-1.272-.041-2.163.112L16.87 5.656c.338-.101.658-.17.842-.203"/></svg><span>👉实用网址导航💯</span></div></a></div></div></widget>
+
+
+
+<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/post/3678619994.html"><span class="title">Modern CMake 简明教程（上）</span></a><a class="item title" href="/post/2304457467.html"><span class="title">Modern CMake 简明教程（中）</span></a><a class="item title" href="/post/1204594779.html"><span class="title">拨开字符编码的迷雾(5)--Qt字符编码</span></a><a class="item title" href="/post/1559270845.html"><span class="title">拨开字符编码的迷雾(4)--MySQL字符编码</span></a><a class="item title" href="/post/2289160283.html"><span class="title">C++标准库线程的启动与退出</span></a><a class="item title" href="/post/3353203242.html"><span class="title">开源库jerryscript使用备忘</span></a><a class="item title" href="/post/2133505170.html"><span class="title">折腾开发环境的一天</span></a><a class="item title" href="/post/4077884774.html"><span class="title">禁用F12作为调试热键</span></a><a class="item title" href="/post/213040252.html"><span class="title">Windows内存体系(6)--跨模块内存分配释放</span></a><a class="item title" href="/post/1967189103.html"><span class="title">玩转Qt 2D绘图之画家</span></a></div></widget>
+</div>
+
+</div></aside><div class="l_main" id="main">
+
+
+
+
+
+<div class="article banner top">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/CMake/">CMake</a></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2024-10-08T09:30:36.000Z">2024-10-08</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-10-16T08:23:04.083Z">2024-10-16</time></span></div></div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>Modern CMake 简明教程（上）</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div><article class="md-text content"><p><a target="_blank" rel="noopener" href="https://cmake.org/">CMake</a> 是一个开源、跨平台的构建系统生成器（Build-system Generator）。</p>
+<p>CMake 是构建系统生成器，而不是构建系统，CMake 支持生成不同构建系统所支持的工程文件，如 Visual Studio，XCode，Makefile 等。</p>
+<p>本教程作为 CMake 的简明教程，不会事无巨细的讲述 CMake 的每一个语法，而是以实用为目的，介绍 CMake 的基础语法和常用指令。</p>
+<p>虽然只是简明教程，但通过本教程，你仍然可以掌握 CMake 的脉络，熟练应用 CMake 于项目中。</p>
+<span id="more"></span>
+
+<h1 id="一、Modern-CMake"><a href="#一、Modern-CMake" class="headerlink" title="一、Modern CMake"></a>一、Modern CMake</h1><p>CMake 距今已有 20 多年的历史，CMake 从 3.0 开始引入 Target 概念，有了 Target 和 Property 的定义，CMake 也就更加地现代化。</p>
+<p>我们将引入 Target 概念之前（也就是 3.0 之前）的 CMake 称之为老式 CMake，之后的称之为现代 CMake（Modern CMake）。</p>
+<p>现代 CMake 是围绕 Target 和 Property 来定义的，在现代 CMake 中不应该出现诸如下面的指令：</p>
+<ul>
+<li>add_compile_options</li>
+<li>include_directories</li>
+<li>link_directories</li>
+<li>link_libraries</li>
+</ul>
+<p>因为这些指令都是目录级别的，在该目录（含子目录）上定义的所有目标都会继承这些属性，这样会导致出现很多隐藏依赖和多余属性的情况。</p>
+<p>我们最好直接针对 Target 进行操作，如：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_executable</span>(hello main.cpp)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 老式写法</span></span><br><span class="line"><span class="keyword">include_directories</span>(./<span class="keyword">include</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 现代写法</span></span><br><span class="line"><span class="keyword">target_include_directories</span>(hello PRIVATE ./<span class="keyword">include</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>本文讲述的知识点只适用于现代 CMake，让我们脱掉沉重的历史包袱，轻装上阵吧！</strong></p>
+<h1 id="二、基础概念"><a href="#二、基础概念" class="headerlink" title="二、基础概念"></a>二、基础概念</h1><p>所有的构建系统都需要通过某个入口点来定义项目（如 Visual Studio 的 .sln 文件），CMake 作为构建系统生成器也不例外，CMake 使用的是 <code>CMakeLists.txt</code> 的文件，该文件以 UTF-8 编码（也支持 UTF-8 BOM 文件头），其中存储了符合 CMake 语言规范的脚本代码。</p>
+<h2 id="2-1-项目结构"><a href="#2-1-项目结构" class="headerlink" title="2.1 项目结构"></a>2.1 项目结构</h2><p>CMake 没有强制规定 CMakeLists.txt 文件的位置以及项目的目录结构，但目前大多数项目都会采用相似的目录结构。</p>
+<p>如果项目名称为 my_project，且该项目包含一个名为 lib 的库和一个名为 app 的程序，则目录结构通常如下面所示：</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">- my_project</span><br><span class="line">  - .gitignore</span><br><span class="line">  - README.md</span><br><span class="line">  - LICENSE.md</span><br><span class="line">  - CMakeLists.txt</span><br><span class="line">  - cmake</span><br><span class="line">    - FindSomeLib.cmake</span><br><span class="line">    - something_else.cmake</span><br><span class="line">  - include</span><br><span class="line">    - my_project</span><br><span class="line">      - lib.h</span><br><span class="line">  - src</span><br><span class="line">    - CMakeLists.txt</span><br><span class="line">    - lib.cpp</span><br><span class="line">  - apps</span><br><span class="line">    - CMakeLists.txt</span><br><span class="line">    - app.cpp</span><br><span class="line">  - tests</span><br><span class="line">    - CMakeLists.txt</span><br><span class="line">    - testlib.cpp</span><br><span class="line">  - docs</span><br><span class="line">    - CMakeLists.txt</span><br><span class="line">  - extern</span><br><span class="line">    - googletest</span><br><span class="line">  - scripts</span><br><span class="line">    - helper.py</span><br></pre></td></tr></table></figure>
+
+<p>当然，上面的名称并不是一成不变的，可以根据自己的喜好来定义，例如 my_project 可以是任意的项目名，如果不喜欢复数，可以将 tests 改成test，如果没有 python 代码，也可以移除 python 目录，cmake 目录则用于存放 CMake 辅助脚本。</p>
+<p>从上面的目录结构可以看到，CMakeLists.txt 文件分散在各个子目录中，但在 include 目录中没有 CMakeList.txt 文件，这样是为了防止暴露不必要的文件给库的使用者，因为 include 目录中存放的是库的头文件，在安装时通常都会将该目录拷贝到指定位置（如Linux系统的 &#x2F;usr&#x2F;include）。</p>
+<p>extern 目录用于存放第三方依赖库的源码，这些库可以通过 <code>git submodule</code> 的形式来管理，也可以直接将源码拷贝到此，并提交到项目 git 中。但无论使用哪种方式，依赖库最好能支持 CMake，这样可以方便的使用 <code>add_subdirectory</code> 命令将项目添加到工程中（add_subdirectory 可以添加任何包含 CMakeLists.txt 文件的目录到项目中）。</p>
+<h2 id="2-2-一个简单的示例"><a href="#2-2-一个简单的示例" class="headerlink" title="2.2 一个简单的示例"></a>2.2 一个简单的示例</h2><p>我们先从一个简单的示例开始，了解 CMake 的基本玩法。</p>
+<p>该示例是只包含一个 main.cpp 文件，我们期望编译该文件能生成 hello_cmake 程序。</p>
+<p>目录结构如下：</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- hello_cmake</span><br><span class="line">  - main.cpp</span><br><span class="line">  - CMakeLists.txt</span><br></pre></td></tr></table></figure>
+
+<p>main.cpp 文件的内容非常简单：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;hello cmake&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>CMakeLists.txt 内容如下：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置 CMake 的最低版本</span></span><br><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.16</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置项目名称</span></span><br><span class="line"><span class="keyword">project</span> (hello_cmake)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加一个名为 hello_cmake 的目标</span></span><br><span class="line"><span class="comment"># 目标类型为可执行文件</span></span><br><span class="line"><span class="comment"># 使用 main.cpp 来编译生成 hello_cmake 可执行文件（如hello_cmake.exe）</span></span><br><span class="line"><span class="keyword">add_executable</span>(hello_cmake main.cpp)</span><br></pre></td></tr></table></figure>
+
+<p>完成上面步骤，我们就可以使用 CMake GUI 或命令行（当然你需要提前安装 CMake，这不在本文的介绍范围之内）就可以生成相应的工程了。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/img/n3oz6wn7Ke-TinyTu.png"></p>
+<p>通过 CMake 命令行生成 Visual Studio 工程的命令如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmake.exe -G <span class="string">&quot;Visual Studio 15 2017&quot;</span> -S .\hello_cmake -B .\hello_cmake\build</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-3-源码外构建"><a href="#2-3-源码外构建" class="headerlink" title="2.3 源码外构建"></a>2.3 源码外构建</h2><p>我们通常会将构建目录指定到一个单独的子目录内，这个目录名称的通常是 <code>build</code>。如果不这样做，CMake 生成的工程文件和临时缓存文件会污染源码目录。这种方式有个学名叫“源码外构建” (out-of-source build)。</p>
+<p>使用源码外构建时，我们通常还会将 build 目录添加到 .gitignore 文件中。</p>
+<h2 id="2-4-工作流程"><a href="#2-4-工作流程" class="headerlink" title="2.4 工作流程"></a>2.4 工作流程</h2><p>编写 CMake 脚本的基本流程如下：</p>
+<ol>
+<li>在脚本第一行使用 cmake_minimum_required 指定运行当前脚本所需的 CMake 最低版本。</li>
+<li>使用 project 指定项目名称。</li>
+<li>使用 add_executable 或 add_library 创建目标。</li>
+<li>为目标设置包含目录、链接库等属性（可选）。</li>
+<li>安装（可选）。</li>
+</ol>
+<p>编写完 CMake 脚本以后，就可以使用 CMake GUI 或命令行来生成对应的工程文件了。以 Visual Studio 为例，对于有 my_lib 库 和 app 应用程序的项目，CMake 会生成如下图所示的 5 个项目：</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/img/Qv1nk8g1ZA.png"></p>
+<p>下面介绍 CMake 自动生成的一些项目的作用：</p>
+<ul>
+<li>编译 ALL_BUILD 项目会自动编译除 INSTALL 项目外的所有项目。</li>
+<li>编译 INSTALL 项目会执行 CMake 脚本中指定的安装操作。</li>
+<li>编译 ZERO_CHECK 项目会再次执行 CMake 脚本，重新生成项目。因此若 CMake 脚本有更新，既可以使用 CMake 工具来重新生成项目，也可以是重新编译 ZERO_CHECK 项目。</li>
+</ul>
+<h2 id="2-5-注释"><a href="#2-5-注释" class="headerlink" title="2.5 注释"></a>2.5 注释</h2><p>在 CMake 中使用 <code>#</code> 来声明单行注释，这是我们使用最多的注释方法。虽然也支持使用 <code>#[[ ]]</code> 来声明多行注释（也称块注释），但是使用的比较少，例如:</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#[[</span></span><br><span class="line"><span class="comment">  这是多行注释也称块注释</span></span><br><span class="line"><span class="comment">  你明白了吗？</span></span><br><span class="line"><span class="comment">]]</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-6-CMake最低版本"><a href="#2-6-CMake最低版本" class="headerlink" title="2.6 CMake最低版本"></a>2.6 CMake最低版本</h2><p><a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/latest/command/cmake_minimum_required.html">cmake_minimum_required</a> 是我们接触到第一个 CMake 指令，该指令用于指定编译该脚本所需的最低 CMake 版本。</p>
+<p>你可以在 CMakeList.txt 文件的第一行都使用该指令来指定运行当前脚本需要的最低 CMake 版本，但我们通常只需要在主 CMakeList.txt （何为主 CMakeList.txt？见下面的“项目名称”小节） 中的第一行使用该指令即可。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION &lt;min&gt;[...&lt;policy_max&gt;] [FATAL_ERROR])</span><br></pre></td></tr></table></figure>
+
+<p>如果运行 CMake 的版本低于<min>要求的版本，则将停止处理该脚本并返回错误。</p>
+<p>我们始终应该选择一个比编译器晚发布的 CMake 版本，因为只有这样，CMake 才能支持新的编译器选项。但最低版本不应低于 3.0，实际项目中通常最低版本不会低于 3.16（该版本于2020年09月15日发布），本教程也是以此为标准进行讲解的。</p>
+<h2 id="2-7-项目名称"><a href="#2-7-项目名称" class="headerlink" title="2.7 项目名称"></a>2.7 项目名称</h2><p>使用 <a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/latest/command/project.html">project</a> 指定项目名称。</p>
+<p>项目名称区别于目标（Target）名称，以 Visual Studio 为例，project 指定的名称对应“解决方案名称”，而 add_executable 或 add_library 等指定的名称才对应具体项目名和生成的“目标文件名”。</p>
+<p>设置项目名称后，CMake 会自动定义一些变量（<em>变量的具体用法会在稍后的“3.1 变量”小节进行介绍</em>）。为了方便介绍各个变量的含义，假设我们是通过如下命令来运行 CMake 的:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmake.exe -G <span class="string">&quot;Visual Studio 15 2017&quot;</span> -S D:\hello_cmake -B D:\hello_cmake\build</span><br></pre></td></tr></table></figure>
+
+<p>下面列举了一些 CMake 自动定义的变量：</p>
+<ul>
+<li>PROJECT_NAME<br>项目名称，如 hello_cmake</li>
+<li>CMAKE_PROJECT_NAME<br>如果 CMakeLists.txt 位于项目的顶级目录，还会定义 CMAKE_PROJECT_NAME 变量，值与 PROJECT_NAME 一致。</li>
+<li>PROJECT_SOURCE_DIR<br>项目的根目录（绝对路径），即 <code>-S</code> 参数指定的目录，如 D:\hello_cmake</li>
+<li>&lt;PROJECT-NAME&gt;_SOURCE_DIR<br>值与 PROJECT_SOURCE_DIR 相同，只是变量名不同，如 hello_cmake_SOURCE_DIR  </li>
+<li>PROJECT_BINARY_DIR<br>项目的构建目录（绝对路径），即 <code>-B</code> 参数指定的目录，如 D:\hello_cmake\build</li>
+<li>&lt;PROJECT-NAME&gt;_BINARY_DIR<br>值与 PROJECT_BINARY_DIR 相同，只是变量名不同，如 hello_cmake_BINARY_DIR</li>
+</ul>
+<h3 id="主CMakeLists-txt"><a href="#主CMakeLists-txt" class="headerlink" title="主CMakeLists.txt"></a>主CMakeLists.txt</h3><p>主 CMakeLists.txt 即项目根目录下的 CMakeLists.txt 文件。可以通过检查 CMAKE_PROJECT_NAME 与 PROJECT_NAME 变量是否相同来判断当前的 CMakeLists.txt 文件是否为主 CMakeLists.txt。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(CMAKE_PROJECT_NAME <span class="keyword">STREQUAL</span> PROJECT_NAME)</span><br><span class="line"></span><br><span class="line"><span class="keyword">endif</span>()</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-8-目标类型"><a href="#2-8-目标类型" class="headerlink" title="2.8 目标类型"></a>2.8 目标类型</h2><p>既然现代 CMake 是围绕目标（Target）工作的，Target 如此重要，那我们首先就需要创建一个 Target。</p>
+<p>在 C&#x2F;C++ 开发中，常见的 Target 类型有：可执行文件、静态库、动态库，CMake 还额外提供了一个 MODULE 类型。</p>
+<p>下面列举了不同类型的目标的创建方式。</p>
+<h3 id="可执行文件"><a href="#可执行文件" class="headerlink" title="可执行文件"></a>可执行文件</h3><p>使用 <a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/latest/command/add_executable.html">add_executable</a> 指令可以创建可执行文件类型的目标。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_executable</span>(my_exe main.cpp)</span><br></pre></td></tr></table></figure>
+
+<h3 id="动态库和静态库"><a href="#动态库和静态库" class="headerlink" title="动态库和静态库"></a>动态库和静态库</h3><p>通过为 <a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/latest/command/add_library.html">add_library</a> 指令指定不同的参数，可以创建动态库和静态库。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_library</span>(&lt;name&gt; [&lt;type&gt;] [EXCLUDE_FROM_ALL] &lt;sources&gt;...)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 动态库</span></span><br><span class="line"><span class="keyword">add_library</span>(my_lib SHARED main.cpp)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 静态库</span></span><br><span class="line"><span class="keyword">add_library</span>(my_lib STATIC main.cpp)</span><br></pre></td></tr></table></figure>
+
+<p>我们也可以在 add_library 中不指定类型参数，改为通过设置 BUILD_SHARED_LIBS 变量来切换静态库和动态库。下面示例在脚本中设置了 BUILD_SHARED_LIBS 变量值为 ON （ON &#x2F; OFF 对应 CMake 中的开&#x2F;关）：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.16</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">project</span> (hello_cmake)</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(BUILD_SHARED_LIBS <span class="keyword">ON</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_library</span>(hello_cmake main.cpp)</span><br></pre></td></tr></table></figure>
+
+<p>也可以通过命令行参数进行指定 BUILD_SHARED_LIBS 变量：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmake.exe -G <span class="string">&quot;Visual Studio 15 2017&quot;</span> -DBUILD_SHARED_LIBS=ON -S .\hello_cmake -B .\hello_cmake\build</span><br></pre></td></tr></table></figure>
+
+<p>亦可以在 GUI 界面上设置 BUILD_SHARED_LIBS 变量，如：</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/img/nx0MX2PY7u-TinyTu.png"></p>
+<h1 id="三、基础语法"><a href="#三、基础语法" class="headerlink" title="三、基础语法"></a>三、基础语法</h1><h2 id="3-1-变量"><a href="#3-1-变量" class="headerlink" title="3.1 变量"></a>3.1 变量</h2><h3 id="3-1-1-变量的定义"><a href="#3-1-1-变量的定义" class="headerlink" title="3.1.1 变量的定义"></a>3.1.1 变量的定义</h3><p>在 CMake 中使用 <a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/latest/command/set.html">set</a> 和 <code>unset</code> 命令来定义和取消定义变量。</p>
+<p>CMake 的变量没有类型一说，因为其变量值始终是字符串类型。</p>
+<p>基于上述原因，在 CMake 中不能直接使用 <code>+</code>、<code>-</code>、<code>*</code>、<code>\</code> 等操作符对变量进行数学运算，需要使用 <a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/latest/command/math.html">math</a> 指令，也不能直接使用 <code>&gt;</code>、<code>&lt;</code>、<code>==</code> 等操作符对变量进行逻辑运算，需要使用 LESS、EQUAL 进行判断，详见下面的“条件判断”章节。</p>
+<p>CMake 的变量名是<strong>大小写敏感</strong>的，而且其变量名不像其他语言那样有各种限制，它可以包含任何字符，如空格、问号等，但如果变量名中包含<code>#</code>（该符号用于行注释），则需要使用 <code>\#</code> 进行转义。</p>
+<p>下面的语句都是合法的：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(abc <span class="number">123</span>)</span><br><span class="line"><span class="keyword">set</span>(ABC <span class="string">&quot;123&quot;</span>)</span><br><span class="line"><span class="keyword">set</span>(<span class="string">&quot;ab c&quot;</span> <span class="string">&quot;456&quot;</span>)</span><br><span class="line"><span class="keyword">set</span>(<span class="string">&quot;ab?c&quot;</span> <span class="string">&quot;789&quot;</span>)</span><br><span class="line"><span class="keyword">set</span>(<span class="string">&quot;/usr/bin/bash&quot;</span> <span class="string">&quot;987&quot;</span>)</span><br><span class="line"><span class="keyword">set</span>(<span class="string">&quot;C:\\Program Files\\&quot;</span> <span class="string">&quot;654&quot;</span>)</span><br><span class="line"><span class="keyword">set</span>(<span class="string">&quot; &quot;</span> <span class="string">&quot;321&quot;</span>)</span><br><span class="line"><span class="keyword">set</span>(\<span class="comment"># &quot;321&quot;)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">unset</span>(a)</span><br></pre></td></tr></table></figure>
+
+<p>虽然 CMake 允许变量名为任意字符串，但我们仍然建议在变量名称中仅包含字母、数字、<code>-</code> 和 <code>_</code> ，而且字母为大写字母，如：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 建议的命名方式</span></span><br><span class="line"><span class="keyword">set</span>(QT_VERSION <span class="string">&quot;5.15.2&quot;</span>)</span><br><span class="line"><span class="keyword">set</span>(LIB_NAME <span class="string">&quot;my_lib&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>CMake 还会保留一些标识符，我们在定义变量时尽量不要使用这些名称（你执意要用，CMake 也不会报错）：</p>
+<ul>
+<li>以 <code>CMAKE_</code> 开头的。</li>
+<li>以 <code>_CMAKE_</code> 开头的。</li>
+<li>以 <code>_&lt;cmake command&gt;</code> 开头的，如 _file，完整的 command 列表见：<a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/latest/manual/cmake-commands.7.html">cmake-commands</a>。</li>
+</ul>
+<p>在定义完变量以后，就可以通过 <code>$&#123;variable&#125;</code> 的形式进行引用了，如：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(QT_VERSION <span class="string">&quot;5.15.2&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">message</span>(STATUS <span class="string">&quot;QT_VERSION is $&#123;QT_VERSION&#125;&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>在 CMake 中，还可以通过引用变量的方式来定义新的变量：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(a <span class="string">&quot;xyz&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(b <span class="string">&quot;$&#123;a&#125;_321&quot;</span>)</span><br><span class="line"><span class="keyword">set</span>(<span class="variable">$&#123;a&#125;</span>_1 <span class="string">&quot;456&quot;</span>)</span><br><span class="line"><span class="keyword">set</span>(variable_<span class="variable">$&#123;a&#125;</span> <span class="string">&quot;$&#123;a&#125; + $&#123;b&#125; + 15&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">message</span>(<span class="string">&quot;b: &#x27;$&#123;b&#125;&#x27;&quot;</span>) <span class="comment"># b: &#x27;xyz_321&#x27;</span></span><br><span class="line"><span class="keyword">message</span>(<span class="string">&quot;xyz_1: &#x27;$&#123;xyz_1&#125;&#x27;&quot;</span>) <span class="comment"># xyz_1: &#x27;456&#x27;</span></span><br><span class="line"><span class="keyword">message</span>(<span class="string">&quot;variable_xyz: &#x27;$&#123;variable_xyz&#125;&#x27;&quot;</span>) <span class="comment"># variable_xyz: &#x27;xyz + xyz_321 + 15&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>环境变量的引用方式有所不同，在下面的环境变量章节会详细介绍，而且在 if 条件中可以省略 <code>$&#123;&#125;</code>，直接使用变量名，如 <code>if(QT_VERSION)</code>。</p>
+<p>CMake 还允许使用未定义的变量，未定义的变量的值为空字符串。</p>
+<p>CMake 也允许重复定义变量，变量的值采用最后定义的值。</p>
+<h3 id="3-1-2-调试输出"><a href="#3-1-2-调试输出" class="headerlink" title="3.1.2 调试输出"></a>3.1.2 调试输出</h3><h4 id="message"><a href="#message" class="headerlink" title="message"></a>message</h4><p>为了方便调试脚本，我们可以使用 <a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/latest/command/message.html">messsage</a> 指令来输出变量和调试信息。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">message</span>([&lt;mode&gt;] <span class="string">&quot;message text&quot;</span> ...)</span><br></pre></td></tr></table></figure>
+
+<p><code>&lt;mode&gt;</code> 关键字是可选的，它用于指定消息的类型，消息类型会影响 CMake 对该消息的处理方式。</p>
+<p>常用的消息类型有：</p>
+<ul>
+<li>FATAL_ERROR<br>致命错误（红色），只有该类型会导致脚本终止执行。</li>
+<li>WARNING<br>警告（红色），脚本继续执行。</li>
+<li><strong>NOTICE（默认）</strong><br>需要特别关注的消息（红色），脚本继续执行。</li>
+<li>STATUS<br>普通输出，正常颜色，脚本也会继续执行。</li>
+</ul>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">message</span>(<span class="string">&quot;Current version is 1.0.0.1&quot;</span>)</span><br><span class="line"><span class="keyword">message</span>(STATUS <span class="string">&quot;BUILD_SHARED_LIBS value is $&#123;BUILD_SHARED_LIBS&#125;&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="cmake-print-variables"><a href="#cmake-print-variables" class="headerlink" title="cmake_print_variables"></a>cmake_print_variables</h4><p>如果只是单纯地想打印变量的值，使用 messsage 显得有些繁琐，我们可以使用 cmake_print_variables 函数来打印变量的值，该函数以 <code>variable=value</code> 格式输出每个变量的值，方便进行观察。</p>
+<p>由于该函数由 CMake 的 CMakePrintHelpers 模块提供，因此在使用之前，需要先 <code>include(CMakePrintHelpers)</code>：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">include</span>(CMakePrintHelpers)</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(MY_NAME <span class="string">&quot;jack&quot;</span>)</span><br><span class="line"><span class="keyword">set</span>(MY_ADDRESS <span class="string">&quot;Hubei&quot;</span>)</span><br><span class="line"></span><br><span class="line">cmake_print_variables(MY_NAME MY_ADDRESS) <span class="comment"># MY_NAME=&quot;jack&quot; ; MY_ADDRESS=&quot;Hubei&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-1-3-列表"><a href="#3-1-3-列表" class="headerlink" title="3.1.3 列表"></a>3.1.3 列表</h3><p>列表就是简单地包含一系列值，使用空格分割每个值：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(MY_LIST a b <span class="string">&quot;c&quot;</span> <span class="number">1</span> <span class="number">2</span> <span class="variable">$&#123;MY_NAME&#125;</span> <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+
+<p>也可以使用 <code>;</code> 来代替空格：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(MY_LIST <span class="string">&quot;a;b;c;1;2;$&#123;MY_NAME&#125;;3&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(MY_LIST a;b;c;<span class="number">1</span>;<span class="number">2</span>;<span class="variable">$&#123;MY_NAME&#125;</span>;<span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="list-命令"><a href="#list-命令" class="headerlink" title="list 命令"></a>list 命令</h4><p><a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/latest/command/list.html">list</a> 命令提供了众多针对列表的操作，如获取元素个数、查找、添加、删除、排序等。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获取元素个数</span></span><br><span class="line"><span class="keyword">list</span>(LENGTH &lt;<span class="keyword">list</span>&gt; &lt;out-var&gt;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取指定下标（可以指定多个下标）的元素</span></span><br><span class="line"><span class="keyword">list</span>(GET &lt;<span class="keyword">list</span>&gt; &lt;element index&gt; [&lt;index&gt; ...] &lt;out-var&gt;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 拼接2个列表</span></span><br><span class="line"><span class="keyword">list</span>(JOIN &lt;<span class="keyword">list</span>&gt; &lt;glue&gt; &lt;out-var&gt;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取指定位置指定长度的一段列表</span></span><br><span class="line"><span class="keyword">list</span>(SUBLIST &lt;<span class="keyword">list</span>&gt; &lt;begin&gt; &lt;length&gt; &lt;out-var&gt;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 查找，&lt;out-var&gt;中存储查找到的元素下标，如果没找到则为-1</span></span><br><span class="line"><span class="keyword">list</span>(FIND &lt;<span class="keyword">list</span>&gt; &lt;value&gt; &lt;out-var&gt;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在列表尾部添加若干元素</span></span><br><span class="line"><span class="keyword">list</span>(APPEND &lt;<span class="keyword">list</span>&gt; [&lt;element&gt;...])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 按条件过滤列表</span></span><br><span class="line"><span class="keyword">list</span>(FILTER &lt;<span class="keyword">list</span>&gt; &lt;<span class="keyword">INCLUDE</span>|EXCLUDE&gt; REGEX &lt;regular_expression&gt;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在指定位置插入若干元素</span></span><br><span class="line"><span class="keyword">list</span>(INSERT &lt;<span class="keyword">list</span>&gt; &lt;index&gt; [&lt;element&gt;...])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 弹出尾部的若干元素（如果没有指定&lt;out-var&gt;变量，则只弹出一个）</span></span><br><span class="line"><span class="keyword">list</span>(POP_BACK &lt;<span class="keyword">list</span>&gt; [&lt;out-var&gt;...])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 弹出头部的若干元素（如果没有指定&lt;out-var&gt;变量，则只弹出一个）</span></span><br><span class="line"><span class="keyword">list</span>(POP_FRONT &lt;<span class="keyword">list</span>&gt; [&lt;out-var&gt;...])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将若干元素插入到列表的头部，如果&lt;list&gt;没有被定义，则相当于创建了一个新的列表</span></span><br><span class="line"><span class="keyword">list</span>(PREPEND &lt;<span class="keyword">list</span>&gt; [&lt;element&gt;...])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 移除列表中的若干元素</span></span><br><span class="line"><span class="keyword">list</span>(REMOVE_ITEM &lt;<span class="keyword">list</span>&gt; &lt;value&gt;...)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 移除列表中指定位置（可以指定多个）的元素</span></span><br><span class="line"><span class="keyword">list</span>(REMOVE_AT &lt;<span class="keyword">list</span>&gt; &lt;index&gt;...)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除列表中的重复项目。保留项目的相对顺序，但如果遇到重复项，则仅保留第一个实例。</span></span><br><span class="line"><span class="keyword">list</span>(REMOVE_DUPLICATES &lt;<span class="keyword">list</span>&gt;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 按照&lt;ACTION&gt;对列表元素进行转换</span></span><br><span class="line"><span class="keyword">list</span>(TRANSFORM &lt;<span class="keyword">list</span>&gt; &lt;ACTION&gt; [&lt;SELECTOR&gt;] [OUTPUT_VARIABLE &lt;output variable&gt;])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列表反转</span></span><br><span class="line"><span class="keyword">list</span>(REVERSE &lt;<span class="keyword">list</span>&gt;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 列表排序</span></span><br><span class="line"><span class="keyword">list</span>(SORT &lt;<span class="keyword">list</span>&gt; [COMPARE &lt;compare&gt;] [CASE &lt;case&gt;] [ORDER &lt;order&gt;])</span><br></pre></td></tr></table></figure>
+
+<p>下面仅简单地演示 2 个列表功能的用法：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(NAME_LIST jack jim jeff tom)</span><br><span class="line"></span><br><span class="line"><span class="keyword">list</span>(LENGTH NAME_LIST NAME_COUNT)</span><br><span class="line"><span class="keyword">message</span>(STATUS <span class="string">&quot;name count: $&#123;NAME_COUNT&#125;&quot;</span>) <span class="comment"># name count: 4</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">list</span>(FIND NAME_LIST jim JIM_INDEX)</span><br><span class="line"><span class="keyword">message</span>(STATUS <span class="string">&quot;jim at: $&#123;JIM_INDEX&#125;&quot;</span>) <span class="comment"># jim at: 1</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="遍历列表"><a href="#遍历列表" class="headerlink" title="遍历列表"></a>遍历列表</h4><p>可以使用 foreach 来遍历列表，下面示例演示了如何使用 foreach 遍历输出 MY_LIST 列表中每个元素，其中 _ITEM 变量的作用域仅限 foreach 代码块。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(MY_LIST hello world)</span><br><span class="line"></span><br><span class="line"><span class="keyword">foreach</span>(_ITEM <span class="variable">$&#123;MY_LIST&#125;</span>)</span><br><span class="line">  <span class="keyword">message</span>(STATUS <span class="string">&quot;$&#123;_ITEM&#125;&quot;</span>)</span><br><span class="line"><span class="keyword">endforeach</span>()</span><br></pre></td></tr></table></figure>
+
+<p>我们还可以使用 <a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/latest/command/while.html">while</a> 来遍历列表，详见下面的“循环”章节。</p>
+<h3 id="3-1-4-双引号的作用"><a href="#3-1-4-双引号的作用" class="headerlink" title="3.1.4 双引号的作用"></a>3.1.4 双引号的作用</h3><p>学习到这里，也许你会感到困扰，在定义变量时，为什么有时候使用双引号把值包围起来，有时候又不使用呢？</p>
+<p>我们已经学习完了列表的相关知识，现在就可以解释加不加引号的区别了。</p>
+<p>在定义变量时，若变量值中包含空格，此时不使用双引号包裹，则等同于定义列表；使用双引号包裹，则等同于定义字符串变量。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义的MY_VAR为列表，包含2个元素：hello、world</span></span><br><span class="line"><span class="keyword">set</span>(MY_VAR hello world)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义的MY_VAR为字符串</span></span><br><span class="line"><span class="keyword">set</span>(MY_VAR <span class="string">&quot;hello world&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>对于列表类型的变量，在使用时是否使用双引号包裹也会有区别：有双引号包裹时，会将数组元素以分号作为分隔符进行拼接，否则会直接拼接各元素。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(MY_LIST hello world)</span><br><span class="line"></span><br><span class="line"><span class="keyword">message</span>(STATUS <span class="string">&quot;$&#123;MY_LIST&#125;&quot;</span>) <span class="comment"># hello;world</span></span><br><span class="line"><span class="keyword">message</span>(STATUS <span class="variable">$&#123;MY_LIST&#125;</span>) <span class="comment"># helloworld</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-1-5-三种不同的变量"><a href="#3-1-5-三种不同的变量" class="headerlink" title="3.1.5 三种不同的变量"></a>3.1.5 三种不同的变量</h3><p>CMake 中的变量分为普通变量、缓存变量和环境变量，三者都可以通过 <code>set</code> 指令进行定义。</p>
+<h4 id="普通变量"><a href="#普通变量" class="headerlink" title="普通变量"></a>普通变量</h4><p>下面使用 <code>set</code> 定义的变量就是普通变量。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(MY_NAME <span class="string">&quot;jack&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>也可以在 CMake 命令行中通过 <code>-D</code> 参数定义普通变量，如下面示例定义了 BUILD_SHARED_LIBS 和 TEST 变量：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cmake.exe -G <span class="string">&quot;Visual Studio 15 2017&quot;</span> -DBUILD_SHARED_LIBS=ON -DTEST=123 -S .\hello_cmake -B .\hello_cmake\build</span><br></pre></td></tr></table></figure>
+
+<h4 id="缓存变量"><a href="#缓存变量" class="headerlink" title="缓存变量"></a>缓存变量</h4><p>缓存变量也是通过 <code>set</code> 指令定义的，但需要添加额外的参数：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(&lt;variable&gt; &lt;value&gt;... CACHE &lt;type&gt; &lt;docstring&gt; [FORCE])</span><br></pre></td></tr></table></figure>
+
+<p>下面示例定义了一个名为 LIB_VERSION 的缓存变量：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.16</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(LIB_VERSION <span class="string">&quot;1.0.0.1&quot;</span> CACHE <span class="keyword">STRING</span> <span class="string">&quot;the version of library&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">project</span> (hello_cmake)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_library</span>(hello_cmake main.cpp)</span><br><span class="line"></span><br><span class="line"><span class="keyword">message</span>(STATUS <span class="string">&quot;LIB_VERSION = $&#123;LIB_VERSION&#125;&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/img/ycHxFOTmrG-TinyTu.png"></p>
+<p>使用 CMake GUI 程序执行该脚本，可以看到界面上多出了一个名为 LIB_VERSION 的文本输入框，而且输入框有默认值 1.0.0.1。</p>
+<p>将输入框中的文本修改为 1.0.0.2，再次执行该脚本，可以发现调试输出的内容是 <code>LIB_VERSION = 1.0.0.2</code>，而且无论我们执行多少次脚本，始终输出的都是该内容。</p>
+<p>这是因为 CMake 会将缓存变量及其值存储到 “构建目录\CMakeCache.txt” 文件中，下次运行脚本时，会优先从该文件中加载变量，该文件内容格式大致如下：</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># build\CMakeCache.txt 文件</span><br><span class="line"></span><br><span class="line">......</span><br><span class="line"></span><br><span class="line">//the version of library</span><br><span class="line">LIB_VERSION:STRING=1.0.0.2</span><br><span class="line"></span><br><span class="line">......</span><br></pre></td></tr></table></figure>
+
+<p>其中，<code>&lt;type&gt;</code> 用于指定变量的输入类型。请注意，<code>&lt;type&gt;</code> 指定的不是变量的类型，因为 CMake 的所有变量都是字符串类型。<code>&lt;type&gt;</code> 指定的是输入类型，仅用于帮助 CMake GUI 程序显示不同的用户输入控件，如文本输入框、复选框、文件选择对话框等。 </p>
+<p><code>&lt;type&gt;</code> 的取值必须是下面列表中的一个：</p>
+<ul>
+<li>BOOL<br>开关ON或OFF，在 CMake GUI 上提供一个复选框。</li>
+<li>PATH<br>文件夹的路径，在 CMake GUI 上提供一个文本输入框和一个按钮来打开<strong>文件夹</strong>选择对话框。</li>
+<li>FILEPATH<br>文件的路径，在 CMake GUI 上提供一个文本输入框和一个按钮来打开文件选择对话框。</li>
+<li>STRING<br>文本字符串，在 CMake GUI 上提供一个文本输入框。</li>
+<li>STRINGS<br>文本字符串，但在 CMake GUI 上会提供一个下拉列表选择框。</li>
+<li>INTERNAL<br>虽然也是文本字符串，但不会显示在 CMake GUI 上，因此用户无法在界面上修改该变量的值。</li>
+</ul>
+<p>如果我们不希望某些缓存变量直接展示 CMake GUI 上，可以使用 <a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/latest/command/mark_as_advanced.html">mark_as_advanced</a> 指令将缓存变量设置为高级状态，这样除非用户打开了 “Show Advanced” 选项，否则高级变量不会显示在 CMake GUI 中。在脚本模式下，高级&#x2F;非高级状态是无效的。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(DEBUG_LIBNAME_SUFFIX <span class="string">&quot;-d&quot;</span> CACHE <span class="keyword">STRING</span> <span class="string">&quot;Optional suffix to append to the library name for a debug build&quot;</span>)</span><br><span class="line"><span class="keyword">mark_as_advanced</span>(DEBUG_LIBNAME_SUFFIX)</span><br></pre></td></tr></table></figure>
+
+<h4 id="option"><a href="#option" class="headerlink" title="option"></a>option</h4><p>虽然 <a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/latest/command/option.html">option</a> 也可用于定义缓存变量，但其只能定义“开&#x2F;关”类型的变量。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">option</span>(ENABLE_TEST <span class="string">&quot;enable test or not&quot;</span> <span class="keyword">ON</span>)</span><br></pre></td></tr></table></figure>
+
+<p>如果未指定初始值，默认为 OFF。</p>
+<h4 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h4><p>环境变量的定义方式如下：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(ENV&#123;&lt;variable&gt;&#125; [&lt;value&gt;])</span><br></pre></td></tr></table></figure>
+
+<p>环境变量在引用时，需要在前面添加 <code>ENV</code> 标识，如 <code>$ENV&#123;&lt;variable&gt;&#125;</code></p>
+<p>示例：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(ENV&#123;USER_NAME&#125; <span class="string">&quot;jack&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">message</span>(STATUS <span class="string">&quot;User name is $ENV&#123;USER_NAME&#125;&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>CMake 程序在启动时，会加载系统的环境变量，同时还会设置一些内置的环境变量，内置的环境变量见 <a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/latest/manual/cmake-env-variables.7.html">cmake-env-variables</a>。</p>
+<p>CMake 虽然会加载系统的环境变量，我们也可以修改该环境变量，但该修改操作不会影响到系统的环境变量。</p>
+<p>定义或加载的环境变量只会作用于当前的 CMake 进程，而且对当前进程所运行的所有脚本都可见，但不会影响到其他 CMake 进程和系统中的其他进程。</p>
+<h3 id="3-1-6-变量作用域"><a href="#3-1-6-变量作用域" class="headerlink" title="3.1.6 变量作用域"></a>3.1.6 变量作用域</h3><p>在上面介绍三种不同的变量时，我一直在竭力避免讨论一个话题，那就是变量的作用域。事实上，上面三种变量还有个不同之处就是作用域的不同。</p>
+<p>缓存变量和环境变量都是全局的，它们可以跨文件、目录、函数进行读写，因此作用域主要针对普通变量而言。</p>
+<p>CMake 中作用域分为“目录级别作用域”和“函数作用域”（也可以使用 <a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/latest/command/block.html">block()</a> 来显式的创建一个作用域，但这种使用方式非常少）。</p>
+<p>函数有自己的作用域，在函数中定义的变量只能在函数体中使用，函数体外无法访问。除非在定义变量时添加 <code>PARENT_SCOPE</code> 来将变量作用域设置为上一级目录。</p>
+<h4 id="include"><a href="#include" class="headerlink" title="include"></a>include</h4><p>使用 <a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/latest/command/include.html">include</a> 指令加载和执行其他 CMake 脚本文件（名称通常为 <code>*.cmake</code>），如：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># utils.cmake</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(NORMAL_VAR_IN_UTILS <span class="string">&quot;I&#x27;m NORMAL_VAR_IN_UTILS&quot;</span>)</span><br><span class="line"><span class="keyword">set</span>(CACHE_VAR_IN_UTILS <span class="string">&quot;I&#x27;m CACHE_VAR_IN_UTILS&quot;</span> CACHE <span class="keyword">STRING</span> <span class="string">&quot;&quot;</span>)</span><br><span class="line"><span class="keyword">set</span>(ENV&#123;ENV_VAR_IN_UTILS&#125; <span class="string">&quot;I&#x27;m ENV_VAR_IN_UTILS&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>当然，在 <code>*.cmake</code> 文件中也可以使用 include 指令加载执行其他 cmake 文件。</p>
+</blockquote>
+<p>假设在 A（CMakeLists.txt或*.cmake）中调用 <code>include(B.cmake)</code>，则 A 和 B 之间可以相互读写彼此的变量（包含普通变量、缓存变量和环境变量）。</p>
+<p>include 会在 <a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/latest/variable/CMAKE_MODULE_PATH.html">CMAKE_MODULE_PATH</a> 变量指定的目录列表中搜索指定文件。</p>
+<h4 id="add-subdirectory"><a href="#add-subdirectory" class="headerlink" title="add_subdirectory"></a>add_subdirectory</h4><p>使用 <a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/latest/command/add_subdirectory.html">add_subdirectory</a> 指令可以添加一个子目录到项目构建中，但是被添加的子目录中必须包含 CMakeLists.txt 文件。</p>
+<p>假设在 A (CMakeLists.txt文件) 中调用 <code>add_subdirectory(lib)</code> 添加了 lib 子目录，则 lib 目录中的 CMakeLists.txt 可以读写 A 中的普通变量，但 A 不能读写 lib 目录 CMakeLists.txt 的普通变量。但可以在定义变量时添加 <code>PARENT_SCOPE</code> 选项来突破该限制，将变量作用域设置为上一级作用域，即父目录的作用域，如：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># lib\CMakeLists.txt 文件</span></span><br><span class="line"><span class="keyword">set</span>(LIB_NAME <span class="string">&quot;MyTestLib&quot;</span> PARENT_SCOPE)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_subdirectory</span>(lib)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 可以访问 LIB_NAME 变量</span></span><br><span class="line"><span class="keyword">message</span>(STATUS <span class="string">&quot;$&#123;LIB_NAME&#125;&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-2-数学运算"><a href="#3-2-数学运算" class="headerlink" title="3.2 数学运算"></a>3.2 数学运算</h2><p>在前面章节已经提到了 CMake 中的值都是以字符串类型存储的，不能直接使用数学运算符符进行运算，需要使用 <a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/latest/command/math.html">math</a> 指令进行数学运算。</p>
+<p>math 的语法如下：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">math</span>(EXPR &lt;variable&gt; <span class="string">&quot;&lt;expression&gt;&quot;</span> [OUTPUT_FORMAT &lt;format&gt;])</span><br></pre></td></tr></table></figure>
+
+<p>其中，<code>&lt;variable&gt;</code>变量如果没有定义，math 会自动定义该变量；</p>
+<p>OUTPUT_FORMAT 选项用于指定计算结果的进制（十六进制或十进制）：</p>
+<ul>
+<li>HEXADECIMAL  十六进制</li>
+<li>DECIMAL 十进制（默认）</li>
+</ul>
+<p>math 支持如下运算符：</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">+ - * / % | &amp; ^ ~ &lt;&lt; &gt;&gt;  (...)</span><br></pre></td></tr></table></figure>
+
+<p>示例：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># value 等于 &quot;300&quot;</span></span><br><span class="line"><span class="keyword">math</span>(EXPR value <span class="string">&quot;100 * 3&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># value 等于 &quot;1000&quot;</span></span><br><span class="line"><span class="keyword">math</span>(EXPR value <span class="string">&quot;100 * 0xA&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># value 等于 &quot;0x12c&quot;</span></span><br><span class="line"><span class="keyword">math</span>(EXPR value <span class="string">&quot;100 * 3&quot;</span> OUTPUT_FORMAT HEXADECIMAL)</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(value <span class="number">3</span>)</span><br><span class="line"><span class="keyword">math</span>(EXPR value <span class="string">&quot;100 * $&#123;value&#125;&quot;</span>)   <span class="comment"># value 等于 &quot;300&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># value 等于 &quot;306&quot;</span></span><br><span class="line"><span class="keyword">math</span>(EXPR value <span class="string">&quot;(100 + 2) * 3&quot;</span>)      </span><br></pre></td></tr></table></figure>
+
+
+<h2 id="3-3-条件判断"><a href="#3-3-条件判断" class="headerlink" title="3.3 条件判断"></a>3.3 条件判断</h2><p>在 CMake 中，使用 <a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/latest/command/if.html">if</a> 进行条件判断，语法如下：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(&lt;condition&gt;)</span><br><span class="line">  &lt;commands&gt;</span><br><span class="line"><span class="keyword">elseif</span>(&lt;condition&gt;) <span class="comment"># 可选的，可以有多个</span></span><br><span class="line">  &lt;commands&gt;</span><br><span class="line"><span class="keyword">else</span>()              <span class="comment"># 可选的</span></span><br><span class="line">  &lt;commands&gt;</span><br><span class="line"><span class="keyword">endif</span>()</span><br></pre></td></tr></table></figure>
+
+<p>与众多语言中的 if 一样，当括号中的条件为真时，才执行指定的 commands。</p>
+<p>示例：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(a <span class="number">9</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(a <span class="keyword">LESS</span> <span class="number">10</span>)</span><br><span class="line">    <span class="keyword">message</span>(STATUS <span class="string">&quot;a &lt; 10&quot;</span>)</span><br><span class="line"><span class="keyword">else</span>()</span><br><span class="line">    <span class="keyword">message</span>(STATUS <span class="string">&quot;a &gt;= 10&quot;</span>)</span><br><span class="line"><span class="keyword">endif</span>()</span><br></pre></td></tr></table></figure>
+
+<p>else() 和 endif() 括号中的内容可以为空，但如果需要指定，则就必须与 if 中的条件完全一致，如下面示例所示：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(a <span class="number">9</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(a <span class="keyword">LESS</span> <span class="number">10</span>)</span><br><span class="line">    <span class="keyword">message</span>(STATUS <span class="string">&quot;a &lt; 10&quot;</span>)</span><br><span class="line"><span class="keyword">else</span>(a <span class="keyword">LESS</span> <span class="number">10</span>)</span><br><span class="line">    <span class="keyword">message</span>(STATUS <span class="string">&quot;a &gt;= 10&quot;</span>)</span><br><span class="line"><span class="keyword">endif</span>(a <span class="keyword">LESS</span> <span class="number">10</span>)</span><br></pre></td></tr></table></figure>
+
+<p>我们通常不在 else() 和 endif() 中指定条件，因为这样太繁琐了。</p>
+<h3 id="3-3-1-真值与假值"><a href="#3-3-1-真值与假值" class="headerlink" title="3.3.1 真值与假值"></a>3.3.1 真值与假值</h3><p>何为真，何为假，人生真真假假，难以分辨，程序的真假却清清楚楚。</p>
+<p>下列常量始终为真（不区分大小写）：</p>
+<ul>
+<li>1 和其他非零数字（包含浮点型），如 1、2、3.14</li>
+<li>ON</li>
+<li>YES</li>
+<li>TRUE</li>
+<li>Y</li>
+</ul>
+<p>下列常量始终为假（不区分大小写）：</p>
+<ul>
+<li>0</li>
+<li>OFF</li>
+<li>NO</li>
+<li>FALSE</li>
+<li>N</li>
+<li>IGNORE</li>
+<li>NOTFOUND</li>
+<li>空字符串</li>
+<li>被引号包裹的字符串（除始终为真的字符串外，如 TRUE、Y 等）</li>
+</ul>
+<h3 id="3-3-2-逻辑运算符"><a href="#3-3-2-逻辑运算符" class="headerlink" title="3.3.2 逻辑运算符"></a>3.3.2 逻辑运算符</h3><p>在 CMake 中，逻辑运算符的与、或、非分别使用 AND、OR、NOT 表示。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(<span class="keyword">NOT</span> &lt;condition&gt;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(&lt;cond1&gt; <span class="keyword">AND</span> &lt;cond2&gt;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(&lt;cond1&gt; <span class="keyword">OR</span> &lt;cond2&gt;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>((condition) <span class="keyword">AND</span> (condition <span class="keyword">OR</span> (condition)))</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3-3-关系运算符"><a href="#3-3-3-关系运算符" class="headerlink" title="3.3.3 关系运算符"></a>3.3.3 关系运算符</h3><p>由于 CMake 变量都是以字符串类型存储的，因此即便是数字也不能直接使用 <code>&gt;</code>、<code>&lt;</code>、<code>==</code> 这样的运算符来直接比较。</p>
+<p>针对数值类型，CMake 支持的关系运算符如下：</p>
+<ul>
+<li>LESS  小于</li>
+<li>LESS_EQUAL  小于等于</li>
+<li>GREATER  大于</li>
+<li>GREATER_EQUAL  大于等于</li>
+<li>EQUAL  等于</li>
+</ul>
+<p>CMake 还支持字符串比较，即从左到右依次比较字符串中的每个字符，出现不相同时立即返回，类似于 C 语言中的 strcmp 函数。</p>
+<ul>
+<li>STRLESS  </li>
+<li>STRLESS_EQUAL </li>
+<li>STRGREATER </li>
+<li>STRGREATER_EQUAL </li>
+<li>STREQUAL</li>
+</ul>
+<h3 id="3-3-4-存在性校验"><a href="#3-3-4-存在性校验" class="headerlink" title="3.3.4 存在性校验"></a>3.3.4 存在性校验</h3><p>CMake 提供了一些判断变量是否定义、目标是否创建、元素是否存在于列表中、文件&#x2F;目录是否存在等方法。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 给定名称是否是可以调用的指令</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">COMMAND</span> &lt;<span class="keyword">command</span>-name&gt;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 给定名称是否是已创建的目标，即通过add_executable()、add_library() 或 add_custom_target() 命令创建</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">TARGET</span> &lt;<span class="keyword">target</span>-name&gt;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 给定名称的普通变量、缓存变量、环境变量是否已定义</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">DEFINED</span> &lt;name&gt;|CACHE&#123;&lt;name&gt;&#125;|ENV&#123;&lt;name&gt;&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 给定的元素是否包含在列表中</span></span><br><span class="line"><span class="keyword">if</span>(&lt;variable|<span class="keyword">string</span>&gt; <span class="keyword">IN_LIST</span> &lt;variable&gt;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 给定的文件或目录是否存在</span></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">EXISTS</span> &lt;path-to-<span class="keyword">file</span>-<span class="keyword">or</span>-directory&gt;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-4-循环"><a href="#3-4-循环" class="headerlink" title="3.4 循环"></a>3.4 循环</h2><p>CMake 有两种循环方式：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/latest/command/foreach.html">foreach</a>  </li>
+<li><a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/latest/command/while.html">while</a></li>
+</ul>
+<p>二者都可以使用 break() 提前退出循环和 continue() 跳过本次循环。</p>
+<h3 id="3-4-1-foreach"><a href="#3-4-1-foreach" class="headerlink" title="3.4.1 foreach"></a>3.4.1 foreach</h3><p>下面是 foreach 的基本语法形式，这种形式在之前的“遍历列表”章节已经使用到了：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">foreach</span>(&lt;loop_var&gt; &lt;items&gt;)</span><br><span class="line">  &lt;commands&gt;</span><br><span class="line"><span class="keyword">endforeach</span>()</span><br></pre></td></tr></table></figure>
+
+<p>示例：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(MY_LIST <span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">7</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">foreach</span>(_ITEM <span class="variable">$&#123;MY_LIST&#125;</span>)</span><br><span class="line">  <span class="keyword">message</span>(STATUS <span class="string">&quot;$&#123;_ITEM&#125;&quot;</span>)</span><br><span class="line"><span class="keyword">endforeach</span>()</span><br></pre></td></tr></table></figure>
+
+<p>foreach 还支持下面两种语法形式，这两种形式都不需要指定列表 <code>&lt;items&gt;</code> 参数，作用类似于 C 语言中的 for 语句：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 循环 [0 ~ &lt;stop&gt;]，步长为 1</span></span><br><span class="line"><span class="keyword">foreach</span>(&lt;loop_var&gt; RANGE &lt;stop&gt;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 循环 [&lt;start&gt; ~ &lt;stop&gt;]，步长为 &lt;step&gt;（可选）</span></span><br><span class="line"><span class="keyword">foreach</span>(&lt;loop_var&gt; RANGE &lt;start&gt; &lt;stop&gt; [&lt;step&gt;])</span><br></pre></td></tr></table></figure>
+
+<p>示例：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">foreach</span>(_I RANGE <span class="number">3</span>)</span><br><span class="line">  <span class="keyword">message</span>(STATUS <span class="string">&quot;$&#123;_I&#125;&quot;</span>) <span class="comment"># 依次输出 0 1 2 3</span></span><br><span class="line"><span class="keyword">endforeach</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">foreach</span>(_I RANGE <span class="number">2</span> <span class="number">5</span>)</span><br><span class="line">  <span class="keyword">message</span>(STATUS <span class="string">&quot;$&#123;_I&#125;&quot;</span>) <span class="comment"># 依次输出 2 3 4 5</span></span><br><span class="line"><span class="keyword">endforeach</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">foreach</span>(_I RANGE <span class="number">2</span> <span class="number">5</span> <span class="number">2</span>)</span><br><span class="line">  <span class="keyword">message</span>(STATUS <span class="string">&quot;$&#123;_I&#125;&quot;</span>) <span class="comment"># 依次输出 2 4</span></span><br><span class="line"><span class="keyword">endforeach</span>()</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-4-2-while"><a href="#3-4-2-while" class="headerlink" title="3.4.2 while"></a>3.4.2 while</h3><p>while 的语法形式如下，其中 <code>&lt;condition&gt;</code> 为真时（参考 if 条件判断章节），执行代码块中的 commands 命令。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>(&lt;condition&gt;)</span><br><span class="line">  &lt;commands&gt;</span><br><span class="line"><span class="keyword">endwhile</span>()</span><br></pre></td></tr></table></figure>
+
+<p>下面示例演示了如何使用 while 来遍历列表：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(MY_LIST <span class="number">1</span> <span class="number">2</span> <span class="number">3</span>)</span><br><span class="line"><span class="keyword">list</span>(LENGTH MY_LIST LIST_COUNT)</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(INDEX <span class="number">0</span>)</span><br><span class="line"><span class="keyword">while</span>(INDEX <span class="keyword">LESS</span> LIST_COUNT)</span><br><span class="line">  <span class="keyword">list</span>(GET MY_LIST <span class="variable">$&#123;INDEX&#125;</span> VALUE) <span class="comment"># 获取 $&#123;INDEX&#125; 位置的元素</span></span><br><span class="line">  <span class="keyword">message</span>(STATUS <span class="string">&quot;element at $&#123;INDEX&#125; = $&#123;VALUE&#125;&quot;</span>)</span><br><span class="line">  <span class="keyword">math</span>(EXPR INDEX <span class="string">&quot;$&#123;INDEX&#125; + 1&quot;</span>) <span class="comment"># 自增 INDEX</span></span><br><span class="line"><span class="keyword">endwhile</span>()</span><br></pre></td></tr></table></figure>
+
+<p>上面示例依次输出如下内容：</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">element at 0 = 1</span><br><span class="line">element at 1 = 2</span><br><span class="line">element at 2 = 3</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="3-5-函数和宏"><a href="#3-5-函数和宏" class="headerlink" title="3.5 函数和宏"></a>3.5 函数和宏</h2><h3 id="3-5-1-函数"><a href="#3-5-1-函数" class="headerlink" title="3.5.1 函数"></a>3.5.1 函数</h3><p>使用 <a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/latest/command/function.html">function</a> 定义函数：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span>(&lt;name&gt; [&lt;arg1&gt; ...])</span><br><span class="line">  &lt;commands&gt;</span><br><span class="line"><span class="keyword">endfunction</span>()</span><br></pre></td></tr></table></figure>
+
+<p>函数有自己的作用域，而宏没有自己的作用域，在函数体里面定义的普通变量默认只能在函数体中被访问，除非在定义时指定了 <code>PARENT_SCOPE</code> 选项，或者改为定义缓存变量、环境变量。</p>
+<p>函数在被调用时，函数名是不区分大小写的，如我们定义了名为 <code>foo</code> 的函数，就可以使用 <code>foo()</code>、<code>Foo()</code>、<code>FOO()</code> 等形式来调用，但我们还是建议保持与函数定义时的名称一致。</p>
+<h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><p>关于函数的参数，我们可以在定义函数时就指定各个参数的名称，如：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span>(my_func NAME AGE)</span><br><span class="line">  <span class="keyword">message</span>(STATUS <span class="string">&quot;name: $&#123;NAME&#125;&quot;</span>) <span class="comment"># name: jack </span></span><br><span class="line">  <span class="keyword">message</span>(STATUS <span class="string">&quot;age: $&#123;AGE&#125;&quot;</span>) <span class="comment"># age: 18</span></span><br><span class="line"><span class="keyword">endfunction</span>()</span><br><span class="line"></span><br><span class="line">my_func(<span class="string">&quot;jack&quot;</span> <span class="number">18</span>)</span><br></pre></td></tr></table></figure>
+
+<p>在调用函数时，调用参数（实参）的个数可以超过定义的参数个数（形参），但不能少于定义的参数个数，否则会报错。超出的参数，可以通过下面的形式获取：</p>
+<ul>
+<li>使用 <code>ARGV0</code>, <code>ARGV1</code>, <code>ARGV2</code>, <code>...</code> 变量获取函数的每个参数。</li>
+<li>使用 <code>ARGV</code> 变量获取函数的参数列表，通过 <code>ARGN</code> 变量获取参数的个数。</li>
+</ul>
+<h4 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h4><p>使用 <code>return()</code> 可以从函数体中提前返回，但不能直接使用 return() 带出返回值，需要借用 <code>set(&lt;variable&gt; &lt;value&gt; PARENT_SCOPE)</code> 方式，来间接的带出返回值。</p>
+<p>下面示例演示了函数的定义、调用、参数的获取以及返回值的用法。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span>(my_func NAME AGE)</span><br><span class="line">  <span class="keyword">message</span>(STATUS <span class="string">&quot;name: $&#123;NAME&#125;&quot;</span>) <span class="comment"># name: jack</span></span><br><span class="line">  <span class="keyword">message</span>(STATUS <span class="string">&quot;parameter count: $&#123;ARGC&#125;&quot;</span>) <span class="comment"># parameter count: 3</span></span><br><span class="line">  <span class="keyword">message</span>(STATUS <span class="string">&quot;parameter list: $&#123;ARGV&#125;&quot;</span>) <span class="comment"># parameter list: jack;18;Hubei</span></span><br><span class="line">  <span class="keyword">message</span>(STATUS <span class="string">&quot;parameter 0: $&#123;ARGV0&#125;&quot;</span>) <span class="comment"># parameter 0: jack</span></span><br><span class="line">  <span class="keyword">message</span>(STATUS <span class="string">&quot;parameter 2: $&#123;ARGV1&#125;&quot;</span>) <span class="comment"># parameter 2: Hubei</span></span><br><span class="line">  <span class="keyword">set</span>(FUNC_RET <span class="string">&quot;OK&quot;</span> PARENT_SCOPE)</span><br><span class="line"><span class="keyword">endfunction</span>()</span><br><span class="line"></span><br><span class="line">my_func(<span class="string">&quot;jack&quot;</span> <span class="number">18</span> <span class="string">&quot;Hubei&quot;</span>)</span><br><span class="line"><span class="keyword">message</span>(STATUS <span class="string">&quot;return value: $&#123;FUNC_RET&#125;&quot;</span>) <span class="comment"># return value: OK</span></span><br></pre></td></tr></table></figure>
+
+<p>但在实际项目中，除需要传入不定个数的参数情况外，我们通常在定义函数时，就约定好了参数名称和返回参数的名称，如下面示例：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span>(my_func NAME AGE OUT_RET)</span><br><span class="line">  <span class="comment"># 使用 $&#123;NAME&#125; $&#123;AGE&#125; 访问参数</span></span><br><span class="line">  <span class="keyword">message</span>(STATUS <span class="string">&quot;name: $&#123;NAME&#125;&quot;</span>) <span class="comment"># name: jack</span></span><br><span class="line">  <span class="keyword">set</span>(OUT_RET <span class="string">&quot;OK&quot;</span> PARENT_SCOPE)</span><br><span class="line"><span class="keyword">endfunction</span>()</span><br><span class="line"></span><br><span class="line">my_func(<span class="string">&quot;jack&quot;</span> <span class="number">18</span> OUT_RET)</span><br><span class="line"><span class="keyword">message</span>(STATUS <span class="string">&quot;return value: $&#123;OUT_RET&#125;&quot;</span>) <span class="comment"># return value: OK</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-5-2-宏"><a href="#3-5-2-宏" class="headerlink" title="3.5.2 宏"></a>3.5.2 宏</h3><p>使用 <a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/latest/command/macro.html">macro</a> 定义宏：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">macro</span>(&lt;name&gt; [&lt;arg1&gt; ...])</span><br><span class="line">  &lt;commands&gt;</span><br><span class="line"><span class="keyword">endmacro</span>()</span><br></pre></td></tr></table></figure>
+
+<p>CMake 中的宏和 C 语言中的宏一样，是在调用处进行语句替换后再执行，因此在宏中使用 <code>return()</code> 时要格外小心，可能会终止整个脚本的执行。</p>
+<p>建议优先使用函数。</p>
+<h2 id="3-6-字符串操作"><a href="#3-6-字符串操作" class="headerlink" title="3.6 字符串操作"></a>3.6 字符串操作</h2><p>字符串操作由 <a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/latest/command/string.html">string</a> 指令提供，详见官方文档。</p>
+<h2 id="3-7-内置变量"><a href="#3-7-内置变量" class="headerlink" title="3.7 内置变量"></a>3.7 内置变量</h2><p>本节列举了在项目中经常用到的 CMake 内置变量。</p>
+<ul>
+<li><p>CMAKE_SOURCE_DIR<br>始终存储的是项目的根目录。</p>
+</li>
+<li><p>CMAKE_BINARY_DIR<br>始终存储的是项目的根构建目录。</p>
+</li>
+<li><p>PROJECT_SOURCE_DIR<br>与 CMAKE_SOURCE_DIR 一样，也始终存储的是项目的根目录，但该变量需要使用 project 创建项目以后，才会被定义。</p>
+</li>
+<li><p>PROJECT_BINARY_DIR<br>与 CMAKE_BINARY_DIR 一样，也始终存储的是项目的构建目录，但该变量需要使用 project 创建项目以后，才会被定义。</p>
+</li>
+<li><p>CMAKE_CURRENT_SOURCE_DIR<br>存储的是当前正在执行脚本所在的目录。</p>
+</li>
+<li><p>CMAKE_CURRENT_BINARY_DIR<br>一个工程中可能包括多个项目，每个项目的构建目录不同，该变量存储的是当前项目的构建目录。</p>
+</li>
+<li><p>CMAKE_CURRENT_LIST_FILE<br>当前脚本代码所在文件的完整路径。</p>
+</li>
+<li><p>CMAKE_CURRENT_LIST_LINE<br>当前脚本代码所在行数。</p>
+</li>
+<li><p>CMAKE_MODULE_PATH<br>通过设置改变变量，可以控制 CMake 查找 <code>.cmake</code> 文件的路径，在使用 <code>include</code> 时就可以直接使用文件名了。如：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(CMAKE_MODULE_PATH <span class="string">&quot;$&#123;CMAKE_SOURCE_DIR&#125;/cmake&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">include</span>(utils)</span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是，当在 include 中仅指定了文件名时，不能再添加 <code>.cmake</code> 扩展名，否则会导致查找不到相应文件。</p>
+</li>
+<li><p>WIN32<br>在 Windows 系统上，定义该变量，值为 1。</p>
+</li>
+<li><p>APPLE<br>在 Apple 系统上，定义该变量，值为 1。</p>
+</li>
+<li><p>UNIX<br>在类 UNIX 系统上，定义该变量，值为 1。</p>
+</li>
+<li><p>CMAKE_SYSTEM_NAME<br>当前构建所选定目标系统，但该变量需要使用 project 创建项目以后，才会被定义。</p>
+<p>该变量常见的值有：Android、iOS、Linux、FreeBSD、MSYS、Windows、Darwin，完整的列表见：<a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/latest/variable/CMAKE_SYSTEM_NAME.html">CMAKE_SYSTEM_NAME</a>。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (CMAKE_SYSTEM_NAME <span class="keyword">STREQUAL</span> <span class="string">&quot;Linux&quot;</span>)</span><br><span class="line">  <span class="keyword">message</span>(STATUS <span class="string">&quot;current platform: Linux &quot;</span>)</span><br><span class="line"><span class="keyword">elseif</span> (CMAKE_SYSTEM_NAME <span class="keyword">STREQUAL</span> <span class="string">&quot;Windows&quot;</span>)</span><br><span class="line">  <span class="keyword">message</span>(STATUS <span class="string">&quot;current platform: Windows&quot;</span>)</span><br><span class="line"><span class="keyword">elseif</span> (CMAKE_SYSTEM_NAME <span class="keyword">STREQUAL</span> <span class="string">&quot;FreeBSD&quot;</span>)</span><br><span class="line">  <span class="keyword">message</span>(STATUS <span class="string">&quot;current platform: FreeBSD&quot;</span>)</span><br><span class="line"><span class="keyword">elseif</span> (CMAKE_SYSTEM_NAME <span class="keyword">STREQUAL</span> <span class="string">&quot;Darwin&quot;</span>)</span><br><span class="line">  <span class="keyword">message</span>(STATUS <span class="string">&quot;current platform: macOS&quot;</span>)</span><br><span class="line"><span class="keyword">elseif</span> (CMAKE_SYSTEM_NAME <span class="keyword">STREQUAL</span> <span class="string">&quot;Android&quot;</span>)</span><br><span class="line">  <span class="keyword">message</span>(STATUS <span class="string">&quot;current platform: Android&quot;</span>)</span><br><span class="line"><span class="keyword">elseif</span> (CMAKE_SYSTEM_NAME <span class="keyword">STREQUAL</span> <span class="string">&quot;iOS&quot;</span>)</span><br><span class="line">  <span class="keyword">message</span>(STATUS <span class="string">&quot;current platform: iOS&quot;</span>)</span><br><span class="line"><span class="keyword">else</span> ()</span><br><span class="line">  <span class="keyword">message</span>(STATUS <span class="string">&quot;other platform: $&#123;CMAKE_SYSTEM_NAME&#125;&quot;</span>)</span><br><span class="line"><span class="keyword">endif</span>()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>MSVC<br>当编译器是 Microsoft Visual C++ 的某个版本或模拟 Visual C++ cl 命令行语法的其他编译器时设置为 true。</p>
+</li>
+<li><p>MSVC_VERSION<br>正在使用的 Microsoft Visual C&#x2F;C++ 版本（如果有）。如果正在使用模拟 Visual C++ 的编译器，则此变量将设置为 _MSC_VER 预处理器定义所给定的模拟工具集版本。</p>
+</li>
+</ul>
+<h1 id="四、目标的属性"><a href="#四、目标的属性" class="headerlink" title="四、目标的属性"></a>四、目标的属性</h1><h2 id="4-1-属性调试"><a href="#4-1-属性调试" class="headerlink" title="4.1 属性调试"></a>4.1 属性调试</h2><p>在介绍如何设置目标的属性之前，我们先学习一下如何调试输出目标属性，方便在开发中检查属性设置是否出错。</p>
+<p>使用 CMakePrintHelpers 模块提供 <a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/latest/module/CMakePrintHelpers.html">cmake_print_properties</a> 函数可以打印输出目标的属性，该函数的原型如下：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cmake_print_properties(&lt;TARGETS       [&lt;target1&gt; ...] |</span><br><span class="line">                        SOURCES       [&lt;source1&gt; ...] |</span><br><span class="line">                        DIRECTORIES   [&lt;dir1&gt; ...]    |</span><br><span class="line">                        TESTS         [&lt;test1&gt; ...]   |</span><br><span class="line">                        CACHE_ENTRIES [&lt;entry1&gt; ...]  &gt;</span><br><span class="line">                       PROPERTIES [&lt;prop1&gt; ...]         )</span><br></pre></td></tr></table></figure>
+
+<p>以打印输出目标的“包含目录”属性为例：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_library</span>(hello_cmake main.cpp)</span><br><span class="line"></span><br><span class="line"><span class="keyword">target_include_directories</span>(hello_cmake PRIVATE <span class="string">&quot;include&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">include</span>(CMakePrintHelpers)</span><br><span class="line">cmake_print_properties(TARGETS hello_cmake PROPERTIES <span class="keyword">INCLUDE_DIRECTORIES</span>) </span><br></pre></td></tr></table></figure>
+
+<p>输出： </p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Properties for TARGET hello_cmake:</span><br><span class="line">  hello_cmake.INCLUDE_DIRECTORIES = &quot;D:/cmake-sample/hello_cmake/include&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-2-包含目录"><a href="#4-2-包含目录" class="headerlink" title="4.2 包含目录"></a>4.2 包含目录</h2><p>使用 <a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/latest/command/target_include_directories.html">target_include_directories</a> 指定目标包含一个或多个目录。指定的目录路径可以是绝对路径也可以是相对路径，如果是相对路径，则该路径是相对于当前脚本文件的。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">target_include_directories</span>(&lt;<span class="keyword">target</span>&gt; [SYSTEM] [AFTER|BEFORE]</span><br><span class="line">  &lt;INTERFACE|PUBLIC|PRIVATE&gt; [items1...]</span><br><span class="line">  [&lt;INTERFACE|PUBLIC|PRIVATE&gt; [items2...] ...])</span><br></pre></td></tr></table></figure>
+
+<p>这就相当于在 Visual Studio 中设置“附加包含目录”。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/img/6zoF01MV26-TinyTu.png"></p>
+<p>可以针对一个目标重复调用 target_include_directories，会按照调用顺序依次附加包含目录，也可以使用 BEFORE 选项，将本次设置的包含目录插入到最前面。</p>
+<p>我们需要特别花精力理解 INTERFACE、PUBLIC、PRIVATE 三者的区别，这三者的区别，我们先按下不表，稍后介绍。</p>
+<p>在使用 PUBLIC、PRIVATE 设置包含目录时，会自动设置 <code>INCLUDE_DIRECTORIES</code> 属性；在使用 INTERFACE 设置包含目录时，会自动设置 <code>INTERFACE_INCLUDE_DIRECTORIES</code> 属性。</p>
+<p>示例：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">target_include_directories</span>(hello_cmake </span><br><span class="line">  PUBLIC <span class="string">&quot;include&quot;</span></span><br><span class="line">  PRIVATE <span class="string">&quot;./extern/jsoncpp&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">target_include_directories</span>(hello_cmake BEFORE</span><br><span class="line">  PUBLIC <span class="string">&quot;include&quot;</span></span><br><span class="line">  PRIVATE <span class="string">&quot;./extern/rpclib&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-3-预编译宏"><a href="#4-3-预编译宏" class="headerlink" title="4.3 预编译宏"></a>4.3 预编译宏</h2><p>使用 <a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/latest/command/target_compile_definitions.html">target_compile_definitions</a> 设置目标的预编译宏。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">target_compile_definitions</span>(&lt;<span class="keyword">target</span>&gt;</span><br><span class="line">  &lt;INTERFACE|PUBLIC|PRIVATE&gt; [items1...]</span><br><span class="line">  [&lt;INTERFACE|PUBLIC|PRIVATE&gt; [items2...] ...])</span><br></pre></td></tr></table></figure>
+
+<p>可以针对一个目标重复调用 target_compile_definitions，附加多个预编译宏。</p>
+<p>使用 PUBLIC、PRIVATE 设置包含目录时，会自动设置 <code>COMPILE_DEFINITIONS</code> 属性；使用 INTERFACE 设置包含目录时，会自动设置 <code>INTERFACE_COMPILE_DEFINITIONS</code> 属性。</p>
+<p>示例：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义2个预编译宏</span></span><br><span class="line"><span class="keyword">target_compile_definitions</span>(hello_cmake</span><br><span class="line">  PUBLIC USING_BOOST USING_THRIFT)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 再定义一个预编译宏</span></span><br><span class="line"><span class="keyword">target_compile_definitions</span>(hello_cmake</span><br><span class="line">  INTERFACE USING_ZLIB)</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-4-依赖库"><a href="#4-4-依赖库" class="headerlink" title="4.4 依赖库"></a>4.4 依赖库</h2><p>使用 <a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/latest/command/target_link_libraries.html">target_link_libraries</a> 指令设置目标的依赖库，该指令有很多原型，但常用的原型有：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">target_link_libraries</span>(&lt;<span class="keyword">target</span>&gt;</span><br><span class="line">                     [&lt;PRIVATE|PUBLIC|INTERFACE&gt; &lt;item&gt;...]</span><br><span class="line">                     [&lt;PRIVATE|PUBLIC|INTERFACE&gt; &lt;item&gt;...]...)</span><br></pre></td></tr></table></figure>
+
+<p>item 可以是如下几种类型：</p>
+<ul>
+<li>lib 文件的绝对路径或相对路径，CMake 不会校验文件是否存在</li>
+<li>其他的 CMake 目标。</li>
+<li>表达式生成器（见“生成器表达式”章节）。</li>
+<li>以 <code>-</code> 开头的链接标志，但从 CMake 3.13 版本开始，可以直接使用 <code>target_link_options()</code> 替代。</li>
+</ul>
+<p>可以针对一个目标重复调用 target_link_libraries，附加多个依赖库。</p>
+<p><code>&lt;PRIVATE|PUBLIC|INTERFACE&gt;</code> 可以省略，如果省略，则默认为 PUBLIC。</p>
+<p>使用 PUBLIC、PRIVATE 设置依赖库时，会自动设置 <code>LINK_LIBRARIES</code> 属性；使用 INTERFACE 设置依赖库时，会自动设置 <code>INTERFACE_LINK_LIBRARIES</code> 属性。</p>
+<h2 id="4-5-INTERFACE、PUBLIC-和-PRIVATE"><a href="#4-5-INTERFACE、PUBLIC-和-PRIVATE" class="headerlink" title="4.5 INTERFACE、PUBLIC 和 PRIVATE"></a>4.5 INTERFACE、PUBLIC 和 PRIVATE</h2><p>INTERFACE、PUBLIC 和 PRIVATE 用于指定属性的可见性传递方案。</p>
+<table>
+<thead>
+<tr>
+<th>目标类型</th>
+<th>可见性传递</th>
+<th>自身是否应用该属性</th>
+<th>使用者是否应用该属性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>可执行文件</td>
+<td>INTERFACE</td>
+<td>否</td>
+<td>否（可执行文件不存在使用者）</td>
+</tr>
+<tr>
+<td>可执行文件</td>
+<td>PUBLIC</td>
+<td>是</td>
+<td>否（可执行文件不存在使用者）</td>
+</tr>
+<tr>
+<td>可执行文件</td>
+<td>PRIVATE</td>
+<td>是</td>
+<td>否（可执行文件不存在使用者）</td>
+</tr>
+<tr>
+<td>库（动态或静态）</td>
+<td>INTERFACE</td>
+<td>否</td>
+<td>是</td>
+</tr>
+<tr>
+<td>库（动态或静态）</td>
+<td>PUBLIC</td>
+<td>是</td>
+<td>是</td>
+</tr>
+<tr>
+<td>库（动态或静态）</td>
+<td>PRIVATE</td>
+<td>是</td>
+<td>否</td>
+</tr>
+</tbody></table>
+<h2 id="4-6-编译和链接选项"><a href="#4-6-编译和链接选项" class="headerlink" title="4.6 编译和链接选项"></a>4.6 编译和链接选项</h2><p>通过 <a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/latest/command/target_compile_options.html">target_compile_options</a> 指令设置编译选项。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">target_compile_options</span>(&lt;<span class="keyword">target</span>&gt; [BEFORE]</span><br><span class="line">  &lt;INTERFACE|PUBLIC|PRIVATE&gt; [items1...]</span><br><span class="line">  [&lt;INTERFACE|PUBLIC|PRIVATE&gt; [items2...] ...])</span><br></pre></td></tr></table></figure>
+
+<p>通过 <a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/latest/command/target_link_options.html">target_link_options</a> 指令设置链接选项。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">target_link_options</span>(&lt;<span class="keyword">target</span>&gt; [BEFORE]</span><br><span class="line">  &lt;INTERFACE|PUBLIC|PRIVATE&gt; [items1...]</span><br><span class="line">  [&lt;INTERFACE|PUBLIC|PRIVATE&gt; [items2...] ...])</span><br></pre></td></tr></table></figure>
+
+<p>这两个指令的用法与前面介绍的 target_include_directories 类似。</p>
+<p>示例：</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 编译选项</span></span><br><span class="line"><span class="keyword">target_compile_options</span>(my_lib PRIVATE /utf8)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 链接选项</span></span><br><span class="line"><span class="keyword">target_link_options</span>(app PRIVATE /NOLOGO)</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-7-其他属性"><a href="#4-7-其他属性" class="headerlink" title="4.7 其他属性"></a>4.7 其他属性</h2><p>CMake 为目标还提供了其他属性，详见：<a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/latest/manual/cmake-properties.7.html#target-properties">target-properties</a></p>
+<p>针对这些属性，需要使用 <a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/latest/command/set_target_properties.html">set_target_properties</a> 指令进行设置。</p>
+<p>例如，使用 OUTPUT_NAME 和 DEBUG_OUTPUT_NAME 设置目标的输出文件名。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set_target_properties</span>(zoe PROPERTIES </span><br><span class="line">  OUTPUT_NAME libZoe</span><br><span class="line">  DEBUG_OUTPUT_NAME libZoe-d)</span><br></pre></td></tr></table></figure>
+
+<div class="article-footer fs14">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section>
+    
+    <section id="share">
+      <div class="header"><span>分享文章</span></div>
+      <div class="body">
+        <div class="link"><input class="copy-area" readonly="true" id="copy-link" value="https://jiangxueqiao.com/post/3678619994.html" /></div>
+        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/b32ef3da1162a.svg" /></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://jiangxueqiao.com/post/3678619994.html&title=Modern CMake 简明教程（上） - 独钓寒江雪&pics=https://blog-static.jiangxueqiao.com/blog/banner/hor-banner-xiongmao.jpg&summary=CMake 是一个开源、跨平台的构建系统生成器（Build-system Generator）。
+CMake 是构建系统生成器，而不是构建系统，CMake 支持生成不同构建系统所支持的工程文件，如 Visual Studio，XCod..."><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/80c07e4dbb303.svg" /></a><a class="social share-item email" href="mailto:?subject=Modern CMake 简明教程（上） - 独钓寒江雪&amp;body=https://jiangxueqiao.com/post/3678619994.html"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/a1b00e20f425d.svg" /></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/8411ed322ced6.svg" /></a></div>
+        
+        <div class="qrcode" id="qrcode-wechat" style="opacity:0;height:0">
+          <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=https://jiangxueqiao.com/post/3678619994.html"/>
+        </div>
+        
+      </div>
+    </section>
+    </div>
+</article>
+<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/post/2304457467.html">Modern CMake 简明教程（中）</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/post/3353203242.html">开源库jerryscript使用备忘</a></div></section></div>
+
+<div class="related-wrap" id="related-posts">
+    <section class='header'>
+      <div class='title cap theme'>您可能感兴趣的文章</div>
+    </section>
+    <section class='body'>
+    <div class="related-posts"><a class="item" href="\post\1531265402.html" title="CMake按目录层级进行分组"><span class="title">CMake按目录层级进行分组</span><span class="excerpt">为了提高项目的可维护性，我们通常会将不同用途的代码文件放到不同的文件夹中，如头文件放到include目录，源文件放到src目录，第三方库放到3rd目录等。
+当使用CMake生成Visual Studio工程时，我们亦希望在Visual...</span></a><a class="item" href="\post\2291877732.html" title="CMake依赖库查找相关问题"><span class="title">CMake依赖库查找相关问题</span><span class="excerpt">1. 如何查找 Vcpkg 安装的依赖库在 CMake 工具中指定跨平台工具链，如图：
+指定 Toolchain 文件D:/sourcecode/vcpkg/scripts/buildsystems/vcpkg.cmake。</span></a><a class="item" href="\post\2065175920.html" title="Vcpkg使用仓库最新代码"><span class="title">Vcpkg使用仓库最新代码</span></a><a class="item" href="\post\1142527271.html" title="Vcpkg安装port历史版本"><span class="title">Vcpkg安装port历史版本</span><span class="excerpt">截至 2023-05-22：vcpkg 仅支持在 manifest 模式下指定 port 的版本，在命令行模式下不支持指定 port 版本。
+本文介绍如何在 Vcpkg 命令行模式下安装 port 时如何指定版本。</span></a><a class="item" href="\post\1904533666.html" title="Vcpkg访问Github私有仓库"><span class="title">Vcpkg访问Github私有仓库</span><span class="excerpt">Vcpkg 默认只支持从公共代码仓库进行下载编译，本文介绍如何使用 Vcpkg 从私有仓库进行源码下载&#x2F;编译&#x2F;安装。</span></a></div></section></div>
+
+
+  <div class="related-wrap md-text" id="comments">
+    <section class='header cmt-title cap theme'>
+      <p>快来参与讨论吧~</p>
+
+    </section>
+    <section class='body cmt-body beaudar'>
+      
+
+<svg class="loading" style="vertical-align:middle;fill:currentColor;overflow:hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2709"><path d="M832 512c0-176-144-320-320-320V128c211.2 0 384 172.8 384 384h-64zM192 512c0 176 144 320 320 320v64C300.8 896 128 723.2 128 512h64z" p-id="2710"></path></svg>
+
+<div id="beaudar" repo="winsoft666/blog-comment" issue-term="pathname" theme="preferred-color-scheme" label="comment" input-position="top" comment-order="desc" loading="false" branch="main"></div>
+
+    </section>
+  </div>
+
+
+
+<footer class="page-footer footnote"><hr><div class="sitemap"><div class="sitemap-group"><span class="fs15">博客</span><a href="/">近期</a><a href="/topic">专栏</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></div><div class="sitemap-group"><span class="fs15">产品</span><a href="/post/776574933.html">1key.run</a><a href="/post/2053741240.html">TinyTu</a><a href="/post/1533480858.html">WinSpyPlus</a><a target="_blank" rel="noopener" href="https://github.com/winsoft666/qss-editor">QSS编辑器</a></div><div class="sitemap-group"><span class="fs15">社交</span><a href="/friends">💋友链</a><a target="_blank" rel="noopener" href="https://github.com/winsoft666/blog-comment">留言</a></div><div class="sitemap-group"><span class="fs15">更多</span><a href="/author">关于本站</a><a target="_blank" rel="noopener" href="https://github.com/winsoft666">GitHub</a></div></div><div class="text"><p>本博客所有文章除特别声明外均为原创，采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。<br><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">鄂ICP备2020015399号-6</a></p>
+</div></footer>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
+<div class="widgets">
+<widget class="widget-wrapper markdown"><div class="widget-header dis-select"><span class="name">小工具推荐</span></div><div class="widget-body fs14"><p><a target="_blank" rel="noopener" href="https://github.com/winsoft666/qss-editor">🌈QSS编辑器</a></p>
+<p><a href="/post/776574933.html">一键启动神器</a></p>
+<p><a href="/post/1533480858.html">Windows窗口调试利器</a></p>
+<p><a href="/post/2053741240.html">跨平台图片压缩软件</a></p>
+</div></widget>
+
+<widget class="widget-wrapper markdown"><div class="widget-header dis-select"><span class="name">开源项目推荐</span></div><div class="widget-body fs14"><p><a href="/post/3008752839.html">全网唯一基于共享内存的RPC框架</a></p>
+<p><a href="/post/946276004.html">产品级的Electron项目模板</a></p>
+<p><a href="/post/3157704992.html">C++跨平台文件下载库</a></p>
+</div></widget>
+
+
+
+
+<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81Modern-CMake"><span class="toc-text">一、Modern CMake</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5"><span class="toc-text">二、基础概念</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84"><span class="toc-text">2.1 项目结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E7%A4%BA%E4%BE%8B"><span class="toc-text">2.2 一个简单的示例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-%E6%BA%90%E7%A0%81%E5%A4%96%E6%9E%84%E5%BB%BA"><span class="toc-text">2.3 源码外构建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B"><span class="toc-text">2.4 工作流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5-%E6%B3%A8%E9%87%8A"><span class="toc-text">2.5 注释</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-6-CMake%E6%9C%80%E4%BD%8E%E7%89%88%E6%9C%AC"><span class="toc-text">2.6 CMake最低版本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-7-%E9%A1%B9%E7%9B%AE%E5%90%8D%E7%A7%B0"><span class="toc-text">2.7 项目名称</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BBCMakeLists-txt"><span class="toc-text">主CMakeLists.txt</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-8-%E7%9B%AE%E6%A0%87%E7%B1%BB%E5%9E%8B"><span class="toc-text">2.8 目标类型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6"><span class="toc-text">可执行文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E5%BA%93%E5%92%8C%E9%9D%99%E6%80%81%E5%BA%93"><span class="toc-text">动态库和静态库</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95"><span class="toc-text">三、基础语法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-%E5%8F%98%E9%87%8F"><span class="toc-text">3.1 变量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-1-%E5%8F%98%E9%87%8F%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-text">3.1.1 变量的定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-2-%E8%B0%83%E8%AF%95%E8%BE%93%E5%87%BA"><span class="toc-text">3.1.2 调试输出</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#message"><span class="toc-text">message</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#cmake-print-variables"><span class="toc-text">cmake_print_variables</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-3-%E5%88%97%E8%A1%A8"><span class="toc-text">3.1.3 列表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#list-%E5%91%BD%E4%BB%A4"><span class="toc-text">list 命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%81%8D%E5%8E%86%E5%88%97%E8%A1%A8"><span class="toc-text">遍历列表</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-4-%E5%8F%8C%E5%BC%95%E5%8F%B7%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-text">3.1.4 双引号的作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-5-%E4%B8%89%E7%A7%8D%E4%B8%8D%E5%90%8C%E7%9A%84%E5%8F%98%E9%87%8F"><span class="toc-text">3.1.5 三种不同的变量</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%99%AE%E9%80%9A%E5%8F%98%E9%87%8F"><span class="toc-text">普通变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%93%E5%AD%98%E5%8F%98%E9%87%8F"><span class="toc-text">缓存变量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#option"><span class="toc-text">option</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="toc-text">环境变量</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-6-%E5%8F%98%E9%87%8F%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="toc-text">3.1.6 变量作用域</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#include"><span class="toc-text">include</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#add-subdirectory"><span class="toc-text">add_subdirectory</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-%E6%95%B0%E5%AD%A6%E8%BF%90%E7%AE%97"><span class="toc-text">3.2 数学运算</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD"><span class="toc-text">3.3 条件判断</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-1-%E7%9C%9F%E5%80%BC%E4%B8%8E%E5%81%87%E5%80%BC"><span class="toc-text">3.3.1 真值与假值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-2-%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">3.3.2 逻辑运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-3-%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="toc-text">3.3.3 关系运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-4-%E5%AD%98%E5%9C%A8%E6%80%A7%E6%A0%A1%E9%AA%8C"><span class="toc-text">3.3.4 存在性校验</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-%E5%BE%AA%E7%8E%AF"><span class="toc-text">3.4 循环</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-1-foreach"><span class="toc-text">3.4.1 foreach</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-2-while"><span class="toc-text">3.4.2 while</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-5-%E5%87%BD%E6%95%B0%E5%92%8C%E5%AE%8F"><span class="toc-text">3.5 函数和宏</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-1-%E5%87%BD%E6%95%B0"><span class="toc-text">3.5.1 函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%82%E6%95%B0"><span class="toc-text">参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="toc-text">返回值</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-2-%E5%AE%8F"><span class="toc-text">3.5.2 宏</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-6-%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9C"><span class="toc-text">3.6 字符串操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-7-%E5%86%85%E7%BD%AE%E5%8F%98%E9%87%8F"><span class="toc-text">3.7 内置变量</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E7%9B%AE%E6%A0%87%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="toc-text">四、目标的属性</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-%E5%B1%9E%E6%80%A7%E8%B0%83%E8%AF%95"><span class="toc-text">4.1 属性调试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-%E5%8C%85%E5%90%AB%E7%9B%AE%E5%BD%95"><span class="toc-text">4.2 包含目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-%E9%A2%84%E7%BC%96%E8%AF%91%E5%AE%8F"><span class="toc-text">4.3 预编译宏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4-%E4%BE%9D%E8%B5%96%E5%BA%93"><span class="toc-text">4.4 依赖库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-5-INTERFACE%E3%80%81PUBLIC-%E5%92%8C-PRIVATE"><span class="toc-text">4.5 INTERFACE、PUBLIC 和 PRIVATE</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-6-%E7%BC%96%E8%AF%91%E5%92%8C%E9%93%BE%E6%8E%A5%E9%80%89%E9%A1%B9"><span class="toc-text">4.6 编译和链接选项</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-7-%E5%85%B6%E4%BB%96%E5%B1%9E%E6%80%A7"><span class="toc-text">4.7 其他属性</span></a></li></ol></li></ol></div><div class="widget-footer">
+
+<a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2c4.714 0 7.071 0 8.535 1.464C22 4.93 22 7.286 22 12c0 4.714 0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12Z"/><path stroke-linecap="round" stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/></g></svg><span>回到顶部</span></a><a class="buttom" onclick="util.scrollComment()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M10.46 1.25h3.08c1.603 0 2.86 0 3.864.095c1.023.098 1.861.3 2.6.752a5.75 5.75 0 0 1 1.899 1.899c.452.738.654 1.577.752 2.6c.095 1.004.095 2.261.095 3.865v1.067c0 1.141 0 2.036-.05 2.759c-.05.735-.153 1.347-.388 1.913a5.75 5.75 0 0 1-3.112 3.112c-.805.334-1.721.408-2.977.43a10.81 10.81 0 0 0-.929.036c-.198.022-.275.054-.32.08c-.047.028-.112.078-.224.232c-.121.166-.258.396-.476.764l-.542.916c-.773 1.307-2.69 1.307-3.464 0l-.542-.916a10.605 10.605 0 0 0-.476-.764c-.112-.154-.177-.204-.224-.232c-.045-.026-.122-.058-.32-.08c-.212-.023-.49-.03-.93-.037c-1.255-.021-2.171-.095-2.976-.429A5.75 5.75 0 0 1 1.688 16.2c-.235-.566-.338-1.178-.389-1.913c-.049-.723-.049-1.618-.049-2.76v-1.066c0-1.604 0-2.86.095-3.865c.098-1.023.3-1.862.752-2.6a5.75 5.75 0 0 1 1.899-1.899c.738-.452 1.577-.654 2.6-.752C7.6 1.25 8.857 1.25 10.461 1.25M6.739 2.839c-.914.087-1.495.253-1.959.537A4.25 4.25 0 0 0 3.376 4.78c-.284.464-.45 1.045-.537 1.96c-.088.924-.089 2.11-.089 3.761v1c0 1.175 0 2.019.046 2.685c.045.659.131 1.089.278 1.441a4.25 4.25 0 0 0 2.3 2.3c.515.214 1.173.294 2.429.316h.031c.398.007.747.013 1.037.045c.311.035.616.104.909.274c.29.17.5.395.682.645c.169.232.342.525.538.856l.559.944a.52.52 0 0 0 .882 0l.559-.944c.196-.331.37-.624.538-.856c.182-.25.392-.476.682-.645c.293-.17.598-.24.909-.274c.29-.032.639-.038 1.037-.045h.032c1.255-.022 1.913-.102 2.428-.316a4.25 4.25 0 0 0 2.3-2.3c.147-.352.233-.782.278-1.441c.046-.666.046-1.51.046-2.685v-1c0-1.651 0-2.837-.089-3.762c-.087-.914-.253-1.495-.537-1.959a4.25 4.25 0 0 0-1.403-1.403c-.464-.284-1.045-.45-1.96-.537c-.924-.088-2.11-.089-3.761-.089h-3c-1.651 0-2.837 0-3.762.089" clip-rule="evenodd"/><path fill="currentColor" d="M9 11a1 1 0 1 1-2 0a1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0a1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0a1 1 0 0 1 2 0"/></svg><span>参与讨论</span></a></div></widget>
+</div></aside><div class='float-panel blur'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+</div><div class="scripts">
+<script type="text/javascript">
+  const ctx = {
+    date_suffix: {
+      just: `刚刚`,
+      min: `分钟前`,
+      hour: `小时前`,
+      day: `天前`,
+    },
+    root : `/`,
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://blog-static.jiangxueqiao.com/blog/stellar-theme/default/3442075.svg`,
+    cover: `https://blog-static.jiangxueqiao.com/blog/stellar-theme/default/76b86c0226ffd.svg`,
+  };
+  const deps = {
+    jquery: `https://blog-static.jiangxueqiao.com/blog/stellar-theme/jquery-3.7.1.min.js`,
+    marked: `https://blog-static.jiangxueqiao.com/blog/stellar-theme/marked-4.0.18.min.js`
+  }
+  
+
+</script>
+
+<script type="text/javascript">
+  const utils = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    js: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = ctx.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    jq: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+    },
+    
+    onLoading: (el) => {
+      if (el) {
+        $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
+      }
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      let retryTimes = 3;
+      utils.onLoading(el);
+      function req() {
+        return new Promise((resolve, reject) => {
+          let status = 0; // 0 等待 1 完成 2 超时
+          let timer = setTimeout(() => {
+            if (status === 0) {
+              status = 2;
+              timer = null;
+              reject('请求超时');
+              if (retryTimes == 0) {
+                onFailure();
+              }
+            }
+          }, 5000);
+          fetch(url).then(function(response) {
+            if (status !== 2) {
+              clearTimeout(timer);
+              resolve(response);
+              timer = null;
+              status = 1;
+            }
+            if (response.ok) {
+              return response.json();
+            }
+            throw new Error('Network response was not ok.');
+          }).then(function(data) {
+            retryTimes = 0;
+            utils.onLoadSuccess(el);
+            callback(data);
+          }).catch(function(error) {
+            if (retryTimes > 0) {
+              retryTimes -= 1;
+              setTimeout(() => {
+                req();
+              }, 5000);
+            } else {
+              utils.onLoadFailure(el);
+              onFailure();
+            }
+          });
+        });
+      }
+      req();
+    },
+  };
+</script>
+
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+<script type="text/javascript">
+  (() => {
+    const tagSwitchers = document.querySelectorAll('.tag-subtree.parent-tag > a > .tag-switcher-wrapper')
+    for (const tagSwitcher of tagSwitchers) {
+      tagSwitcher.addEventListener('click', (e) => {
+        const parent = e.target.closest('.tag-subtree.parent-tag')
+        parent.classList.toggle('expanded')
+        e.preventDefault()
+      })
+    }
+
+    // Get active tag from query string, then activate it.
+    const urlParams = new URLSearchParams(window.location.search)
+    const activeTag = urlParams.get('tag')
+    if (activeTag) {
+      let tag = document.querySelector(`.tag-subtree[data-tag="${activeTag}"]`)
+      if (tag) {
+        tag.querySelector('a').classList.add('active')
+        
+        while (tag) {
+          tag.classList.add('expanded')
+          tag = tag.parentElement.closest('.tag-subtree.parent-tag')
+        }
+      }
+    }
+  })()
+</script>
+
+
+<!-- required -->
+<script src="/js/main.js?v=1.29.0" defer></script>
+
+<script type="text/javascript">
+  const applyTheme = (theme) => {
+    if (theme === 'auto') {
+      document.documentElement.removeAttribute('data-theme')
+    } else {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+
+    applyThemeToGiscus(theme)
+  }
+
+  const applyThemeToGiscus = (theme) => {
+    theme = theme === 'auto' ? 'preferred_color_scheme' : theme
+
+    const cmt = document.getElementById('giscus')
+    if (cmt) {
+      // This works before giscus load.
+      cmt.setAttribute('data-theme', theme)
+    }
+
+    const iframe = document.querySelector('#comments > section.giscus > iframe')
+    if (iframe) {
+      // This works after giscus loaded.
+      const src = iframe.src
+      const newSrc = src.replace(/theme=[\w]+/, `theme=${theme}`)
+      iframe.src = newSrc
+    }
+  }
+
+  const switchTheme = () => {
+    // light -> dark -> auto -> light -> ...
+    const currentTheme = document.documentElement.getAttribute('data-theme')
+    let newTheme;
+    switch (currentTheme) {
+      case 'light':
+        newTheme = 'dark'
+        break
+      case 'dark':
+        newTheme = 'auto'
+        break
+      default:
+        newTheme = 'light'
+    }
+    applyTheme(newTheme)
+    window.localStorage.setItem('Stellar.theme', newTheme)
+
+    const messages = {
+      light: `切换到浅色模式`,
+      dark: `切换到深色模式`,
+      auto: `切换到跟随系统配色`,
+    }
+    hud?.toast?.(messages[newTheme])
+  }
+
+  (() => {
+    // Apply user's preferred theme, if any.
+    const theme = window.localStorage.getItem('Stellar.theme')
+    if (theme !== null) {
+      applyTheme(theme)
+    }
+  })()
+</script>
+
+
+<!-- optional -->
+
+  <script type="module">
+  const el = document.querySelector('#comments #beaudar');
+  util.viewportLazyload(el, load_beaudar, false);
+
+  function load_beaudar() {
+    if (!el) return;
+    try {
+      el.innerHTML = '';
+    } catch (error) {
+      console.error(error);
+    }
+    const script = document.createElement('script');
+    script.src = 'https://beaudar.lipk.org/client.js';
+    script.async = true;
+    for (const key of Object.keys(el.attributes)) {
+      const attr = el.attributes[key];
+      if (['class', 'id'].includes(attr.name) === false) {
+        script.setAttribute(attr.name, attr.value);
+      }
+    }
+    el.appendChild(script);
+  }
+</script>
+
+
+
+
+<script defer>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        ctx.cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (ctx.cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(ctx.cardlinks);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || 'memos' || 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          });
+        }
+      }
+    }
+  });
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
+  });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/flying-pages-2.1.2.min.js"></script><script defer src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/lazyload-17.8.4.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+</script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img`,
+    css: `https://blog-static.jiangxueqiao.com/blog/stellar-theme/fancybox-5.0.22.min.css`,
+    js: `https://blog-static.jiangxueqiao.com/blog/stellar-theme/fancybox-5.0.22.umd.min.js`
+  };
+  var selector = '[data-fancybox]:not(.error)';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const els = document.getElementsByClassName('ds-memos');
+    if (els != undefined && els.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || slide.triggerEl.dataset.caption || null
+        }
+      });
+    })
+  }
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://blog-static.jiangxueqiao.com/blog/stellar-theme/swiper-bundle-10.3.1.min.css`);
+      utils.js(`https://blog-static.jiangxueqiao.com/blog/stellar-theme/swiper-bundle-10.3.1.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.codeElements = document.querySelectorAll('.code');
+    if (window.codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `复制`,
+        success_text: `已复制`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js');
+    }
+  });
+</script>
+
+
+<!-- inject -->
+
+</div></body></html>
