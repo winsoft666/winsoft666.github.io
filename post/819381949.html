@@ -20,8 +20,8 @@
   <title>Node插件开发(1)-快速入门 - 独钓寒江雪</title>
 
   
-  <meta name="description" content="在使用Electron开发客户端时，如果现有Node模块所提供的功能无法满足需求，我们可以使用C++开发自定义的Node模块，也称插件（addon）。
-Node.js插件的扩展名为.node，是二进制文件，其本质上是动态链接库重命名而来，在Windows平台是.dll文件，Linux&#x2F...">
+  <meta name="description" content="在使用 Electron 开发客户端时，如果现有 Node 模块所提供的功能无法满足需要，我们可以使用 C++ 开发自定义的 Node 模块，也称插件（addon）。
+Node.js 插件的扩展名为 .node，是二进制文件，其本质上是通过动态链接库（.dll 或 .so）重命名而来。">
   
   <meta name="keywords" content="Electron,Node-API">
 
@@ -61,7 +61,7 @@ Node.js插件的扩展名为.node，是二进制文件，其本质上是动态�
 
 
 
-<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/post/3416050985.html"><span class="title">“江”心之作</span></a><a class="item title" href="/post/3678619994.html"><span class="title">Modern CMake 简明教程（上）</span></a><a class="item title" href="/post/1531265402.html"><span class="title">CMake按目录层级进行分组</span></a><a class="item title" href="/post/2304457467.html"><span class="title">Modern CMake 简明教程（中）</span></a><a class="item title" href="/post/201509401.html"><span class="title">Modern CMake 简明教程（下）</span></a><a class="item title" href="/post/1204594779.html"><span class="title">拨开字符编码的迷雾(5)--Qt字符编码</span></a><a class="item title" href="/post/1559270845.html"><span class="title">拨开字符编码的迷雾(4)--MySQL字符编码</span></a><a class="item title" href="/post/2289160283.html"><span class="title">C++标准库线程的启动与退出</span></a><a class="item title" href="/post/3353203242.html"><span class="title">开源库jerryscript使用备忘</span></a><a class="item title" href="/post/2133505170.html"><span class="title">折腾开发环境的一天</span></a></div></widget>
+<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/post/235943795.html"><span class="title">Node插件开发(2)-调用方式</span></a><a class="item title" href="/post/819381949.html"><span class="title">Node插件开发(1)-快速入门</span></a><a class="item title" href="/post/3678619994.html"><span class="title">Modern CMake 简明教程（上）</span></a><a class="item title" href="/post/201509401.html"><span class="title">Modern CMake 简明教程（下）</span></a><a class="item title" href="/post/2304457467.html"><span class="title">Modern CMake 简明教程（中）</span></a><a class="item title" href="/post/3034381124.html"><span class="title">网络协议(2)--ARP和RARP协议</span></a><a class="item title" href="/post/3416050985.html"><span class="title">“江”心之作</span></a><a class="item title" href="/post/1531265402.html"><span class="title">CMake按目录层级进行分组</span></a><a class="item title" href="/post/1204594779.html"><span class="title">拨开字符编码的迷雾(5)--Qt字符编码</span></a><a class="item title" href="/post/1559270845.html"><span class="title">拨开字符编码的迷雾(4)--MySQL字符编码</span></a></div></widget>
 </div>
 
 </div></aside><div class="l_main" id="main">
@@ -74,7 +74,7 @@ Node.js插件的扩展名为.node，是二进制文件，其本质上是动态�
   <div class="content">
     <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
 <span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Electron/">Electron</a></div>
-<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2024-02-27T15:54:54.000Z">2024-02-27</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-04-17T04:15:00.171Z">2024-04-17</time></span></div></div></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2024-02-27T15:54:54.000Z">2024-02-27</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-10-29T02:02:29.587Z">2024-10-29</time></span></div></div></div>
     
     <div class="bottom only-title">
       
@@ -85,8 +85,8 @@ Node.js插件的扩展名为.node，是二进制文件，其本质上是动态�
     </div>
     
   </div>
-  </div><article class="md-text content"><p>在使用Electron开发客户端时，如果现有Node模块所提供的功能无法满足需求，我们可以使用C++开发自定义的Node模块，也称插件（addon）。</p>
-<p>Node.js插件的扩展名为<code>.node</code>，是二进制文件，其本质上是动态链接库重命名而来，在Windows平台是.dll文件，Linux&#x2F;Unix平台是.so文件。</p>
+  </div><article class="md-text content"><p>在使用 Electron 开发客户端时，如果现有 Node 模块所提供的功能无法满足需要，我们可以使用 C++ 开发自定义的 Node 模块，也称插件（addon）。</p>
+<p>Node.js 插件的扩展名为 <code>.node</code>，是二进制文件，其本质上是通过动态链接库（.dll 或 .so）重命名而来。</p>
 <span id="more"></span>
 
 <h1 id="1-选择Node-API"><a href="#1-选择Node-API" class="headerlink" title="1. 选择Node-API"></a>1. 选择Node-API</h1><p>开发Node.js扩展的方式有三种：</p>
@@ -216,8 +216,8 @@ Node.js插件的扩展名为.node，是二进制文件，其本质上是动态�
       <div class="header"><span>分享文章</span></div>
       <div class="body">
         <div class="link"><input class="copy-area" readonly="true" id="copy-link" value="https://jiangxueqiao.com/post/819381949.html" /></div>
-        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/b32ef3da1162a.svg" /></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://jiangxueqiao.com/post/819381949.html&title=Node插件开发(1)-快速入门 - 独钓寒江雪&pics=https://blog-static.jiangxueqiao.com/blog/banner/hor-banner-nodejs.png&summary=在使用Electron开发客户端时，如果现有Node模块所提供的功能无法满足需求，我们可以使用C++开发自定义的Node模块，也称插件（addon）。
-Node.js插件的扩展名为.node，是二进制文件，其本质上是动态链接库重命名而..."><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/80c07e4dbb303.svg" /></a><a class="social share-item email" href="mailto:?subject=Node插件开发(1)-快速入门 - 独钓寒江雪&amp;body=https://jiangxueqiao.com/post/819381949.html"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/a1b00e20f425d.svg" /></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/8411ed322ced6.svg" /></a></div>
+        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/b32ef3da1162a.svg" /></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://jiangxueqiao.com/post/819381949.html&title=Node插件开发(1)-快速入门 - 独钓寒江雪&pics=https://blog-static.jiangxueqiao.com/blog/banner/hor-banner-nodejs.png&summary=在使用 Electron 开发客户端时，如果现有 Node 模块所提供的功能无法满足需要，我们可以使用 C++ 开发自定义的 Node 模块，也称插件（addon）。
+Node.js 插件的扩展名为 .node，是二进制文件，其本质上..."><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/80c07e4dbb303.svg" /></a><a class="social share-item email" href="mailto:?subject=Node插件开发(1)-快速入门 - 独钓寒江雪&amp;body=https://jiangxueqiao.com/post/819381949.html"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/a1b00e20f425d.svg" /></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/8411ed322ced6.svg" /></a></div>
         
         <div class="qrcode" id="qrcode-wechat" style="opacity:0;height:0">
           <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=https://jiangxueqiao.com/post/819381949.html"/>
@@ -234,12 +234,12 @@ Node.js插件的扩展名为.node，是二进制文件，其本质上是动态�
       <div class='title cap theme'>您可能感兴趣的文章</div>
     </section>
     <section class='body'>
-    <div class="related-posts"><a class="item" href="\post\235943795.html" title="Node插件开发(2)-不同的调用方式"><span class="title">Node插件开发(2)-不同的调用方式</span><span class="excerpt">本文主要介绍如何在 Node-API 中实现不同的类型的接口，如：
+    <div class="related-posts"><a class="item" href="\post\235943795.html" title="Node插件开发(2)-调用方式"><span class="title">Node插件开发(2)-调用方式</span><span class="excerpt">本文主要介绍如何在 Node-API 中实现不同类型的接口，主要有下面几种类型：
 
 同步调用
 基于 Napi::AsyncWorker 的异步调用，通过回调函数返回
 异步调用，返回 Promise
-基于 Napi::ThreadSafeFuncti...</span></a><a class="item" href="\post\612028078.html" title="Electron判断程序运行环境"><span class="title">Electron判断程序运行环境</span><span class="excerpt">Electron官方未提供判断当前程序运行环境的方法。我认为官方不提供这个方法也是说的过去的，因为Electron扮演的是应用开发框架的角色，而运行环境这些东西本身属于开发者自己的事情，有的开发者喜欢定义“开发、测试、预生产、生成”四...</span></a><a class="item" href="\post\2191045165.html" title="Electron启动和禁用调试工具的方法"><span class="title">Electron启动和禁用调试工具的方法</span><span class="excerpt">1. 启用调试工具Electron中打开调试窗口的方法有多种，但前提都需要在创建Browser Window时启用devTools特性，如：
+基于 Napi::ThreadSaf...</span></a><a class="item" href="\post\612028078.html" title="Electron判断程序运行环境"><span class="title">Electron判断程序运行环境</span><span class="excerpt">Electron官方未提供判断当前程序运行环境的方法。我认为官方不提供这个方法也是说的过去的，因为Electron扮演的是应用开发框架的角色，而运行环境这些东西本身属于开发者自己的事情，有的开发者喜欢定义“开发、测试、预生产、生成”四...</span></a><a class="item" href="\post\2191045165.html" title="Electron启动和禁用调试工具的方法"><span class="title">Electron启动和禁用调试工具的方法</span><span class="excerpt">1. 启用调试工具Electron中打开调试窗口的方法有多种，但前提都需要在创建Browser Window时启用devTools特性，如：
 12345678const win = new BrowserWindow(&#123;  ...</span></a><a class="item" href="\post\946276004.html" title="产品级的Electron项目模板"><span class="title">产品级的Electron项目模板</span><span class="excerpt">写在前面已经有了那么多的 Electron 项目模板，为什么还要再造一个？是重复造轮子吗？
 我相信大多数人选择使用 Electron 开发客户端时，或多或少都看上了 Web 开发的高效率，但Web开发人员在客户端和系统编程方面的经验相...</span></a></div></section></div>
 

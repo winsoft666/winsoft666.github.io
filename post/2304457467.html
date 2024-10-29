@@ -21,8 +21,8 @@
 
   
   <meta name="description" content="CMake 是一个开源、跨平台的构建系统生成器（Build-system Generator）。
-本文是 Modern CMake 简明教程系列的中篇，上篇请移步 Modern CMake 简明教程（上）
-本教程默认 CMake 最低版本为 3.16，即 cmake_minimum_requi...">
+本文是 Modern CMake 简明教程系列的中篇，上篇请移步 《Modern CMake 简明教程（上）》
+本教程默认 CMake 最低版本为 3.16，即 cmake_minimum_req...">
   
   <meta name="keywords" content="CMake">
 
@@ -62,7 +62,7 @@
 
 
 
-<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/post/3416050985.html"><span class="title">“江”心之作</span></a><a class="item title" href="/post/3678619994.html"><span class="title">Modern CMake 简明教程（上）</span></a><a class="item title" href="/post/1531265402.html"><span class="title">CMake按目录层级进行分组</span></a><a class="item title" href="/post/2304457467.html"><span class="title">Modern CMake 简明教程（中）</span></a><a class="item title" href="/post/201509401.html"><span class="title">Modern CMake 简明教程（下）</span></a><a class="item title" href="/post/1204594779.html"><span class="title">拨开字符编码的迷雾(5)--Qt字符编码</span></a><a class="item title" href="/post/1559270845.html"><span class="title">拨开字符编码的迷雾(4)--MySQL字符编码</span></a><a class="item title" href="/post/2289160283.html"><span class="title">C++标准库线程的启动与退出</span></a><a class="item title" href="/post/3353203242.html"><span class="title">开源库jerryscript使用备忘</span></a><a class="item title" href="/post/2133505170.html"><span class="title">折腾开发环境的一天</span></a></div></widget>
+<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/post/235943795.html"><span class="title">Node插件开发(2)-调用方式</span></a><a class="item title" href="/post/819381949.html"><span class="title">Node插件开发(1)-快速入门</span></a><a class="item title" href="/post/3678619994.html"><span class="title">Modern CMake 简明教程（上）</span></a><a class="item title" href="/post/201509401.html"><span class="title">Modern CMake 简明教程（下）</span></a><a class="item title" href="/post/2304457467.html"><span class="title">Modern CMake 简明教程（中）</span></a><a class="item title" href="/post/3034381124.html"><span class="title">网络协议(2)--ARP和RARP协议</span></a><a class="item title" href="/post/3416050985.html"><span class="title">“江”心之作</span></a><a class="item title" href="/post/1531265402.html"><span class="title">CMake按目录层级进行分组</span></a><a class="item title" href="/post/1204594779.html"><span class="title">拨开字符编码的迷雾(5)--Qt字符编码</span></a><a class="item title" href="/post/1559270845.html"><span class="title">拨开字符编码的迷雾(4)--MySQL字符编码</span></a></div></widget>
 </div>
 
 </div></aside><div class="l_main" id="main">
@@ -75,7 +75,7 @@
   <div class="content">
     <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
 <span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/CMake/">CMake</a></div>
-<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2024-10-11T09:34:36.000Z">2024-10-11</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-10-17T06:39:03.359Z">2024-10-17</time></span></div></div></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2024-10-11T09:34:36.000Z">2024-10-11</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-10-29T01:56:52.631Z">2024-10-29</time></span></div></div></div>
     
     <div class="bottom only-title">
       
@@ -87,7 +87,7 @@
     
   </div>
   </div><article class="md-text content"><p><a target="_blank" rel="noopener" href="https://cmake.org/">CMake</a> 是一个开源、跨平台的构建系统生成器（Build-system Generator）。</p>
-<p>本文是 Modern CMake 简明教程系列的中篇，上篇请移步 <a href="/post/3678619994.html" title="Modern CMake 简明教程（上）">Modern CMake 简明教程（上）</a></p>
+<p>本文是 Modern CMake 简明教程系列的中篇，上篇请移步 <a href="/post/3678619994.html" title="Modern CMake 简明教程（上）">《Modern CMake 简明教程（上）》</a></p>
 <p>本教程默认 CMake 最低版本为 3.16，即 <code>cmake_minimum_required(VERSION 3.16)</code>。</p>
 <span id="more"></span>
 
@@ -115,7 +115,7 @@
 
 <h2 id="1-3"><a href="#1-3" class="headerlink" title="1.3 $&lt;BOOL:string&gt;"></a>1.3 $&lt;BOOL:string&gt;</h2><p>前面 2 种形式的 condition 都只允许为 0 或 1，这种限制未免有些呆板，如果 ENABLE_JSONCPP 的值不是 1 ，而是 ON 时，该怎么办呢？</p>
 <p>此时可以使用 <code>$&lt;BOOL:string&gt;</code> 将其转换成 0 或 1。</p>
-<p>何时转换成 0，何时转换成 1？可以参考前面的“3.3 条件判断”章节，所有为假的情况都转换成 0，其他情况则转换成 1。</p>
+<p>何时转换成 0，何时转换成 1？可以参考前面的<a href="/post/3678619994.html" title="Modern CMake 简明教程（上）">《Modern CMake 简明教程（上）》</a> 的“条件判断”章节，在该章节中介绍的所有为假的情况都会转换成 0，其他情况则转换成 1。</p>
 <p>该表达式的作用注定了其单独使用意义不大，通常都是和其他表达式一起使用，如将上面示例中的 ENABLE_JSONCPP 设置为 ON：</p>
 <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(ENABLE_JSONCPP <span class="keyword">ON</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">target_include_directories</span>(</span><br><span class="line">    my_lib PUBLIC </span><br><span class="line">    $&lt;<span class="keyword">IF</span>:$&lt;BOOL:<span class="variable">$&#123;ENABLE_JSONCPP&#125;</span>&gt;,<span class="variable">$&#123;CMAKE_SOURCE_DIR&#125;</span>/jsoncpp/<span class="keyword">include</span>,<span class="variable">$&#123;CMAKE_SOURCE_DIR&#125;</span>/rapidjson/<span class="keyword">include</span>&gt;  </span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 
@@ -249,8 +249,8 @@
       <div class="body">
         <div class="link"><input class="copy-area" readonly="true" id="copy-link" value="https://jiangxueqiao.com/post/2304457467.html" /></div>
         <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/b32ef3da1162a.svg" /></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://jiangxueqiao.com/post/2304457467.html&title=Modern CMake 简明教程（中） - 独钓寒江雪&pics=https://blog-static.jiangxueqiao.com/blog/banner/hor-cmake-girl.jpg&summary=CMake 是一个开源、跨平台的构建系统生成器（Build-system Generator）。
-本文是 Modern CMake 简明教程系列的中篇，上篇请移步 Modern CMake 简明教程（上）
-本教程默认 CMake 最低..."><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/80c07e4dbb303.svg" /></a><a class="social share-item email" href="mailto:?subject=Modern CMake 简明教程（中） - 独钓寒江雪&amp;body=https://jiangxueqiao.com/post/2304457467.html"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/a1b00e20f425d.svg" /></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/8411ed322ced6.svg" /></a></div>
+本文是 Modern CMake 简明教程系列的中篇，上篇请移步 《Modern CMake 简明教程（上）》
+本教程默认 CMake ..."><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/80c07e4dbb303.svg" /></a><a class="social share-item email" href="mailto:?subject=Modern CMake 简明教程（中） - 独钓寒江雪&amp;body=https://jiangxueqiao.com/post/2304457467.html"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/a1b00e20f425d.svg" /></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/8411ed322ced6.svg" /></a></div>
         
         <div class="qrcode" id="qrcode-wechat" style="opacity:0;height:0">
           <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=https://jiangxueqiao.com/post/2304457467.html"/>
@@ -270,7 +270,7 @@
     <div class="related-posts"><a class="item" href="\post\2291877732.html" title="CMake依赖库查找相关问题"><span class="title">CMake依赖库查找相关问题</span><span class="excerpt">1. 如何查找 Vcpkg 安装的依赖库在 CMake 工具中指定跨平台工具链，如图：
 指定 Toolchain 文件D:/sourcecode/vcpkg/scripts/buildsystems/vcpkg.cmake。</span></a><a class="item" href="\post\1531265402.html" title="CMake按目录层级进行分组"><span class="title">CMake按目录层级进行分组</span><span class="excerpt">为了提高项目的可维护性，我们通常会将不同用途的代码文件放到不同的文件夹中，如头文件放到include目录，源文件放到src目录，第三方库放到3rd目录等。
 当使用CMake生成Visual Studio工程时，我们亦希望在Visual...</span></a><a class="item" href="\post\201509401.html" title="Modern CMake 简明教程（下）"><span class="title">Modern CMake 简明教程（下）</span><span class="excerpt">CMake 是一个开源、跨平台的构建系统生成器（Build-system Generator）。
-本文是 Modern CMake 简明教程系列的下篇，上篇请移步至 Modern CMake 简明教程（上），中篇请移步至 Modern...</span></a><a class="item" href="\post\3678619994.html" title="Modern CMake 简明教程（上）"><span class="title">Modern CMake 简明教程（上）</span><span class="excerpt">CMake 是一个开源、跨平台的构建系统生成器（Build-system Generator）。
+本文是 Modern CMake 简明教程系列的下篇，上篇请移步至 《Modern CMake 简明教程（上）》，中篇请移步至 《Mod...</span></a><a class="item" href="\post\3678619994.html" title="Modern CMake 简明教程（上）"><span class="title">Modern CMake 简明教程（上）</span><span class="excerpt">CMake 是一个开源、跨平台的构建系统生成器（Build-system Generator）。
 CMake 是构建系统生成器，而不是构建系统，CMake 支持生成不同构建系统所支持的工程文件，如 Visual Studio，XCod...</span></a><a class="item" href="\post\1142527271.html" title="Vcpkg安装port历史版本"><span class="title">Vcpkg安装port历史版本</span><span class="excerpt">截至 2023-05-22：vcpkg 仅支持在 manifest 模式下指定 port 的版本，在命令行模式下不支持指定 port 版本。
 本文介绍如何在 Vcpkg 命令行模式下安装 port 时如何指定版本。</span></a></div></section></div>
 

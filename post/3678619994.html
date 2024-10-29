@@ -62,7 +62,7 @@ CMake 是构建系统生成器，而不是构建系统，CMake 支持生成不�
 
 
 
-<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/post/3416050985.html"><span class="title">“江”心之作</span></a><a class="item title" href="/post/3678619994.html"><span class="title">Modern CMake 简明教程（上）</span></a><a class="item title" href="/post/1531265402.html"><span class="title">CMake按目录层级进行分组</span></a><a class="item title" href="/post/2304457467.html"><span class="title">Modern CMake 简明教程（中）</span></a><a class="item title" href="/post/201509401.html"><span class="title">Modern CMake 简明教程（下）</span></a><a class="item title" href="/post/1204594779.html"><span class="title">拨开字符编码的迷雾(5)--Qt字符编码</span></a><a class="item title" href="/post/1559270845.html"><span class="title">拨开字符编码的迷雾(4)--MySQL字符编码</span></a><a class="item title" href="/post/2289160283.html"><span class="title">C++标准库线程的启动与退出</span></a><a class="item title" href="/post/3353203242.html"><span class="title">开源库jerryscript使用备忘</span></a><a class="item title" href="/post/2133505170.html"><span class="title">折腾开发环境的一天</span></a></div></widget>
+<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/post/235943795.html"><span class="title">Node插件开发(2)-调用方式</span></a><a class="item title" href="/post/819381949.html"><span class="title">Node插件开发(1)-快速入门</span></a><a class="item title" href="/post/3678619994.html"><span class="title">Modern CMake 简明教程（上）</span></a><a class="item title" href="/post/201509401.html"><span class="title">Modern CMake 简明教程（下）</span></a><a class="item title" href="/post/2304457467.html"><span class="title">Modern CMake 简明教程（中）</span></a><a class="item title" href="/post/3034381124.html"><span class="title">网络协议(2)--ARP和RARP协议</span></a><a class="item title" href="/post/3416050985.html"><span class="title">“江”心之作</span></a><a class="item title" href="/post/1531265402.html"><span class="title">CMake按目录层级进行分组</span></a><a class="item title" href="/post/1204594779.html"><span class="title">拨开字符编码的迷雾(5)--Qt字符编码</span></a><a class="item title" href="/post/1559270845.html"><span class="title">拨开字符编码的迷雾(4)--MySQL字符编码</span></a></div></widget>
 </div>
 
 </div></aside><div class="l_main" id="main">
@@ -75,7 +75,7 @@ CMake 是构建系统生成器，而不是构建系统，CMake 支持生成不�
   <div class="content">
     <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
 <span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/CMake/">CMake</a></div>
-<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2024-10-08T09:30:36.000Z">2024-10-08</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-10-17T06:41:08.114Z">2024-10-17</time></span></div></div></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2024-10-08T09:30:36.000Z">2024-10-08</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-10-29T02:00:36.644Z">2024-10-29</time></span></div></div></div>
     
     <div class="bottom only-title">
       
@@ -113,8 +113,8 @@ CMake 是构建系统生成器，而不是构建系统，CMake 支持生成不�
 
 <p>当然，上面的名称并不是一成不变的，可以根据自己的喜好来定义，例如 my_project 可以是任意的项目名，如果不喜欢复数，可以将 tests 改成test，如果没有 python 代码，也可以移除 python 目录，cmake 目录则用于存放 CMake 辅助脚本。</p>
 <p>从上面的目录结构可以看到，CMakeLists.txt 文件分散在各个子目录中，但在 include 目录中没有 CMakeList.txt 文件，这样是为了防止暴露不必要的文件给库的使用者，因为 include 目录中存放的是库的头文件，在安装时通常都会将该目录拷贝到指定位置（如Linux系统的 &#x2F;usr&#x2F;include）。</p>
-<p>extern 目录用于存放第三方依赖库的源码，这些库可以通过 <code>git submodule</code> 的形式来管理，也可以直接将源码拷贝到此，并提交到项目 git 中。但无论使用哪种方式，依赖库最好能支持 CMake，这样可以方便的使用 <code>add_subdirectory</code> 命令将项目添加到工程中（add_subdirectory 可以添加任何包含 CMakeLists.txt 文件的目录到项目中）。</p>
-<h2 id="2-2-一个简单的示例"><a href="#2-2-一个简单的示例" class="headerlink" title="2.2 一个简单的示例"></a>2.2 一个简单的示例</h2><p>我们先从一个简单的示例开始，了解 CMake 的基本玩法。</p>
+<p>extern 目录用于存放第三方依赖库的源码，这些库可以通过 <code>git submodule</code> 的形式来管理，也可以直接将源码拷贝到此，并提交到项目 git 中。但无论使用哪种方式，依赖库最好能支持 CMake，这样可以方便的使用 <code>add_subdirectory</code> 命令将项目添加到工程中（如果你对 add_subdirectory 命令的具体用法还不了解，这没关系，现在你只需要知道该命令可以添加任何包含 CMakeLists.txt 的目录到项目中即可）。</p>
+<h2 id="2-2-一个简单的示例"><a href="#2-2-一个简单的示例" class="headerlink" title="2.2 一个简单的示例"></a>2.2 一个简单的示例</h2><p>在学习 CMake 之前，我们先将 CMake 玩起来。我们先从一个简单的示例开始，了解 CMake 的基本玩法。</p>
 <p>该示例是只包含一个 main.cpp 文件，我们期望编译该文件能生成 hello_cmake 程序。</p>
 <p>目录结构如下：</p>
 <figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- hello_cmake</span><br><span class="line">  - main.cpp</span><br><span class="line">  - CMakeLists.txt</span><br></pre></td></tr></table></figure>
@@ -586,7 +586,7 @@ CMake 是构建系统生成器，而不是构建系统，CMake 支持生成不�
 <p>示例：</p>
 <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 编译选项</span></span><br><span class="line"><span class="keyword">target_compile_options</span>(my_lib PRIVATE /utf8)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 链接选项</span></span><br><span class="line"><span class="keyword">target_link_options</span>(app PRIVATE /NOLOGO)</span><br></pre></td></tr></table></figure>
 
-<h2 id="4-7-其他属性"><a href="#4-7-其他属性" class="headerlink" title="4.7 其他属性"></a>4.7 其他属性</h2><p>CMake 为目标还提供了其他属性，详见：<a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/latest/manual/cmake-properties.7.html#target-properties">target-properties</a></p>
+<h2 id="4-7-其他属性"><a href="#4-7-其他属性" class="headerlink" title="4.7 其他属性"></a>4.7 其他属性</h2><p>CMake 为目标还提供了其他属性，详见 <a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/latest/manual/cmake-properties.7.html#target-properties">target-properties</a> ，总计约有 400 多个，涵盖了开发中会用到的绝大多数属性，例如其中以 VS_ 开头的属性是专门为 Visual Studio 所准备的。</p>
 <p>针对这些属性，需要使用 <a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/latest/command/set_target_properties.html">set_target_properties</a> 指令进行设置。</p>
 <p>例如，使用 OUTPUT_NAME 和 DEBUG_OUTPUT_NAME 设置目标的输出文件名。</p>
 <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set_target_properties</span>(zoe PROPERTIES </span><br><span class="line">  OUTPUT_NAME Zoe</span><br><span class="line">  DEBUG_OUTPUT_NAME Zoe-d)</span><br></pre></td></tr></table></figure>
@@ -623,7 +623,7 @@ CMake 是构建系统生成器，而不是构建系统，CMake 支持生成不�
     <div class="related-posts"><a class="item" href="\post\2291877732.html" title="CMake依赖库查找相关问题"><span class="title">CMake依赖库查找相关问题</span><span class="excerpt">1. 如何查找 Vcpkg 安装的依赖库在 CMake 工具中指定跨平台工具链，如图：
 指定 Toolchain 文件D:/sourcecode/vcpkg/scripts/buildsystems/vcpkg.cmake。</span></a><a class="item" href="\post\1531265402.html" title="CMake按目录层级进行分组"><span class="title">CMake按目录层级进行分组</span><span class="excerpt">为了提高项目的可维护性，我们通常会将不同用途的代码文件放到不同的文件夹中，如头文件放到include目录，源文件放到src目录，第三方库放到3rd目录等。
 当使用CMake生成Visual Studio工程时，我们亦希望在Visual...</span></a><a class="item" href="\post\201509401.html" title="Modern CMake 简明教程（下）"><span class="title">Modern CMake 简明教程（下）</span><span class="excerpt">CMake 是一个开源、跨平台的构建系统生成器（Build-system Generator）。
-本文是 Modern CMake 简明教程系列的下篇，上篇请移步至 Modern CMake 简明教程（上），中篇请移步至 Modern...</span></a><a class="item" href="\post\1142527271.html" title="Vcpkg安装port历史版本"><span class="title">Vcpkg安装port历史版本</span><span class="excerpt">截至 2023-05-22：vcpkg 仅支持在 manifest 模式下指定 port 的版本，在命令行模式下不支持指定 port 版本。
+本文是 Modern CMake 简明教程系列的下篇，上篇请移步至 《Modern CMake 简明教程（上）》，中篇请移步至 《Mod...</span></a><a class="item" href="\post\1142527271.html" title="Vcpkg安装port历史版本"><span class="title">Vcpkg安装port历史版本</span><span class="excerpt">截至 2023-05-22：vcpkg 仅支持在 manifest 模式下指定 port 的版本，在命令行模式下不支持指定 port 版本。
 本文介绍如何在 Vcpkg 命令行模式下安装 port 时如何指定版本。</span></a><a class="item" href="\post\1904533666.html" title="Vcpkg访问Github私有仓库"><span class="title">Vcpkg访问Github私有仓库</span><span class="excerpt">Vcpkg 默认只支持从公共代码仓库进行下载编译，本文介绍如何使用 Vcpkg 从私有仓库进行源码下载&#x2F;编译&#x2F;安装。</span></a></div></section></div>
 
 
