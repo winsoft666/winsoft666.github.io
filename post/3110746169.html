@@ -61,7 +61,7 @@
 
 
 
-<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/post/235943795.html"><span class="title">Node插件开发(2)-调用方式</span></a><a class="item title" href="/post/819381949.html"><span class="title">Node插件开发(1)-快速入门</span></a><a class="item title" href="/post/3678619994.html"><span class="title">Modern CMake 简明教程（上）</span></a><a class="item title" href="/post/201509401.html"><span class="title">Modern CMake 简明教程（下）</span></a><a class="item title" href="/post/2304457467.html"><span class="title">Modern CMake 简明教程（中）</span></a><a class="item title" href="/post/3034381124.html"><span class="title">网络协议(2)--ARP和RARP协议</span></a><a class="item title" href="/post/3416050985.html"><span class="title">“江”心之作</span></a><a class="item title" href="/post/1531265402.html"><span class="title">CMake按目录层级进行分组</span></a><a class="item title" href="/post/1204594779.html"><span class="title">拨开字符编码的迷雾(5)--Qt字符编码</span></a><a class="item title" href="/post/1559270845.html"><span class="title">拨开字符编码的迷雾(4)--MySQL字符编码</span></a></div></widget>
+<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/post/3353203242.html"><span class="title">开源库jerryscript使用备忘</span></a><a class="item title" href="/post/2306363290.html"><span class="title">Windows系统各版本占比对技术选型的影响</span></a><a class="item title" href="/post/3110746169.html"><span class="title">聊聊桌面客户端开发的技术选型</span></a><a class="item title" href="/post/819381949.html"><span class="title">Node插件开发(1)-快速入门</span></a><a class="item title" href="/post/235943795.html"><span class="title">Node插件开发(2)-调用方式</span></a><a class="item title" href="/post/3678619994.html"><span class="title">Modern CMake 简明教程（上）</span></a><a class="item title" href="/post/201509401.html"><span class="title">Modern CMake 简明教程（下）</span></a><a class="item title" href="/post/2304457467.html"><span class="title">Modern CMake 简明教程（中）</span></a><a class="item title" href="/post/3034381124.html"><span class="title">网络协议(2)--ARP和RARP协议</span></a><a class="item title" href="/post/3416050985.html"><span class="title">“江”心之作</span></a></div></widget>
 </div>
 
 </div></aside><div class="l_main" id="main">
@@ -74,7 +74,7 @@
   <div class="content">
     <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
 <span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/">项目管理</a></div>
-<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2023-07-22T15:35:10.000Z">2023-07-22</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-08-06T02:55:41.924Z">2024-08-06</time></span></div></div></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2023-07-22T15:35:10.000Z">2023-07-22</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-11-05T03:46:49.857Z">2024-11-05</time></span></div></div></div>
     
     <div class="bottom only-title">
       
@@ -226,20 +226,22 @@
 <li><a target="_blank" rel="noopener" href="https://github.com/ocornut/imgui">imgui</a></li>
 <li>……</li>
 </ul>
-<h1 id="二、选型建议"><a href="#二、选型建议" class="headerlink" title="二、选型建议"></a>二、选型建议</h1><p>在进行技术选型时，需要综合考虑客户端需要支持的系统环境、安装包大小、界面效果、动画性能、开发周期、技术人员储备等因素，通常没有标准答案。</p>
+<h1 id="二、选型建议"><a href="#二、选型建议" class="headerlink" title="二、选型建议"></a>二、选型建议</h1><p>在进行技术选型时，需要综合考虑客户端需要支持的系统环境、安装包大小、界面效果、动画性能、系统功能的数量、开发周期、技术人员储备等因素，通常没有标准答案。</p>
 <p>下面根据几种常见的情况，给出了一点点建议，仅供参考。</p>
 <ul>
-<li><p>如果程序只需要支持 Windows 平台，对安装包大小不敏感，开发周期想要尽可能缩短，可以选择 Microsoft WebView2、 WinForms、 WPF。</p>
+<li><p>如果程序只需要支持 Windows 平台，对安装包大小不敏感，开发周期想要尽可能缩短，可以选择的比较多，如 Microsoft WebView2、 WinForms、 WPF、CEF 等。</p>
 </li>
-<li><p>如果程序只需要支持 Windows 平台，对安装包大小比较敏感，可以选择 MFC、DirectUI、Qt。</p>
+<li><p>如果程序只需要支持 Windows 平台，对安装包大小比较敏感，开发时间充裕可以选择原生开发 MFC、DirectUI、Qt，想加快开发进度可以使用网页开发 Microsoft WebView2。</p>
 </li>
 <li><p>如果程序只需要支持 Windows 平台，对安装包大小比较敏感，界面效果要求较高，开发周期想要尽可能缩短，可以选择 Microsoft WebView2。</p>
 </li>
-<li><p>如果程序需要支持 Windows、macOS 平台，对安装包大小不敏感，开发周期想要尽可能缩短，建议选择 Electron。</p>
+<li><p>如果程序只需要支持 Windows 平台，对安装包大小比较敏感，功能以系统功能为主，可以选择 MFC、DirectUI、Qt。</p>
 </li>
-<li><p>如果程序需要支持 Windows、macOS 平台，对安装包大小比较敏感，可以选择 Qt。</p>
+<li><p>如果程序需要支持 Windows、macOS 平台，对安装包大小不敏感，开发周期想要尽可能缩短，选择 Electron。</p>
 </li>
-<li><p>如果程序需要支持国产系统（如麒麟系统、统信系统等），可能只能选择 Qt 了，因为 Electron、.Net Core 等框架都还未对这些系统进行适配，而且可能不在信创白名单中。</p>
+<li><p>如果程序需要支持 Windows、macOS 平台，对安装包大小比较敏感，选择 Qt。</p>
+</li>
+<li><p>如果程序需要支持国产系统（如麒麟系统、统信系统等），可能只能选择 Qt 了，因为 Electron、.Net Core 等框架可能还未对这些系统进行完全适配，需要自己去填坑，而且还需要考虑是否在信创白名单中。</p>
 </li>
 </ul>
 
@@ -272,7 +274,7 @@
       <div class='title cap theme'>您可能感兴趣的文章</div>
     </section>
     <section class='body'>
-    <div class="related-posts"><a class="item" href="\post\449620601.html" title="客户端软件日志输出规范"><span class="title">客户端软件日志输出规范</span></a></div></section></div>
+    <div class="related-posts"><a class="item" href="\post\128186902.html" title="C++的API设计规范"><span class="title">C++的API设计规范</span><span class="excerpt">《C++ API 设计》是一本非常不错的书，该书内容远远超过了它标题所指的 C++ API 设计，它不仅仅讲述了与编程语言无关的 API 设计需要遵循的一些规范，同时也介绍了很多 C++开发中需要遵守一些准则，如果在开发中能遵循这些准...</span></a></div></section></div>
 
 
   <div class="related-wrap md-text" id="comments">

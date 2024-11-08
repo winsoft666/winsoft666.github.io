@@ -61,7 +61,7 @@ Node.js 插件的扩展名为 .node，是二进制文件，其本质上是通过
 
 
 
-<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/post/235943795.html"><span class="title">Node插件开发(2)-调用方式</span></a><a class="item title" href="/post/819381949.html"><span class="title">Node插件开发(1)-快速入门</span></a><a class="item title" href="/post/3678619994.html"><span class="title">Modern CMake 简明教程（上）</span></a><a class="item title" href="/post/201509401.html"><span class="title">Modern CMake 简明教程（下）</span></a><a class="item title" href="/post/2304457467.html"><span class="title">Modern CMake 简明教程（中）</span></a><a class="item title" href="/post/3034381124.html"><span class="title">网络协议(2)--ARP和RARP协议</span></a><a class="item title" href="/post/3416050985.html"><span class="title">“江”心之作</span></a><a class="item title" href="/post/1531265402.html"><span class="title">CMake按目录层级进行分组</span></a><a class="item title" href="/post/1204594779.html"><span class="title">拨开字符编码的迷雾(5)--Qt字符编码</span></a><a class="item title" href="/post/1559270845.html"><span class="title">拨开字符编码的迷雾(4)--MySQL字符编码</span></a></div></widget>
+<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/post/3353203242.html"><span class="title">开源库jerryscript使用备忘</span></a><a class="item title" href="/post/2306363290.html"><span class="title">Windows系统各版本占比对技术选型的影响</span></a><a class="item title" href="/post/3110746169.html"><span class="title">聊聊桌面客户端开发的技术选型</span></a><a class="item title" href="/post/819381949.html"><span class="title">Node插件开发(1)-快速入门</span></a><a class="item title" href="/post/235943795.html"><span class="title">Node插件开发(2)-调用方式</span></a><a class="item title" href="/post/3678619994.html"><span class="title">Modern CMake 简明教程（上）</span></a><a class="item title" href="/post/201509401.html"><span class="title">Modern CMake 简明教程（下）</span></a><a class="item title" href="/post/2304457467.html"><span class="title">Modern CMake 简明教程（中）</span></a><a class="item title" href="/post/3034381124.html"><span class="title">网络协议(2)--ARP和RARP协议</span></a><a class="item title" href="/post/3416050985.html"><span class="title">“江”心之作</span></a></div></widget>
 </div>
 
 </div></aside><div class="l_main" id="main">
@@ -74,7 +74,7 @@ Node.js 插件的扩展名为 .node，是二进制文件，其本质上是通过
   <div class="content">
     <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
 <span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Electron/">Electron</a></div>
-<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2024-02-27T15:54:54.000Z">2024-02-27</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-10-29T02:02:29.587Z">2024-10-29</time></span></div></div></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2024-02-27T15:54:54.000Z">2024-02-27</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-11-05T02:35:24.808Z">2024-11-05</time></span></div></div></div>
     
     <div class="bottom only-title">
       
@@ -198,9 +198,10 @@ Node.js 插件的扩展名为 .node，是二进制文件，其本质上是通过
 <p>TypeError继承自Error，通常用于表示与类型错误相关的异常。类似的错误类型还有<code>RangeError</code>等，也可以直接抛出<code>Error</code>类型的错误：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">throw</span> Napi::Error::<span class="built_in">New</span>(env, <span class="string">&quot;Wrong number of arguments&quot;</span>);</span><br></pre></td></tr></table></figure>
 
-<p>在没有启动C++异常的情况下，从Node插件抛出异常的方式如下，抛出异常后需要使用return语句终止下面流程的执行：</p>
+<p>在没有启用 C++ 异常的情况下，采用如下方式从 Node 插件抛出异常：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Napi::TypeError::<span class="built_in">New</span>(env, <span class="string">&quot;Wrong number of arguments&quot;</span>).<span class="built_in">ThrowAsJavaScriptException</span>();</span><br><span class="line"><span class="keyword">return</span>;</span><br></pre></td></tr></table></figure>
 
+<p>抛出异常后需要使用 return 语句终止下面流程的执行。</p>
 <blockquote>
 <p>Node-API官方文档：<a target="_blank" rel="noopener" href="https://github.com/nodejs/node-addon-api/blob/main/doc/README.md">node-addon-api doc</a><br>Node.js官方addon示例：<a target="_blank" rel="noopener" href="https://github.com/nodejs/node-addon-examples">node-addon-examples</a></p>
 </blockquote>
