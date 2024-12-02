@@ -23,7 +23,7 @@
   <meta name="description" content="一、写在前面前面的文章已经介绍了套接字 I&#x2F;O 的同步模型、WSAAsyncSelect模型、WSAEventSelect模型，到目前为止套接字I&#x2F;O还剩下2个模型没有介绍：重叠模型，完成端口模型。 
 如果程序对性能和并发要求不高，可以使用前面介绍的WSAEventSele...">
   
-  <meta name="keywords" content="Windows,Linux,C/C++,Golang,Qt,Node.js,Electron,WebRTC,NSIS">
+  <meta name="keywords" content="套接字I/O模型,完成端口">
 
   <!-- feed -->
   
@@ -61,7 +61,7 @@
 
 <widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">专栏：《Windows套接字I/O模型》</span></div><div class="widget-body"><a class="item" href="/post/2937580891.html"><span class="title">Windows套接字I/O模型(1)-阻塞模型</span></a><a class="item" href="/post/640627104.html"><span class="title">Windows套接字I/O模型(2)-Select模型</span></a><a class="item" href="/post/2544551173.html"><span class="title">Windows套接字I/O模型(3)-WSAAsyncSelect模型</span></a><a class="item" href="/post/547434843.html"><span class="title">Windows套接字I/O模型(4)-WSAEventSelect模型</span></a><a class="item active" href="/post/326824759.html"><span class="title">Windows套接字I/O模型(5)-完成端口模型</span><svg class="active-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M21 11.098v4.993c0 3.096 0 4.645-.734 5.321c-.35.323-.792.526-1.263.58c-.987.113-2.14-.907-4.445-2.946c-1.02-.901-1.529-1.352-2.118-1.47a2.225 2.225 0 0 0-.88 0c-.59.118-1.099.569-2.118 1.47c-2.305 2.039-3.458 3.059-4.445 2.945a2.238 2.238 0 0 1-1.263-.579C3 20.736 3 19.188 3 16.091v-4.994C3 6.81 3 4.666 4.318 3.333C5.636 2 7.758 2 12 2c4.243 0 6.364 0 7.682 1.332C21 4.665 21 6.81 21 11.098" opacity=".5"/><path fill="currentColor" d="M9 5.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5z"/></svg></a></div></widget>
 
-<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/post/3353203242.html"><span class="title">开源库jerryscript使用备忘</span></a><a class="item title" href="/post/3416050985.html"><span class="title">工具及开源项目集合</span></a><a class="item title" href="/post/2306363290.html"><span class="title">Windows系统各版本占比对技术选型的影响</span></a><a class="item title" href="/post/3110746169.html"><span class="title">聊聊桌面客户端开发的技术选型</span></a><a class="item title" href="/post/819381949.html"><span class="title">Node插件开发(1)-快速入门</span></a><a class="item title" href="/post/235943795.html"><span class="title">Node插件开发(2)-调用方式</span></a><a class="item title" href="/post/3678619994.html"><span class="title">Modern CMake 简明教程（上）</span></a><a class="item title" href="/post/201509401.html"><span class="title">Modern CMake 简明教程（下）</span></a><a class="item title" href="/post/2304457467.html"><span class="title">Modern CMake 简明教程（中）</span></a><a class="item title" href="/post/3034381124.html"><span class="title">网络协议(2)--ARP和RARP协议</span></a></div></widget>
+<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/post/213040252.html"><span class="title">Windows内存体系(6)--跨模块内存分配释放</span></a><a class="item title" href="/post/2819651546.html"><span class="title">字节序列之大小端</span></a><a class="item title" href="/post/1504192511.html"><span class="title">Windows注入与拦截(1)-注入基础</span></a><a class="item title" href="/post/2804470458.html"><span class="title">Windows注入与拦截(3)-窗口挂载</span></a><a class="item title" href="/post/547434843.html"><span class="title">Windows套接字I/O模型(4)-WSAEventSelect模型</span></a><a class="item title" href="/post/326824759.html"><span class="title">Windows套接字I/O模型(5)-完成端口模型</span></a><a class="item title" href="/post/2544551173.html"><span class="title">Windows套接字I/O模型(3)-WSAAsyncSelect模型</span></a><a class="item title" href="/post/640627104.html"><span class="title">Windows套接字I/O模型(2)-Select模型</span></a><a class="item title" href="/post/2937580891.html"><span class="title">Windows套接字I/O模型(1)-阻塞模型</span></a><a class="item title" href="/post/3937624737.html"><span class="title">Windows内存体系(7)--使用std::string跨MT模块传参</span></a></div></widget>
 </div>
 
 </div></aside><div class="l_main" id="main">
@@ -74,7 +74,7 @@
   <div class="content">
     <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
 <span class="sep"></span><a class="cap breadcrumb" id="menu" href="/topic">专栏</a><span class="sep"></span><a class="cap breadcrumb" id="proj" href="/post/2937580891.html">《Windows套接字I/O模型》</a></div>
-<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2017-12-15T09:38:58.000Z">2017-12-15</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-04-13T07:45:40.041Z">2024-04-13</time></span></div></div></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2017-12-15T09:38:58.000Z">2017-12-15</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-12-02T04:29:29.025Z">2024-12-02</time></span></div></div></div>
     
     <div class="bottom only-title">
       
@@ -176,7 +176,7 @@
       <div class='title cap theme'>您可能感兴趣的文章</div>
     </section>
     <section class='body'>
-    <div class="related-posts"><a class="item" href="\post\640627104.html" title="Windows套接字I/O模型(2)-Select模型"><span class="title">Windows套接字I/O模型(2)-Select模型</span><span class="excerpt">一、Select模型介绍套接字Select模型的中心思想是利用select函数实现对I&#x2F;O的管理。利用select函数来判断套接字（一个或多个）上是否存在数据，或者能否向套接字写入数据。它也是同步的，也会阻塞。但和阻塞模型不...</span></a></div></section></div>
+    <div class="related-posts"><a class="item" href="\post\2937580891.html" title="Windows套接字I/O模型(1)-阻塞模型"><span class="title">Windows套接字I/O模型(1)-阻塞模型</span><span class="excerpt">套接字I&#x2F;O的阻塞模型是最常见的网络模型，也是在网络编程中最早接触的一个模型。因为它是阻塞的，所以我们一般都会结合线程一起使用，如将accept，recv等操作放到单独的线程，防止程序的主线程被阻塞住。</span></a><a class="item" href="\post\640627104.html" title="Windows套接字I/O模型(2)-Select模型"><span class="title">Windows套接字I/O模型(2)-Select模型</span><span class="excerpt">一、Select模型介绍套接字Select模型的中心思想是利用select函数实现对I&#x2F;O的管理。利用select函数来判断套接字（一个或多个）上是否存在数据，或者能否向套接字写入数据。它也是同步的，也会阻塞。但和阻塞模型不...</span></a><a class="item" href="\post\2544551173.html" title="Windows套接字I/O模型(3)-WSAAsyncSelect模型"><span class="title">Windows套接字I/O模型(3)-WSAAsyncSelect模型</span><span class="excerpt">一、WSAAsyncSelect模型介绍利用WSAAsyncSelect模型结合windows窗口消息循环，应用程序可以在一个套接字上接收以Windows消息为基础的网络事件通知。要想使用WSAAsyncSelect模型，首先必须创建...</span></a><a class="item" href="\post\547434843.html" title="Windows套接字I/O模型(4)-WSAEventSelect模型"><span class="title">Windows套接字I/O模型(4)-WSAEventSelect模型</span><span class="excerpt">一、WSAEventSelect模型介绍WSAEventSelect模型和WSAAsyncSelect模型类似，但WSAEventSelect模型允许应用程序在一个或多个套接字上面接收以事件为基础的网络事件通知。该模型和WSAAsyn...</span></a></div></section></div>
 
 
   <div class="related-wrap md-text" id="comments">
