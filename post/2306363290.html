@@ -20,9 +20,7 @@
   <title>Windows系统各版本占比对技术选型的影响 - 独钓寒江雪</title>
 
   
-  <meta name="description" content="既然是从 Windows 系统占比来谈技术选型，这个技术选型当然只现定于开发 Windows 客户端产品的选型了。
-在聊技术选型之前，我们需要先了解目前不同市场上 Windows 系统各个版本的占比情况。
-下图展示了我们公司的 A、B两个产品（面向 C 端用户）在 2024 年度的装机量的统计...">
+  <meta name="description" content="文章已被加密">
   
   <meta name="keywords" content="Windows,Linux,C/C++,Golang,Qt,Node.js,Electron,WebRTC,NSIS">
 
@@ -62,7 +60,7 @@
 
 
 
-<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/post/213040252.html"><span class="title">Windows内存体系(6)--跨模块内存分配释放</span></a><a class="item title" href="/post/2819651546.html"><span class="title">字节序列之大小端</span></a><a class="item title" href="/post/1504192511.html"><span class="title">Windows注入与拦截(1)-注入基础</span></a><a class="item title" href="/post/2804470458.html"><span class="title">Windows注入与拦截(3)-窗口挂载</span></a><a class="item title" href="/post/547434843.html"><span class="title">Windows套接字I/O模型(4)-WSAEventSelect模型</span></a><a class="item title" href="/post/326824759.html"><span class="title">Windows套接字I/O模型(5)-完成端口模型</span></a><a class="item title" href="/post/2544551173.html"><span class="title">Windows套接字I/O模型(3)-WSAAsyncSelect模型</span></a><a class="item title" href="/post/640627104.html"><span class="title">Windows套接字I/O模型(2)-Select模型</span></a><a class="item title" href="/post/2937580891.html"><span class="title">Windows套接字I/O模型(1)-阻塞模型</span></a><a class="item title" href="/post/3937624737.html"><span class="title">Windows内存体系(7)--使用std::string跨MT模块传参</span></a></div></widget>
+<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/post/2133505170.html"><span class="title">折腾开发环境的一天</span></a><a class="item title" href="/post/2306363290.html"><span class="title">Windows系统各版本占比对技术选型的影响</span></a><a class="item title" href="/post/2304457467.html"><span class="title">Modern CMake 简明教程（中）</span></a><a class="item title" href="/post/3678619994.html"><span class="title">Modern CMake 简明教程（上）</span></a><a class="item title" href="/post/201509401.html"><span class="title">Modern CMake 简明教程（下）</span></a><a class="item title" href="/post/213040252.html"><span class="title">Windows内存体系(6)--跨模块内存分配释放</span></a><a class="item title" href="/post/2819651546.html"><span class="title">字节序列之大小端</span></a><a class="item title" href="/post/1504192511.html"><span class="title">Windows注入与拦截(1)-注入基础</span></a><a class="item title" href="/post/2804470458.html"><span class="title">Windows注入与拦截(3)-窗口挂载</span></a><a class="item title" href="/post/547434843.html"><span class="title">Windows套接字I/O模型(4)-WSAEventSelect模型</span></a></div></widget>
 </div>
 
 </div></aside><div class="l_main" id="main">
@@ -75,7 +73,7 @@
   <div class="content">
     <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
 <span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/">项目管理</a></div>
-<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2024-11-05T05:35:00.000Z">2024-11-05</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-11-08T02:25:38.550Z">2024-11-08</time></span></div></div></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2024-11-05T05:35:00.000Z">2024-11-05</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2025-01-09T06:57:21.963Z">2025-01-09</time></span></div></div></div>
     
     <div class="bottom only-title">
       
@@ -86,23 +84,18 @@
     </div>
     
   </div>
-  </div><article class="md-text content"><p>既然是从 Windows 系统占比来谈技术选型，这个技术选型当然只现定于开发 Windows 客户端产品的选型了。</p>
-<p>在聊技术选型之前，我们需要先了解目前不同市场上 Windows 系统各个版本的占比情况。</p>
-<p>下图展示了我们公司的 A、B两个产品（面向 C 端用户）在 2024 年度的装机量的统计信息。</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/img/QTLS0la1uO-TinyTu.png"></p>
-<p>下图是 Steam 统计的 Windows 系统各版本的占比情况，Steam 以游戏用户为主，因此机器配置会高一些，升级系统的意愿也会强烈一些。</p>
-<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/img/UsnFtncuVO-TinyTu.png"></p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://store.steampowered.com/hwsurvey/directx/">Steam 硬件和软件调查: October 2024</a></p>
-</blockquote>
-<p>从上面的两个统计结果可以得出：</p>
-<ul>
-<li>Windows XP、Windows Vista、 Windows 8 系统已经绝迹。</li>
-<li>Win7 系统在非游戏消费市场的占比仍然较大，在面向 B 端用户的领域，如工业软件等，占比只会更高，因此在技术选型时，还不能忽略对 Win7 的支持。</li>
-<li>Win10 和 Win11 已是当前的主流系统，虽然 Win11 的占比在逐步提升，但 Win10 系统依然占据了近乎半壁江山。因此如果采用 Microsoft Edge WebView2 技术架构，可能有近一半的用户要先在线安装 Microsoft Edge WebView2 运行时才能运行。</li>
-<li>目前，在个人消费者市场上，绝大部分系统已经是 64 位，仅有少部分 Win7 还是 32 位的，因此面向个人消费者市场的软件可以完全采用 64 位架构开发，而面向 B 端的软件则还可能需要支持 32 位架构。</li>
-</ul>
-
+  </div><article class="md-text content"><div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="密码错误" data-whm="无法校验文章哈希">
+  <script id="hbeData" type="hbeData" data-hmacdigest="8fb760eff8ab7ad5612184f809df14c2d58d21227db3626892e3a94593e0fe05">49420f43dcd4ffad5e1774efbcfcadee1df58b08bd2027afeeff190f6d3914caa3f5046f3f5bad5b765f8cbb26ace04d6965f94871d34eafdab6cc28b4206ec5923d3968c22469732531493518815210892145cff461ac8a8fb2a237750d7842771878571b9008bad5d5f30e6d3ad86bb644fda522166f202c972259dfc028974b69f095caa8d5b77cd27cdedaa4ac899377d20a00be9995f7881bcd106590837ff386be93f1c195600fc5a244fd5242024464d283358d629d5a87c4d0eaae5e2d740a0e2aae6c40dc2854859529b59faa10704c399588f138db6097f16f67d8ac1d14d3755bdbe14e4f91356508b7329982a479767417beddd0509fe77f57e029a43c689b1e52663654395e320c1d3047615969ebe89793a7eee4b630f2928de8b6a63a88a3871cf91937634430faa3b86745ddbad29154a6101df9c75a082356c4cf0de32adb1676f79e344339db3cf8d1c7f5cefc092d1cedfad1c16fae5864b31085efe02d77010801d8224cb3857e2de8719e70fc6734ec47b69b186d05cccfa011002cbdb47fc6eaaa799cf078bdeb6073fd16d37c8bcd216992edd1ebba4011707a8f4e6fcd4df8811be78bf8b8109f72b2cc90e495bc3649b5bce9fe8b87a3fcdb8ccfd7466844ebe65cd6a71ae3d2263a72987685f523b9fd1b4c69e9a5ddf49f747d2883e99cc0d7c797eb8be5255189ee61942373f0c7e26bc64583ab28ff5cc4d44802597c55b5600724c3e398eef5520ca68ddb2decf045814518c6596eab4f5ffac9ebb52f5ab8ba2a00b60f9c3c7ba49e997437fc1af88ce660abcf4f30f627411f1f04d3829b3460d3cb1e911e8cee55f6f32f06ec7926dd1a4630d6f9fd6f91da9041b184aa77e4aadd053a291b668369c924df2550bf585d4986ba62ed656faef12906d6308a6450bd5846aeb2eb40ee66ee11dc855cc536717270ff5dcaaf2dd8a5723c7613dc3729f575052e867914f89ff0c8f5dff4bbe457f0cca56215e0208654f0ebfb1b12d23a5f4dc28287e6d2825ddc8de1e50302cc8d366e9d1137d85dca5de87a88e145834a99e420527fc26e89b865267dba5f54741f4a87441293edb964bd28e53f26eace6bc1aac24ba98942b99b8052b7cfbd6b94f3ef499fad333134768d2d0ae0374b3f1483e13cb514ecdc32aa6f1a07529adf59f5cdcde3eac413bb95c4afef5b4719cfa2835342b0064043f0555afbb93fcda255a99bbd3ec3acba8ad41d7525218f3c13f3d1eea5972c6eaf74edfe2313e9dde97df19291fcaf7deaaeaac0ea1581881750e8f1f4c10fe14f359a73e73158bd08c17a52704de5dfa78669d34e7d30adfb5e3ffbf7a0a243ed7d1855ae899603be66d43cc45243489399683d020e2501a9af0aaa6a86ec4b35b8a41517f27f71429de269e262baa4345e9115c08e41210c999b7a7cec809d3c088b075503f5a6732cd96b4d65821557df8242080e3882c43b1e34d3394facdd7508c3b43c682417d8a1da4b8a7304719b0da91ff0fb37576bb16a68ce296532df6c89504dedfed221055fca8fa34b164d69b9f18f6d11d2da4c921ac51501b152590b2bca2e1cda04883baa2d65f93ead7ee4e39d312f38d0fde8246dea9ec789501d96dd7f710b85a209300199d070771e77e5789dc40e61eea41a38d5d4a0881dc2972177aeb49472d660dd32e3ec9a83bc122d9d63c48c53f2d77bdd5bf0032861835bdf2d5cf0b0e1a0f8443c5380001e6d75dad4c08382d9bd23bd07bf336d4753bc7cd743034c874216f736f6d0489855e9cd2f8f50eada41f25616949c6f3ffc070ddedadb81f2224acedf7ee4c6b7f78e2a295dc950849b557bb0ba4385c910fa0fb1791c71c12c6c4205625977431fa78e3c542543e49a00390db01dd7d2b3ae7e50a9f63a96fcc1dd40e52c126a4c2c548217ef9367e1d58a87eb5b5ee841fbf9d8f391e624c050d5f9444a11fe1ec36f7b242e29494e65555b996aa1a0f766ba960794d864577ec73e7810fb6c2fc36ca3d75fb2076ef2c849593c6d7b1067316333d2577259ba84eacec00f7f46a7c6c329941cb12c0e381622c2bf42be6d747192550cafd5499ca8b8203d68f59eaf464945a4fe5a8ebbbb9259411a89dbb3f2aef3a1deb1ca7b8c5b83713aa5daa94de6d65f13b73f974e179818dcbb4f6913d483456f1d501a5b6d60c96f761619ad6bc54bd34c99985d3008253e388c138c5bc18ff2435c83ae31d49e341f28f6fbecdcacc1a4935b1bd4b1cc690f417c6526759be6acaf41b4362873822ca0272bdaf75d8b20a498f73e249730ab34565e1454fe7a0581a1be17cf2e893c13e54fd56e2eae382718ffcf21cffd3ce7fadade6ab72119ef219b7c02578a4f21e82a8091f76fde822870429e0d1bfd3e6d6946863afe2d1e89944cce59be41a228d96b6c78808a57a951c8804529f52e64c898339e3c055b165eb4f1f7bd17eb6bddc894e0ec706693e07ff251603b4d2b1bc9db6c3a24a1d7796fa3acd39076b484bfa9539f535e4bf6dbda98b8fe5840621914e9f306184b5460ae34f6eb2a5efef86e3d5c449bb494bb84</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">文章已被加密，请联系作者获取密码</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
 <div class="article-footer fs14">
     <section id="license">
       <div class="header"><span>许可协议</span></div>
@@ -114,9 +107,7 @@
       <div class="header"><span>分享文章</span></div>
       <div class="body">
         <div class="link"><input class="copy-area" readonly="true" id="copy-link" value="https://jiangxueqiao.com/post/2306363290.html" /></div>
-        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/b32ef3da1162a.svg" /></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://jiangxueqiao.com/post/2306363290.html&title=Windows系统各版本占比对技术选型的影响 - 独钓寒江雪&pics=https://blog-static.jiangxueqiao.com/blog/banner/hor-banner-windows-TinyTu.jpg&summary=既然是从 Windows 系统占比来谈技术选型，这个技术选型当然只现定于开发 Windows 客户端产品的选型了。
-在聊技术选型之前，我们需要先了解目前不同市场上 Windows 系统各个版本的占比情况。
-下图展示了我们公司的 A、B..."><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/80c07e4dbb303.svg" /></a><a class="social share-item email" href="mailto:?subject=Windows系统各版本占比对技术选型的影响 - 独钓寒江雪&amp;body=https://jiangxueqiao.com/post/2306363290.html"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/a1b00e20f425d.svg" /></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/8411ed322ced6.svg" /></a></div>
+        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/b32ef3da1162a.svg" /></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://jiangxueqiao.com/post/2306363290.html&title=Windows系统各版本占比对技术选型的影响 - 独钓寒江雪&pics=https://blog-static.jiangxueqiao.com/blog/banner/hor-banner-windows-TinyTu.jpg&summary=文章已被加密"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/80c07e4dbb303.svg" /></a><a class="social share-item email" href="mailto:?subject=Windows系统各版本占比对技术选型的影响 - 独钓寒江雪&amp;body=https://jiangxueqiao.com/post/2306363290.html"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/a1b00e20f425d.svg" /></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/8411ed322ced6.svg" /></a></div>
         
         <div class="qrcode" id="qrcode-wechat" style="opacity:0;height:0">
           <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=https://jiangxueqiao.com/post/2306363290.html"/>

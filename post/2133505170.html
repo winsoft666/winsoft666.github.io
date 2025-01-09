@@ -20,7 +20,7 @@
   <title>折腾开发环境的一天 - 独钓寒江雪</title>
 
   
-  <meta name="description" content="日常使用的 IDE 主要有 Visual Studio、Qt Creator，代码查看工具有 Source Insight、Visual Studio Code。每个工具的使用方式不太一样，今天想花点时间折腾一下，统一下各个工具的快捷键，记录下它们的使用差异。">
+  <meta name="description" content="文章已被加密">
   
   <meta name="keywords" content="Visual Studio,Qt">
 
@@ -60,7 +60,7 @@
 
 
 
-<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/post/213040252.html"><span class="title">Windows内存体系(6)--跨模块内存分配释放</span></a><a class="item title" href="/post/2819651546.html"><span class="title">字节序列之大小端</span></a><a class="item title" href="/post/1504192511.html"><span class="title">Windows注入与拦截(1)-注入基础</span></a><a class="item title" href="/post/2804470458.html"><span class="title">Windows注入与拦截(3)-窗口挂载</span></a><a class="item title" href="/post/547434843.html"><span class="title">Windows套接字I/O模型(4)-WSAEventSelect模型</span></a><a class="item title" href="/post/326824759.html"><span class="title">Windows套接字I/O模型(5)-完成端口模型</span></a><a class="item title" href="/post/2544551173.html"><span class="title">Windows套接字I/O模型(3)-WSAAsyncSelect模型</span></a><a class="item title" href="/post/640627104.html"><span class="title">Windows套接字I/O模型(2)-Select模型</span></a><a class="item title" href="/post/2937580891.html"><span class="title">Windows套接字I/O模型(1)-阻塞模型</span></a><a class="item title" href="/post/3937624737.html"><span class="title">Windows内存体系(7)--使用std::string跨MT模块传参</span></a></div></widget>
+<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/post/2133505170.html"><span class="title">折腾开发环境的一天</span></a><a class="item title" href="/post/2306363290.html"><span class="title">Windows系统各版本占比对技术选型的影响</span></a><a class="item title" href="/post/2304457467.html"><span class="title">Modern CMake 简明教程（中）</span></a><a class="item title" href="/post/3678619994.html"><span class="title">Modern CMake 简明教程（上）</span></a><a class="item title" href="/post/201509401.html"><span class="title">Modern CMake 简明教程（下）</span></a><a class="item title" href="/post/213040252.html"><span class="title">Windows内存体系(6)--跨模块内存分配释放</span></a><a class="item title" href="/post/2819651546.html"><span class="title">字节序列之大小端</span></a><a class="item title" href="/post/1504192511.html"><span class="title">Windows注入与拦截(1)-注入基础</span></a><a class="item title" href="/post/2804470458.html"><span class="title">Windows注入与拦截(3)-窗口挂载</span></a><a class="item title" href="/post/547434843.html"><span class="title">Windows套接字I/O模型(4)-WSAEventSelect模型</span></a></div></widget>
 </div>
 
 </div></aside><div class="l_main" id="main">
@@ -73,7 +73,7 @@
   <div class="content">
     <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
 <span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/">编程基础</a></div>
-<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2024-08-12T01:52:55.000Z">2024-08-12</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-08-27T07:00:42.154Z">2024-08-27</time></span></div></div></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2024-08-12T01:52:55.000Z">2024-08-12</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2025-01-09T07:08:37.822Z">2025-01-09</time></span></div></div></div>
     
     <div class="bottom only-title">
       
@@ -84,177 +84,18 @@
     </div>
     
   </div>
-  </div><article class="md-text content"><p>日常使用的 IDE 主要有 Visual Studio、Qt Creator，代码查看工具有 Source Insight、Visual Studio Code。每个工具的使用方式不太一样，今天想花点时间折腾一下，统一下各个工具的快捷键，记录下它们的使用差异。</p>
-<span id="more"></span>
-
-<h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><h4 id="Visual-Studio"><a href="#Visual-Studio" class="headerlink" title="Visual Studio"></a>Visual Studio</h4><ul>
-<li>Visual Assist X</li>
-<li>VsVim</li>
-</ul>
-<h4 id="Qt-Creator"><a href="#Qt-Creator" class="headerlink" title="Qt Creator"></a>Qt Creator</h4><ul>
-<li>Beautifier 支持根据<code>.clang-format</code>文件进行格式化。</li>
-</ul>
-<h2 id="统一快捷键"><a href="#统一快捷键" class="headerlink" title="统一快捷键"></a>统一快捷键</h2><p>下面是一些常用功能在不同的工具中的快捷键列表，有的功能快捷键是默认的，如Visual Studio的转的定义F12快捷键，有的功能快捷键需要自定义设置。</p>
-<p>能设置成统一快捷键的都会优先设置成统一的。</p>
-<table>
-<thead>
-<tr>
-<th>功能</th>
-<th>Visual Studio</th>
-<th>Qt Creator</th>
-<th>Source Insight</th>
-<th>Visual Studio Code</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>转到定义</td>
-<td>F12或Alt+G (VAX插件)</td>
-<td>F12</td>
-<td>F12</td>
-<td></td>
-</tr>
-<tr>
-<td>头文件和源代码切换</td>
-<td>Alt+I</td>
-<td>Alt+I</td>
-<td>Alt+I</td>
-<td>-</td>
-</tr>
-<tr>
-<td>书签切换</td>
-<td>Ctrl+M</td>
-<td>Ctrl+M</td>
-<td>Ctrl+M打开书签窗口</td>
-<td>-</td>
-</tr>
-<tr>
-<td>跳转到指定行</td>
-<td>Ctrl+G</td>
-<td>Ctrl+G</td>
-<td>Ctrl+G</td>
-<td></td>
-</tr>
-<tr>
-<td>创建函数定义</td>
-<td>Alt+Enter</td>
-<td>Alt+Enter</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>删除当前行</td>
-<td>Ctrl+L</td>
-<td>Ctrl+L</td>
-<td>Ctrl+L</td>
-<td></td>
-</tr>
-<tr>
-<td>当前文件方法列表</td>
-<td>Alt+M</td>
-<td>Alt+M</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>格式化当前文件</td>
-<td>Ctrl+;</td>
-<td>Ctrl+;（Beautifier插件）</td>
-<td></td>
-<td></td>
-</tr>
-<tr>
-<td>后退</td>
-<td>Alt+Left</td>
-<td>Alt+Left</td>
-<td>Alt+Left</td>
-<td></td>
-</tr>
-<tr>
-<td>前进</td>
-<td>Alt+Right</td>
-<td>Alt+Right</td>
-<td>Alt+Right</td>
-<td></td>
-</tr>
-<tr>
-<td>当前文件查找</td>
-<td>Ctrl+F</td>
-<td>Ctrl+F</td>
-<td>Ctrl+F</td>
-<td>Ctrl+F</td>
-</tr>
-<tr>
-<td>所有文件查找</td>
-<td>Ctrl+Shift+F</td>
-<td>Ctrl+Shift+F</td>
-<td>Ctrl+Shift+F</td>
-<td>Ctrl+Shift+F</td>
-</tr>
-<tr>
-<td>当前文件替换</td>
-<td>Ctrl+H</td>
-<td>Ctrl+H</td>
-<td>Ctrl+H</td>
-<td>Ctrl+H</td>
-</tr>
-<tr>
-<td>所有文件查找</td>
-<td>Ctrl+Shift+H</td>
-<td>-</td>
-<td>Ctrl+Shift+F</td>
-<td>Ctrl+Shift+F</td>
-</tr>
-<tr>
-<td>查找引用</td>
-<td>Shift+Alt+F（VAX插件）</td>
-<td>Shift+Alt+F</td>
-<td>Shift+Alt+F</td>
-<td>-</td>
-</tr>
-<tr>
-<td>开始调试</td>
-<td>F5</td>
-<td>F5</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr>
-<td>停止调试</td>
-<td>Shift+F5</td>
-<td>Shift+F5</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr>
-<td>断点切换</td>
-<td>F9</td>
-<td>F9</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr>
-<td>逐过程</td>
-<td>F10</td>
-<td>F10</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr>
-<td>逐语句</td>
-<td>F11</td>
-<td>F11</td>
-<td>-</td>
-<td>-</td>
-</tr>
-<tr>
-<td>跳出当前过程</td>
-<td>Shift+F11</td>
-<td>Shift+F11</td>
-<td>-</td>
-<td>-</td>
-</tr>
-</tbody></table>
-
+  </div><article class="md-text content"><div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="密码错误" data-whm="无法校验文章哈希">
+  <script id="hbeData" type="hbeData" data-hmacdigest="1775f08d5aecb6bae980729bf8c3e01558299d4fdd4f246cc5510d5d692cf606">49420f43dcd4ffad5e1774efbcfcadee2bd7039b3241a2ee4fd438f9dcc74bffcb03be0a8e762c996d40e1cac9294e017a4b8e4c93e0474a33c860be2af036d6b41dfb03e04c3b63d0babc52787f6005bb27d44ce9321b20d2e4681608cedc232245320ce1cbfc16328fe36f3b98f22b4208e15d1b870be37373741bf4ec943ab781fa8f4adf3bb226440aa371c14ef2e9fd438e760d72281f3ce1b789ccae0d20a58c8967d6ce10813d5302534aaaa25b4052d4ea35cc3c302c7c203e1d75babaa48ee50227d02722b48076520c8c9e7c237a1f90e05ebd4f9ee16f4996a523a98ff0d7cdc2232dcc269599dd939258b78e114e59c634bec8e1ee687aed2631de401aefaeb931935be74c660be9ff57d37f62e6f0068fc6fe947ad344a442396321eebcdcc97939bb9b8cd88950c1292e8c4370a20f839d23161ed28f3964c49eb965a3260dd9157f117308d75780716151a2ef1af10b299065ff65a705eb541417eb92f9f51895c77b755cebb37e20ef3d74527752e84465ec3bbad4072ed6f24c685c30f49b831736aeb56b0bf0e809cbcca825eb1a2b089c356b156fdcb8768c60ea4d43b98a3ca21026fef2ab8ec25037af77e851e08747395387a2c2f5a202398ed5e61bce68bc63ec9fa62dddfd94393f4feca143f7830346fbbd7bed655a5d6633bc52fa89713efde23d0f491df76b5b674ba0d97cae76b253fd6dc4ac9872406ef294f2a1e8db48e76c7b51f6db23aaf564c5e1891577f3361c530ddf1a14f32d5d162cfb92393235b6d034f84c8e9a8c83a39345f6caeec3c611ee7cb44fd3a36969dc4d0fea09c72adea8c87103f2394c7d78b8b2ca8f03f306ba210db4b9971b8cdb45ccd2cb6cc81feb531f1f1fe144d7edf35802593fd01928bc23bd4f315cb94fb1c348eeda5b0cd3122917b05ee035e916dc31163697b02a490be92a8e39d4353a909c51ab5796629c0b72bb3941c6fe8538051c3ad0b188c5b7b6a0ee9494bbf7575f1fdd4ac3ebed599181351e119b90b0f39f9b2cf86e3e19bad469b87b99e71ca4be204901dff0e3d7c46900004b66344c2ac071bc305f3291ca2face27f90a1e6664c5dbd02f5ceb42975841dabc19eafb285b9c04ce9a6a32b850d1028ca698c3c11d4f12038f558beeddb7ea9b2518f74945801765d1e7045522fc36cb8707d90b3a087c29192bb423533d83dc1d8854ca985e28556c91fb87e595fb3eb7bd5bb75633660b0126fb4c27da3874e776eb161e92b980afa6cc0d16f7a7007cd0f77ed9ed4cc4c0f0ab60f47dc7ddced9afebd7938a92b111c4e08f1d6e1da2ad3710b26d67e712e676c73f325ff3bbc0955e532b15e1ef502ec1072284169b497024e53c70d8dd6cbb900a791d83e9a09864be7ff8a2ec03a41a33e4648570d511169d71818a1645f344332511b9f657d780cd30c4f41e74d6afd27b53c9bb6bbd2c10d8d4b11073b63b33137216f0650e28b7c110a913fab239057fcd1f7d26bc14af2d4f9e236c76785e0144e8b1bdf4c3c7fa493f20bb757650a0596729d34cb54a4d901b917d7062ddd265e222e063475e16bea5b47adcab7b0244a35919fe42b3b464096cc036f0567653e6052d4de5292f9f449fac35a906f0336e8011c9c8f01e900ac75366162b8f944fbce53a38366dc904450c7ff3609b5e28784bbad70fe626e011e948da063e944259070798e37b972be15794e9e9ebd684ac04c4625d28807a7790e5c6f0dc64015de2d91d68c77ddb10761bbadc0a8b3f20f9b0d71a55a8f1a364186fcea3396bcf6a0b8d45877d6bfcac863b89e2294db34adb6befbdfe8236b5f085b4bb7b5585696a7ed08726b1a1cd9bce641752628c1e95d21b85926c1d4cd0cff3485c25b76c56e39559d6cd2fd44eefc677e2848a142793b4a1f26845d30b44131505ad3c3fe8d2de878058c6d5e8200076fb63096bb890bf6a37ee9ceb406d8464ebb47f7ca7f064b723fde1c548207ec1366ea958b169de8f8bedebea2b8ca9f87d9dfa75d469edd637a116413d60139145c13195915905de90bb0bf3cd899844cb860262a35b2afcd3f1b653f9869a6db92e846e364f93867b89406dca0e340b70a4d5b7d84f3913d74f5e47639601a9ee56d9ebfd6041e6680208499e8dfbce57aa895de53b67aada102123835d967135f8b51120609d0d545aaece160a04bc7d27fa15266bbe07d42ad94f5224ad3c81a7cb7537739cb109262ef45ac8752bf1e5f8e005aa3ca83b0beb627080c9928e860d8acaa973133369bc1292a55a496bc725912904e457753e8a7335b556a3a966fed6be0b7b29a3ac7336dde38e6f4a8526c28646b3aebfb5d6cb77746b836f09159eff475e12f055583d6ff402935cf8d0f843b9258d0647e854f1e818cf2a29d66009a4601a604bf711d28399f5d56103b190cdf8aa4bfdac2bbf182449a4ddfe6189a1a7612540ad8c87f4bcba74d4bd293006b64692ff4a7eebff5c705f8244f5eee069db4d6abea34a28e04d2df538b513f05c7bc718ff68d4fd4d206fe1fae981d50829d8589a9f412fe37103b9e44d9138b0a3a7a6ec2f42d47d906a8674098e37e08045003a65ad09efcd693b629d9569ff43f1144791f24fbcf31372c6a9bf2a84b32dbfb83cf1d459efdd0433c92f5948671fc2612ffbb52387f679857059531b9ec864752b1d94848a8aafddd5c1a7f82126d417022aa1438a8240106fff9efb16d958d430a2f1bcbe5e0e875644ea5ebd74bef17269c11e836aface1303c82fb88d7a69c5e9b0b5100438815911f005df326b73856786974bda20c646c8dcd4c3971e4953294fd660ed9012d5376885aa75c0fc94fb0b4df54da3afecbb2eb31aabbca928055208548045b772f9b6d9cac88b72a96884d0bab35f360c84e1ffe21def4cfba527fdd61c7a9219d3fc79b0cfeb1e2448c64f6959de565fc82badc2bb9fa06140f4d9d5b1cba5ecc00f6e8941c47e245493aa267ddd3ba6c7517b3622cd0d6e8f3c36c337ac80aede6df57e4631a9717028971a81df7927b8aa99d3711eee98c83ed6a02faef28be604ba9c83d17f1d5a120f34448a202002e540c42fb7b814d7c7e3b1e8be122eb12665d6bd008b8adf0eeff05e3059422ed452f80b2b97634f4a577e080205b751aee21788585c48952ce4fc57856442db0d4bf2ae5cd5e5bbc2f3089dc5563e6c1607b3d529072b1e42ed3e017201cbdbe89914c4ae8eff21d791cdcd01b3ce9de223376af77b197b7bd2d2230a490603f349b4fb2b23771d38750fbdcb4898882d4fb01b2212bf93dcb171458d9e5da67aa442ac81731929024bfa56221781d68530a517450bbfd751c67f426a62cad6f3ddf019cc9611b336a6b851c5a192d3bdd82730103a920edc36273fc5327d018ffe36411be808e70250ee3b73117422021286e688a317e375eced4e28780195add46650e5d1a70a4b56dc90f93c766afde8e2678c502ca224de309e8a987749244dbbc8c721dfb38abeacca7a5337224eb9fbf9308b162faef0c2e80dfbb41fcc437a9a5b61cc8ae03767ee37b64633c019c381de343bde47825db52a4fea877e9660a93b336a28cb0690900dc7ffd2805e24703dc738e1721b07ab5dd11bfe3fe1a605dbd5207eaa159f2c3adadf5844e2fd0782683277e925ac7d337d2dfdafff253d28f67f386d9c2121a9f8decd6f9307be173ac15167727c5adf388c6b9638f43eb5f7efb4eb2c3f5a86e3ce4d1226aa53468f7325983face5111fe1935637c5b2b9f7298ff14f79c5d094a16ff1eca8a7cc47f293e97d8857a92c14d4e33d229d91badc61aff571b515335b0c1fb994c8be8577cf75499852369422a9eccdc985c050e2172837f9bc6df63e91a2b749042bf4c067c7c5549e1cee7508fbb7de31ea6f5a22b6b2cbb2e97db35c06f13ff7bc4fd2f1089aece1fb367ae77b7ba2f458cf4f37101cbc51b6895043d888fc92c87713d1b04c30b414c12448a56200039694af77f1f4a9182aab4edc290aeace0684b004aa41a12c329301b408fb69d19049c32afdb6f8cee92f1851560d433986bd2a53340146c83c45990a57fefc3f21c6b044cde0cfa62d9af6ec5aec644db012c93572cd1a654e2b8021cccc75acbcc91cbea561e3280cdb886465cca3eed3efc7c2566b9c23a3d545cb56e17db9b61c7c0f03da024bf416054803bd5c4168220f7d31e266b50cd515c2d77cfa9cc694d35d5c7ff021786758c261521c1227db902e3ccae49eafeabed61beefb83b94d68ae59d53816dc07af7f79562c02839a84eb41dc6e318e9f6d74f588a39ae71bbf5b143142d5d7431f64ebffcfcbd7ae7fe79af0ea7676303ccf39edab0f4cf64072c87d674feba4bb1d2b9a59a0dc49cf17beb9a0fc289a15c1f6546b7800e05dd7acdbe7ed0b984a902fedd806d9195084d39a36ce79d191fd3137fe285f39ffc8754176e3b988a6fce8934320b5160bbf30690adc3e90e2c955efe06c2293dc0e7a89725a5089c56e8d821bcb040276a33128c790ec20df310508ef12fd819b62b18756b7033c6c51651bfe3ad1d895e58bf76fdc6604fd09bb6ed916160971f20e2fb630713360826ac6bc56781db10e944ca578dedbd3d030ca55da65d11bc05b5b135d8f27ed55f7d95a46a9d1898a111fa9bef9fb179655136cbde7f413f900e5f6bc04ba9b2f93e13f1bdd0233fd1c1bd5f302504bdab42f93e9dea344372f139bf96ba5c47c9cfe132212009f002c46dd8033be350410b5e39f5158fb65392e85547cdf07abf844bdba2d276ad8a2dc89ae13ebe2228e8a28ef2</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">文章已被加密，请联系作者获取密码</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
 <div class="article-footer fs14">
     <section id="license">
       <div class="header"><span>许可协议</span></div>
@@ -266,7 +107,7 @@
       <div class="header"><span>分享文章</span></div>
       <div class="body">
         <div class="link"><input class="copy-area" readonly="true" id="copy-link" value="https://jiangxueqiao.com/post/2133505170.html" /></div>
-        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/b32ef3da1162a.svg" /></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://jiangxueqiao.com/post/2133505170.html&title=折腾开发环境的一天 - 独钓寒江雪&summary=日常使用的 IDE 主要有 Visual Studio、Qt Creator，代码查看工具有 Source Insight、Visual Studio Code。每个工具的使用方式不太一样，今天想花点时间折腾一下，统一下各个工具的快捷..."><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/80c07e4dbb303.svg" /></a><a class="social share-item email" href="mailto:?subject=折腾开发环境的一天 - 独钓寒江雪&amp;body=https://jiangxueqiao.com/post/2133505170.html"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/a1b00e20f425d.svg" /></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/8411ed322ced6.svg" /></a></div>
+        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/b32ef3da1162a.svg" /></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://jiangxueqiao.com/post/2133505170.html&title=折腾开发环境的一天 - 独钓寒江雪&summary=文章已被加密"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/80c07e4dbb303.svg" /></a><a class="social share-item email" href="mailto:?subject=折腾开发环境的一天 - 独钓寒江雪&amp;body=https://jiangxueqiao.com/post/2133505170.html"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/a1b00e20f425d.svg" /></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/8411ed322ced6.svg" /></a></div>
         
         <div class="qrcode" id="qrcode-wechat" style="opacity:0;height:0">
           <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=https://jiangxueqiao.com/post/2133505170.html"/>
