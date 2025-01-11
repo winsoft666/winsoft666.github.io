@@ -1,5 +1,5 @@
 
-<!DOCTYPE html><html lang="zh-CN">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light">
 
 <head>
   <meta charset="utf-8">
@@ -60,7 +60,7 @@
 
 <widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">专栏：《Windows内存体系》</span></div><div class="widget-body"><a class="item" href="/post/2494475058.html"><span class="title">Windows内存体系(1)--虚拟地址空间</span></a><a class="item" href="/post/595856315.html"><span class="title">Windows内存体系(2)--虚拟内存</span></a><a class="item" href="/post/3938269003.html"><span class="title">Windows内存体系(3)--内存映射文件</span></a><a class="item" href="/post/4245522728.html"><span class="title">Windows内存体系(4)--内存对齐</span></a><a class="item active" href="/post/3599385732.html"><span class="title">Windows内存体系(5)--堆</span><svg class="active-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M21 11.098v4.993c0 3.096 0 4.645-.734 5.321c-.35.323-.792.526-1.263.58c-.987.113-2.14-.907-4.445-2.946c-1.02-.901-1.529-1.352-2.118-1.47a2.225 2.225 0 0 0-.88 0c-.59.118-1.099.569-2.118 1.47c-2.305 2.039-3.458 3.059-4.445 2.945a2.238 2.238 0 0 1-1.263-.579C3 20.736 3 19.188 3 16.091v-4.994C3 6.81 3 4.666 4.318 3.333C5.636 2 7.758 2 12 2c4.243 0 6.364 0 7.682 1.332C21 4.665 21 6.81 21 11.098" opacity=".5"/><path fill="currentColor" d="M9 5.25a.75.75 0 0 0 0 1.5h6a.75.75 0 0 0 0-1.5z"/></svg></a><a class="item" href="/post/213040252.html"><span class="title">Windows内存体系(6)--跨模块内存分配释放</span></a><a class="item" href="/post/3937624737.html"><span class="title">Windows内存体系(7)--使用std::string跨MT模块传参</span></a></div></widget>
 
-<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/post/2133505170.html"><span class="title">折腾开发环境的一天</span></a><a class="item title" href="/post/2306363290.html"><span class="title">Windows系统各版本占比对技术选型的影响</span></a><a class="item title" href="/post/2304457467.html"><span class="title">Modern CMake 简明教程（中）</span></a><a class="item title" href="/post/3678619994.html"><span class="title">Modern CMake 简明教程（上）</span></a><a class="item title" href="/post/201509401.html"><span class="title">Modern CMake 简明教程（下）</span></a><a class="item title" href="/post/213040252.html"><span class="title">Windows内存体系(6)--跨模块内存分配释放</span></a><a class="item title" href="/post/2819651546.html"><span class="title">字节序列之大小端</span></a><a class="item title" href="/post/1504192511.html"><span class="title">Windows注入与拦截(1)-注入基础</span></a><a class="item title" href="/post/2804470458.html"><span class="title">Windows注入与拦截(3)-窗口挂载</span></a><a class="item title" href="/post/547434843.html"><span class="title">Windows套接字I/O模型(4)-WSAEventSelect模型</span></a></div></widget>
+<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/post/2304457467.html"><span class="title">Modern CMake 简明教程（中）</span></a><a class="item title" href="/post/3678619994.html"><span class="title">Modern CMake 简明教程（上）</span></a><a class="item title" href="/post/201509401.html"><span class="title">Modern CMake 简明教程（下）</span></a><a class="item title" href="/post/2133505170.html"><span class="title">折腾开发环境的一天</span></a><a class="item title" href="/post/2306363290.html"><span class="title">Windows系统各版本占比对技术选型的影响</span></a><a class="item title" href="/post/213040252.html"><span class="title">Windows内存体系(6)--跨模块内存分配释放</span></a><a class="item title" href="/post/2819651546.html"><span class="title">字节序列之大小端</span></a><a class="item title" href="/post/1504192511.html"><span class="title">Windows注入与拦截(1)-注入基础</span></a><a class="item title" href="/post/2804470458.html"><span class="title">Windows注入与拦截(3)-窗口挂载</span></a><a class="item title" href="/post/547434843.html"><span class="title">Windows套接字I/O模型(4)-WSAEventSelect模型</span></a></div></widget>
 </div>
 
 </div></aside><div class="l_main" id="main">
@@ -159,12 +159,7 @@
     <div class="related-posts"><a class="item" href="\post\213040252.html" title="Windows内存体系(6)--跨模块内存分配释放"><span class="title">Windows内存体系(6)--跨模块内存分配释放</span><span class="excerpt">在《Windows核心编程 第五版》第19章 DLL基础（511页）中给出了一个建议：
 “当一个 MT 版本的模块如果提供一个内存分配函数的时候，它必须同时提供另一个用来释放内存的函数。”。
 说得更加直白一点就是，“对于 MT 的模块...</span></a><a class="item" href="\post\3937624737.html" title="Windows内存体系(7)--使用std::string跨MT模块传参"><span class="title">Windows内存体系(7)--使用std::string跨MT模块传参</span><span class="excerpt">前面的Windows内存体系(6)--跨模块内存分配释放文章解释了跨 MT 模块分配的内存相互释放为什么会崩溃的问题，本文介绍如何解决该问题。</span></a><a class="item" href="\post\2494475058.html" title="Windows内存体系(1)--虚拟地址空间"><span class="title">Windows内存体系(1)--虚拟地址空间</span><span class="excerpt">一、实模式下内存分配机制在 8086 或者 80186 以前，程序运行时，操作系统会把程序全都装入内存，程序都是直接运行在物理内存上的。也就是说程序中访问的内存地址都是实际的物理内存地址。当计算机同时运行多个程序时，必须保证这些程序用...</span></a><a class="item" href="\post\595856315.html" title="Windows内存体系(2)--虚拟内存"><span class="title">Windows内存体系(2)--虚拟内存</span><span class="excerpt">一、页交换文件虚拟地址空间只是操作系统为进程“虚拟”出来的一块地址区域，并不代表任何实际的空间。而“页交换文件”却对应了实际的空间，这个空间一般是磁盘上名为“pagefile.sys”的文件。
-“页交换文件”的大小和位置可以在系统设置...</span></a><a class="item" href="\post\2510508225.html" title="Windows API的不同返回状态"><span class="title">Windows API的不同返回状态</span><span class="excerpt">在Windows编程中，我们经常接触到的Windows API返回值类型有：
-
-BOOL
-HRESULT
-LSTATUS
-</span></a></div></section></div>
+“页交换文件”的大小和位置可以在系统设置...</span></a><a class="item" href="\post\3938269003.html" title="Windows内存体系(3)--内存映射文件"><span class="title">Windows内存体系(3)--内存映射文件</span><span class="excerpt">一、为什么需要内存映射“内存映射文件”可以将硬盘上的文件映射到虚拟地址空间，这样就不需要将所有东西都放入到页交换文件中，比如系统有许多程序同时运行时，如果将这些程序文件都加载到页交换文件中，页交换文件将会变得非常大。事实上，Windo...</span></a></div></section></div>
 
 
   <div class="related-wrap md-text" id="comments">
