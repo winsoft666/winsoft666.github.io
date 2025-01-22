@@ -21,7 +21,7 @@
 
   
   <meta name="description" content="本文介绍如何根据进程 ID 获取进程命令行参数，使用 Windows NTDLL 提供的未公开 API 实现。
-由于需要使用到Windows应用层未公开的 API，而且这些 API 在 Windows 头文件中未提供函数定义，因此我们需要使用GetProcessAddress动态地从 ntdl...">
+由于需要使用到 Windows 应用层未公开的 API，而且这些 API 在 Windows 头文件中未提供函数定义，因此我们需要使用 GetProcessAddress 动态地从 ...">
   
   <meta name="keywords" content="进程,NDK">
 
@@ -61,7 +61,7 @@
 
 
 
-<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/post/2304457467.html"><span class="title">Modern CMake 简明教程（中）</span></a><a class="item title" href="/post/3678619994.html"><span class="title">Modern CMake 简明教程（上）</span></a><a class="item title" href="/post/201509401.html"><span class="title">Modern CMake 简明教程（下）</span></a><a class="item title" href="/post/2133505170.html"><span class="title">折腾开发环境的一天</span></a><a class="item title" href="/post/2306363290.html"><span class="title">Windows系统各版本占比对技术选型的影响</span></a><a class="item title" href="/post/213040252.html"><span class="title">Windows内存体系(6)--跨模块内存分配释放</span></a><a class="item title" href="/post/2819651546.html"><span class="title">字节序列之大小端</span></a><a class="item title" href="/post/1504192511.html"><span class="title">Windows注入与拦截(1)-注入基础</span></a><a class="item title" href="/post/2804470458.html"><span class="title">Windows注入与拦截(3)-窗口挂载</span></a><a class="item title" href="/post/547434843.html"><span class="title">Windows套接字I/O模型(4)-WSAEventSelect模型</span></a></div></widget>
+<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/post/3666245140.html"><span class="title">获取其他进程的命令行参数</span></a><a class="item title" href="/post/1955778079.html"><span class="title">窗口无法接收WM_LBUTTONDBLCLK消息</span></a><a class="item title" href="/post/2065788833.html"><span class="title">窗口如何逃脱显示桌面指令</span></a><a class="item title" href="/post/547434843.html"><span class="title">Windows套接字I/O模型(4)-WSAEventSelect模型</span></a><a class="item title" href="/post/2544551173.html"><span class="title">Windows套接字I/O模型(3)-WSAAsyncSelect模型</span></a><a class="item title" href="/post/640627104.html"><span class="title">Windows套接字I/O模型(2)-Select模型</span></a><a class="item title" href="/post/326824759.html"><span class="title">Windows套接字I/O模型(5)-完成端口模型</span></a><a class="item title" href="/post/2937580891.html"><span class="title">Windows套接字I/O模型(1)-阻塞模型</span></a><a class="item title" href="/post/1204594779.html"><span class="title">拨开字符编码的迷雾(5)--Qt字符编码</span></a><a class="item title" href="/post/1559270845.html"><span class="title">拨开字符编码的迷雾(4)--MySQL字符编码</span></a></div></widget>
 </div>
 
 </div></aside><div class="l_main" id="main">
@@ -74,7 +74,7 @@
   <div class="content">
     <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
 <span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Windows%E7%BC%96%E7%A8%8B/">Windows编程</a></div>
-<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2023-08-11T09:06:14.675Z">2023-08-11</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-07-09T02:04:54.490Z">2024-07-09</time></span></div></div></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2023-08-11T09:06:14.675Z">2023-08-11</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2025-01-22T08:43:33.119Z">2025-01-22</time></span></div></div></div>
     
     <div class="bottom only-title">
       
@@ -86,7 +86,7 @@
     
   </div>
   </div><article class="md-text content"><p>本文介绍如何根据进程 ID 获取进程命令行参数，使用 Windows NTDLL 提供的未公开 API 实现。</p>
-<p>由于需要使用到Windows应用层未公开的 API，而且这些 API 在 Windows 头文件中未提供函数定义，因此我们需要使用<code>GetProcessAddress</code>动态地从 ntdll.dll 中获取函数地址。</p>
+<p>由于需要使用到 Windows 应用层未公开的 API，而且这些 API 在 Windows 头文件中未提供函数定义，因此我们需要使用 <code>GetProcessAddress</code> 动态地从 ntdll.dll 中获取函数地址。</p>
 <p>动态获取函数地址本不是一件困难的事情，但是当涉及调用函数比较多时，这个操作就显得比较繁琐了，我们可以直接使用下面的库来简化上述操作。<br><a target="_blank" rel="noopener" href="https://github.com/winsoft666/ndk">https://github.com/winsoft666/ndk</a></p>
 <span id="more"></span>
 
@@ -110,7 +110,7 @@
       <div class="body">
         <div class="link"><input class="copy-area" readonly="true" id="copy-link" value="https://jiangxueqiao.com/post/3666245140.html" /></div>
         <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/b32ef3da1162a.svg" /></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://jiangxueqiao.com/post/3666245140.html&title=获取其他进程的命令行参数 - 独钓寒江雪&summary=本文介绍如何根据进程 ID 获取进程命令行参数，使用 Windows NTDLL 提供的未公开 API 实现。
-由于需要使用到Windows应用层未公开的 API，而且这些 API 在 Windows 头文件中未提供函数定义，因此我们..."><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/80c07e4dbb303.svg" /></a><a class="social share-item email" href="mailto:?subject=获取其他进程的命令行参数 - 独钓寒江雪&amp;body=https://jiangxueqiao.com/post/3666245140.html"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/a1b00e20f425d.svg" /></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/8411ed322ced6.svg" /></a></div>
+由于需要使用到 Windows 应用层未公开的 API，而且这些 API 在 Windows 头文件中未提供函数定义，因此..."><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/80c07e4dbb303.svg" /></a><a class="social share-item email" href="mailto:?subject=获取其他进程的命令行参数 - 独钓寒江雪&amp;body=https://jiangxueqiao.com/post/3666245140.html"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/a1b00e20f425d.svg" /></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/8411ed322ced6.svg" /></a></div>
         
         <div class="qrcode" id="qrcode-wechat" style="opacity:0;height:0">
           <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=https://jiangxueqiao.com/post/3666245140.html"/>
