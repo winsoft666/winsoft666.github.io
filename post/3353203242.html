@@ -21,9 +21,7 @@
 
   
   <meta name="description" content="
-前段时间研究了 JerryScript 库，也顺手给 JerryScript 提交了几个 PR 被采纳了，有幸成为顶级项目的 Contributor（就是玩儿 ^_^）。
-
-JerryScript 是一个轻量级的 JavaScript 引擎，资源占用极少，它可以运行在资源受限制的设备上，如：...">
+以前嵌入脚本首选Lua，但有些年头没有用Lua了，语法也快忘记光了，这些年倒是对 JavaScript 语法愈发熟悉了，于是想看看有没有小巧的 JavaScript 引擎，可以嵌入到 C++程序中使用。嘿，还真有。花时间研究了下 JerryScript 库，也顺手给 JerryScript ...">
   
   <meta name="keywords" content="开源库,jeffyscript">
 
@@ -63,7 +61,7 @@ JerryScript 是一个轻量级的 JavaScript 引擎，资源占用极少，它�
 
 
 
-<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/post/908211703.html"><span class="title">NPM和Yarn设置国内源</span></a><a class="item title" href="/post/3416050985.html"><span class="title">工具及开源项目集合</span></a><a class="item title" href="/post/1967189103.html"><span class="title">玩转Qt 2D绘图之画家</span></a><a class="item title" href="/post/556603567.html"><span class="title">Wireshark过滤器规则速学</span></a><a class="item title" href="/post/3462229631.html"><span class="title">了解数字证书</span></a><a class="item title" href="/post/3666245140.html"><span class="title">获取其他进程的命令行参数</span></a><a class="item title" href="/post/2418701368.html"><span class="title">C/C++不同整数类型的区别</span></a><a class="item title" href="/post/4245522728.html"><span class="title">Windows内存体系(4)--内存对齐</span></a><a class="item title" href="/post/1955778079.html"><span class="title">窗口无法接收WM_LBUTTONDBLCLK消息</span></a><a class="item title" href="/post/2065788833.html"><span class="title">窗口如何逃脱显示桌面指令</span></a></div></widget>
+<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/post/3843160677.html"><span class="title">Lua杂记</span></a><a class="item title" href="/post/3353203242.html"><span class="title">开源库jerryscript使用备忘</span></a><a class="item title" href="/post/908211703.html"><span class="title">NPM和Yarn设置国内源</span></a><a class="item title" href="/post/3416050985.html"><span class="title">工具及开源项目集合</span></a><a class="item title" href="/post/1967189103.html"><span class="title">玩转Qt 2D绘图之画家</span></a><a class="item title" href="/post/556603567.html"><span class="title">Wireshark过滤器规则速学</span></a><a class="item title" href="/post/3462229631.html"><span class="title">了解数字证书</span></a><a class="item title" href="/post/3666245140.html"><span class="title">获取其他进程的命令行参数</span></a><a class="item title" href="/post/2418701368.html"><span class="title">C/C++不同整数类型的区别</span></a><a class="item title" href="/post/4245522728.html"><span class="title">Windows内存体系(4)--内存对齐</span></a></div></widget>
 </div>
 
 </div></aside><div class="l_main" id="main">
@@ -76,7 +74,7 @@ JerryScript 是一个轻量级的 JavaScript 引擎，资源占用极少，它�
   <div class="content">
     <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
 <span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E5%BC%80%E6%BA%90%E5%BA%93/">开源库</a></div>
-<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2024-09-09T04:48:55.000Z">2024-09-09</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-11-08T05:56:06.385Z">2024-11-08</time></span></div></div></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2024-09-09T04:48:55.000Z">2024-09-09</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2025-05-07T02:40:34.036Z">2025-05-07</time></span></div></div></div>
     
     <div class="bottom only-title">
       
@@ -88,7 +86,7 @@ JerryScript 是一个轻量级的 JavaScript 引擎，资源占用极少，它�
     
   </div>
   </div><article class="md-text content"><p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/img/jerryscript-LOGO.png"></p>
-<p>前段时间研究了 JerryScript 库，也顺手给 JerryScript 提交了几个 PR 被采纳了，有幸成为顶级项目的 Contributor（就是玩儿 ^_^）。</p>
+<p>以前嵌入脚本首选Lua，但有些年头没有用Lua了，语法也快忘记光了，这些年倒是对 JavaScript 语法愈发熟悉了，于是想看看有没有小巧的 JavaScript 引擎，可以嵌入到 C++程序中使用。嘿，还真有。花时间研究了下 JerryScript 库，也顺手给 JerryScript 提交了几个 PR 被采纳了，有幸成为顶级项目的 Contributor（就是玩儿 ^_^）。</p>
 <p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/img/3udYdv0Ten.png"></p>
 <p><a target="_blank" rel="noopener" href="https://github.com/jerryscript-project/jerryscript">JerryScript</a> 是一个轻量级的 JavaScript 引擎，资源占用极少，它可以运行在资源受限制的设备上，如：</p>
 <ul>
@@ -117,9 +115,7 @@ JerryScript 是一个轻量级的 JavaScript 引擎，资源占用极少，它�
       <div class="body">
         <div class="link"><input class="copy-area" readonly="true" id="copy-link" value="https://jiangxueqiao.com/post/3353203242.html" /></div>
         <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/b32ef3da1162a.svg" /></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://jiangxueqiao.com/post/3353203242.html&title=开源库jerryscript使用备忘 - 独钓寒江雪&summary=
-前段时间研究了 JerryScript 库，也顺手给 JerryScript 提交了几个 PR 被采纳了，有幸成为顶级项目的 Contributor（就是玩儿 ^_^）。
-
-JerryScript 是一个轻量级的 JavaScrip..."><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/80c07e4dbb303.svg" /></a><a class="social share-item email" href="mailto:?subject=开源库jerryscript使用备忘 - 独钓寒江雪&amp;body=https://jiangxueqiao.com/post/3353203242.html"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/a1b00e20f425d.svg" /></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/8411ed322ced6.svg" /></a></div>
+以前嵌入脚本首选Lua，但有些年头没有用Lua了，语法也快忘记光了，这些年倒是对 JavaScript 语法愈发熟悉了，于是想看看有没有小巧的 JavaScript 引擎，可以嵌入到 C++程序中使用。嘿，还真有。花时间研究了下 J..."><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/80c07e4dbb303.svg" /></a><a class="social share-item email" href="mailto:?subject=开源库jerryscript使用备忘 - 独钓寒江雪&amp;body=https://jiangxueqiao.com/post/3353203242.html"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/a1b00e20f425d.svg" /></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/8411ed322ced6.svg" /></a></div>
         
         <div class="qrcode" id="qrcode-wechat" style="opacity:0;height:0">
           <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=https://jiangxueqiao.com/post/3353203242.html"/>
