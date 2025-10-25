@@ -1,0 +1,1098 @@
+
+<!DOCTYPE html><html lang="zh-CN" data-theme="light">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.29.0" theme-name="Stellar" theme-version="1.29.0">
+  
+  <meta name="generator" content="Hexo 6.3.0">
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
+  <meta name="theme-color" content="#f9fafb">
+  
+  <title>x86架构常用寄存器及汇编指令 - 独钓寒江雪</title>
+
+  
+  <meta name="description" content="x86架构作为个人计算机和服务器领域的主流计算架构，其汇编语言是理解计算机底层运行机制、进行逆向工程、性能优化及嵌入式开发的核心基础。本文将系统梳理x86架构中的常用寄存器​和常用汇编指令​，并结合实际应用场景说明其作用。">
+  
+  <meta name="keywords" content="汇编">
+
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="独钓寒江雪" type="application/atom+xml">
+  
+
+  <link rel="stylesheet" href="/css/main.css?v=1.29.0">
+
+  
+    <link rel="shortcut icon" href="/images/logo.png">
+  
+
+  
+
+  <script src="/js/baidu-tongji.js"></script>
+</head>
+<body>
+
+<div class="l_body s:aa content tech" id="start" layout="post" ><aside class="l_left"><div class="leftbar-container">
+
+
+<header class="header"><div class="logo-wrap"><a class="avatar" href="/author/"><div class="bg" style="opacity:0;background-image:url(https://blog-static.jiangxueqiao.com/blog/stellar-theme/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/images/logo.png" onerror="javascript:this.classList.add('error');this.src='https://blog-static.jiangxueqiao.com/blog/stellar-theme/default/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">独钓寒江雪</div></a></div></header>
+
+<div class="nav-area">
+<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" placeholder="站内搜索"></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
+
+
+<nav class="menu dis-select"><a class="nav-item active" title="最新" href="/" style="color:#000000"><span>最新</span></a><a class="nav-item" title="专栏" href="/topic" style="color:#000000"><span>专栏</span></a><a class="nav-item" title="分类" href="/categories" style="color:#000000"><span>分类</span></a><a class="nav-item" title="🌈关于" href="/author" style="color:#000000"><span>🌈关于</span></a></nav>
+</div>
+<div class="widgets">
+<widget class="widget-wrapper linklist"><div class="widget-body fs14">
+<div class="linklist left" style="grid-template-columns:repeat(1,1fr);">
+<a class="link" title="在线工具" href="/online-tools"><div class="flex"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M20 12a8 8 0 1 1-16 0a8 8 0 0 1 16 0" opacity=".5"/><path fill="currentColor" d="M17.712 5.453c1.047-.193 2.006-.259 2.797-.152c.77.103 1.536.393 1.956 1.064c.446.714.312 1.542-.012 2.258c-.33.728-.918 1.499-1.672 2.268c-1.516 1.547-3.836 3.226-6.597 4.697c-2.763 1.472-5.495 2.484-7.694 2.92c-1.095.217-2.098.299-2.923.201c-.8-.095-1.6-.383-2.032-1.075c-.47-.752-.296-1.63.07-2.379c.375-.768 1.032-1.586 1.872-2.403L4 12.416c0 .219.083.71.168 1.146c.045.23.09.444.123.596c-.652.666-1.098 1.263-1.339 1.756c-.277.567-.208.825-.145.925c.072.116.305.305.937.38c.609.073 1.44.018 2.455-.183c2.02-.4 4.613-1.351 7.28-2.772c2.667-1.42 4.85-3.015 6.23-4.423c.694-.707 1.15-1.334 1.377-1.836c.233-.515.167-.75.107-.844c-.07-.112-.289-.294-.883-.374c-.542-.072-1.272-.041-2.163.112L16.87 5.656c.338-.101.658-.17.842-.203"/></svg><span>在线工具</span></div></a>
+<a class="link" title="实用网址导航" href="/sites"><div class="flex"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M20 12a8 8 0 1 1-16 0a8 8 0 0 1 16 0" opacity=".5"/><path fill="currentColor" d="M17.712 5.453c1.047-.193 2.006-.259 2.797-.152c.77.103 1.536.393 1.956 1.064c.446.714.312 1.542-.012 2.258c-.33.728-.918 1.499-1.672 2.268c-1.516 1.547-3.836 3.226-6.597 4.697c-2.763 1.472-5.495 2.484-7.694 2.92c-1.095.217-2.098.299-2.923.201c-.8-.095-1.6-.383-2.032-1.075c-.47-.752-.296-1.63.07-2.379c.375-.768 1.032-1.586 1.872-2.403L4 12.416c0 .219.083.71.168 1.146c.045.23.09.444.123.596c-.652.666-1.098 1.263-1.339 1.756c-.277.567-.208.825-.145.925c.072.116.305.305.937.38c.609.073 1.44.018 2.455-.183c2.02-.4 4.613-1.351 7.28-2.772c2.667-1.42 4.85-3.015 6.23-4.423c.694-.707 1.15-1.334 1.377-1.836c.233-.515.167-.75.107-.844c-.07-.112-.289-.294-.883-.374c-.542-.072-1.272-.041-2.163.112L16.87 5.656c.338-.101.658-.17.842-.203"/></svg><span>实用网址导航</span></div></a></div></div></widget>
+
+
+
+<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/post/470495318.html"><span class="title">x86架构常用寄存器及汇编指令</span></a><a class="item title" href="/post/782629701.html"><span class="title">理解 Visual C/C++ 运行时库</span></a><a class="item title" href="/post/487899896.html"><span class="title">C++字符串和字符字面量</span></a><a class="item title" href="/post/2579659560.html"><span class="title">C++智能指针</span></a><a class="item title" href="/post/556603567.html"><span class="title">Wireshark过滤器规则速学</span></a><a class="item title" href="/post/966041457.html"><span class="title">Visual Studio 断点高级使用指南</span></a><a class="item title" href="/post/2025031576.html"><span class="title">CentOS7申请免费LetsEncrypt证书并续期</span></a><a class="item title" href="/post/2065788833.html"><span class="title">窗口如何逃脱显示桌面指令</span></a><a class="item title" href="/post/2289160283.html"><span class="title">C++标准库线程的启动与退出</span></a><a class="item title" href="/post/1144324523.html"><span class="title">C++右值</span></a></div></widget>
+</div>
+
+</div></aside><div class="l_main" id="main">
+
+
+
+
+
+<div class="article banner top">
+  <div class="content">
+    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
+<span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E8%BD%AF%E4%BB%B6%E8%B0%83%E8%AF%95/">软件调试</a></div>
+<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2025-10-22T08:31:00.000Z">2025-10-22</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2025-10-22T09:53:28.461Z">2025-10-22</time></span></div></div></div>
+    
+    <div class="bottom only-title">
+      
+      <div class="text-area">
+        <h1 class="text title"><span>x86架构常用寄存器及汇编指令</span></h1>
+        
+      </div>
+    </div>
+    
+  </div>
+  </div><article class="md-text content"><p>x86架构作为个人计算机和服务器领域的主流计算架构，其汇编语言是理解计算机底层运行机制、进行逆向工程、性能优化及嵌入式开发的核心基础。本文将系统梳理x86架构中的常用寄存器​和常用汇编指令​，并结合实际应用场景说明其作用。</p>
+<span id="more"></span>
+
+<h1 id="x86常用寄存器（Registers）"><a href="#x86常用寄存器（Registers）" class="headerlink" title="x86常用寄存器（Registers）"></a>x86常用寄存器（Registers）</h1><p>寄存器是CPU内部的高速存储单元，用于临时存放数据、地址或控制信息。x86寄存器按功能可分为通用寄存器、段寄存器、标志寄存器、指令指针、控制寄存器、调试寄存器及浮点&#x2F;SIMD寄存器等类别。</p>
+<h2 id="通用寄存器（General-Purpose-Registers-GPRs）"><a href="#通用寄存器（General-Purpose-Registers-GPRs）" class="headerlink" title="通用寄存器（General-Purpose Registers, GPRs）"></a>通用寄存器（General-Purpose Registers, GPRs）</h2><p>通用寄存器是最常用的寄存器，支持数据存储、算术运算、内存寻址及栈操作等功能。根据架构位宽（16&#x2F;32&#x2F;64位）扩展，以下为核心寄存器：</p>
+<h3 id="32位通用寄存器（EAX-EBP-ESP）"><a href="#32位通用寄存器（EAX-EBP-ESP）" class="headerlink" title="32位通用寄存器（EAX-EBP&#x2F;ESP）"></a>32位通用寄存器（EAX-EBP&#x2F;ESP）</h3><table>
+<thead>
+<tr>
+<th>缩写</th>
+<th>英文全程</th>
+<th>功能描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>EAX</td>
+<td>Extended Accumulator Reister</td>
+<td>累加器，用于算术运算（如ADD、MUL）、函数返回值存储（如C语言eax存返回值）；高16位为AX，低8位AL，高8位AH。</td>
+</tr>
+<tr>
+<td>EBX</td>
+<td>Extended Base Register</td>
+<td>基址寄存器，常用作内存访问的基地址（如数组索引），支持相对寻址（[ebx+offset]）；高16位BX，低8位BL，高8位BH。</td>
+</tr>
+<tr>
+<td>ECX</td>
+<td>Extended Counter Register</td>
+<td>计数器，用于循环计数（如LOOP指令自动递减ECX）或字符串操作重复次数（REP MOVSB）；高16位CX，低8位CL（位移量常用）。</td>
+</tr>
+<tr>
+<td>EDX</td>
+<td>Extended Data Register</td>
+<td>数据寄存器，与EAX配合完成大数运算（如32位MUL EDX:EAX得64位结果）；高16位DX，低8位DL，高8位DH。</td>
+</tr>
+<tr>
+<td>ESI</td>
+<td>Extended Source Index Register</td>
+<td>源变址寄存器</td>
+</tr>
+<tr>
+<td>EDI</td>
+<td>Extended Distination Index Register</td>
+<td>目的变址寄存器</td>
+</tr>
+<tr>
+<td>EBP</td>
+<td>Extended Base Pointer Register</td>
+<td>基指针寄存器，指向当前栈帧基地址（[ebp+8]访问函数第一个参数）；高16位BP，无8位模式。</td>
+</tr>
+<tr>
+<td>ESP</td>
+<td>Extended Stack Pointer Register</td>
+<td>栈指针寄存器，指向当前栈顶地址，随PUSH&#x2F;POP&#x2F;CALL自动调整；高16位SP，无8位模式。</td>
+</tr>
+</tbody></table>
+<h3 id="64位通用寄存器（RAX-R15）"><a href="#64位通用寄存器（RAX-R15）" class="headerlink" title="64位通用寄存器（RAX-R15）"></a>64位通用寄存器（RAX-R15）</h3><p>x86-64（AMD64）扩展了8个64位寄存器（RAX-RDI）及新增8个（R8-R15），低32位兼容32位寄存器：</p>
+<table>
+<thead>
+<tr>
+<th>缩写</th>
+<th>功能描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>RAX ~ RDI</td>
+<td>64位版本，低32位为EAX-EDI，用于64位运算或存储更大范围数据。</td>
+</tr>
+<tr>
+<td>R8 ~ R15</td>
+<td>新增寄存器，低32位为R8D-R15D，常用于64位模式函数参数传递（如Linux 64位前6个参数用RDI&#x2F;RSI&#x2F;RDX&#x2F;RCX&#x2F;R8&#x2F;R9）。</td>
+</tr>
+</tbody></table>
+<h2 id="段寄存器（Segment-Registers）"><a href="#段寄存器（Segment-Registers）" class="headerlink" title="段寄存器（Segment Registers）"></a>段寄存器（Segment Registers）</h2><p>段寄存器存储内存段的基地址或选择子，在实模式和保护模式下作用不同：</p>
+<h3 id="实模式（16位，如DOS）"><a href="#实模式（16位，如DOS）" class="headerlink" title="实模式（16位，如DOS）"></a>实模式（16位，如DOS）</h3><p>通过“段地址×16 + 偏移地址”计算20位物理地址：</p>
+<h3 id="保护模式-长模式（32-64位）"><a href="#保护模式-长模式（32-64位）" class="headerlink" title="保护模式&#x2F;长模式（32&#x2F;64位）"></a>保护模式&#x2F;长模式（32&#x2F;64位）</h3><p>存储段选择子（16位），指向全局描述符表（GDT）&#x2F;局部描述符表（LDT）中的段描述符：</p>
+<table>
+<thead>
+<tr>
+<th>缩写</th>
+<th>英文全程</th>
+<th>功能描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CS</td>
+<td>Code Segment Register</td>
+<td>代码段寄存器</td>
+</tr>
+<tr>
+<td>DS</td>
+<td>Data Segment Register</td>
+<td>数据段寄存器</td>
+</tr>
+<tr>
+<td>ES</td>
+<td>Extra Segment Register</td>
+<td>附加段寄存器</td>
+</tr>
+<tr>
+<td>SS</td>
+<td>Stack Segment Register</td>
+<td>栈段寄存器</td>
+</tr>
+<tr>
+<td>FS</td>
+<td>无严格全称</td>
+<td></td>
+</tr>
+<tr>
+<td>GS</td>
+<td>无严格全称</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="标志寄存器（Flags-Registers）"><a href="#标志寄存器（Flags-Registers）" class="headerlink" title="标志寄存器（Flags Registers）"></a>标志寄存器（Flags Registers）</h2><p>记录运算状态或控制CPU行为，32位为EFLAGS，64位为RFLAGS（低32位兼容EFLAGS）。</p>
+<p><img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/img/huibian-flags-register.png"></p>
+<table>
+<thead>
+<tr>
+<th>缩写</th>
+<th>英文全程</th>
+<th>功能描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CF</td>
+<td>Carry Flag</td>
+<td>进位标志</td>
+</tr>
+<tr>
+<td>PF</td>
+<td>Parity Flag</td>
+<td>奇偶标志，结果低8位中1的个数为偶数时置1（用于校验）</td>
+</tr>
+<tr>
+<td>AF</td>
+<td>Auxiliary Carry Flag</td>
+<td>辅助进位标志</td>
+</tr>
+<tr>
+<td>ZF</td>
+<td>Zero Flag</td>
+<td>运算结果为0时置1（如CMP EAX, EBX后ZF&#x3D;1，表示EAX&#x3D;&#x3D;EBX）</td>
+</tr>
+<tr>
+<td>SF</td>
+<td>Sign Flag</td>
+<td>结果最高位（符号位）为1时置1（表示负数）</td>
+</tr>
+<tr>
+<td>TF</td>
+<td>Trap Flag</td>
+<td>置1时CPU进入单步调试模式（每条指令后触发中断）</td>
+</tr>
+<tr>
+<td>IF</td>
+<td>Interrupt Enable Flag</td>
+<td>置1时允许外部可屏蔽中断（INTR）</td>
+</tr>
+<tr>
+<td>DF</td>
+<td>Direction Flag</td>
+<td>控制字符串操作指针增减（CLD清零→递增；STD置1→递减）</td>
+</tr>
+<tr>
+<td>OF</td>
+<td>Overflow Flag</td>
+<td>有符号运算溢出（如8位加法结果超-128~127）</td>
+</tr>
+</tbody></table>
+<h2 id="指令指针寄存器（Instruction-Pointer-Registers）"><a href="#指令指针寄存器（Instruction-Pointer-Registers）" class="headerlink" title="指令指针寄存器（Instruction Pointer Registers）"></a>指令指针寄存器（Instruction Pointer Registers）</h2><table>
+<thead>
+<tr>
+<th>缩写</th>
+<th>英文全称</th>
+<th>功能描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>EIP</td>
+<td>Extended Instruction Pointer</td>
+<td>32位指令指针，存储下一条要执行的指令地址（程序计数器）。</td>
+</tr>
+<tr>
+<td>RIP</td>
+<td>Instruction Pointer (64-bit)</td>
+<td>64位指令指针，存储下一条指令地址（R表示64位扩展）。</td>
+</tr>
+</tbody></table>
+<h1 id="x86常用汇编指令（Instructions）"><a href="#x86常用汇编指令（Instructions）" class="headerlink" title="x86常用汇编指令（Instructions）"></a>x86常用汇编指令（Instructions）</h1><p>指令按功能分为数据传输、算术运算、逻辑操作、移位、比较与跳转等类别。多数指令会修改标志寄存器（如CF、ZF），少数例外（如PUSHF）。</p>
+<h2 id="数据传输指令（Data-Transfer-Instructions）"><a href="#数据传输指令（Data-Transfer-Instructions）" class="headerlink" title="数据传输指令（Data Transfer Instructions）"></a>数据传输指令（Data Transfer Instructions）</h2><p>功能​：寄存器、内存或I&#x2F;O端口间数据移动，​通常不影响标志寄存器。</p>
+<table>
+<thead>
+<tr>
+<th>指令缩写</th>
+<th>英文全称</th>
+<th>功能描述</th>
+<th>影响标志</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>MOV</td>
+<td>Move</td>
+<td>寄存器&#x2F;内存与寄存器&#x2F;立即数传数据（如<code>MOV EAX, 1</code>）。</td>
+<td>无</td>
+</tr>
+<tr>
+<td>XCHG</td>
+<td>Exchange</td>
+<td>交换两个寄存器或寄存器与内存内容（如<code>XCHG EAX, EBX</code>）。</td>
+<td>无</td>
+</tr>
+<tr>
+<td>PUSH</td>
+<td>Push onto Stack</td>
+<td>操作数压入栈（ESP&#x2F;SP递减，如<code>PUSH EAX</code>）。</td>
+<td>无（除非操作数是标志寄存器）</td>
+</tr>
+<tr>
+<td>POP</td>
+<td>Pop from Stack</td>
+<td>从栈顶弹出数据到操作数（ESP&#x2F;SP递增，如<code>POP EBX</code>）。</td>
+<td>无（除非操作数是标志寄存器）</td>
+</tr>
+<tr>
+<td>LEA</td>
+<td>Load Effective Address</td>
+<td>加载有效地址到寄存器（计算地址但不访问内存，如<code>LEA EAX, [EBX+4]</code>）。</td>
+<td>无</td>
+</tr>
+<tr>
+<td>PUSHF(Push Flags)</td>
+<td>Push Flags onto Stack</td>
+<td>将标志寄存器（EFLAGS&#x2F;RFLAGS）压栈（如<code>PUSHF</code>）。</td>
+<td>无</td>
+</tr>
+<tr>
+<td>POPF(Pop Flags)</td>
+<td>Pop Flags from Stack</td>
+<td>从栈弹出数据到标志寄存器（直接修改所有标志，慎用！如<code>POPF</code>）。</td>
+<td>修改所有标志</td>
+</tr>
+</tbody></table>
+<h2 id="算术运算指令（Arithmetic-Instructions）"><a href="#算术运算指令（Arithmetic-Instructions）" class="headerlink" title="算术运算指令（Arithmetic Instructions）"></a>算术运算指令（Arithmetic Instructions）</h2><p>功能：加减乘除或带进位运算，<strong>显著修改状态标志</strong>（CF、ZF、OF等）。</p>
+<table>
+<thead>
+<tr>
+<th>指令缩写</th>
+<th>英文全称</th>
+<th>功能描述</th>
+<th>影响标志</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ADD</td>
+<td>Add</td>
+<td>加法（dst &#x3D; dst + src，如<code>ADD EAX, EBX</code>）。</td>
+<td>CF、ZF、OF、SF、PF、AF</td>
+</tr>
+<tr>
+<td>SUB</td>
+<td>Subtract</td>
+<td>减法（dst &#x3D; dst - src，如<code>SUB ECX, 10</code>）。</td>
+<td>同ADD</td>
+</tr>
+<tr>
+<td>ADC</td>
+<td>Add with Carry</td>
+<td>带进位加法（dst &#x3D; dst + src + CF，如<code>ADC EDX, EAX</code>）。</td>
+<td>同ADD</td>
+</tr>
+<tr>
+<td>INC</td>
+<td>Increment</td>
+<td>加1（dst &#x3D; dst + 1，如<code>INC ESI</code>）。</td>
+<td>ZF、OF、SF、PF（<strong>不影响CF</strong>）</td>
+</tr>
+<tr>
+<td>MUL</td>
+<td>Unsigned Multiply</td>
+<td>无符号乘法（AL<em>r&#x2F;m8→AX；EAX</em>r&#x2F;m32→EDX:EAX）。</td>
+<td>CF&#x3D;1或OF&#x3D;1（结果超寄存器宽度时置1，否则清零）；其他标志无定义</td>
+</tr>
+<tr>
+<td>DIV</td>
+<td>Unsigned Divide</td>
+<td>无符号除法（被除数在AX&#x2F;EDX:EAX，商→AL&#x2F;EAX，余数→AH&#x2F;EDX）。</td>
+<td>除数为0或商溢出时触发#DE异常；标志无定义</td>
+</tr>
+</tbody></table>
+<h2 id="逻辑操作指令（Logical-Instructions）"><a href="#逻辑操作指令（Logical-Instructions）" class="headerlink" title="逻辑操作指令（Logical Instructions）"></a>逻辑操作指令（Logical Instructions）</h2><p>功能：按位与、或、异或等操作，<strong>影响ZF、SF、PF，清除CF&#x2F;OF</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>指令缩写</th>
+<th>英文全称</th>
+<th>功能描述</th>
+<th>影响标志</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AND</td>
+<td>And</td>
+<td>按位与（dst &#x3D; dst &amp; src，如<code>AND EDX, 0xFF</code>）。</td>
+<td>ZF、SF、PF；<strong>CF&#x3D;0，OF&#x3D;0</strong></td>
+</tr>
+<tr>
+<td>OR</td>
+<td>Or</td>
+<td>按位或（dst &#x3D; dst | src，如<code>OR EAX, 1</code>）。</td>
+<td>同AND</td>
+</tr>
+<tr>
+<td>XOR</td>
+<td>Exclusive Or</td>
+<td>按位异或（dst &#x3D; dst ^ src，如<code>XOR ECX, ECX</code>清零ECX）。</td>
+<td>同AND</td>
+</tr>
+<tr>
+<td>TEST</td>
+<td>Test</td>
+<td>测试位（dst &amp; src，不保存结果，如<code>TEST EAX, 0x80</code>检查最高位）。</td>
+<td>同AND</td>
+</tr>
+</tbody></table>
+<h2 id="移位与循环移位指令（Shift-Rotate-Instructions）"><a href="#移位与循环移位指令（Shift-Rotate-Instructions）" class="headerlink" title="移位与循环移位指令（Shift &amp; Rotate Instructions）"></a>移位与循环移位指令（Shift &amp; Rotate Instructions）</h2><p>功能：左移、右移或循环移位，<strong>影响CF、OF（单次移位）或ZF、SF、PF（多次移位）</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>指令缩写</th>
+<th>英文全称</th>
+<th>功能描述</th>
+<th>影响标志</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SHL</td>
+<td>Shift Left Logical</td>
+<td>逻辑左移（高位丢弃，低位补0，如<code>SHL EAX, 1</code>）。</td>
+<td>单次：CF&#x3D;移出的最高位；ZF&#x2F;SF&#x2F;PF；OF&#x3D;符号位是否改变<br/>多次：CF&#x3D;最后移出的位；OF无定义</td>
+</tr>
+<tr>
+<td>SHR</td>
+<td>Shift Right Logical</td>
+<td>逻辑右移（低位丢弃，高位补0，如<code>SHR EBX, 2</code>）。</td>
+<td>同SHL</td>
+</tr>
+<tr>
+<td>SAR</td>
+<td>Shift Right Arithmetic</td>
+<td>算术右移（低位丢弃，高位补符号位，如<code>SAR ECX, 1</code>保持符号）。</td>
+<td>同SHL</td>
+</tr>
+<tr>
+<td>ROL</td>
+<td>Rotate Left</td>
+<td>循环左移（高位移到低位，如<code>ROL EDX, 3</code>）。</td>
+<td>单次：CF&#x3D;移出的最高位；<br/>多次：CF&#x3D;最后移出的位；OF无定义</td>
+</tr>
+<tr>
+<td>RCL</td>
+<td>Rotate Left with Carry</td>
+<td>带进位循环左移（CF参与，最高位→CF→最低位，如<code>RCL EAX, 1</code>）。</td>
+<td>单次：CF&#x3D;移出的最高位；<br/>多次：CF&#x3D;最后移出的位；OF无定义</td>
+</tr>
+</tbody></table>
+<h2 id="比较与条件跳转指令（Compare-Conditional-Jump-Instructions）"><a href="#比较与条件跳转指令（Compare-Conditional-Jump-Instructions）" class="headerlink" title="比较与条件跳转指令（Compare &amp; Conditional Jump Instructions）"></a>比较与条件跳转指令（Compare &amp; Conditional Jump Instructions）</h2><p><code>CMP</code>和<code>TEST</code>通过隐含减法&#x2F;与操作设置标志，供条件跳转判断。</p>
+<table>
+<thead>
+<tr>
+<th>指令缩写</th>
+<th>英文全称</th>
+<th>功能描述</th>
+<th>影响标志&#x2F;依赖标志</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>CMP</td>
+<td>Compare</td>
+<td>比较（dst - src，如<code>CMP EAX, EBX</code>），<br/>等价于 SUB dst, src（不保存结果），<br/>通过设置标志寄存器反映大小关系。</td>
+<td>dst &#x3D;&#x3D; src时，​ZF&#x3D;1 <br/> dst &gt; src时，ZF&#x3D;0 CF&#x3D;0 SF&#x3D;0 <br/> dst &lt; src时，ZF&#x3D;0 CF&#x3D;1 SF&#x3D;1</td>
+</tr>
+<tr>
+<td>JE&#x2F;JZ</td>
+<td>Jump if Equal&#x2F;Zero</td>
+<td>ZF&#x3D;1（<code>dst == src</code>，或运算结果为0）</td>
+<td>相等&#x2F;为零时跳转（如 <code>CMP EAX, EBX</code> 后 <code>JE Label</code> 表示 EAX&#x3D;EBX 时跳转）</td>
+</tr>
+<tr>
+<td>JNE&#x2F;JNZ</td>
+<td>Jump if Not Equal&#x2F;Not Zero</td>
+<td>ZF&#x3D;0（<code>dst != src</code>，或运算结果非0）</td>
+<td>不相等&#x2F;非零时跳转</td>
+</tr>
+<tr>
+<td>JG&#x2F;JNLE</td>
+<td>Jump if Greater&#x2F;Not Less or Equal</td>
+<td>ZF&#x3D;0 且 SF&#x3D;OF（有符号比较：<code>dst &gt; src</code>，不包括等于）</td>
+<td>有符号大于时跳转（如 <code>CMP EAX, EBX</code> 后 <code>JG Label</code> 表示 EAX&gt;EBX 时跳转）</td>
+</tr>
+<tr>
+<td>JGE</td>
+<td>Jump if Greater or Equal</td>
+<td>SF&#x3D;OF（有符号比较：<code>dst ≥ src</code>，包括等于）</td>
+<td>有符号大于等于时跳转（<code>dst == src</code> 时 ZF&#x3D;1，仍满足 SF&#x3D;OF）</td>
+</tr>
+<tr>
+<td>JL</td>
+<td>Jump if Less</td>
+<td>SF≠OF（有符号比较：<code>dst &lt; src</code>）</td>
+<td>有符号小于时跳转</td>
+</tr>
+<tr>
+<td>JLE</td>
+<td>Jump if Less or Equal</td>
+<td>ZF&#x3D;1 或 SF!&#x3D;OF（有符号比较：<code>dst ≤ src</code>，包括等于）</td>
+<td>有符号小于等于时跳转</td>
+</tr>
+<tr>
+<td>JB&#x2F;JC</td>
+<td>Jump if Below&#x2F;Jump if Carry</td>
+<td>CF&#x3D;1（无符号比较：<code>dst &lt; src</code>，或减法产生借位）</td>
+<td>无符号小于时跳转（如 <code>CMP AL, BL</code> 后 <code>JB Label</code> 表示 AL&lt;BL 时跳转）</td>
+</tr>
+<tr>
+<td>JAE&#x2F;JNB</td>
+<td>Jump if Above or Equal&#x2F;Jump if Not Below</td>
+<td>CF&#x3D;0（无符号比较：<code>dst ≥ src</code>，或减法无借位）</td>
+<td>无符号大于等于时跳转</td>
+</tr>
+<tr>
+<td>JA</td>
+<td>Jump if Above</td>
+<td>CF&#x3D;0 且 ZF&#x3D;0（无符号比较：<code>dst &gt; src</code>）</td>
+<td>无符号大于时跳转</td>
+</tr>
+<tr>
+<td>CALL</td>
+<td>Call Procedure</td>
+<td>无（压返回地址到栈，跳转到子程序）</td>
+<td>调用子函数（如 <code>CALL Func</code>）</td>
+</tr>
+<tr>
+<td>RET</td>
+<td>Return</td>
+<td>无（弹出栈顶返回地址，返回调用处）</td>
+<td>子函数返回</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>完整的指令文档可以参考：<a target="_blank" rel="noopener" href="https://shell-storm.org/x86doc/">https://shell-storm.org/x86doc/</a></p>
+</blockquote>
+
+<div class="article-footer fs14">
+    <section id="license">
+      <div class="header"><span>许可协议</span></div>
+      <div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div>
+    </section>
+    
+    <section id="share">
+      <div class="header"><span>分享文章</span></div>
+      <div class="body">
+        <div class="link"><input class="copy-area" readonly="true" id="copy-link" value="https://jiangxueqiao.com/post/470495318.html" /></div>
+        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/b32ef3da1162a.svg" /></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://jiangxueqiao.com/post/470495318.html&title=x86架构常用寄存器及汇编指令 - 独钓寒江雪&summary=x86架构作为个人计算机和服务器领域的主流计算架构，其汇编语言是理解计算机底层运行机制、进行逆向工程、性能优化及嵌入式开发的核心基础。本文将系统梳理x86架构中的常用寄存器​和常用汇编指令​，并结合实际应用场景说明其作用。"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/80c07e4dbb303.svg" /></a><a class="social share-item email" href="mailto:?subject=x86架构常用寄存器及汇编指令 - 独钓寒江雪&amp;body=https://jiangxueqiao.com/post/470495318.html"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/a1b00e20f425d.svg" /></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/8411ed322ced6.svg" /></a></div>
+        
+        <div class="qrcode" id="qrcode-wechat" style="opacity:0;height:0">
+          <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=https://jiangxueqiao.com/post/470495318.html"/>
+        </div>
+        
+      </div>
+    </section>
+    </div>
+</article>
+<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"></div><div class="item" id="next"><div class="note">较早文章</div><a href="/post/966041457.html">Visual Studio 断点高级使用指南</a></div></section></div>
+
+<div class="related-wrap" id="related-posts">
+    <section class='header'>
+      <div class='title cap theme'>您可能感兴趣的文章</div>
+    </section>
+    <section class='body'>
+    <div class="related-posts"><a class="item" href="\post\4168021185.html" title="从汇编的角度分析函数调用过程"><span class="title">从汇编的角度分析函数调用过程</span><span class="excerpt">本文从汇编的视角分析了函数的调用方式，掌握该知识对使用 OllyDbg 等动态调试工具会大有裨益。</span></a><a class="item" href="\post\2824175441.html" title="Linux GDB调试命令"><span class="title">Linux GDB调试命令</span><span class="excerpt">一、启动GDBgdb -tui：分屏显示源代码gdb -q：不显示开始的提示信息
+可以在.bashrc中加入别名：
+1alias gdb=&quot;gdb -q -tui&quot;</span></a></div></section></div>
+
+
+  <div class="related-wrap md-text" id="comments">
+    <section class='header cmt-title cap theme'>
+      <p>快来参与讨论吧~</p>
+
+    </section>
+    <section class='body cmt-body beaudar'>
+      
+
+<svg class="loading" style="vertical-align:middle;fill:currentColor;overflow:hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2709"><path d="M832 512c0-176-144-320-320-320V128c211.2 0 384 172.8 384 384h-64zM192 512c0 176 144 320 320 320v64C300.8 896 128 723.2 128 512h64z" p-id="2710"></path></svg>
+
+<div id="beaudar" repo="winsoft666/blog-comment" issue-term="pathname" theme="preferred-color-scheme" label="comment" input-position="top" comment-order="desc" loading="false" branch="main"></div>
+
+    </section>
+  </div>
+
+
+
+<footer class="page-footer footnote"><hr><div class="sitemap"><div class="sitemap-group"><span class="fs15">博客</span><a href="/">近期</a><a href="/topic">专栏</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></div><div class="sitemap-group"><span class="fs15">社交</span><a href="/friends">友链</a><a target="_blank" rel="noopener" href="https://github.com/winsoft666/blog-comment">留言</a></div><div class="sitemap-group"><span class="fs15">更多</span><a href="/author">关于本站</a><a target="_blank" rel="noopener" href="https://github.com/winsoft666">GitHub</a></div></div><div class="text"><p>本博客所有文章除特别声明外均为原创，采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。<br><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">鄂ICP备2020015399号-6</a></p>
+</div></footer>
+<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
+<div class="widgets">
+
+
+<widget class="widget-wrapper markdown"><div class="widget-header dis-select"><span class="name">开源项目推荐</span></div><div class="widget-body fs14"><p><a target="_blank" rel="noopener" href="https://github.com/winsoft666/ashe">跨平台的C++基础库</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/winsoft666/QWebView">Qt浏览器控件(CEF/WebView2)</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/winsoft666/veigar">全网唯一基于共享内存的RPC框架</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/winsoft666/electron-vue3-boilerplate">产品级的Electron项目模板</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/winsoft666/zoe">跨平台的C++文件下载库</a></p>
+</div></widget>
+
+
+
+
+<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#x86%E5%B8%B8%E7%94%A8%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%88Registers%EF%BC%89"><span class="toc-text">x86常用寄存器（Registers）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%9A%E7%94%A8%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%88General-Purpose-Registers-GPRs%EF%BC%89"><span class="toc-text">通用寄存器（General-Purpose Registers, GPRs）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#32%E4%BD%8D%E9%80%9A%E7%94%A8%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%88EAX-EBP-ESP%EF%BC%89"><span class="toc-text">32位通用寄存器（EAX-EBP&#x2F;ESP）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#64%E4%BD%8D%E9%80%9A%E7%94%A8%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%88RAX-R15%EF%BC%89"><span class="toc-text">64位通用寄存器（RAX-R15）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AE%B5%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%88Segment-Registers%EF%BC%89"><span class="toc-text">段寄存器（Segment Registers）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E6%A8%A1%E5%BC%8F%EF%BC%8816%E4%BD%8D%EF%BC%8C%E5%A6%82DOS%EF%BC%89"><span class="toc-text">实模式（16位，如DOS）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F-%E9%95%BF%E6%A8%A1%E5%BC%8F%EF%BC%8832-64%E4%BD%8D%EF%BC%89"><span class="toc-text">保护模式&#x2F;长模式（32&#x2F;64位）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%88Flags-Registers%EF%BC%89"><span class="toc-text">标志寄存器（Flags Registers）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4%E6%8C%87%E9%92%88%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%88Instruction-Pointer-Registers%EF%BC%89"><span class="toc-text">指令指针寄存器（Instruction Pointer Registers）</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#x86%E5%B8%B8%E7%94%A8%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4%EF%BC%88Instructions%EF%BC%89"><span class="toc-text">x86常用汇编指令（Instructions）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E6%8C%87%E4%BB%A4%EF%BC%88Data-Transfer-Instructions%EF%BC%89"><span class="toc-text">数据传输指令（Data Transfer Instructions）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97%E6%8C%87%E4%BB%A4%EF%BC%88Arithmetic-Instructions%EF%BC%89"><span class="toc-text">算术运算指令（Arithmetic Instructions）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%BB%E8%BE%91%E6%93%8D%E4%BD%9C%E6%8C%87%E4%BB%A4%EF%BC%88Logical-Instructions%EF%BC%89"><span class="toc-text">逻辑操作指令（Logical Instructions）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A7%BB%E4%BD%8D%E4%B8%8E%E5%BE%AA%E7%8E%AF%E7%A7%BB%E4%BD%8D%E6%8C%87%E4%BB%A4%EF%BC%88Shift-Rotate-Instructions%EF%BC%89"><span class="toc-text">移位与循环移位指令（Shift &amp; Rotate Instructions）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%AF%94%E8%BE%83%E4%B8%8E%E6%9D%A1%E4%BB%B6%E8%B7%B3%E8%BD%AC%E6%8C%87%E4%BB%A4%EF%BC%88Compare-Conditional-Jump-Instructions%EF%BC%89"><span class="toc-text">比较与条件跳转指令（Compare &amp; Conditional Jump Instructions）</span></a></li></ol></li></ol></div><div class="widget-footer">
+
+<a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2c4.714 0 7.071 0 8.535 1.464C22 4.93 22 7.286 22 12c0 4.714 0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12Z"/><path stroke-linecap="round" stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/></g></svg><span>回到顶部</span></a><a class="buttom" onclick="util.scrollComment()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M10.46 1.25h3.08c1.603 0 2.86 0 3.864.095c1.023.098 1.861.3 2.6.752a5.75 5.75 0 0 1 1.899 1.899c.452.738.654 1.577.752 2.6c.095 1.004.095 2.261.095 3.865v1.067c0 1.141 0 2.036-.05 2.759c-.05.735-.153 1.347-.388 1.913a5.75 5.75 0 0 1-3.112 3.112c-.805.334-1.721.408-2.977.43a10.81 10.81 0 0 0-.929.036c-.198.022-.275.054-.32.08c-.047.028-.112.078-.224.232c-.121.166-.258.396-.476.764l-.542.916c-.773 1.307-2.69 1.307-3.464 0l-.542-.916a10.605 10.605 0 0 0-.476-.764c-.112-.154-.177-.204-.224-.232c-.045-.026-.122-.058-.32-.08c-.212-.023-.49-.03-.93-.037c-1.255-.021-2.171-.095-2.976-.429A5.75 5.75 0 0 1 1.688 16.2c-.235-.566-.338-1.178-.389-1.913c-.049-.723-.049-1.618-.049-2.76v-1.066c0-1.604 0-2.86.095-3.865c.098-1.023.3-1.862.752-2.6a5.75 5.75 0 0 1 1.899-1.899c.738-.452 1.577-.654 2.6-.752C7.6 1.25 8.857 1.25 10.461 1.25M6.739 2.839c-.914.087-1.495.253-1.959.537A4.25 4.25 0 0 0 3.376 4.78c-.284.464-.45 1.045-.537 1.96c-.088.924-.089 2.11-.089 3.761v1c0 1.175 0 2.019.046 2.685c.045.659.131 1.089.278 1.441a4.25 4.25 0 0 0 2.3 2.3c.515.214 1.173.294 2.429.316h.031c.398.007.747.013 1.037.045c.311.035.616.104.909.274c.29.17.5.395.682.645c.169.232.342.525.538.856l.559.944a.52.52 0 0 0 .882 0l.559-.944c.196-.331.37-.624.538-.856c.182-.25.392-.476.682-.645c.293-.17.598-.24.909-.274c.29-.032.639-.038 1.037-.045h.032c1.255-.022 1.913-.102 2.428-.316a4.25 4.25 0 0 0 2.3-2.3c.147-.352.233-.782.278-1.441c.046-.666.046-1.51.046-2.685v-1c0-1.651 0-2.837-.089-3.762c-.087-.914-.253-1.495-.537-1.959a4.25 4.25 0 0 0-1.403-1.403c-.464-.284-1.045-.45-1.96-.537c-.924-.088-2.11-.089-3.761-.089h-3c-1.651 0-2.837 0-3.762.089" clip-rule="evenodd"/><path fill="currentColor" d="M9 11a1 1 0 1 1-2 0a1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0a1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0a1 1 0 0 1 2 0"/></svg><span>参与讨论</span></a></div></widget>
+</div></aside><div class='float-panel blur'>
+  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+  </button>
+  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
+    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
+  </button>
+</div>
+</div><div class="scripts">
+<script type="text/javascript">
+  const ctx = {
+    date_suffix: {
+      just: `刚刚`,
+      min: `分钟前`,
+      hour: `小时前`,
+      day: `天前`,
+    },
+    root : `/`,
+  };
+
+  // required plugins (only load if needs)
+  if (`local_search`) {
+    ctx.search = {};
+    ctx.search.service = `local_search`;
+    if (ctx.search.service == 'local_search') {
+      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"sort":"-date"}`);
+      ctx.search[ctx.search.service] = service_obj;
+    }
+  }
+  const def = {
+    avatar: `https://blog-static.jiangxueqiao.com/blog/stellar-theme/default/3442075.svg`,
+    cover: `https://blog-static.jiangxueqiao.com/blog/stellar-theme/default/76b86c0226ffd.svg`,
+  };
+  const deps = {
+    jquery: `https://blog-static.jiangxueqiao.com/blog/stellar-theme/jquery-3.7.1.min.js`,
+    marked: `https://blog-static.jiangxueqiao.com/blog/stellar-theme/marked-4.0.18.min.js`
+  }
+  
+
+</script>
+
+<script type="text/javascript">
+  const utils = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    css: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    js: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      if (src.startsWith('/')){
+        src = ctx.root + src.substring(1);
+      }
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    jq: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        utils.js(deps.jquery).then(fn)
+      } else {
+        fn()
+      }
+    },
+    
+    onLoading: (el) => {
+      if (el) {
+        $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
+      }
+    },
+    onLoadSuccess: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap').remove();
+      }
+    },
+    onLoadFailure: (el) => {
+      if (el) {
+        $(el).find('.loading-wrap svg').remove();
+        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
+        $(el).find('.loading-wrap').addClass('error');
+      }
+    },
+    request: (el, url, callback, onFailure) => {
+      let retryTimes = 3;
+      utils.onLoading(el);
+      function req() {
+        return new Promise((resolve, reject) => {
+          let status = 0; // 0 等待 1 完成 2 超时
+          let timer = setTimeout(() => {
+            if (status === 0) {
+              status = 2;
+              timer = null;
+              reject('请求超时');
+              if (retryTimes == 0) {
+                onFailure();
+              }
+            }
+          }, 5000);
+          fetch(url).then(function(response) {
+            if (status !== 2) {
+              clearTimeout(timer);
+              resolve(response);
+              timer = null;
+              status = 1;
+            }
+            if (response.ok) {
+              return response.json();
+            }
+            throw new Error('Network response was not ok.');
+          }).then(function(data) {
+            retryTimes = 0;
+            utils.onLoadSuccess(el);
+            callback(data);
+          }).catch(function(error) {
+            if (retryTimes > 0) {
+              retryTimes -= 1;
+              setTimeout(() => {
+                req();
+              }, 5000);
+            } else {
+              utils.onLoadFailure(el);
+              onFailure();
+            }
+          });
+        });
+      }
+      req();
+    },
+  };
+</script>
+
+<script>
+  const sidebar = {
+    leftbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    rightbar: () => {
+      if (l_body) {
+        l_body.toggleAttribute('rightbar');
+        l_body.removeAttribute('leftbar');
+      }
+    },
+    dismiss: () => {
+      if (l_body) {
+        l_body.removeAttribute('leftbar');
+        l_body.removeAttribute('rightbar');
+      }
+    },
+    toggleTOC: () => {
+      document.querySelector('#data-toc').classList.toggle('collapse');
+    }
+  }
+</script>
+<script type="text/javascript">
+  (() => {
+    const tagSwitchers = document.querySelectorAll('.tag-subtree.parent-tag > a > .tag-switcher-wrapper')
+    for (const tagSwitcher of tagSwitchers) {
+      tagSwitcher.addEventListener('click', (e) => {
+        const parent = e.target.closest('.tag-subtree.parent-tag')
+        parent.classList.toggle('expanded')
+        e.preventDefault()
+      })
+    }
+
+    // Get active tag from query string, then activate it.
+    const urlParams = new URLSearchParams(window.location.search)
+    const activeTag = urlParams.get('tag')
+    if (activeTag) {
+      let tag = document.querySelector(`.tag-subtree[data-tag="${activeTag}"]`)
+      if (tag) {
+        tag.querySelector('a').classList.add('active')
+        
+        while (tag) {
+          tag.classList.add('expanded')
+          tag = tag.parentElement.closest('.tag-subtree.parent-tag')
+        }
+      }
+    }
+  })()
+</script>
+
+
+<!-- required -->
+<script src="/js/main.js?v=1.29.0" defer></script>
+
+<script type="text/javascript">
+  const applyTheme = (theme) => {
+    if (theme === 'auto') {
+      document.documentElement.removeAttribute('data-theme')
+    } else {
+      document.documentElement.setAttribute('data-theme', theme)
+    }
+
+    applyThemeToGiscus(theme)
+  }
+
+  const applyThemeToGiscus = (theme) => {
+    theme = theme === 'auto' ? 'preferred_color_scheme' : theme
+
+    const cmt = document.getElementById('giscus')
+    if (cmt) {
+      // This works before giscus load.
+      cmt.setAttribute('data-theme', theme)
+    }
+
+    const iframe = document.querySelector('#comments > section.giscus > iframe')
+    if (iframe) {
+      // This works after giscus loaded.
+      const src = iframe.src
+      const newSrc = src.replace(/theme=[\w]+/, `theme=${theme}`)
+      iframe.src = newSrc
+    }
+  }
+
+  const switchTheme = () => {
+    // light -> dark -> auto -> light -> ...
+    const currentTheme = document.documentElement.getAttribute('data-theme')
+    let newTheme;
+    switch (currentTheme) {
+      case 'light':
+        newTheme = 'dark'
+        break
+      case 'dark':
+        newTheme = 'auto'
+        break
+      default:
+        newTheme = 'light'
+    }
+    applyTheme(newTheme)
+    window.localStorage.setItem('Stellar.theme', newTheme)
+
+    const messages = {
+      light: `切换到浅色模式`,
+      dark: `切换到深色模式`,
+      auto: `切换到跟随系统配色`,
+    }
+    hud?.toast?.(messages[newTheme])
+  }
+
+  (() => {
+    // Apply user's preferred theme, if any.
+    const theme = window.localStorage.getItem('Stellar.theme')
+    if (theme !== null) {
+      applyTheme(theme)
+    }
+  })()
+</script>
+
+
+<!-- optional -->
+
+  <script type="module">
+  const el = document.querySelector('#comments #beaudar');
+  util.viewportLazyload(el, load_beaudar, false);
+
+  function load_beaudar() {
+    if (!el) return;
+    try {
+      el.innerHTML = '';
+    } catch (error) {
+      console.error(error);
+    }
+    const script = document.createElement('script');
+    script.src = 'https://beaudar.lipk.org/client.js';
+    script.async = true;
+    for (const key of Object.keys(el.attributes)) {
+      const attr = el.attributes[key];
+      if (['class', 'id'].includes(attr.name) === false) {
+        script.setAttribute(attr.name, attr.value);
+      }
+    }
+    el.appendChild(script);
+  }
+</script>
+
+
+
+
+<script defer>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"}}`));
+    for (let id of Object.keys(ctx.services)) {
+      const js = ctx.services[id].js;
+      if (id == 'siteinfo') {
+        ctx.cardlinks = document.querySelectorAll('a.link-card[cardlink]');
+        if (ctx.cardlinks?.length > 0) {
+          utils.js(js, { defer: true }).then(function () {
+            setCardLink(ctx.cardlinks);
+          });
+        }
+      } else {
+        const els = document.getElementsByClassName(`ds-${id}`);
+        if (els?.length > 0) {
+          utils.jq(() => {
+            if (id == 'timeline' || 'memos' || 'marked') {
+              utils.js(deps.marked).then(function () {
+                utils.js(js, { defer: true });
+              });
+            } else {
+              utils.js(js, { defer: true });
+            }
+          });
+        }
+      }
+    }
+  });
+</script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    ctx.search = {
+      path: `/search.json`,
+    }
+    utils.js('/js/search/local-search.js', { defer: true });
+  });
+</script><script>
+  window.FPConfig = {
+    delay: 0,
+    ignoreKeywords: [],
+    maxRPS: 5,
+    hoverDelay: 25
+  };
+</script>
+<script defer src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/flying-pages-2.1.2.min.js"></script><script defer src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/lazyload-17.8.4.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazy",
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    window.lazyLoadInstance?.update();
+  });
+</script><script>
+  ctx.fancybox = {
+    selector: `.timenode p>img`,
+    css: `https://blog-static.jiangxueqiao.com/blog/stellar-theme/fancybox-5.0.22.min.css`,
+    js: `https://blog-static.jiangxueqiao.com/blog/stellar-theme/fancybox-5.0.22.umd.min.js`
+  };
+  var selector = '[data-fancybox]:not(.error)';
+  if (ctx.fancybox.selector) {
+    selector += `, ${ctx.fancybox.selector}`
+  }
+  var needFancybox = document.querySelectorAll(selector).length !== 0;
+  if (!needFancybox) {
+    const els = document.getElementsByClassName('ds-memos');
+    if (els != undefined && els.length > 0) {
+      needFancybox = true;
+    }
+  }
+  if (needFancybox) {
+    utils.css(ctx.fancybox.css);
+    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
+      Fancybox.bind(selector, {
+        hideScrollbar: false,
+        Thumbs: {
+          autoStart: false,
+        },
+        caption: (fancybox, slide) => {
+          return slide.triggerEl.alt || slide.triggerEl.dataset.caption || null
+        }
+      });
+    })
+  }
+</script>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    const swiper_api = document.getElementById('swiper-api');
+    if (swiper_api != undefined) {
+      utils.css(`https://blog-static.jiangxueqiao.com/blog/stellar-theme/swiper-bundle-10.3.1.min.css`);
+      utils.js(`https://blog-static.jiangxueqiao.com/blog/stellar-theme/swiper-bundle-10.3.1.min.js`, { defer: true }).then(function () {
+        const effect = swiper_api.getAttribute('effect') || '';
+        var swiper = new Swiper('.swiper#swiper-api', {
+          slidesPerView: 'auto',
+          spaceBetween: 8,
+          centeredSlides: true,
+          effect: effect,
+          rewind: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+      })
+    }
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    window.codeElements = document.querySelectorAll('.code');
+    if (window.codeElements.length > 0) {
+      ctx.copycode = {
+        default_text: `复制`,
+        success_text: `已复制`,
+        toast: `复制成功`,
+      };
+      utils.js('/js/plugins/copycode.js');
+    }
+  });
+</script>
+
+
+<!-- inject -->
+
+</div></body></html>
