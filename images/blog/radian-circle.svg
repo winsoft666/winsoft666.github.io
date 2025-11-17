@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Copyright 2017 mathsisfun.com -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="234.3"
+   height="167.7"
+   version="1.1"
+   id="svg2"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="radian-circle.svg">
+  <metadata
+     id="metadata49">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1366"
+     inkscape:window-height="745"
+     id="namedview47"
+     showgrid="false"
+     inkscape:zoom="1.2291933"
+     inkscape:cx="117.15"
+     inkscape:cy="83.849998"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2" />
+  <defs
+     id="defs4">
+    <marker
+       id="id1"
+       style="overflow:visible;"
+       orient="auto">
+      <path
+         transform="matrix(.8 0 0 .8 10 0)"
+         style="fill:#f44800; stroke:#f44800; stroke-width:1pt;"
+         d="m0 0 5-5-17.5 5 17.5 5-5-5z"
+         id="path7" />
+    </marker>
+    <marker
+       id="id2"
+       style="overflow:visible;"
+       orient="auto">
+      <path
+         transform="matrix(-.8 0 0 -.8 -10 0)"
+         style="fill:#f44800; stroke:#f44800; stroke-width:1pt;"
+         d="m0 0 5-5-17.5 5 17.5 5-5-5z"
+         id="path10" />
+    </marker>
+    <marker
+       id="id3"
+       style="overflow:visible;"
+       orient="auto">
+      <path
+         transform="matrix(.8 0 0 .8 10 0)"
+         style="fill:#6600cc; stroke:#6600cc; stroke-width:1pt;"
+         d="m0 0 5-5-17.5 5 17.5 5-5-5z"
+         id="path13" />
+    </marker>
+    <marker
+       id="id4"
+       style="overflow:visible;"
+       orient="auto">
+      <path
+         transform="matrix(-.8 0 0 -.8 -10 0)"
+         style="fill:#6600cc; stroke:#6600cc; stroke-width:1pt;"
+         d="m0 0 5-5-17.5 5 17.5 5-5-5z"
+         id="path16" />
+    </marker>
+    <filter
+       id="id5"
+       x="-.02833"
+       y="-.1371"
+       width="1.057"
+       height="1.274">
+      <feGaussianBlur
+         stdDeviation="2.2282282"
+         id="feGaussianBlur19" />
+    </filter>
+  </defs>
+  <circle
+     cx="83.8"
+     cy="83.8"
+     r="83.459999"
+     style="marker-end:; fill:#b3defd; fill-opacity:0.23; stroke:black; stroke-width:0.81;"
+     id="circle21" />
+  <circle
+     cx="83.8"
+     cy="83.8"
+     r="2.9860001"
+     style="marker-end:; fill:black;"
+     id="circle23" />
+  <path
+     style="marker-end:; opacity:0.74; fill:#b3defd; stroke:black; stroke-width:1.06;"
+     d="m 125.7,11.7 a 83.5,83.5 0 0 1 41.6,72.2 l -83.5,0 z"
+     id="path25" />
+  <path
+     style="marker-start:url(#id1); marker-end:url(#id2); fill:none; stroke:#f44800; stroke-width:0.89;"
+     d="m 119,22.9 a 70.4,70.4 0 0 1 35.2,60.9"
+     id="path27" />
+  <path
+     style="marker-start:url(#id3); marker-end:url(#id4); fill:none; stroke:#6600cc; stroke-width:0.77;"
+     d="m 84.5,93.3 83.1,0"
+     id="path29" />
+  <path
+     style="marker-end:; fill:none; stroke:#6600cc; stroke-width:3.23;"
+     d="m 125.1,11.3 a 83.5,83.5 0 0 1 42.2,72.6"
+     id="path31" />
+  <text
+     x="234.10001"
+     y="15.6"
+     style="font-size:20.10000038px;font-family:Arial;text-align:end;text-anchor:end;fill:#6600cc"
+     id="text33">长度 = r</text>
+  <text
+     x="128.7"
+     y="111.2"
+     style="font-family:Arial; text-align:end; text-anchor:end; font-size:25px; fill:#6600cc;"
+     id="text35">r</text>
+  <path
+     style="marker-end:; fill:#6600cc; stroke:#6600cc; stroke-width:1.79;"
+     d="m 191.6,20.6 c -0.1,0.4 -0.3,0.8 -0.5,1.2 -0.2,0.5 -0.4,1 -0.7,1.5 -0.2,0.5 -0.5,1 -0.7,1.5 -0.2,0.5 -0.5,1 -0.8,1.5 -0.3,0.4 -0.6,0.9 -0.9,1.3 -0.2,0.3 -0.5,0.6 -0.7,0.9 -0.2,0.3 -0.4,0.5 -0.7,0.7 -0.3,0.2 -0.6,0.4 -0.9,0.5 -0.9,0.4 -1.9,0.6 -2.8,0.7 -0.3,0.1 -0.6,0.1 -1,0.1 -0.3,0 -0.7,-0.1 -1,-0.1 -0.3,0 -0.6,-0.1 -1,-0.2 -0.3,-0.1 -0.6,-0.1 -0.9,-0.2 -0.3,-0.1 -0.7,-0.1 -1,-0.2 -0.3,0 -0.7,-0.1 -1,-0.1 -0.4,0 -0.7,-0.1 -1.1,-0.1 -0.4,0 -0.9,0 -1.3,0.1 -0.5,0.1 -1,0.2 -1.5,0.2 -0.4,0.1 -0.9,0.2 -1.3,0.3 0.6,-0.2 -1.3,0.3 -0.8,0.2 2.3,-0.6 2.1,-0.6 1.4,-0.4 -0.4,0.1 -0.8,0.3 -1.2,0.4 -0.4,0.2 -0.8,0.3 -1.1,0.5 -0.4,0.2 -0.8,0.4 -1.1,0.6 -0.4,0.2 -0.8,0.5 -1.1,0.7 -0.3,0.2 -0.6,0.4 -0.9,0.6 -0.3,0.2 -0.6,0.5 -0.9,0.7 -0.3,0.2 -0.5,0.5 -0.8,0.7 -0.2,0.2 -0.4,0.4 -0.6,0.6 -0.1,0.1 -0.3,0.2 -0.4,0.3 -0.1,0.1 -0.2,0.1 -0.2,0.2 0,0 -0.1,0.1 -0.1,0.1 -0.1,0 -0.1,0.1 -0.1,0 l -2.4,-0.4 c 0,-0.1 0,-0.1 0.1,-0.2 0.1,0 0.1,-0.1 0.1,-0.1 0.1,-0.1 0.2,-0.1 0.2,-0.2 0.1,-0.1 0.3,-0.2 0.4,-0.3 0.2,-0.2 0.4,-0.4 0.6,-0.5 0.3,-0.3 0.6,-0.5 0.8,-0.7 0.3,-0.3 0.6,-0.6 0.9,-0.8 0.3,-0.3 0.6,-0.5 0.9,-0.7 0.4,-0.2 0.8,-0.5 1.1,-0.7 0.4,-0.2 0.8,-0.5 1.2,-0.7 0.4,-0.2 0.8,-0.4 1.1,-0.5 0.4,-0.2 0.8,-0.3 1.2,-0.5 1,-0.4 2,-0.6 3,-0.8 0.4,-0.1 0.9,-0.2 1.3,-0.2 0.5,-0.1 1,-0.2 1.5,-0.2 l 1.4,0 c 0.4,0 0.8,0.1 1.2,0.1 0.4,0.1 0.7,0.1 1.1,0.2 0.3,0.1 0.7,0.1 1,0.2 0.3,0.1 0.6,0.1 0.9,0.2 0.3,0.1 0.6,0.1 0.9,0.1 l 0.9,0 c 0.3,0 0.6,-0.1 0.9,-0.2 0.2,-0.1 0.3,-0.1 0.5,-0.1 0.1,0 0.2,-0.1 0.2,-0.1 -1.8,0.5 -2.2,0.6 -1.5,0.4 0.3,-0.1 0.6,-0.1 0.8,-0.3 0.2,-0.1 0.4,-0.2 0.6,-0.4 0.2,-0.3 0.5,-0.6 0.7,-0.9 0.3,-0.4 0.6,-0.8 0.9,-1.2 0.3,-0.5 0.6,-0.9 0.8,-1.4 0.2,-0.5 0.5,-1 0.7,-1.5 0.2,-0.5 0.4,-1 0.7,-1.5 0.2,-0.4 0.3,-0.8 0.5,-1.2 l 2.4,-0.1 z"
+     id="path37" />
+  <path
+     style="marker-end:; fill:#6600cc; stroke:#6600cc; stroke-width:1.79;"
+     d="m 165.5,25 c -0.1,0.4 -0.2,0.7 -0.3,1.1 -0.1,0.4 -0.2,0.9 -0.4,1.3 -0.1,0.4 -0.2,0.9 -0.4,1.3 -0.1,0.4 -0.2,0.9 -0.3,1.3 -0.1,0.4 -0.2,0.9 -0.3,1.3 -0.1,0.5 -0.2,0.9 -0.4,1.3 -0.1,0.4 -0.3,0.9 -0.4,1.3 l -0.3,1 c -0.1,0.3 -0.1,0.5 -0.2,0.8 0,0.2 -0.1,0.3 -0.2,0.5 -0.1,0.1 -0.1,0.2 -0.1,0.3 0,0.1 0,0.1 -0.1,0.2 l 0,0.1 0,-0.2 c -0.1,-0.2 -0.2,-0.4 -0.3,-0.6 l 0,-0.1 c -0.9,0.2 -2.4,0.6 -1.6,0.4 0.9,-0.3 1.8,-0.5 2.7,-0.7 0.3,-0.1 0.7,-0.2 1,-0.2 l 1,0 1.2,0 c 0.4,0 0.7,0.1 1.1,0.1 0.3,0 0.7,0.1 1,0.1 0.4,0.1 0.7,0.1 1.1,0.1 0.3,0 0.6,0 0.9,0.1 0.2,0 0.4,0.1 0.7,0.1 0.2,0 0.4,0.1 0.5,0.1 0.1,0 0.3,0.1 0.4,0.1 l 0.2,0 c 0.1,0 0.1,0 0.2,0.1 l -1.9,1.4 c 0.1,0.1 0,0.1 -0.1,0.1 -0.1,0 -0.2,-0.1 -0.2,-0.1 -0.1,0 -0.3,0 -0.4,-0.1 -0.2,-0.1 -0.3,-0.1 -0.5,-0.1 -0.2,0 -0.4,0 -0.6,-0.1 -0.3,-0.1 -0.6,-0.1 -0.8,-0.1 -0.4,0 -0.7,0 -1.1,-0.1 -0.3,-0.1 -0.7,-0.1 -1,-0.1 l -1,0 -1.2,0 c -0.3,0 -0.6,0 -0.9,0.1 -0.3,0.1 -0.6,0.2 -0.9,0.2 -1.8,0.5 2.2,-0.6 1,-0.3 -1,0.3 -2.5,1.2 -2.6,-0.4 l 0,-0.1 c 0,-0.1 0.1,-0.1 0.1,-0.2 0,-0.1 0.1,-0.2 0.1,-0.3 0.1,-0.2 0.1,-0.3 0.2,-0.5 0.1,-0.3 0.2,-0.5 0.2,-0.8 l 0.3,-1 c 0.1,-0.4 0.3,-0.9 0.4,-1.3 0.1,-0.4 0.3,-0.9 0.4,-1.3 0.1,-0.4 0.2,-0.8 0.3,-1.3 0.1,-0.5 0.2,-0.9 0.3,-1.4 0.1,-0.5 0.2,-0.9 0.3,-1.3 0.1,-0.4 0.2,-0.9 0.4,-1.3 0.1,-0.4 0.2,-0.8 0.3,-1.1 l 2.4,-0.1 z"
+     id="path39" />
+  <text
+     x="-427.39999"
+     y="504.60001"
+     transform="matrix(0.4256,0,0,0.4256,119.29583,-254.53333)"
+     style="font-size:56.40000153px;font-family:'Comic Sans MS';text-align:end;text-anchor:end;fill:#ffffff;filter:url(#id5)"
+     id="text41">1 Radian</text>
+  <text
+     x="123.72397"
+     y="69.708336"
+     style="font-size:24px;font-family:'Comic Sans MS';text-align:end;text-anchor:end;fill:#f44800"
+     id="text43">1 弧度</text>
+  <path
+     style="marker-end:; fill:none; stroke:#6600cc; stroke-width:2.89;"
+     d="m 85.2,84.4 83.2,0"
+     id="path45" />
+</svg>

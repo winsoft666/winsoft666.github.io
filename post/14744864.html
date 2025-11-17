@@ -1,96 +1,327 @@
-
-<!DOCTYPE html><html lang="zh-CN" data-theme="light">
-
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.29.0" theme-name="Stellar" theme-version="1.29.0">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/logo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.png" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-corner-indicator.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous" defer></script>
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"jiangxueqiao.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":true,"height":300},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":false,"async":true,"duration":200,"transition":{"menu_item":null,"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":null}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="什么是内核对象我们在 windows 开发中经常会遇到内核对象，如事件(Event)，管道(Pipe)，互斥量(Mutex)，完成端口(IOCP)，进程(Process)，线程(Thread)等，他们都是内核对象。这些内核对象虽然通过不同的系统 API 来创建，但这些 API 都有一个共同特点，就是都需要传入SECURITY_ATTRIBUTES安全描述符结构体指针，并且返回句柄(HANDLE)。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows内核对象">
+<meta property="og:url" content="https://jiangxueqiao.com/post/14744864.html">
+<meta property="og:site_name" content="JiangXueqiao&#39;s blog">
+<meta property="og:description" content="什么是内核对象我们在 windows 开发中经常会遇到内核对象，如事件(Event)，管道(Pipe)，互斥量(Mutex)，完成端口(IOCP)，进程(Process)，线程(Thread)等，他们都是内核对象。这些内核对象虽然通过不同的系统 API 来创建，但这些 API 都有一个共同特点，就是都需要传入SECURITY_ATTRIBUTES安全描述符结构体指针，并且返回句柄(HANDLE)。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-07-03T12:00:35.000Z">
+<meta property="article:modified_time" content="2025-11-15T14:47:49.828Z">
+<meta property="article:author" content="jiangxueqiao.com">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://jiangxueqiao.com/post/14744864.html">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jiangxueqiao.com/post/14744864.html","path":"post/14744864.html","title":"Windows内核对象"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Windows内核对象 | JiangXueqiao's blog</title>
   
-  <meta name="generator" content="Hexo 6.3.0">
-  <meta http-equiv='x-dns-prefetch-control' content='on' />
-  
-  <meta name="renderer" content="webkit">
-  <meta name="force-rendering" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-  <meta name="HandheldFriendly" content="True" >
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#000">
-  <meta name="theme-color" content="#f9fafb">
-  
-  <title>Windows内核对象 - 独钓寒江雪</title>
+
+
+
+
+
+
+
 
   
-  <meta name="description" content="一、什么是内核对象我们在 windows 开发中经常会遇到内核对象，如事件(Event)，管道(Pipe)，互斥量(Mutex)，完成端口(IOCP)，进程(Process)，线程(Thread)等，他们都是内核对象。这些内核对象虽然通过不同的系统 API 来创建，但这些 API 都有一个共同...">
-  
-  <meta name="keywords" content="Windows,内核">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
 
-  <!-- feed -->
-  
-    <link rel="alternate" href="/atom.xml" title="独钓寒江雪" type="application/atom+xml">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js" defer></script>
+
+  <script src="/js/third-party/pace.js" defer></script>
+
+
   
 
-  <link rel="stylesheet" href="/css/main.css?v=1.29.0">
 
-  
-    <link rel="shortcut icon" href="/images/logo.png">
-  
+
 
   
 
-  <script src="/js/baidu-tongji.js"></script>
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
 </head>
-<body>
 
-<div class="l_body s:aa content tech" id="start" layout="post" ><aside class="l_left"><div class="leftbar-container">
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
 
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
 
-<header class="header"><div class="logo-wrap"><a class="avatar" href="/author/"><div class="bg" style="opacity:0;background-image:url(https://blog-static.jiangxueqiao.com/blog/stellar-theme/rainbow64@3x.webp);"></div><img no-lazy class="avatar" src="/images/logo.png" onerror="javascript:this.classList.add('error');this.src='https://blog-static.jiangxueqiao.com/blog/stellar-theme/default/2659360.svg';"></a><a class="title" href="/"><div class="main" ff="title">独钓寒江雪</div></a></div></header>
+  <div class="site-meta">
 
-<div class="nav-area">
-<div class="search-wrapper" id="search-wrapper"><form class="search-form"><a class="search-button" onclick="document.getElementById(&quot;search-input&quot;).focus();"><svg t="1705074644177" viewBox="0 0 1025 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1560" width="200" height="200"><path d="M1008.839137 935.96571L792.364903 719.491476a56.783488 56.783488 0 0 0-80.152866 0 358.53545 358.53545 0 1 1 100.857314-335.166073 362.840335 362.840335 0 0 1-3.689902 170.145468 51.248635 51.248635 0 1 0 99.217358 26.444296 462.057693 462.057693 0 1 0-158.255785 242.303546l185.930047 185.725053a51.248635 51.248635 0 0 0 72.568068 0 51.248635 51.248635 0 0 0 0-72.978056z" p-id="1561"></path><path d="M616.479587 615.969233a50.428657 50.428657 0 0 0-61.498362-5.534852 174.655348 174.655348 0 0 1-177.525271 3.484907 49.403684 49.403684 0 0 0-58.833433 6.76482l-3.074918 2.869923a49.403684 49.403684 0 0 0 8.609771 78.10292 277.767601 277.767601 0 0 0 286.992355-5.739847 49.403684 49.403684 0 0 0 8.404776-76.667958z" p-id="1562"></path></svg></a><input type="text" class="search-input" id="search-input" placeholder="站内搜索"></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div>
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">JiangXueqiao's blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
 
-
-<nav class="menu dis-select"><a class="nav-item active" title="最新" href="/" style="color:#000000"><span>最新</span></a><a class="nav-item" title="专栏" href="/topic" style="color:#000000"><span>专栏</span></a><a class="nav-item" title="分类" href="/categories" style="color:#000000"><span>分类</span></a><a class="nav-item" title="🌈关于" href="/author" style="color:#000000"><span>🌈关于</span></a></nav>
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
 </div>
-<div class="widgets">
-<widget class="widget-wrapper linklist"><div class="widget-body fs14">
-<div class="linklist left" style="grid-template-columns:repeat(1,1fr);">
-<a class="link" title="在线工具" href="/online-tools"><div class="flex"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M20 12a8 8 0 1 1-16 0a8 8 0 0 1 16 0" opacity=".5"/><path fill="currentColor" d="M17.712 5.453c1.047-.193 2.006-.259 2.797-.152c.77.103 1.536.393 1.956 1.064c.446.714.312 1.542-.012 2.258c-.33.728-.918 1.499-1.672 2.268c-1.516 1.547-3.836 3.226-6.597 4.697c-2.763 1.472-5.495 2.484-7.694 2.92c-1.095.217-2.098.299-2.923.201c-.8-.095-1.6-.383-2.032-1.075c-.47-.752-.296-1.63.07-2.379c.375-.768 1.032-1.586 1.872-2.403L4 12.416c0 .219.083.71.168 1.146c.045.23.09.444.123.596c-.652.666-1.098 1.263-1.339 1.756c-.277.567-.208.825-.145.925c.072.116.305.305.937.38c.609.073 1.44.018 2.455-.183c2.02-.4 4.613-1.351 7.28-2.772c2.667-1.42 4.85-3.015 6.23-4.423c.694-.707 1.15-1.334 1.377-1.836c.233-.515.167-.75.107-.844c-.07-.112-.289-.294-.883-.374c-.542-.072-1.272-.041-2.163.112L16.87 5.656c.338-.101.658-.17.842-.203"/></svg><span>在线工具</span></div></a>
-<a class="link" title="磨损计算器" href="/attrition-calc"><div class="flex"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M20 12a8 8 0 1 1-16 0a8 8 0 0 1 16 0" opacity=".5"/><path fill="currentColor" d="M17.712 5.453c1.047-.193 2.006-.259 2.797-.152c.77.103 1.536.393 1.956 1.064c.446.714.312 1.542-.012 2.258c-.33.728-.918 1.499-1.672 2.268c-1.516 1.547-3.836 3.226-6.597 4.697c-2.763 1.472-5.495 2.484-7.694 2.92c-1.095.217-2.098.299-2.923.201c-.8-.095-1.6-.383-2.032-1.075c-.47-.752-.296-1.63.07-2.379c.375-.768 1.032-1.586 1.872-2.403L4 12.416c0 .219.083.71.168 1.146c.045.23.09.444.123.596c-.652.666-1.098 1.263-1.339 1.756c-.277.567-.208.825-.145.925c.072.116.305.305.937.38c.609.073 1.44.018 2.455-.183c2.02-.4 4.613-1.351 7.28-2.772c2.667-1.42 4.85-3.015 6.23-4.423c.694-.707 1.15-1.334 1.377-1.836c.233-.515.167-.75.107-.844c-.07-.112-.289-.294-.883-.374c-.542-.072-1.272-.041-2.163.112L16.87 5.656c.338-.101.658-.17.842-.203"/></svg><span>磨损计算器</span></div></a>
-<a class="link" title="实用网址导航" href="/sites"><div class="flex"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M20 12a8 8 0 1 1-16 0a8 8 0 0 1 16 0" opacity=".5"/><path fill="currentColor" d="M17.712 5.453c1.047-.193 2.006-.259 2.797-.152c.77.103 1.536.393 1.956 1.064c.446.714.312 1.542-.012 2.258c-.33.728-.918 1.499-1.672 2.268c-1.516 1.547-3.836 3.226-6.597 4.697c-2.763 1.472-5.495 2.484-7.694 2.92c-1.095.217-2.098.299-2.923.201c-.8-.095-1.6-.383-2.032-1.075c-.47-.752-.296-1.63.07-2.379c.375-.768 1.032-1.586 1.872-2.403L4 12.416c0 .219.083.71.168 1.146c.045.23.09.444.123.596c-.652.666-1.098 1.263-1.339 1.756c-.277.567-.208.825-.145.925c.072.116.305.305.937.38c.609.073 1.44.018 2.455-.183c2.02-.4 4.613-1.351 7.28-2.772c2.667-1.42 4.85-3.015 6.23-4.423c.694-.707 1.15-1.334 1.377-1.836c.233-.515.167-.75.107-.844c-.07-.112-.289-.294-.883-.374c-.542-.072-1.272-.041-2.163.112L16.87 5.656c.338-.101.658-.17.842-.203"/></svg><span>实用网址导航</span></div></a></div></div></widget>
 
 
 
-<widget class="widget-wrapper post-list"><div class="widget-header dis-select"><span class="name">最近更新</span></div><div class="widget-body fs14"><a class="item title" href="/post/470495318.html"><span class="title">x86架构常用寄存器及汇编指令</span></a><a class="item title" href="/post/782629701.html"><span class="title">理解 Visual C/C++ 运行时库</span></a><a class="item title" href="/post/487899896.html"><span class="title">C++字符串和字符字面量</span></a><a class="item title" href="/post/2579659560.html"><span class="title">C++智能指针</span></a><a class="item title" href="/post/556603567.html"><span class="title">Wireshark过滤器规则速学</span></a><a class="item title" href="/post/966041457.html"><span class="title">Visual Studio 断点高级使用指南</span></a><a class="item title" href="/post/2025031576.html"><span class="title">CentOS7申请免费LetsEncrypt证书并续期</span></a><a class="item title" href="/post/2065788833.html"><span class="title">窗口如何逃脱显示桌面指令</span></a><a class="item title" href="/post/2289160283.html"><span class="title">C++标准库线程的启动与退出</span></a><a class="item title" href="/post/1144324523.html"><span class="title">C++右值</span></a></div></widget>
-</div>
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">17</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">12</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
 
-</div></aside><div class="l_main" id="main">
 
 
-
-
-
-<div class="article banner top">
-  <div class="content">
-    <div class="top bread-nav footnote"><div class="left"><div class="flex-row" id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a>
-<span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Windows%E7%BC%96%E7%A8%8B/">Windows编程</a></div>
-<div class="flex-row" id="post-meta"><span class="text created">发布于：<time datetime="2021-07-03T12:00:35.000Z">2021-07-03</time></span><span class="sep updated"></span><span class="text updated">更新于：<time datetime="2024-04-14T04:37:23.062Z">2024-04-14</time></span></div></div></div>
-    
-    <div class="bottom only-title">
-      
-      <div class="text-area">
-        <h1 class="text title"><span>Windows内核对象</span></h1>
-        
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
       </div>
     </div>
-    
   </div>
-  </div><article class="md-text content"><h2 id="一、什么是内核对象"><a href="#一、什么是内核对象" class="headerlink" title="一、什么是内核对象"></a>一、什么是内核对象</h2><p>我们在 windows 开发中经常会遇到内核对象，如事件(Event)，管道(Pipe)，互斥量(Mutex)，完成端口(IOCP)，进程(Process)，线程(Thread)等，他们都是内核对象。这些内核对象虽然通过不同的系统 API 来创建，但这些 API 都有一个共同特点，就是都需要传入<code>SECURITY_ATTRIBUTES</code>安全描述符结构体指针，并且返回句柄(HANDLE)。依据这个特点，我们有一个简单方法来判断对象是否是内核对象，就是看创建它的函数是否允许传入<code>SECURITY_ATTRIBUTES</code>安全描述符。</p>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%86%85%E6%A0%B8%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.</span> <span class="nav-text">什么是内核对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E6%A0%B8%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%9B%E5%BB%BA"><span class="nav-number">2.</span> <span class="nav-text">内核对象的创建</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E6%A0%B8%E5%AF%B9%E8%B1%A1%E7%9A%84%E8%AE%BF%E9%97%AE"><span class="nav-number">3.</span> <span class="nav-text">内核对象的访问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E6%A0%B8%E5%AF%B9%E8%B1%A1%E7%9A%84%E9%94%80%E6%AF%81"><span class="nav-number">4.</span> <span class="nav-text">内核对象的销毁</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0"><span class="nav-number">4.1.</span> <span class="nav-text">引用计数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A3%E7%A1%AE%E7%9A%84%E9%94%80%E6%AF%81%E6%96%B9%E5%BC%8F"><span class="nav-number">4.2.</span> <span class="nav-text">正确的销毁方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%86%85%E6%A0%B8%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0"><span class="nav-number">4.3.</span> <span class="nav-text">获取内核对象的引用计数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%85%E6%A0%B8%E5%AF%B9%E8%B1%A1%E8%B7%A8%E8%BF%9B%E7%A8%8B%E8%AE%BF%E9%97%AE"><span class="nav-number">5.</span> <span class="nav-text">内核对象跨进程访问</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%8F%A5%E6%9F%84%E7%BB%A7%E6%89%BF%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="nav-number">5.1.</span> <span class="nav-text">使用句柄继承的方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-DuplicateHandle-%E6%96%B9%E5%BC%8F"><span class="nav-number">5.2.</span> <span class="nav-text">使用 DuplicateHandle 方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BA%E4%BE%8B"><span class="nav-number">5.2.1.</span> <span class="nav-text">示例</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%91%BD%E5%90%8D%E7%9A%84%E5%86%85%E6%A0%B8%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="nav-number">5.3.</span> <span class="nav-text">使用命名的内核对象的方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="nav-number">5.3.1.</span> <span class="nav-text">实现原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E5%91%BD%E4%BB%A4%E7%A9%BA%E9%97%B4"><span class="nav-number">5.3.2.</span> <span class="nav-text">全局命令空间</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="jiangxueqiao.com"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">jiangxueqiao.com</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">158</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/winsoft666" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;winsoft666" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:smart7178@163.com" title="E-Mail → mailto:smart7178@163.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          链接
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://jiangxueqiao.com/online-tools" title="https:&#x2F;&#x2F;jiangxueqiao.com&#x2F;online-tools">在线工具</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jiangxueqiao.com/post/14744864.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="jiangxueqiao.com">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="JiangXueqiao's blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Windows内核对象 | JiangXueqiao's blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Windows内核对象
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-07-03 20:00:35" itemprop="dateCreated datePublished" datetime="2021-07-03T20:00:35+08:00">2021-07-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-11-15 22:47:49" itemprop="dateModified" datetime="2025-11-15T22:47:49+08:00">2025-11-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Windows%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E4%B8%8E%E8%B0%83%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">Windows软件开发与调试</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.5k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>13 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="什么是内核对象"><a href="#什么是内核对象" class="headerlink" title="什么是内核对象"></a>什么是内核对象</h2><p>我们在 windows 开发中经常会遇到内核对象，如事件(Event)，管道(Pipe)，互斥量(Mutex)，完成端口(IOCP)，进程(Process)，线程(Thread)等，他们都是内核对象。这些内核对象虽然通过不同的系统 API 来创建，但这些 API 都有一个共同特点，就是都需要传入<code>SECURITY_ATTRIBUTES</code>安全描述符结构体指针，并且返回句柄(HANDLE)。依据这个特点，我们有一个简单方法来判断对象是否是内核对象，就是看创建它的函数是否允许传入<code>SECURITY_ATTRIBUTES</code>安全描述符。</p>
 <span id="more"></span>
 
-<h2 id="二、内核对象的创建"><a href="#二、内核对象的创建" class="headerlink" title="二、内核对象的创建"></a>二、内核对象的创建</h2><p>大多数创建内核对象的系统 API 函数，如 CreateEvent, CreateMutex, CreateThread, CreateProcess, CreatePipe, CreateNamedPipe 等都会返回一个 HANDLE（无论是以返回值的形式，还是以指针参数的形式返回），创建内核对象成功时 HANDLE 为<code>非NULL</code>，我们可以通过将 HANDLE 的值与 NULL 进行比较，来判断函数是否执行成功。但是有些函数比较例外，如<code>CreateFile</code>，这些函数执行失败时，返回的<code>HANDLE</code>的值为<code>INVALID_HANDLE_VALUIE</code>。</p>
+<h2 id="内核对象的创建"><a href="#内核对象的创建" class="headerlink" title="内核对象的创建"></a>内核对象的创建</h2><p>大多数创建内核对象的系统 API 函数，如 CreateEvent, CreateMutex, CreateThread, CreateProcess, CreatePipe, CreateNamedPipe 等都会返回一个 HANDLE（无论是以返回值的形式，还是以指针参数的形式返回），创建内核对象成功时 HANDLE 为<code>非NULL</code>，我们可以通过将 HANDLE 的值与 NULL 进行比较，来判断函数是否执行成功。但是有些函数比较例外，如<code>CreateFile</code>，这些函数执行失败时，返回的<code>HANDLE</code>的值为<code>INVALID_HANDLE_VALUIE</code>。</p>
 <p>相关文章：<a href="/post/3906615635.html" title="由HANDLE返回值不确定性引发的思考">由HANDLE返回值不确定性引发的思考</a></p>
-<h2 id="三、内核对象的访问"><a href="#三、内核对象的访问" class="headerlink" title="三、内核对象的访问"></a>三、内核对象的访问</h2><p><strong>虽然内核对象属于系统内核，但创建函数返回的<code>HANDLE</code>句柄却只和当前进程有关，离开了当前进程这个句柄也就失去了意义。</strong><br>内核对象属于系统内核级别，为了系统安全性，Windows 不允许我们直接访问内核对象的内存区域，只允许我们通过 Windows 提供的一系列 API 来访问内核对象，如<code>SetEvent</code>, <code>ResetEvent</code>等等，使用这些函数时我们都会用到<code>HANDLE</code>，windows 头文件中<code>HANDLE</code>的定义如下：</p>
+<h2 id="内核对象的访问"><a href="#内核对象的访问" class="headerlink" title="内核对象的访问"></a>内核对象的访问</h2><p><strong>虽然内核对象属于系统内核，但创建函数返回的<code>HANDLE</code>句柄却只和当前进程有关，离开了当前进程这个句柄也就失去了意义。</strong><br>内核对象属于系统内核级别，为了系统安全性，Windows 不允许我们直接访问内核对象的内存区域，只允许我们通过 Windows 提供的一系列 API 来访问内核对象，如<code>SetEvent</code>, <code>ResetEvent</code>等等，使用这些函数时我们都会用到<code>HANDLE</code>，windows 头文件中<code>HANDLE</code>的定义如下：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="type">void</span> *HANDLE;</span><br></pre></td></tr></table></figure>
 
 <p>虽然定义为<code>void*</code>类型，但很显然这个<code>HANDLE</code>不是指向内核对象的指针。</p>
@@ -127,9 +358,9 @@
 </tr>
 </tbody></table>
 <p>如我们调用类似<code>CreateEvent</code>的函数返回的句柄<code>HANDLE</code>就是句柄表中的<code>索引</code>。因为是<code>索引</code>，所以它的值一般比较小。我们向 windows API 函数传入这个<code>索引</code>，API 再通过<code>索引</code>找到对应的<code>内核对象指针</code>。</p>
-<h2 id="四、内核对象的销毁"><a href="#四、内核对象的销毁" class="headerlink" title="四、内核对象的销毁"></a>四、内核对象的销毁</h2><h3 id="4-1-引用计数"><a href="#4-1-引用计数" class="headerlink" title="4.1 引用计数"></a>4.1 引用计数</h3><p><strong>内核对象的所有者是操作系统内核，而不是创建它的进程。</strong></p>
+<h2 id="内核对象的销毁"><a href="#内核对象的销毁" class="headerlink" title="内核对象的销毁"></a>内核对象的销毁</h2><h3 id="引用计数"><a href="#引用计数" class="headerlink" title="引用计数"></a>引用计数</h3><p><strong>内核对象的所有者是操作系统内核，而不是创建它的进程。</strong></p>
 <p>多个进程可以引用（使用）同一个内核对象，操作系统使用了计数器的方式来管理内核对象（这个和 C++中的<code>std::shared_ptr</code>智能指针类似），一个内核对象其实有两个计数器：一个是给用户态(Ring3)用的句柄计数；另一个是指针计数，也叫引用计数，因为核心态程序(Ring0)也经常用到内核对象，为了使用方便，在核心态的代码用指针直接访问对象，所以内核对象的管理器也维护了这个指针引用计数。只有在内核对象的<code>句柄计数</code>和<code>引用计数</code>都为 0 时，该内核对象才被释放。一般而言，指针引用计数值比句柄计数值大。</p>
-<h3 id="4-2-正确的销毁方式"><a href="#4-2-正确的销毁方式" class="headerlink" title="4.2 正确的销毁方式"></a>4.2 正确的销毁方式</h3><p>当程序不再使用内核对象时，需要调用<code>CloseHandle</code>将内核对象的计数减 1，这样系统内核在该对象计数为 0 时（也就是没有被任何东西引用时）将销毁该对象。 <strong>并且在调用<code>CloseHandle</code>之后，程序还应该将<code>HANDLE</code>置为<code>NULL</code>。</strong></p>
+<h3 id="正确的销毁方式"><a href="#正确的销毁方式" class="headerlink" title="正确的销毁方式"></a>正确的销毁方式</h3><p>当程序不再使用内核对象时，需要调用<code>CloseHandle</code>将内核对象的计数减 1，这样系统内核在该对象计数为 0 时（也就是没有被任何东西引用时）将销毁该对象。 <strong>并且在调用<code>CloseHandle</code>之后，程序还应该将<code>HANDLE</code>置为<code>NULL</code>。</strong></p>
 <p>如果<code>CloseHandle</code>之后不将<code>HANDLE</code>置为<code>NULL</code>，反而再次使用该<code>HANDLE</code>，就会出现 2 种情况：</p>
 <ol>
 <li><p>进程句柄表中该<code>HANDLE</code>所在的索引项的记录已经被清除，且没有别的线程再次在该索引创建记录项，若此时使用这个过期的<code>HANDLE</code>调用 Win32 API 函数，Windows 会返回无效参数错误。这种情况还比较好调试。</p>
@@ -137,23 +368,23 @@
 <li><p>进程句柄表中该<code>HANDLE</code>所在的索引项的记录同样也已经被清除，但已经有别的线程（该进程中的其他线程）在该<code>索引</code>位置创建了记录项，若此时使用这个过期的<code>HANDLE</code>调用 Win32 API 函数，该<code>HANDLE</code>就会引用到其他线程新建的那个内核对象，从而出现一些难以预料的错误。这种错误很难调试。</p>
 </li>
 </ol>
-<h3 id="4-3-获取内核对象的引用计数"><a href="#4-3-获取内核对象的引用计数" class="headerlink" title="4.3 获取内核对象的引用计数"></a>4.3 获取内核对象的引用计数</h3><p>虽然 windows 没有提供 API 让用户在用户态（Ring3）查询一个内核对象的句柄计数和引用计数，但我们可以从<code>Ntdll.dll</code>导出<code>NtQueryObject</code>函数来实现查询内核对象的当前状态(该函数没有被文档化)。</p>
+<h3 id="获取内核对象的引用计数"><a href="#获取内核对象的引用计数" class="headerlink" title="获取内核对象的引用计数"></a>获取内核对象的引用计数</h3><p>虽然 windows 没有提供 API 让用户在用户态（Ring3）查询一个内核对象的句柄计数和引用计数，但我们可以从<code>Ntdll.dll</code>导出<code>NtQueryObject</code>函数来实现查询内核对象的当前状态(该函数没有被文档化)。</p>
 <p><code>NtQueryObject</code>函数声明如下：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 返回值：如果成功则返回0</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="function">DWORD WINAPI <span class="title">NtQueryObject</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">HANDLE   handle,       <span class="comment">// 待查询的句柄</span></span></span></span><br><span class="line"><span class="params"><span class="function">DWORD   nQueryIndex,   <span class="comment">// 0为查询对象的当前状态，包括句柄计数，引用计数等等。</span></span></span></span><br><span class="line"><span class="params"><span class="function">VOID*   pOutBuffer,    <span class="comment">// 存放查询结果</span></span></span></span><br><span class="line"><span class="params"><span class="function">DWORD   cbInBufferSize,   <span class="comment">// pOutBuffer的大小，如果nQueryIndex为0，这里为sizeof(SYSTEM_HANDLE_STATE)</span></span></span></span><br><span class="line"><span class="params"><span class="function">VOID*   cbOutBufferSize   <span class="comment">// 实际大小</span></span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>;</span><br></pre></td></tr></table></figure>
 
 <p>将<code>NtQueryObject</code>函数调用的细节封装到<code>GetKernelObjectRefCount</code>函数中，方便使用：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">GetKernelObjectRefCount</span><span class="params">(HANDLE handle, DWORD &amp;handle_count, DWORD &amp;point_count)</span> </span>&#123;</span><br><span class="line">  <span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">_SYSTEM_HANDLE_STATE</span> &#123;</span><br><span class="line">    DWORD   r1;</span><br><span class="line">    DWORD   GrantedAccess;</span><br><span class="line">    DWORD   HandleCount;      <span class="comment">// 减1为句柄计数</span></span><br><span class="line">    DWORD   ReferenceCount;   <span class="comment">// 减1为指针引用计数</span></span><br><span class="line">    DWORD   r5;</span><br><span class="line">    DWORD   r6;</span><br><span class="line">    DWORD   r7;</span><br><span class="line">    DWORD   r8;</span><br><span class="line">    DWORD   r9;</span><br><span class="line">    DWORD   r10;</span><br><span class="line">    DWORD   r11;</span><br><span class="line">    DWORD   r12;</span><br><span class="line">    DWORD   r13;</span><br><span class="line">    DWORD   r14;</span><br><span class="line">  &#125;SYSTEM_HANDLE_STATE, *PSYSTEM_HANDLE_STATE;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">typedef</span> <span class="title">DWORD</span><span class="params">(WINAPI *PFN_NtQueryObject)</span><span class="params">(HANDLE handle,</span></span></span><br><span class="line"><span class="params"><span class="function">    DWORD nQueryIndex,</span></span></span><br><span class="line"><span class="params"><span class="function">    VOID* pOutBuffer,</span></span></span><br><span class="line"><span class="params"><span class="function">    DWORD cbInBufferSize,</span></span></span><br><span class="line"><span class="params"><span class="function">    VOID* cbOutBufferSize)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="type">static</span> PFN_NtQueryObject pfnNtQueryObject = <span class="literal">NULL</span>;</span><br><span class="line">  <span class="type">bool</span> ret = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">do</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (pfnNtQueryObject == <span class="literal">NULL</span>) &#123;</span><br><span class="line">      HMODULE ntdll = <span class="built_in">GetModuleHandle</span>(<span class="built_in">TEXT</span>(<span class="string">&quot;Ntdll.dll&quot;</span>));</span><br><span class="line">      <span class="keyword">if</span> (ntdll == <span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">      pfnNtQueryObject = (PFN_NtQueryObject)<span class="built_in">GetProcAddress</span>(ntdll, <span class="string">&quot;NtQueryObject&quot;</span>);</span><br><span class="line">      <span class="keyword">if</span> (pfnNtQueryObject == <span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    SYSTEM_HANDLE_STATE sys_handle_state;</span><br><span class="line">    <span class="built_in">memset</span>(&amp;sys_handle_state, <span class="number">0</span>, <span class="built_in">sizeof</span>(SYSTEM_HANDLE_STATE));</span><br><span class="line"></span><br><span class="line">    DWORD out_buf_size = <span class="number">0</span>;</span><br><span class="line">    ret = (<span class="built_in">pfnNtQueryObject</span>(handle, <span class="number">0</span>, &amp;sys_handle_state, <span class="built_in">sizeof</span>(SYSTEM_HANDLE_STATE), &amp;out_buf_size) == <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">if</span> (ret) &#123;</span><br><span class="line">      handle_count = sys_handle_state.HandleCount - <span class="number">1</span>;</span><br><span class="line">      point_count = sys_handle_state.ReferenceCount - <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">while</span> (<span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">GetKernelObjectRefCount</span><span class="params">(HANDLE handle, DWORD &amp;handle_count, DWORD &amp;point_count)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">_SYSTEM_HANDLE_STATE</span> &#123;</span><br><span class="line">		DWORD   r1;</span><br><span class="line">		DWORD   GrantedAccess;</span><br><span class="line">		DWORD   HandleCount;      <span class="comment">// 减1为句柄计数</span></span><br><span class="line">		DWORD   ReferenceCount;   <span class="comment">// 减1为指针引用计数</span></span><br><span class="line">		DWORD   r5;</span><br><span class="line">		DWORD   r6;</span><br><span class="line">		DWORD   r7;</span><br><span class="line">		DWORD   r8;</span><br><span class="line">		DWORD   r9;</span><br><span class="line">		DWORD   r10;</span><br><span class="line">		DWORD   r11;</span><br><span class="line">		DWORD   r12;</span><br><span class="line">		DWORD   r13;</span><br><span class="line">		DWORD   r14;</span><br><span class="line">	&#125;SYSTEM_HANDLE_STATE, *PSYSTEM_HANDLE_STATE;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">typedef</span> <span class="title">DWORD</span><span class="params">(WINAPI *PFN_NtQueryObject)</span><span class="params">(HANDLE handle,</span></span></span><br><span class="line"><span class="params"><span class="function">		DWORD nQueryIndex,</span></span></span><br><span class="line"><span class="params"><span class="function">		VOID* pOutBuffer,</span></span></span><br><span class="line"><span class="params"><span class="function">		DWORD cbInBufferSize,</span></span></span><br><span class="line"><span class="params"><span class="function">		VOID* cbOutBufferSize)</span></span>;</span><br><span class="line"></span><br><span class="line">	<span class="type">static</span> PFN_NtQueryObject pfnNtQueryObject = <span class="literal">NULL</span>;</span><br><span class="line">	<span class="type">bool</span> ret = <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">do</span> &#123;</span><br><span class="line">		<span class="keyword">if</span> (pfnNtQueryObject == <span class="literal">NULL</span>) &#123;</span><br><span class="line">			HMODULE ntdll = <span class="built_in">GetModuleHandle</span>(<span class="built_in">TEXT</span>(<span class="string">&quot;Ntdll.dll&quot;</span>));</span><br><span class="line">			<span class="keyword">if</span> (ntdll == <span class="literal">NULL</span>)</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">			pfnNtQueryObject = (PFN_NtQueryObject)<span class="built_in">GetProcAddress</span>(ntdll, <span class="string">&quot;NtQueryObject&quot;</span>);</span><br><span class="line">			<span class="keyword">if</span> (pfnNtQueryObject == <span class="literal">NULL</span>)</span><br><span class="line">				<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		SYSTEM_HANDLE_STATE sys_handle_state;</span><br><span class="line">		<span class="built_in">memset</span>(&amp;sys_handle_state, <span class="number">0</span>, <span class="built_in">sizeof</span>(SYSTEM_HANDLE_STATE));</span><br><span class="line"></span><br><span class="line">		DWORD out_buf_size = <span class="number">0</span>;</span><br><span class="line">		ret = (<span class="built_in">pfnNtQueryObject</span>(handle, <span class="number">0</span>, &amp;sys_handle_state, <span class="built_in">sizeof</span>(SYSTEM_HANDLE_STATE), &amp;out_buf_size) == <span class="number">0</span>);</span><br><span class="line">		<span class="keyword">if</span> (ret) &#123;</span><br><span class="line">			handle_count = sys_handle_state.HandleCount - <span class="number">1</span>;</span><br><span class="line">			point_count = sys_handle_state.ReferenceCount - <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125; <span class="keyword">while</span> (<span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="五、内核对象跨进程访问"><a href="#五、内核对象跨进程访问" class="headerlink" title="五、内核对象跨进程访问"></a>五、内核对象跨进程访问</h2><p>虽然内核对象位于独立于进程之外的内核区域，我们在开发中却只能通过调用 Win32 API 传入 HANDLE 参数来操作内核对象（如<code>SetEvent</code>等）。然而<code>HANDLE句柄</code>只对当前进程有效，离开了当前进程该句柄就无效了。所以说，跨进程访问内核对象的关键在于我们怎么跨进程访问<code>句柄HANDLE</code>？</p>
+<h2 id="内核对象跨进程访问"><a href="#内核对象跨进程访问" class="headerlink" title="内核对象跨进程访问"></a>内核对象跨进程访问</h2><p>虽然内核对象位于独立于进程之外的内核区域，我们在开发中却只能通过调用 Win32 API 传入 HANDLE 参数来操作内核对象（如<code>SetEvent</code>等）。然而<code>HANDLE句柄</code>只对当前进程有效，离开了当前进程该句柄就无效了。所以说，跨进程访问内核对象的关键在于我们怎么跨进程访问<code>句柄HANDLE</code>？</p>
 <p>下面介绍几种方法来实现跨进程共享内核对象。</p>
-<h3 id="5-1-使用句柄继承的方式"><a href="#5-1-使用句柄继承的方式" class="headerlink" title="5.1 使用句柄继承的方式"></a>5.1 使用句柄继承的方式</h3><p>只有进程之间有父子关系时，才可以使用句柄继承的方式。在这种情况下，父进程可以生成一个子进程，并允许子进程访问父进程的内核对象。为了使这种继承生效，父进程必须执行几个步骤：<br>（1）. 父进程在创建一个内核对象时，父进程必须向系统指定它希望这个内核对象的句柄是可以继承的。为了创建一个可继承的内核对象，必须分配并初始化一个<code>SECURITY_ATTRIBUTES</code>结构，如：</p>
+<h3 id="使用句柄继承的方式"><a href="#使用句柄继承的方式" class="headerlink" title="使用句柄继承的方式"></a>使用句柄继承的方式</h3><p>只有进程之间有父子关系时，才可以使用句柄继承的方式。在这种情况下，父进程可以生成一个子进程，并允许子进程访问父进程的内核对象。为了使这种继承生效，父进程必须执行几个步骤：<br>（1）. 父进程在创建一个内核对象时，父进程必须向系统指定它希望这个内核对象的句柄是可以继承的。为了创建一个可继承的内核对象，必须分配并初始化一个<code>SECURITY_ATTRIBUTES</code>结构，如：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SECURITY_ATTRIBUTES sa;</span><br><span class="line">sa.nLength = <span class="built_in">sizeof</span>(SECURITY_ATTRIBUTES);</span><br><span class="line">sa.bInheritHandle = TRUE;  <span class="comment">// 可继承的</span></span><br><span class="line">sa.lpSecurityDescriptor = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">HANDLE h = <span class="built_in">CreateEvent</span>(&amp;sa, TRUE, FALSE, <span class="literal">NULL</span>);</span><br></pre></td></tr></table></figure>
 
 <p>（2）. 父进程通过 CreateProcess 生成子进程，且指定<code>bInheritHandles</code>为 TRUE，从而允许子进程来继承父进程的那些“可继承的句柄”。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 启动子进程TestB.exe，将句柄h作为启动参数传给进程TestB</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line">TCHAR cmd_buf[MAX_PATH];</span><br><span class="line"><span class="built_in">StringCchPrintf</span>(cmd_buf, MAX_PATH, <span class="built_in">TEXT</span>(<span class="string">&quot;TestB.exe %ld&quot;</span>), (<span class="type">long</span>)h);</span><br><span class="line"></span><br><span class="line">STARTUPINFO si = &#123; <span class="built_in">sizeof</span>(si) &#125;;</span><br><span class="line">PROCESS_INFORMATION pi;</span><br><span class="line">BOOL ret = <span class="built_in">CreateProcess</span>(</span><br><span class="line">  <span class="literal">NULL</span>,</span><br><span class="line">  cmd_buf,</span><br><span class="line">  <span class="literal">NULL</span>,</span><br><span class="line">  <span class="literal">NULL</span>,</span><br><span class="line">  TRUE,  <span class="comment">// 指定子进程可以继承父进程的“可继承句柄”</span></span><br><span class="line">  <span class="number">0</span>,</span><br><span class="line">  <span class="literal">NULL</span>,</span><br><span class="line">  <span class="literal">NULL</span>,</span><br><span class="line">  &amp;si,</span><br><span class="line">  &amp;pi</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">CloseHandle</span>(pi.hProcess);</span><br><span class="line"><span class="built_in">CloseHandle</span>(pi.hThread);</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 启动子进程TestB.exe，将句柄h作为启动参数传给进程TestB</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line">TCHAR cmd_buf[MAX_PATH];</span><br><span class="line"><span class="built_in">StringCchPrintf</span>(cmd_buf, MAX_PATH, <span class="built_in">TEXT</span>(<span class="string">&quot;TestB.exe %ld&quot;</span>), (<span class="type">long</span>)h);</span><br><span class="line"></span><br><span class="line">STARTUPINFO si = &#123; <span class="built_in">sizeof</span>(si) &#125;;</span><br><span class="line">PROCESS_INFORMATION pi;</span><br><span class="line">BOOL ret = <span class="built_in">CreateProcess</span>(</span><br><span class="line">	<span class="literal">NULL</span>,</span><br><span class="line">	cmd_buf,</span><br><span class="line">	<span class="literal">NULL</span>,</span><br><span class="line">	<span class="literal">NULL</span>,</span><br><span class="line">	TRUE,  <span class="comment">// 指定子进程可以继承父进程的“可继承句柄”</span></span><br><span class="line">	<span class="number">0</span>,</span><br><span class="line">	<span class="literal">NULL</span>,</span><br><span class="line">	<span class="literal">NULL</span>,</span><br><span class="line">	&amp;si,</span><br><span class="line">	&amp;pi</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">CloseHandle</span>(pi.hProcess);</span><br><span class="line"><span class="built_in">CloseHandle</span>(pi.hThread);</span><br></pre></td></tr></table></figure>
 
 <p>由于我们传给<code>bInheritHandles</code>参数的值是<code>TRUE</code>，所以系统在创建子进程时会多做一件事情：它会遍历父进程的句柄表，对它的每一项进行检查，凡是包含一个有效的“可继承的句柄”的项，都会将该项完整的复制到子进程的句柄表。在子进程的句柄表中，复制项的位置与它在父进程句柄表中的位置完全一样（包含索引），这个就意味着：在父进程和子进程中，对一个内核对象进行标识的句柄值也是完全一样的。所以我们只需要通过某种方式（如上面示例中的启动参数的方式，或者环境变量的方式等任何进程间通讯的方式）将这个值告诉子进程，子进程就可以将该值转成<code>HANDLE</code>，然后使用这个<code>HANDLE</code>来调用系统 API。</p>
-<h3 id="5-2-使用-DuplicateHandle-方式"><a href="#5-2-使用-DuplicateHandle-方式" class="headerlink" title="5.2 使用 DuplicateHandle 方式"></a>5.2 使用 DuplicateHandle 方式</h3><p>DuplicateHandle 函数可以将指定“源进程的句柄表”中的某一项<strong>复制</strong>到“目的进程句柄表”中（除了索引），并且返回该项在目的进程句柄表中的索引（即 HADNLE）。<br>可以在任何时候调用 DuplicateHandle 函数，DuplicateHandle 对源句柄是否是可继承的没有要求。</p>
+<h3 id="使用-DuplicateHandle-方式"><a href="#使用-DuplicateHandle-方式" class="headerlink" title="使用 DuplicateHandle 方式"></a>使用 DuplicateHandle 方式</h3><p>DuplicateHandle 函数可以将指定“源进程的句柄表”中的某一项<strong>复制</strong>到“目的进程句柄表”中（除了索引），并且返回该项在目的进程句柄表中的索引（即 HADNLE）。<br>可以在任何时候调用 DuplicateHandle 函数，DuplicateHandle 对源句柄是否是可继承的没有要求。</p>
 <p>函数声明如下：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">BOOL <span class="title">DuplicateHandle</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">  HANDLE hSourceProcessHandle,</span></span></span><br><span class="line"><span class="params"><span class="function">  HANDLE hSourceHandle,</span></span></span><br><span class="line"><span class="params"><span class="function">  HANDLE hTargetProcessHandle,</span></span></span><br><span class="line"><span class="params"><span class="function">  LPHANDLE lpTargetHandle,</span></span></span><br><span class="line"><span class="params"><span class="function">  DWORD dwDesiredAccess,</span></span></span><br><span class="line"><span class="params"><span class="function">  BOOL bInheritHandle,</span></span></span><br><span class="line"><span class="params"><span class="function">  DWORD dwOptions</span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>;</span><br></pre></td></tr></table></figure>
 
@@ -251,585 +482,140 @@
 </tbody></table>
 <p>不同的事件类型对应的<code>dwDesiredAccess</code>参数不同，具体参考<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms724251(v=vs.85).aspx">MSDN</a>。</p>
 <h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><p><strong>进程 TestA 源码</strong></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>** argv)</span> </span>&#123;</span><br><span class="line">  HANDLE h = <span class="built_in">CreateEvent</span>(<span class="literal">NULL</span>, TRUE, FALSE, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 启动子进程TestB.exe</span></span><br><span class="line">  <span class="comment">//</span></span><br><span class="line">  TCHAR cmd_buf[MAX_PATH];</span><br><span class="line">  <span class="built_in">StringCchPrintf</span>(cmd_buf, MAX_PATH, <span class="built_in">TEXT</span>(<span class="string">&quot;D:\\TestB.exe&quot;</span>), (<span class="type">long</span>)h);</span><br><span class="line"></span><br><span class="line">  STARTUPINFO si = &#123; <span class="built_in">sizeof</span>(si) &#125;;</span><br><span class="line">  PROCESS_INFORMATION pi;</span><br><span class="line">  BOOL ret = <span class="built_in">CreateProcess</span>(<span class="literal">NULL</span>, cmd_buf, <span class="literal">NULL</span>, <span class="literal">NULL</span>, TRUE, <span class="number">0</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>, &amp;si, &amp;pi);</span><br><span class="line">  <span class="built_in">assert</span>(ret);</span><br><span class="line">  <span class="built_in">assert</span>(pi.hProcess);</span><br><span class="line"></span><br><span class="line">  HANDLE duplicated_h = <span class="literal">NULL</span>;</span><br><span class="line">  ret = <span class="built_in">DuplicateHandle</span>(<span class="built_in">GetCurrentProcess</span>(), h, pi.hProcess, &amp;duplicated_h, <span class="number">0</span>, FALSE, DUPLICATE_SAME_ACCESS);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="built_in">WaitForSingleObject</span>(pi.hProcess, INFINITE);</span><br><span class="line">  <span class="built_in">CloseHandle</span>(pi.hProcess);</span><br><span class="line">  <span class="built_in">CloseHandle</span>(pi.hThread);</span><br><span class="line"></span><br><span class="line">  <span class="type">bool</span> has_signal = <span class="built_in">WaitForSingleObject</span>(h, <span class="number">0</span>) == WAIT_OBJECT_0;</span><br><span class="line">  <span class="built_in">assert</span>(has_signal == <span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>** argv)</span> </span>&#123;</span><br><span class="line">	HANDLE h = <span class="built_in">CreateEvent</span>(<span class="literal">NULL</span>, TRUE, FALSE, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 启动子进程TestB.exe</span></span><br><span class="line">	<span class="comment">//</span></span><br><span class="line">	TCHAR cmd_buf[MAX_PATH];</span><br><span class="line">	<span class="built_in">StringCchPrintf</span>(cmd_buf, MAX_PATH, <span class="built_in">TEXT</span>(<span class="string">&quot;D:\\TestB.exe&quot;</span>), (<span class="type">long</span>)h);</span><br><span class="line"></span><br><span class="line">	STARTUPINFO si = &#123; <span class="built_in">sizeof</span>(si) &#125;;</span><br><span class="line">	PROCESS_INFORMATION pi;</span><br><span class="line">	BOOL ret = <span class="built_in">CreateProcess</span>(<span class="literal">NULL</span>, cmd_buf, <span class="literal">NULL</span>, <span class="literal">NULL</span>, TRUE, <span class="number">0</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>, &amp;si, &amp;pi);</span><br><span class="line">	<span class="built_in">assert</span>(ret);</span><br><span class="line">	<span class="built_in">assert</span>(pi.hProcess);</span><br><span class="line"></span><br><span class="line">	HANDLE duplicated_h = <span class="literal">NULL</span>;</span><br><span class="line">	ret = <span class="built_in">DuplicateHandle</span>(<span class="built_in">GetCurrentProcess</span>(), h, pi.hProcess, &amp;duplicated_h, <span class="number">0</span>, FALSE, DUPLICATE_SAME_ACCESS);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="built_in">WaitForSingleObject</span>(pi.hProcess, INFINITE);</span><br><span class="line">	<span class="built_in">CloseHandle</span>(pi.hProcess);</span><br><span class="line">	<span class="built_in">CloseHandle</span>(pi.hThread);</span><br><span class="line"></span><br><span class="line">	<span class="type">bool</span> has_signal = <span class="built_in">WaitForSingleObject</span>(h, <span class="number">0</span>) == WAIT_OBJECT_0;</span><br><span class="line">	<span class="built_in">assert</span>(has_signal == <span class="literal">true</span>);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><strong>子进程 TestB 源码</strong></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>** argv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="type">long</span> l = <span class="number">0</span>;</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;Input Handle:&quot;</span>);</span><br><span class="line">  <span class="built_in">scanf</span>(<span class="string">&quot;%ld&quot;</span>, &amp;l);</span><br><span class="line"></span><br><span class="line">  HANDLE h = (HANDLE)l;</span><br><span class="line"></span><br><span class="line">  <span class="type">bool</span> has_signal = <span class="built_in">WaitForSingleObject</span>(h, <span class="number">0</span>) == WAIT_OBJECT_0;</span><br><span class="line">  <span class="built_in">assert</span>(has_signal == <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">SetEvent</span>(h);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>** argv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="type">long</span> l = <span class="number">0</span>;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;Input Handle:&quot;</span>);</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">&quot;%ld&quot;</span>, &amp;l);</span><br><span class="line"></span><br><span class="line">	HANDLE h = (HANDLE)l;</span><br><span class="line"></span><br><span class="line">	<span class="type">bool</span> has_signal = <span class="built_in">WaitForSingleObject</span>(h, <span class="number">0</span>) == WAIT_OBJECT_0;</span><br><span class="line">	<span class="built_in">assert</span>(has_signal == <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">	<span class="built_in">SetEvent</span>(h);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>在父进程 TestA 中创建一个不可继承的事件 -&gt; 然后启动子进程 TestB -&gt; 调用 DuplicateHandle 复制句柄项到 TestB 进程句柄表 -&gt; 并向 TestB 输入句柄值 -&gt; TestB 访问该事件句柄，将事件置为有信号状态。</p>
-<h3 id="5-3-使用命名的内核对象的方式"><a href="#5-3-使用命名的内核对象的方式" class="headerlink" title="5.3 使用命名的内核对象的方式"></a>5.3 使用命名的内核对象的方式</h3><h4 id="5-3-1-实现原理"><a href="#5-3-1-实现原理" class="headerlink" title="5.3.1 实现原理"></a>5.3.1 实现原理</h4><p>这种方式严格的说已经不是文章开头说到的跨进程访问句柄了，有点类似跨进程直接访问内核对象了。<br>该方式实现起来比较简单，就是在调用创建内核对象的<code>Create***</code>函数时，通过<code>pszName</code>参数为内核对象取一个名字。<br>如创建事件 Event 的函数<code>CreateEvent</code>：</p>
+<h3 id="使用命名的内核对象的方式"><a href="#使用命名的内核对象的方式" class="headerlink" title="使用命名的内核对象的方式"></a>使用命名的内核对象的方式</h3><h4 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h4><p>这种方式严格的说已经不是文章开头说到的跨进程访问句柄了，有点类似跨进程直接访问内核对象了。<br>该方式实现起来比较简单，就是在调用创建内核对象的<code>Create***</code>函数时，通过<code>pszName</code>参数为内核对象取一个名字。<br>如创建事件 Event 的函数<code>CreateEvent</code>：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">HANDLE WINAPI <span class="title">CreateEvent</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">  LPSECURITY_ATTRIBUTES lpEventAttributes,</span></span></span><br><span class="line"><span class="params"><span class="function">  BOOL bManualReset,</span></span></span><br><span class="line"><span class="params"><span class="function">  BOOL bInitialState,</span></span></span><br><span class="line"><span class="params"><span class="function">  LPCTSTR lpName  <span class="comment">// 指定名称</span></span></span></span><br><span class="line"><span class="params"><span class="function">)</span></span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HANDLE h = <span class="built_in">CreateEvent</span>(<span class="literal">NULL</span>, TRUE, FALSE, <span class="built_in">TEXT</span>(<span class="string">&quot;TestA_Obj&quot;</span>));</span><br></pre></td></tr></table></figure>
 
 <p>若在其他进程中要访问这个内核对象，只需要使用打开函数<code>Open***</code>打开该内核对象，<strong>系统就会在进程的句柄表中插入一条记录，并返回这条记录的索引，也就是句柄</strong>。需要注意的是，在打开内核对象时需要留意<code>返回值</code>和<code>GetLastError</code>函数的返回值。由于内核对象是有访问权限的，有时候虽然这个名字的内核对象存在，但该进程却不见得有权限可以打开它，这个时候<code>GetLastError</code>函数会返回失败的原因。</p>
 <p>以打开事件的函数<code>OpenEvent</code>为例：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">HANDLE h = <span class="built_in">OpenEvent</span>(READ_CONTROL, FALSE, <span class="built_in">TEXT</span>(<span class="string">&quot;TestA_Obj&quot;</span>));</span><br><span class="line"><span class="keyword">if</span> (h == <span class="literal">NULL</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">GetLastError</span>() == ERROR_ACCESS_DENIED) &#123; <span class="comment">// 没有READ_CONTROL权限</span></span><br><span class="line"></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">HANDLE h = <span class="built_in">OpenEvent</span>(READ_CONTROL, FALSE, <span class="built_in">TEXT</span>(<span class="string">&quot;TestA_Obj&quot;</span>));</span><br><span class="line"><span class="keyword">if</span> (h == <span class="literal">NULL</span>) &#123;</span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">GetLastError</span>() == ERROR_ACCESS_DENIED) &#123; <span class="comment">// 没有READ_CONTROL权限</span></span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h4 id="5-3-2-全局命令空间"><a href="#5-3-2-全局命令空间" class="headerlink" title="5.3.2 全局命令空间"></a>5.3.2 全局命令空间</h4><p>不同的会话（Session）有不同的内核对象命名空间（如 windows 服务程序位于<code>Session 0</code>，而普通的用户进程位于<code>Session 1</code>），要通过名称访问其他会话中的内核对象，需要在名称前面加上<code>Session\&lt;当前会话ID&gt;</code>。Windows 提供了一个全局的内核对象命名空间，处于任何会话中的进程都可以访问该命名空间，将内核对象放入全局命令空间的方式很简单：只需要在内核对象名称前加入<code>Global\</code>即可。</p>
+<h4 id="全局命令空间"><a href="#全局命令空间" class="headerlink" title="全局命令空间"></a>全局命令空间</h4><p>不同的会话（Session）有不同的内核对象命名空间（如 windows 服务程序位于<code>Session 0</code>，而普通的用户进程位于<code>Session 1</code>），要通过名称访问其他会话中的内核对象，需要在名称前面加上<code>Session\&lt;当前会话ID&gt;</code>。Windows 提供了一个全局的内核对象命名空间，处于任何会话中的进程都可以访问该命名空间，将内核对象放入全局命令空间的方式很简单：只需要在内核对象名称前加入<code>Global\</code>即可。</p>
 <p>如：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HANDLE h = <span class="built_in">CreateEvent</span>(<span class="literal">NULL</span>, TRUE, FALSE, <span class="built_in">TEXT</span>(<span class="string">&quot;Global\\TestA_Obj&quot;</span>));</span><br></pre></td></tr></table></figure>
 
-<div class="article-footer fs14">
-    <section id="license">
-      <div class="header"><span>许可协议</span></div>
-      <div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
-</div>
-    </section>
-    
-    <section id="share">
-      <div class="header"><span>分享文章</span></div>
-      <div class="body">
-        <div class="link"><input class="copy-area" readonly="true" id="copy-link" value="https://jiangxueqiao.com/post/14744864.html" /></div>
-        <div class="social-wrap dis-select"><a class="social share-item wechat" onclick="util.toggle(&quot;qrcode-wechat&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/b32ef3da1162a.svg" /></a><a class="social share-item weibo" target="_blank" rel="external nofollow noopener noreferrer" href="https://service.weibo.com/share/share.php?url=https://jiangxueqiao.com/post/14744864.html&title=Windows内核对象 - 独钓寒江雪&summary=一、什么是内核对象我们在 windows 开发中经常会遇到内核对象，如事件(Event)，管道(Pipe)，互斥量(Mutex)，完成端口(IOCP)，进程(Process)，线程(Thread)等，他们都是内核对象。这些内核对象虽然..."><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/80c07e4dbb303.svg" /></a><a class="social share-item email" href="mailto:?subject=Windows内核对象 - 独钓寒江雪&amp;body=https://jiangxueqiao.com/post/14744864.html"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/a1b00e20f425d.svg" /></a><a class="social share-item link" onclick="util.copy(&quot;copy-link&quot;, &quot;复制成功&quot;)"><img class="lazy"  src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/8411ed322ced6.svg" /></a></div>
-        
-        <div class="qrcode" id="qrcode-wechat" style="opacity:0;height:0">
-          <img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="https://api.qrserver.com/v1/create-qr-code/?size=256x256&data=https://jiangxueqiao.com/post/14744864.html"/>
-        </div>
-        
-      </div>
-    </section>
     </div>
-</article>
-<div class="related-wrap" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/post/128186902.html">C++的API设计规范</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/post/4155207961.html">C++编译时断言</a></div></section></div>
 
-<div class="related-wrap" id="related-posts">
-    <section class='header'>
-      <div class='title cap theme'>您可能感兴趣的文章</div>
-    </section>
-    <section class='body'>
-    <div class="related-posts"><a class="item" href="\post\2510508225.html" title="Windows API的不同返回状态"><span class="title">Windows API的不同返回状态</span><span class="excerpt">在Windows编程中，我们经常接触到的Windows API返回值类型有：
-
-BOOL
-HRESULT
-LSTATUS
-</span></a><a class="item" href="\post\4126466705.html" title="拨开字符编码的迷雾(3)--字符编码转换"><span class="title">拨开字符编码的迷雾(3)--字符编码转换</span><span class="excerpt">本文主要介绍如何使用系统 API 进行字符编码的转换。</span></a><a class="item" href="\post\2567544627.html" title="Windows资源管理器图标覆盖优先级设定"><span class="title">Windows资源管理器图标覆盖优先级设定</span></a><a class="item" href="\post\2494475058.html" title="Windows内存体系(1)--虚拟地址空间"><span class="title">Windows内存体系(1)--虚拟地址空间</span><span class="excerpt">一、实模式下内存分配机制在 8086 或者 80186 以前，程序运行时，操作系统会把程序全都装入内存，程序都是直接运行在物理内存上的。也就是说程序中访问的内存地址都是实际的物理内存地址。当计算机同时运行多个程序时，必须保证这些程序用...</span></a></div></section></div>
-
-
-  <div class="related-wrap md-text" id="comments">
-    <section class='header cmt-title cap theme'>
-      <p>快来参与讨论吧~</p>
-
-    </section>
-    <section class='body cmt-body beaudar'>
-      
-
-<svg class="loading" style="vertical-align:middle;fill:currentColor;overflow:hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2709"><path d="M832 512c0-176-144-320-320-320V128c211.2 0 384 172.8 384 384h-64zM192 512c0 176 144 320 320 320v64C300.8 896 128 723.2 128 512h64z" p-id="2710"></path></svg>
-
-<div id="beaudar" repo="winsoft666/blog-comment" issue-term="pathname" theme="preferred-color-scheme" label="comment" input-position="top" comment-order="desc" loading="false" branch="main"></div>
-
-    </section>
-  </div>
-
-
-
-<footer class="page-footer footnote"><hr><div class="sitemap"><div class="sitemap-group"><span class="fs15">博客</span><a href="/">近期</a><a href="/topic">专栏</a><a href="/categories">分类</a><a href="/tags">标签</a><a href="/archives">归档</a></div><div class="sitemap-group"><span class="fs15">社交</span><a href="/friends">友链</a><a target="_blank" rel="noopener" href="https://github.com/winsoft666/blog-comment">留言</a></div><div class="sitemap-group"><span class="fs15">更多</span><a href="/author">关于本站</a><a target="_blank" rel="noopener" href="https://github.com/winsoft666">GitHub</a></div></div><div class="text"><p>本博客所有文章除特别声明外均为原创，采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。<br><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/">鄂ICP备2020015399号-6</a></p>
-</div></footer>
-<div class="main-mask" onclick="sidebar.dismiss()"></div></div><aside class="l_right">
-<div class="widgets">
-
-
-<widget class="widget-wrapper markdown"><div class="widget-header dis-select"><span class="name">开源项目推荐</span></div><div class="widget-body fs14"><p><a target="_blank" rel="noopener" href="https://github.com/winsoft666/ashe">跨平台的C++基础库</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/winsoft666/QWebView">Qt浏览器控件(CEF/WebView2)</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/winsoft666/veigar">全网唯一基于共享内存的RPC框架</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/winsoft666/electron-vue3-boilerplate">产品级的Electron项目模板</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/winsoft666/zoe">跨平台的C++文件下载库</a></p>
-</div></widget>
-
-
-
-
-<widget class="widget-wrapper toc" id="data-toc" collapse="false"><div class="widget-header dis-select"><span class="name">本文目录</span><a class="cap-action" onclick="sidebar.toggleTOC()" ><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg></a></div><div class="widget-body"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E5%86%85%E6%A0%B8%E5%AF%B9%E8%B1%A1"><span class="toc-text">一、什么是内核对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%86%85%E6%A0%B8%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%9B%E5%BB%BA"><span class="toc-text">二、内核对象的创建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%86%85%E6%A0%B8%E5%AF%B9%E8%B1%A1%E7%9A%84%E8%AE%BF%E9%97%AE"><span class="toc-text">三、内核对象的访问</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%86%85%E6%A0%B8%E5%AF%B9%E8%B1%A1%E7%9A%84%E9%94%80%E6%AF%81"><span class="toc-text">四、内核对象的销毁</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0"><span class="toc-text">4.1 引用计数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E6%AD%A3%E7%A1%AE%E7%9A%84%E9%94%80%E6%AF%81%E6%96%B9%E5%BC%8F"><span class="toc-text">4.2 正确的销毁方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E8%8E%B7%E5%8F%96%E5%86%85%E6%A0%B8%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0"><span class="toc-text">4.3 获取内核对象的引用计数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%86%85%E6%A0%B8%E5%AF%B9%E8%B1%A1%E8%B7%A8%E8%BF%9B%E7%A8%8B%E8%AE%BF%E9%97%AE"><span class="toc-text">五、内核对象跨进程访问</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E4%BD%BF%E7%94%A8%E5%8F%A5%E6%9F%84%E7%BB%A7%E6%89%BF%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="toc-text">5.1 使用句柄继承的方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-%E4%BD%BF%E7%94%A8-DuplicateHandle-%E6%96%B9%E5%BC%8F"><span class="toc-text">5.2 使用 DuplicateHandle 方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B"><span class="toc-text">示例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-%E4%BD%BF%E7%94%A8%E5%91%BD%E5%90%8D%E7%9A%84%E5%86%85%E6%A0%B8%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="toc-text">5.3 使用命名的内核对象的方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-3-1-%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="toc-text">5.3.1 实现原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-3-2-%E5%85%A8%E5%B1%80%E5%91%BD%E4%BB%A4%E7%A9%BA%E9%97%B4"><span class="toc-text">5.3.2 全局命令空间</span></a></li></ol></li></ol></li></ol></div><div class="widget-footer">
-
-<a class="top" onclick="util.scrollTop()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12c0-4.714 0-7.071 1.464-8.536C4.93 2 7.286 2 12 2c4.714 0 7.071 0 8.535 1.464C22 4.93 22 7.286 22 12c0 4.714 0 7.071-1.465 8.535C19.072 22 16.714 22 12 22s-7.071 0-8.536-1.465C2 19.072 2 16.714 2 12Z"/><path stroke-linecap="round" stroke-linejoin="round" d="m9 15.5l3-3l3 3m-6-4l3-3l3 3"/></g></svg><span>回到顶部</span></a><a class="buttom" onclick="util.scrollComment()"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M10.46 1.25h3.08c1.603 0 2.86 0 3.864.095c1.023.098 1.861.3 2.6.752a5.75 5.75 0 0 1 1.899 1.899c.452.738.654 1.577.752 2.6c.095 1.004.095 2.261.095 3.865v1.067c0 1.141 0 2.036-.05 2.759c-.05.735-.153 1.347-.388 1.913a5.75 5.75 0 0 1-3.112 3.112c-.805.334-1.721.408-2.977.43a10.81 10.81 0 0 0-.929.036c-.198.022-.275.054-.32.08c-.047.028-.112.078-.224.232c-.121.166-.258.396-.476.764l-.542.916c-.773 1.307-2.69 1.307-3.464 0l-.542-.916a10.605 10.605 0 0 0-.476-.764c-.112-.154-.177-.204-.224-.232c-.045-.026-.122-.058-.32-.08c-.212-.023-.49-.03-.93-.037c-1.255-.021-2.171-.095-2.976-.429A5.75 5.75 0 0 1 1.688 16.2c-.235-.566-.338-1.178-.389-1.913c-.049-.723-.049-1.618-.049-2.76v-1.066c0-1.604 0-2.86.095-3.865c.098-1.023.3-1.862.752-2.6a5.75 5.75 0 0 1 1.899-1.899c.738-.452 1.577-.654 2.6-.752C7.6 1.25 8.857 1.25 10.461 1.25M6.739 2.839c-.914.087-1.495.253-1.959.537A4.25 4.25 0 0 0 3.376 4.78c-.284.464-.45 1.045-.537 1.96c-.088.924-.089 2.11-.089 3.761v1c0 1.175 0 2.019.046 2.685c.045.659.131 1.089.278 1.441a4.25 4.25 0 0 0 2.3 2.3c.515.214 1.173.294 2.429.316h.031c.398.007.747.013 1.037.045c.311.035.616.104.909.274c.29.17.5.395.682.645c.169.232.342.525.538.856l.559.944a.52.52 0 0 0 .882 0l.559-.944c.196-.331.37-.624.538-.856c.182-.25.392-.476.682-.645c.293-.17.598-.24.909-.274c.29-.032.639-.038 1.037-.045h.032c1.255-.022 1.913-.102 2.428-.316a4.25 4.25 0 0 0 2.3-2.3c.147-.352.233-.782.278-1.441c.046-.666.046-1.51.046-2.685v-1c0-1.651 0-2.837-.089-3.762c-.087-.914-.253-1.495-.537-1.959a4.25 4.25 0 0 0-1.403-1.403c-.464-.284-1.045-.45-1.96-.537c-.924-.088-2.11-.089-3.761-.089h-3c-1.651 0-2.837 0-3.762.089" clip-rule="evenodd"/><path fill="currentColor" d="M9 11a1 1 0 1 1-2 0a1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0a1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0a1 1 0 0 1 2 0"/></svg><span>参与讨论</span></a></div></widget>
-</div></aside><div class='float-panel blur'>
-  <button type='button' style='display:none' class='laptop-only rightbar-toggle mobile' onclick='sidebar.rightbar()'>
-    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h11m-11 6h11m-11 6h11M4 6h1v4m-1 0h2m0 8H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
-  </button>
-  <button type='button' style='display:none' class='mobile-only leftbar-toggle mobile' onclick='sidebar.leftbar()'>
-    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 11c0-3.771 0-5.657 1.172-6.828C4.343 3 6.229 3 10 3h4c3.771 0 5.657 0 6.828 1.172C22 5.343 22 7.229 22 11v2c0 3.771 0 5.657-1.172 6.828C19.657 21 17.771 21 14 21h-4c-3.771 0-5.657 0-6.828-1.172C2 18.657 2 16.771 2 13z"/><path id="sep" stroke-linecap="round" d="M5.5 10h6m-5 4h4m4.5 7V3"/></g></svg>
-  </button>
-</div>
-</div><div class="scripts">
-<script type="text/javascript">
-  const ctx = {
-    date_suffix: {
-      just: `刚刚`,
-      min: `分钟前`,
-      hour: `小时前`,
-      day: `天前`,
-    },
-    root : `/`,
-  };
-
-  // required plugins (only load if needs)
-  if (`local_search`) {
-    ctx.search = {};
-    ctx.search.service = `local_search`;
-    if (ctx.search.service == 'local_search') {
-      let service_obj = Object.assign({}, `{"field":"all","path":"/search.json","content":true,"sort":"-date"}`);
-      ctx.search[ctx.search.service] = service_obj;
-    }
-  }
-  const def = {
-    avatar: `https://blog-static.jiangxueqiao.com/blog/stellar-theme/default/3442075.svg`,
-    cover: `https://blog-static.jiangxueqiao.com/blog/stellar-theme/default/76b86c0226ffd.svg`,
-  };
-  const deps = {
-    jquery: `https://blog-static.jiangxueqiao.com/blog/stellar-theme/jquery-3.7.1.min.js`,
-    marked: `https://blog-static.jiangxueqiao.com/blog/stellar-theme/marked-4.0.18.min.js`
-  }
-  
-
-</script>
-
-<script type="text/javascript">
-  const utils = {
-    // 懒加载 css https://github.com/filamentgroup/loadCSS
-    css: (href, before, media, attributes) => {
-      var doc = window.document;
-      var ss = doc.createElement("link");
-      var ref;
-      if (before) {
-        ref = before;
-      } else {
-        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
-        ref = refs[refs.length - 1];
-      }
-      var sheets = doc.styleSheets;
-      if (attributes) {
-        for (var attributeName in attributes) {
-          if (attributes.hasOwnProperty(attributeName)) {
-            ss.setAttribute(attributeName, attributes[attributeName]);
-          }
-        }
-      }
-      ss.rel = "stylesheet";
-      ss.href = href;
-      ss.media = "only x";
-      function ready(cb) {
-        if (doc.body) {
-          return cb();
-        }
-        setTimeout(function () {
-          ready(cb);
-        });
-      }
-      ready(function () {
-        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
-      });
-      var onloadcssdefined = function (cb) {
-        var resolvedHref = ss.href;
-        var i = sheets.length;
-        while (i--) {
-          if (sheets[i].href === resolvedHref) {
-            return cb();
-          }
-        }
-        setTimeout(function () {
-          onloadcssdefined(cb);
-        });
-      };
-      function loadCB() {
-        if (ss.addEventListener) {
-          ss.removeEventListener("load", loadCB);
-        }
-        ss.media = media || "all";
-      }
-      if (ss.addEventListener) {
-        ss.addEventListener("load", loadCB);
-      }
-      ss.onloadcssdefined = onloadcssdefined;
-      onloadcssdefined(loadCB);
-      return ss;
-    },
-
-    js: (src, opt) => new Promise((resolve, reject) => {
-      var script = document.createElement('script');
-      if (src.startsWith('/')){
-        src = ctx.root + src.substring(1);
-      }
-      script.src = src;
-      if (opt) {
-        for (let key of Object.keys(opt)) {
-          script[key] = opt[key]
-        }
-      } else {
-        // 默认异步，如果需要同步，第二个参数传入 {} 即可
-        script.async = true
-      }
-      script.onerror = reject
-      script.onload = script.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        script.onload = script.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(script)
-    }),
-
-    jq: (fn) => {
-      if (typeof jQuery === 'undefined') {
-        utils.js(deps.jquery).then(fn)
-      } else {
-        fn()
-      }
-    },
     
-    onLoading: (el) => {
-      if (el) {
-        $(el).append('<div class="loading-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" stroke-opacity=".3" d="M12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="1.3s" values="60;0"/></path><path stroke-dasharray="15" stroke-dashoffset="15" d="M12 3C16.9706 3 21 7.02944 21 12"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.3s" values="15;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></g></svg></div>');
-      }
-    },
-    onLoadSuccess: (el) => {
-      if (el) {
-        $(el).find('.loading-wrap').remove();
-      }
-    },
-    onLoadFailure: (el) => {
-      if (el) {
-        $(el).find('.loading-wrap svg').remove();
-        $(el).find('.loading-wrap').append('<svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path stroke-dasharray="60" stroke-dashoffset="60" d="M12 3L21 20H3L12 3Z"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/></path><path stroke-dasharray="6" stroke-dashoffset="6" d="M12 10V14"><animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s" values="6;0"/></path></g><circle cx="12" cy="17" r="1" fill="currentColor" fill-opacity="0"><animate fill="freeze" attributeName="fill-opacity" begin="0.8s" dur="0.4s" values="0;1"/></circle></svg>');
-        $(el).find('.loading-wrap').addClass('error');
-      }
-    },
-    request: (el, url, callback, onFailure) => {
-      let retryTimes = 3;
-      utils.onLoading(el);
-      function req() {
-        return new Promise((resolve, reject) => {
-          let status = 0; // 0 等待 1 完成 2 超时
-          let timer = setTimeout(() => {
-            if (status === 0) {
-              status = 2;
-              timer = null;
-              reject('请求超时');
-              if (retryTimes == 0) {
-                onFailure();
-              }
-            }
-          }, 5000);
-          fetch(url).then(function(response) {
-            if (status !== 2) {
-              clearTimeout(timer);
-              resolve(response);
-              timer = null;
-              status = 1;
-            }
-            if (response.ok) {
-              return response.json();
-            }
-            throw new Error('Network response was not ok.');
-          }).then(function(data) {
-            retryTimes = 0;
-            utils.onLoadSuccess(el);
-            callback(data);
-          }).catch(function(error) {
-            if (retryTimes > 0) {
-              retryTimes -= 1;
-              setTimeout(() => {
-                req();
-              }, 5000);
-            } else {
-              utils.onLoadFailure(el);
-              onFailure();
-            }
-          });
-        });
-      }
-      req();
-    },
-  };
-</script>
+    
+    
 
-<script>
-  const sidebar = {
-    leftbar: () => {
-      if (l_body) {
-        l_body.toggleAttribute('leftbar');
-        l_body.removeAttribute('rightbar');
-      }
-    },
-    rightbar: () => {
-      if (l_body) {
-        l_body.toggleAttribute('rightbar');
-        l_body.removeAttribute('leftbar');
-      }
-    },
-    dismiss: () => {
-      if (l_body) {
-        l_body.removeAttribute('leftbar');
-        l_body.removeAttribute('rightbar');
-      }
-    },
-    toggleTOC: () => {
-      document.querySelector('#data-toc').classList.toggle('collapse');
-    }
-  }
-</script>
-<script type="text/javascript">
-  (() => {
-    const tagSwitchers = document.querySelectorAll('.tag-subtree.parent-tag > a > .tag-switcher-wrapper')
-    for (const tagSwitcher of tagSwitchers) {
-      tagSwitcher.addEventListener('click', (e) => {
-        const parent = e.target.closest('.tag-subtree.parent-tag')
-        parent.classList.toggle('expanded')
-        e.preventDefault()
-      })
-    }
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
 
-    // Get active tag from query string, then activate it.
-    const urlParams = new URLSearchParams(window.location.search)
-    const activeTag = urlParams.get('tag')
-    if (activeTag) {
-      let tag = document.querySelector(`.tag-subtree[data-tag="${activeTag}"]`)
-      if (tag) {
-        tag.querySelector('a').classList.add('active')
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>jiangxueqiao.com
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://jiangxueqiao.com/post/14744864.html" title="Windows内核对象">https://jiangxueqiao.com/post/14744864.html</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
         
-        while (tag) {
-          tag.classList.add('expanded')
-          tag = tag.parentElement.closest('.tag-subtree.parent-tag')
-        }
-      }
-    }
-  })()
-</script>
 
-
-<!-- required -->
-<script src="/js/main.js?v=1.29.0" defer></script>
-
-<script type="text/javascript">
-  const applyTheme = (theme) => {
-    if (theme === 'auto') {
-      document.documentElement.removeAttribute('data-theme')
-    } else {
-      document.documentElement.setAttribute('data-theme', theme)
-    }
-
-    applyThemeToGiscus(theme)
-  }
-
-  const applyThemeToGiscus = (theme) => {
-    theme = theme === 'auto' ? 'preferred_color_scheme' : theme
-
-    const cmt = document.getElementById('giscus')
-    if (cmt) {
-      // This works before giscus load.
-      cmt.setAttribute('data-theme', theme)
-    }
-
-    const iframe = document.querySelector('#comments > section.giscus > iframe')
-    if (iframe) {
-      // This works after giscus loaded.
-      const src = iframe.src
-      const newSrc = src.replace(/theme=[\w]+/, `theme=${theme}`)
-      iframe.src = newSrc
-    }
-  }
-
-  const switchTheme = () => {
-    // light -> dark -> auto -> light -> ...
-    const currentTheme = document.documentElement.getAttribute('data-theme')
-    let newTheme;
-    switch (currentTheme) {
-      case 'light':
-        newTheme = 'dark'
-        break
-      case 'dark':
-        newTheme = 'auto'
-        break
-      default:
-        newTheme = 'light'
-    }
-    applyTheme(newTheme)
-    window.localStorage.setItem('Stellar.theme', newTheme)
-
-    const messages = {
-      light: `切换到浅色模式`,
-      dark: `切换到深色模式`,
-      auto: `切换到跟随系统配色`,
-    }
-    hud?.toast?.(messages[newTheme])
-  }
-
-  (() => {
-    // Apply user's preferred theme, if any.
-    const theme = window.localStorage.getItem('Stellar.theme')
-    if (theme !== null) {
-      applyTheme(theme)
-    }
-  })()
-</script>
-
-
-<!-- optional -->
-
-  <script type="module">
-  const el = document.querySelector('#comments #beaudar');
-  util.viewportLazyload(el, load_beaudar, false);
-
-  function load_beaudar() {
-    if (!el) return;
-    try {
-      el.innerHTML = '';
-    } catch (error) {
-      console.error(error);
-    }
-    const script = document.createElement('script');
-    script.src = 'https://beaudar.lipk.org/client.js';
-    script.async = true;
-    for (const key of Object.keys(el.attributes)) {
-      const attr = el.attributes[key];
-      if (['class', 'id'].includes(attr.name) === false) {
-        script.setAttribute(attr.name, attr.value);
-      }
-    }
-    el.appendChild(script);
-  }
-</script>
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/4155207961.html" rel="prev" title="C++编译时断言">
+                  <i class="fa fa-angle-left"></i> C++编译时断言
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/128186902.html" rel="next" title="C++的API设计规范">
+                  C++的API设计规范 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
 
 
 
 
-<script defer>
-  window.addEventListener('DOMContentLoaded', (event) => {
-    ctx.services = Object.assign({}, JSON.parse(`{"mdrender":{"js":"/js/services/mdrender.js"},"siteinfo":{"js":"/js/services/siteinfo.js","api":null},"ghinfo":{"js":"/js/services/ghinfo.js"},"sites":{"js":"/js/services/sites.js"},"friends":{"js":"/js/services/friends.js"},"timeline":{"js":"/js/services/timeline.js"},"fcircle":{"js":"/js/services/fcircle.js"},"weibo":{"js":"/js/services/weibo.js"},"memos":{"js":"/js/services/memos.js"}}`));
-    for (let id of Object.keys(ctx.services)) {
-      const js = ctx.services[id].js;
-      if (id == 'siteinfo') {
-        ctx.cardlinks = document.querySelectorAll('a.link-card[cardlink]');
-        if (ctx.cardlinks?.length > 0) {
-          utils.js(js, { defer: true }).then(function () {
-            setCardLink(ctx.cardlinks);
-          });
-        }
-      } else {
-        const els = document.getElementsByClassName(`ds-${id}`);
-        if (els?.length > 0) {
-          utils.jq(() => {
-            if (id == 'timeline' || 'memos' || 'marked') {
-              utils.js(deps.marked).then(function () {
-                utils.js(js, { defer: true });
-              });
-            } else {
-              utils.js(js, { defer: true });
-            }
-          });
-        }
-      }
-    }
-  });
-</script>
-
-<script>
-  window.addEventListener('DOMContentLoaded', (event) => {
-    ctx.search = {
-      path: `/search.json`,
-    }
-    utils.js('/js/search/local-search.js', { defer: true });
-  });
-</script><script>
-  window.FPConfig = {
-    delay: 0,
-    ignoreKeywords: [],
-    maxRPS: 5,
-    hoverDelay: 25
-  };
-</script>
-<script defer src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/flying-pages-2.1.2.min.js"></script><script defer src="https://blog-static.jiangxueqiao.com/blog/stellar-theme/lazyload-17.8.4.min.js"></script>
-<script>
-  // https://www.npmjs.com/package/vanilla-lazyload
-  // Set the options globally
-  // to make LazyLoad self-initialize
-  window.lazyLoadOptions = {
-    elements_selector: ".lazy",
-  };
-  // Listen to the initialization event
-  // and get the instance of LazyLoad
-  window.addEventListener(
-    "LazyLoad::Initialized",
-    function (event) {
-      window.lazyLoadInstance = event.detail.instance;
-    },
-    false
-  );
-  document.addEventListener('DOMContentLoaded', function () {
-    window.lazyLoadInstance?.update();
-  });
-</script><script>
-  ctx.fancybox = {
-    selector: `.timenode p>img`,
-    css: `https://blog-static.jiangxueqiao.com/blog/stellar-theme/fancybox-5.0.22.min.css`,
-    js: `https://blog-static.jiangxueqiao.com/blog/stellar-theme/fancybox-5.0.22.umd.min.js`
-  };
-  var selector = '[data-fancybox]:not(.error)';
-  if (ctx.fancybox.selector) {
-    selector += `, ${ctx.fancybox.selector}`
-  }
-  var needFancybox = document.querySelectorAll(selector).length !== 0;
-  if (!needFancybox) {
-    const els = document.getElementsByClassName('ds-memos');
-    if (els != undefined && els.length > 0) {
-      needFancybox = true;
-    }
-  }
-  if (needFancybox) {
-    utils.css(ctx.fancybox.css);
-    utils.js(ctx.fancybox.js, { defer: true }).then(function () {
-      Fancybox.bind(selector, {
-        hideScrollbar: false,
-        Thumbs: {
-          autoStart: false,
-        },
-        caption: (fancybox, slide) => {
-          return slide.triggerEl.alt || slide.triggerEl.dataset.caption || null
-        }
-      });
-    })
-  }
-</script>
-<script>
-  window.addEventListener('DOMContentLoaded', (event) => {
-    const swiper_api = document.getElementById('swiper-api');
-    if (swiper_api != undefined) {
-      utils.css(`https://blog-static.jiangxueqiao.com/blog/stellar-theme/swiper-bundle-10.3.1.min.css`);
-      utils.js(`https://blog-static.jiangxueqiao.com/blog/stellar-theme/swiper-bundle-10.3.1.min.js`, { defer: true }).then(function () {
-        const effect = swiper_api.getAttribute('effect') || '';
-        var swiper = new Swiper('.swiper#swiper-api', {
-          slidesPerView: 'auto',
-          spaceBetween: 8,
-          centeredSlides: true,
-          effect: effect,
-          rewind: true,
-          pagination: {
-            el: '.swiper-pagination',
-            clickable: true,
-          },
-          navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-          },
-        });
-      })
-    }
-  });
-</script>
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    window.codeElements = document.querySelectorAll('.code');
-    if (window.codeElements.length > 0) {
-      ctx.copycode = {
-        default_text: `复制`,
-        success_text: `已复制`,
-        toast: `复制成功`,
-      };
-      utils.js('/js/plugins/copycode.js');
-    }
-  });
-</script>
 
 
-<!-- inject -->
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
 
-</div></body></html>
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">鄂ICP备2020015399号-6 </a>
+  </div>
+  <div class="copyright">
+    &copy; 2017 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-rocket"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">jiangxueqiao.com</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">255k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">15:29</span>
+  </span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"winsoft666","repo":"blog-comment","client_id":"Ov23libVrm4js5jotUI4","client_secret":"ab2e3a6d1daa72bfcb968ff049246f8df2ce8988","admin_user":"winsoft666","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"8b0030279d91bd69b1a55ceba9a64b36"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>
