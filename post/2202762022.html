@@ -39,7 +39,7 @@
 <meta property="og:image" content="https://jiangxueqiao.com/images/blog/NinePatchTest.png">
 <meta property="og:image" content="https://jiangxueqiao.com/images/blog/feiyuqitupiansuofang-1.png">
 <meta property="article:published_time" content="2022-09-25T12:55:02.000Z">
-<meta property="article:modified_time" content="2025-11-17T05:59:32.695Z">
+<meta property="article:modified_time" content="2025-11-17T07:58:28.716Z">
 <meta property="article:author" content="jiangxueqiao.com">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jiangxueqiao.com/images/blog/default-menu-style.png">
@@ -291,7 +291,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-11-17 13:59:32" itemprop="dateModified" datetime="2025-11-17T13:59:32+08:00">2025-11-17</time>
+      <time title="修改时间：2025-11-17 15:58:28" itemprop="dateModified" datetime="2025-11-17T15:58:28+08:00">2025-11-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -427,7 +427,7 @@
 <p>我们也可以使用QSS对菜单项内的控件进行样式设置，如：</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">QMenu QPushButton &#123;</span><br><span class="line">    <span class="attribute">border</span>: none;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">10px</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: black;</span><br><span class="line">    <span class="attribute">color</span>: white;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
+<p><strong>📌限于篇幅，不在此提供完整的示例代码，如需获取完整的示例代码，可以<a href="/about">联系我</a></strong></p>
 <h1 id="弹窗外部点击时自动关闭"><a href="#弹窗外部点击时自动关闭" class="headerlink" title="弹窗外部点击时自动关闭"></a>弹窗外部点击时自动关闭</h1><p>在 Qt 编程中如何实现当鼠标点击弹窗外部区域时，该弹窗可以自动关闭的效果。</p>
 <h2 id="ActivationChange-事件"><a href="#ActivationChange-事件" class="headerlink" title="ActivationChange 事件"></a>ActivationChange 事件</h2><p>弹窗通过监听 Activation 改变事件，来判断自身是否还是当前的活动窗口，如果不是则关闭自身。</p>
 <p>在 QWidget 里面重写 event，捕获 QEvent::ActivationChange 事件：</p>
