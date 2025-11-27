@@ -16,17 +16,15 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/themes/blue/pace-theme-corner-indicator.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.2.4/pace.min.js" integrity="sha256-gqd7YTjg/BtfqWSwsJOvndl0Bxc8gFImLEkXQT8+qj0=" crossorigin="anonymous" defer></script>
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"jiangxueqiao.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"vs2015"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":true,"height":300},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":false,"async":true,"duration":200,"transition":{"menu_item":null,"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":null}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"jiangxueqiao.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"right","width_expanded":300,"width_dual_column":260,"display":"hide","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"vs2015"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":true,"height":300},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":false,"async":true,"duration":200,"transition":{"menu_item":null,"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":null}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="Qt中提供了强大的 2D 绘图系统，可以使用相同的API在屏幕和绘图设备上进行绘制，主要基于 QPainter、QPaintDevice和 QPaintEngine 这三个类实现，其中：  QPainter执行具体的绘图操作，QPainter 类提供了大量的GUI编程所需的函数，如drawLine、drawImage等。 QPaintDevice 是一个基类，提供绘图设备的抽象接口，它是一个二维空">
+    <meta name="description" content="Qt 中提供了强大的 2D 绘图系统，可以使用相同的 API 在屏幕和绘图设备上进行绘制，主要基于 QPainter、QPaintDevice 和 QPaintEngine 这三个类实现，其中：  QPainter 执行具体的绘图操作，QPainter 类提供了大量的 GUI 编程所需的函数，如 drawLine、drawImage 等。 QPaintDevice 是一个基类，提供绘图设备的抽象接">
 <meta property="og:type" content="article">
 <meta property="og:title" content="玩转Qt 2D绘图之坐标系">
 <meta property="og:url" content="https://jiangxueqiao.com/post/847642761.html">
-<meta property="og:site_name" content="JiangXueqiao&#39;s blog">
-<meta property="og:description" content="Qt中提供了强大的 2D 绘图系统，可以使用相同的API在屏幕和绘图设备上进行绘制，主要基于 QPainter、QPaintDevice和 QPaintEngine 这三个类实现，其中：  QPainter执行具体的绘图操作，QPainter 类提供了大量的GUI编程所需的函数，如drawLine、drawImage等。 QPaintDevice 是一个基类，提供绘图设备的抽象接口，它是一个二维空">
+<meta property="og:site_name" content="独钓寒江雪">
+<meta property="og:description" content="Qt 中提供了强大的 2D 绘图系统，可以使用相同的 API 在屏幕和绘图设备上进行绘制，主要基于 QPainter、QPaintDevice 和 QPaintEngine 这三个类实现，其中：  QPainter 执行具体的绘图操作，QPainter 类提供了大量的 GUI 编程所需的函数，如 drawLine、drawImage 等。 QPaintDevice 是一个基类，提供绘图设备的抽象接">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://jiangxueqiao.com/images/blog/qt-coordination.jpeg">
 <meta property="og:image" content="https://jiangxueqiao.com/images/blog/qt-3-zuobiaoxiguanxi.jpg">
@@ -38,8 +36,11 @@
 <meta property="og:image" content="https://jiangxueqiao.com/images/blog/jeHIWzh62T.png">
 <meta property="og:image" content="https://jiangxueqiao.com/images/blog/YSQWnZ7g8p-TinyTu.png">
 <meta property="article:published_time" content="2024-03-25T12:55:02.000Z">
-<meta property="article:modified_time" content="2025-11-17T05:13:34.649Z">
+<meta property="article:modified_time" content="2025-11-20T16:19:49.143Z">
 <meta property="article:author" content="jiangxueqiao.com">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="Kernel">
+<meta property="article:tag" content="Windows">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jiangxueqiao.com/images/blog/qt-coordination.jpeg">
 
@@ -50,7 +51,7 @@
 <script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jiangxueqiao.com/post/847642761.html","path":"post/847642761.html","title":"玩转Qt 2D绘图之坐标系"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>玩转Qt 2D绘图之坐标系 | JiangXueqiao's blog</title>
+<title>玩转Qt 2D绘图之坐标系 | 独钓寒江雪</title>
   
 
   <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
@@ -76,7 +77,6 @@
 
   <script src="/js/third-party/fancybox.js" defer></script>
 
-  <script src="/js/third-party/pace.js" defer></script>
 
 
   
@@ -114,9 +114,10 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <p class="site-title">JiangXueqiao's blog</p>
+      <p class="site-title">独钓寒江雪</p>
       <i class="logo-line"></i>
     </a>
+      <p class="site-subtitle" itemprop="description">用C++的优雅，驯服Windows的狂野</p>
   </div>
 
   <div class="site-nav-right">
@@ -129,7 +130,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">17</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">12</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">158</span></a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -180,14 +181,12 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%96%E7%95%8C%E5%9D%90%E6%A0%87%E7%B3%BB"><span class="nav-number">1.</span> <span class="nav-text">世界坐标系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AA%97%E5%8F%A3%E5%9D%90%E6%A0%87%E7%B3%BB"><span class="nav-number">2.</span> <span class="nav-text">窗口坐标系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E5%A4%87%E5%9D%90%E6%A0%87%E7%B3%BB"><span class="nav-number">3.</span> <span class="nav-text">设备坐标系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%86%E5%8F%A3"><span class="nav-number">4.</span> <span class="nav-text">视口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%E8%AE%B2%E8%A7%A3"><span class="nav-number">5.</span> <span class="nav-text">实例讲解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%BB%E5%8A%A8%E5%8E%9F%E7%82%B9%E5%88%B0%E7%AA%97%E5%8F%A3%E4%B8%AD%E5%A4%AE"><span class="nav-number">6.</span> <span class="nav-text">移动原点到窗口中央</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#QRect%E9%81%97%E7%95%99%E9%97%AE%E9%A2%98"><span class="nav-number">7.</span> <span class="nav-text">QRect遗留问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-%E6%8A%97%E9%94%AF%E9%BD%BF"><span class="nav-number">7.1.</span> <span class="nav-text">7.1 抗锯齿</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-QRect%E5%AE%9E%E9%99%85%E5%AE%BD%E9%AB%98"><span class="nav-number">7.2.</span> <span class="nav-text">7.2 QRect实际宽高</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-3-%E5%BC%80%E5%90%AF%E6%8A%97%E9%94%AF%E9%BD%BF"><span class="nav-number">7.3.</span> <span class="nav-text">7.3 开启抗锯齿</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E5%9D%90%E6%A0%87%E7%9F%A9%E9%98%B5%E5%8F%98%E6%8D%A2"><span class="nav-number">8.</span> <span class="nav-text">逻辑坐标矩阵变换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#translate"><span class="nav-number">8.1.</span> <span class="nav-text">translate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scale"><span class="nav-number">8.2.</span> <span class="nav-text">scale</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rotate"><span class="nav-number">8.3.</span> <span class="nav-text">rotate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shear"><span class="nav-number">8.4.</span> <span class="nav-text">shear</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%96%E7%95%8C%E5%9D%90%E6%A0%87%E7%B3%BB"><span class="nav-number">1.</span> <span class="nav-text">世界坐标系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AA%97%E5%8F%A3%E5%9D%90%E6%A0%87%E7%B3%BB"><span class="nav-number">2.</span> <span class="nav-text">窗口坐标系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E5%A4%87%E5%9D%90%E6%A0%87%E7%B3%BB"><span class="nav-number">3.</span> <span class="nav-text">设备坐标系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%86%E5%8F%A3"><span class="nav-number">4.</span> <span class="nav-text">视口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%E8%AE%B2%E8%A7%A3"><span class="nav-number">5.</span> <span class="nav-text">实例讲解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%BB%E5%8A%A8%E5%8E%9F%E7%82%B9%E5%88%B0%E7%AA%97%E5%8F%A3%E4%B8%AD%E5%A4%AE"><span class="nav-number">6.</span> <span class="nav-text">移动原点到窗口中央</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#QRect-%E9%81%97%E7%95%99%E9%97%AE%E9%A2%98"><span class="nav-number">7.</span> <span class="nav-text">QRect 遗留问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-%E6%8A%97%E9%94%AF%E9%BD%BF"><span class="nav-number">7.1.</span> <span class="nav-text">7.1 抗锯齿</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-QRect-%E5%AE%9E%E9%99%85%E5%AE%BD%E9%AB%98"><span class="nav-number">7.2.</span> <span class="nav-text">7.2 QRect 实际宽高</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-3-%E5%BC%80%E5%90%AF%E6%8A%97%E9%94%AF%E9%BD%BF"><span class="nav-number">7.3.</span> <span class="nav-text">7.3 开启抗锯齿</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E5%9D%90%E6%A0%87%E7%9F%A9%E9%98%B5%E5%8F%98%E6%8D%A2"><span class="nav-number">8.</span> <span class="nav-text">逻辑坐标矩阵变换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#translate"><span class="nav-number">8.1.</span> <span class="nav-text">translate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#scale"><span class="nav-number">8.2.</span> <span class="nav-text">scale</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rotate"><span class="nav-number">8.3.</span> <span class="nav-text">rotate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shear"><span class="nav-number">8.4.</span> <span class="nav-text">shear</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
         <div class="site-overview-wrap sidebar-panel">
           <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="jiangxueqiao.com"
-      src="/images/avatar.png">
   <p class="site-author-name" itemprop="name">jiangxueqiao.com</p>
   <div class="site-description" itemprop="description"></div>
 </div>
@@ -195,7 +194,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">158</span>
+          <span class="site-state-item-count">161</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -206,7 +205,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -259,17 +258,17 @@
     <link itemprop="mainEntityOfPage" href="https://jiangxueqiao.com/post/847642761.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="image" content="/images/avatar.gif">
       <meta itemprop="name" content="jiangxueqiao.com">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="JiangXueqiao's blog">
+      <meta itemprop="name" content="独钓寒江雪">
       <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="玩转Qt 2D绘图之坐标系 | JiangXueqiao's blog">
+      <meta itemprop="name" content="玩转Qt 2D绘图之坐标系 | 独钓寒江雪">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
@@ -292,7 +291,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-11-17 13:13:34" itemprop="dateModified" datetime="2025-11-17T13:13:34+08:00">2025-11-17</time>
+      <time title="修改时间：2025-11-21 00:19:49" itemprop="dateModified" datetime="2025-11-21T00:19:49+08:00">2025-11-21</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -305,21 +304,6 @@
     </span>
 
   
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>2.9k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>11 分钟</span>
-    </span>
 </div>
 
         </div>
@@ -328,31 +312,31 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>Qt中提供了强大的 2D 绘图系统，可以使用相同的API在屏幕和绘图设备上进行绘制，主要基于 QPainter、QPaintDevice和 QPaintEngine 这三个类实现，其中：</p>
+    <div class="post-body" itemprop="articleBody"><p>Qt 中提供了强大的 2D 绘图系统，可以使用相同的 API 在屏幕和绘图设备上进行绘制，主要基于 QPainter、QPaintDevice 和 QPaintEngine 这三个类实现，其中：</p>
 <ul>
-<li>QPainter执行具体的绘图操作，QPainter 类提供了大量的GUI编程所需的函数，如drawLine、drawImage等。</li>
-<li>QPaintDevice 是一个基类，提供绘图设备的抽象接口，它是一个二维空间的抽象，可以使用QPainter在其上进行绘制，常见的继承该类的绘图设备有QImage、QPixmap、QWidget、QOpenGLPaintDevice等。</li>
-<li>QPaintEngine 提供了一些抽象接口，用于实现QPainter在不同的设备上进行绘制。QPaintEngine 由 QPaintDevice 创建并管理。</li>
+<li>QPainter 执行具体的绘图操作，QPainter 类提供了大量的 GUI 编程所需的函数，如 drawLine、drawImage 等。</li>
+<li>QPaintDevice 是一个基类，提供绘图设备的抽象接口，它是一个二维空间的抽象，可以使用 QPainter 在其上进行绘制，常见的继承该类的绘图设备有 QImage、QPixmap、QWidget、QOpenGLPaintDevice 等。</li>
+<li>QPaintEngine 提供了一些抽象接口，用于实现 QPainter 在不同的设备上进行绘制。QPaintEngine 由 QPaintDevice 创建并管理。</li>
 </ul>
 <span id="more"></span>
 
-<p>在Qt官方文档中有一张图可以很好说明Qt各个坐标系变换方式（暂不用关注图上的坐标值）：</p>
+<p>在 Qt 官方文档中有一张图可以很好说明 Qt 各个坐标系变换方式（暂不用关注图上的坐标值）：</p>
 <p><img data-src="/images/blog/qt-coordination.jpeg" alt="Qt坐标关系图"></p>
-<p>我们在使用QPainter绘图时需要传入元素坐标，传入的坐标就是图上的世界坐标系（World Coordinates），世界坐标经过矩阵变换（这一步是可选的）后再传递给窗口坐标系（Window Coordinates），窗口坐标系上的元素的坐标还需经过窗口到视口的坐标变换（线性变换），最后在设备坐标系（Device Coordinates）的视口区域内绘制。</p>
+<p>我们在使用 QPainter 绘图时需要传入元素坐标，传入的坐标就是图上的世界坐标系（World Coordinates），世界坐标经过矩阵变换（这一步是可选的）后再传递给窗口坐标系（Window Coordinates），窗口坐标系上的元素的坐标还需经过窗口到视口的坐标变换（线性变换），最后在设备坐标系（Device Coordinates）的视口区域内绘制。</p>
 <h2 id="世界坐标系"><a href="#世界坐标系" class="headerlink" title="世界坐标系"></a>世界坐标系</h2><p>世界坐标系也称之为逻辑坐标系，使用的单位叫逻辑单位。</p>
-<p>在真实的世界地理中，我们通常使用经纬度来表示某一个具体位置，如武汉的坐标为(东经114°,北纬30°)，而在Qt绘图时使用的逻辑单位是像素。</p>
-<p>Qt的像素支持非整数数量，如 0.5 个像素，而实际设备（如显示器、打印机等）只支持整数数量的像素显示，因此从逻辑坐标到设备坐标需要经过相应的转换过程。</p>
-<p>在Qt中，我们提供给 QPainter 的都是逻辑坐标，这种坐标与具体的设备类型无关。</p>
+<p>在真实的世界地理中，我们通常使用经纬度来表示某一个具体位置，如武汉的坐标为(东经 114°,北纬 30°)，而在 Qt 绘图时使用的逻辑单位是像素。</p>
+<p>Qt 的像素支持非整数数量，如 0.5 个像素，而实际设备（如显示器、打印机等）只支持整数数量的像素显示，因此从逻辑坐标到设备坐标需要经过相应的转换过程。</p>
+<p>在 Qt 中，我们提供给 QPainter 的都是逻辑坐标，这种坐标与具体的设备类型无关。</p>
 <h2 id="窗口坐标系"><a href="#窗口坐标系" class="headerlink" title="窗口坐标系"></a>窗口坐标系</h2><p>上图中的窗口是打了引号的，这说明该窗口是实际不存在的，这个窗口指的是窗口坐标系左上角原点到右下角的一个虚拟矩形窗口。</p>
 <p>默认情况下，窗口坐标系和逻辑坐标系都等同于设备坐标系，三者重合，但我们可以使用<code>QPaintet::setWindow</code>方法重设窗口坐标系的原点和范围，有了左上角原点和长&#x2F;宽，也就得到一个新的“窗口”。</p>
-<p>在绘图时传递给 QPainter 的逻辑坐标需要先经过矩阵变换（常见的矩阵变换有QPainter 的 translate、scale、rotate、shear等方法，后面章节会介绍），然后再传递给窗口坐标系。</p>
-<h2 id="设备坐标系"><a href="#设备坐标系" class="headerlink" title="设备坐标系"></a>设备坐标系</h2><p>也称之为物理坐标（Physical Coordinates），坐标原点位于左上角，X轴水平向右增长，Y轴垂直向下增长。</p>
+<p>在绘图时传递给 QPainter 的逻辑坐标需要先经过矩阵变换（常见的矩阵变换有 QPainter 的 translate、scale、rotate、shear 等方法，后面章节会介绍），然后再传递给窗口坐标系。</p>
+<h2 id="设备坐标系"><a href="#设备坐标系" class="headerlink" title="设备坐标系"></a>设备坐标系</h2><p>也称之为物理坐标（Physical Coordinates），坐标原点位于左上角，X 轴水平向右增长，Y 轴垂直向下增长。</p>
 <p>不同的设备坐标单位通常不同，如显示器通常以像素为单位，而打印机通常以点为单位。</p>
 <p>需要注意的是设备坐标系的原点和范围始终等同于实际绘制设备，不会跟随逻辑坐标系、窗口坐标系以及视口（viewport）的改变而改变。</p>
 <h2 id="视口"><a href="#视口" class="headerlink" title="视口"></a>视口</h2><p>视口（viewport）是设备环境中的一个矩形框，使用设备坐标系表示。默认情况下，视口左上角位置为设备坐标系的原点，大小为实际绘制目标设备的大小。</p>
 <p>视口存在的意义是为了指定在显示设备的什么位置，以多大的范围来<strong>完全显示</strong>指定的窗口内容，如果窗口内容超出了视口区域，超出部分将不会显示。</p>
 <p>我们可以用 <code>QPainter::setViewport</code> 方法来改变视口的位置和大小，<code>QPainter::setViewport</code> 的参数都是基于设备坐标系的，如果指定的视口区域超出了设备外，设备外的内容将不会显示。</p>
-<h2 id="实例讲解"><a href="#实例讲解" class="headerlink" title="实例讲解"></a>实例讲解</h2><p>为了更好说明各个坐标系及视口之间的关系，我们通过一个实例来具体说明。首先创建一个长宽为400x400的窗口，并且程序未开启DPI缩放特性：</p>
+<h2 id="实例讲解"><a href="#实例讲解" class="headerlink" title="实例讲解"></a>实例讲解</h2><p>为了更好说明各个坐标系及视口之间的关系，我们通过一个实例来具体说明。首先创建一个长宽为 400x400 的窗口，并且程序未开启 DPI 缩放特性：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">resize</span>(<span class="number">400</span>, <span class="number">400</span>);</span><br></pre></td></tr></table></figure>
 
 <p>绘制代码如下：</p>
@@ -360,21 +344,21 @@
 
 <p>下图使用不同的颜色绘制了不同的坐标系及视口、窗口的位置和区域：</p>
 <p><img data-src="/images/blog/qt-3-zuobiaoxiguanxi.jpg"></p>
-<p><strong>第1行代码<code>QPainter painter(this)</code>：</strong></p>
-<p>表明我们是在当前 QWidget 实例上进行绘制，因此设备坐标系原点为(0,0)，坐标系的范围为QWidget的长宽400x400，坐标单位为像素，对应上图绿色部分。</p>
+<p><strong>第 1 行代码<code>QPainter painter(this)</code>：</strong></p>
+<p>表明我们是在当前 QWidget 实例上进行绘制，因此设备坐标系原点为(0,0)，坐标系的范围为 QWidget 的长宽 400x400，坐标单位为像素，对应上图绿色部分。</p>
 <p>此时还未设置视口，因此视口默认等同于设备坐标系的范围，即(0,0,400,400)，该部分未在上图画出。</p>
-<p><strong>第2行代码<code>painter.translate(100, 200)</code>:</strong></p>
+<p><strong>第 2 行代码<code>painter.translate(100, 200)</code>:</strong></p>
 <p>将逻辑坐标系的原点偏移(100,200)个像素。</p>
 <p>在进行偏移时，值为正表示向方向移动，值为负表示向负方向移动。</p>
-<p><strong>第3行代码<code>painter.setWindow(QRect(200, 300, 600, 600))</code>：</strong></p>
-<p>设置窗口坐标系原点为(200, 300)，窗口范围是600x600，对应上图红色部分。</p>
-<p><strong>第4行代码<code>painter.setViewport(QRect(100, 100, 300, 300))</code>：</strong></p>
-<p>设置视口为QRect(100, 100, 300, 300)，即在设备坐标系上的使用QRect(100, 100, 300, 300)区域来显示上面600x600的窗口，对应上图蓝色部分。</p>
+<p><strong>第 3 行代码<code>painter.setWindow(QRect(200, 300, 600, 600))</code>：</strong></p>
+<p>设置窗口坐标系原点为(200, 300)，窗口范围是 600x600，对应上图红色部分。</p>
+<p><strong>第 4 行代码<code>painter.setViewport(QRect(100, 100, 300, 300))</code>：</strong></p>
+<p>设置视口为 QRect(100, 100, 300, 300)，即在设备坐标系上的使用 QRect(100, 100, 300, 300)区域来显示上面 600x600 的窗口，对应上图蓝色部分。</p>
 <blockquote>
-<p>第2、3、4行代码是没有先后顺序的，因为三个设置函数所影响的目标是不同的。</p>
+<p>第 2、3、4 行代码是没有先后顺序的，因为三个设置函数所影响的目标是不同的。</p>
 </blockquote>
-<p><strong>第5行代码<code>painter.drawRect(QRect(300, 100, 200, 200))</code>：</strong></p>
-<p>在 (300,100) 位置绘制 200x200 的正方形，此处传递的是逻辑坐标，而逻辑坐标系已在第2行代码处进行了偏移，因此根据新的逻辑坐标系，正方形左上角位置是 (300+100, 100+200) &#x3D; (400, 300)，又因为此处逻辑坐标系未做缩放操作（缩放操作由 QPainter::scale 提供），因此正方形的长宽保持不变，仍为200x200，即 QRect(400,300,200,200)。</p>
+<p><strong>第 5 行代码<code>painter.drawRect(QRect(300, 100, 200, 200))</code>：</strong></p>
+<p>在 (300,100) 位置绘制 200x200 的正方形，此处传递的是逻辑坐标，而逻辑坐标系已在第 2 行代码处进行了偏移，因此根据新的逻辑坐标系，正方形左上角位置是 (300+100, 100+200) &#x3D; (400, 300)，又因为此处逻辑坐标系未做缩放操作（缩放操作由 QPainter::scale 提供），因此正方形的长宽保持不变，仍为 200x200，即 QRect(400,300,200,200)。</p>
 <p>然后将正方形 QRect(400,300,200,200) 传递给窗口坐标系，该正方形在窗口坐标系 (200,300,600,600) 上面的位置和大小对应上图粉红色部分。</p>
 <p>最后用设备坐标系上的视口区域来显示该窗口，由于窗口坐标系和设备坐标系的原点及范围不相同，因此还需要做线性转化：</p>
 <figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">在(200, 300, 600, 600) 范围上显示的正方形 (400, 300, 200, 200)</span><br><span class="line"></span><br><span class="line">转化为</span><br><span class="line"></span><br><span class="line">在视口(100, 100, 300, 300) 范围上显示的正方形 (x, y, w, h)</span><br></pre></td></tr></table></figure>
@@ -384,32 +368,32 @@
 
 <p>计算得到需要在视口 (100, 100, 300, 300) 上绘制的正方形为 (200,100,100,100) ，实际绘制的正方形如下图所示：</p>
 <p><img data-src="/images/blog/PxUDuO0cQO.png"></p>
-<h2 id="移动原点到窗口中央"><a href="#移动原点到窗口中央" class="headerlink" title="移动原点到窗口中央"></a>移动原点到窗口中央</h2><p>默认情况下，坐标原点在窗口的左上角，X轴水平向右增长，Y轴垂直向下增长。现在将坐标原点移动到窗口中央，但不改变X轴和Y轴的方向。</p>
+<h2 id="移动原点到窗口中央"><a href="#移动原点到窗口中央" class="headerlink" title="移动原点到窗口中央"></a>移动原点到窗口中央</h2><p>默认情况下，坐标原点在窗口的左上角，X 轴水平向右增长，Y 轴垂直向下增长。现在将坐标原点移动到窗口中央，但不改变 X 轴和 Y 轴的方向。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Qt2DSample窗口长宽为400x400</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">Qt2DSample::paintEvent</span><span class="params">(QPaintEvent* e)</span> </span>&#123;</span><br><span class="line">  <span class="function">QPainter <span class="title">painter</span><span class="params">(<span class="keyword">this</span>)</span></span>;</span><br><span class="line">  painter.<span class="built_in">setRenderHints</span>(QPainter::Antialiasing | QPainter::TextAntialiasing);</span><br><span class="line"></span><br><span class="line">  <span class="type">const</span> <span class="type">int</span> w = <span class="built_in">width</span>();</span><br><span class="line">  <span class="type">const</span> <span class="type">int</span> h = <span class="built_in">height</span>();</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 将坐标原点移动到窗口中央</span></span><br><span class="line">  painter.<span class="built_in">translate</span>(w / <span class="number">2.0</span>, h / <span class="number">2.0</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 也可以使用下面的方式：</span></span><br><span class="line">  <span class="comment">// painter.setWindow(w / 2.0, h / 2.0, w, h);</span></span><br><span class="line">  <span class="comment">// painter.translate(w, h);</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 绘制测试矩形</span></span><br><span class="line">  painter.<span class="built_in">drawRect</span>(<span class="built_in">QRect</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">100</span>, <span class="number">100</span>));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>实际绘制的矩形在窗口中的位置如下图所示：</p>
 <p><img data-src="/images/blog/arB5MLLUyg.png"></p>
-<h2 id="QRect遗留问题"><a href="#QRect遗留问题" class="headerlink" title="QRect遗留问题"></a>QRect遗留问题</h2><p>在介绍 QRect 的遗留问题之前，我们需要先了解Qt中锯齿与抗锯齿的相关内容。</p>
+<h2 id="QRect-遗留问题"><a href="#QRect-遗留问题" class="headerlink" title="QRect 遗留问题"></a>QRect 遗留问题</h2><p>在介绍 QRect 的遗留问题之前，我们需要先了解 Qt 中锯齿与抗锯齿的相关内容。</p>
 <h3 id="7-1-抗锯齿"><a href="#7-1-抗锯齿" class="headerlink" title="7.1 抗锯齿"></a>7.1 抗锯齿</h3><p>下图展示了在绘制一条斜线时，未开启抗锯齿（左边）和开启了抗锯齿后（右边）两者的效果。</p>
 <p><img data-src="/images/blog/qt-aliased-anti-aliased.jpg"></p>
 <p>抗锯齿就是绘图引擎通过在元素的边缘填充不同的颜色来实现平滑边缘的效果。</p>
-<p>Qt默认绘图的元素是有锯齿的，当使用1像素宽的画笔绘制时，实际像素将渲染到我们定义坐标的右下方，如下图所示：</p>
+<p>Qt 默认绘图的元素是有锯齿的，当使用 1 像素宽的画笔绘制时，实际像素将渲染到我们定义坐标的右下方，如下图所示：</p>
 <p><img data-src="/images/blog/n3Rsmq1Lp2.png"></p>
 <p>当画笔宽度为偶数时，像素将围绕定义坐标进行对称渲染，如下图所示：</p>
 <p><img data-src="/images/blog/ofglrvzxwM.png"></p>
-<p>当画笔宽度为奇数时，整除后多余的1像素将渲染到定义坐标的右下方，如下图所示：</p>
+<p>当画笔宽度为奇数时，整除后多余的 1 像素将渲染到定义坐标的右下方，如下图所示：</p>
 <p><img data-src="/images/blog/jeHIWzh62T.png"></p>
-<h3 id="7-2-QRect实际宽高"><a href="#7-2-QRect实际宽高" class="headerlink" title="7.2 QRect实际宽高"></a>7.2 QRect实际宽高</h3><p>基于上述原因，<code>QRect::right()</code> 和 <code>QRect::bottom()</code> 的值并不等于矩形真正右下角的坐标。</p>
+<h3 id="7-2-QRect-实际宽高"><a href="#7-2-QRect-实际宽高" class="headerlink" title="7.2 QRect 实际宽高"></a>7.2 QRect 实际宽高</h3><p>基于上述原因，<code>QRect::right()</code> 和 <code>QRect::bottom()</code> 的值并不等于矩形真正右下角的坐标。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">QRect::<span class="built_in">QRect</span>(<span class="type">int</span> aleft, <span class="type">int</span> atop, <span class="type">int</span> awidth, <span class="type">int</span> aheight) <span class="keyword">noexcept</span></span><br><span class="line">    : <span class="built_in">x1</span>(aleft), <span class="built_in">y1</span>(atop), <span class="built_in">x2</span>(aleft + awidth - <span class="number">1</span>), <span class="built_in">y2</span>(atop + aheight - <span class="number">1</span>) &#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">QRect::setWidth</span><span class="params">(<span class="type">int</span> w)</span> <span class="keyword">noexcept</span></span></span><br><span class="line"><span class="function"></span>&#123; x2 = (x1 + w - <span class="number">1</span>); &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">QRect::setHeight</span><span class="params">(<span class="type">int</span> h)</span> <span class="keyword">noexcept</span></span></span><br><span class="line"><span class="function"></span>&#123; y2 = (y1 + h - <span class="number">1</span>); &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">QRect::width</span><span class="params">()</span> <span class="type">const</span> <span class="keyword">noexcept</span></span></span><br><span class="line"><span class="function"></span>&#123; <span class="keyword">return</span>  x2 - x1 + <span class="number">1</span>; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">QRect::height</span><span class="params">()</span> <span class="type">const</span> <span class="keyword">noexcept</span></span></span><br><span class="line"><span class="function"></span>&#123; <span class="keyword">return</span>  y2 - y1 + <span class="number">1</span>; &#125;</span><br></pre></td></tr></table></figure>
 
 <p>从上面 QRect 的源码可知，QRect::width() 和 QRect::height() 方法返回的是矩形的实际宽高，但 QRect::right() 和 QRect::bottom() 方法返回的不是矩形的实际右边和底部：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">QRect::right() 返回的实际是 QRect::left() + QRect::width() - 1</span><br><span class="line"></span><br><span class="line">QRect::bottom() 返回的实际是 QRect::top() + QRect::height() - 1</span><br></pre></td></tr></table></figure>
 
-<p>这属于QRect的历史遗留问题，Qt为了兼容之前老的代码，对该部分未作修改，我们可以使用下面方式获取QRect真实的宽和高：</p>
+<p>这属于 QRect 的历史遗留问题，Qt 为了兼容之前老的代码，对该部分未作修改，我们可以使用下面方式获取 QRect 真实的 right 和 bottom：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">QRect::<span class="built_in">x</span>() + QRect::<span class="built_in">width</span>()</span><br><span class="line"></span><br><span class="line">QRect::<span class="built_in">y</span>() + QRect::<span class="built_in">height</span>()</span><br></pre></td></tr></table></figure>
 
 <p>也可以使用 <code>QRectF</code>类型来代替 QRect 类型，<code>QRectF</code>类型没有上述问题。</p>
-<h3 id="7-3-开启抗锯齿"><a href="#7-3-开启抗锯齿" class="headerlink" title="7.3 开启抗锯齿"></a>7.3 开启抗锯齿</h3><p>在Qt中开启抗锯齿也非常简单，下面代码开启了抗锯齿：</p>
+<h3 id="7-3-开启抗锯齿"><a href="#7-3-开启抗锯齿" class="headerlink" title="7.3 开启抗锯齿"></a>7.3 开启抗锯齿</h3><p>在 Qt 中开启抗锯齿也非常简单，下面代码开启了抗锯齿：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">painter.<span class="built_in">setRenderHints</span>(</span><br><span class="line">    QPainter::Antialiasing |    <span class="comment">// 消除基础元素（如线、点）边缘的锯齿</span></span><br><span class="line">    QPainter::TextAntialiasing  <span class="comment">// 消除文字边缘的锯齿</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 
 <p>开启抗锯齿以后，像素将始终围绕定义坐标进行对称渲染，并且会自动在边缘填充颜色来平滑边缘，如下图所示：</p>
@@ -421,28 +405,28 @@
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">QPainter::setWorldMatrixEnabled</span><span class="params">(<span class="type">bool</span> enable)</span></span></span><br></pre></td></tr></table></figure>
 
 <p>同时 QPainter 还是提供了 translate、scale、rotate、shear 等快捷方法实现对逻辑坐标的矩阵变换操作。</p>
-<p>需要注意的是在调用了translate、scale、rotate、shear方法后，QPainter 会自动开启对世界坐标的矩阵转换。</p>
-<p>为了更好的介绍是逻辑坐标的转化过程，现在假设在坐标变换之前存在 点A(x, y) 和 矩形B(x, y, w, h)</p>
+<p>需要注意的是在调用了 translate、scale、rotate、shear 方法后，QPainter 会自动开启对世界坐标的矩阵转换。</p>
+<p>为了更好的介绍是逻辑坐标的转化过程，现在假设在坐标变换之前存在 点 A(x, y) 和 矩形 B(x, y, w, h)</p>
 <h3 id="translate"><a href="#translate" class="headerlink" title="translate"></a>translate</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">QPainter::translate</span><span class="params">(<span class="type">const</span> QPointF &amp;offset)</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">QPainter::translate</span><span class="params">(<span class="type">const</span> QPoint &amp;offset)</span></span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">QPainter::translate</span><span class="params">(qreal dx, qreal dy)</span></span></span><br></pre></td></tr></table></figure>
 
-<p>X和Y轴分别平移距离 m 和 n，平移后，点A的坐标为(x + m, y + n)，矩形B的坐标为(x + m, y + n, w, h)</p>
+<p>X 和 Y 轴分别平移距离 m 和 n，平移后，点 A 的坐标为(x + m, y + n)，矩形 B 的坐标为(x + m, y + n, w, h)</p>
 <p>m 和 n 可以为负数。</p>
 <h3 id="scale"><a href="#scale" class="headerlink" title="scale"></a>scale</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">QPainter::scale</span><span class="params">(qreal sx, qreal sy)</span></span></span><br></pre></td></tr></table></figure>
 
-<p>X和Y轴分别缩放 m 和 n 倍 ，缩放后，点A的坐标为(x * m, y * n)，矩形B的坐标为 (x * m, y * n, w * m, h * n)</p>
+<p>X 和 Y 轴分别缩放 m 和 n 倍 ，缩放后，点 A 的坐标为(x _ m, y _ n)，矩形 B 的坐标为 (x _ m, y _ n, w _ m, h _ n)</p>
 <p>m 和 n 可以为负数，如：</p>
-<p>点A(50,100) -&gt; scale(-10, 2) -&gt; (-500,200)</p>
-<p>点A(-50,100) -&gt; scale(-10, 2) -&gt; (500,200)</p>
+<p>点 A(50,100) -&gt; scale(-10, 2) -&gt; (-500,200)</p>
+<p>点 A(-50,100) -&gt; scale(-10, 2) -&gt; (500,200)</p>
 <h3 id="rotate"><a href="#rotate" class="headerlink" title="rotate"></a>rotate</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">QPainter::rotate</span><span class="params">(qreal angle)</span></span></span><br></pre></td></tr></table></figure>
 
-<p>按<strong>顺时针</strong>将X和Y轴同时旋转angle度（注意angle参数的单位是度，而不是弧度），其中<code>0度</code>为正三点钟方向。</p>
+<p>按<strong>顺时针</strong>将 X 和 Y 轴同时旋转 angle 度（注意 angle 参数的单位是度，而不是弧度），其中<code>0度</code>为正三点钟方向。</p>
 <blockquote>
 <p>rotate 是顺时针旋转，而使用 QPainter::drawArc 等方法绘制圆弧或扇形时，是按逆时针方向绘制的。</p>
 </blockquote>
 <p>对于单个点进行旋转是没有意义的，</p>
 <h3 id="shear"><a href="#shear" class="headerlink" title="shear"></a>shear</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">QPainter::shear</span><span class="params">(qreal sh, qreal sv)</span></span></span><br></pre></td></tr></table></figure>
 
-<p>对X和Y轴分别进行扭曲变换。</p>
+<p>对 X 和 Y 轴分别进行扭曲变换。</p>
 
     </div>
 
@@ -527,22 +511,6 @@
     </span>
     <span class="author" itemprop="copyrightHolder">jiangxueqiao.com</span>
   </div>
-<div class="wordcount">
-  <span class="post-meta-item">
-    <span class="post-meta-item-icon">
-      <i class="fa fa-chart-line"></i>
-    </span>
-      <span>站点总字数：</span>
-    <span title="站点总字数">255k</span>
-  </span>
-  <span class="post-meta-item">
-    <span class="post-meta-item-icon">
-      <i class="fa fa-coffee"></i>
-    </span>
-      <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">15:29</span>
-  </span>
-</div>
 
     </div>
   </footer>

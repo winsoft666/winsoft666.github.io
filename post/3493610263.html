@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#177cb0"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/logo.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.png" color="#177cb0">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"jiangxueqiao.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"right","width_expanded":300,"width_dual_column":260,"display":"hide","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"vs2015"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":true,"height":300},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":false,"async":true,"duration":200,"transition":{"menu_item":null,"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":null}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="文章还未完成，请输入密码查看">
+<meta property="og:type" content="article">
+<meta property="og:title" content="别怕！Windows内核驱动开发：从0到1的最速通关指南">
+<meta property="og:url" content="https://jiangxueqiao.com/post/3493610263.html">
+<meta property="og:site_name" content="独钓寒江雪">
+<meta property="og:description" content="文章还未完成，请输入密码查看">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-11-26T13:53:01.000Z">
+<meta property="article:modified_time" content="2025-11-27T05:30:06.736Z">
+<meta property="article:author" content="jiangxueqiao.com">
+<meta property="article:tag" content="内核">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://jiangxueqiao.com/post/3493610263.html">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jiangxueqiao.com/post/3493610263.html","path":"post/3493610263.html","title":"别怕！Windows内核驱动开发：从0到1的最速通关指南"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>别怕！Windows内核驱动开发：从0到1的最速通关指南 | 独钓寒江雪</title>
+  
+
+  <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
+  <script async src="https://hm.baidu.com/hm.js?fbb46283a7b4d42d425356f8779708d5"></script>
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.umd.js" integrity="sha256-a+H7FYzJv6oU2hfsfDGM2Ohw/cR9v+hPfxHCLdmCrE8=" crossorigin="anonymous" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lozad.js/1.16.0/lozad.min.js" integrity="sha256-mOFREFhqmHeQbXpK2lp4nA3qooVgACfh88fpJftLBbc=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+  <script src="/js/third-party/fancybox.js" defer></script>
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js" defer></script>
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">独钓寒江雪</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">用C++的优雅，驯服Windows的狂野</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">jiangxueqiao.com</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">161</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/winsoft666" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;winsoft666" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:smart7178@163.com" title="E-Mail → mailto:smart7178@163.com" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdnjs.cloudflare.com/ajax/libs/creativecommons-vocabulary/2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          链接
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://jiangxueqiao.com/online-tools" title="https:&#x2F;&#x2F;jiangxueqiao.com&#x2F;online-tools">在线工具</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://jiangxueqiao.com/post/3493610263.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jiangxueqiao.com">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="独钓寒江雪">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="别怕！Windows内核驱动开发：从0到1的最速通关指南 | 独钓寒江雪">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          别怕！Windows内核驱动开发：从0到1的最速通关指南
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-11-26 21:53:01" itemprop="dateCreated datePublished" datetime="2025-11-26T21:53:01+08:00">2025-11-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-11-27 13:30:06" itemprop="dateModified" datetime="2025-11-27T13:30:06+08:00">2025-11-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Windows%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E4%B8%8E%E8%B0%83%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">Windows软件开发与调试</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="密码错误，请联系作者获取密码" data-whm="哈希校验失败">
+  <script id="hbeData" type="hbeData" data-hmacdigest="3c588fffeb98d95e6190e7a02542ad27a6a95020a075bc2a7159e38a5e6be28b">0c2e8fc22e23fc6a95492c4a31d13ed2b78088b8525049a34325435b0c3691deb54bb3f13da8423b162535f3e18142094d81d4066294af310cbd956d696435249989fc97589f539610ffa6ffe8dcb5f552b2f303307bbdd5a983751abbac4b5b55ea688d8fdf1bee30da99ef88b91cb57cc137b59d10fc39a2eae0ae121a8b7819f5acdd5ed9c0a401e023adc9e0c3ba7e8dcb764815bdfb36df91860b7c1fc782caf5b73b53b3a6d28cdc46cd3622e319e3cc90c01b2c3c372f041e6c7f785b82d6b719dd44c3df91221b65c8a536d4c045201d2f89f220372e99df4625f4e669d13e088d93b27d22b53083673ce41383040097b3dd9f4526b8d204c35ef2a0642834976a22ea34861bf7baed108c7c192edcd7c852452f24c9e2c81499c948e8e0a9ada9aab905b2e69f6ceb1df701c33f72de0614ec5529671d16fa53d873d835da5bf24384482449f63bb45d775ba7aa658f7df12b1f2ff2a33e16283b67a2874ab2164ec96a42e4f6b3bc200c201486a9efca48a1ae601e1bea0ad54d3a94b0a6f35e1eadda7620b0ff5606266294f8a41d30d35c773f09b91e1d9c3cc73da46a1bc93f8568922abac444234e0534405b1a9ab69d0598a9c4ae43d33b06c4869e47f8be4b236eeba8b721c359ff5d92e7258f6a64267a690177c3b02b6cf4dd7aedf14c9f5decc2b9fcb804ad10a4c195937ffabb6dea6b4eb4ab654f9cb5b70ed1bc4d5f85a6362e17699d00a7ff8951fe69fdcb797f31f61f3e393d238aed62c8ad9744327d19820aa3b93d8623253b52428eb41275b1bc6e4a2952a7c8042a1db95ebe8ef6e0e61307a8e1d87fa25a8d061cdcb6fb65b3d29abea8edee318685c96a8244a2fed38190e4a17f182fb003dfb76a95336ebc5c831889d5fd0185f4a3bae5bdef650306b0a701fc89b1d6ef3812a7bed81ad5e86e6397c30a0e83036a93881c36c8c73649202fbcd014c1814d9bbb7bc5742281dc4e7daa79cbf4fa63f55e07c87b442e257da7f0eaf982a594d10bc8b9227b7546feb9f3d2cc786462ebb7c60b3fb97cafcaebb9ccbe28f10247cea3f1c05a40991a1bfaf357074c7f70c22d8ffee75ecbdd8580c8586ec0b53a1cd3cd5e2b91e96749731523db53e5a561726f444c4b34462ee36cb4d0268584a895e9ddbf696e3f99269a91452b0a5fa59d5e3a4ab00a363aeeb4309e9fae934e885471eb38c9d4964ae5e8f8972fbef3a59040ac532115d4c9a8f2241e456ef712baba03f1b1cc53697532dfbd53b3b4a3802360762318a4efffc1fcfbe0f634cb72c0f6642a8601614292328a870ec5adfb4ab7d7b7986d485f24f2e9601a56fed2da5f1694272f2af55fd7045d5fdf98909f57e73b39aafdd0d5ab246e5214ef163433195a6d2ce32b6e7ab82f5346f636a9ebe571837a7015ec117e541975997135df6d921395b4ac2c21c07790b2863ea1411edced89e7b84ffcb5aec6abace88da9421d24ac45778a6ca5e274ba6f53206cf76ab7f760e6b516907b3ffd2ef0d673dd39e15f2173bff8782d0436e859f1eaa6addc442dd11f7f3a479f00e3c896b73a3b7b5e866e7de0232be7806d2334f47b603060b7c42ff25e51fb398c13ca83433e0ac8eada0e0f1c1a525916157a9bf6fd15d35ec12491dffbb44088ded9278b4a3fc6a013745ae6a4ba0f4a9b737f623dd6c69bacc332ce513f20a4c57809a09f78fe4f2a77c03c4670b229697b96ce52334a5f5b412b34f6d83bbf1977a1cdfed8e4bbc5b6371ef9e348c02622c0c3b2ca9b89a245c36e8ddb34a37b900d8390e2f19c7799440aa86c8bc869f924ae2e34a03a7add425209986f823227470dee8a6a57553c057f1a2172ced4e52e9ee65724931dae53d5ac5fb7a6f1ace6dce1ea01b793858232fa4b91d0226131edcbf89bb072c1aef6bdb5541f4ee5c095e2e0e01c70ae44828ab7c9e87090c9a9df759e32731b2034a88efb39e257d316c94d0adddb8c3f758e2e4a55a65048ad0e4ad7e0d137b37eacbaaf14c7c004dffbb1fb41d008cc7ae00b2a15b816e8519a24a762dbbd85b35eb5689bf82fbd9a061bd9ffb652489abf5232c4964ae4a5e60eab095b63be5f27b83327214611669e9b84dff3de0bc598544f52e7164f07ea3fba2e3fd502e6a6433ffe81f22b9c8350bf896d6dc31aed843509ce72e4cea3cd0ed7b50c08f6c8f3b23e58c520c2d6d3581cde51975b4d66463253db1b2f2fc649b90941257d78452ff249919c6d03be9baf810b97bcf0e2957dd8289b7a73c39bafab42ef7f4b28a720c4a205d1b9f557d6340d3d22f3ee4ea1f2cca6ee60ae3e462fcaebad2f3864d93389489594dd9c0a4f4c2481835bc7ee970bea732ad85404c2a7dd1368310bb6b6b1438fcb2d7b78c6ad9325ec47041710578a9ddada83a3f8f2e687cdcee3bca8347d632d1a13c94b36acde8d859743138ace577f10d3c45910ef05891ae2b4db9c4981e4dc20acdc9f486ee0fba25d14113d173deb119db957b61c08415cb548fee1747e49350d377ddcabbc34c1a74e09217449c14664ac1e2bd461445818b43be33e1266970a547fc1bf0f624b6a3fb5f226715b6cbfd0c4c5acea36071ccec4b2d063596387be08f5b446096013d9e75a0431628642dfbcdfce8c519f3ec4161b62a33cb7d79087e233f4861e7650978afbbe246c20948ec09e142130a80158196160d9689ebd0affdd8a2ccb1265075a2a982f0b09749eb7734f42ccba6420fc3de5559f84b79558578eb980599fc6d15970224f613151b91b9f143daeab72493cded754ac58c4ce1f9b73ecf373b3f79839dd6bd561652e178e3b3c51ce4e22e4730bfaeda66d0d14454840547f250d21cbf001d811fca5d414558698f4278915f8fe15a3fda45e9c41c590a6e280230a3226a31cbe2fb1dabaa4b0e9c4c7a95d91961af532642136dc27febb849a2e7a408bcb7cfc73e1acac8583bba5d125078b714347951b0017e8e37f8945dde27ffac470273d0c01c75003bf3d9548d6c6518c272f19075b28a778a8f99d39b03fbdfbacc6b4d64ca92c1c2d8d7cfea505b3812e30443e0ba9dfe2e1fc2fc64c4ca7196b8236f52555f2e8c49dfbe6a20d88f83d094a1602eba2ce00f4f4c5d5815db2de19872ceb5cc44b64c5a436f44834b3736e8a54e63f053c7afc0a1d0eb29ced7c20af7c5ca56a9603eee54d6d38a1224b7b143be82b656ab87f0048ff15473dbbf1e251e3cf121fccd55f0ca7534cf08176462f25381d4f97ceb1344e4c6627597d7fbbed130683a1ff653147be2f67ab5eecb8929025ff833206682f049ef573c788ccc2fbd7b2558ead0ed52046170d3aa554a72e295754ea05e2e9ac4cd4c74c33c3483d5fe5f8258deb698a0c86e104dcacb2bdb3d08f7d1c4e040bd7ceee1b8eaace4626cf71edd490d70404c97faea2d7b4f303a3e9e8c37ae3195bcfcd45d561d9112100d30d9a3a710d74c293629bdcbe83018530f91f26ceaac40f39bef87134d9037747909e7fa251785b11ad3d6c69c7c0e179a40b8251da56b8f2b8b2d7ca7ff0d0ded2f818e613f1960d50c09ce48bf6a5c7da80d119eb7ba5e015648a0bddf1603faaea18d1ce3ab2c85a68d1a8f6c2b5840c008032321dd984df7968080b9fea5b613c2b4240e7b48c779dc0359472948f6af885eb650a042ea40988a682ebd347b07d044a5d8c3486ebe6be27edc5bb6d53c40355d4f49bc75c233611096c0a3bb9e604e01bab55dd56be08ca9ebde05a05e2bccb0438dbbf7c389e35c09e745cb1c92aae691e8aba04a740401d77bba2c2e0e6311120c6a7aa0192d6a8c638d563e39d3e586b52e25200ed3460043d2992f43ce5d971ea14ee4f2b0ed986eda8db3ff6d88d328bfc0b45212e3fb43e8d4630008e9b6ffd5f9009e04dc142175c16a497fd5a5d1be526bd2e08e22b557fc3a3b323f2275f452c481d29c1553cab99578c77bbb3742535e324f314e61ed89021e15719b33e2ea04d41d6dff7ccdb966ac78bbdd0069645627f09cfe2cdc03b0dcf8fb50f02bf3896855e9f33eb23d8e93feca51a92f729c2c775ba1e9f363e35c7698c8391a166337c2d402d816840e8b28c992c9c89e562f10d30a92d967d534532f4d6540f92dd26c34ea5755c02d27b9993d014fe91c47f5461757ac451615f37375bc98eb96bc8a307bbb1bc87468d94e6e233527dfd560602aa49ca955db869efbd93f73b2b7f54dcd4a5a003f4156a8e71187bbf1255e0194369cb6a80b054b5431093046e68e878638ef7a72da5df149f5508b30ac69b2e12edadd9f6951a7cabdfb88de6d8b5e173e901a432ea96772f5f9b9fa6a3c5187bdd372756147996f61d7997e247d9e8341558c8018b22687945101398f81000e107a50126bf97f1266384270dd43d42d3cf6c484aca4219dca89fb7a3e5cea48c3bbd713e0b0b4cc3257059f89b1ae03e507d93d64bbcd566a8f9ddd96b3fe59183ef346dde32c679588ee4780166e3381bedeb02bdfd65e9f2165408a8bc847ae15f09e812dad112918871b8829178a86e457d541ef41bb7119c690f738139a7f22145f0d4c8d02dfff98baffb6bb38d0f7ea33a1ee2161c15af76b1a09939b5e2646d310fb5bdeaa070d4a7606faa896b8dbeabd4c847b1d8c2c3becac93a35d7df6bc835e5d7b6adc28aa437941b0f7ca028d386060f8941ca7cd2e3ca8f03dcb9ced32c12bb171d05a9563ca9974d3cc1ab356ae280c232cfaf2252e3ef605f7cc1d07a82a21928c93b78e0dbeb1161eed1d4a96d0705e5e438ad91fb9750779bdbe7a2eec9a08b336cabc32d158e43255cceb2a5a556f9f9c5adc9d535a8c829a87d2b652cf53220a2fc109cba221d6231e646c26e2dc180b0695a1b48e0a0eab26d59b0cf6945c3f6b4465cf7ef53c4421708bd696a9866e8f6dc1f6d48973531bf67ad9f43a8bd852c58f49694d0d98e52640fbeebb0c82e410e1129f7c50ea1dac554149eb27629afefe3a0eb8d33df312e9ebd34a42352b1e7061fb3da0529f4a9047e49ede2b2d985ecb749cab5dc5406e0c0530a12d854852f94422ef76b4d400ce08d91568a5edaa845cddd7aa17c3492308b63e75dd4bc5af3460b9d8b379590d3913411f5958115d555726bc43f14b033e482c21a5f1abebb2b340dfba24d12769dfdd098d8a212672194565eb28a84a6f5152b6e319d89210e363ab0f08b9e35fc833b5aa9ad116b259daa76cf1a985cff330fc6747d183723be4a9ae2ed63a98dbcec2210a392dcb042579479898a959c40969523ca88d8b8d179252cb752925c9bb5de7ea0d32321f01bc4774f04c06ea5c5ceb8515525c348ecd6d2f963e21b3aa5a5aaaf27d931448d1ee4f781cfda93231c48b672a6ac3acc483d1f10d7ef9988a3d5db7414fdac3a26b9db3707a482b935152c091f6d8fa3289bf193a263f85e428abeaa7cecaa5fba12aca9a64274b780c3e9c56afdeb6722542aef82e70bfa13e6c5acfbaeb7b27e88f634c7094ddf65f9df5a53c298040bf41e8950ea103a127686eac2e58ad858ca33f6718e72b58f6570ac33769eff37709d30c88a1477f0757b647550b288dd14a2a406b30d9b92a9061a4c64b806b287a295ff3f9a0608a4a11bedce749f22b0d532a72adf4f7c36f1712a01433df6bfae6a5492657c5575862cd1ae47dd0eed24a0ad023bac93f02e780d99ff28dba5663395491b33dce1caaaaf493510cc62489cb15e9c207a0d130bd55bacd7f74cdb66fa90f8e2a98a029b9957ec30d6637d7510448985e4717cb3b488e8d1ced62281cd5abc380734c6717044312b1a065ab4ddab1fd80c8f9d68197a7965b79b1f7a03719a224df10820f00a35a2b09c7e3222a3c5d04cc6c2554e0e1c381ec7cb75feaa97d322d259a292d37aa22a02ca439ef9f47412a6de106fe8da7253e0e5c6ecb93a2478e522fbb30ffdfc7ba9ee24b318e12137587d9365b10e1355dbcedf6b46085174ed57f34e247c8de59450b3f57a0008e8d19e13743a13c9e86477172a42868f0f62377d19415858a524edd554e45b5b761e3fe6a3cb4caa86ca96354045703b4826db6a523c181ac886737c034be7de9c4920bd02e2b010c4c5166512d56fed1f4f0d294b7b4a21d9de5aa03ae96b3e207d133d04f0cd6c4c6c9bed06e06093df4f95b8f00d7d39c130486a068de364f7c3c9e4cb5a2f14c245b64d612eb42df17b8055bcfe62e0d27ce1b6662cec94ef68b6be4e8f670e105469a33fb56e7196135bde899ae8c124a2d6fc0c5c3161845a640d7fc4e14e659624d82b9dcf6c1335d528c37ef9cd0ab11492adfca7e88fae75dfde84aadd3a6f06745388826cd4f0c945f8caf6413f0a2ca343b2b62b4253dbb5bf58693e81141be0b550c983495ad1a9f4525434b0a2e3de5562ac2ee727c943fd70d58e03725a71716a7163d1434c0df83e0569ab66798437713ca800ce72eec57a21027536180cb54abac0bd860d0bc535b7e3103b402fc83fc470cd7bfe873b6def03ecb09022a4a23d1e1b7f0ef910b7b91773d6507a1f5e3537b69926257dbaaca8bbf5328cf43d9e08e25a27899361578820b7573cedfbdc86df50d7945b78e0500def776c627d4746834571e168f6e6ddb0a72f0fb10b2c43b0eb8ef3eb7b462970d50af5c3dc7b9b0329bde1d2b0bc09bfab92751ddaa38f55b55d41a9b7f8f412c6243c8b6f4046a7f1bb88b4fafbea90cf975b86ed7bc1decde0327dd6f91e221f9c71ed364cfcb974e7892f350c4a9521172defdc8252bc</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">请输入密码</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/buycoffie.png" alt="jiangxueqiao.com 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/buycoffie.png" alt="jiangxueqiao.com 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>jiangxueqiao.com
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://jiangxueqiao.com/post/3493610263.html" title="别怕！Windows内核驱动开发：从0到1的最速通关指南">https://jiangxueqiao.com/post/3493610263.html</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E5%86%85%E6%A0%B8/" rel="tag"># 内核</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/3573459553.html" rel="prev" title="代码的隐形战场：Windows进程注入与API Hook完全指南">
+                  <i class="fa fa-angle-left"></i> 代码的隐形战场：Windows进程注入与API Hook完全指南
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments gitalk-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="beian"><a href="https://beian.miit.gov.cn/" rel="noopener" target="_blank">鄂ICP备2020015399号-6 </a>
+  </div>
+  <div class="copyright">
+    &copy; 2017 – 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-rocket"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">jiangxueqiao.com</span>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
+
+<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"winsoft666","repo":"blog-comment","client_id":"Ov23libVrm4js5jotUI4","client_secret":"ab2e3a6d1daa72bfcb968ff049246f8df2ce8988","admin_user":"winsoft666","distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":"zh-CN","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"348dec6f3e10c8ee31e3ffde861983c2"}</script>
+<script src="/js/third-party/comments/gitalk.js" defer></script>
+
+</body>
+</html>
