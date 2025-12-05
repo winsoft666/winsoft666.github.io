@@ -12,7 +12,7 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
+
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
@@ -179,18 +179,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">161</span>
+          <span class="site-state-item-count">162</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">20</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -239,6 +239,279 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jiangxueqiao.com/post/737279469.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jiangxueqiao.com">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="独钓寒江雪">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 独钓寒江雪">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/post/737279469.html" class="post-title-link" itemprop="url">流媒体基础概念</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-10-24 11:08:32" itemprop="dateCreated datePublished" datetime="2019-10-24T11:08:32+08:00">2019-10-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-12-05 14:34:54" itemprop="dateModified" datetime="2025-12-05T14:34:54+08:00">2025-12-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E2%91%A5%E9%9F%B3%E8%A7%86%E9%A2%91%E5%8F%8A%E6%B5%81%E5%AA%92%E4%BD%93%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">⑥音视频及流媒体技术</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="流媒体协议"><a href="#流媒体协议" class="headerlink" title="流媒体协议"></a>流媒体协议</h1><h2 id="RTP-Real-time-Transport-Protocol"><a href="#RTP-Real-time-Transport-Protocol" class="headerlink" title="RTP (Real-time Transport Protocol)"></a>RTP (Real-time Transport Protocol)</h2><h3 id="RTP-特征"><a href="#RTP-特征" class="headerlink" title="RTP 特征"></a>RTP 特征</h3><p>实时传输协议（Real-time Transport Protocol）是一个<strong>网络传输层</strong>协议，它是由 IETF 的多媒体传输工作小组 1996 年在 RFC 1889 中公布的，它作为因特网标准在 RFC 3550（该文档的旧版本是 RFC 1889）有详细说明，RTP 标准定义了两个子协议：RTP 和 RTCP。</p>
+<p><strong>RTP 协议是建立在 UDP 协议上的。</strong> RTP 协议详细说明了在互联网上传递音频和视频的标准数据包格式。RTP 协议常用于流媒体系统（配合 RTCP 协议）、视频会议和视频电话系统（配合 H.263 或 SIP）。</p>
+<p>RTP 标准由两个紧密链接部分组成：</p>
+<ul>
+<li>RTP —- 传送具有实时属性的数据；</li>
+<li>RTP 控制协议（RTCP）—-监控服务质量并传送正在进行的会话参与者的相关信息。</li>
+</ul>
+<p>RTP 本身并没有提供按时发送机制或其他服务质量（QoS）保证，它依赖于底层服务去实现这一过程。RTP 并不保证传送或防止无序传送，也不确定底层网络的可靠性。RTP 实行有序传送，RTP 中的序列号允许接收方重组发送方的包序列，同时序列号也能用于决定适当的包位置，例如：在视频解码中，就不需要顺序解码。</p>
+<h3 id="RTP-报头"><a href="#RTP-报头" class="headerlink" title="RTP 报头"></a>RTP 报头</h3><p>RTP 报头格式如下：<br><img data-src="/images/blog/liumeitijichu-1.jpg"></p>
+<ul>
+<li>V：RTP 协议的版本号，占 2 位，当前协议版本号为 2。</li>
+<li>P：填充标志，占 1 位，如果 P&#x3D;1，则在该报文的尾部填充一个或多个额外的八位组，它们不是有效载荷的一部分。</li>
+<li>X：扩展标志，占 1 位，如果 X&#x3D;1，则在 RTP 报头后跟有一个扩展报头。</li>
+<li>CC：CSRC 计数器，占 4 位，指示 CSRC 标识符的个数。</li>
+<li>M: 标记，占 1 位，不同的有效载荷有不同的含义，对于视频，标记一帧的结束；对于音频，标记会话的开始。</li>
+<li>PT: 有效载荷类型，占 7 位，用于说明 RTP 报文中有效载荷的类型，如 GSM 音频、JPEM 图像等。</li>
+<li>序列号：占 16 位，用于标识发送者所发送的 RTP 报文的序列号，每发送一个报文，序列号增 1。接收者通过序列号来检测报文丢失情况，重新排序报文，恢复数据。</li>
+<li>时戳(Timestamp)：占 32 位，时戳反映了该 RTP 报文的第一个八位组的采样时刻。接收者使用时戳来计算延迟和延迟抖动，并进行同步控制。</li>
+<li>同步信源(SSRC)标识符：占 32 位，用于标识同步信源。该标识符是随机选择的，参加同一视频会议的两个同步信源不能有相同的 SSRC。</li>
+<li>特约信源(CSRC)标识符：每个 CSRC 标识符占 32 位，可以有 0 ～ 15 个。每个 CSRC 标识了包含在该 RTP 报文有效载荷中的所有特约信源。</li>
+</ul>
+<p>这里的同步信源是指产生媒体流的信源，它通过 RTP 报头中的一个 32 位数字 SSRC 标识符来标识，而不依赖于网络地址，接收者将根据 SSRC 标识符来区分不同的信源，进行 RTP 报文的分组。特约信源是指当混合器接收到一个或多个同步信源的 RTP 报文后，经过混合处理产生一个新的组合 RTP 报文，并把混合器作为组合 RTP 报文的 SSRC，而将原来所有的 SSRC 都作为 CSRC 传送给接收者，使接收者知道组成组合报文的各个 SSRC。</p>
+<h2 id="RTCP-Real-time-Transport-Control-Protocol"><a href="#RTCP-Real-time-Transport-Control-Protocol" class="headerlink" title="RTCP (Real-time Transport Control Protocol)"></a>RTCP (Real-time Transport Control Protocol)</h2><p>实时传输控制协议（Real-time Transport Control Protocol,RTCP）是实时传输协议（RTP）的一个姐妹协议。</p>
+<p>RTCP 为 RTP 媒体流提供信道外控制。RTCP 定期在多媒体流会话参加者之间传输控制数据。RTCP 的主要功能是为 RTP 所提供的服务质量提供反馈。</p>
+<p>RTCP 收集相关媒体连接的统计信息，例如：传输字节数，传输分组数，丢失分组数，时延抖动，单向和双向网络延迟等等。网络应用程序可以利用 RTCP 所提供的信息试图提高服务质量，比如限制信息流量或改用压缩比较小的编解码器。RTCP 本身不提供数据加密或身份认证，其伴生协议<code>SRTCP（安全实时传输控制协议）</code>则可用于此类用途。</p>
+<blockquote>
+<p>WebRTC 内部采用的是 RTC+RTCP</p>
+</blockquote>
+<h2 id="SRTP-SRTCP"><a href="#SRTP-SRTCP" class="headerlink" title="SRTP &amp; SRTCP"></a>SRTP &amp; SRTCP</h2><p>SRTP &#x3D; Secure Real-time Transport Protocol<br>SRTCP &#x3D; Secure Real-time Transport Control Protocol<br>SRTP 是在实时传输协议 RTP 基础上所定义的一个协议，旨在为单播和多播应用程序中的实时传输协议的数据提供加密、消息认证、完整性保证和重放保护。它是由 David Oran（思科）和 Rolf Blom（爱立信）开发的，并最早由 IETF 于 2004 年 3 月作为 RFC 3711 发布。</p>
+<h2 id="RTSP-Real-time-Transport-Streaming-Protocol"><a href="#RTSP-Real-time-Transport-Streaming-Protocol" class="headerlink" title="RTSP (Real-time Transport Streaming Protocol)"></a>RTSP (Real-time Transport Streaming Protocol)</h2><p>RTSP（Real Time Streaming Protocol），RFC2326，实时流传输协议。RTSP 在体系结构上位于 RTP 和 RTCP 之上，它使用 TCP 或 UDP 完成数据传输。</p>
+<p>RTSP 是一种基于文本的<strong>应用层协议</strong>，在语法及一些消息参数等方面与 HTTP 协议类似。</p>
+<p>RTSP 被用于建立的控制媒体流的传输，它为多媒体服务扮演“网络远程控制”的角色。尽管有时可以把 RTSP 控制信息和媒体数据流交织在一起传送，但一般情况 RTSP 本身并不用于传送媒体流数据，媒体数据的传送可通过 RTP&#x2F;RTCP 等协议来完成。<br><img data-src="/images/blog/liumeitijichu-2.jpg"></p>
+<h2 id="SDP-Session-Description-Protocol"><a href="#SDP-Session-Description-Protocol" class="headerlink" title="SDP (Session Description Protocol)"></a>SDP (Session Description Protocol)</h2><p>会话描述协议（Session Description Protocol 或简写 SDP）描述的是流媒体的初始化参数。此协议由 IETF 发表为 RFC 2327。</p>
+<p>SDP 完全是一种会话描述格式，它不属于传输协议。</p>
+<p>SDP 用于描述多媒体通信会话，包括会话建立、会话请求和参数协商。SDP 不用于传输媒体数据，只能用于两个通信终端的参数协商，包括媒体类型、格式以及所有其他和会话相关的属性。SDP 以字符串的形式描述上述初始化参数。</p>
+<blockquote>
+<p>可以参考 <a href="/post/2172509399.html" title="SDP格式解析">SDP格式解析</a></p>
+</blockquote>
+<h2 id="SIP-Session-Initiation-Protocol"><a href="#SIP-Session-Initiation-Protocol" class="headerlink" title="SIP (Session Initiation Protocol)"></a>SIP (Session Initiation Protocol)</h2><p>SIP(Session Initiation Protocol)是一个应用层的信令控制协议。</p>
+<p>SIP 用于初始化一个 Session，并负责传输 SDP 包；而 SDP 包中描述了一个 Session 中包含哪些媒体数据，邀请的人等等；当需要被邀请的人都通过各自的终端设备被通知到后，就可以使用 RTSP 来控制特定 Media 的通信，比如 RTSP 控制信息要求开始 Video 的播放，那么就开始使用 RTP（或者 TCP）实时传输数据，在传输过程中，RTCP 要负责 QoS 等。</p>
+<h2 id="RTMP-Real-Time-Messaging-Protocol"><a href="#RTMP-Real-Time-Messaging-Protocol" class="headerlink" title="RTMP (Real Time Messaging Protocol)"></a>RTMP (Real Time Messaging Protocol)</h2><p>RTMP(Real-Time Messaging Protocol 实时消息传送协议)的缩写，它是 Adobe Systems 公司为 Flash 播放器和服务器之间音频、视频和数据传输开发的一个基于<strong>TCP</strong>的<strong>应用层</strong>传输协议。这是一个标准的、未加密的实时消息传递协议，默认端口是 1935。</p>
+<p>RTMP 是一种有状态协议。</p>
+<p>RTMP 协议有效的保证了媒体传输质量，使用户可以观看到高质量的多媒体。RTMP 采用 TCP 协议作为其在传输层的协议，避免了多媒体数据在广域网传输过程中的丢包对质量造成的损失。此外 RTMP 协议传输的 FLV 封装格式支持的 H．264 视频编码方式可以在很低的码率下显示质量还不错的画面，非常适合网络带宽不足的情况下收看流媒体。</p>
+<p>当然 RTMP 协议也有一些局限，RTMP 基于 TCP 协议，而 TCP 协议实时性不如 UDP，也非常占用带宽。目前基于 UDP 的 RTMFP 协议能很好的解决这些问题。</p>
+<blockquote>
+<p>RTMPT 封装在 HTTP 请求之中，可穿越防火墙;<br>RTMPS 类似 RTMPT，但使用的是 HTTPS 连接;</p>
+</blockquote>
+<h2 id="RTMFP-Real-Time-Media-Flow-Protocol"><a href="#RTMFP-Real-Time-Media-Flow-Protocol" class="headerlink" title="RTMFP (Real Time Media Flow Protocol)"></a>RTMFP (Real Time Media Flow Protocol)</h2><p>RTMFP 是 Adobe 公司开发的一套新的通信协议。</p>
+<p>RTMFP 是基于 UDP 的，RTMP 是基于 TCP 的。UDP 在传送直播数据方面比 TCP 还是有较多优势的，比如减少延时，对丢包的容忍，虽然在可靠性上有所损失。与 RTMP 不同, RTMFP 支持 Flash Player 直接发送数据给另一个，而不经过 Server。</p>
+<h2 id="RSVP-Resource-ReSerVation-Protocol"><a href="#RSVP-Resource-ReSerVation-Protocol" class="headerlink" title="RSVP (Resource ReSerVation Protocol)"></a>RSVP (Resource ReSerVation Protocol)</h2><p>使用 RSVP 预留一部分网络资源（即带宽），能在一定程度上为流媒体的传输提供 QoS。通常 RSVP 请求将会引起每个节点数据路径上的资源预留。</p>
+<p>RSVP 只在单方向上进行资源请求，因此，尽管相同的应用程序，同时可能既担当发送者也担当接受者，但 RSVP 对发送者与接受者在逻辑上是有区别的。 RSVP 属于<strong>网络层</strong>协议。 RSVP 不传输应用数据，但支持因特网控制协议，如 ICMP、IGMP 或者路由选择协议。</p>
+<h2 id="MMS-Microsoft-Media-Server-Protocol"><a href="#MMS-Microsoft-Media-Server-Protocol" class="headerlink" title="MMS (Microsoft Media Server Protocol)"></a>MMS (Microsoft Media Server Protocol)</h2><p>MMS(Microsoft Media Server Protocol)，微软媒体服务器协议，用来访问接收 Windows Media 服务器中 .asf 文件的一种协议。MMS 协议用于访问 Windows Media 发布点上的单播内容。</p>
+<p>MMS 的默认端口是 1755.</p>
+<h2 id="HLS-HTTP-Live-Streaming"><a href="#HLS-HTTP-Live-Streaming" class="headerlink" title="HLS (HTTP Live Streaming)"></a>HLS (HTTP Live Streaming)</h2><p>HTTP Live Streaming（缩写是 HLS）是一个由苹果公司提出的基于<strong>HTTP</strong>的流媒体网络传输协议。它的工作原理是把整个流分成一个个小的基于 HTTP 的文件来下载，每次只下载一些。当媒体流正在播放时，客户端可以选择从许多不同的备用源中以不同的速率下载同样的资源，允许流媒体会话适应不同的数据速率。在开始一个流媒体会话时，客户端会下载一个包含元数据的 extended M3U (m3u8)playlist 文件，用于寻找可用的媒体流。</p>
+<p>HLS 只请求基本的 HTTP 报文，与实时传输协议（RTP)不同，HLS 可以穿过任何允许 HTTP 数据通过的防火墙或者代理服务器。它也很容易使用内容分发网络来传输媒体流。</p>
+<p>HLS 协议规定：</p>
+<ul>
+<li>视频的封装格式是 TS。</li>
+<li>视频的编码格式为 H264,音频编码格式为 MP3、AAC 或者 AC-3。</li>
+<li>除了 TS 视频文件本身，还定义了用来控制播放的 m3u8 文件（文本文件）。</li>
+</ul>
+<h1 id="封装格式"><a href="#封装格式" class="headerlink" title="封装格式"></a>封装格式</h1><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>推出机构</th>
+<th>流媒体支持</th>
+<th>支持的视频编码</th>
+<th>支持的音频编码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AVI</td>
+<td>Microsoft Inc.</td>
+<td>否</td>
+<td>几乎所有格式</td>
+<td>几乎所有格式</td>
+</tr>
+<tr>
+<td>MP4</td>
+<td>MPEG</td>
+<td>是</td>
+<td>MPEG-2, MPEG-4, H.264, H.263 等</td>
+<td>AAC, MPEG-1 Layers I, II, III, AC-3 等</td>
+</tr>
+<tr>
+<td>TS</td>
+<td>MPEG</td>
+<td>是</td>
+<td>MPEG-1, MPEG-2, MPEG-4, H.264</td>
+<td>MPEG-1 Layers I, II, III, AAC</td>
+</tr>
+<tr>
+<td>FLV</td>
+<td>Adobe Inc.</td>
+<td>是</td>
+<td>Sorenson, VP6, H.264</td>
+<td>MP3, ADPCM, Linear PCM, AAC 等</td>
+</tr>
+<tr>
+<td>MKV</td>
+<td>CoreCodec Inc.</td>
+<td>是</td>
+<td>几乎所有格式</td>
+<td>几乎所有格式</td>
+</tr>
+<tr>
+<td>RMVB</td>
+<td>Real Network Inc.</td>
+<td>是</td>
+<td>RealVideo 8, 9, 10</td>
+<td>AAC, Cook Codec, RealAudio Lossless</td>
+</tr>
+</tbody></table>
+<h1 id="视频编码格式"><a href="#视频编码格式" class="headerlink" title="视频编码格式"></a>视频编码格式</h1><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>推出机构</th>
+<th>推出时间</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>HEVC(h.265)</td>
+<td>MPEG&#x2F;ITU-T</td>
+<td>2013</td>
+</tr>
+<tr>
+<td>H.264</td>
+<td>MPEG&#x2F;ITU-T</td>
+<td>2003</td>
+</tr>
+<tr>
+<td>MPEG4</td>
+<td>MPEG</td>
+<td>2001</td>
+</tr>
+<tr>
+<td>MPEG2</td>
+<td>MPEG</td>
+<td>1994</td>
+</tr>
+<tr>
+<td>VP9</td>
+<td>Google</td>
+<td>2013</td>
+</tr>
+<tr>
+<td>VP8</td>
+<td>Google</td>
+<td>2008</td>
+</tr>
+<tr>
+<td>VC-1</td>
+<td>Microsoft Inc.</td>
+<td>2006</td>
+</tr>
+</tbody></table>
+<h1 id="音频编码格式"><a href="#音频编码格式" class="headerlink" title="音频编码格式"></a>音频编码格式</h1><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>推出机构</th>
+<th>推出时间</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>AAC</td>
+<td>MPEG</td>
+<td>1997</td>
+</tr>
+<tr>
+<td>AC-3</td>
+<td>Dolby Inc.</td>
+<td>1992</td>
+</tr>
+<tr>
+<td>MP3</td>
+<td>MPEG</td>
+<td>1993</td>
+</tr>
+<tr>
+<td>WMA</td>
+<td>Microsoft Inc.</td>
+<td>1999</td>
+</tr>
+</tbody></table>
+<br />
+目前，直播服务普通采用RTMP作为流媒体协议，FLV作为封装格式，H.264作为视频编码格式，AAC作为音频编码格式化。点播服务普通采用HTTP作为流媒体协议，H.264作为视频编码格式，AAC作为音频编码格式，而封装格式有多种，如MP4，FLV，F4V等。
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://jiangxueqiao.com/post/2567544627.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -275,7 +548,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-11-17 13:07:24" itemprop="dateModified" datetime="2025-11-17T13:07:24+08:00">2025-11-17</time>
+      <time title="修改时间：2025-12-05 14:36:57" itemprop="dateModified" datetime="2025-12-05T14:36:57+08:00">2025-12-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -283,7 +556,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Windows%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E4%B8%8E%E8%B0%83%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">Windows软件开发与调试</span></a>
+          <a href="/categories/%E2%91%A4Windows%E5%BC%80%E5%8F%91%E4%B8%8E%E8%B0%83%E8%AF%95%E7%A7%98%E7%B1%8D/" itemprop="url" rel="index"><span itemprop="name">⑤Windows开发与调试秘籍</span></a>
         </span>
     </span>
 
@@ -371,7 +644,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-11-17 11:02:36" itemprop="dateModified" datetime="2025-11-17T11:02:36+08:00">2025-11-17</time>
+      <time title="修改时间：2025-12-05 14:34:54" itemprop="dateModified" datetime="2025-12-05T14:34:54+08:00">2025-12-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -379,7 +652,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E9%9F%B3%E8%A7%86%E9%A2%91%E5%8F%8A%E6%B5%81%E5%AA%92%E4%BD%93/" itemprop="url" rel="index"><span itemprop="name">音视频及流媒体</span></a>
+          <a href="/categories/%E2%91%A5%E9%9F%B3%E8%A7%86%E9%A2%91%E5%8F%8A%E6%B5%81%E5%AA%92%E4%BD%93%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">⑥音视频及流媒体技术</span></a>
         </span>
     </span>
 
@@ -466,7 +739,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-11-17 13:07:24" itemprop="dateModified" datetime="2025-11-17T13:07:24+08:00">2025-11-17</time>
+      <time title="修改时间：2025-12-05 14:36:57" itemprop="dateModified" datetime="2025-12-05T14:36:57+08:00">2025-12-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -474,7 +747,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Windows%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E4%B8%8E%E8%B0%83%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">Windows软件开发与调试</span></a>
+          <a href="/categories/%E2%91%A4Windows%E5%BC%80%E5%8F%91%E4%B8%8E%E8%B0%83%E8%AF%95%E7%A7%98%E7%B1%8D/" itemprop="url" rel="index"><span itemprop="name">⑤Windows开发与调试秘籍</span></a>
         </span>
     </span>
 
@@ -558,7 +831,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-11-17 13:07:24" itemprop="dateModified" datetime="2025-11-17T13:07:24+08:00">2025-11-17</time>
+      <time title="修改时间：2025-12-05 14:34:54" itemprop="dateModified" datetime="2025-12-05T14:34:54+08:00">2025-12-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -566,7 +839,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E9%9F%B3%E8%A7%86%E9%A2%91%E5%8F%8A%E6%B5%81%E5%AA%92%E4%BD%93/" itemprop="url" rel="index"><span itemprop="name">音视频及流媒体</span></a>
+          <a href="/categories/%E2%91%A5%E9%9F%B3%E8%A7%86%E9%A2%91%E5%8F%8A%E6%B5%81%E5%AA%92%E4%BD%93%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">⑥音视频及流媒体技术</span></a>
         </span>
     </span>
 
@@ -652,7 +925,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-11-17 13:07:24" itemprop="dateModified" datetime="2025-11-17T13:07:24+08:00">2025-11-17</time>
+      <time title="修改时间：2025-12-05 14:36:57" itemprop="dateModified" datetime="2025-12-05T14:36:57+08:00">2025-12-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -660,7 +933,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Windows%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E4%B8%8E%E8%B0%83%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">Windows软件开发与调试</span></a>
+          <a href="/categories/%E2%91%A4Windows%E5%BC%80%E5%8F%91%E4%B8%8E%E8%B0%83%E8%AF%95%E7%A7%98%E7%B1%8D/" itemprop="url" rel="index"><span itemprop="name">⑤Windows开发与调试秘籍</span></a>
         </span>
     </span>
 
@@ -746,7 +1019,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-11-17 13:07:24" itemprop="dateModified" datetime="2025-11-17T13:07:24+08:00">2025-11-17</time>
+      <time title="修改时间：2025-12-05 14:34:54" itemprop="dateModified" datetime="2025-12-05T14:34:54+08:00">2025-12-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -754,7 +1027,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E9%9F%B3%E8%A7%86%E9%A2%91%E5%8F%8A%E6%B5%81%E5%AA%92%E4%BD%93/" itemprop="url" rel="index"><span itemprop="name">音视频及流媒体</span></a>
+          <a href="/categories/%E2%91%A5%E9%9F%B3%E8%A7%86%E9%A2%91%E5%8F%8A%E6%B5%81%E5%AA%92%E4%BD%93%E6%8A%80%E6%9C%AF/" itemprop="url" rel="index"><span itemprop="name">⑥音视频及流媒体技术</span></a>
         </span>
     </span>
 
@@ -904,7 +1177,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-11-17 13:07:24" itemprop="dateModified" datetime="2025-11-17T13:07:24+08:00">2025-11-17</time>
+      <time title="修改时间：2025-12-05 14:36:57" itemprop="dateModified" datetime="2025-12-05T14:36:57+08:00">2025-12-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -912,7 +1185,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Windows%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E4%B8%8E%E8%B0%83%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">Windows软件开发与调试</span></a>
+          <a href="/categories/%E2%91%A4Windows%E5%BC%80%E5%8F%91%E4%B8%8E%E8%B0%83%E8%AF%95%E7%A7%98%E7%B1%8D/" itemprop="url" rel="index"><span itemprop="name">⑤Windows开发与调试秘籍</span></a>
         </span>
     </span>
 
@@ -999,7 +1272,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-11-17 13:07:24" itemprop="dateModified" datetime="2025-11-17T13:07:24+08:00">2025-11-17</time>
+      <time title="修改时间：2025-12-05 14:36:57" itemprop="dateModified" datetime="2025-12-05T14:36:57+08:00">2025-12-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1007,7 +1280,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Windows%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E4%B8%8E%E8%B0%83%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">Windows软件开发与调试</span></a>
+          <a href="/categories/%E2%91%A4Windows%E5%BC%80%E5%8F%91%E4%B8%8E%E8%B0%83%E8%AF%95%E7%A7%98%E7%B1%8D/" itemprop="url" rel="index"><span itemprop="name">⑤Windows开发与调试秘籍</span></a>
         </span>
     </span>
 
@@ -1093,7 +1366,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-11-17 13:07:24" itemprop="dateModified" datetime="2025-11-17T13:07:24+08:00">2025-11-17</time>
+      <time title="修改时间：2025-12-05 14:36:57" itemprop="dateModified" datetime="2025-12-05T14:36:57+08:00">2025-12-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1101,7 +1374,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Windows%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E4%B8%8E%E8%B0%83%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">Windows软件开发与调试</span></a>
+          <a href="/categories/%E2%91%A4Windows%E5%BC%80%E5%8F%91%E4%B8%8E%E8%B0%83%E8%AF%95%E7%A7%98%E7%B1%8D/" itemprop="url" rel="index"><span itemprop="name">⑤Windows开发与调试秘籍</span></a>
         </span>
     </span>
 
@@ -1121,100 +1394,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/post/3938269003.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jiangxueqiao.com/post/595856315.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="jiangxueqiao.com">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="独钓寒江雪">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 独钓寒江雪">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/post/595856315.html" class="post-title-link" itemprop="url">Windows内存体系(2)--虚拟内存</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-04-21 19:40:00" itemprop="dateCreated datePublished" datetime="2018-04-21T19:40:00+08:00">2018-04-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-11-17 13:07:24" itemprop="dateModified" datetime="2025-11-17T13:07:24+08:00">2025-11-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Windows%E8%BD%AF%E4%BB%B6%E5%BC%80%E5%8F%91%E4%B8%8E%E8%B0%83%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">Windows软件开发与调试</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="页交换文件"><a href="#页交换文件" class="headerlink" title="页交换文件"></a>页交换文件</h2><p><code>虚拟地址空间</code>只是操作系统为进程“虚拟”出来的一块地址区域，并不代表任何实际的空间。而<code>“页交换文件”</code>却对应了实际的空间，这个空间一般是磁盘上名为<code>“pagefile.sys”</code>的文件。</p>
-<p><code>“页交换文件”</code>的大小和位置可以在系统设置（<code>系统属性 -&gt; 高级 -&gt; 性能 -&gt; 设置 -&gt; 高级</code> ）中进行设置：<br><img data-src="/images/blog/windows-nctx-xnnc-1.jpg"></p>
-<p>从微软的官方文档来看，<code>“虚拟内存”</code>等于<code>“物理内存”+“分页文件”</code>总和。可以把<code>“虚拟内存”</code>理解为 Windows 的一种内存管理机制。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/post/595856315.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>

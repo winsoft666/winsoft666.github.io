@@ -12,7 +12,7 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
+
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
@@ -179,18 +179,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">161</span>
+          <span class="site-state-item-count">162</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">20</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -239,6 +239,96 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jiangxueqiao.com/post/1822204079.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jiangxueqiao.com">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="独钓寒江雪">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 独钓寒江雪">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/post/1822204079.html" class="post-title-link" itemprop="url">CentOS7更新国内阿里源</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-06-28 13:16:41" itemprop="dateCreated datePublished" datetime="2023-06-28T13:16:41+08:00">2023-06-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-12-05 14:36:11" itemprop="dateModified" datetime="2025-12-05T14:36:11+08:00">2025-12-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E2%91%A7Linux%E8%BF%90%E7%BB%B4%E4%B8%8E%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">⑧Linux运维与开发</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>依次执行如下命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y wget</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 备份并下载阿里云的base和epel源</span></span><br><span class="line"><span class="built_in">mv</span> -f /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup</span><br><span class="line">wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo</span><br><span class="line"><span class="built_in">mv</span> /etc/yum.repos.d/epel.repo /etc/yum.repos.d/epel.repo.backup</span><br><span class="line">wget -O /etc/yum.repos.d/epel.repo http://mirrors.aliyun.com/repo/epel-7.repo</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum clean all</span><br><span class="line">yum makecache</span><br><span class="line">yum -y update</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://jiangxueqiao.com/post/2291877732.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -275,7 +365,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-11-17 13:07:24" itemprop="dateModified" datetime="2025-11-17T13:07:24+08:00">2025-11-17</time>
+      <time title="修改时间：2025-12-05 14:32:51" itemprop="dateModified" datetime="2025-12-05T14:32:51+08:00">2025-12-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -283,7 +373,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%BC%96%E8%AF%91%E4%B8%8E%E6%9E%84%E5%BB%BA/" itemprop="url" rel="index"><span itemprop="name">编译与构建</span></a>
+          <a href="/categories/%E2%91%A1%E8%B7%A8%E5%B9%B3%E5%8F%B0%E7%BC%96%E8%AF%91%E4%B8%8E%E9%83%A8%E7%BD%B2/" itemprop="url" rel="index"><span itemprop="name">②跨平台编译与部署</span></a>
         </span>
     </span>
 
@@ -368,7 +458,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-11-17 11:48:57" itemprop="dateModified" datetime="2025-11-17T11:48:57+08:00">2025-11-17</time>
+      <time title="修改时间：2025-12-05 14:34:11" itemprop="dateModified" datetime="2025-12-05T14:34:11+08:00">2025-12-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -376,7 +466,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Web%E4%B8%8EElectron/" itemprop="url" rel="index"><span itemprop="name">Web与Electron</span></a>
+          <a href="/categories/%E2%91%A6%E7%8E%B0%E4%BB%A3Web%E4%B8%8EElectron%E6%A1%8C%E9%9D%A2%E5%BA%94%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">⑦现代Web与Electron桌面应用</span></a>
         </span>
     </span>
 
@@ -464,7 +554,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-11-17 13:07:24" itemprop="dateModified" datetime="2025-11-17T13:07:24+08:00">2025-11-17</time>
+      <time title="修改时间：2025-12-05 14:14:54" itemprop="dateModified" datetime="2025-12-05T14:14:54+08:00">2025-12-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -472,7 +562,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">编程基础</span></a>
+          <a href="/categories/%E2%91%A0%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">①编程基础</span></a>
         </span>
     </span>
 
@@ -556,7 +646,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-11-17 11:45:17" itemprop="dateModified" datetime="2025-11-17T11:45:17+08:00">2025-11-17</time>
+      <time title="修改时间：2025-12-05 14:36:11" itemprop="dateModified" datetime="2025-12-05T14:36:11+08:00">2025-12-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -564,7 +654,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BC%96%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">Linux服务器编程</span></a>
+          <a href="/categories/%E2%91%A7Linux%E8%BF%90%E7%BB%B4%E4%B8%8E%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">⑧Linux运维与开发</span></a>
         </span>
     </span>
 
@@ -649,7 +739,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-11-17 13:07:24" itemprop="dateModified" datetime="2025-11-17T13:07:24+08:00">2025-11-17</time>
+      <time title="修改时间：2025-12-05 14:14:54" itemprop="dateModified" datetime="2025-12-05T14:14:54+08:00">2025-12-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -657,7 +747,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">编程基础</span></a>
+          <a href="/categories/%E2%91%A0%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">①编程基础</span></a>
         </span>
     </span>
 
@@ -744,7 +834,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-11-17 13:54:56" itemprop="dateModified" datetime="2025-11-17T13:54:56+08:00">2025-11-17</time>
+      <time title="修改时间：2025-12-05 14:14:54" itemprop="dateModified" datetime="2025-12-05T14:14:54+08:00">2025-12-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -752,7 +842,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">编程基础</span></a>
+          <a href="/categories/%E2%91%A0%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">①编程基础</span></a>
         </span>
     </span>
 
@@ -836,7 +926,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-11-17 11:48:15" itemprop="dateModified" datetime="2025-11-17T11:48:15+08:00">2025-11-17</time>
+      <time title="修改时间：2025-12-05 14:34:11" itemprop="dateModified" datetime="2025-12-05T14:34:11+08:00">2025-12-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -844,7 +934,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Web%E4%B8%8EElectron/" itemprop="url" rel="index"><span itemprop="name">Web与Electron</span></a>
+          <a href="/categories/%E2%91%A6%E7%8E%B0%E4%BB%A3Web%E4%B8%8EElectron%E6%A1%8C%E9%9D%A2%E5%BA%94%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">⑦现代Web与Electron桌面应用</span></a>
         </span>
     </span>
 
@@ -928,7 +1018,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-11-17 11:48:21" itemprop="dateModified" datetime="2025-11-17T11:48:21+08:00">2025-11-17</time>
+      <time title="修改时间：2025-12-05 14:34:11" itemprop="dateModified" datetime="2025-12-05T14:34:11+08:00">2025-12-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -936,7 +1026,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Web%E4%B8%8EElectron/" itemprop="url" rel="index"><span itemprop="name">Web与Electron</span></a>
+          <a href="/categories/%E2%91%A6%E7%8E%B0%E4%BB%A3Web%E4%B8%8EElectron%E6%A1%8C%E9%9D%A2%E5%BA%94%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">⑦现代Web与Electron桌面应用</span></a>
         </span>
     </span>
 
@@ -1020,7 +1110,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-11-17 15:37:20" itemprop="dateModified" datetime="2025-11-17T15:37:20+08:00">2025-11-17</time>
+      <time title="修改时间：2025-12-05 14:34:11" itemprop="dateModified" datetime="2025-12-05T14:34:11+08:00">2025-12-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1028,7 +1118,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Web%E4%B8%8EElectron/" itemprop="url" rel="index"><span itemprop="name">Web与Electron</span></a>
+          <a href="/categories/%E2%91%A6%E7%8E%B0%E4%BB%A3Web%E4%B8%8EElectron%E6%A1%8C%E9%9D%A2%E5%BA%94%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">⑦现代Web与Electron桌面应用</span></a>
         </span>
     </span>
 
@@ -1046,99 +1136,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/post/51642520.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jiangxueqiao.com/post/749849405.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="jiangxueqiao.com">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="独钓寒江雪">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 独钓寒江雪">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/post/749849405.html" class="post-title-link" itemprop="url">QSS基本使用方法</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-10-22 19:42:38" itemprop="dateCreated datePublished" datetime="2022-10-22T19:42:38+08:00">2022-10-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-11-17 13:53:55" itemprop="dateModified" datetime="2025-11-17T13:53:55+08:00">2025-11-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Qt/" itemprop="url" rel="index"><span itemprop="name">Qt</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Qt QSS 选择器和 CSS2、CSS3 的选择器类似，建议先学习或者复习 <a target="_blank" rel="noopener" href="https://www.w3school.com.cn/cssref/css_selectors.asp">CSS 选择器的语法</a>。</p>
-<p>QSS 虽然源自 CSS ，但也有稍许不同，而且支持的语法也没 CSS 那么多。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/post/749849405.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
