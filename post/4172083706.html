@@ -27,7 +27,7 @@
 <meta property="og:description" content="静默安装&#x2F;卸载是一种安装&#x2F;卸载形式，用户打开安装包后不显示任何安装界面，直接开始安装，支持使用命令行参数指定安装路径等。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-08-04T14:07:51.000Z">
-<meta property="article:modified_time" content="2025-12-05T06:36:57.641Z">
+<meta property="article:modified_time" content="2025-12-09T03:07:33.413Z">
 <meta property="article:author" content="jiangxueqiao.com">
 <meta property="article:tag" content="NSIS">
 <meta name="twitter:card" content="summary">
@@ -182,7 +182,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-count">163</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -279,7 +279,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-12-05 14:36:57" itemprop="dateModified" datetime="2025-12-05T14:36:57+08:00">2025-12-05</time>
+      <time title="修改时间：2025-12-09 11:07:33" itemprop="dateModified" datetime="2025-12-09T11:07:33+08:00">2025-12-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -311,7 +311,7 @@
 <h1 id="当前是否静默运行"><a href="#当前是否静默运行" class="headerlink" title="当前是否静默运行"></a>当前是否静默运行</h1><p>在脚本中判断安装、卸载程序是否为静默运行，可以使用 <code>IfSilent</code>：</p>
 <figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装操作开始前.</span></span><br><span class="line"><span class="keyword">Function</span> <span class="title function_">.onInit</span></span><br><span class="line">    <span class="keyword">IfSilent</span> +<span class="number">2</span> +<span class="number">1</span></span><br><span class="line">    <span class="keyword">MessageBox</span> <span class="params">MB_ICONQUESTION</span>|<span class="params">MB_OK</span> <span class="string">&quot;欢迎使用&quot;</span></span><br><span class="line"><span class="keyword">FunctionEnd</span></span><br></pre></td></tr></table></figure>
 
-<h1 id="默认应答"><a href="#默认应答" class="headerlink" title="默认应答"></a>默认应答</h1><p>对于有些命令需要为静默安装指定默认的回答，如<code>MessageBox</code>需要加入&#x2F;SD 开关来指定默认回答。</p>
+<h1 id="默认应答"><a href="#默认应答" class="headerlink" title="默认应答"></a>默认应答</h1><p>对于有些命令需要为静默安装指定默认的回答，如<code>MessageBox</code>需要加入&#x2F;SD 开关来指定默认回答。<br><span style="color:#FFFFFF">&lt;原文出自: jiangxueqiao.com，请尊重原创&gt;</span></p>
 <figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 卸载操作开始前.</span></span><br><span class="line"><span class="keyword">Function</span> <span class="title function_">un</span>.onInit</span><br><span class="line">    <span class="keyword">MessageBox</span> <span class="params">MB_ICONQUESTION</span>|<span class="params">MB_YESNO</span> <span class="string">&quot;确定要卸载吗?&quot;</span> /SD <span class="params">IDYES</span> <span class="params">IDYES</span> +<span class="number">2</span> <span class="params">IDNO</span> +<span class="number">1</span></span><br><span class="line">    <span class="keyword">Abort</span></span><br><span class="line"><span class="keyword">FunctionEnd</span></span><br></pre></td></tr></table></figure>
 
 <h1 id="启动参数解析"><a href="#启动参数解析" class="headerlink" title="启动参数解析"></a>启动参数解析</h1><p>如果需要为静默安装指定其他的参数，如用户名等，可以使用程序启动参数指定，并在<code>.onInit</code> 函数里进行解析：</p>

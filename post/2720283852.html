@@ -34,7 +34,7 @@
 <meta property="og:image" content="https://jiangxueqiao.com/images/blog/mysql-zfbm-1.jpg">
 <meta property="og:image" content="https://jiangxueqiao.com/images/blog/mysql-zfbm-2.jpg">
 <meta property="article:published_time" content="2017-11-27T12:46:23.000Z">
-<meta property="article:modified_time" content="2025-12-05T06:14:57.878Z">
+<meta property="article:modified_time" content="2025-12-09T03:01:05.326Z">
 <meta property="article:author" content="jiangxueqiao.com">
 <meta property="article:tag" content="字符编码">
 <meta name="twitter:card" content="summary">
@@ -190,7 +190,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-count">163</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -287,7 +287,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-12-05 14:14:57" itemprop="dateModified" datetime="2025-12-05T14:14:57+08:00">2025-12-05</time>
+      <time title="修改时间：2025-12-09 11:01:05" itemprop="dateModified" datetime="2025-12-09T11:01:05+08:00">2025-12-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -784,8 +784,7 @@
 </tr>
 </tbody></table>
 <p>因为其对应关系非常简单，不需要特殊的编码规则，所以严格来讲 ASCII 不能算字符编码，因为它没有规定编码规则。我们只是习惯性的将 ASCII 字符集称之为 ASCII 码、ASCII 编码。</p>
-<h2 id="ASCII-的扩展"><a href="#ASCII-的扩展" class="headerlink" title="ASCII 的扩展"></a>ASCII 的扩展</h2><h3 id="扩展最高位"><a href="#扩展最高位" class="headerlink" title="扩展最高位"></a>扩展最高位</h3><p>ASCII 字符集是美国人发明的，其中的字符完全是为其自己量身定制的。随着计算机技术普及到欧洲（如法国、德国）各国，欧洲很多国家使用的字符除了 ASCII 表中的 128 个字符之外，此时欧洲人民发现 ASCII 字符集不能完全表达他们所要表达的内容。</p>
-<p>怎么办了？他们发现 ASCII 只使用了一个字节（8 位）之中的低 7 位，于是欧洲各国开始各显神通，打起了最高位（第 0 位）的主意，将最高位利用了起来，这样又多了 128 个字符，从而满足了欧洲人民的需要。</p>
+<h2 id="ASCII-的扩展"><a href="#ASCII-的扩展" class="headerlink" title="ASCII 的扩展"></a>ASCII 的扩展</h2><h3 id="扩展最高位"><a href="#扩展最高位" class="headerlink" title="扩展最高位"></a>扩展最高位</h3><p>ASCII 字符集是美国人发明的，其中的字符完全是为其自己量身定制的。随着计算机技术普及到欧洲（如法国、德国）各国，欧洲很多国家使用的字符除了 ASCII 表中的 128 个字符之外，此时欧洲人民发现 ASCII 字符集不能完全表达他们所要表达的内容。<br><span style="color:#FFFFFF">&lt;原文出自: jiangxueqiao.com，请尊重原创&gt;</span><br>怎么办了？他们发现 ASCII 只使用了一个字节（8 位）之中的低 7 位，于是欧洲各国开始各显神通，打起了最高位（第 0 位）的主意，将最高位利用了起来，这样又多了 128 个字符，从而满足了欧洲人民的需要。</p>
 <p>但因为每个国家的需求不一样，各国都设计了不同的方案。为了结束这种混乱的局面，国际标准化组织(ISO)及国际电工委员会(IEC)联合制定了<strong>一系列 8 位字符集</strong>的标准，统称为 ISO 8859（全称 ISO&#x2F;IEC 8859）。注意，这是一系列字符集的统称，如 ISO&#x2F;IEC 8859-1（也就是常听到的 Latin-1）支持西欧语言，ISO&#x2F;IEC 8859-4（Latin-4）支持北欧语言等。</p>
 <p>完整列表如下（摘自百度百科）：<br>ISO&#x2F;IEC 8859-1 (Latin-1) - 西欧语言<br>ISO&#x2F;IEC 8859-2 (Latin-2) - 中欧语言<br>ISO&#x2F;IEC 8859-3 (Latin-3) - 南欧语言，世界语也可用此字符集显示。<br>ISO&#x2F;IEC 8859-4 (Latin-4) - 北欧语言<br>ISO&#x2F;IEC 8859-5 (Cyrillic) - 斯拉夫语言<br>ISO&#x2F;IEC 8859-6 (Arabic) - 阿拉伯语<br>ISO&#x2F;IEC 8859-7 (Greek) - 希腊语<br>ISO&#x2F;IEC 8859-8 (Hebrew) - 希伯来语(视觉顺序)<br>ISO 8859-8-I - 希伯来语(逻辑顺序)<br>ISO&#x2F;IEC 8859-9 (Latin-5 或 Turkish) - 它把 Latin-1 的冰岛语字母换走，加入土耳其语字母。<br>ISO&#x2F;IEC 8859-10 (Latin-6 或 Nordic) - 北日耳曼语支，用来代替 Latin-4。<br>ISO&#x2F;IEC 8859-11 (Thai) - 泰语，从泰国的 TIS620 标准字集演化而来。<br>ISO&#x2F;IEC 8859-13 (Latin-7 或 Baltic Rim) - 波罗的语族<br>ISO&#x2F;IEC 8859-14 (Latin-8 或 Celtic) - 凯尔特语族<br>ISO&#x2F;IEC 8859-15 (Latin-9) - 西欧语言，加入 Latin-1 欠缺的芬兰语字母和大写法语重音字母，以及欧元符号。<br>ISO&#x2F;IEC 8859-16 (Latin-10) - 东南欧语言。主要供罗马尼亚语使用，并加入欧元符号。</p>
 <blockquote>
@@ -831,8 +830,7 @@
 </tbody></table>
 <p>每一次迭代，支持的字符数量都会增加，而且每一次迭代都会保留之前版本支持的编码，所以做到了向上兼容。</p>
 <h3 id="全角与半角"><a href="#全角与半角" class="headerlink" title="全角与半角"></a>全角与半角</h3><p>因为汉字在显示器上的显示宽度要比英文字符的宽度要宽一倍，在一起排版显示时不太美观。所以 GB 编码不仅仅加入了汉字字符，而且包括了 ASCII 字符集中本来就有的数字、标点符号、字母等字符。这些被编入 GB 编码中的数字、英文标点符号、字母在显示器上的显示宽度比 ASCII 字符集中的宽度宽一倍，所以前者称为全角字符，后者称为半角字符。</p>
-<h1 id="ANSI"><a href="#ANSI" class="headerlink" title="ANSI"></a>ANSI</h1><h2 id="ANSI-与代码页"><a href="#ANSI-与代码页" class="headerlink" title="ANSI 与代码页"></a>ANSI 与代码页</h2><p>前面说到了世界各国针对 ASCII 的扩展方案（如欧洲的 ISO&#x2F;IEC 8859，中国的 GB 系列等），这些 ASCII 扩展编码方案的特点是：他们都兼容 ASCII 编码，但他们彼此之间是不兼容的。微软将这些编码方案统称为 ANSI 编码。故 ANSI 并不是特指某一种编码方案，只有知道了在哪个国家，哪个语言环境下，才知道它具体表示哪个编码方案。</p>
-<p>在 Windows 操作系统上，默认使用 ANSI 来保存文件（但从 Windows 10 开始默认使用 UTF8 编码）。操作系统是如何知道 ANSI 到底应该表示哪种编码了，是 GBK 还是 ASCII，抑或还是 EUC-KR 了？ Windows 通过一个叫”Code Page”（翻译为中文叫代码页）的东西来判断系统的默认编码。</p>
+<h1 id="ANSI"><a href="#ANSI" class="headerlink" title="ANSI"></a>ANSI</h1><h2 id="ANSI-与代码页"><a href="#ANSI-与代码页" class="headerlink" title="ANSI 与代码页"></a>ANSI 与代码页</h2><p>前面说到了世界各国针对 ASCII 的扩展方案（如欧洲的 ISO&#x2F;IEC 8859，中国的 GB 系列等），这些 ASCII 扩展编码方案的特点是：他们都兼容 ASCII 编码，但他们彼此之间是不兼容的。微软将这些编码方案统称为 ANSI 编码。故 ANSI 并不是特指某一种编码方案，只有知道了在哪个国家，哪个语言环境下，才知道它具体表示哪个编码方案。<br><span style="color:#FFFFFF">&lt;原文出自: jiangxueqiao.com，请尊重原创&gt;</span><br>在 Windows 操作系统上，默认使用 ANSI 来保存文件（但从 Windows 10 开始默认使用 UTF8 编码）。操作系统是如何知道 ANSI 到底应该表示哪种编码了，是 GBK 还是 ASCII，抑或还是 EUC-KR 了？ Windows 通过一个叫”Code Page”（翻译为中文叫代码页）的东西来判断系统的默认编码。</p>
 <p>简体中文操作系统的代码页默认是 936，即 ANSI 使用的是 GBK 编码。</p>
 <blockquote>
 <p>GB18030 编码对应的 Windows 代码页为 CP54936。</p>
@@ -848,8 +846,7 @@
 <h1 id="Unicode"><a href="#Unicode" class="headerlink" title="Unicode"></a>Unicode</h1><h2 id="Unicode-产生背景"><a href="#Unicode-产生背景" class="headerlink" title="Unicode 产生背景"></a>Unicode 产生背景</h2><p>各个国家使用不同的编码规则，虽然他们都是兼容 ASCII 的，但它们相互却是不兼容的。</p>
 <p>试想法国人 Jack 写了一封名为”love_you.txt”的信，传给了他的德国朋友 Rose，Rose 想要在 windows 系统上打开这个文件，她需要知道德国使用的字符编码是 Latin-1，然后还要确保她的计算机上安装了该编码，才能顺利的打开这个文件。</p>
 <p>如果上面这些还能忍受，那么随着网络的发展，你从互联网上获取的文件，你很有可能不知道它来自哪个国家，使用的哪种编码。这也就是 Email 刚诞生时常常出现乱码的原因，发信人和收信人使用的编码可能是不一样的。</p>
-<p>于是<code>The Unicode Standard</code>（统一码标准）横空出世，它由 The Unicode Consortium 于 1991 年发布，我们习惯称它为 Unicode 字符集。</p>
-<p>Unicode 字符集和 ASCII 字符集一样，也只是一个字符集合，标记着字符和数字之间的映射关系，它不包含任何编码规则和方案。和 ASCII 不一样的是，Unicode 字符集支持的字符数量是没有限制的（具体可以参考 Unicode 规范）。</p>
+<p>于是<code>The Unicode Standard</code>（统一码标准）横空出世，它由 The Unicode Consortium 于 1991 年发布，我们习惯称它为 Unicode 字符集。<br><span style="color:#FFFFFF">&lt;原文出自: jiangxueqiao.com，请尊重原创&gt;</span><br>Unicode 字符集和 ASCII 字符集一样，也只是一个字符集合，标记着字符和数字之间的映射关系，它不包含任何编码规则和方案。和 ASCII 不一样的是，Unicode 字符集支持的字符数量是没有限制的（具体可以参考 Unicode 规范）。</p>
 <blockquote>
 <p>我们通常认为的 Unicode 字符固定占用 2 个字节的观点是错误的。如“𤭢”（念 suì）的 Unicode 码为<code>D852 DF62</code>。</p>
 </blockquote>

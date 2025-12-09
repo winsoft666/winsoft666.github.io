@@ -27,7 +27,7 @@
 <meta property="og:description" content="CMake 是一个开源、跨平台的构建系统生成器（Build-system Generator）。 本文是 Modern CMake 简明教程系列的中篇，上篇请移步 《Modern CMake 简明教程（上）》 本教程默认 CMake 最低版本为 3.16，即 cmake_minimum_required(VERSION 3.16)。 生成器表达式不知你是否思考过这样一个问题：我们在编译项目时，通常">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-10-11T09:34:36.000Z">
-<meta property="article:modified_time" content="2025-12-05T06:32:51.156Z">
+<meta property="article:modified_time" content="2025-12-09T03:04:42.460Z">
 <meta property="article:author" content="jiangxueqiao.com">
 <meta property="article:tag" content="CMake">
 <meta name="twitter:card" content="summary">
@@ -182,7 +182,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-count">163</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -279,7 +279,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-12-05 14:32:51" itemprop="dateModified" datetime="2025-12-05T14:32:51+08:00">2025-12-05</time>
+      <time title="修改时间：2025-12-09 11:04:42" itemprop="dateModified" datetime="2025-12-09T11:04:42+08:00">2025-12-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -317,8 +317,7 @@
 
 <h2 id=""><a href="#" class="headerlink" title="$&lt;condition:true_string&gt;"></a>$&lt;condition:true_string&gt;</h2><p>condition 只允许为 0 或 1，其他任何值都会报错。</p>
 <p>当 condition 为 1 时，表达式返回 true_string；</p>
-<p>当 condition 为 0 时，表达式返回空字符串。</p>
-<p>如：</p>
+<p>当 condition 为 0 时，表达式返回空字符串。<br><span style="color:#FFFFFF">&lt;原文出自: jiangxueqiao.com，请尊重原创&gt;</span><br>如：</p>
 <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(ENABLE_JSONCPP <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">target_include_directories</span>(</span><br><span class="line">    my_lib PUBLIC </span><br><span class="line">    $&lt;<span class="variable">$&#123;ENABLE_JSONCPP&#125;</span>:<span class="variable">$&#123;CMAKE_SOURCE_DIR&#125;</span>/jsoncpp/<span class="keyword">include</span>&gt;  </span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 
 <h2 id="-1"><a href="#-1" class="headerlink" title="$&lt;IF:condition,true_string,false_string&gt;"></a>$&lt;IF:condition,true_string,false_string&gt;</h2><p>condition 只允许为 0 或 1，其他任何值都会报错。</p>
@@ -329,8 +328,7 @@
 
 <h2 id="-2"><a href="#-2" class="headerlink" title="$&lt;BOOL:string&gt;"></a>$&lt;BOOL:string&gt;</h2><p>前面 2 种形式的 condition 都只允许为 0 或 1，这种限制未免有些呆板，如果 ENABLE_JSONCPP 的值不是 1 ，而是 ON 时，该怎么办呢？</p>
 <p>此时可以使用 <code>$&lt;BOOL:string&gt;</code> 将其转换成 0 或 1。</p>
-<p>何时转换成 0，何时转换成 1？可以参考前面的<a href="/post/3678619994.html" title="Modern CMake 简明教程（上）">《Modern CMake 简明教程（上）》</a> 的“条件判断”章节，在该章节中介绍的所有为假的情况都会转换成 0，其他情况则转换成 1。</p>
-<p>该表达式的作用注定了其单独使用意义不大，通常都是和其他表达式一起使用，如将上面示例中的 ENABLE_JSONCPP 设置为 ON：</p>
+<p>何时转换成 0，何时转换成 1？可以参考前面的<a href="/post/3678619994.html" title="Modern CMake 简明教程（上）">《Modern CMake 简明教程（上）》</a> 的“条件判断”章节，在该章节中介绍的所有为假的情况都会转换成 0，其他情况则转换成 1。<br><span style="color:#FFFFFF">&lt;原文出自: jiangxueqiao.com，请尊重原创&gt;</span><br>该表达式的作用注定了其单独使用意义不大，通常都是和其他表达式一起使用，如将上面示例中的 ENABLE_JSONCPP 设置为 ON：</p>
 <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(ENABLE_JSONCPP <span class="keyword">ON</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">target_include_directories</span>(</span><br><span class="line">    my_lib PUBLIC </span><br><span class="line">    $&lt;<span class="keyword">IF</span>:$&lt;BOOL:<span class="variable">$&#123;ENABLE_JSONCPP&#125;</span>&gt;,<span class="variable">$&#123;CMAKE_SOURCE_DIR&#125;</span>/jsoncpp/<span class="keyword">include</span>,<span class="variable">$&#123;CMAKE_SOURCE_DIR&#125;</span>/rapidjson/<span class="keyword">include</span>&gt;  </span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 
 <h2 id="逻辑运算"><a href="#逻辑运算" class="headerlink" title="逻辑运算"></a>逻辑运算</h2><p>运算符表达式也支持与、或、非三种逻辑运算，语法如下：</p>
@@ -415,7 +413,7 @@
 
 <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">install</span>(CODE <span class="string">&quot;message(\&quot;Sample install message.\&quot;)&quot;</span>)</span><br></pre></td></tr></table></figure>
 
-<h3 id="安装导出依赖项"><a href="#安装导出依赖项" class="headerlink" title="安装导出依赖项"></a>安装导出依赖项</h3><p>如果在安装 Target（见上面的5.2.1节） 时已经指定了 EXPORT 选项，则可以通过 <code>install(EXPORT ...)</code> 的形式来安装需要导出的依赖性，即生成 <code>xxxConfig.cmake</code> 文件，该文件名不是固定的，可以通过 FILE 选项来指定其他名称，但必须是 <code>.cmake</code> 类型的文件。</p>
+<h3 id="安装导出依赖项"><a href="#安装导出依赖项" class="headerlink" title="安装导出依赖项"></a>安装导出依赖项</h3><p>如果在安装 Target（见上面的5.2.1节） 时已经指定了 EXPORT 选项，则可以通过 <code>install(EXPORT ...)</code> 的形式来安装需要导出的依赖性，即生成 <code>xxxConfig.cmake</code> 文件，该文件名不是固定的，可以通过 FILE 选项来指定其他名称，但必须是 <code>.cmake</code> 类型的文件。<br><span style="color:#FFFFFF">&lt;原文出自: jiangxueqiao.com，请尊重原创&gt;</span></p>
 <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">install</span>(<span class="keyword">EXPORT</span> &lt;<span class="keyword">export</span>-name&gt; DESTINATION &lt;dir&gt;</span><br><span class="line">        [NAMESPACE &lt;namespace&gt;] [<span class="keyword">FILE</span> &lt;name&gt;.cmake]</span><br><span class="line">        [PERMISSIONS &lt;permission&gt;...]</span><br><span class="line">        [CONFIGURATIONS &lt;config&gt;...]</span><br><span class="line">        [CXX_MODULES_DIRECTORY &lt;directory&gt;]</span><br><span class="line">        [EXPORT_LINK_INTERFACE_LIBRARIES]</span><br><span class="line">        [COMPONENT &lt;component&gt;]</span><br><span class="line">        [EXCLUDE_FROM_ALL]</span><br><span class="line">        [EXPORT_PACKAGE_DEPENDENCIES])</span><br></pre></td></tr></table></figure>
 
 <p><code>&lt;export-name&gt;</code> 选项所指定的名称需要与在 <code>install(TARGET ... EXPORT ...)</code> 语句中指定名称一致。</p>

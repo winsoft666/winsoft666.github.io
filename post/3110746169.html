@@ -29,7 +29,7 @@
 <meta property="og:image" content="https://jiangxueqiao.com/images/blog/llkhdjsxx-1.jpg">
 <meta property="og:image" content="https://jiangxueqiao.com/images/blog/llkhdjsxx-2.gif">
 <meta property="article:published_time" content="2023-07-22T15:35:10.000Z">
-<meta property="article:modified_time" content="2025-12-05T06:36:57.634Z">
+<meta property="article:modified_time" content="2025-12-09T03:09:32.524Z">
 <meta property="article:author" content="jiangxueqiao.com">
 <meta property="article:tag" content="C++">
 <meta property="article:tag" content="Kernel">
@@ -187,7 +187,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-count">163</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -284,7 +284,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-12-05 14:36:57" itemprop="dateModified" datetime="2025-12-05T14:36:57+08:00">2025-12-05</time>
+      <time title="修改时间：2025-12-09 11:09:32" itemprop="dateModified" datetime="2025-12-09T11:09:32+08:00">2025-12-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -316,8 +316,7 @@
 <p>当然，WinForms 也能开发出绚丽、非标准化的界面效果，但需要花费较多的时间，对开发人员的技术要求也更高。</p>
 </blockquote>
 <p>基于 WinForms 开发的应用程序需要依赖.Net Framework 运行时，如果用户电脑上未安装.Net Framework 运行时，软件安装包需要自带运行时，并自动为用户安装，否则程序会无法运行。</p>
-<p>使用 WinForms 开发的应用程序体积本身很小，但为了适应不同的用户电脑环境，安装包需要检测用户电脑上的.Net Framework 运行时版本是否与软件所需版本匹配，如果不匹配则需要自动安装相应的.Net Framework 运行时。</p>
-<p>.Net Framework 很难做成便携版，通常需要使用微软提供的安装包进行安装，安装.Net Framework 运行时分为在线和离线安装两种方式：</p>
+<p>使用 WinForms 开发的应用程序体积本身很小，但为了适应不同的用户电脑环境，安装包需要检测用户电脑上的.Net Framework 运行时版本是否与软件所需版本匹配，如果不匹配则需要自动安装相应的.Net Framework 运行时。<br><span style="color:#FFFFFF">&lt;原文出自: jiangxueqiao.com，请尊重原创&gt;</span><br>.Net Framework 很难做成便携版，通常需要使用微软提供的安装包进行安装，安装.Net Framework 运行时分为在线和离线安装两种方式：</p>
 <ul>
 <li>离线安装方式。<br>将微软提供的.Net Framework 离线安装包（不同版本体积不同，如 4.8 版本的离线安装包约 115M 左右）打包进程序安装包，安装时进行释放和安装。这种方式会增加程序安装包的体积。</li>
 <li>在线安装方式。<br>将微软提供的.Net Framework 在线安装工具（体积很小，约 1.5M 左右）打包进程序安装包，安装时进行释放和在线安装，这种方式虽然可以减少安装包体积，但在线安装需要实时从微软服务器下载资源，受限于用户网络环境，很可能会安装失败。</li>
@@ -379,8 +378,7 @@
 <p>.Net Core 是微软开发的一个开源的、跨平台的（支持 Windows、MacOS、Linux 等系统）通用软件开发框架。在.Net Core 出现之前，开发人员只能基于.Net Framwork 开发 WinForms 应用程序，.Net Core 出现之后，开发人员多了一种选择。</p>
 <p>.Net Core 与.Net Framework 最大的不同在于.Net Core 是开源和跨平台的，基于.Net Core 开发的应用程序可以运行在不同的操作系统上，如 Windows、Linux、MacOS。</p>
 <p>.Net Core 还处于快速的更新迭代中，之前的老版本对 WinForms 及 WPF 的支持不太好（甚至不支持），建议采用最新版本的.Net Core 进行开发。</p>
-<p>使用.Net Core 开发的应用的体积本身非常小，但在打包分发时也需要携带.Net Core 运行时。不同于.Net Framework，.Net Core 运行时既支持安装包的方式，也支持便携版的方式。</p>
-<p>以.Net Core 6.0 版本为例，微软官方提供的 WindowsDesktop 的运行时大小为 50M，我们可以根据程序实际依赖情况，安装包只包含程序依赖的文件，从而缩减安装包体积（缩减后约 20M 左右）。</p>
+<p>使用.Net Core 开发的应用的体积本身非常小，但在打包分发时也需要携带.Net Core 运行时。不同于.Net Framework，.Net Core 运行时既支持安装包的方式，也支持便携版的方式。<br><span style="color:#FFFFFF">&lt;原文出自: jiangxueqiao.com，请尊重原创&gt;</span><br>以.Net Core 6.0 版本为例，微软官方提供的 WindowsDesktop 的运行时大小为 50M，我们可以根据程序实际依赖情况，安装包只包含程序依赖的文件，从而缩减安装包体积（缩减后约 20M 左右）。</p>
 <h2 id="WPF"><a href="#WPF" class="headerlink" title="WPF"></a>WPF</h2><p>WPF（Windows Presentation Foundation）也是微软推出的 UI 框架。与 WinForms 一样，可以使用 C#和 Visual Basic 语言进行开发，WPF也支持.Net Framework 和.Net Core 两种开发平台。</p>
 <p>使用 WPF 框架开发的应用程序界面更加炫酷，界面组件可随意定制化，适合用于对界面要求较高的应用。</p>
 <p>WPF 程序的性能稍逊与 WinForms 应用，不过这种性能差别在计算机硬件性能快速提升的今天已在逐渐的被淡化，因此在进行技术选型时基本可以忽略的 WPF 性能问题了。</p>
@@ -401,8 +399,7 @@
 </ul>
 <p>建议选择公司技术人员比较熟悉的DirectUI库，最好能熟悉源码，可以进行 Bug 修复和功能定制开发。</p>
 <p>DirectUI 界面库通常都是轻量级的，因此其开发的应用程序体积都会比较小。</p>
-<h2 id="Qt"><a href="#Qt" class="headerlink" title="Qt"></a>Qt</h2><p>Qt 是一个跨平台的 C++图像界面开发框架，不仅支持 Windows、MacOS、Linux 等 PC 操作系统，还支持嵌入式 QNX、VxWorks 及 Android、iOS 等操作系统。</p>
-<p>Qt 的应用非常广泛，是目前使用最广的 C++ 图像界面框架。Qt 应用程序的开发语言为 C++，Qt 比 MFC 上手更快，而且在控件定制、 UI 绘制上也比 MFC 方便。</p>
+<h2 id="Qt"><a href="#Qt" class="headerlink" title="Qt"></a>Qt</h2><p>Qt 是一个跨平台的 C++图像界面开发框架，不仅支持 Windows、MacOS、Linux 等 PC 操作系统，还支持嵌入式 QNX、VxWorks 及 Android、iOS 等操作系统。<br><span style="color:#FFFFFF">&lt;原文出自: jiangxueqiao.com，请尊重原创&gt;</span><br>Qt 的应用非常广泛，是目前使用最广的 C++ 图像界面框架。Qt 应用程序的开发语言为 C++，Qt 比 MFC 上手更快，而且在控件定制、 UI 绘制上也比 MFC 方便。</p>
 <p><img data-src="/images/blog/llkhdjsxx-2.gif"></p>
 <p>以 Qt 5.15.2 版本为例，Qt 应用程序打包后的体积最小到 6MB 左右，如果使用更老版本的 Qt，体积还可以更小。</p>
 <h3 id="1-5-1-Qt-版权问题"><a href="#1-5-1-Qt-版权问题" class="headerlink" title="1.5.1 Qt 版权问题"></a>1.5.1 Qt 版权问题</h3><p>Qt 分为开源版本和商业版本，开源版本可以免费使用，商业版本需要付费才能使用。</p>
@@ -428,8 +425,7 @@
 <blockquote>
 <p>亦可以使用我编译好的CEF：<a target="_blank" rel="noopener" href="https://github.com/winsoft666/cef_binary">https://github.com/winsoft666/cef_binary</a></p>
 </blockquote>
-<p>采用 CEF 内嵌 Web 页面的方式，虽然可以借助 Web 开发的优势，极大提升软件开发效率，Web 页面更新起来也比客户端的升级更加方便，但由于其本质还是客户端内嵌浏览器，因此软件内存占用会比较高，通常一个简单的程序可能会占用 100MB 左右内存。在性能方面，也远远不及上面介绍的其他原生开发方式。</p>
-<p>CEF 不同版本的体积差距较大，2623 版本压缩后大约 25MB，而 89.0.18 版本压缩后大约 60MB。不同版本对 Web 新特效的支持程度不同，在不在乎安装包体积的情况下可以选择最新版本，如果需要考虑安装包体积，则需要做出权衡。</p>
+<p>采用 CEF 内嵌 Web 页面的方式，虽然可以借助 Web 开发的优势，极大提升软件开发效率，Web 页面更新起来也比客户端的升级更加方便，但由于其本质还是客户端内嵌浏览器，因此软件内存占用会比较高，通常一个简单的程序可能会占用 100MB 左右内存。在性能方面，也远远不及上面介绍的其他原生开发方式。<br><span style="color:#FFFFFF">&lt;原文出自: jiangxueqiao.com，请尊重原创&gt;</span><br>CEF 不同版本的体积差距较大，2623 版本压缩后大约 25MB，而 89.0.18 版本压缩后大约 60MB。不同版本对 Web 新特效的支持程度不同，在不在乎安装包体积的情况下可以选择最新版本，如果需要考虑安装包体积，则需要做出权衡。</p>
 <p>采用该技术方案需要由 Web 开发者开发客户端内嵌页面，C++开发者开发客户端主体框架。由于 Web 页面无法直接访问系统资源，因此还需 Web 与 C++进行交互，并由 C++完成系统功能的开发。</p>
 <h2 id="Microsoft-WebView2"><a href="#Microsoft-WebView2" class="headerlink" title="Microsoft WebView2"></a>Microsoft WebView2</h2><p>微软基于 Chromium 开源项目开发了Edge浏览器，同时也提供了 WebView2 组件，基于该组件可以实现在客户端中嵌入Web页面，实现 JavaScript 和本地程序的相互调用。</p>
 <p>WebView2 组件支持 Windows7 及以上平台，但 Windows7 系统肯定是没有自带该组件的，需要单独下载安装。如果用户有更新过 Windows 10、11系统，很可能系统已集成组件，不需要额外下载安装。</p>

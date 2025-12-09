@@ -27,7 +27,7 @@
 <meta property="og:description" content="在使用 Electron 开发客户端时，如果现有 Node 模块所提供的功能无法满足需要，我们可以使用 C++ 开发自定义的 Node 模块，也称插件（addon）。 Node.js 插件的扩展名为 .node，是二进制文件，其本质上是通过动态链接库（.dll 或 .so）重命名而来。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-02-27T15:54:54.000Z">
-<meta property="article:modified_time" content="2025-12-05T06:34:11.688Z">
+<meta property="article:modified_time" content="2025-12-09T03:07:07.169Z">
 <meta property="article:author" content="jiangxueqiao.com">
 <meta property="article:tag" content="Electron">
 <meta name="twitter:card" content="summary">
@@ -182,7 +182,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-count">163</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -279,7 +279,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-12-05 14:34:11" itemprop="dateModified" datetime="2025-12-05T14:34:11+08:00">2025-12-05</time>
+      <time title="修改时间：2025-12-09 11:07:07" itemprop="dateModified" datetime="2025-12-09T11:07:07+08:00">2025-12-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -310,15 +310,13 @@
 <li>nan</li>
 <li>直接使用 v8、libuv 等库进行开发</li>
 </ul>
-<p>除非是为了使用 Node-API 未公开的接口，否则建议使用 Node-API 进行开发。</p>
-<p>因为 Node-API 是二进制（ABI）兼容的，它将底层 JavaScript 引擎与上层插件隔离开了，JavaScripty 引擎的修改不会影响我们开发的上层插件，我们基于某个版本编译的插件在不需要重新编译的情况下，就可以运行在其他版本的 Node.js 中。</p>
+<p>除非是为了使用 Node-API 未公开的接口，否则建议使用 Node-API 进行开发。<br><span style="color:#FFFFFF">&lt;原文出自: jiangxueqiao.com，请尊重原创&gt;</span><br>因为 Node-API 是二进制（ABI）兼容的，它将底层 JavaScript 引擎与上层插件隔离开了，JavaScripty 引擎的修改不会影响我们开发的上层插件，我们基于某个版本编译的插件在不需要重新编译的情况下，就可以运行在其他版本的 Node.js 中。</p>
 <h1 id="安装编译环境"><a href="#安装编译环境" class="headerlink" title="安装编译环境"></a>安装编译环境</h1><p>Node 插件使用 C++开发，因此在不同的系统上采用不同的编译环境。<br>在 Linux 环境通常使用 GCC 和 LLVM；</p>
 <p>Mac 环境通常使用 Xcode；</p>
 <p>Windows 环境通常使用 Visual Studio，如果不想安装完整的 Visual Studio，可以使用如下命令仅安装必要的工具链：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --global windows-build-tools</span><br></pre></td></tr></table></figure>
 
-<p>Node 插件通常使用 node-gyp 进行编译，node-gyp 基于 Google 的 gyp-next 构建系统，node-gyp 已经与 npm 捆绑在一起，但我们在使用 node-gyp 之前还需要先安装 Python。</p>
-<p>至此 Node 插件开发的环境已经搭建完成。</p>
+<p>Node 插件通常使用 node-gyp 进行编译，node-gyp 基于 Google 的 gyp-next 构建系统，node-gyp 已经与 npm 捆绑在一起，但我们在使用 node-gyp 之前还需要先安装 Python。<br><span style="color:#FFFFFF">&lt;原文出自: jiangxueqiao.com，请尊重原创&gt;</span><br>至此 Node 插件开发的环境已经搭建完成。</p>
 <h1 id="搭建工程"><a href="#搭建工程" class="headerlink" title="搭建工程"></a>搭建工程</h1><blockquote>
 <p><strong>本文以在 Windows 下开发 Node 插件为例，其他系统环境在编译选项方面略有不同</strong></p>
 </blockquote>
@@ -336,8 +334,7 @@
 </ul>
 <p><code>build-debug</code>和<code>build-release</code>脚本分别用于编译 Debug 和 Release 版本的插件；</p>
 <p><code>test</code>脚本用于执行测试用例；</p>
-<h3 id="32-位插件"><a href="#32-位插件" class="headerlink" title="32 位插件"></a>32 位插件</h3><p>指定 arch 为 ia32（<code>--arch=ia32</code>）就可以编译 32 位版本的 Node 插件。</p>
-<p>需要注意：64 位版本 Node.js 只能加载 64 位的 Node 插件，32 位版本的 Node.js 也只能加载 32 位的 Node 插件，否则会报错：</p>
+<h3 id="32-位插件"><a href="#32-位插件" class="headerlink" title="32 位插件"></a>32 位插件</h3><p>指定 arch 为 ia32（<code>--arch=ia32</code>）就可以编译 32 位版本的 Node 插件。<br><span style="color:#FFFFFF">&lt;原文出自: jiangxueqiao.com，请尊重原创&gt;</span><br>需要注意：64 位版本 Node.js 只能加载 64 位的 Node 插件，32 位版本的 Node.js 也只能加载 32 位的 Node 插件，否则会报错：</p>
 <figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Error: \\?\D:\node-addon-sample\build\Debug\node-addon-sample.node is not a valid Win32 application.</span><br></pre></td></tr></table></figure>
 
 <h2 id="编译脚本"><a href="#编译脚本" class="headerlink" title="编译脚本"></a>编译脚本</h2><p>Node-API 支持 GYP 和 CMake.js 两种编译方式，这里选择使用 GYP 方式。</p>

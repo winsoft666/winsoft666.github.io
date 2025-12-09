@@ -27,7 +27,7 @@
 <meta property="og:description" content="前面的几篇文章介绍了 NSIS 的传统界面的安装包和现代界面的安装包的制作方法，也提到了 NSIS 支持自定义页面（即使用page custom）的特性，自定义页面需要用户自己创建对话框、控件、添加控件响应等等，虽然 NSIS 提供了nsDialogs.nsh来支持这些功能，但使用起来还是不太方便（需要专门了解这个插件诸多用法），而且不够灵活，所以本文介绍一种终极的自定义界面的安装包解决方案，即完">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-08-07T09:35:21.000Z">
-<meta property="article:modified_time" content="2025-12-05T06:36:57.641Z">
+<meta property="article:modified_time" content="2025-12-09T03:07:43.473Z">
 <meta property="article:author" content="jiangxueqiao.com">
 <meta property="article:tag" content="NSIS">
 <meta name="twitter:card" content="summary">
@@ -182,7 +182,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-count">163</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -279,7 +279,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-12-05 14:36:57" itemprop="dateModified" datetime="2025-12-05T14:36:57+08:00">2025-12-05</time>
+      <time title="修改时间：2025-12-09 11:07:43" itemprop="dateModified" datetime="2025-12-09T11:07:43+08:00">2025-12-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -308,7 +308,7 @@
 <figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">page</span> <span class="literal">custom</span> [创建函数] [离开函数] [标题]</span><br></pre></td></tr></table></figure>
 
 <p>使用第三方界面库完全定制安装包界面的基本原理就是：新建一个 dll 插件，在<code>page custom</code>的<code>[创建函数]</code>中调用该插件中的函数来显示界面，这时界面上的按钮的响应就不再由 NSIS 控制了，完全由我们的代码控制。</p>
-<h2 id="难点问题"><a href="#难点问题" class="headerlink" title="难点问题"></a>难点问题</h2><p>使用我们的插件 dll 完全替代 NSIS 界面之后，有几个问题需要解决：</p>
+<h2 id="难点问题"><a href="#难点问题" class="headerlink" title="难点问题"></a>难点问题</h2><p><span style="color:#FFFFFF">&lt;原文出自: jiangxueqiao.com，请尊重原创&gt;</span><br>使用我们的插件 dll 完全替代 NSIS 界面之后，有几个问题需要解决：</p>
 <ul>
 <li>如何获取安装和卸载的进度</li>
 <li>如何从 C++回调 NSIS 函数</li>
@@ -326,7 +326,7 @@
 <blockquote>
 <p>写这篇文字的时候，发现现在的<a target="_blank" rel="noopener" href="http://nsis.sourceforge.net/Nsis7z_plug-in">nsis7z</a>已经太老了，新版的压缩软件生成的 7z 压缩包，该插件已经无法解压。可以使用 7za.exe 命令行工具来生成 7z 压缩文件，7za.exe 从此处下载：<a target="_blank" rel="noopener" href="http://download.csdn.net/download/china_jeffery/10214464">http://download.csdn.net/download/china_jeffery&#x2F;10214464</a>。<br>7za 生成 7z 压缩包语法为：<br><code>7za.exe a app.7z app\*</code></p>
 </blockquote>
-<h3 id="从-C-回调-NSIS-函数"><a href="#从-C-回调-NSIS-函数" class="headerlink" title="从 C++回调 NSIS 函数"></a>从 C++回调 NSIS 函数</h3><p>比如用户点击了我们自定义界面上的“取消”按钮，这时我们需要调用 NSIS 的<code>Abort</code>函数来取消安装。此时就需要解决如何从 C++环境回调到 NSIS 环境。</p>
+<h3 id="从-C-回调-NSIS-函数"><a href="#从-C-回调-NSIS-函数" class="headerlink" title="从 C++回调 NSIS 函数"></a>从 C++回调 NSIS 函数</h3><p><span style="color:#FFFFFF">&lt;原文出自: jiangxueqiao.com，请尊重原创&gt;</span><br>比如用户点击了我们自定义界面上的“取消”按钮，这时我们需要调用 NSIS 的<code>Abort</code>函数来取消安装。此时就需要解决如何从 C++环境回调到 NSIS 环境。</p>
 <p>我们可以使用<a href="/post/1273492093.html" title="NSIS教程(8)-插件开发">NSIS教程(8)-插件开发</a>中介绍的<code>PluginCommon.h</code>来实现该功能。</p>
 <p>大致原理是，在 NSIS 脚本中初始化自定义界面的控件与 NSIS 函数指针（整型）的绑定关系（如控件名–函数名），当用户点击控件之后，查找到该控件绑定的 NSIS 函数，然后调用<code>extra_parameters::ExecuteCodeSegment</code>函数（函数第一个参数就是 NSIS 函数指针）。</p>
 <p>以 duilib 界面库为例，对 NSIS 暴露 OnControlBindNSISScript 接口，提供绑定控件与 NSIS 函数指针（整型）的功能：</p>
