@@ -179,7 +179,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">163</span>
+          <span class="site-state-item-count">164</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -230,6 +230,100 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jiangxueqiao.com/post/4245522728.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jiangxueqiao.com">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="独钓寒江雪">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 独钓寒江雪">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/post/4245522728.html" class="post-title-link" itemprop="url">Windows内存体系(4)--内存对齐</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2018-04-24 09:43:01" itemprop="dateCreated datePublished" datetime="2018-04-24T09:43:01+08:00">2018-04-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-12-09 11:07:58" itemprop="dateModified" datetime="2025-12-09T11:07:58+08:00">2025-12-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E2%91%A4Windows%E5%BC%80%E5%8F%91%E4%B8%8E%E8%B0%83%E8%AF%95%E7%A7%98%E7%B1%8D/" itemprop="url" rel="index"><span itemprop="name">⑤Windows开发与调试秘籍</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="为什么要内存对齐"><a href="#为什么要内存对齐" class="headerlink" title="为什么要内存对齐"></a>为什么要内存对齐</h2><h3 id="平台原因"><a href="#平台原因" class="headerlink" title="平台原因"></a>平台原因</h3><p>不是所有的CPU都能访问任意地址上的任意数据的，有些CPU只能在某些地址处取某些特定类型的数据，否则抛出硬件异常。</p>
+<h3 id="性能原因"><a href="#性能原因" class="headerlink" title="性能原因"></a>性能原因</h3><p>尽管内存是以字节为单位，但是大部分处理器并不是按字节块来存取内存的，它一般会以双字节、四字节、8字节、16字节甚至32字节为单位来存取内存，我们将上述这些存取单位称为<strong>内存存取粒度</strong>。</p>
+<p>如果数据存储时是按照内存存取粒度对齐的，那么处理器就可以在一个内存访问周期内完成数据的读取；反之，如果数据没有对齐，可能需要多个内存访问周期才能读取完整的数据。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/post/4245522728.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1082,98 +1176,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/post/4190400644.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jiangxueqiao.com/post/349088656.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="jiangxueqiao.com">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="独钓寒江雪">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 独钓寒江雪">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/post/349088656.html" class="post-title-link" itemprop="url">网络协议(4)--ICMP协议</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-03-12 20:00:00" itemprop="dateCreated datePublished" datetime="2018-03-12T20:00:00+08:00">2018-03-12</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-12-05 14:35:41" itemprop="dateModified" datetime="2025-12-05T14:35:41+08:00">2025-12-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E2%91%A2%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8%E5%88%B0%E5%AE%9E%E6%88%98/" itemprop="url" rel="index"><span itemprop="name">③网络编程入门到实战</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>互联网控制消息协议（英文：Internet Control Message Protocol，ICMP）是互联网协议族的核心协议之一。定义在 RFC 792 文档中。<br>ICMP 的消息大致可以分为两类：一类是差错报文，即通知出错原因的错误消息（如 traceroute），另一类是查询报文，即用于诊断的查询消息（如 ping）。<br>使用 ICMP 协议的典型应用有 ping 和 traceroute（windows 上叫 tracert）。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/post/349088656.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>

@@ -2,20 +2,9 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://jiangxueqiao.com/post/3801212176.html</loc>
-    
-    <lastmod>2025-12-09T08:25:35.051Z</lastmod>
-    
-    <date>1694496611000</date>
-    <title>Windows批处理杂记 | 独钓寒江雪</title>
-    
-    <desc>exit命令exit命令用于退出当前的批处理脚本，并返回一个退出代码ExitCode（即返回值）。退出代码通常是一个整数，用于指示脚本执行的状态，例如成功（0）或失败（非零值）。 exit命令的语法为： 1exit [/b] [exitCode] 其中 /b 选项表示仅退出当前批处理脚本的执行，而不会影响调用脚本的父进程。如果不使用 /b 选项，则 exit 命令会终止当前整个的命令处理器进程（C</desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/about/index.html</loc>
     
-    <lastmod>2025-12-09T08:24:25.089Z</lastmod>
+    <lastmod>2025-12-10T09:22:42.778Z</lastmod>
     
     <date>1763199134000</date>
     <title>关于 | 独钓寒江雪</title>
@@ -24,14 +13,47 @@
   </url>
   
   <url>
+    <loc>https://jiangxueqiao.com/post/2711697202.html</loc>
+    
+    <lastmod>2025-12-10T06:08:07.372Z</lastmod>
+    
+    <date>1661686789000</date>
+    <title>Windbg调试速查手册 | 独钓寒江雪</title>
+    
+    <desc>Windbg 是 Microsoft 公司推出的免费的、带 GUI 的调试器，支持 Source 和 Assembly 两种模式的调试。 Windbg 不仅可以调试应用程序，还可以进行系统内核调试，Windbg 支持的平台包括 X86、IA64、AMD64。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/2963045346.html</loc>
+    
+    <lastmod>2025-12-10T05:53:29.633Z</lastmod>
+    
+    <date>1765332000000</date>
+    <title>给进程伪造一个父亲 | 独钓寒江雪</title>
+    
+    <desc>传统的进程树模型不仅是系统管理的图谱，更是安全审计与调查的关键线索。然而，通过特定的技术手段，一个进程完全可以“认贼作父”——将其父进程信息伪装成另一个合法或高权限进程，从而隐匿自己的真实起源，逃逸监控，混淆侦查视线。这不仅是攻击者用于规避检测的方法，也为防御方深入理解系统底层机制打开了另一扇窗。本文将探索这项技术在 Windows 系统下的实现原理。</desc>
+  </url>
+  
+  <url>
     <loc>https://jiangxueqiao.com/post/470495318.html</loc>
     
-    <lastmod>2025-12-09T05:56:08.377Z</lastmod>
+    <lastmod>2025-12-10T05:15:40.902Z</lastmod>
     
     <date>1761121860000</date>
     <title>x86架构常用寄存器及汇编指令 | 独钓寒江雪</title>
     
     <desc>x86架构作为个人计算机和服务器领域的主流计算架构，其汇编语言是理解计算机底层运行机制、进行逆向工程、性能优化及嵌入式开发的核心基础。本文将系统梳理x86架构中的常用寄存器​和常用汇编指令​，并结合实际应用场景说明其作用。 x86常用寄存器寄存器是CPU内部的高速存储单元，用于临时存放数据、地址或控制信息。x86寄存器按功能可分为通用寄存器、段寄存器、标志寄存器、指令指针、控制寄存器、调试寄存器及</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/3801212176.html</loc>
+    
+    <lastmod>2025-12-09T08:25:35.051Z</lastmod>
+    
+    <date>1694496611000</date>
+    <title>Windows批处理杂记 | 独钓寒江雪</title>
+    
+    <desc>exit命令exit命令用于退出当前的批处理脚本，并返回一个退出代码ExitCode（即返回值）。退出代码通常是一个整数，用于指示脚本执行的状态，例如成功（0）或失败（非零值）。 exit命令的语法为： 1exit [/b] [exitCode] 其中 /b 选项表示仅退出当前批处理脚本的执行，而不会影响调用脚本的父进程。如果不使用 /b 选项，则 exit 命令会终止当前整个的命令处理器进程（C</desc>
   </url>
   
   <url>
@@ -552,17 +574,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/3666245140.html</loc>
-    
-    <lastmod>2025-12-09T03:00:05.499Z</lastmod>
-    
-    <date>1691632800000</date>
-    <title>获取其他进程的命令行参数 | 独钓寒江雪</title>
-    
-    <desc>本文介绍如何根据进程 ID 获取进程命令行参数，使用 Windows NTDLL 提供的未公开 API 实现。 由于需要使用到 Windows 应用层未公开的 API，而且这些 API 在 Windows 头文件中未提供函数定义，因此我们需要使用 GetProcessAddress 动态地从 ntdll.dll 中获取函数地址。 动态获取函数地址本不是一件困难的事情，但是当涉及调用函数比较多时，这</desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/3832899600.html</loc>
     
     <lastmod>2025-12-09T03:00:05.499Z</lastmod>
@@ -571,6 +582,17 @@
     <title>绘制Windows的界面：探索窗口、GDI与GDI+的图形世界 | 独钓寒江雪</title>
     
     <desc>当你点击桌面图标，一个窗口缓缓展开；滚动网页时，文字与图片在屏幕上丝滑游走；打开绘图软件，笔触落下的瞬间，色彩便在虚拟画布上晕染开来——这些习以为常的界面交互，构成了我们与数字世界对话的桥梁。但你是否想过：这些“理所当然”的视觉体验，究竟是如何从代码的海洋里“生长”出来的？窗口的轮廓如何被精准勾勒？色彩与线条怎样穿越硬件与系统的边界，最终跃入人眼？ Windows图形编程的核心骨架在深入探索Win</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/3666245140.html</loc>
+    
+    <lastmod>2025-12-09T03:00:05.499Z</lastmod>
+    
+    <date>1691632800000</date>
+    <title>获取其他进程的命令行参数 | 独钓寒江雪</title>
+    
+    <desc>本文介绍如何根据进程 ID 获取进程命令行参数，使用 Windows NTDLL 提供的未公开 API 实现。 由于需要使用到 Windows 应用层未公开的 API，而且这些 API 在 Windows 头文件中未提供函数定义，因此我们需要使用 GetProcessAddress 动态地从 ntdll.dll 中获取函数地址。 动态获取函数地址本不是一件困难的事情，但是当涉及调用函数比较多时，这</desc>
   </url>
   
   <url>
@@ -607,17 +629,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/2711697202.html</loc>
-    
-    <lastmod>2025-12-08T12:54:27.247Z</lastmod>
-    
-    <date>1661686789000</date>
-    <title>Windbg调试速查手册 | 独钓寒江雪</title>
-    
-    <desc>Windbg 是 Microsoft 公司推出的免费的、带 GUI 的调试器，支持 Source 和 Assembly 两种模式的调试。 Windbg 不仅可以调试应用程序，还可以进行系统内核调试，Windbg 支持的平台包括 X86、IA64、AMD64。</desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/3493610263.html</loc>
     
     <lastmod>2025-12-08T12:29:17.283Z</lastmod>
@@ -629,17 +640,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/2948643539.html</loc>
-    
-    <lastmod>2025-12-05T06:36:57.641Z</lastmod>
-    
-    <date>1600598627000</date>
-    <title>NSIS教程(11)-中文手册 | 独钓寒江雪</title>
-    
-    <desc></desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/1597634702.html</loc>
     
     <lastmod>2025-12-05T06:36:57.641Z</lastmod>
@@ -648,6 +648,17 @@
     <title>NSIS教程(10)-MUI跳过指定安装步骤 | 独钓寒江雪</title>
     
     <desc>在正常情况下安装包会有“欢迎界面”、“安装目录选择界面”等等，有时我们需要安装包自动跳过这 2 个界面，如安装包通过命令行参数传入“安装目录”（如setup.exe /installdir F:\test），本文讲述如何使安装包跳过指定的界面。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/2948643539.html</loc>
+    
+    <lastmod>2025-12-05T06:36:57.641Z</lastmod>
+    
+    <date>1600598627000</date>
+    <title>NSIS教程(11)-中文手册 | 独钓寒江雪</title>
+    
+    <desc></desc>
   </url>
   
   <url>
@@ -673,17 +684,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/3798382521.html</loc>
-    
-    <lastmod>2025-12-05T06:36:57.641Z</lastmod>
-    
-    <date>1596498894000</date>
-    <title>NSIS教程(5)-现代界面示例 | 独钓寒江雪</title>
-    
-    <desc>NSIS 的现代用户界面(Modern UI)只是相对于传统（丑陋）的界面而言的“现代”而已。它定义在MUI2.nsh中，nsh 文件类似 C++中的头文件，可以被其他模块包含引用。</desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/275632694.html</loc>
     
     <lastmod>2025-12-05T06:36:57.641Z</lastmod>
@@ -692,6 +692,17 @@
     <title>NSIS教程(4)-传统界面示例 | 独钓寒江雪</title>
     
     <desc>本文以一个完整的、传统界面的网易云音乐安装包的脚本为示例，来介绍 NSIS 传统用户界面的开发流程。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/3798382521.html</loc>
+    
+    <lastmod>2025-12-05T06:36:57.641Z</lastmod>
+    
+    <date>1596498894000</date>
+    <title>NSIS教程(5)-现代界面示例 | 独钓寒江雪</title>
+    
+    <desc>NSIS 的现代用户界面(Modern UI)只是相对于传统（丑陋）的界面而言的“现代”而已。它定义在MUI2.nsh中，nsh 文件类似 C++中的头文件，可以被其他模块包含引用。</desc>
   </url>
   
   <url>
@@ -739,17 +750,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/2494475058.html</loc>
-    
-    <lastmod>2025-12-05T06:36:57.641Z</lastmod>
-    
-    <date>1524192188000</date>
-    <title>Windows内存体系(1)--虚拟地址空间 | 独钓寒江雪</title>
-    
-    <desc>实模式下内存分配机制在 8086 或者 80186 以前，程序运行时，操作系统会把程序全都装入内存，程序都是直接运行在物理内存上的。也就是说程序中访问的内存地址都是实际的物理内存地址。当计算机同时运行多个程序时，必须保证这些程序用到的内存总量要小于计算机实际物理内存的大小。 例如某台计算机总的内存大小是128M ，现在同时运行两个程序 A 和 B ，A 需占用内存10M ， B 需占用内存110M</desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/595856315.html</loc>
     
     <lastmod>2025-12-05T06:36:57.641Z</lastmod>
@@ -758,6 +758,17 @@
     <title>Windows内存体系(2)--虚拟内存 | 独钓寒江雪</title>
     
     <desc>页交换文件虚拟地址空间只是操作系统为进程“虚拟”出来的一块地址区域，并不代表任何实际的空间。而“页交换文件”却对应了实际的空间，这个空间一般是磁盘上名为“pagefile.sys”的文件。 “页交换文件”的大小和位置可以在系统设置（系统属性 -&gt; 高级 -&gt; 性能 -&gt; 设置 -&gt; 高级 ）中进行设置： 从微软的官方文档来看，“虚拟内存”等于“物理内存”+“分页文件”总和。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/2494475058.html</loc>
+    
+    <lastmod>2025-12-05T06:36:57.641Z</lastmod>
+    
+    <date>1524192188000</date>
+    <title>Windows内存体系(1)--虚拟地址空间 | 独钓寒江雪</title>
+    
+    <desc>实模式下内存分配机制在 8086 或者 80186 以前，程序运行时，操作系统会把程序全都装入内存，程序都是直接运行在物理内存上的。也就是说程序中访问的内存地址都是实际的物理内存地址。当计算机同时运行多个程序时，必须保证这些程序用到的内存总量要小于计算机实际物理内存的大小。 例如某台计算机总的内存大小是128M ，现在同时运行两个程序 A 和 B ，A 需占用内存10M ， B 需占用内存110M</desc>
   </url>
   
   <url>
@@ -783,17 +794,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/3102005562.html</loc>
-    
-    <lastmod>2025-12-05T06:36:57.634Z</lastmod>
-    
-    <date>1642768855000</date>
-    <title>Windows程序如何删除自身 | 独钓寒江雪</title>
-    
-    <desc>本文介绍几种实现在程序退出后，从磁盘删除自身 exe 文件的方式。该技术通常应用于安装包卸载程序中。</desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/3832058229.html</loc>
     
     <lastmod>2025-12-05T06:36:57.634Z</lastmod>
@@ -802,28 +802,6 @@
     <title>为什么SetParent会失败 | 独钓寒江雪</title>
     
     <desc>SetParent是Windows提供的设置窗口父窗体的API，函数原型比较简单： 1234HWND SetParent( [in] HWND hWndChild, [in, optional] HWND hWndNewParent);</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/3177767322.html</loc>
-    
-    <lastmod>2025-12-05T06:36:57.634Z</lastmod>
-    
-    <date>1514476500000</date>
-    <title>使用WinDbg调试关键区死锁 | 独钓寒江雪</title>
-    
-    <desc>本文通过一个实例来讲解如何使用 WinDbg 来调试 Windows CriticalSection 死锁的问题。 演示示例这里有一个关键区锁死问题的程序，运行之后依次点击“CS 锁死”按钮、右上角退出按钮，程序就会卡死。 对于眼下的这个问题，界面完全失去响应，这说明负责消息处理的 UI 线程阻塞了。 对于几乎所有的 windows GUI 程序，编号为 0 的初始线程就是 UI 线程，windo</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/3573459553.html</loc>
-    
-    <lastmod>2025-12-05T06:36:57.634Z</lastmod>
-    
-    <date>1763903462000</date>
-    <title>代码的隐形战场：Windows进程注入与API Hook完全指南 | 独钓寒江雪</title>
-    
-    <desc>文章还未完成，请输入密码查看初稿</desc>
   </url>
   
   <url>
@@ -838,6 +816,39 @@
   </url>
   
   <url>
+    <loc>https://jiangxueqiao.com/post/3573459553.html</loc>
+    
+    <lastmod>2025-12-05T06:36:57.634Z</lastmod>
+    
+    <date>1763903462000</date>
+    <title>代码的隐形战场：Windows进程注入与API Hook完全指南 | 独钓寒江雪</title>
+    
+    <desc>文章还未完成，请输入密码查看初稿</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/3102005562.html</loc>
+    
+    <lastmod>2025-12-05T06:36:57.634Z</lastmod>
+    
+    <date>1642768855000</date>
+    <title>Windows程序如何删除自身 | 独钓寒江雪</title>
+    
+    <desc>本文介绍几种实现在程序退出后，从磁盘删除自身 exe 文件的方式。该技术通常应用于安装包卸载程序中。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/3177767322.html</loc>
+    
+    <lastmod>2025-12-05T06:36:57.634Z</lastmod>
+    
+    <date>1514476500000</date>
+    <title>使用WinDbg调试关键区死锁 | 独钓寒江雪</title>
+    
+    <desc>本文通过一个实例来讲解如何使用 WinDbg 来调试 Windows CriticalSection 死锁的问题。 演示示例这里有一个关键区锁死问题的程序，运行之后依次点击“CS 锁死”按钮、右上角退出按钮，程序就会卡死。 对于眼下的这个问题，界面完全失去响应，这说明负责消息处理的 UI 线程阻塞了。 对于几乎所有的 windows GUI 程序，编号为 0 的初始线程就是 UI 线程，windo</desc>
+  </url>
+  
+  <url>
     <loc>https://jiangxueqiao.com/post/3906615635.html</loc>
     
     <lastmod>2025-12-05T06:36:57.634Z</lastmod>
@@ -846,17 +857,6 @@
     <title>由HANDLE返回值不确定性引发的思考 | 独钓寒江雪</title>
     
     <desc>HANDLE类型返回值的不确定性指的是Windows API函数的返回值为HANDLE类型时，有两种表示失败的方式： HANDLE &#x3D;&#x3D; NULL，如CreateEvent等 HANDLE &#x3D;&#x3D; INVALID_HANDLE_VALUE，如CreateFile等 其中，NULL的值始终为0，而INVALID_HANDLE_VALUE的值为-1，其在32位和6</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/432875265.html</loc>
-    
-    <lastmod>2025-12-05T06:36:57.634Z</lastmod>
-    
-    <date>1513091485000</date>
-    <title>由字符串格式化函数引起的崩溃 | 独钓寒江雪</title>
-    
-    <desc>本文记录一个由错误使用StringCchVPrintf等格式化函数所导致的崩溃问题。</desc>
   </url>
   
   <url>
@@ -879,6 +879,17 @@
     <title>认识Windows顶级(top-level)窗口 | 独钓寒江雪</title>
     
     <desc></desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/432875265.html</loc>
+    
+    <lastmod>2025-12-05T06:36:57.634Z</lastmod>
+    
+    <date>1513091485000</date>
+    <title>由字符串格式化函数引起的崩溃 | 独钓寒江雪</title>
+    
+    <desc>本文记录一个由错误使用StringCchVPrintf等格式化函数所导致的崩溃问题。</desc>
   </url>
   
   <url>
@@ -937,17 +948,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/3599385732.html</loc>
-    
-    <lastmod>2025-12-05T06:36:57.627Z</lastmod>
-    
-    <date>1524708000000</date>
-    <title>Windows内存体系(5)--堆 | 独钓寒江雪</title>
-    
-    <desc>为什么要使用堆？应用程序虽然可以使用页面粒度的函数（如VirualAlloc）来分配一个最小为4KB或8K的内存块，但是很多时候我们并不需要分配这么大的内存块，我们可能只想分配 1K，2K 的内存块，那么这个时候无论从内存的使用率，还是从性能的角度来看，再分配这么大的一个内存区域显然不是最优的了。 为了满足这种需求，Windows 提供了一个被称为“堆管理器”的组件，它负责管理大内存区域中的内存分</desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/213040252.html</loc>
     
     <lastmod>2025-12-05T06:36:57.627Z</lastmod>
@@ -959,14 +959,14 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/2824175441.html</loc>
+    <loc>https://jiangxueqiao.com/post/3599385732.html</loc>
     
-    <lastmod>2025-12-05T06:36:11.156Z</lastmod>
+    <lastmod>2025-12-05T06:36:57.627Z</lastmod>
     
-    <date>1512121629000</date>
-    <title>Linux GDB调试命令 | 独钓寒江雪</title>
+    <date>1524708000000</date>
+    <title>Windows内存体系(5)--堆 | 独钓寒江雪</title>
     
-    <desc>启动 GDBgdb -tui：分屏显示源代码gdb -q：不显示开始的提示信息 可以在.bashrc 中加入别名： 1alias gdb=&quot;gdb -q -tui&quot;</desc>
+    <desc>为什么要使用堆？应用程序虽然可以使用页面粒度的函数（如VirualAlloc）来分配一个最小为4KB或8K的内存块，但是很多时候我们并不需要分配这么大的内存块，我们可能只想分配 1K，2K 的内存块，那么这个时候无论从内存的使用率，还是从性能的角度来看，再分配这么大的一个内存区域显然不是最优的了。 为了满足这种需求，Windows 提供了一个被称为“堆管理器”的组件，它负责管理大内存区域中的内存分</desc>
   </url>
   
   <url>
@@ -981,17 +981,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/44844734.html</loc>
-    
-    <lastmod>2025-12-05T06:36:11.156Z</lastmod>
-    
-    <date>1692338100000</date>
-    <title>Redis常见异常及处理方案 | 独钓寒江雪</title>
-    
-    <desc>Redis 是高性能内存键值数据库，支持字符串、哈希等多结构，兼具缓存与持久化能力，广泛用于实时数据处理场景。本文主要介绍 Redis 常见的异常及处理方案。</desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/2025031576.html</loc>
     
     <lastmod>2025-12-05T06:36:11.156Z</lastmod>
@@ -1003,6 +992,17 @@
   </url>
   
   <url>
+    <loc>https://jiangxueqiao.com/post/2824175441.html</loc>
+    
+    <lastmod>2025-12-05T06:36:11.156Z</lastmod>
+    
+    <date>1512121629000</date>
+    <title>Linux GDB调试命令 | 独钓寒江雪</title>
+    
+    <desc>启动 GDBgdb -tui：分屏显示源代码gdb -q：不显示开始的提示信息 可以在.bashrc 中加入别名： 1alias gdb=&quot;gdb -q -tui&quot;</desc>
+  </url>
+  
+  <url>
     <loc>https://jiangxueqiao.com/post/851648499.html</loc>
     
     <lastmod>2025-12-05T06:36:11.156Z</lastmod>
@@ -1011,6 +1011,17 @@
     <title>Redis慢日志与BigKey | 独钓寒江雪</title>
     
     <desc></desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/44844734.html</loc>
+    
+    <lastmod>2025-12-05T06:36:11.156Z</lastmod>
+    
+    <date>1692338100000</date>
+    <title>Redis常见异常及处理方案 | 独钓寒江雪</title>
+    
+    <desc>Redis 是高性能内存键值数据库，支持字符串、哈希等多结构，兼具缓存与持久化能力，广泛用于实时数据处理场景。本文主要介绍 Redis 常见的异常及处理方案。</desc>
   </url>
   
   <url>
@@ -1036,6 +1047,17 @@
   </url>
   
   <url>
+    <loc>https://jiangxueqiao.com/post/2937580891.html</loc>
+    
+    <lastmod>2025-12-05T06:35:41.916Z</lastmod>
+    
+    <date>1512982558000</date>
+    <title>Windows套接字I/O模型(1)-阻塞模型 | 独钓寒江雪</title>
+    
+    <desc>套接字I&#x2F;O的阻塞模型是最常见的网络模型，也是在网络编程中最早接触的一个模型。因为它是阻塞的，所以我们一般都会结合线程一起使用，如将accept，recv等操作放到单独的线程，避免程序主线程被阻塞。</desc>
+  </url>
+  
+  <url>
     <loc>https://jiangxueqiao.com/post/640627104.html</loc>
     
     <lastmod>2025-12-05T06:35:41.916Z</lastmod>
@@ -1055,17 +1077,6 @@
     <title>Windows套接字I/O模型(3)-WSAAsyncSelect模型 | 独钓寒江雪</title>
     
     <desc>WSAAsyncSelect模型介绍利用 WSAAsyncSelect 模型结合 Windows 窗口消息循环，应用程序可以在一个套接字上接收以 Windows 消息为基础的网络事件通知。 在使用 WSAAsyncSelect 模型之前，首先需要创建一个 Windows 窗口，并为该窗口提供一个窗口过程支持函数（WndProc）。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/2937580891.html</loc>
-    
-    <lastmod>2025-12-05T06:35:41.916Z</lastmod>
-    
-    <date>1512982558000</date>
-    <title>Windows套接字I/O模型(1)-阻塞模型 | 独钓寒江雪</title>
-    
-    <desc>套接字I&#x2F;O的阻塞模型是最常见的网络模型，也是在网络编程中最早接触的一个模型。因为它是阻塞的，所以我们一般都会结合线程一起使用，如将accept，recv等操作放到单独的线程，避免程序主线程被阻塞。</desc>
   </url>
   
   <url>
@@ -1146,28 +1157,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/2441416675.html</loc>
-    
-    <lastmod>2025-12-05T06:34:54.383Z</lastmod>
-    
-    <date>1510737991000</date>
-    <title>P2P及NAT穿透技术介绍 | 独钓寒江雪</title>
-    
-    <desc>P2PP2P（peer to peer）是一个“点对点传输技术”，也就是两台计算机之间不需要第三台机器作为服务端就能实现数据的传输，每台计算机即是客户端又是服务端。 如果每台计算机都有自己的独立的公网 IP，那么 P2P 技术就比较好实现了，但是现实中由于 NAT（Network Address Translation） 的存在，使得 P2P 技术最大的难点就在于穿越 NAT 的限制，俗称“打洞”</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/2172509399.html</loc>
-    
-    <lastmod>2025-12-05T06:34:54.383Z</lastmod>
-    
-    <date>1524038403000</date>
-    <title>SDP格式解析 | 独钓寒江雪</title>
-    
-    <desc>会话描述协议（Session Description Protocol 或简写 SDP）描述的是流媒体的初始化参数。此协议由 IETF 发表为 RFC 2327。 SDP 完全是一种会话描述格式，它不属于传输协议。 SDP 用于描述多媒体通信会话，包括会话建立、会话请求和参数协商。SDP 不用于传输媒体数据，只能用于两个通信终端的参数协商，包括媒体类型、格式以及所有其他和会话相关的属性。SDP 以</desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/3773107387.html</loc>
     
     <lastmod>2025-12-05T06:34:54.383Z</lastmod>
@@ -1176,6 +1165,17 @@
     <title>Janus的编译部署及配置 | 独钓寒江雪</title>
     
     <desc>Janus是一个开源的 WebRTC SFU 服务器，可以作为 WebRTC 的一个端将其收到的数据进行转发，同时提供了一些的控制能力。Janus 是基于插件架构的，其功能都是通过一个个插件来提供，我们可以为 Janus 开发插件，来扩展其功能。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/2441416675.html</loc>
+    
+    <lastmod>2025-12-05T06:34:54.383Z</lastmod>
+    
+    <date>1510737991000</date>
+    <title>P2P及NAT穿透技术介绍 | 独钓寒江雪</title>
+    
+    <desc>P2PP2P（peer to peer）是一个“点对点传输技术”，也就是两台计算机之间不需要第三台机器作为服务端就能实现数据的传输，每台计算机即是客户端又是服务端。 如果每台计算机都有自己的独立的公网 IP，那么 P2P 技术就比较好实现了，但是现实中由于 NAT（Network Address Translation） 的存在，使得 P2P 技术最大的难点就在于穿越 NAT 的限制，俗称“打洞”</desc>
   </url>
   
   <url>
@@ -1190,6 +1190,17 @@
   </url>
   
   <url>
+    <loc>https://jiangxueqiao.com/post/2172509399.html</loc>
+    
+    <lastmod>2025-12-05T06:34:54.383Z</lastmod>
+    
+    <date>1524038403000</date>
+    <title>SDP格式解析 | 独钓寒江雪</title>
+    
+    <desc>会话描述协议（Session Description Protocol 或简写 SDP）描述的是流媒体的初始化参数。此协议由 IETF 发表为 RFC 2327。 SDP 完全是一种会话描述格式，它不属于传输协议。 SDP 用于描述多媒体通信会话，包括会话建立、会话请求和参数协商。SDP 不用于传输媒体数据，只能用于两个通信终端的参数协商，包括媒体类型、格式以及所有其他和会话相关的属性。SDP 以</desc>
+  </url>
+  
+  <url>
     <loc>https://jiangxueqiao.com/post/2143630083.html</loc>
     
     <lastmod>2025-12-05T06:34:54.378Z</lastmod>
@@ -1201,14 +1212,14 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/2114040426.html</loc>
+    <loc>https://jiangxueqiao.com/post/2016855525.html</loc>
     
     <lastmod>2025-12-05T06:34:54.378Z</lastmod>
     
-    <date>1572225505000</date>
-    <title>WebRTC的三种架构 | 独钓寒江雪</title>
+    <date>1572967746000</date>
+    <title>WebRTC在直播领域应用的可行性分析 | 独钓寒江雪</title>
     
-    <desc>WebRTC 是基于 P2P 的实时通信技术，（如果 P2P 打洞失败，则会使用 TURN 服务器进行数据转发），在有 2 台客户端参与的情况下，网络拓扑结构如图：</desc>
+    <desc>目前流行的直播技术架构目前主流的直播方案一般采用RTMP架构，首先客户端采集音视频流（如obs studio客户端），然后通过 RTMP 协议将流推到流媒体服务器，最后流媒体服务器将流处理后分发给各个直播客户端。</desc>
   </url>
   
   <url>
@@ -1223,6 +1234,17 @@
   </url>
   
   <url>
+    <loc>https://jiangxueqiao.com/post/2114040426.html</loc>
+    
+    <lastmod>2025-12-05T06:34:54.378Z</lastmod>
+    
+    <date>1572225505000</date>
+    <title>WebRTC的三种架构 | 独钓寒江雪</title>
+    
+    <desc>WebRTC 是基于 P2P 的实时通信技术，（如果 P2P 打洞失败，则会使用 TURN 服务器进行数据转发），在有 2 台客户端参与的情况下，网络拓扑结构如图：</desc>
+  </url>
+  
+  <url>
     <loc>https://jiangxueqiao.com/post/2910781705.html</loc>
     
     <lastmod>2025-12-05T06:34:54.378Z</lastmod>
@@ -1231,17 +1253,6 @@
     <title>Windows平台编译WebRTC源码 | 独钓寒江雪</title>
     
     <desc>写作本文时使用的 webrtc 版本为：branch heads/67 准备工作请确保可以访问国外网站系统语言切换到英文系统 Windows 7&#x2F;10 都可以，在“控制面板”–&gt;”区域和语言”–&gt;”管理”–&gt;”更改系统区域设置”中切换到“英语（美国）”，然后重启系统。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/2016855525.html</loc>
-    
-    <lastmod>2025-12-05T06:34:54.378Z</lastmod>
-    
-    <date>1572967746000</date>
-    <title>WebRTC在直播领域应用的可行性分析 | 独钓寒江雪</title>
-    
-    <desc>目前流行的直播技术架构目前主流的直播方案一般采用RTMP架构，首先客户端采集音视频流（如obs studio客户端），然后通过 RTMP 协议将流推到流媒体服务器，最后流媒体服务器将流处理后分发给各个直播客户端。</desc>
   </url>
   
   <url>
@@ -1322,14 +1333,14 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/2248228478.html</loc>
+    <loc>https://jiangxueqiao.com/post/51642520.html</loc>
     
     <lastmod>2025-12-05T06:34:11.680Z</lastmod>
     
-    <date>1666968607000</date>
-    <title>写给C++程序员的Typescript语法基础 | 独钓寒江雪</title>
+    <date>1666614710000</date>
+    <title>写给C++程序员的ES6语法基础 | 独钓寒江雪</title>
     
-    <desc>TypeScript 是 JavaScript 的一个超集，支持 ES6 的语法规范，并在此基础上进行了增强，二者最大的不同在于：TypeScript 是强类型语言，而 JavaScript 是弱类型的语言。</desc>
+    <desc>ECMAScript 标准的发展经历了一个漫长的过程，从 1997 年发布的ECMAScript 1.0，到 2011 年的ECMAScript 5.1，再到 2015 年的ECMAScript 2015，以及后面每年都会发布的一个新的 ECMAScript 版本，版本众多，而且每个版本都有新特性的加入。</desc>
   </url>
   
   <url>
@@ -1344,14 +1355,14 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/51642520.html</loc>
+    <loc>https://jiangxueqiao.com/post/2248228478.html</loc>
     
     <lastmod>2025-12-05T06:34:11.680Z</lastmod>
     
-    <date>1666614710000</date>
-    <title>写给C++程序员的ES6语法基础 | 独钓寒江雪</title>
+    <date>1666968607000</date>
+    <title>写给C++程序员的Typescript语法基础 | 独钓寒江雪</title>
     
-    <desc>ECMAScript 标准的发展经历了一个漫长的过程，从 1997 年发布的ECMAScript 1.0，到 2011 年的ECMAScript 5.1，再到 2015 年的ECMAScript 2015，以及后面每年都会发布的一个新的 ECMAScript 版本，版本众多，而且每个版本都有新特性的加入。</desc>
+    <desc>TypeScript 是 JavaScript 的一个超集，支持 ES6 的语法规范，并在此基础上进行了增强，二者最大的不同在于：TypeScript 是强类型语言，而 JavaScript 是弱类型的语言。</desc>
   </url>
   
   <url>
@@ -1520,17 +1531,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/737594544.html</loc>
-    
-    <lastmod>2025-12-05T06:24:25.666Z</lastmod>
-    
-    <date>1717390399000</date>
-    <title>建立专属的账号密码体系 | 独钓寒江雪</title>
-    
-    <desc>在日常生活中，我们不仅需要记忆6位数字的银行卡密码，还需要记忆各式各样网站和应用的账号密码，可能我们自己也不记得曾经注册过多少个账号。账号和密码如此繁多，管理这些账号和密码，也是一个让人头疼的问题。 最原始的方法是将密码写纸上，放在一个安全的地方，但纸张存在丢失、损坏的风险，而且不方便存取。 改进版则是将纸张电子化，如 Excel，并辅以云盘实现多端同步，这样虽然存取便利性上有一定的改善，但安全性</desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/2173106656.html</loc>
     
     <lastmod>2025-12-05T06:24:25.666Z</lastmod>
@@ -1539,6 +1539,17 @@
     <title>基于Joplin和WebDAV搭建私有云笔记 | 独钓寒江雪</title>
     
     <desc>本文介绍如何自己搭建Joplin云笔记。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/737594544.html</loc>
+    
+    <lastmod>2025-12-05T06:24:25.666Z</lastmod>
+    
+    <date>1717390399000</date>
+    <title>建立专属的账号密码体系 | 独钓寒江雪</title>
+    
+    <desc>在日常生活中，我们不仅需要记忆6位数字的银行卡密码，还需要记忆各式各样网站和应用的账号密码，可能我们自己也不记得曾经注册过多少个账号。账号和密码如此繁多，管理这些账号和密码，也是一个让人头疼的问题。 最原始的方法是将密码写纸上，放在一个安全的地方，但纸张存在丢失、损坏的风险，而且不方便存取。 改进版则是将纸张电子化，如 Excel，并辅以云盘实现多端同步，这样虽然存取便利性上有一定的改善，但安全性</desc>
   </url>
   
   <url>
@@ -1663,6 +1674,17 @@
   </url>
   
   <url>
+    <loc>https://jiangxueqiao.com/post/128186902.html</loc>
+    
+    <lastmod>2025-12-05T06:14:54.760Z</lastmod>
+    
+    <date>1626395623000</date>
+    <title>C++的API设计规范 | 独钓寒江雪</title>
+    
+    <desc>《C++ API 设计》是一本非常不错的书，该书内容远远超过了它标题所指的 C++ API 设计，它不仅仅讲述了与编程语言无关的 API 设计需要遵循的一些规范，同时也介绍了很多 C++开发中需要遵守一些准则，如果在开发中能遵循这些准则，将有利于我们写出高质量的代码。</desc>
+  </url>
+  
+  <url>
     <loc>https://jiangxueqiao.com/post/3756556672.html</loc>
     
     <lastmod>2025-12-05T06:14:54.760Z</lastmod>
@@ -1682,17 +1704,6 @@
     <title>LLVM-Obfuscator代码混淆 | 独钓寒江雪</title>
     
     <desc>LLVM-Obfuscator 可用于混淆程序的代码逻辑，本文介绍如何使用 LLVM-Obfuscator 进行代码逻辑的混淆。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/128186902.html</loc>
-    
-    <lastmod>2025-12-05T06:14:54.760Z</lastmod>
-    
-    <date>1626395623000</date>
-    <title>C++的API设计规范 | 独钓寒江雪</title>
-    
-    <desc>《C++ API 设计》是一本非常不错的书，该书内容远远超过了它标题所指的 C++ API 设计，它不仅仅讲述了与编程语言无关的 API 设计需要遵循的一些规范，同时也介绍了很多 C++开发中需要遵守一些准则，如果在开发中能遵循这些准则，将有利于我们写出高质量的代码。</desc>
   </url>
   
   <url>
