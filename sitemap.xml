@@ -2,6 +2,138 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://jiangxueqiao.com/post/966041457.html</loc>
+    
+    <lastmod>2025-12-23T06:46:03.285Z</lastmod>
+    
+    <date>1758541189000</date>
+    <title>Visual Studio 断点高级使用指南 | 独钓寒江雪</title>
+    
+    <desc>Visual Studio 的断点系统远不止”在代码行上点击左侧边栏”那么简单。掌握其高级功能可以彻底改变你的调试体验，让你能精准定位问题，而不是在无尽的代码执行中盲目搜索。本文将带你全面了解 Visual Studio 断点系统的各项高级功能。 条件断点条件断点允许你设置特定条件，只有满足这些条件时调试器才会暂停。 支持如下格式的表达式： 12345678910// 基本条件i &gt; 100</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/3247297083.html</loc>
+    
+    <lastmod>2025-12-23T06:45:48.360Z</lastmod>
+    
+    <date>1738075189000</date>
+    <title>IDA Pro速查手册 | 独钓寒江雪</title>
+    
+    <desc>IDA Pro 是顶级的静态反汇编与逆向工程平台。其核心功能包括强大的自动代码分析、生成交互式流程图、跨处理器架构支持，以及将汇编代码反编译为高级语言伪代码（Hex-Rays 反编译器）。它允许用户深度分析二进制文件结构、识别函数与逻辑、进行漏洞研究，并通过脚本和插件系统实现功能扩展。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/2711697202.html</loc>
+    
+    <lastmod>2025-12-23T06:45:43.373Z</lastmod>
+    
+    <date>1661686789000</date>
+    <title>Windbg调试速查手册 | 独钓寒江雪</title>
+    
+    <desc>Windbg 是 Microsoft 公司推出的免费的、带 GUI 的调试器，支持 Source 和 Assembly 两种模式的调试。 Windbg 不仅可以调试应用程序，还可以进行系统内核调试，Windbg 支持的平台包括 X86、IA64、AMD64。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/2358498140.html</loc>
+    
+    <lastmod>2025-12-23T06:45:35.899Z</lastmod>
+    
+    <date>1735396789000</date>
+    <title>x64dbg速查手册 | 独钓寒江雪</title>
+    
+    <desc>x64dbg 是一款开源的 x64&#x2F;x32 位 Windows 动态调试工具。它集成了反汇编、内存查看、断点管理等多种功能，界面直观，插件架构灵活。作为 OllyDbg 的现代继承者，它以其强大的动态分析能力、活跃的社区支持和对逆向工程师的友好性，成为软件分析、漏洞研究和安全调试领域的常用利器。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/714268304.html</loc>
+    
+    <lastmod>2025-12-23T05:31:46.683Z</lastmod>
+    
+    <date>1766757181000</date>
+    <title>游戏加速器的原理及实现 | 独钓寒江雪</title>
+    
+    <desc>文章还未公开，请输入密码查看</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/3573459553.html</loc>
+    
+    <lastmod>2025-12-20T04:01:17.536Z</lastmod>
+    
+    <date>1763903462000</date>
+    <title>代码的隐形战场：Windows进程注入与API Hook完全指南 | 独钓寒江雪</title>
+    
+    <desc>文章还未公开，请输入密码查看</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/470495318.html</loc>
+    
+    <lastmod>2025-12-17T14:22:50.001Z</lastmod>
+    
+    <date>1761121860000</date>
+    <title>x86架构常用寄存器及汇编指令 | 独钓寒江雪</title>
+    
+    <desc>x86架构作为个人计算机和服务器领域的主流计算架构，其汇编语言是理解计算机底层运行机制、进行逆向工程、性能优化及嵌入式开发的核心基础。本文将系统梳理x86架构中的常用寄存器​和常用汇编指令​，并结合实际应用场景说明其作用。 x86常用寄存器寄存器是CPU内部的高速存储单元，用于临时存放数据、地址或控制信息。x86寄存器按功能可分为通用寄存器、段寄存器、标志寄存器、指令指针、控制寄存器、调试寄存器及</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/3493610263.html</loc>
+    
+    <lastmod>2025-12-17T13:14:13.037Z</lastmod>
+    
+    <date>1764165181000</date>
+    <title>别怕！Windows内核驱动开发：从0到1的最速通关指南 | 独钓寒江雪</title>
+    
+    <desc>文章还未公开，请输入密码查看</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/1142527271.html</loc>
+    
+    <lastmod>2025-12-17T13:14:07.103Z</lastmod>
+    
+    <date>1687930346000</date>
+    <title>Vcpkg踩坑实录 | 独钓寒江雪</title>
+    
+    <desc></desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/1112470146.html</loc>
+    
+    <lastmod>2025-12-16T08:22:25.218Z</lastmod>
+    
+    <date>1764939302000</date>
+    <title>C++ Qt应用在macOS平台的编译与发布 | 独钓寒江雪</title>
+    
+    <desc>在 macOS 上分发 Qt 应用，开发者常被多架构编译、代码签名、公证流程所困扰。本文基于 Qt6.9.2 实战经验，系统梳理了从编译配置到最终分发的完整路径。你将了解如何通过 CMake 管理多架构构建，使用 macdeployqt 打包依赖，配置正确的 entitlements 文件，并完成 Apple 强制要求的签名与公证。更提供自动化脚本示例，助你告别重复操作，确保应用在 Intel 和</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/679969051.html</loc>
+    
+    <lastmod>2025-12-15T05:43:27.256Z</lastmod>
+    
+    <date>1763471462000</date>
+    <title>软件开发中常用的数值：藏在代码里的数字密码 | 独钓寒江雪</title>
+    
+    <desc>文章还未公开，请输入密码查看</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/432875265.html</loc>
+    
+    <lastmod>2025-12-10T09:47:17.512Z</lastmod>
+    
+    <date>1513091485000</date>
+    <title>由字符串格式化函数引起的崩溃 | 独钓寒江雪</title>
+    
+    <desc>本文记录一个由于错误使用 StringCchVPrintf 等格式化函数所导致的崩溃问题。</desc>
+  </url>
+  
+  <url>
     <loc>https://jiangxueqiao.com/about/index.html</loc>
     
     <lastmod>2025-12-10T09:22:42.778Z</lastmod>
@@ -13,17 +145,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/2711697202.html</loc>
-    
-    <lastmod>2025-12-10T06:08:07.372Z</lastmod>
-    
-    <date>1661686789000</date>
-    <title>Windbg调试速查手册 | 独钓寒江雪</title>
-    
-    <desc>Windbg 是 Microsoft 公司推出的免费的、带 GUI 的调试器，支持 Source 和 Assembly 两种模式的调试。 Windbg 不仅可以调试应用程序，还可以进行系统内核调试，Windbg 支持的平台包括 X86、IA64、AMD64。</desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/2963045346.html</loc>
     
     <lastmod>2025-12-10T05:53:29.633Z</lastmod>
@@ -32,17 +153,6 @@
     <title>给进程伪造一个父亲 | 独钓寒江雪</title>
     
     <desc>传统的进程树模型不仅是系统管理的图谱，更是安全审计与调查的关键线索。然而，通过特定的技术手段，一个进程完全可以“认贼作父”——将其父进程信息伪装成另一个合法或高权限进程，从而隐匿自己的真实起源，逃逸监控，混淆侦查视线。这不仅是攻击者用于规避检测的方法，也为防御方深入理解系统底层机制打开了另一扇窗。本文将探索这项技术在 Windows 系统下的实现原理。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/470495318.html</loc>
-    
-    <lastmod>2025-12-10T05:15:40.902Z</lastmod>
-    
-    <date>1761121860000</date>
-    <title>x86架构常用寄存器及汇编指令 | 独钓寒江雪</title>
-    
-    <desc>x86架构作为个人计算机和服务器领域的主流计算架构，其汇编语言是理解计算机底层运行机制、进行逆向工程、性能优化及嵌入式开发的核心基础。本文将系统梳理x86架构中的常用寄存器​和常用汇编指令​，并结合实际应用场景说明其作用。 x86常用寄存器寄存器是CPU内部的高速存储单元，用于临时存放数据、地址或控制信息。x86寄存器按功能可分为通用寄存器、段寄存器、标志寄存器、指令指针、控制寄存器、调试寄存器及</desc>
   </url>
   
   <url>
@@ -167,17 +277,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/966041457.html</loc>
-    
-    <lastmod>2025-12-09T03:07:50.244Z</lastmod>
-    
-    <date>1758541189000</date>
-    <title>Visual Studio 断点高级使用指南 | 独钓寒江雪</title>
-    
-    <desc>Visual Studio 的断点系统远不止”在代码行上点击左侧边栏”那么简单。掌握其高级功能可以彻底改变你的调试体验，让你能精准定位问题，而不是在无尽的代码执行中盲目搜索。本文将带你全面了解 Visual Studio 断点系统的各项高级功能。 条件断点条件断点允许你设置特定条件，只有满足这些条件时调试器才会暂停。 支持如下格式的表达式： 12345678910// 基本条件i &gt; 100</desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/100006247.html</loc>
     
     <lastmod>2025-12-09T03:07:43.473Z</lastmod>
@@ -241,17 +340,6 @@
     <title>QSS基本使用方法 | 独钓寒江雪</title>
     
     <desc>Qt QSS 选择器和 CSS2、CSS3 的选择器类似，建议先学习或者复习 CSS 选择器的语法。 QSS 虽然源自 CSS ，但也有稍许不同，而且支持的语法也没 CSS 那么多。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/1112470146.html</loc>
-    
-    <lastmod>2025-12-09T03:06:35.267Z</lastmod>
-    
-    <date>1764939302000</date>
-    <title>C++ Qt应用在macOS平台的编译与发布 | 独钓寒江雪</title>
-    
-    <desc>在 macOS 上分发 Qt 应用，开发者常被多架构编译、代码签名、公证流程所困扰。本文基于 Qt6.9.2 实战经验，系统梳理了从编译配置到最终分发的完整路径。你将了解如何通过 CMake 管理多架构构建，使用 macdeployqt 打包依赖，配置正确的 entitlements 文件，并完成 Apple 强制要求的签名与公证。更提供自动化脚本示例，助你告别重复操作，确保应用在 Intel 和</desc>
   </url>
   
   <url>
@@ -329,17 +417,6 @@
     <title>白酒入门 | 独钓寒江雪</title>
     
     <desc>正值 9 月 9 全球酒水节，各大电商都在做活动，趁机网购了一批酒水。在享受这大自然馈赠的礼物的同时，也说一说自己对白酒的理解。希望在了解了白酒的这些知识后能明明白白喝酒。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/1142527271.html</loc>
-    
-    <lastmod>2025-12-09T03:04:50.164Z</lastmod>
-    
-    <date>1687930346000</date>
-    <title>Vcpkg踩坑实录 | 独钓寒江雪</title>
-    
-    <desc></desc>
   </url>
   
   <url>
@@ -629,28 +706,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/3493610263.html</loc>
-    
-    <lastmod>2025-12-08T12:29:17.283Z</lastmod>
-    
-    <date>1764165181000</date>
-    <title>别怕！Windows内核驱动开发：从0到1的最速通关指南 | 独钓寒江雪</title>
-    
-    <desc>文章还未完成，请输入密码查看初稿</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/1597634702.html</loc>
-    
-    <lastmod>2025-12-05T06:36:57.641Z</lastmod>
-    
-    <date>1596793427000</date>
-    <title>NSIS教程(10)-MUI跳过指定安装步骤 | 独钓寒江雪</title>
-    
-    <desc>在正常情况下安装包会有“欢迎界面”、“安装目录选择界面”等等，有时我们需要安装包自动跳过这 2 个界面，如安装包通过命令行参数传入“安装目录”（如setup.exe /installdir F:\test），本文讲述如何使安装包跳过指定的界面。</desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/2948643539.html</loc>
     
     <lastmod>2025-12-05T06:36:57.641Z</lastmod>
@@ -659,28 +714,6 @@
     <title>NSIS教程(11)-中文手册 | 独钓寒江雪</title>
     
     <desc></desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/2584392152.html</loc>
-    
-    <lastmod>2025-12-05T06:36:57.641Z</lastmod>
-    
-    <date>1632138227000</date>
-    <title>NSIS教程(12)-开源UI插件 | 独钓寒江雪</title>
-    
-    <desc>介绍一个我开发的开源NSIS UI插件 NSIS-UI-Plugin，基于 NSIS-UI-Plugin 插件我们可以快速使用NSIS制作类似QQ等软件那样的安装包。 该插件默认使用Qt作为界面库（不需要编译Qt静态库，可以使用Qt动态库），但也可以很方便的切换使用其他界面库，如DuiLib等。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/1923360270.html</loc>
-    
-    <lastmod>2025-12-05T06:36:57.641Z</lastmod>
-    
-    <date>1596324094000</date>
-    <title>NSIS教程(2)-完整属性 | 独钓寒江雪</title>
-    
-    <desc>本文列举了 NSIS 支持的所有属性，以供查阅。</desc>
   </url>
   
   <url>
@@ -695,14 +728,36 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/3798382521.html</loc>
+    <loc>https://jiangxueqiao.com/post/2584392152.html</loc>
     
     <lastmod>2025-12-05T06:36:57.641Z</lastmod>
     
-    <date>1596498894000</date>
-    <title>NSIS教程(5)-现代界面示例 | 独钓寒江雪</title>
+    <date>1632138227000</date>
+    <title>NSIS教程(12)-开源UI插件 | 独钓寒江雪</title>
     
-    <desc>NSIS 的现代用户界面(Modern UI)只是相对于传统（丑陋）的界面而言的“现代”而已。它定义在MUI2.nsh中，nsh 文件类似 C++中的头文件，可以被其他模块包含引用。</desc>
+    <desc>介绍一个我开发的开源NSIS UI插件 NSIS-UI-Plugin，基于 NSIS-UI-Plugin 插件我们可以快速使用NSIS制作类似QQ等软件那样的安装包。 该插件默认使用Qt作为界面库（不需要编译Qt静态库，可以使用Qt动态库），但也可以很方便的切换使用其他界面库，如DuiLib等。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/1597634702.html</loc>
+    
+    <lastmod>2025-12-05T06:36:57.641Z</lastmod>
+    
+    <date>1596793427000</date>
+    <title>NSIS教程(10)-MUI跳过指定安装步骤 | 独钓寒江雪</title>
+    
+    <desc>在正常情况下安装包会有“欢迎界面”、“安装目录选择界面”等等，有时我们需要安装包自动跳过这 2 个界面，如安装包通过命令行参数传入“安装目录”（如setup.exe /installdir F:\test），本文讲述如何使安装包跳过指定的界面。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/1923360270.html</loc>
+    
+    <lastmod>2025-12-05T06:36:57.641Z</lastmod>
+    
+    <date>1596324094000</date>
+    <title>NSIS教程(2)-完整属性 | 独钓寒江雪</title>
+    
+    <desc>本文列举了 NSIS 支持的所有属性，以供查阅。</desc>
   </url>
   
   <url>
@@ -717,17 +772,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/1273492093.html</loc>
-    
-    <lastmod>2025-12-05T06:36:57.641Z</lastmod>
-    
-    <date>1596611071000</date>
-    <title>NSIS教程(8)-插件开发 | 独钓寒江雪</title>
-    
-    <desc>虽然 NSIS 官方提供了很多插件，也有一些第三方的插件可以下载使用，但在实际开发中难免会遇到已有插件没有提供的功能或者插件不好用的情况，这时我们可以选择自己开发 NSIS 插件。</desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/3031217406.html</loc>
     
     <lastmod>2025-12-05T06:36:57.641Z</lastmod>
@@ -736,6 +780,28 @@
     <title>NSIS教程(7)-插件使用 | 独钓寒江雪</title>
     
     <desc>NSIS 内置了很多指令，这些指令可以满足我们基本需求，但难免会遇到 NSIS 没有内置的功能，如进程操作，后台运行（即多线程），7z 压缩等等，这个时候我们就需要借助第三方插件来满足我们所需要的功能了。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/3798382521.html</loc>
+    
+    <lastmod>2025-12-05T06:36:57.641Z</lastmod>
+    
+    <date>1596498894000</date>
+    <title>NSIS教程(5)-现代界面示例 | 独钓寒江雪</title>
+    
+    <desc>NSIS 的现代用户界面(Modern UI)只是相对于传统（丑陋）的界面而言的“现代”而已。它定义在MUI2.nsh中，nsh 文件类似 C++中的头文件，可以被其他模块包含引用。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/1273492093.html</loc>
+    
+    <lastmod>2025-12-05T06:36:57.641Z</lastmod>
+    
+    <date>1596611071000</date>
+    <title>NSIS教程(8)-插件开发 | 独钓寒江雪</title>
+    
+    <desc>虽然 NSIS 官方提供了很多插件，也有一些第三方的插件可以下载使用，但在实际开发中难免会遇到已有插件没有提供的功能或者插件不好用的情况，这时我们可以选择自己开发 NSIS 插件。</desc>
   </url>
   
   <url>
@@ -794,6 +860,17 @@
   </url>
   
   <url>
+    <loc>https://jiangxueqiao.com/post/3102005562.html</loc>
+    
+    <lastmod>2025-12-05T06:36:57.634Z</lastmod>
+    
+    <date>1642768855000</date>
+    <title>Windows程序如何删除自身 | 独钓寒江雪</title>
+    
+    <desc>本文介绍几种实现在程序退出后，从磁盘删除自身 exe 文件的方式。该技术通常应用于安装包卸载程序中。</desc>
+  </url>
+  
+  <url>
     <loc>https://jiangxueqiao.com/post/3832058229.html</loc>
     
     <lastmod>2025-12-05T06:36:57.634Z</lastmod>
@@ -813,28 +890,6 @@
     <title>使用WinDbg调试互斥体死锁 | 独钓寒江雪</title>
     
     <desc>本文通过一个实例来讲解如何使用 WinDbg 来调试 Windows Mutex 死锁的问题。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/3573459553.html</loc>
-    
-    <lastmod>2025-12-05T06:36:57.634Z</lastmod>
-    
-    <date>1763903462000</date>
-    <title>代码的隐形战场：Windows进程注入与API Hook完全指南 | 独钓寒江雪</title>
-    
-    <desc>文章还未完成，请输入密码查看初稿</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/3102005562.html</loc>
-    
-    <lastmod>2025-12-05T06:36:57.634Z</lastmod>
-    
-    <date>1642768855000</date>
-    <title>Windows程序如何删除自身 | 独钓寒江雪</title>
-    
-    <desc>本文介绍几种实现在程序退出后，从磁盘删除自身 exe 文件的方式。该技术通常应用于安装包卸载程序中。</desc>
   </url>
   
   <url>
@@ -882,14 +937,14 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/432875265.html</loc>
+    <loc>https://jiangxueqiao.com/post/667140500.html</loc>
     
-    <lastmod>2025-12-05T06:36:57.634Z</lastmod>
+    <lastmod>2025-12-05T06:36:57.633Z</lastmod>
     
-    <date>1513091485000</date>
-    <title>由字符串格式化函数引起的崩溃 | 独钓寒江雪</title>
+    <date>1692335712000</date>
+    <title>Windows平台文件自签名 | 独钓寒江雪</title>
     
-    <desc>本文记录一个由错误使用StringCchVPrintf等格式化函数所导致的崩溃问题。</desc>
+    <desc></desc>
   </url>
   
   <url>
@@ -904,12 +959,12 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/667140500.html</loc>
+    <loc>https://jiangxueqiao.com/post/2567544627.html</loc>
     
     <lastmod>2025-12-05T06:36:57.633Z</lastmod>
     
-    <date>1692335712000</date>
-    <title>Windows平台文件自签名 | 独钓寒江雪</title>
+    <date>1566529683000</date>
+    <title>Windows资源管理器图标覆盖优先级设定 | 独钓寒江雪</title>
     
     <desc></desc>
   </url>
@@ -921,17 +976,6 @@
     
     <date>1694689750000</date>
     <title>Windows的DLL全局共享变量 | 独钓寒江雪</title>
-    
-    <desc></desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/2567544627.html</loc>
-    
-    <lastmod>2025-12-05T06:36:57.633Z</lastmod>
-    
-    <date>1566529683000</date>
-    <title>Windows资源管理器图标覆盖优先级设定 | 独钓寒江雪</title>
     
     <desc></desc>
   </url>
@@ -970,47 +1014,14 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/1822204079.html</loc>
+    <loc>https://jiangxueqiao.com/post/2409581593.html</loc>
     
     <lastmod>2025-12-05T06:36:11.156Z</lastmod>
     
-    <date>1687929401000</date>
-    <title>CentOS7更新国内阿里源 | 独钓寒江雪</title>
+    <date>1679744733000</date>
+    <title>一个Dockerfile同时运行多个进程 | 独钓寒江雪</title>
     
-    <desc></desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/2025031576.html</loc>
-    
-    <lastmod>2025-12-05T06:36:11.156Z</lastmod>
-    
-    <date>1687962032000</date>
-    <title>CentOS7申请免费LetsEncrypt证书并续期 | 独钓寒江雪</title>
-    
-    <desc>本文介绍在 CentOS7 环境下，使用 Certbot 申请免费的 Lets Encrypt SSL 证书，并自动续期。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/2824175441.html</loc>
-    
-    <lastmod>2025-12-05T06:36:11.156Z</lastmod>
-    
-    <date>1512121629000</date>
-    <title>Linux GDB调试命令 | 独钓寒江雪</title>
-    
-    <desc>启动 GDBgdb -tui：分屏显示源代码gdb -q：不显示开始的提示信息 可以在.bashrc 中加入别名： 1alias gdb=&quot;gdb -q -tui&quot;</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/851648499.html</loc>
-    
-    <lastmod>2025-12-05T06:36:11.156Z</lastmod>
-    
-    <date>1692447312000</date>
-    <title>Redis慢日志与BigKey | 独钓寒江雪</title>
-    
-    <desc></desc>
+    <desc>Docker 容器的哲学是一个 Docker 容器只运行一个进程。 但如果需要在一个容器内运行多个进程或服务，可以采取将入口文件设置为 Bash Shell 脚本，在脚本内运行多个程序的方式。</desc>
   </url>
   
   <url>
@@ -1025,14 +1036,47 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/2409581593.html</loc>
+    <loc>https://jiangxueqiao.com/post/2824175441.html</loc>
     
     <lastmod>2025-12-05T06:36:11.156Z</lastmod>
     
-    <date>1679744733000</date>
-    <title>一个Dockerfile同时运行多个进程 | 独钓寒江雪</title>
+    <date>1512121629000</date>
+    <title>Linux GDB调试命令 | 独钓寒江雪</title>
     
-    <desc>Docker 容器的哲学是一个 Docker 容器只运行一个进程。 但如果需要在一个容器内运行多个进程或服务，可以采取将入口文件设置为 Bash Shell 脚本，在脚本内运行多个程序的方式。</desc>
+    <desc>启动 GDBgdb -tui：分屏显示源代码gdb -q：不显示开始的提示信息 可以在.bashrc 中加入别名： 1alias gdb=&quot;gdb -q -tui&quot;</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/1822204079.html</loc>
+    
+    <lastmod>2025-12-05T06:36:11.156Z</lastmod>
+    
+    <date>1687929401000</date>
+    <title>CentOS7更新国内阿里源 | 独钓寒江雪</title>
+    
+    <desc></desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/851648499.html</loc>
+    
+    <lastmod>2025-12-05T06:36:11.156Z</lastmod>
+    
+    <date>1692447312000</date>
+    <title>Redis慢日志与BigKey | 独钓寒江雪</title>
+    
+    <desc></desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/2025031576.html</loc>
+    
+    <lastmod>2025-12-05T06:36:11.156Z</lastmod>
+    
+    <date>1687962032000</date>
+    <title>CentOS7申请免费LetsEncrypt证书并续期 | 独钓寒江雪</title>
+    
+    <desc>本文介绍在 CentOS7 环境下，使用 Certbot 申请免费的 Lets Encrypt SSL 证书，并自动续期。</desc>
   </url>
   
   <url>
@@ -1058,17 +1102,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/640627104.html</loc>
-    
-    <lastmod>2025-12-05T06:35:41.916Z</lastmod>
-    
-    <date>1513001974000</date>
-    <title>Windows套接字I/O模型(2)-Select模型 | 独钓寒江雪</title>
-    
-    <desc>Select模型介绍套接字Select模型的中心思想是利用 select 函数实现对I&#x2F;O的管理。 可以利用select函数判断一个或多个套接字上是否存在待接收数据，或者能否向一个或多个套接字发送数据。 select函数是同步的，也会阻塞，但和阻塞模型不同的是，Select模型可以同时管理多个套接字。</desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/2544551173.html</loc>
     
     <lastmod>2025-12-05T06:35:41.916Z</lastmod>
@@ -1077,6 +1110,17 @@
     <title>Windows套接字I/O模型(3)-WSAAsyncSelect模型 | 独钓寒江雪</title>
     
     <desc>WSAAsyncSelect模型介绍利用 WSAAsyncSelect 模型结合 Windows 窗口消息循环，应用程序可以在一个套接字上接收以 Windows 消息为基础的网络事件通知。 在使用 WSAAsyncSelect 模型之前，首先需要创建一个 Windows 窗口，并为该窗口提供一个窗口过程支持函数（WndProc）。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/640627104.html</loc>
+    
+    <lastmod>2025-12-05T06:35:41.916Z</lastmod>
+    
+    <date>1513001974000</date>
+    <title>Windows套接字I/O模型(2)-Select模型 | 独钓寒江雪</title>
+    
+    <desc>Select模型介绍套接字Select模型的中心思想是利用 select 函数实现对I&#x2F;O的管理。 可以利用select函数判断一个或多个套接字上是否存在待接收数据，或者能否向一个或多个套接字发送数据。 select函数是同步的，也会阻塞，但和阻塞模型不同的是，Select模型可以同时管理多个套接字。</desc>
   </url>
   
   <url>
@@ -1091,17 +1135,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/2274025898.html</loc>
-    
-    <lastmod>2025-12-05T06:35:41.912Z</lastmod>
-    
-    <date>1520853000000</date>
-    <title>网络协议(3)--IP协议 | 独钓寒江雪</title>
-    
-    <desc>IP 协议是 TCP&#x2F;IP 协议族中最核心的协议。所有的 TCP、UDP、ICMP、IGMP 数据都以 IP 数据报的格式传输。</desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/3034381124.html</loc>
     
     <lastmod>2025-12-05T06:35:41.912Z</lastmod>
@@ -1110,6 +1143,17 @@
     <title>网络协议(2)--ARP和RARP协议 | 独钓寒江雪</title>
     
     <desc>ARP (Address Resolution Protocol) 地址解析协议，位于 TCP&#x2F;IP 协议栈中的链路层。 当局域网内主机间（或者是主机与网关间）需要通信时，通过使用 ARP 协议获取目标 IP 地址所对应的硬件 MAC 地址，然后在主机间通过 MAC 地址来完成数据包的发送和接收。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/2274025898.html</loc>
+    
+    <lastmod>2025-12-05T06:35:41.912Z</lastmod>
+    
+    <date>1520853000000</date>
+    <title>网络协议(3)--IP协议 | 独钓寒江雪</title>
+    
+    <desc>IP 协议是 TCP&#x2F;IP 协议族中最核心的协议。所有的 TCP、UDP、ICMP、IGMP 数据都以 IP 数据报的格式传输。</desc>
   </url>
   
   <url>
@@ -1201,6 +1245,17 @@
   </url>
   
   <url>
+    <loc>https://jiangxueqiao.com/post/2016855525.html</loc>
+    
+    <lastmod>2025-12-05T06:34:54.378Z</lastmod>
+    
+    <date>1572967746000</date>
+    <title>WebRTC在直播领域应用的可行性分析 | 独钓寒江雪</title>
+    
+    <desc>目前流行的直播技术架构目前主流的直播方案一般采用RTMP架构，首先客户端采集音视频流（如obs studio客户端），然后通过 RTMP 协议将流推到流媒体服务器，最后流媒体服务器将流处理后分发给各个直播客户端。</desc>
+  </url>
+  
+  <url>
     <loc>https://jiangxueqiao.com/post/2143630083.html</loc>
     
     <lastmod>2025-12-05T06:34:54.378Z</lastmod>
@@ -1212,14 +1267,14 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/2016855525.html</loc>
+    <loc>https://jiangxueqiao.com/post/2910781705.html</loc>
     
     <lastmod>2025-12-05T06:34:54.378Z</lastmod>
     
-    <date>1572967746000</date>
-    <title>WebRTC在直播领域应用的可行性分析 | 独钓寒江雪</title>
+    <date>1560996106000</date>
+    <title>Windows平台编译WebRTC源码 | 独钓寒江雪</title>
     
-    <desc>目前流行的直播技术架构目前主流的直播方案一般采用RTMP架构，首先客户端采集音视频流（如obs studio客户端），然后通过 RTMP 协议将流推到流媒体服务器，最后流媒体服务器将流处理后分发给各个直播客户端。</desc>
+    <desc>写作本文时使用的 webrtc 版本为：branch heads/67 准备工作请确保可以访问国外网站系统语言切换到英文系统 Windows 7&#x2F;10 都可以，在“控制面板”–&gt;”区域和语言”–&gt;”管理”–&gt;”更改系统区域设置”中切换到“英语（美国）”，然后重启系统。</desc>
   </url>
   
   <url>
@@ -1242,17 +1297,6 @@
     <title>WebRTC的三种架构 | 独钓寒江雪</title>
     
     <desc>WebRTC 是基于 P2P 的实时通信技术，（如果 P2P 打洞失败，则会使用 TURN 服务器进行数据转发），在有 2 台客户端参与的情况下，网络拓扑结构如图：</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/2910781705.html</loc>
-    
-    <lastmod>2025-12-05T06:34:54.378Z</lastmod>
-    
-    <date>1560996106000</date>
-    <title>Windows平台编译WebRTC源码 | 独钓寒江雪</title>
-    
-    <desc>写作本文时使用的 webrtc 版本为：branch heads/67 准备工作请确保可以访问国外网站系统语言切换到英文系统 Windows 7&#x2F;10 都可以，在“控制面板”–&gt;”区域和语言”–&gt;”管理”–&gt;”更改系统区域设置”中切换到“英语（美国）”，然后重启系统。</desc>
   </url>
   
   <url>
@@ -1531,17 +1575,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/2173106656.html</loc>
-    
-    <lastmod>2025-12-05T06:24:25.666Z</lastmod>
-    
-    <date>1600659419000</date>
-    <title>基于Joplin和WebDAV搭建私有云笔记 | 独钓寒江雪</title>
-    
-    <desc>本文介绍如何自己搭建Joplin云笔记。</desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/737594544.html</loc>
     
     <lastmod>2025-12-05T06:24:25.666Z</lastmod>
@@ -1561,6 +1594,17 @@
     <title>有趣的Unicode表情符号 | 独钓寒江雪</title>
     
     <desc></desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/2173106656.html</loc>
+    
+    <lastmod>2025-12-05T06:24:25.666Z</lastmod>
+    
+    <date>1600659419000</date>
+    <title>基于Joplin和WebDAV搭建私有云笔记 | 独钓寒江雪</title>
+    
+    <desc>本文介绍如何自己搭建Joplin云笔记。</desc>
   </url>
   
   <url>
@@ -1674,17 +1718,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/128186902.html</loc>
-    
-    <lastmod>2025-12-05T06:14:54.760Z</lastmod>
-    
-    <date>1626395623000</date>
-    <title>C++的API设计规范 | 独钓寒江雪</title>
-    
-    <desc>《C++ API 设计》是一本非常不错的书，该书内容远远超过了它标题所指的 C++ API 设计，它不仅仅讲述了与编程语言无关的 API 设计需要遵循的一些规范，同时也介绍了很多 C++开发中需要遵守一些准则，如果在开发中能遵循这些准则，将有利于我们写出高质量的代码。</desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/3756556672.html</loc>
     
     <lastmod>2025-12-05T06:14:54.760Z</lastmod>
@@ -1693,6 +1726,17 @@
     <title>C++生成条形码 | 独钓寒江雪</title>
     
     <desc>条形码(barcode)是将宽度不等的多个黑条和空白，按照一定的编码规则排列，用以表达一组信息的图形标识符。常见的条形码是由反射率相差很大的黑条（简称条）和白条（简称空）排成的平行线图案。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/128186902.html</loc>
+    
+    <lastmod>2025-12-05T06:14:54.760Z</lastmod>
+    
+    <date>1626395623000</date>
+    <title>C++的API设计规范 | 独钓寒江雪</title>
+    
+    <desc>《C++ API 设计》是一本非常不错的书，该书内容远远超过了它标题所指的 C++ API 设计，它不仅仅讲述了与编程语言无关的 API 设计需要遵循的一些规范，同时也介绍了很多 C++开发中需要遵守一些准则，如果在开发中能遵循这些准则，将有利于我们写出高质量的代码。</desc>
   </url>
   
   <url>
@@ -1726,17 +1770,6 @@
     <title>正则规则速查 | 独钓寒江雪</title>
     
     <desc>本文不是一个完整的正则表达式的教程，仅适用于已掌握正则表达式语法，需要进行规则速查的开发人员。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/679969051.html</loc>
-    
-    <lastmod>2025-12-05T06:14:54.756Z</lastmod>
-    
-    <date>1763471462000</date>
-    <title>软件开发中常用的数值：藏在代码里的数字密码 | 独钓寒江雪</title>
-    
-    <desc>文章还未完成，请输入密码查看初稿</desc>
   </url>
   
   <url>

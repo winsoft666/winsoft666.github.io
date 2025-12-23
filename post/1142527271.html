@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"jiangxueqiao.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"right","width_expanded":300,"width_dual_column":260,"display":"hide","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"vs2015"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":true,"height":300},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":false,"async":true,"duration":200,"transition":{"menu_item":null,"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":null}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"jiangxueqiao.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"right","width_expanded":300,"width_dual_column":260,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"vs2015"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":true,"height":300},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":false,"async":true,"duration":200,"transition":{"menu_item":null,"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":null}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
 
     <meta name="description" content="安装 port 历史版本如何在 Vcpkg 命令行模式下安装 port 时如何指定版本。 截至 2023-05-22：vcpkg 仅支持在 manifest 模式下指定 port 的版本，在命令行模式下不支持指定 port 版本。 使用 Git 命令查看当前 Vcpkg 仓库的 baseline： 1git rev-parse HEAD  创建vcpkg_json目录，并在该目录下创建vcpkg.">
 <meta property="og:type" content="article">
@@ -28,7 +28,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://jiangxueqiao.com/images/blog/vcpkg-private-repo-1.png">
 <meta property="article:published_time" content="2023-06-28T05:32:26.000Z">
-<meta property="article:modified_time" content="2025-12-09T03:04:50.164Z">
+<meta property="article:modified_time" content="2025-12-17T13:14:07.103Z">
 <meta property="article:author" content="jiangxueqiao.com">
 <meta property="article:tag" content="Vcpkg">
 <meta name="twitter:card" content="summary">
@@ -171,7 +171,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-port-%E5%8E%86%E5%8F%B2%E7%89%88%E6%9C%AC"><span class="nav-number">1.</span> <span class="nav-text">安装 port 历史版本</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE-Github-%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93"><span class="nav-number">2.</span> <span class="nav-text">访问 Github 私有仓库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8-Github-%E4%B8%AD%E6%B7%BB%E5%8A%A0-TOKEN"><span class="nav-number">2.1.</span> <span class="nav-text">在 Github 中添加 TOKEN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0-Windows-%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%EF%BC%9A"><span class="nav-number">2.2.</span> <span class="nav-text">添加 Windows 环境变量：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9-portfile-cmake"><span class="nav-number">2.3.</span> <span class="nav-text">修改 portfile.cmake</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E4%BB%93%E5%BA%93%E7%9A%84%E6%9C%80%E6%96%B0%E4%BB%A3%E7%A0%81"><span class="nav-number">3.</span> <span class="nav-text">使用仓库的最新代码</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-port-%E5%8E%86%E5%8F%B2%E7%89%88%E6%9C%AC"><span class="nav-number">1.</span> <span class="nav-text">安装 port 历史版本</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE-Github-%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93"><span class="nav-number">2.</span> <span class="nav-text">访问 Github 私有仓库</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E4%BB%93%E5%BA%93%E7%9A%84%E6%9C%80%E6%96%B0%E4%BB%A3%E7%A0%81"><span class="nav-number">3.</span> <span class="nav-text">使用仓库的最新代码</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -184,7 +184,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">164</span>
+          <span class="site-state-item-count">167</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -195,7 +195,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">20</span>
+        <span class="site-state-item-count">23</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -225,6 +225,39 @@
         <ul class="links-of-blogroll-list">
             <li class="links-of-blogroll-item">
               <a href="https://jiangxueqiao.com/online-tools" title="https:&#x2F;&#x2F;jiangxueqiao.com&#x2F;online-tools">在线工具</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://github.com/winsoft666/zoe" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;zoe" rel="noopener" target="_blank">跨平台文件下载库</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://github.com/winsoft666/veigar" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;veigar" rel="noopener" target="_blank">跨平台RPC库</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://github.com/winsoft666/QWebView" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;QWebView" rel="noopener" target="_blank">多浏览器内核Qt组件</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://github.com/winsoft666/vlc-qt2" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;vlc-qt2" rel="noopener" target="_blank">VLC内核Qt播放器组件</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://github.com/winsoft666/1key.run" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;1key.run" rel="noopener" target="_blank">仿Mac平台Alfred软件</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://github.com/winsoft666/qss-editor" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;qss-editor" rel="noopener" target="_blank">QSS编辑预览工具</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://github.com/winsoft666/WinSpyPlus" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;WinSpyPlus" rel="noopener" target="_blank">Spy++加强版</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://github.com/winsoft666/PortableStarter" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;PortableStarter" rel="noopener" target="_blank">便携式应用启动工具</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://github.com/winsoft666/electron-vue3-boilerplate" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;electron-vue3-boilerplate" rel="noopener" target="_blank">产品级的Electron模板</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://github.com/winsoft666/NSIS-UI-Plugin" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;NSIS-UI-Plugin" rel="noopener" target="_blank">NSIS界面插件</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://github.com/winsoft666/epub-image-localizer" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;epub-image-localizer" rel="noopener" target="_blank">本地化EPUB在线图片</a>
             </li>
         </ul>
       </div>
@@ -281,7 +314,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-12-09 11:04:50" itemprop="dateModified" datetime="2025-12-09T11:04:50+08:00">2025-12-09</time>
+      <time title="修改时间：2025-12-17 21:14:07" itemprop="dateModified" datetime="2025-12-17T21:14:07+08:00">2025-12-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -313,11 +346,10 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vcpkg install --triplet <span class="string">&quot;x64-windows&quot;</span> <span class="string">&quot;--x-manifest-root=D:\vcpkg_json\\&quot;</span> <span class="string">&quot;--x-install-root=D:CODE\vcpkg\installed\\&quot;</span></span><br></pre></td></tr></table></figure>
 
 <h1 id="访问-Github-私有仓库"><a href="#访问-Github-私有仓库" class="headerlink" title="访问 Github 私有仓库"></a>访问 Github 私有仓库</h1><p>Vcpkg 默认只支持从公共代码仓库进行下载编译，本文介绍如何使用 Vcpkg 从私有仓库进行源码下载&#x2F;编译&#x2F;安装。</p>
-<h3 id="在-Github-中添加-TOKEN"><a href="#在-Github-中添加-TOKEN" class="headerlink" title="在 Github 中添加 TOKEN"></a>在 Github 中添加 TOKEN</h3><p><img data-src="/images/blog/vcpkg-private-repo-1.png"></p>
-<h3 id="添加-Windows-环境变量："><a href="#添加-Windows-环境变量：" class="headerlink" title="添加 Windows 环境变量："></a>添加 Windows 环境变量：</h3><p><code>VCPKG_KEEP_ENV_VARS</code>值为<code>GITHUB_TOKEN</code></p>
-<p><code>GITHUB_TOKEN</code>值为第一步生成的 TOKEN</p>
-<h3 id="修改-portfile-cmake"><a href="#修改-portfile-cmake" class="headerlink" title="修改 portfile.cmake"></a>修改 portfile.cmake</h3><p>在<code>vcpkg\ports</code>目录下，找到对应库的 portfile.cmake 文件，加入<code>AUTHORIZATION_TOKEN</code>参数。</p>
-<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vcpkg_from_github(</span><br><span class="line">    OUT_SOURCE_PATH SOURCE_PATH</span><br><span class="line">    REPO xxx/xxx</span><br><span class="line">    HEAD_REF main</span><br><span class="line">    AUTHORIZATION_TOKEN $ENV&#123;GITHUB_TOKEN&#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>在 Github 中添加 TOKEN</p>
+<p><img data-src="/images/blog/vcpkg-private-repo-1.png"></p>
+<p>在<code>vcpkg\ports</code>目录下，找到对应库的 portfile.cmake 文件，加入<code>AUTHORIZATION_TOKEN</code>参数。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vcpkg_from_github(</span><br><span class="line">    OUT_SOURCE_PATH SOURCE_PATH</span><br><span class="line">    REPO xxx/xxx</span><br><span class="line">    HEAD_REF main</span><br><span class="line">    AUTHORIZATION_TOKEN <span class="string">&quot;your github token&quot;</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 
 <h1 id="使用仓库的最新代码"><a href="#使用仓库的最新代码" class="headerlink" title="使用仓库的最新代码"></a>使用仓库的最新代码</h1><p>在向 Vcpkg 提交 port 时，我们会不断地对仓库进行修改和调试。如果采用<code>REF</code>方式指定源码版本，则需要不断地修改 REF 和 SHA512，调试起来比较繁琐，我们可以采用<code>HEAD_REF</code>的方式来简化调试流程。<br><span style="color:#FFFFFF">&lt;原文出自: jiangxueqiao.com，请尊重原创&gt;</span><br>在<code>portfile.cmake</code>文件中指定<code>HEAD_REF</code>，如：</p>
 <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vcpkg_from_github(</span><br><span class="line">    OUT_SOURCE_PATH SOURCE_PATH</span><br><span class="line">    REPO winsoft666/ashe</span><br><span class="line">    HEAD_REF main</span><br><span class="line">    AUTHORIZATION_TOKEN $ENV&#123;GITHUB_TOKEN&#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
