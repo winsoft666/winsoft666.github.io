@@ -706,6 +706,17 @@
   </url>
   
   <url>
+    <loc>https://jiangxueqiao.com/post/1597634702.html</loc>
+    
+    <lastmod>2025-12-05T06:36:57.641Z</lastmod>
+    
+    <date>1596793427000</date>
+    <title>NSIS教程(10)-MUI跳过指定安装步骤 | 独钓寒江雪</title>
+    
+    <desc>在正常情况下安装包会有“欢迎界面”、“安装目录选择界面”等等，有时我们需要安装包自动跳过这 2 个界面，如安装包通过命令行参数传入“安装目录”（如setup.exe /installdir F:\test），本文讲述如何使安装包跳过指定的界面。</desc>
+  </url>
+  
+  <url>
     <loc>https://jiangxueqiao.com/post/2948643539.html</loc>
     
     <lastmod>2025-12-05T06:36:57.641Z</lastmod>
@@ -717,17 +728,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/275632694.html</loc>
-    
-    <lastmod>2025-12-05T06:36:57.641Z</lastmod>
-    
-    <date>1596457965000</date>
-    <title>NSIS教程(4)-传统界面示例 | 独钓寒江雪</title>
-    
-    <desc>本文以一个完整的、传统界面的网易云音乐安装包的脚本为示例，来介绍 NSIS 传统用户界面的开发流程。</desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/2584392152.html</loc>
     
     <lastmod>2025-12-05T06:36:57.641Z</lastmod>
@@ -736,17 +736,6 @@
     <title>NSIS教程(12)-开源UI插件 | 独钓寒江雪</title>
     
     <desc>介绍一个我开发的开源NSIS UI插件 NSIS-UI-Plugin，基于 NSIS-UI-Plugin 插件我们可以快速使用NSIS制作类似QQ等软件那样的安装包。 该插件默认使用Qt作为界面库（不需要编译Qt静态库，可以使用Qt动态库），但也可以很方便的切换使用其他界面库，如DuiLib等。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/1597634702.html</loc>
-    
-    <lastmod>2025-12-05T06:36:57.641Z</lastmod>
-    
-    <date>1596793427000</date>
-    <title>NSIS教程(10)-MUI跳过指定安装步骤 | 独钓寒江雪</title>
-    
-    <desc>在正常情况下安装包会有“欢迎界面”、“安装目录选择界面”等等，有时我们需要安装包自动跳过这 2 个界面，如安装包通过命令行参数传入“安装目录”（如setup.exe /installdir F:\test），本文讲述如何使安装包跳过指定的界面。</desc>
   </url>
   
   <url>
@@ -772,14 +761,14 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/3031217406.html</loc>
+    <loc>https://jiangxueqiao.com/post/275632694.html</loc>
     
     <lastmod>2025-12-05T06:36:57.641Z</lastmod>
     
-    <date>1596593666000</date>
-    <title>NSIS教程(7)-插件使用 | 独钓寒江雪</title>
+    <date>1596457965000</date>
+    <title>NSIS教程(4)-传统界面示例 | 独钓寒江雪</title>
     
-    <desc>NSIS 内置了很多指令，这些指令可以满足我们基本需求，但难免会遇到 NSIS 没有内置的功能，如进程操作，后台运行（即多线程），7z 压缩等等，这个时候我们就需要借助第三方插件来满足我们所需要的功能了。</desc>
+    <desc>本文以一个完整的、传统界面的网易云音乐安装包的脚本为示例，来介绍 NSIS 传统用户界面的开发流程。</desc>
   </url>
   
   <url>
@@ -791,6 +780,17 @@
     <title>NSIS教程(5)-现代界面示例 | 独钓寒江雪</title>
     
     <desc>NSIS 的现代用户界面(Modern UI)只是相对于传统（丑陋）的界面而言的“现代”而已。它定义在MUI2.nsh中，nsh 文件类似 C++中的头文件，可以被其他模块包含引用。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/3031217406.html</loc>
+    
+    <lastmod>2025-12-05T06:36:57.641Z</lastmod>
+    
+    <date>1596593666000</date>
+    <title>NSIS教程(7)-插件使用 | 独钓寒江雪</title>
+    
+    <desc>NSIS 内置了很多指令，这些指令可以满足我们基本需求，但难免会遇到 NSIS 没有内置的功能，如进程操作，后台运行（即多线程），7z 压缩等等，这个时候我们就需要借助第三方插件来满足我们所需要的功能了。</desc>
   </url>
   
   <url>
@@ -816,17 +816,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/595856315.html</loc>
-    
-    <lastmod>2025-12-05T06:36:57.641Z</lastmod>
-    
-    <date>1524310800000</date>
-    <title>Windows内存体系(2)--虚拟内存 | 独钓寒江雪</title>
-    
-    <desc>页交换文件虚拟地址空间只是操作系统为进程“虚拟”出来的一块地址区域，并不代表任何实际的空间。而“页交换文件”却对应了实际的空间，这个空间一般是磁盘上名为“pagefile.sys”的文件。 “页交换文件”的大小和位置可以在系统设置（系统属性 -&gt; 高级 -&gt; 性能 -&gt; 设置 -&gt; 高级 ）中进行设置： 从微软的官方文档来看，“虚拟内存”等于“物理内存”+“分页文件”总和。</desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/2494475058.html</loc>
     
     <lastmod>2025-12-05T06:36:57.641Z</lastmod>
@@ -835,6 +824,17 @@
     <title>Windows内存体系(1)--虚拟地址空间 | 独钓寒江雪</title>
     
     <desc>实模式下内存分配机制在 8086 或者 80186 以前，程序运行时，操作系统会把程序全都装入内存，程序都是直接运行在物理内存上的。也就是说程序中访问的内存地址都是实际的物理内存地址。当计算机同时运行多个程序时，必须保证这些程序用到的内存总量要小于计算机实际物理内存的大小。 例如某台计算机总的内存大小是128M ，现在同时运行两个程序 A 和 B ，A 需占用内存10M ， B 需占用内存110M</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/595856315.html</loc>
+    
+    <lastmod>2025-12-05T06:36:57.641Z</lastmod>
+    
+    <date>1524310800000</date>
+    <title>Windows内存体系(2)--虚拟内存 | 独钓寒江雪</title>
+    
+    <desc>页交换文件虚拟地址空间只是操作系统为进程“虚拟”出来的一块地址区域，并不代表任何实际的空间。而“页交换文件”却对应了实际的空间，这个空间一般是磁盘上名为“pagefile.sys”的文件。 “页交换文件”的大小和位置可以在系统设置（系统属性 -&gt; 高级 -&gt; 性能 -&gt; 设置 -&gt; 高级 ）中进行设置： 从微软的官方文档来看，“虚拟内存”等于“物理内存”+“分页文件”总和。</desc>
   </url>
   
   <url>
@@ -959,23 +959,23 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/2567544627.html</loc>
-    
-    <lastmod>2025-12-05T06:36:57.633Z</lastmod>
-    
-    <date>1566529683000</date>
-    <title>Windows资源管理器图标覆盖优先级设定 | 独钓寒江雪</title>
-    
-    <desc></desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/3002178342.html</loc>
     
     <lastmod>2025-12-05T06:36:57.633Z</lastmod>
     
     <date>1694689750000</date>
     <title>Windows的DLL全局共享变量 | 独钓寒江雪</title>
+    
+    <desc></desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/2567544627.html</loc>
+    
+    <lastmod>2025-12-05T06:36:57.633Z</lastmod>
+    
+    <date>1566529683000</date>
+    <title>Windows资源管理器图标覆盖优先级设定 | 独钓寒江雪</title>
     
     <desc></desc>
   </url>
@@ -992,17 +992,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/213040252.html</loc>
-    
-    <lastmod>2025-12-05T06:36:57.627Z</lastmod>
-    
-    <date>1524877201000</date>
-    <title>Windows内存体系(6)--跨模块内存分配释放 | 独钓寒江雪</title>
-    
-    <desc>在《Windows核心编程 第五版》第19章 DLL基础（511页）中给出了一个建议： “当一个 MT 版本的模块如果提供一个内存分配函数的时候，它必须同时提供另一个用来释放内存的函数。”。 说得更加直白一点就是，“对于 MT 的模块，不要跨模块进行内存释放。”。但是核心编程这本书上面没有具体分析原因，本文就来分析具体的原因。</desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/3599385732.html</loc>
     
     <lastmod>2025-12-05T06:36:57.627Z</lastmod>
@@ -1014,36 +1003,14 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/2409581593.html</loc>
+    <loc>https://jiangxueqiao.com/post/213040252.html</loc>
     
-    <lastmod>2025-12-05T06:36:11.156Z</lastmod>
+    <lastmod>2025-12-05T06:36:57.627Z</lastmod>
     
-    <date>1679744733000</date>
-    <title>一个Dockerfile同时运行多个进程 | 独钓寒江雪</title>
+    <date>1524877201000</date>
+    <title>Windows内存体系(6)--跨模块内存分配释放 | 独钓寒江雪</title>
     
-    <desc>Docker 容器的哲学是一个 Docker 容器只运行一个进程。 但如果需要在一个容器内运行多个进程或服务，可以采取将入口文件设置为 Bash Shell 脚本，在脚本内运行多个程序的方式。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/44844734.html</loc>
-    
-    <lastmod>2025-12-05T06:36:11.156Z</lastmod>
-    
-    <date>1692338100000</date>
-    <title>Redis常见异常及处理方案 | 独钓寒江雪</title>
-    
-    <desc>Redis 是高性能内存键值数据库，支持字符串、哈希等多结构，兼具缓存与持久化能力，广泛用于实时数据处理场景。本文主要介绍 Redis 常见的异常及处理方案。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/2824175441.html</loc>
-    
-    <lastmod>2025-12-05T06:36:11.156Z</lastmod>
-    
-    <date>1512121629000</date>
-    <title>Linux GDB调试命令 | 独钓寒江雪</title>
-    
-    <desc>启动 GDBgdb -tui：分屏显示源代码gdb -q：不显示开始的提示信息 可以在.bashrc 中加入别名： 1alias gdb=&quot;gdb -q -tui&quot;</desc>
+    <desc>在《Windows核心编程 第五版》第19章 DLL基础（511页）中给出了一个建议： “当一个 MT 版本的模块如果提供一个内存分配函数的时候，它必须同时提供另一个用来释放内存的函数。”。 说得更加直白一点就是，“对于 MT 的模块，不要跨模块进行内存释放。”。但是核心编程这本书上面没有具体分析原因，本文就来分析具体的原因。</desc>
   </url>
   
   <url>
@@ -1058,6 +1025,39 @@
   </url>
   
   <url>
+    <loc>https://jiangxueqiao.com/post/2025031576.html</loc>
+    
+    <lastmod>2025-12-05T06:36:11.156Z</lastmod>
+    
+    <date>1687962032000</date>
+    <title>CentOS7申请免费LetsEncrypt证书并续期 | 独钓寒江雪</title>
+    
+    <desc>本文介绍在 CentOS7 环境下，使用 Certbot 申请免费的 Lets Encrypt SSL 证书，并自动续期。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/2824175441.html</loc>
+    
+    <lastmod>2025-12-05T06:36:11.156Z</lastmod>
+    
+    <date>1512121629000</date>
+    <title>Linux GDB调试命令 | 独钓寒江雪</title>
+    
+    <desc>启动 GDBgdb -tui：分屏显示源代码gdb -q：不显示开始的提示信息 可以在.bashrc 中加入别名： 1alias gdb=&quot;gdb -q -tui&quot;</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/44844734.html</loc>
+    
+    <lastmod>2025-12-05T06:36:11.156Z</lastmod>
+    
+    <date>1692338100000</date>
+    <title>Redis常见异常及处理方案 | 独钓寒江雪</title>
+    
+    <desc>Redis 是高性能内存键值数据库，支持字符串、哈希等多结构，兼具缓存与持久化能力，广泛用于实时数据处理场景。本文主要介绍 Redis 常见的异常及处理方案。</desc>
+  </url>
+  
+  <url>
     <loc>https://jiangxueqiao.com/post/851648499.html</loc>
     
     <lastmod>2025-12-05T06:36:11.156Z</lastmod>
@@ -1069,14 +1069,14 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/2025031576.html</loc>
+    <loc>https://jiangxueqiao.com/post/2409581593.html</loc>
     
     <lastmod>2025-12-05T06:36:11.156Z</lastmod>
     
-    <date>1687962032000</date>
-    <title>CentOS7申请免费LetsEncrypt证书并续期 | 独钓寒江雪</title>
+    <date>1679744733000</date>
+    <title>一个Dockerfile同时运行多个进程 | 独钓寒江雪</title>
     
-    <desc>本文介绍在 CentOS7 环境下，使用 Certbot 申请免费的 Lets Encrypt SSL 证书，并自动续期。</desc>
+    <desc>Docker 容器的哲学是一个 Docker 容器只运行一个进程。 但如果需要在一个容器内运行多个进程或服务，可以采取将入口文件设置为 Bash Shell 脚本，在脚本内运行多个程序的方式。</desc>
   </url>
   
   <url>
@@ -1102,17 +1102,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/2544551173.html</loc>
-    
-    <lastmod>2025-12-05T06:35:41.916Z</lastmod>
-    
-    <date>1513066464000</date>
-    <title>Windows套接字I/O模型(3)-WSAAsyncSelect模型 | 独钓寒江雪</title>
-    
-    <desc>WSAAsyncSelect模型介绍利用 WSAAsyncSelect 模型结合 Windows 窗口消息循环，应用程序可以在一个套接字上接收以 Windows 消息为基础的网络事件通知。 在使用 WSAAsyncSelect 模型之前，首先需要创建一个 Windows 窗口，并为该窗口提供一个窗口过程支持函数（WndProc）。</desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/640627104.html</loc>
     
     <lastmod>2025-12-05T06:35:41.916Z</lastmod>
@@ -1121,6 +1110,17 @@
     <title>Windows套接字I/O模型(2)-Select模型 | 独钓寒江雪</title>
     
     <desc>Select模型介绍套接字Select模型的中心思想是利用 select 函数实现对I&#x2F;O的管理。 可以利用select函数判断一个或多个套接字上是否存在待接收数据，或者能否向一个或多个套接字发送数据。 select函数是同步的，也会阻塞，但和阻塞模型不同的是，Select模型可以同时管理多个套接字。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/2544551173.html</loc>
+    
+    <lastmod>2025-12-05T06:35:41.916Z</lastmod>
+    
+    <date>1513066464000</date>
+    <title>Windows套接字I/O模型(3)-WSAAsyncSelect模型 | 独钓寒江雪</title>
+    
+    <desc>WSAAsyncSelect模型介绍利用 WSAAsyncSelect 模型结合 Windows 窗口消息循环，应用程序可以在一个套接字上接收以 Windows 消息为基础的网络事件通知。 在使用 WSAAsyncSelect 模型之前，首先需要创建一个 Windows 窗口，并为该窗口提供一个窗口过程支持函数（WndProc）。</desc>
   </url>
   
   <url>
@@ -1168,17 +1168,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/3654006375.html</loc>
-    
-    <lastmod>2025-12-05T06:35:41.903Z</lastmod>
-    
-    <date>1521088200000</date>
-    <title>网络协议(7)--HTTP与HTTPS协议 | 独钓寒江雪</title>
-    
-    <desc>HTTP 是Hyper Text Transfer Protocol（超文本传输协议）的缩写。HTTP 协议位于 TCP&#x2F;IP 协议栈的应用层。</desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/4190400644.html</loc>
     
     <lastmod>2025-12-05T06:35:41.903Z</lastmod>
@@ -1187,6 +1176,17 @@
     <title>网络协议(5)--UDP协议 | 独钓寒江雪</title>
     
     <desc>一、什么是 UDP 协议？UDP 是 User Datagram Protocol 的简称，中文名是用户数据报协议，是 OSI 参考模型中的传输层协议，它是一种无连接的传输层协议，提供面向事务的简单不可靠信息传送服务。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/3654006375.html</loc>
+    
+    <lastmod>2025-12-05T06:35:41.903Z</lastmod>
+    
+    <date>1521088200000</date>
+    <title>网络协议(7)--HTTP与HTTPS协议 | 独钓寒江雪</title>
+    
+    <desc>HTTP 是Hyper Text Transfer Protocol（超文本传输协议）的缩写。HTTP 协议位于 TCP&#x2F;IP 协议栈的应用层。</desc>
   </url>
   
   <url>
@@ -1223,17 +1223,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/3666885372.html</loc>
-    
-    <lastmod>2025-12-05T06:34:54.383Z</lastmod>
-    
-    <date>1524901827000</date>
-    <title>Wav音频编码 | 独钓寒江雪</title>
-    
-    <desc>WAV格式是微软公司（Microsoft）开发的一种声音文件格式，它符合 RIFF(Resource Interchange File Format)文件规范，用于保存 Windows 平台的音频信息资源，被 Windows 平台及其应用程序所广泛支持。 WAVE 是录音时用的标准的 WINDOWS 文件格式，文件的扩展名为“WAV”，数据本身的格式为 PCM 或其他压缩数据，属于无损音乐格式的一</desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/2172509399.html</loc>
     
     <lastmod>2025-12-05T06:34:54.383Z</lastmod>
@@ -1242,6 +1231,17 @@
     <title>SDP格式解析 | 独钓寒江雪</title>
     
     <desc>会话描述协议（Session Description Protocol 或简写 SDP）描述的是流媒体的初始化参数。此协议由 IETF 发表为 RFC 2327。 SDP 完全是一种会话描述格式，它不属于传输协议。 SDP 用于描述多媒体通信会话，包括会话建立、会话请求和参数协商。SDP 不用于传输媒体数据，只能用于两个通信终端的参数协商，包括媒体类型、格式以及所有其他和会话相关的属性。SDP 以</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/3666885372.html</loc>
+    
+    <lastmod>2025-12-05T06:34:54.383Z</lastmod>
+    
+    <date>1524901827000</date>
+    <title>Wav音频编码 | 独钓寒江雪</title>
+    
+    <desc>WAV格式是微软公司（Microsoft）开发的一种声音文件格式，它符合 RIFF(Resource Interchange File Format)文件规范，用于保存 Windows 平台的音频信息资源，被 Windows 平台及其应用程序所广泛支持。 WAVE 是录音时用的标准的 WINDOWS 文件格式，文件的扩展名为“WAV”，数据本身的格式为 PCM 或其他压缩数据，属于无损音乐格式的一</desc>
   </url>
   
   <url>
@@ -1256,28 +1256,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/2143630083.html</loc>
-    
-    <lastmod>2025-12-05T06:34:54.378Z</lastmod>
-    
-    <date>1573529444000</date>
-    <title>WebRTC添加选择音频输入输出设备功能 | 独钓寒江雪</title>
-    
-    <desc>我们先来看看 WebRTC 中提供音频设备输入输出功能的类结构：</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/2910781705.html</loc>
-    
-    <lastmod>2025-12-05T06:34:54.378Z</lastmod>
-    
-    <date>1560996106000</date>
-    <title>Windows平台编译WebRTC源码 | 独钓寒江雪</title>
-    
-    <desc>写作本文时使用的 webrtc 版本为：branch heads/67 准备工作请确保可以访问国外网站系统语言切换到英文系统 Windows 7&#x2F;10 都可以，在“控制面板”–&gt;”区域和语言”–&gt;”管理”–&gt;”更改系统区域设置”中切换到“英语（美国）”，然后重启系统。</desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/201024982.html</loc>
     
     <lastmod>2025-12-05T06:34:54.378Z</lastmod>
@@ -1289,6 +1267,17 @@
   </url>
   
   <url>
+    <loc>https://jiangxueqiao.com/post/2143630083.html</loc>
+    
+    <lastmod>2025-12-05T06:34:54.378Z</lastmod>
+    
+    <date>1573529444000</date>
+    <title>WebRTC添加选择音频输入输出设备功能 | 独钓寒江雪</title>
+    
+    <desc>我们先来看看 WebRTC 中提供音频设备输入输出功能的类结构：</desc>
+  </url>
+  
+  <url>
     <loc>https://jiangxueqiao.com/post/2114040426.html</loc>
     
     <lastmod>2025-12-05T06:34:54.378Z</lastmod>
@@ -1297,6 +1286,17 @@
     <title>WebRTC的三种架构 | 独钓寒江雪</title>
     
     <desc>WebRTC 是基于 P2P 的实时通信技术，（如果 P2P 打洞失败，则会使用 TURN 服务器进行数据转发），在有 2 台客户端参与的情况下，网络拓扑结构如图：</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/2910781705.html</loc>
+    
+    <lastmod>2025-12-05T06:34:54.378Z</lastmod>
+    
+    <date>1560996106000</date>
+    <title>Windows平台编译WebRTC源码 | 独钓寒江雪</title>
+    
+    <desc>写作本文时使用的 webrtc 版本为：branch heads/67 准备工作请确保可以访问国外网站系统语言切换到英文系统 Windows 7&#x2F;10 都可以，在“控制面板”–&gt;”区域和语言”–&gt;”管理”–&gt;”更改系统区域设置”中切换到“英语（美国）”，然后重启系统。</desc>
   </url>
   
   <url>
@@ -1377,6 +1377,17 @@
   </url>
   
   <url>
+    <loc>https://jiangxueqiao.com/post/2248228478.html</loc>
+    
+    <lastmod>2025-12-05T06:34:11.680Z</lastmod>
+    
+    <date>1666968607000</date>
+    <title>写给C++程序员的Typescript语法基础 | 独钓寒江雪</title>
+    
+    <desc>TypeScript 是 JavaScript 的一个超集，支持 ES6 的语法规范，并在此基础上进行了增强，二者最大的不同在于：TypeScript 是强类型语言，而 JavaScript 是弱类型的语言。</desc>
+  </url>
+  
+  <url>
     <loc>https://jiangxueqiao.com/post/51642520.html</loc>
     
     <lastmod>2025-12-05T06:34:11.680Z</lastmod>
@@ -1396,17 +1407,6 @@
     <title>前后端常用概念扫盲 | 独钓寒江雪</title>
     
     <desc>本文主要介绍前后端及客户端开发中遇到的一些常用的技术概念，本文不会涉及太深奥的技术细节。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/2248228478.html</loc>
-    
-    <lastmod>2025-12-05T06:34:11.680Z</lastmod>
-    
-    <date>1666968607000</date>
-    <title>写给C++程序员的Typescript语法基础 | 独钓寒江雪</title>
-    
-    <desc>TypeScript 是 JavaScript 的一个超集，支持 ES6 的语法规范，并在此基础上进行了增强，二者最大的不同在于：TypeScript 是强类型语言，而 JavaScript 是弱类型的语言。</desc>
   </url>
   
   <url>
@@ -1575,6 +1575,17 @@
   </url>
   
   <url>
+    <loc>https://jiangxueqiao.com/post/2173106656.html</loc>
+    
+    <lastmod>2025-12-05T06:24:25.666Z</lastmod>
+    
+    <date>1600659419000</date>
+    <title>基于Joplin和WebDAV搭建私有云笔记 | 独钓寒江雪</title>
+    
+    <desc>本文介绍如何自己搭建Joplin云笔记。</desc>
+  </url>
+  
+  <url>
     <loc>https://jiangxueqiao.com/post/737594544.html</loc>
     
     <lastmod>2025-12-05T06:24:25.666Z</lastmod>
@@ -1594,17 +1605,6 @@
     <title>有趣的Unicode表情符号 | 独钓寒江雪</title>
     
     <desc></desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/2173106656.html</loc>
-    
-    <lastmod>2025-12-05T06:24:25.666Z</lastmod>
-    
-    <date>1600659419000</date>
-    <title>基于Joplin和WebDAV搭建私有云笔记 | 独钓寒江雪</title>
-    
-    <desc>本文介绍如何自己搭建Joplin云笔记。</desc>
   </url>
   
   <url>
