@@ -17,20 +17,20 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"jiangxueqiao.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"right","width_expanded":300,"width_dual_column":260,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"vs2015"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":true,"height":300},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":false,"async":true,"duration":200,"transition":{"menu_item":null,"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":null}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"jiangxueqiao.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"right","width_expanded":260,"width_dual_column":260,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"vs2015"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":true,"height":300},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":false,"async":true,"duration":200,"transition":{"menu_item":null,"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":null}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="x86架构作为个人计算机和服务器领域的主流计算架构，其汇编语言是理解计算机底层运行机制、进行逆向工程、性能优化及嵌入式开发的核心基础。本文将系统梳理x86架构中的常用寄存器​和常用汇编指令​，并结合实际应用场景说明其作用。 x86常用寄存器寄存器是CPU内部的高速存储单元，用于临时存放数据、地址或控制信息。x86寄存器按功能可分为通用寄存器、段寄存器、标志寄存器、指令指针、控制寄存器、调试寄存器及">
+    <meta name="description" content="x86架构作为个人计算机和服务器领域的主流计算架构，其汇编语言是理解计算机底层运行机制、进行逆向工程、性能优化及嵌入式开发的核心基础。本文将系统梳理x86架构中的常用寄存器​和常用汇编指令​，并结合实际应用场景说明其作用。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="x86架构常用寄存器及汇编指令">
 <meta property="og:url" content="https://jiangxueqiao.com/post/470495318.html">
 <meta property="og:site_name" content="独钓寒江雪">
-<meta property="og:description" content="x86架构作为个人计算机和服务器领域的主流计算架构，其汇编语言是理解计算机底层运行机制、进行逆向工程、性能优化及嵌入式开发的核心基础。本文将系统梳理x86架构中的常用寄存器​和常用汇编指令​，并结合实际应用场景说明其作用。 x86常用寄存器寄存器是CPU内部的高速存储单元，用于临时存放数据、地址或控制信息。x86寄存器按功能可分为通用寄存器、段寄存器、标志寄存器、指令指针、控制寄存器、调试寄存器及">
+<meta property="og:description" content="x86架构作为个人计算机和服务器领域的主流计算架构，其汇编语言是理解计算机底层运行机制、进行逆向工程、性能优化及嵌入式开发的核心基础。本文将系统梳理x86架构中的常用寄存器​和常用汇编指令​，并结合实际应用场景说明其作用。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://jiangxueqiao.com/images/blog/huibian-flags-register.png">
 <meta property="article:published_time" content="2025-10-22T08:31:00.000Z">
-<meta property="article:modified_time" content="2025-12-17T14:22:50.001Z">
+<meta property="article:modified_time" content="2025-12-29T14:18:55.910Z">
 <meta property="article:author" content="jiangxueqiao.com">
-<meta property="article:tag" content="汇编指令">
+<meta property="article:tag" content="汇编">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://jiangxueqiao.com/images/blog/huibian-flags-register.png">
 
@@ -184,7 +184,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">167</span>
+          <span class="site-state-item-count">153</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -195,7 +195,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -314,7 +314,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-12-17 22:22:50" itemprop="dateModified" datetime="2025-12-17T22:22:50+08:00">2025-12-17</time>
+      <time title="修改时间：2025-12-29 22:18:55" itemprop="dateModified" datetime="2025-12-29T22:18:55+08:00">2025-12-29</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -336,9 +336,10 @@
     
     
     <div class="post-body" itemprop="articleBody"><p>x86架构作为个人计算机和服务器领域的主流计算架构，其汇编语言是理解计算机底层运行机制、进行逆向工程、性能优化及嵌入式开发的核心基础。本文将系统梳理x86架构中的常用寄存器​和常用汇编指令​，并结合实际应用场景说明其作用。</p>
+<span id="more"></span>
+
 <h1 id="x86常用寄存器"><a href="#x86常用寄存器" class="headerlink" title="x86常用寄存器"></a>x86常用寄存器</h1><p>寄存器是CPU内部的高速存储单元，用于临时存放数据、地址或控制信息。x86寄存器按功能可分为通用寄存器、段寄存器、标志寄存器、指令指针、控制寄存器、调试寄存器及浮点&#x2F;SIMD寄存器等类别。</p>
 <h2 id="通用寄存器"><a href="#通用寄存器" class="headerlink" title="通用寄存器"></a>通用寄存器</h2><p>（General-Purpose Registers, GPRs）<br>通用寄存器是最常用的寄存器，支持数据存储、算术运算、内存寻址及栈操作等功能。根据架构位宽（16&#x2F;32&#x2F;64位）扩展，以下为核心寄存器：</p>
-<span id="more"></span>
 <h3 id="32位通用寄存器"><a href="#32位通用寄存器" class="headerlink" title="32位通用寄存器"></a>32位通用寄存器</h3><table>
 <thead>
 <tr>
@@ -350,7 +351,7 @@
 <tbody><tr>
 <td>EAX</td>
 <td>Extended Accumulator Reister</td>
-<td>累加器，用于算术运算（如ADD、MUL）、函数返回值存储（如C语言eax存返回值）；高16位为AX，低8位AL，高8位AH。</td>
+<td>累加器，用于算术运算（如ADD、MUL）、<strong>函数返回值存储</strong>；高16位为AX，低8位AL，高8位AH。</td>
 </tr>
 <tr>
 <td>EBX</td>
@@ -440,12 +441,12 @@
 <tr>
 <td>FS</td>
 <td>无严格全称</td>
-<td>用户模式下，32位进程可以通过FS获取TEB和PEB</td>
+<td>用户模式下，32位进程可以通过 FS 获取 TEB 和 PEB指针<br/>32位Windows内核模式下，通过FS获取KPCR指针</td>
 </tr>
 <tr>
 <td>GS</td>
 <td>无严格全称</td>
-<td>用户模式下，64位进程可以通过GS获取TEB和PEB</td>
+<td>用户模式下，64位进程可以通过 GS 获取 TEB和 PEB指针<br/>64位Windows内核模式下，通过GS获取KPCR指针</td>
 </tr>
 </tbody></table>
 <h2 id="标志寄存器"><a href="#标志寄存器" class="headerlink" title="标志寄存器"></a>标志寄存器</h2><p>记录运算状态或控制CPU行为，32位为EFLAGS，64位为RFLAGS（低32位兼容EFLAGS）。</p>
@@ -515,12 +516,12 @@
 <tbody><tr>
 <td>EIP</td>
 <td>Extended Instruction Pointer</td>
-<td>32位指令指针，存储下一条要执行的指令地址（程序计数器）。</td>
+<td>32位指令指针，存储下一条要执行的指令地址</td>
 </tr>
 <tr>
 <td>RIP</td>
 <td>Instruction Pointer (64-bit)</td>
-<td>64位指令指针，存储下一条指令地址（R表示64位扩展）。</td>
+<td>64位指令指针，存储下一条要执行的指令地址</td>
 </tr>
 </tbody></table>
 <h1 id="x86常用汇编指令"><a href="#x86常用汇编指令" class="headerlink" title="x86常用汇编指令"></a>x86常用汇编指令</h1><p>指令按功能分为数据传输、算术运算、逻辑操作、移位、比较与跳转等类别。多数指令会修改标志寄存器（如CF、ZF），少数例外（如PUSHF）。</p>
@@ -548,13 +549,13 @@
 </tr>
 <tr>
 <td>PUSH</td>
-<td>Push onto Stack</td>
+<td>Push</td>
 <td>操作数压入栈（ESP&#x2F;SP递减，如<code>PUSH EAX</code>）。</td>
 <td>无（除非操作数是标志寄存器）</td>
 </tr>
 <tr>
 <td>POP</td>
-<td>Pop from Stack</td>
+<td>Pop</td>
 <td>从栈顶弹出数据到操作数（ESP&#x2F;SP递增，如<code>POP EBX</code>）。</td>
 <td>无（除非操作数是标志寄存器）</td>
 </tr>
@@ -830,15 +831,15 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4/" rel="tag"># 汇编指令</a>
+              <a href="/tags/%E6%B1%87%E7%BC%96/" rel="tag"># 汇编</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/post/966041457.html" rel="prev" title="Visual Studio 断点高级使用指南">
-                  <i class="fa fa-angle-left"></i> Visual Studio 断点高级使用指南
+                <a href="/post/966041457.html" rel="prev" title="Visual Studio 断点使用手册">
+                  <i class="fa fa-angle-left"></i> Visual Studio 断点使用手册
                 </a>
             </div>
             <div class="post-nav-item">

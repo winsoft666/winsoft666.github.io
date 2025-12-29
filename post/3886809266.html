@@ -17,14 +17,14 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"jiangxueqiao.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"right","width_expanded":300,"width_dual_column":260,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"vs2015"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":true,"height":300},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":false,"async":true,"duration":200,"transition":{"menu_item":null,"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":null}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"jiangxueqiao.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"right","width_expanded":260,"width_dual_column":260,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"vs2015"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":true,"height":300},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":false,"async":true,"duration":200,"transition":{"menu_item":null,"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":null}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="一、协议栈1.1 七层OSI协议栈完整的OSI协议总共有7层，如下图所示： 1.2 五层TCP&#x2F;IP协议栈在实际应用中，业界又产生了简化的五层 TPC&#x2F;IP 协议栈，将 OSI 协议栈中的会话层、表示层、应用层统称为应用层。 1.3 四层TCP&#x2F;IP协议栈在五层TCP&#x2F;IP协议栈的基础上，进一步将物理层、数据链路层统称为链路层。  二、IP 地址、子网掩码、">
+    <meta name="description" content="从烽火台到 TCP&#x2F;IP，人类协作的本质，是达成共识。网络协议，正是数字时代赖以生存的“共识”基石。它沉默地流淌在每次点击、每条消息、每一帧画面之下，构筑了现代社会的神经系统。本系列将层层剖析这些无形的规则，为您揭开互联网高效、有序运转的终极秘密，理解我们究竟如何在比特的海洋中，精准地找到彼此。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="网络协议(1)--基础概念">
 <meta property="og:url" content="https://jiangxueqiao.com/post/3886809266.html">
 <meta property="og:site_name" content="独钓寒江雪">
-<meta property="og:description" content="一、协议栈1.1 七层OSI协议栈完整的OSI协议总共有7层，如下图所示： 1.2 五层TCP&#x2F;IP协议栈在实际应用中，业界又产生了简化的五层 TPC&#x2F;IP 协议栈，将 OSI 协议栈中的会话层、表示层、应用层统称为应用层。 1.3 四层TCP&#x2F;IP协议栈在五层TCP&#x2F;IP协议栈的基础上，进一步将物理层、数据链路层统称为链路层。  二、IP 地址、子网掩码、">
+<meta property="og:description" content="从烽火台到 TCP&#x2F;IP，人类协作的本质，是达成共识。网络协议，正是数字时代赖以生存的“共识”基石。它沉默地流淌在每次点击、每条消息、每一帧画面之下，构筑了现代社会的神经系统。本系列将层层剖析这些无形的规则，为您揭开互联网高效、有序运转的终极秘密，理解我们究竟如何在比特的海洋中，精准地找到彼此。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://jiangxueqiao.com/images/blog/osi-7.png">
 <meta property="og:image" content="https://jiangxueqiao.com/images/blog/wangluoxieyi-jichugailian-1.jpg">
@@ -34,7 +34,7 @@
 <meta property="og:image" content="https://jiangxueqiao.com/images/blog/wangluoxieyi-jichugailian-5.jpg">
 <meta property="og:image" content="https://jiangxueqiao.com/images/blog/wangluoxieyi-jichugailian-6.jpg">
 <meta property="article:published_time" content="2018-03-10T10:10:58.000Z">
-<meta property="article:modified_time" content="2025-12-05T06:35:41.899Z">
+<meta property="article:modified_time" content="2025-12-28T12:41:16.609Z">
 <meta property="article:author" content="jiangxueqiao.com">
 <meta property="article:tag" content="网络协议">
 <meta name="twitter:card" content="summary">
@@ -177,7 +177,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%8D%8F%E8%AE%AE%E6%A0%88"><span class="nav-number">1.</span> <span class="nav-text">一、协议栈</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-%E4%B8%83%E5%B1%82OSI%E5%8D%8F%E8%AE%AE%E6%A0%88"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 七层OSI协议栈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-%E4%BA%94%E5%B1%82TCP-IP%E5%8D%8F%E8%AE%AE%E6%A0%88"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 五层TCP&#x2F;IP协议栈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-%E5%9B%9B%E5%B1%82TCP-IP%E5%8D%8F%E8%AE%AE%E6%A0%88"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 四层TCP&#x2F;IP协议栈</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81IP-%E5%9C%B0%E5%9D%80%E3%80%81%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81%E3%80%81%E7%BD%91%E5%85%B3"><span class="nav-number">2.</span> <span class="nav-text">二、IP 地址、子网掩码、网关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-IP-%E5%9C%B0%E5%9D%80%E5%8F%8A%E5%88%86%E7%B1%BB"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 IP 地址及分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E7%BD%91%E7%BB%9C%E6%95%B0%E7%9A%84%E8%A7%A3%E9%87%8A"><span class="nav-number">2.1.1.</span> <span class="nav-text">关于网络数的解释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E4%B8%BB%E6%9C%BA%E6%95%B0%E7%9A%84%E8%A7%A3%E9%87%8A"><span class="nav-number">2.1.2.</span> <span class="nav-text">关于主机数的解释</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E7%A7%81%E6%9C%89-IP-%E5%9C%B0%E5%9D%80"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 私有 IP 地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 子网掩码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-%E7%BD%91%E5%85%B3%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">2.4.</span> <span class="nav-text">2.3 网关的作用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%8C%85%E7%9A%84%E5%B0%81%E8%A3%85%E4%B8%8E%E8%A7%A3%E5%B0%81%E8%A3%85"><span class="nav-number">3.</span> <span class="nav-text">三、包的封装与解封装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%81MTU"><span class="nav-number">4.</span> <span class="nav-text">四、MTU</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#windows-%E7%B3%BB%E7%BB%9F%E4%BF%AE%E6%94%B9-MTU-%E5%80%BC"><span class="nav-number">4.1.</span> <span class="nav-text">windows 系统修改 MTU 值</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8D%8F%E8%AE%AE%E6%A0%88"><span class="nav-number">1.</span> <span class="nav-text">协议栈</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83%E5%B1%82OSI%E5%8D%8F%E8%AE%AE%E6%A0%88"><span class="nav-number">1.1.</span> <span class="nav-text">七层OSI协议栈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E5%B1%82TCP-IP%E5%8D%8F%E8%AE%AE%E6%A0%88"><span class="nav-number">1.2.</span> <span class="nav-text">五层TCP&#x2F;IP协议栈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E5%B1%82TCP-IP%E5%8D%8F%E8%AE%AE%E6%A0%88"><span class="nav-number">1.3.</span> <span class="nav-text">四层TCP&#x2F;IP协议栈</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IP-%E5%9C%B0%E5%9D%80%E3%80%81%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81%E3%80%81%E7%BD%91%E5%85%B3"><span class="nav-number">2.</span> <span class="nav-text">IP 地址、子网掩码、网关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IP-%E5%9C%B0%E5%9D%80%E5%8F%8A%E5%88%86%E7%B1%BB"><span class="nav-number">2.1.</span> <span class="nav-text">IP 地址及分类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E7%BD%91%E7%BB%9C%E6%95%B0%E7%9A%84%E8%A7%A3%E9%87%8A"><span class="nav-number">2.1.1.</span> <span class="nav-text">关于网络数的解释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E4%B8%BB%E6%9C%BA%E6%95%B0%E7%9A%84%E8%A7%A3%E9%87%8A"><span class="nav-number">2.1.2.</span> <span class="nav-text">关于主机数的解释</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%81%E6%9C%89-IP-%E5%9C%B0%E5%9D%80"><span class="nav-number">2.2.</span> <span class="nav-text">私有 IP 地址</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AD%90%E7%BD%91%E6%8E%A9%E7%A0%81"><span class="nav-number">2.3.</span> <span class="nav-text">子网掩码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E5%85%B3%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">2.4.</span> <span class="nav-text">网关的作用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8C%85%E7%9A%84%E5%B0%81%E8%A3%85%E4%B8%8E%E8%A7%A3%E5%B0%81%E8%A3%85"><span class="nav-number">3.</span> <span class="nav-text">包的封装与解封装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MTU"><span class="nav-number">4.</span> <span class="nav-text">MTU</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#windows-%E7%B3%BB%E7%BB%9F%E4%BF%AE%E6%94%B9-MTU-%E5%80%BC"><span class="nav-number">4.1.</span> <span class="nav-text">windows 系统修改 MTU 值</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -190,7 +190,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">167</span>
+          <span class="site-state-item-count">153</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -201,7 +201,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -320,7 +320,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-12-05 14:35:41" itemprop="dateModified" datetime="2025-12-05T14:35:41+08:00">2025-12-05</time>
+      <time title="修改时间：2025-12-28 20:41:16" itemprop="dateModified" datetime="2025-12-28T20:41:16+08:00">2025-12-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -341,11 +341,13 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h1 id="一、协议栈"><a href="#一、协议栈" class="headerlink" title="一、协议栈"></a>一、协议栈</h1><h2 id="1-1-七层OSI协议栈"><a href="#1-1-七层OSI协议栈" class="headerlink" title="1.1 七层OSI协议栈"></a>1.1 七层OSI协议栈</h2><p>完整的OSI协议总共有7层，如下图所示：<br><img data-src="/images/blog/osi-7.png"></p>
-<h2 id="1-2-五层TCP-IP协议栈"><a href="#1-2-五层TCP-IP协议栈" class="headerlink" title="1.2 五层TCP&#x2F;IP协议栈"></a>1.2 五层TCP&#x2F;IP协议栈</h2><p>在实际应用中，业界又产生了简化的五层 TPC&#x2F;IP 协议栈，将 OSI 协议栈中的会话层、表示层、应用层统称为应用层。</p>
-<h2 id="1-3-四层TCP-IP协议栈"><a href="#1-3-四层TCP-IP协议栈" class="headerlink" title="1.3 四层TCP&#x2F;IP协议栈"></a>1.3 四层TCP&#x2F;IP协议栈</h2><p>在五层TCP&#x2F;IP协议栈的基础上，进一步将物理层、数据链路层统称为链路层。</p>
+    <div class="post-body" itemprop="articleBody"><p>从烽火台到 TCP&#x2F;IP，人类协作的本质，是达成共识。网络协议，正是数字时代赖以生存的“共识”基石。它沉默地流淌在每次点击、每条消息、每一帧画面之下，构筑了现代社会的神经系统。本系列将层层剖析这些无形的规则，为您揭开互联网高效、有序运转的终极秘密，理解我们究竟如何在比特的海洋中，精准地找到彼此。</p>
+<span id="more"></span>
+<h1 id="协议栈"><a href="#协议栈" class="headerlink" title="协议栈"></a>协议栈</h1><h2 id="七层OSI协议栈"><a href="#七层OSI协议栈" class="headerlink" title="七层OSI协议栈"></a>七层OSI协议栈</h2><p>完整的OSI协议总共有7层，如下图所示：<br><img data-src="/images/blog/osi-7.png"></p>
+<h2 id="五层TCP-IP协议栈"><a href="#五层TCP-IP协议栈" class="headerlink" title="五层TCP&#x2F;IP协议栈"></a>五层TCP&#x2F;IP协议栈</h2><p>在实际应用中，业界又产生了简化的五层 TPC&#x2F;IP 协议栈，将 OSI 协议栈中的会话层、表示层、应用层统称为应用层。</p>
+<h2 id="四层TCP-IP协议栈"><a href="#四层TCP-IP协议栈" class="headerlink" title="四层TCP&#x2F;IP协议栈"></a>四层TCP&#x2F;IP协议栈</h2><p>在五层TCP&#x2F;IP协议栈的基础上，进一步将物理层、数据链路层统称为链路层。</p>
 <p><img data-src="/images/blog/wangluoxieyi-jichugailian-1.jpg"></p>
-<h1 id="二、IP-地址、子网掩码、网关"><a href="#二、IP-地址、子网掩码、网关" class="headerlink" title="二、IP 地址、子网掩码、网关"></a>二、IP 地址、子网掩码、网关</h1><h2 id="2-1-IP-地址及分类"><a href="#2-1-IP-地址及分类" class="headerlink" title="2.1 IP 地址及分类"></a>2.1 IP 地址及分类</h2><p>IP 地址相当于互联网上的门牌号，计算机在启动的时候可以从磁盘（无盘系统例外）上读取该主机的 IP 配置。</p>
+<h1 id="IP-地址、子网掩码、网关"><a href="#IP-地址、子网掩码、网关" class="headerlink" title="IP 地址、子网掩码、网关"></a>IP 地址、子网掩码、网关</h1><h2 id="IP-地址及分类"><a href="#IP-地址及分类" class="headerlink" title="IP 地址及分类"></a>IP 地址及分类</h2><p>IP 地址相当于互联网上的门牌号，计算机在启动的时候可以从磁盘（无盘系统例外）上读取该主机的 IP 配置。</p>
 <p>IP 地址由 4 个字节（也就是 32 位）的二进制码组成，包含了<code>网络号( net-id )</code>和<code>主机号( host-id )</code>。但现实中，我们经常还需要再继续划分<code>“子网”</code>，这时就需要借用主机号的一部分充任子网号，这样 IP 地址也就可以看成由<code>标准网络号、子网号、主机号</code>3 部分组成的，即<code>IP地址=标准网络号+子网号+主机号</code>。</p>
 <blockquote>
 <p>网络号、子网号、主机号三者间的关系，形象的描述如下：假设你的住址 IP 是<code>武汉市文治街16号</code>，那么，<br>IP 地址 &#x3D; 武汉市文治街 16 号<br>网络号 &#x3D; 武汉市<br>子网号 &#x3D; 文治街<br>主机号 &#x3D; 16 号</p>
@@ -404,7 +406,7 @@
 <li>在 C 类地址中，实际上 <code>192.0.0.0</code> 是不指派的，而可以指派的最小网络是 <code>192.0.1.0</code>，所以 C 类地址网络数是 $2^{21}-1$。</li>
 </ul>
 <h3 id="关于主机数的解释"><a href="#关于主机数的解释" class="headerlink" title="关于主机数的解释"></a>关于主机数的解释</h3><p>主机数就是一个子网里面可以容纳多少台主机。从上面表格可以推算出主机数的计算公式为: <code>2^主机号位数-2</code>（主机号全为 0 表示该网络，而主机号全为 1 表示广播地址，所以要排除掉这两个）。比如 A 类地址 <code>1.0.0.0</code> 表示主机所在的网段的网络地址, <code>1.255.255.255</code> 为该网段的广播地址。</p>
-<h2 id="2-2-私有-IP-地址"><a href="#2-2-私有-IP-地址" class="headerlink" title="2.2 私有 IP 地址"></a>2.2 私有 IP 地址</h2><p>经常可以看到<code>192.168.1.101</code>这类的 IP 地址, 这些是私有 IP 地址, 专用地址, 也就是局域网内使用的的 IP 地址。<br>公网 IP 地址是需要向有关部门申请备案的，私有 IP 地址不用申请, 但是仅限内网使用, 也节约公网 IP。</p>
+<h2 id="私有-IP-地址"><a href="#私有-IP-地址" class="headerlink" title="私有 IP 地址"></a>私有 IP 地址</h2><p>经常可以看到<code>192.168.1.101</code>这类的 IP 地址, 这些是私有 IP 地址, 专用地址, 也就是局域网内使用的的 IP 地址。<br>公网 IP 地址是需要向有关部门申请备案的，私有 IP 地址不用申请, 但是仅限内网使用, 也节约公网 IP。</p>
 <table>
 <thead>
 <tr>
@@ -428,7 +430,7 @@
 <p>路由器看到专用地址就不转发，所以说专用地址作为目的地址是不可能在因特网上传送的。专用 IP 地址也可叫做可重用地址。</p>
 <p>那么，问题来了，如果配置了这些专用地址的主机想和因特网上的主机通信，需要怎么办呢？</p>
 <p>NAT(network address translation: 网络地址转换)在这种情况下就应运而生了。NAT 就是将这种地址转换成有效的外部全球 IP 地址，使得整个专用网只需要一个全球 IP 地址就可以与因特网联通。</p>
-<h2 id="2-3-子网掩码"><a href="#2-3-子网掩码" class="headerlink" title="2.3 子网掩码"></a>2.3 子网掩码</h2><p><code>IP地址=标准网络号+子网号+主机号</code>。从 IP 分类可以很容易确定“标准网络号”，<code>32bit</code>的 IP 地址除去前面的“标准网络号”之后，剩下的就是“子网号”和“主机号”，那么怎么确定“子网号”和“主机号”呢？ 这就需要借助<code>“子网掩码”</code>了。</p>
+<h2 id="子网掩码"><a href="#子网掩码" class="headerlink" title="子网掩码"></a>子网掩码</h2><p><code>IP地址=标准网络号+子网号+主机号</code>。从 IP 分类可以很容易确定“标准网络号”，<code>32bit</code>的 IP 地址除去前面的“标准网络号”之后，剩下的就是“子网号”和“主机号”，那么怎么确定“子网号”和“主机号”呢？ 这就需要借助<code>“子网掩码”</code>了。</p>
 <p>子网掩码也是一个 32bit(<code>xxx.xxx.xxx.xxx</code>)的值，其中值为 1 的 bit 留给“标准网络号”和“子网号”，为 0 的 bit 留给“主机号”。我们可以将子网掩码和 IP 地址进行二进制<code>“与运算”</code>，通过得到的结果来确定“子网号”。</p>
 <p>以 C 类 IP 地址为例，对于规范的 C 类 IP 地址来说，规范子网掩码为<code>255.255.255.0</code>，即用 32 比特 IP 地址的前 24 比特标识网络号，后 8 比特标识主机号。因而，每个 C 类网络下共可容纳 254 台主机($2^8-2$)。 </p>
 <p>如今，我们打算借用 2 比特的主机号来充任子网络号。C 类网络地址<code>210.31.233.0</code>，我们借用 2 比特的主机号来充当子网号，子网的数目为$2^2-2$(子网号无法全为 0 或 1，所以减 2).</p>
@@ -439,8 +441,8 @@
 <blockquote>
 <p>经常见到像<code>192.168.1.0/24</code>这样的写法，它的意思是网络号为<code>192.168.1.0</code>；子网掩码为 24 位，即<code>111111111 111111111 111111111 00000000</code>，转为点分十进制就为<code>255.255.255.0</code>，可以拥有的主机数为$2^8$-2.</p>
 </blockquote>
-<h2 id="2-3-网关的作用"><a href="#2-3-网关的作用" class="headerlink" title="2.3 网关的作用"></a>2.3 网关的作用</h2><p>你的住址 IP 是<code>武汉市洪山区文治街16号</code>，你的父母只允许你和文治街的小朋友（同一个子网）一起玩耍，如果你想要去和别的街道（别的子网）的小朋友玩耍，你就需要经过你的父母的同意，由你的父母带你过去，这时候你的父母就充当了<strong>网关</strong>的角色，没有你的父母，你就不能和其他街道（其他子网）的小朋友玩耍。</p>
-<h1 id="三、包的封装与解封装"><a href="#三、包的封装与解封装" class="headerlink" title="三、包的封装与解封装"></a>三、包的封装与解封装</h1><blockquote>
+<h2 id="网关的作用"><a href="#网关的作用" class="headerlink" title="网关的作用"></a>网关的作用</h2><p>你的住址 IP 是<code>武汉市洪山区文治街16号</code>，你的父母只允许你和文治街的小朋友（同一个子网）一起玩耍，如果你想要去和别的街道（别的子网）的小朋友玩耍，你就需要经过你的父母的同意，由你的父母带你过去，这时候你的父母就充当了<strong>网关</strong>的角色，没有你的父母，你就不能和其他街道（其他子网）的小朋友玩耍。</p>
+<h1 id="包的封装与解封装"><a href="#包的封装与解封装" class="headerlink" title="包的封装与解封装"></a>包的封装与解封装</h1><blockquote>
 <p>封装英文：Encapsulation<br>解封装英文：Demultiplexing</p>
 </blockquote>
 <p>当应用程序使用网络传送数据时，数据按照协议栈从上到下的顺序，逐次通过每一层。其中每一层对收到的数据都要增加一些首部信息（有时还增加尾部信息）。最终生成的一串比特流将通过以太网来传输，我们称这串比特流叫帧。</p>
@@ -451,7 +453,7 @@
 <blockquote>
 <p>完整的 IP 协议号见：<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/IP%E5%8D%8F%E8%AE%AE%E5%8F%B7%E5%88%97%E8%A1%A8">IP 协议号列表</a></p>
 </blockquote>
-<h1 id="四、MTU"><a href="#四、MTU" class="headerlink" title="四、MTU"></a>四、MTU</h1><p>前面第三节提到了以太网封装限制了数据帧的长度为 1500 字节，这个限制是在链路层封装 IP 数据报时作的。如果 IP 层的数据报比链路层的这个 MTU 值大，那么 IP 层就需要分片（英文：fragmentation），把数据报分成若干片，保证每一片的大小都小于 MTU 值。</p>
+<h1 id="MTU"><a href="#MTU" class="headerlink" title="MTU"></a>MTU</h1><p>前面第三节提到了以太网封装限制了数据帧的长度为 1500 字节，这个限制是在链路层封装 IP 数据报时作的。如果 IP 层的数据报比链路层的这个 MTU 值大，那么 IP 层就需要分片（英文：fragmentation），把数据报分成若干片，保证每一片的大小都小于 MTU 值。</p>
 <h3 id="windows-系统修改-MTU-值"><a href="#windows-系统修改-MTU-值" class="headerlink" title="windows 系统修改 MTU 值"></a>windows 系统修改 MTU 值</h3><ul>
 <li>查询当前 MTU 值</li>
 </ul>

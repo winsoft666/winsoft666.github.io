@@ -17,17 +17,17 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"jiangxueqiao.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"right","width_expanded":300,"width_dual_column":260,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"vs2015"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":true,"height":300},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":false,"async":true,"duration":200,"transition":{"menu_item":null,"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":null}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"jiangxueqiao.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"right","width_expanded":260,"width_dual_column":260,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"vs2015"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":true,"height":300},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":false,"async":true,"duration":200,"transition":{"menu_item":null,"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":null}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
 
     <meta name="description" content="前面的几篇文章介绍了 NSIS 的传统界面的安装包和现代界面的安装包的制作方法，也提到了 NSIS 支持自定义页面（即使用page custom）的特性，自定义页面需要用户自己创建对话框、控件、添加控件响应等等，虽然 NSIS 提供了nsDialogs.nsh来支持这些功能，但使用起来还是不太方便（需要专门了解这个插件诸多用法），而且不够灵活，所以本文介绍一种终极的自定义界面的安装包解决方案，即完">
 <meta property="og:type" content="article">
-<meta property="og:title" content="NSIS教程(9)-使用界面库制作安装界面">
+<meta property="og:title" content="NSIS的UI插件的开发">
 <meta property="og:url" content="https://jiangxueqiao.com/post/100006247.html">
 <meta property="og:site_name" content="独钓寒江雪">
 <meta property="og:description" content="前面的几篇文章介绍了 NSIS 的传统界面的安装包和现代界面的安装包的制作方法，也提到了 NSIS 支持自定义页面（即使用page custom）的特性，自定义页面需要用户自己创建对话框、控件、添加控件响应等等，虽然 NSIS 提供了nsDialogs.nsh来支持这些功能，但使用起来还是不太方便（需要专门了解这个插件诸多用法），而且不够灵活，所以本文介绍一种终极的自定义界面的安装包解决方案，即完">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-08-07T09:35:21.000Z">
-<meta property="article:modified_time" content="2025-12-09T03:07:43.473Z">
+<meta property="article:modified_time" content="2025-12-29T13:35:53.621Z">
 <meta property="article:author" content="jiangxueqiao.com">
 <meta property="article:tag" content="NSIS">
 <meta name="twitter:card" content="summary">
@@ -36,10 +36,10 @@
 <link rel="canonical" href="https://jiangxueqiao.com/post/100006247.html">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jiangxueqiao.com/post/100006247.html","path":"post/100006247.html","title":"NSIS教程(9)-使用界面库制作安装界面"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jiangxueqiao.com/post/100006247.html","path":"post/100006247.html","title":"NSIS的UI插件的开发"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>NSIS教程(9)-使用界面库制作安装界面 | 独钓寒江雪</title>
+<title>NSIS的UI插件的开发 | 独钓寒江雪</title>
   
 
   <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
@@ -182,7 +182,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">167</span>
+          <span class="site-state-item-count">153</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -193,7 +193,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -289,12 +289,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="NSIS教程(9)-使用界面库制作安装界面 | 独钓寒江雪">
+      <meta itemprop="name" content="NSIS的UI插件的开发 | 独钓寒江雪">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          NSIS教程(9)-使用界面库制作安装界面
+          NSIS的UI插件的开发
         </h1>
 
         <div class="post-meta-container">
@@ -312,7 +312,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-12-09 11:07:43" itemprop="dateModified" datetime="2025-12-09T11:07:43+08:00">2025-12-09</time>
+      <time title="修改时间：2025-12-29 21:35:53" itemprop="dateModified" datetime="2025-12-29T21:35:53+08:00">2025-12-29</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -360,7 +360,6 @@
 <p>写这篇文字的时候，发现现在的<a target="_blank" rel="noopener" href="http://nsis.sourceforge.net/Nsis7z_plug-in">nsis7z</a>已经太老了，新版的压缩软件生成的 7z 压缩包，该插件已经无法解压。可以使用 7za.exe 命令行工具来生成 7z 压缩文件，7za.exe 从此处下载：<a target="_blank" rel="noopener" href="http://download.csdn.net/download/china_jeffery/10214464">http://download.csdn.net/download/china_jeffery&#x2F;10214464</a>。<br>7za 生成 7z 压缩包语法为：<br><code>7za.exe a app.7z app\*</code></p>
 </blockquote>
 <h3 id="从-C-回调-NSIS-函数"><a href="#从-C-回调-NSIS-函数" class="headerlink" title="从 C++回调 NSIS 函数"></a>从 C++回调 NSIS 函数</h3><p><span style="color:#FFFFFF">&lt;原文出自: jiangxueqiao.com，请尊重原创&gt;</span><br>比如用户点击了我们自定义界面上的“取消”按钮，这时我们需要调用 NSIS 的<code>Abort</code>函数来取消安装。此时就需要解决如何从 C++环境回调到 NSIS 环境。</p>
-<p>我们可以使用<a href="/post/1273492093.html" title="NSIS教程(8)-插件开发">NSIS教程(8)-插件开发</a>中介绍的<code>PluginCommon.h</code>来实现该功能。</p>
 <p>大致原理是，在 NSIS 脚本中初始化自定义界面的控件与 NSIS 函数指针（整型）的绑定关系（如控件名–函数名），当用户点击控件之后，查找到该控件绑定的 NSIS 函数，然后调用<code>extra_parameters::ExecuteCodeSegment</code>函数（函数第一个参数就是 NSIS 函数指针）。</p>
 <p>以 duilib 界面库为例，对 NSIS 暴露 OnControlBindNSISScript 接口，提供绑定控件与 NSIS 函数指针（整型）的功能：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">NSISAPI <span class="title">OnControlBindNSISScript</span><span class="params">(HWND hwndParent, <span class="type">int</span> string_size, <span class="type">char</span> *variables, <span class="type">stack_t</span> **stacktop, extra_parameters *extra)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">char</span> controlName[MAX_PATH];</span><br><span class="line">    <span class="built_in">ZeroMemory</span>(controlName, MAX_PATH);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">popstring</span>(controlName);</span><br><span class="line">    <span class="type">int</span> callbackID = <span class="built_in">popint</span>();</span><br><span class="line">    g_pMainDlg-&gt;<span class="built_in">SaveToControlCallbackMap</span>( controlName, callbackID );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -407,7 +406,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://jiangxueqiao.com/post/100006247.html" title="NSIS教程(9)-使用界面库制作安装界面">https://jiangxueqiao.com/post/100006247.html</a>
+      <a href="https://jiangxueqiao.com/post/100006247.html" title="NSIS的UI插件的开发">https://jiangxueqiao.com/post/100006247.html</a>
   </li>
   <li class="post-copyright-license">
       <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -423,13 +422,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/post/1273492093.html" rel="prev" title="NSIS教程(8)-插件开发">
-                  <i class="fa fa-angle-left"></i> NSIS教程(8)-插件开发
+                <a href="/post/3031217406.html" rel="prev" title="NSIS插件使用及开发">
+                  <i class="fa fa-angle-left"></i> NSIS插件使用及开发
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/post/1597634702.html" rel="next" title="NSIS教程(10)-MUI跳过指定安装步骤">
-                  NSIS教程(10)-MUI跳过指定安装步骤 <i class="fa fa-angle-right"></i>
+                <a href="/post/2173106656.html" rel="next" title="基于Joplin和WebDAV搭建私有云笔记">
+                  基于Joplin和WebDAV搭建私有云笔记 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>

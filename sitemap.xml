@@ -2,14 +2,487 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://jiangxueqiao.com/post/1914794883.html</loc>
+    
+    <lastmod>2025-12-29T14:21:00.450Z</lastmod>
+    
+    <date>1754280662000</date>
+    <title>从C++11开始新增的常用关键字 | 独钓寒江雪</title>
+    
+    <desc>从 C++11 开始，一系列新关键字的引入，为我们提供了更优的语法选择，它们逐渐取代了许多传统的 C++98&#x2F;03 惯用法。这不仅是语法的更新，更是理念的升级：用 nullptr 替代 NULL 以获得类型安全，用范围 for 替代手动迭代以提升可读性，用 constexpr 宣告编译期计算以追求极致性能。本文旨在梳理这些自 C++11 起新增的常用关键字，揭示它们如何让我们的代码变得更</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/470495318.html</loc>
+    
+    <lastmod>2025-12-29T14:18:55.910Z</lastmod>
+    
+    <date>1761121860000</date>
+    <title>x86架构常用寄存器及汇编指令 | 独钓寒江雪</title>
+    
+    <desc>x86架构作为个人计算机和服务器领域的主流计算架构，其汇编语言是理解计算机底层运行机制、进行逆向工程、性能优化及嵌入式开发的核心基础。本文将系统梳理x86架构中的常用寄存器​和常用汇编指令​，并结合实际应用场景说明其作用。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/4168021185.html</loc>
+    
+    <lastmod>2025-12-29T14:18:47.405Z</lastmod>
+    
+    <date>1642773181000</date>
+    <title>从汇编的角度分析函数调用过程 | 独钓寒江雪</title>
+    
+    <desc>本文从汇编的视角分析了函数的调用方式，掌握该知识对使用 OllyDbg 等动态调试工具会大有裨益。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/3573459553.html</loc>
+    
+    <lastmod>2025-12-29T14:18:31.538Z</lastmod>
+    
+    <date>1763903462000</date>
+    <title>代码的隐形战场：Windows进程注入与API Hook完全指南 | 独钓寒江雪</title>
+    
+    <desc>在数字时代的攻防战场上，Windows 注入与 Hook 技术如影随形，它们始终是开发者与安全研究员的“终极兵器库”。无论是逆向工程师通过动态调试破解加密算法，还是恶意软件通过进程注入窃取敏感信息，这项技术始终游走在合法与非法的灰色边缘。它既是系统底层机制的“潘多拉魔盒”，也是守护软件安全的“达摩克利斯之剑”——掌握它，你既能修复高危漏洞，也可能成为攻击者的帮凶。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/2494475058.html</loc>
+    
+    <lastmod>2025-12-29T14:13:53.785Z</lastmod>
+    
+    <date>1524192188000</date>
+    <title>Windows内存探索：从虚拟内存到堆管理的核心机制 | 独钓寒江雪</title>
+    
+    <desc>在 Windows 开发中，对内存的理解深度，往往直接决定了一个程序的稳定性、性能与安全边界。那些看似突然的程序崩溃、难以追踪的内存泄漏，或是性能分析工具中令人困惑的内存数据，其根源常深植于我们对系统内存机制的理解盲区。 Windows 内存管理是一套层次分明、环环相扣的精密体系。从应用程序视角看到的连续“内存”，实际上是虚拟内存技术精心营造的抽象空间；支撑程序运行的物理资源，则通过分页机制在物理</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/409779091.html</loc>
+    
+    <lastmod>2025-12-29T13:39:48.495Z</lastmod>
+    
+    <date>1596283492000</date>
+    <title>NSIS基础语法 | 独钓寒江雪</title>
+    
+    <desc>NSIS（Nullsoft Scriptable Install System）是一个开源的 Windows 平台安装包制作程序。NSIS 通过它定义的脚本语言来描述安装包的行为和逻辑的。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/3798382521.html</loc>
+    
+    <lastmod>2025-12-29T13:37:36.746Z</lastmod>
+    
+    <date>1596498894000</date>
+    <title>NSIS的现代界面示例 | 独钓寒江雪</title>
+    
+    <desc>NSIS 的现代用户界面(Modern UI)只是相对于传统（丑陋）的界面而言的“现代”而已。它定义在MUI2.nsh中，nsh 文件类似 C++中的头文件，可以被其他模块包含引用。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/100006247.html</loc>
+    
+    <lastmod>2025-12-29T13:35:53.621Z</lastmod>
+    
+    <date>1596792921000</date>
+    <title>NSIS的UI插件的开发 | 独钓寒江雪</title>
+    
+    <desc>前面的几篇文章介绍了 NSIS 的传统界面的安装包和现代界面的安装包的制作方法，也提到了 NSIS 支持自定义页面（即使用page custom）的特性，自定义页面需要用户自己创建对话框、控件、添加控件响应等等，虽然 NSIS 提供了nsDialogs.nsh来支持这些功能，但使用起来还是不太方便（需要专门了解这个插件诸多用法），而且不够灵活，所以本文介绍一种终极的自定义界面的安装包解决方案，即完</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/3031217406.html</loc>
+    
+    <lastmod>2025-12-29T13:35:27.569Z</lastmod>
+    
+    <date>1596593666000</date>
+    <title>NSIS插件使用及开发 | 独钓寒江雪</title>
+    
+    <desc>NSIS 内置了很多指令，这些指令可以满足我们基本需求，但难免会遇到 NSIS 没有内置的功能，如进程操作，后台运行（即多线程），7z 压缩等等，这个时候我们就需要借助第三方插件来满足我们所需要的功能了。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/275632694.html</loc>
+    
+    <lastmod>2025-12-29T13:31:29.843Z</lastmod>
+    
+    <date>1596457965000</date>
+    <title>NSIS的传统界面示例 | 独钓寒江雪</title>
+    
+    <desc>本文以一个完整的、传统界面的网易云音乐安装包的脚本为示例，来介绍 NSIS 传统用户界面的开发流程。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/3462229631.html</loc>
+    
+    <lastmod>2025-12-28T13:01:46.066Z</lastmod>
+    
+    <date>1721201710000</date>
+    <title>了解数字证书 | 独钓寒江雪</title>
+    
+    <desc>打开任何一个数字证书售卖网站都可以看到它们通常将数字证书分为两个大类：SSL证书和数字签名证书。 SSL证书的主要作用是对网站进行身份验证和传输数据加密； 数字签名主要用于验证信息的真实性和完整性，根据使用场景的不同大致分为如下几类： 对客户端程序（.exe、.dll、.sys等文件）签名的代码签名证书。 对PDF等文档签名的文档签名证书。 对电子邮件及其附件签名和加密的邮件安全证书。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/3666245140.html</loc>
+    
+    <lastmod>2025-12-28T13:01:18.671Z</lastmod>
+    
+    <date>1691632800000</date>
+    <title>获取其他进程的命令行参数 | 独钓寒江雪</title>
+    
+    <desc>本文介绍如何根据进程 ID 获取进程命令行参数，使用 Windows NTDLL 提供的未公开 API 实现。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/2963045346.html</loc>
+    
+    <lastmod>2025-12-28T13:00:53.939Z</lastmod>
+    
+    <date>1757469600000</date>
+    <title>给进程伪造一个父亲 | 独钓寒江雪</title>
+    
+    <desc>传统的进程树模型不仅是系统管理的图谱，更是安全审计与调查的关键线索。然而，通过特定的技术手段，一个进程完全可以“认贼作父”——将其父进程信息伪装成另一个合法或高权限进程，从而隐匿自己的真实起源，逃逸监控，混淆侦查视线。这不仅是攻击者用于规避检测的方法，也为防御方深入理解系统底层机制打开了另一扇窗。本文将探索这项技术在 Windows 系统下的实现原理。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/4190400644.html</loc>
+    
+    <lastmod>2025-12-28T13:00:11.462Z</lastmod>
+    
+    <date>1520915400000</date>
+    <title>网络协议(5)--UDP协议 | 独钓寒江雪</title>
+    
+    <desc>什么是 UDP 协议？UDP 是 User Datagram Protocol 的简称，中文名是用户数据报协议，是 OSI 参考模型中的传输层协议，它是一种无连接的传输层协议，提供面向事务的简单不可靠信息传送服务。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/2291877732.html</loc>
+    
+    <lastmod>2025-12-28T13:00:05.300Z</lastmod>
+    
+    <date>1687928976000</date>
+    <title>CMake依赖库查找相关问题 | 独钓寒江雪</title>
+    
+    <desc>如何查找 Vcpkg 安装的依赖库在 CMake 工具中指定跨平台工具链，如图： 指定 Toolchain 文件D:/sourcecode/vcpkg/scripts/buildsystems/vcpkg.cmake。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/2304457467.html</loc>
+    
+    <lastmod>2025-12-28T12:59:59.303Z</lastmod>
+    
+    <date>1728639276000</date>
+    <title>Modern CMake 简明教程（中） | 独钓寒江雪</title>
+    
+    <desc>CMake 是一个开源、跨平台的构建系统生成器（Build-system Generator）。 本文是 Modern CMake 简明教程系列的中篇，上篇请移步 《Modern CMake 简明教程（上）》 本教程默认 CMake 最低版本为 3.16，即 cmake_minimum_required(VERSION 3.16)。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/1485983255.html</loc>
+    
+    <lastmod>2025-12-28T12:58:14.060Z</lastmod>
+    
+    <date>1713536438000</date>
+    <title>生活家（转载） | 独钓寒江雪</title>
+    
+    <desc>《红楼梦》第五十回中，一夜大雪后，贾府大观园的姐妹们一起作诗，众姐妹要王熙凤为即景联诗起个头。王熙凤虽只识得几个字，倒也不扭捏，笑道:“我想下雪必刮北风。昨夜听见了一夜的北风，我有了一句，就是‘一夜北风紧’，可使得?”众人听了，都相视笑道：“这句虽粗，不见底下的，这正是会作诗的起法。不但好，而且留了多少地步与后人”。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/3832899600.html</loc>
+    
+    <lastmod>2025-12-28T12:57:39.157Z</lastmod>
+    
+    <date>1726892432000</date>
+    <title>绘制Windows的界面：探索窗口、GDI与GDI+的图形世界 | 独钓寒江雪</title>
+    
+    <desc>当你点击桌面图标，一个窗口缓缓展开；滚动网页时，文字与图片在屏幕上丝滑游走；打开绘图软件，笔触落下的瞬间，色彩便在虚拟画布上晕染开来——这些习以为常的界面交互，构成了我们与数字世界对话的桥梁。但你是否想过：这些“理所当然”的视觉体验，究竟是如何从代码的海洋里“生长”出来的？窗口的轮廓如何被精准勾勒？色彩与线条怎样穿越硬件与系统的边界，最终跃入人眼？</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/556603567.html</loc>
+    
+    <lastmod>2025-12-28T12:57:08.950Z</lastmod>
+    
+    <date>1740216535000</date>
+    <title>Wireshark过滤器速查手册 | 独钓寒江雪</title>
+    
+    <desc>Wireshark 中有两种过滤器： 捕获过滤器：用于在数据包捕获阶段过滤数据包，只捕获符合条件的数据包，这样可以减少捕获不必要的数据包，从而提高性能。 显示过滤器：用于在已经捕获的数据包中过滤出符合条件的数据包进行显示，它使用的是 Wireshark 自己的语法。</desc>
+  </url>
+  
+  <url>
     <loc>https://jiangxueqiao.com/post/966041457.html</loc>
     
-    <lastmod>2025-12-23T06:46:03.285Z</lastmod>
+    <lastmod>2025-12-28T12:54:27.364Z</lastmod>
     
     <date>1758541189000</date>
-    <title>Visual Studio 断点高级使用指南 | 独钓寒江雪</title>
+    <title>Visual Studio 断点使用手册 | 独钓寒江雪</title>
     
-    <desc>Visual Studio 的断点系统远不止”在代码行上点击左侧边栏”那么简单。掌握其高级功能可以彻底改变你的调试体验，让你能精准定位问题，而不是在无尽的代码执行中盲目搜索。本文将带你全面了解 Visual Studio 断点系统的各项高级功能。 条件断点条件断点允许你设置特定条件，只有满足这些条件时调试器才会暂停。 支持如下格式的表达式： 12345678910// 基本条件i &gt; 100</desc>
+    <desc>Visual Studio 的断点系统远不止”在代码行上点击左侧边栏”那么简单。掌握其高级功能可以彻底改变你的调试体验，让你能精准定位问题，而不是在无尽的代码执行中盲目搜索。本文将带你全面了解 Visual Studio 断点系统的各项高级功能。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/2819651546.html</loc>
+    
+    <lastmod>2025-12-28T12:45:21.526Z</lastmod>
+    
+    <date>1509421325000</date>
+    <title>字节序列之大小端 | 独钓寒江雪</title>
+    
+    <desc>大小端的定义Big-Endian 和 Little-Endian 的定义分别如下： Little-Endian 数据的低位字节位存放在内存的低地址端，高位字节存放在内存的高地址端。 Big-Endian 数据的高位字节位存放在内存的低地址端，低位字节存放在内存的高地址端。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/547434843.html</loc>
+    
+    <lastmod>2025-12-28T12:44:57.012Z</lastmod>
+    
+    <date>1513084284000</date>
+    <title>Windows套接字I/O模型(4)-WSAEventSelect模型 | 独钓寒江雪</title>
+    
+    <desc>WSAEventSelect模型和WSAAsyncSelect模型类似，但WSAEventSelect模型允许应用程序在一个或多个套接字上面接收以事件为基础的网络事件通知。该模型和WSAAsyncSelect模型的最主要的区别在于网络事件是由事件对象句柄完成的，而不是通过窗口消息完成的。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/2544551173.html</loc>
+    
+    <lastmod>2025-12-28T12:44:53.950Z</lastmod>
+    
+    <date>1513066464000</date>
+    <title>Windows套接字I/O模型(3)-WSAAsyncSelect模型 | 独钓寒江雪</title>
+    
+    <desc>利用 WSAAsyncSelect 模型结合 Windows 窗口消息循环，应用程序可以在一个套接字上接收以 Windows 消息为基础的网络事件通知。 在使用 WSAAsyncSelect 模型之前，首先需要创建一个 Windows 窗口，并为该窗口提供一个窗口过程支持函数（WndProc）。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/640627104.html</loc>
+    
+    <lastmod>2025-12-28T12:44:51.106Z</lastmod>
+    
+    <date>1513001974000</date>
+    <title>Windows套接字I/O模型(2)-Select模型 | 独钓寒江雪</title>
+    
+    <desc>套接字Select模型的中心思想是利用 select 函数实现对I&#x2F;O的管理。 可以利用select函数判断一个或多个套接字上是否存在待接收数据，或者能否向一个或多个套接字发送数据。 select函数是同步的，也会阻塞，但和阻塞模型不同的是，Select模型可以同时管理多个套接字。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/326824759.html</loc>
+    
+    <lastmod>2025-12-28T12:44:37.448Z</lastmod>
+    
+    <date>1513330738000</date>
+    <title>Windows套接字I/O模型(5)-完成端口模型 | 独钓寒江雪</title>
+    
+    <desc>前面的文章已经介绍了套接字 I&#x2F;O 的同步模型、WSAAsyncSelect模型、WSAEventSelect模型，到目前为止套接字I&#x2F;O还剩下2个模型没有介绍：重叠模型，完成端口模型。 如果程序对性能和并发要求不高，可以使用前面介绍的WSAEventSelect模型；如果对性能和并发有要求，可以使用本文介绍的完成端口模型。 因为完成端口模型是基于重叠模型的，且在易用性、可伸缩</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/618632730.html</loc>
+    
+    <lastmod>2025-12-28T12:44:18.071Z</lastmod>
+    
+    <date>1514611538000</date>
+    <title>程序员如何提升自身价值（转载） | 独钓寒江雪</title>
+    
+    <desc>程序员薪水有高有低，有的人一个月可能拿30K、50K，有的人可能只有2K、3K。同样有五年工作经验的程序员，可能一个人每月拿20K，一个拿5K。是什么因素导致了这种差异？我特意总结了容易导致薪水低的九大行为表现，避开这些大坑，你就离高薪不远了。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/3534906950.html</loc>
+    
+    <lastmod>2025-12-28T12:44:06.231Z</lastmod>
+    
+    <date>1516325138000</date>
+    <title>最不像干货的33条干货（转载） | 独钓寒江雪</title>
+    
+    <desc>成功的唯一秘诀就是钻空子。钻职场人际关系的空子、钻市场监管的空子、钻信息不对称的空子，钻你发现的一切空子的空子。当然，坚持、努力、选择这些因素，对于成功也很重要，但算不上秘诀。只有钻空子才是唯一的秘诀。 不要做永远正确的穷人。少跟人争辩，你觉得对就去做，做成了自然别人就闭嘴了。说服别人并没有实际的意义，浪费口舌和时间。当然，利益相关的事情，有人冤枉你的情况除外。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/3654006375.html</loc>
+    
+    <lastmod>2025-12-28T12:43:39.967Z</lastmod>
+    
+    <date>1521088200000</date>
+    <title>网络协议(7)--HTTP与HTTPS协议 | 独钓寒江雪</title>
+    
+    <desc>HTTP 是Hyper Text Transfer Protocol（超文本传输协议）的缩写。HTTP 协议位于 TCP&#x2F;IP 协议栈的应用层。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/3886809266.html</loc>
+    
+    <lastmod>2025-12-28T12:41:16.609Z</lastmod>
+    
+    <date>1520676658000</date>
+    <title>网络协议(1)--基础概念 | 独钓寒江雪</title>
+    
+    <desc></desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/4206756384.html</loc>
+    
+    <lastmod>2025-12-28T12:39:02.756Z</lastmod>
+    
+    <date>1521001232000</date>
+    <title>Windows的消息机制 | 独钓寒江雪</title>
+    
+    <desc>消息队列首先我们要明确一个观点：窗口是和线程相关联的，消息队列也是和线程相关联的，这个线程无论是主线程还是子线程。 当一个线程被创建时，系统假定该线程不会被用于任何与用户界面相关的任务，所以不会为它分配相应的资源（如消息队列等），因为这样可以减少线程对系统资源的占用。 但是，一旦这个线程调用一个与图形用户界面有关的函数（例如检查它的消息队列或建立一个窗口），系统就会为该线程分配一些额外的资源，以便</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/201024982.html</loc>
+    
+    <lastmod>2025-12-28T12:38:33.592Z</lastmod>
+    
+    <date>1524717691000</date>
+    <title>WebRTC官方示例apprtc搭建 | 独钓寒江雪</title>
+    
+    <desc>本文讲述如何搭建WebRTC官方的apprtc示例，系统环境 Ubuntu 16.04，在搭建之前建议关闭系统防火墙。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/2567544627.html</loc>
+    
+    <lastmod>2025-12-28T12:37:44.454Z</lastmod>
+    
+    <date>1566529683000</date>
+    <title>Windows资源管理器图标覆盖优先级设定 | 独钓寒江雪</title>
+    
+    <desc>我们在安装了TortoiseSVN或TortoiseGit后，会自动在资源管理器的文件夹和文件图标上显示覆盖图标（Icon Overlay），这样可以比较方便的查看文件状态。 但有时候我们安装的其他软件，如Dropbox等，也会在资源管理器中显示覆盖图标。多个软件都显示覆盖图标时，会由于优先级问题导致覆盖图标不显示的问题。 本文讲述如何通过调整软件覆盖图标的优先级来解决诸如此类的问题。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/737279469.html</loc>
+    
+    <lastmod>2025-12-28T12:37:17.343Z</lastmod>
+    
+    <date>1571886512000</date>
+    <title>流媒体基础概念 | 独钓寒江雪</title>
+    
+    <desc>流媒体协议RTP (Real-time Transport Protocol)RTP 特征实时传输协议（Real-time Transport Protocol）是一个网络传输层协议，它是由 IETF 的多媒体传输工作小组 1996 年在 RFC 1889 中公布的，它作为因特网标准在 RFC 3550（该文档的旧版本是 RFC 1889）有详细说明，RTP 标准定义了两个子协议：RTP 和 RT</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/795351407.html</loc>
+    
+    <lastmod>2025-12-28T12:36:10.524Z</lastmod>
+    
+    <date>1577265991000</date>
+    <title>WebRTC线程模型 | 独钓寒江雪</title>
+    
+    <desc>在介绍WebRTC的线程模型之前，先介绍Webrtc线程模型中用到的几个简单、常用的模块或函数。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/2202762022.html</loc>
+    
+    <lastmod>2025-12-28T12:34:40.793Z</lastmod>
+    
+    <date>1664110502000</date>
+    <title>Qt开发路上的“绊脚石”与“垫脚石” | 独钓寒江雪</title>
+    
+    <desc>本文整理了一些在使用 Qt 框架过程中遇到的实际问题及其解决方案。内容源自日常开发笔记，偏重实用，虽未刻意追求系统性的篇章结构，但希望能为遇到类似情况的开发者提供参考。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/3768553066.html</loc>
+    
+    <lastmod>2025-12-28T12:31:49.066Z</lastmod>
+    
+    <date>1671801606000</date>
+    <title>C++构造函数排雷 | 独钓寒江雪</title>
+    
+    <desc>默认构造函数什么是默认构造函数？我们一般会认为默认构造函数就是编译器自动生成的那个构造函数，其实这种理解不全面。**准确的说，默认构造函数就是在调用时不需要显示地传入实参的构造函数。**根据这个原则，下面 2 种构造函数都是默认构造函数： 1234567class Sample &#123;public: // 默认构造函数。 Sample() &#123; // do something &#1</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/1142527271.html</loc>
+    
+    <lastmod>2025-12-28T12:31:16.556Z</lastmod>
+    
+    <date>1687930346000</date>
+    <title>Vcpkg踩坑实录 | 独钓寒江雪</title>
+    
+    <desc>本文记录在使用 Vcpkg 时遇到的问题及解决方案，不成章法和体系。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/851648499.html</loc>
+    
+    <lastmod>2025-12-28T12:30:08.502Z</lastmod>
+    
+    <date>1692447312000</date>
+    <title>Redis慢日志与BigKey | 独钓寒江雪</title>
+    
+    <desc>慢日志设置1234# 当命令耗时超过5毫秒时，记录慢日志CONFIG SET slowlog-log-slower-than 5000# 只保留最近500条慢日志CONFIG SET slowlog-max-len 500</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/2737986840.html</loc>
+    
+    <lastmod>2025-12-28T12:29:35.380Z</lastmod>
+    
+    <date>1693889599000</date>
+    <title>基于Hexo搭建静态博客 | 独钓寒江雪</title>
+    
+    <desc>Hexo是一个快速、简洁且高效的博客框架，使用Hexo可以快速地生成静态博客框架。在框架生成完成后，可以使用任意文本编辑器语法书写博客。我们可以使用Markdown语法书写博客，Hexo在生成博客时会自动将Markdown解析成Html静态页面。 Hexo官网：https://hexo.io/zh-cn/Hexo中文文档：https://hexo.io/zh-cn/docs/</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/3984616957.html</loc>
+    
+    <lastmod>2025-12-28T12:28:04.972Z</lastmod>
+    
+    <date>1714279999000</date>
+    <title>有趣的Unicode表情符号 | 独钓寒江雪</title>
+    
+    <desc>本文了转载和收集了一些常用的 Unicode 表情符号，方便查阅。完整的 Unicode 表情符号可以查询下面的网站： unicode官网emoji列表 wikipedia List_of_emojis</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/3924191794.html</loc>
+    
+    <lastmod>2025-12-28T12:27:51.563Z</lastmod>
+    
+    <date>1718846738000</date>
+    <title>互联网的黑话 | 独钓寒江雪</title>
+    
+    <desc>对于黑话我是拒绝的，但在这个圈子混，又不得不懂一些黑话，以防产生沟通障碍。关键时候说一两句黑话似乎还能显得有B格。 下面是在网上收集的一些黑话，进行了稍许整理，仅供娱乐，请勿当真。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/3678619994.html</loc>
+    
+    <lastmod>2025-12-28T12:27:24.548Z</lastmod>
+    
+    <date>1728379836000</date>
+    <title>Modern CMake 简明教程（上） | 独钓寒江雪</title>
+    
+    <desc>CMake 是一个开源、跨平台的构建系统生成器（Build-system Generator）。 CMake 是构建系统生成器，而不是构建系统，CMake 支持生成不同构建系统所支持的工程文件，如 Visual Studio，XCode，Makefile 等。 本教程作为 CMake 的简明教程，不会事无巨细的讲述 CMake 的每一个语法，而是以实用为目的，介绍 CMake 的基础语法和常用指令</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/201509401.html</loc>
+    
+    <lastmod>2025-12-28T12:26:50.142Z</lastmod>
+    
+    <date>1729218876000</date>
+    <title>Modern CMake 简明教程（下） | 独钓寒江雪</title>
+    
+    <desc>CMake 是一个开源、跨平台的构建系统生成器（Build-system Generator）。 本文是 Modern CMake 简明教程系列的下篇，上篇请移步至 《Modern CMake 简明教程（上）》，中篇请移步至 《Modern CMake 简明教程（中）》。 本教程默认 CMake 最低版本为 3.16，即 cmake_minimum_required(VERSION 3.16)。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/3843160677.html</loc>
+    
+    <lastmod>2025-12-28T12:26:15.430Z</lastmod>
+    
+    <date>1746583255000</date>
+    <title>Lua杂记 | 独钓寒江雪</title>
+    
+    <desc>自从接触了 JerryScript（见开源库jerryscript使用备忘），本以为再也不会用到 Lua 了，关于 Lua 的记忆已经逐渐在我的脑海中删除，但最近维护的几个老项目又都使用了 Lua，真是命运的捉弄啊。 来吧，刷新记忆！</desc>
   </url>
   
   <url>
@@ -57,50 +530,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/3573459553.html</loc>
-    
-    <lastmod>2025-12-20T04:01:17.536Z</lastmod>
-    
-    <date>1763903462000</date>
-    <title>代码的隐形战场：Windows进程注入与API Hook完全指南 | 独钓寒江雪</title>
-    
-    <desc>文章还未公开，请输入密码查看</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/470495318.html</loc>
-    
-    <lastmod>2025-12-17T14:22:50.001Z</lastmod>
-    
-    <date>1761121860000</date>
-    <title>x86架构常用寄存器及汇编指令 | 独钓寒江雪</title>
-    
-    <desc>x86架构作为个人计算机和服务器领域的主流计算架构，其汇编语言是理解计算机底层运行机制、进行逆向工程、性能优化及嵌入式开发的核心基础。本文将系统梳理x86架构中的常用寄存器​和常用汇编指令​，并结合实际应用场景说明其作用。 x86常用寄存器寄存器是CPU内部的高速存储单元，用于临时存放数据、地址或控制信息。x86寄存器按功能可分为通用寄存器、段寄存器、标志寄存器、指令指针、控制寄存器、调试寄存器及</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/3493610263.html</loc>
-    
-    <lastmod>2025-12-17T13:14:13.037Z</lastmod>
-    
-    <date>1764165181000</date>
-    <title>别怕！Windows内核驱动开发：从0到1的最速通关指南 | 独钓寒江雪</title>
-    
-    <desc>文章还未公开，请输入密码查看</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/1142527271.html</loc>
-    
-    <lastmod>2025-12-17T13:14:07.103Z</lastmod>
-    
-    <date>1687930346000</date>
-    <title>Vcpkg踩坑实录 | 独钓寒江雪</title>
-    
-    <desc></desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/1112470146.html</loc>
     
     <lastmod>2025-12-16T08:22:25.218Z</lastmod>
@@ -142,17 +571,6 @@
     <title>关于 | 独钓寒江雪</title>
     
     <desc></desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/2963045346.html</loc>
-    
-    <lastmod>2025-12-10T05:53:29.633Z</lastmod>
-    
-    <date>1765332000000</date>
-    <title>给进程伪造一个父亲 | 独钓寒江雪</title>
-    
-    <desc>传统的进程树模型不仅是系统管理的图谱，更是安全审计与调查的关键线索。然而，通过特定的技术手段，一个进程完全可以“认贼作父”——将其父进程信息伪装成另一个合法或高权限进程，从而隐匿自己的真实起源，逃逸监控，混淆侦查视线。这不仅是攻击者用于规避检测的方法，也为防御方深入理解系统底层机制打开了另一扇窗。本文将探索这项技术在 Windows 系统下的实现原理。</desc>
   </url>
   
   <url>
@@ -211,17 +629,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/3843160677.html</loc>
-    
-    <lastmod>2025-12-09T03:11:42.587Z</lastmod>
-    
-    <date>1746583255000</date>
-    <title>Lua杂记 | 独钓寒江雪</title>
-    
-    <desc>自从接触了 JerryScript（见开源库jerryscript使用备忘），本以为再也不会用到 Lua 了，关于 Lua 的记忆已经逐渐在我的脑海中删除，但最近维护的几个老项目又都使用了 Lua，真是命运的捉弄啊。 来吧，刷新记忆！ 基础 Lua区分大小写 注释格式 12345-- 行注释--[[块注释--]] 局部变量使用local声明, 其他的全部为全局变量，变量的默认值为nil 只有fal</desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/3110746169.html</loc>
     
     <lastmod>2025-12-09T03:09:32.524Z</lastmod>
@@ -230,72 +637,6 @@
     <title>聊聊桌面客户端开发的技术选型 | 独钓寒江雪</title>
     
     <desc>桌面客户端也叫 PC 客户端，桌面操作系统（如Windows、MacOS、Ubuntu 等系统）上的软件都可以称为桌面客户端软件，客户端软件的开发有多种技术选型方式，而且每种方式各有优劣。 采用不同的方式通常会导致在开发周期、技术人员招聘、软件性能、安装包体积等方面有比较大的差别。本文结合我这些年的客户端开发经验，聊一聊在客户端开发方面的各种技术选型以及他们的优劣。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/3462229631.html</loc>
-    
-    <lastmod>2025-12-09T03:09:20.543Z</lastmod>
-    
-    <date>1721201710000</date>
-    <title>了解数字证书 | 独钓寒江雪</title>
-    
-    <desc>打开任何一个数字证书售卖网站都可以看到它们通常将数字证书分为两个大类：SSL证书和数字签名证书。 SSL证书的主要作用是对网站进行身份验证和传输数据加密； 数字签名主要用于验证信息的真实性和完整性，根据使用场景的不同大致分为如下几类： 对客户端程序（.exe、.dll、.sys等文件）签名的代码签名证书。 对PDF等文档签名的文档签名证书。 对电子邮件及其附件签名和加密的邮件安全证书。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/409779091.html</loc>
-    
-    <lastmod>2025-12-09T03:08:37.511Z</lastmod>
-    
-    <date>1596283492000</date>
-    <title>NSIS教程(1)-基础语法 | 独钓寒江雪</title>
-    
-    <desc>NSIS（Nullsoft Scriptable Install System）是一个开源的 Windows 平台安装包制作程序。NSIS 通过它定义的脚本语言来描述安装包的行为和逻辑的。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/3937624737.html</loc>
-    
-    <lastmod>2025-12-09T03:08:19.404Z</lastmod>
-    
-    <date>1525000174000</date>
-    <title>Windows内存体系(7)--使用std::string跨MT模块传参 | 独钓寒江雪</title>
-    
-    <desc>前面的Windows内存体系(6)--跨模块内存分配释放文章解释了跨 MT 模块分配的内存相互释放为什么会崩溃的问题，本文介绍如何解决该问题。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/4245522728.html</loc>
-    
-    <lastmod>2025-12-09T03:07:58.578Z</lastmod>
-    
-    <date>1524534181000</date>
-    <title>Windows内存体系(4)--内存对齐 | 独钓寒江雪</title>
-    
-    <desc>为什么要内存对齐平台原因不是所有的CPU都能访问任意地址上的任意数据的，有些CPU只能在某些地址处取某些特定类型的数据，否则抛出硬件异常。 性能原因尽管内存是以字节为单位，但是大部分处理器并不是按字节块来存取内存的，它一般会以双字节、四字节、8字节、16字节甚至32字节为单位来存取内存，我们将上述这些存取单位称为内存存取粒度。 如果数据存储时是按照内存存取粒度对齐的，那么处理器就可以在一个内存访问</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/100006247.html</loc>
-    
-    <lastmod>2025-12-09T03:07:43.473Z</lastmod>
-    
-    <date>1596792921000</date>
-    <title>NSIS教程(9)-使用界面库制作安装界面 | 独钓寒江雪</title>
-    
-    <desc>前面的几篇文章介绍了 NSIS 的传统界面的安装包和现代界面的安装包的制作方法，也提到了 NSIS 支持自定义页面（即使用page custom）的特性，自定义页面需要用户自己创建对话框、控件、添加控件响应等等，虽然 NSIS 提供了nsDialogs.nsh来支持这些功能，但使用起来还是不太方便（需要专门了解这个插件诸多用法），而且不够灵活，所以本文介绍一种终极的自定义界面的安装包解决方案，即完</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/4172083706.html</loc>
-    
-    <lastmod>2025-12-09T03:07:33.413Z</lastmod>
-    
-    <date>1596550071000</date>
-    <title>NSIS教程(6)-静默安装 | 独钓寒江雪</title>
-    
-    <desc>静默安装&#x2F;卸载是一种安装&#x2F;卸载形式，用户打开安装包后不显示任何安装界面，直接开始安装，支持使用命令行参数指定安装路径等。</desc>
   </url>
   
   <url>
@@ -318,17 +659,6 @@
     <title>Node插件开发(1)-快速入门 | 独钓寒江雪</title>
     
     <desc>在使用 Electron 开发客户端时，如果现有 Node 模块所提供的功能无法满足需要，我们可以使用 C++ 开发自定义的 Node 模块，也称插件（addon）。 Node.js 插件的扩展名为 .node，是二进制文件，其本质上是通过动态链接库（.dll 或 .so）重命名而来。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/2202762022.html</loc>
-    
-    <lastmod>2025-12-09T03:06:56.691Z</lastmod>
-    
-    <date>1664110502000</date>
-    <title>Qt开发路上的“绊脚石”与“垫脚石” | 独钓寒江雪</title>
-    
-    <desc>路径相关 当前程序可执行文件的据对路径 QCoreApplication::applicationFilePath() 当前程序可执行文件所在的目录 QCoreApplication::applicationDirPath() 当前进程的工作目录 QDir::currentPath()，在调用 CreateProcess 函数时通过 lpCurrentDirectory 参数指定进程工作目录 通过</desc>
   </url>
   
   <url>
@@ -387,28 +717,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/556603567.html</loc>
-    
-    <lastmod>2025-12-09T03:05:32.142Z</lastmod>
-    
-    <date>1740216535000</date>
-    <title>Wireshark过滤器规则速学 | 独钓寒江雪</title>
-    
-    <desc>Wireshark 中有两种过滤器： 捕获过滤器：用于在数据包捕获阶段过滤数据包，只捕获符合条件的数据包，这样可以减少捕获不必要的数据包，从而提高性能。 显示过滤器：用于在已经捕获的数据包中过滤出符合条件的数据包进行显示，它使用的是 Wireshark 自己的语法。 捕获过滤器在 Wireshark 的开始页面或者在捕获选型页面中选择需要捕获的网络适配器，然后输入捕获过滤器规则，设置完成之后，点击</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/326824759.html</loc>
-    
-    <lastmod>2025-12-09T03:05:22.488Z</lastmod>
-    
-    <date>1513330738000</date>
-    <title>Windows套接字I/O模型(5)-完成端口模型 | 独钓寒江雪</title>
-    
-    <desc></desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/1855436935.html</loc>
     
     <lastmod>2025-12-09T03:05:04.954Z</lastmod>
@@ -417,39 +725,6 @@
     <title>白酒入门 | 独钓寒江雪</title>
     
     <desc>正值 9 月 9 全球酒水节，各大电商都在做活动，趁机网购了一批酒水。在享受这大自然馈赠的礼物的同时，也说一说自己对白酒的理解。希望在了解了白酒的这些知识后能明明白白喝酒。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/2304457467.html</loc>
-    
-    <lastmod>2025-12-09T03:04:42.460Z</lastmod>
-    
-    <date>1728639276000</date>
-    <title>Modern CMake 简明教程（中） | 独钓寒江雪</title>
-    
-    <desc>CMake 是一个开源、跨平台的构建系统生成器（Build-system Generator）。 本文是 Modern CMake 简明教程系列的中篇，上篇请移步 《Modern CMake 简明教程（上）》 本教程默认 CMake 最低版本为 3.16，即 cmake_minimum_required(VERSION 3.16)。 生成器表达式不知你是否思考过这样一个问题：我们在编译项目时，通常</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/201509401.html</loc>
-    
-    <lastmod>2025-12-09T03:04:30.388Z</lastmod>
-    
-    <date>1729218876000</date>
-    <title>Modern CMake 简明教程（下） | 独钓寒江雪</title>
-    
-    <desc>CMake 是一个开源、跨平台的构建系统生成器（Build-system Generator）。 本文是 Modern CMake 简明教程系列的下篇，上篇请移步至 《Modern CMake 简明教程（上）》，中篇请移步至 《Modern CMake 简明教程（中）》。 本教程默认 CMake 最低版本为 3.16，即 cmake_minimum_required(VERSION 3.16)。 </desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/3678619994.html</loc>
-    
-    <lastmod>2025-12-09T03:04:20.096Z</lastmod>
-    
-    <date>1728379836000</date>
-    <title>Modern CMake 简明教程（上） | 独钓寒江雪</title>
-    
-    <desc>CMake 是一个开源、跨平台的构建系统生成器（Build-system Generator）。 CMake 是构建系统生成器，而不是构建系统，CMake 支持生成不同构建系统所支持的工程文件，如 Visual Studio，XCode，Makefile 等。 本教程作为 CMake 的简明教程，不会事无巨细的讲述 CMake 的每一个语法，而是以实用为目的，介绍 CMake 的基础语法和常用指令</desc>
   </url>
   
   <url>
@@ -497,17 +772,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/3768553066.html</loc>
-    
-    <lastmod>2025-12-09T03:03:24.202Z</lastmod>
-    
-    <date>1671801606000</date>
-    <title>C++构造函数排雷 | 独钓寒江雪</title>
-    
-    <desc>默认构造函数什么是默认构造函数？我们一般会认为默认构造函数就是编译器自动生成的那个构造函数，其实这种理解不全面。**准确的说，默认构造函数就是在调用时不需要显示地传入实参的构造函数。**根据这个原则，下面 2 种构造函数都是默认构造函数： 1234567class Sample &#123;public: // 默认构造函数。 Sample() &#123; // do something &#1</desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/2418701368.html</loc>
     
     <lastmod>2025-12-09T03:03:19.042Z</lastmod>
@@ -527,17 +791,6 @@
     <title>C++标准库线程的启动与退出 | 独钓寒江雪</title>
     
     <desc>本文简要介绍 C++标准库提供的几种线程操作方法，主要介绍如何判断线程是否已经结束运行。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/2819651546.html</loc>
-    
-    <lastmod>2025-12-09T03:03:03.969Z</lastmod>
-    
-    <date>1509421325000</date>
-    <title>字节序列之大小端 | 独钓寒江雪</title>
-    
-    <desc></desc>
   </url>
   
   <url>
@@ -596,17 +849,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/1914794883.html</loc>
-    
-    <lastmod>2025-12-09T03:01:19.135Z</lastmod>
-    
-    <date>1754280662000</date>
-    <title>从C++11开始新增的常用关键字 | 独钓寒江雪</title>
-    
-    <desc>nullptr (C++11)nullptr 专门用于表示空指针，旨在解决传统 NULL 或 0 在类型安全性和代码清晰度上的缺陷。 nullptr 的类型为 std::nullptr_t，只能隐式转换为指针类型（包括原生指针、智能指针、托管句柄等），​不能转换为整数类型，避免了与整型 0 的混淆。 而传统 NULL 是宏（通常定义为 0 或 (void*)0），可能被误解释为整数，导致类型错误。</desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/2720283852.html</loc>
     
     <lastmod>2025-12-09T03:01:05.326Z</lastmod>
@@ -651,28 +893,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/3832899600.html</loc>
-    
-    <lastmod>2025-12-09T03:00:05.499Z</lastmod>
-    
-    <date>1726892432000</date>
-    <title>绘制Windows的界面：探索窗口、GDI与GDI+的图形世界 | 独钓寒江雪</title>
-    
-    <desc>当你点击桌面图标，一个窗口缓缓展开；滚动网页时，文字与图片在屏幕上丝滑游走；打开绘图软件，笔触落下的瞬间，色彩便在虚拟画布上晕染开来——这些习以为常的界面交互，构成了我们与数字世界对话的桥梁。但你是否想过：这些“理所当然”的视觉体验，究竟是如何从代码的海洋里“生长”出来的？窗口的轮廓如何被精准勾勒？色彩与线条怎样穿越硬件与系统的边界，最终跃入人眼？ Windows图形编程的核心骨架在深入探索Win</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/3666245140.html</loc>
-    
-    <lastmod>2025-12-09T03:00:05.499Z</lastmod>
-    
-    <date>1691632800000</date>
-    <title>获取其他进程的命令行参数 | 独钓寒江雪</title>
-    
-    <desc>本文介绍如何根据进程 ID 获取进程命令行参数，使用 Windows NTDLL 提供的未公开 API 实现。 由于需要使用到 Windows 应用层未公开的 API，而且这些 API 在 Windows 头文件中未提供函数定义，因此我们需要使用 GetProcessAddress 动态地从 ntdll.dll 中获取函数地址。 动态获取函数地址本不是一件困难的事情，但是当涉及调用函数比较多时，这</desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/2236960039.html</loc>
     
     <lastmod>2025-12-09T03:00:05.486Z</lastmod>
@@ -681,17 +901,6 @@
     <title>Windows音频环回录制 | 独钓寒江雪</title>
     
     <desc>所谓音频环回录制就是录制扬声器播放的声音。播放到扬声器的声音已经过混合，Windows 提供了 WASAPI 来获取这种混合的音频信号。 本文将录制到原始音频样本数据写入到文件，可以使用Audacity导入原始数据试听。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/4168021185.html</loc>
-    
-    <lastmod>2025-12-09T03:00:05.486Z</lastmod>
-    
-    <date>1642773181000</date>
-    <title>从汇编的角度分析函数调用过程 | 独钓寒江雪</title>
-    
-    <desc>本文从汇编的视角分析了函数的调用方式，掌握该知识对使用 OllyDbg 等动态调试工具会大有裨益。</desc>
   </url>
   
   <url>
@@ -706,105 +915,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/1597634702.html</loc>
-    
-    <lastmod>2025-12-05T06:36:57.641Z</lastmod>
-    
-    <date>1596793427000</date>
-    <title>NSIS教程(10)-MUI跳过指定安装步骤 | 独钓寒江雪</title>
-    
-    <desc>在正常情况下安装包会有“欢迎界面”、“安装目录选择界面”等等，有时我们需要安装包自动跳过这 2 个界面，如安装包通过命令行参数传入“安装目录”（如setup.exe /installdir F:\test），本文讲述如何使安装包跳过指定的界面。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/2948643539.html</loc>
-    
-    <lastmod>2025-12-05T06:36:57.641Z</lastmod>
-    
-    <date>1600598627000</date>
-    <title>NSIS教程(11)-中文手册 | 独钓寒江雪</title>
-    
-    <desc></desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/2584392152.html</loc>
-    
-    <lastmod>2025-12-05T06:36:57.641Z</lastmod>
-    
-    <date>1632138227000</date>
-    <title>NSIS教程(12)-开源UI插件 | 独钓寒江雪</title>
-    
-    <desc>介绍一个我开发的开源NSIS UI插件 NSIS-UI-Plugin，基于 NSIS-UI-Plugin 插件我们可以快速使用NSIS制作类似QQ等软件那样的安装包。 该插件默认使用Qt作为界面库（不需要编译Qt静态库，可以使用Qt动态库），但也可以很方便的切换使用其他界面库，如DuiLib等。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/1923360270.html</loc>
-    
-    <lastmod>2025-12-05T06:36:57.641Z</lastmod>
-    
-    <date>1596324094000</date>
-    <title>NSIS教程(2)-完整属性 | 独钓寒江雪</title>
-    
-    <desc>本文列举了 NSIS 支持的所有属性，以供查阅。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/2673115526.html</loc>
-    
-    <lastmod>2025-12-05T06:36:57.641Z</lastmod>
-    
-    <date>1596370438000</date>
-    <title>NSIS教程(3)-完整指令 | 独钓寒江雪</title>
-    
-    <desc>本文列出了 NSIS 支持的完整指令，以供查阅。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/275632694.html</loc>
-    
-    <lastmod>2025-12-05T06:36:57.641Z</lastmod>
-    
-    <date>1596457965000</date>
-    <title>NSIS教程(4)-传统界面示例 | 独钓寒江雪</title>
-    
-    <desc>本文以一个完整的、传统界面的网易云音乐安装包的脚本为示例，来介绍 NSIS 传统用户界面的开发流程。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/3798382521.html</loc>
-    
-    <lastmod>2025-12-05T06:36:57.641Z</lastmod>
-    
-    <date>1596498894000</date>
-    <title>NSIS教程(5)-现代界面示例 | 独钓寒江雪</title>
-    
-    <desc>NSIS 的现代用户界面(Modern UI)只是相对于传统（丑陋）的界面而言的“现代”而已。它定义在MUI2.nsh中，nsh 文件类似 C++中的头文件，可以被其他模块包含引用。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/3031217406.html</loc>
-    
-    <lastmod>2025-12-05T06:36:57.641Z</lastmod>
-    
-    <date>1596593666000</date>
-    <title>NSIS教程(7)-插件使用 | 独钓寒江雪</title>
-    
-    <desc>NSIS 内置了很多指令，这些指令可以满足我们基本需求，但难免会遇到 NSIS 没有内置的功能，如进程操作，后台运行（即多线程），7z 压缩等等，这个时候我们就需要借助第三方插件来满足我们所需要的功能了。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/1273492093.html</loc>
-    
-    <lastmod>2025-12-05T06:36:57.641Z</lastmod>
-    
-    <date>1596611071000</date>
-    <title>NSIS教程(8)-插件开发 | 独钓寒江雪</title>
-    
-    <desc>虽然 NSIS 官方提供了很多插件，也有一些第三方的插件可以下载使用，但在实际开发中难免会遇到已有插件没有提供的功能或者插件不好用的情况，这时我们可以选择自己开发 NSIS 插件。</desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/2510508225.html</loc>
     
     <lastmod>2025-12-05T06:36:57.641Z</lastmod>
@@ -816,28 +926,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/2494475058.html</loc>
-    
-    <lastmod>2025-12-05T06:36:57.641Z</lastmod>
-    
-    <date>1524192188000</date>
-    <title>Windows内存体系(1)--虚拟地址空间 | 独钓寒江雪</title>
-    
-    <desc>实模式下内存分配机制在 8086 或者 80186 以前，程序运行时，操作系统会把程序全都装入内存，程序都是直接运行在物理内存上的。也就是说程序中访问的内存地址都是实际的物理内存地址。当计算机同时运行多个程序时，必须保证这些程序用到的内存总量要小于计算机实际物理内存的大小。 例如某台计算机总的内存大小是128M ，现在同时运行两个程序 A 和 B ，A 需占用内存10M ， B 需占用内存110M</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/595856315.html</loc>
-    
-    <lastmod>2025-12-05T06:36:57.641Z</lastmod>
-    
-    <date>1524310800000</date>
-    <title>Windows内存体系(2)--虚拟内存 | 独钓寒江雪</title>
-    
-    <desc>页交换文件虚拟地址空间只是操作系统为进程“虚拟”出来的一块地址区域，并不代表任何实际的空间。而“页交换文件”却对应了实际的空间，这个空间一般是磁盘上名为“pagefile.sys”的文件。 “页交换文件”的大小和位置可以在系统设置（系统属性 -&gt; 高级 -&gt; 性能 -&gt; 设置 -&gt; 高级 ）中进行设置： 从微软的官方文档来看，“虚拟内存”等于“物理内存”+“分页文件”总和。</desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/14744864.html</loc>
     
     <lastmod>2025-12-05T06:36:57.640Z</lastmod>
@@ -846,17 +934,6 @@
     <title>Windows内核对象 | 独钓寒江雪</title>
     
     <desc>什么是内核对象我们在 windows 开发中经常会遇到内核对象，如事件(Event)，管道(Pipe)，互斥量(Mutex)，完成端口(IOCP)，进程(Process)，线程(Thread)等，他们都是内核对象。这些内核对象虽然通过不同的系统 API 来创建，但这些 API 都有一个共同特点，就是都需要传入SECURITY_ATTRIBUTES安全描述符结构体指针，并且返回句柄(HANDLE)。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/4206756384.html</loc>
-    
-    <lastmod>2025-12-05T06:36:57.634Z</lastmod>
-    
-    <date>1521001232000</date>
-    <title>Windows的消息机制 | 独钓寒江雪</title>
-    
-    <desc></desc>
   </url>
   
   <url>
@@ -904,17 +981,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/3906615635.html</loc>
-    
-    <lastmod>2025-12-05T06:36:57.634Z</lastmod>
-    
-    <date>1695361033000</date>
-    <title>由HANDLE返回值不确定性引发的思考 | 独钓寒江雪</title>
-    
-    <desc>HANDLE类型返回值的不确定性指的是Windows API函数的返回值为HANDLE类型时，有两种表示失败的方式： HANDLE &#x3D;&#x3D; NULL，如CreateEvent等 HANDLE &#x3D;&#x3D; INVALID_HANDLE_VALUE，如CreateFile等 其中，NULL的值始终为0，而INVALID_HANDLE_VALUE的值为-1，其在32位和6</desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/4077884774.html</loc>
     
     <lastmod>2025-12-05T06:36:57.634Z</lastmod>
@@ -923,6 +989,17 @@
     <title>禁用F12作为调试热键 | 独钓寒江雪</title>
     
     <desc></desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/3906615635.html</loc>
+    
+    <lastmod>2025-12-05T06:36:57.634Z</lastmod>
+    
+    <date>1695361033000</date>
+    <title>由HANDLE返回值不确定性引发的思考 | 独钓寒江雪</title>
+    
+    <desc>HANDLE类型返回值的不确定性指的是Windows API函数的返回值为HANDLE类型时，有两种表示失败的方式： HANDLE &#x3D;&#x3D; NULL，如CreateEvent等 HANDLE &#x3D;&#x3D; INVALID_HANDLE_VALUE，如CreateFile等 其中，NULL的值始终为0，而INVALID_HANDLE_VALUE的值为-1，其在32位和6</desc>
   </url>
   
   <url>
@@ -970,50 +1047,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/2567544627.html</loc>
-    
-    <lastmod>2025-12-05T06:36:57.633Z</lastmod>
-    
-    <date>1566529683000</date>
-    <title>Windows资源管理器图标覆盖优先级设定 | 独钓寒江雪</title>
-    
-    <desc></desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/3938269003.html</loc>
-    
-    <lastmod>2025-12-05T06:36:57.627Z</lastmod>
-    
-    <date>1524362408000</date>
-    <title>Windows内存体系(3)--内存映射文件 | 独钓寒江雪</title>
-    
-    <desc>为什么需要内存映射“内存映射文件”可以将硬盘上的文件映射到虚拟地址空间，这样就不需要将所有东西都放入到页交换文件中，比如系统有许多程序同时运行时，如果将这些程序文件都加载到页交换文件中，页交换文件将会变得非常大。事实上，Windows 也并没有将硬盘上的程序文件复制到页交换文件中，因为这样不仅会让页交换文件将会变得非常大，也会浪费很多时间，特别是可执行程序非常大的时候。 当用户要求执行一个应用程序</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/3599385732.html</loc>
-    
-    <lastmod>2025-12-05T06:36:57.627Z</lastmod>
-    
-    <date>1524708000000</date>
-    <title>Windows内存体系(5)--堆 | 独钓寒江雪</title>
-    
-    <desc>为什么要使用堆？应用程序虽然可以使用页面粒度的函数（如VirualAlloc）来分配一个最小为4KB或8K的内存块，但是很多时候我们并不需要分配这么大的内存块，我们可能只想分配 1K，2K 的内存块，那么这个时候无论从内存的使用率，还是从性能的角度来看，再分配这么大的一个内存区域显然不是最优的了。 为了满足这种需求，Windows 提供了一个被称为“堆管理器”的组件，它负责管理大内存区域中的内存分</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/213040252.html</loc>
-    
-    <lastmod>2025-12-05T06:36:57.627Z</lastmod>
-    
-    <date>1524877201000</date>
-    <title>Windows内存体系(6)--跨模块内存分配释放 | 独钓寒江雪</title>
-    
-    <desc>在《Windows核心编程 第五版》第19章 DLL基础（511页）中给出了一个建议： “当一个 MT 版本的模块如果提供一个内存分配函数的时候，它必须同时提供另一个用来释放内存的函数。”。 说得更加直白一点就是，“对于 MT 的模块，不要跨模块进行内存释放。”。但是核心编程这本书上面没有具体分析原因，本文就来分析具体的原因。</desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/1822204079.html</loc>
     
     <lastmod>2025-12-05T06:36:11.156Z</lastmod>
@@ -1022,17 +1055,6 @@
     <title>CentOS7更新国内阿里源 | 独钓寒江雪</title>
     
     <desc></desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/2025031576.html</loc>
-    
-    <lastmod>2025-12-05T06:36:11.156Z</lastmod>
-    
-    <date>1687962032000</date>
-    <title>CentOS7申请免费LetsEncrypt证书并续期 | 独钓寒江雪</title>
-    
-    <desc>本文介绍在 CentOS7 环境下，使用 Certbot 申请免费的 Lets Encrypt SSL 证书，并自动续期。</desc>
   </url>
   
   <url>
@@ -1047,6 +1069,17 @@
   </url>
   
   <url>
+    <loc>https://jiangxueqiao.com/post/2025031576.html</loc>
+    
+    <lastmod>2025-12-05T06:36:11.156Z</lastmod>
+    
+    <date>1687962032000</date>
+    <title>CentOS7申请免费LetsEncrypt证书并续期 | 独钓寒江雪</title>
+    
+    <desc>本文介绍在 CentOS7 环境下，使用 Certbot 申请免费的 Lets Encrypt SSL 证书，并自动续期。</desc>
+  </url>
+  
+  <url>
     <loc>https://jiangxueqiao.com/post/44844734.html</loc>
     
     <lastmod>2025-12-05T06:36:11.156Z</lastmod>
@@ -1055,17 +1088,6 @@
     <title>Redis常见异常及处理方案 | 独钓寒江雪</title>
     
     <desc>Redis 是高性能内存键值数据库，支持字符串、哈希等多结构，兼具缓存与持久化能力，广泛用于实时数据处理场景。本文主要介绍 Redis 常见的异常及处理方案。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/851648499.html</loc>
-    
-    <lastmod>2025-12-05T06:36:11.156Z</lastmod>
-    
-    <date>1692447312000</date>
-    <title>Redis慢日志与BigKey | 独钓寒江雪</title>
-    
-    <desc></desc>
   </url>
   
   <url>
@@ -1102,39 +1124,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/640627104.html</loc>
-    
-    <lastmod>2025-12-05T06:35:41.916Z</lastmod>
-    
-    <date>1513001974000</date>
-    <title>Windows套接字I/O模型(2)-Select模型 | 独钓寒江雪</title>
-    
-    <desc>Select模型介绍套接字Select模型的中心思想是利用 select 函数实现对I&#x2F;O的管理。 可以利用select函数判断一个或多个套接字上是否存在待接收数据，或者能否向一个或多个套接字发送数据。 select函数是同步的，也会阻塞，但和阻塞模型不同的是，Select模型可以同时管理多个套接字。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/2544551173.html</loc>
-    
-    <lastmod>2025-12-05T06:35:41.916Z</lastmod>
-    
-    <date>1513066464000</date>
-    <title>Windows套接字I/O模型(3)-WSAAsyncSelect模型 | 独钓寒江雪</title>
-    
-    <desc>WSAAsyncSelect模型介绍利用 WSAAsyncSelect 模型结合 Windows 窗口消息循环，应用程序可以在一个套接字上接收以 Windows 消息为基础的网络事件通知。 在使用 WSAAsyncSelect 模型之前，首先需要创建一个 Windows 窗口，并为该窗口提供一个窗口过程支持函数（WndProc）。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/547434843.html</loc>
-    
-    <lastmod>2025-12-05T06:35:41.916Z</lastmod>
-    
-    <date>1513084284000</date>
-    <title>Windows套接字I/O模型(4)-WSAEventSelect模型 | 独钓寒江雪</title>
-    
-    <desc>WSAEventSelect模型介绍WSAEventSelect模型和WSAAsyncSelect模型类似，但WSAEventSelect模型允许应用程序在一个或多个套接字上面接收以事件为基础的网络事件通知。该模型和WSAAsyncSelect模型的最主要的区别在于网络事件是由事件对象句柄完成的，而不是通过窗口消息完成的。</desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/3034381124.html</loc>
     
     <lastmod>2025-12-05T06:35:41.912Z</lastmod>
@@ -1168,39 +1157,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/4190400644.html</loc>
-    
-    <lastmod>2025-12-05T06:35:41.903Z</lastmod>
-    
-    <date>1520915400000</date>
-    <title>网络协议(5)--UDP协议 | 独钓寒江雪</title>
-    
-    <desc>一、什么是 UDP 协议？UDP 是 User Datagram Protocol 的简称，中文名是用户数据报协议，是 OSI 参考模型中的传输层协议，它是一种无连接的传输层协议，提供面向事务的简单不可靠信息传送服务。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/3654006375.html</loc>
-    
-    <lastmod>2025-12-05T06:35:41.903Z</lastmod>
-    
-    <date>1521088200000</date>
-    <title>网络协议(7)--HTTP与HTTPS协议 | 独钓寒江雪</title>
-    
-    <desc>HTTP 是Hyper Text Transfer Protocol（超文本传输协议）的缩写。HTTP 协议位于 TCP&#x2F;IP 协议栈的应用层。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/3886809266.html</loc>
-    
-    <lastmod>2025-12-05T06:35:41.899Z</lastmod>
-    
-    <date>1520676658000</date>
-    <title>网络协议(1)--基础概念 | 独钓寒江雪</title>
-    
-    <desc></desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/3773107387.html</loc>
     
     <lastmod>2025-12-05T06:34:54.383Z</lastmod>
@@ -1223,17 +1179,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/2172509399.html</loc>
-    
-    <lastmod>2025-12-05T06:34:54.383Z</lastmod>
-    
-    <date>1524038403000</date>
-    <title>SDP格式解析 | 独钓寒江雪</title>
-    
-    <desc>会话描述协议（Session Description Protocol 或简写 SDP）描述的是流媒体的初始化参数。此协议由 IETF 发表为 RFC 2327。 SDP 完全是一种会话描述格式，它不属于传输协议。 SDP 用于描述多媒体通信会话，包括会话建立、会话请求和参数协商。SDP 不用于传输媒体数据，只能用于两个通信终端的参数协商，包括媒体类型、格式以及所有其他和会话相关的属性。SDP 以</desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/3666885372.html</loc>
     
     <lastmod>2025-12-05T06:34:54.383Z</lastmod>
@@ -1242,6 +1187,17 @@
     <title>Wav音频编码 | 独钓寒江雪</title>
     
     <desc>WAV格式是微软公司（Microsoft）开发的一种声音文件格式，它符合 RIFF(Resource Interchange File Format)文件规范，用于保存 Windows 平台的音频信息资源，被 Windows 平台及其应用程序所广泛支持。 WAVE 是录音时用的标准的 WINDOWS 文件格式，文件的扩展名为“WAV”，数据本身的格式为 PCM 或其他压缩数据，属于无损音乐格式的一</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/2172509399.html</loc>
+    
+    <lastmod>2025-12-05T06:34:54.383Z</lastmod>
+    
+    <date>1524038403000</date>
+    <title>SDP格式解析 | 独钓寒江雪</title>
+    
+    <desc>会话描述协议（Session Description Protocol 或简写 SDP）描述的是流媒体的初始化参数。此协议由 IETF 发表为 RFC 2327。 SDP 完全是一种会话描述格式，它不属于传输协议。 SDP 用于描述多媒体通信会话，包括会话建立、会话请求和参数协商。SDP 不用于传输媒体数据，只能用于两个通信终端的参数协商，包括媒体类型、格式以及所有其他和会话相关的属性。SDP 以</desc>
   </url>
   
   <url>
@@ -1256,17 +1212,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/201024982.html</loc>
-    
-    <lastmod>2025-12-05T06:34:54.378Z</lastmod>
-    
-    <date>1524717691000</date>
-    <title>WebRTC官方示例apprtc搭建 | 独钓寒江雪</title>
-    
-    <desc></desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/2143630083.html</loc>
     
     <lastmod>2025-12-05T06:34:54.378Z</lastmod>
@@ -1275,17 +1220,6 @@
     <title>WebRTC添加选择音频输入输出设备功能 | 独钓寒江雪</title>
     
     <desc>我们先来看看 WebRTC 中提供音频设备输入输出功能的类结构：</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/2114040426.html</loc>
-    
-    <lastmod>2025-12-05T06:34:54.378Z</lastmod>
-    
-    <date>1572225505000</date>
-    <title>WebRTC的三种架构 | 独钓寒江雪</title>
-    
-    <desc>WebRTC 是基于 P2P 的实时通信技术，（如果 P2P 打洞失败，则会使用 TURN 服务器进行数据转发），在有 2 台客户端参与的情况下，网络拓扑结构如图：</desc>
   </url>
   
   <url>
@@ -1300,14 +1234,14 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/795351407.html</loc>
+    <loc>https://jiangxueqiao.com/post/2114040426.html</loc>
     
-    <lastmod>2025-12-05T06:34:54.377Z</lastmod>
+    <lastmod>2025-12-05T06:34:54.378Z</lastmod>
     
-    <date>1577265991000</date>
-    <title>WebRTC线程模型 | 独钓寒江雪</title>
+    <date>1572225505000</date>
+    <title>WebRTC的三种架构 | 独钓寒江雪</title>
     
-    <desc></desc>
+    <desc>WebRTC 是基于 P2P 的实时通信技术，（如果 P2P 打洞失败，则会使用 TURN 服务器进行数据转发），在有 2 台客户端参与的情况下，网络拓扑结构如图：</desc>
   </url>
   
   <url>
@@ -1330,17 +1264,6 @@
     <title>如何搭建WebRTC的TURN服务器 | 独钓寒江雪</title>
     
     <desc>本文讲解如何在 Ubuntu 系统上采用coturn搭建 p2p 打洞服务器，coturn 是一个开源的 stun 和 turn 服务器实现。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/737279469.html</loc>
-    
-    <lastmod>2025-12-05T06:34:54.366Z</lastmod>
-    
-    <date>1571886512000</date>
-    <title>流媒体基础概念 | 独钓寒江雪</title>
-    
-    <desc></desc>
   </url>
   
   <url>
@@ -1377,14 +1300,14 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/2248228478.html</loc>
+    <loc>https://jiangxueqiao.com/post/1162897275.html</loc>
     
     <lastmod>2025-12-05T06:34:11.680Z</lastmod>
     
-    <date>1666968607000</date>
-    <title>写给C++程序员的Typescript语法基础 | 独钓寒江雪</title>
+    <date>1669639273000</date>
+    <title>前后端常用概念扫盲 | 独钓寒江雪</title>
     
-    <desc>TypeScript 是 JavaScript 的一个超集，支持 ES6 的语法规范，并在此基础上进行了增强，二者最大的不同在于：TypeScript 是强类型语言，而 JavaScript 是弱类型的语言。</desc>
+    <desc>本文主要介绍前后端及客户端开发中遇到的一些常用的技术概念，本文不会涉及太深奥的技术细节。</desc>
   </url>
   
   <url>
@@ -1399,14 +1322,14 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/1162897275.html</loc>
+    <loc>https://jiangxueqiao.com/post/2248228478.html</loc>
     
     <lastmod>2025-12-05T06:34:11.680Z</lastmod>
     
-    <date>1669639273000</date>
-    <title>前后端常用概念扫盲 | 独钓寒江雪</title>
+    <date>1666968607000</date>
+    <title>写给C++程序员的Typescript语法基础 | 独钓寒江雪</title>
     
-    <desc>本文主要介绍前后端及客户端开发中遇到的一些常用的技术概念，本文不会涉及太深奥的技术细节。</desc>
+    <desc>TypeScript 是 JavaScript 的一个超集，支持 ES6 的语法规范，并在此基础上进行了增强，二者最大的不同在于：TypeScript 是强类型语言，而 JavaScript 是弱类型的语言。</desc>
   </url>
   
   <url>
@@ -1440,17 +1363,6 @@
     <title>基于Qt的无边框窗体实现 | 独钓寒江雪</title>
     
     <desc>Qt 虽然提供了诸如 Qt::FramelessWindowHint 之类的属性可以移除窗体的边框，但是移除边框之后，窗体的一些默认行为同时也被移除了，如鼠标拖动改变大小、双击标题栏最大化等，这些行为需要开发者自己来实现。 本文主要介绍实现无边框窗体的几种方案，并在最后分享了作者实现的方案。 笔者认为，一个完美的无边框窗体解决方案需要支持如下功能： 支持通过使用鼠标拖拽来改变窗体位置和大小； 支持</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/2291877732.html</loc>
-    
-    <lastmod>2025-12-05T06:32:51.165Z</lastmod>
-    
-    <date>1687928976000</date>
-    <title>CMake依赖库查找相关问题 | 独钓寒江雪</title>
-    
-    <desc>如何查找 Vcpkg 安装的依赖库在 CMake 工具中指定跨平台工具链，如图： 指定 Toolchain 文件D:/sourcecode/vcpkg/scripts/buildsystems/vcpkg.cmake。</desc>
   </url>
   
   <url>
@@ -1498,17 +1410,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/3534906950.html</loc>
-    
-    <lastmod>2025-12-05T06:25:02.137Z</lastmod>
-    
-    <date>1516325138000</date>
-    <title>最不像干货的33条干货（转载） | 独钓寒江雪</title>
-    
-    <desc></desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/2501563677.html</loc>
     
     <lastmod>2025-12-05T06:24:57.934Z</lastmod>
@@ -1531,17 +1432,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/1485983255.html</loc>
-    
-    <lastmod>2025-12-05T06:24:52.252Z</lastmod>
-    
-    <date>1713536438000</date>
-    <title>生活家（转载） | 独钓寒江雪</title>
-    
-    <desc></desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/1878076142.html</loc>
     
     <lastmod>2025-12-05T06:24:47.440Z</lastmod>
@@ -1550,28 +1440,6 @@
     <title>戴建业：阅读习惯与人生未来（转载） | 独钓寒江雪</title>
     
     <desc>人有丑俊，书有浅深。就像人有种种色色一样，书也分不同的性质和层次。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/618632730.html</loc>
-    
-    <lastmod>2025-12-05T06:24:44.227Z</lastmod>
-    
-    <date>1514611538000</date>
-    <title>程序员如何提升自身价值（转载） | 独钓寒江雪</title>
-    
-    <desc></desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/2737986840.html</loc>
-    
-    <lastmod>2025-12-05T06:24:25.669Z</lastmod>
-    
-    <date>1693889599000</date>
-    <title>基于Hexo搭建静态博客 | 独钓寒江雪</title>
-    
-    <desc>Hexo是一个快速、简洁且高效的博客框架，使用Hexo可以快速地生成静态博客框架。在框架生成完成后，可以使用任意文本编辑器语法书写博客。我们可以使用Markdown语法书写博客，Hexo在生成博客时会自动将Markdown解析成Html静态页面。 Hexo官网：https://hexo.io/zh-cn/Hexo中文文档：https://hexo.io/zh-cn/docs/ 一、玩法说明使用He</desc>
   </url>
   
   <url>
@@ -1594,28 +1462,6 @@
     <title>建立专属的账号密码体系 | 独钓寒江雪</title>
     
     <desc>在日常生活中，我们不仅需要记忆6位数字的银行卡密码，还需要记忆各式各样网站和应用的账号密码，可能我们自己也不记得曾经注册过多少个账号。账号和密码如此繁多，管理这些账号和密码，也是一个让人头疼的问题。 最原始的方法是将密码写纸上，放在一个安全的地方，但纸张存在丢失、损坏的风险，而且不方便存取。 改进版则是将纸张电子化，如 Excel，并辅以云盘实现多端同步，这样虽然存取便利性上有一定的改善，但安全性</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/3984616957.html</loc>
-    
-    <lastmod>2025-12-05T06:24:25.666Z</lastmod>
-    
-    <date>1714279999000</date>
-    <title>有趣的Unicode表情符号 | 独钓寒江雪</title>
-    
-    <desc></desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/3924191794.html</loc>
-    
-    <lastmod>2025-12-05T06:24:25.659Z</lastmod>
-    
-    <date>1718846738000</date>
-    <title>互联网的黑话 | 独钓寒江雪</title>
-    
-    <desc></desc>
   </url>
   
   <url>
@@ -1846,7 +1692,7 @@
     <date>1521001800000</date>
     <title>网络协议(6)--TCP协议 | 独钓寒江雪</title>
     
-    <desc>一、TCP 特性尽管 TCP 和 UDP 都是用 IP 协议作为网络层，但 TCP 却提供和 UDP 完全不同的网络服务。TCP 是面向连接的、稳定可靠的字节流服务。TCP 首部的很多字段都是为了实现这 2 大特性而设计的。</desc>
+    <desc>TCP 特性尽管 TCP 和 UDP 都是用 IP 协议作为网络层，但 TCP 却提供和 UDP 完全不同的网络服务。TCP 是面向连接的、稳定可靠的字节流服务。TCP 首部的很多字段都是为了实现这 2 大特性而设计的。</desc>
   </url>
   
   <url>
@@ -1857,7 +1703,7 @@
     <date>1571968172000</date>
     <title>客户端软件日志输出规范 | 独钓寒江雪</title>
     
-    <desc></desc>
+    <desc>众所周知，软件日志对问题的排查可以起到至关重要的作用，但在多人协同开发的情况下，可能会导致不同的人使用不同的日志打印风格，导致日志可阅读性不高。纵观各大知名软件的输出日志，无不有着规范的格式，非常利于阅读。</desc>
   </url>
   
   <url>

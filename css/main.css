@@ -1214,7 +1214,7 @@ pre code {
   text-shadow: 1px 1px 0 rgba(0,0,0,0.1);
 }
 .sidebar {
-  right: -300px;
+  right: -260px;
 }
 .sidebar-active .sidebar {
   right: 0;
@@ -1229,7 +1229,7 @@ pre code {
   top: 0;
   transition: 0.2s ease-out;
   transition-property: left, right;
-  width: 300px;
+  width: 260px;
   z-index: 20;
 }
 .sidebar a {
@@ -1251,7 +1251,7 @@ pre code {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #9ca78f;
+  background: #090861;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
@@ -2739,10 +2739,10 @@ header.header {
     display: none;
   }
   .sidebar-active {
-    padding-right: 300px;
+    padding-right: 260px;
   }
   .sidebar-active .footer-fixed {
-    right: 300px;
+    right: 260px;
   }
 }
 .sub-menu {
@@ -2750,4 +2750,7 @@ header.header {
 }
 .sub-menu .menu-item {
   display: inline-block;
+}
+.posts-expand .post-block:not(:first-of-type) {
+  margin-top: 60px;
 }

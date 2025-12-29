@@ -17,11 +17,11 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancyapps-ui/5.0.31/fancybox/fancybox.css" integrity="sha256-gkQVf8UKZgQ0HyuxL/VnacadJ+D2Kox2TCEBuNQg5+w=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"jiangxueqiao.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"right","width_expanded":300,"width_dual_column":260,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"vs2015"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":true,"height":300},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":false,"async":true,"duration":200,"transition":{"menu_item":null,"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":null}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"jiangxueqiao.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"right","width_expanded":260,"width_dual_column":260,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"vs2015"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":true,"height":300},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":false,"async":true,"duration":200,"transition":{"menu_item":null,"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":null}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
 
     <meta name="description" content="NSIS（Nullsoft Scriptable Install System）是一个开源的 Windows 平台安装包制作程序。NSIS 通过它定义的脚本语言来描述安装包的行为和逻辑的。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="NSIS教程(1)-基础语法">
+<meta property="og:title" content="NSIS基础语法">
 <meta property="og:url" content="https://jiangxueqiao.com/post/409779091.html">
 <meta property="og:site_name" content="独钓寒江雪">
 <meta property="og:description" content="NSIS（Nullsoft Scriptable Install System）是一个开源的 Windows 平台安装包制作程序。NSIS 通过它定义的脚本语言来描述安装包的行为和逻辑的。">
@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://jiangxueqiao.com/images/blog/nsis-jichuyufa-2.png">
 <meta property="og:image" content="https://jiangxueqiao.com/images/blog/nsis-jichuyufa-3.png">
 <meta property="article:published_time" content="2020-08-01T12:04:52.000Z">
-<meta property="article:modified_time" content="2025-12-09T03:08:37.511Z">
+<meta property="article:modified_time" content="2025-12-29T13:39:48.495Z">
 <meta property="article:author" content="jiangxueqiao.com">
 <meta property="article:tag" content="NSIS">
 <meta name="twitter:card" content="summary">
@@ -40,10 +40,10 @@
 <link rel="canonical" href="https://jiangxueqiao.com/post/409779091.html">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jiangxueqiao.com/post/409779091.html","path":"post/409779091.html","title":"NSIS教程(1)-基础语法"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jiangxueqiao.com/post/409779091.html","path":"post/409779091.html","title":"NSIS基础语法"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>NSIS教程(1)-基础语法 | 独钓寒江雪</title>
+<title>NSIS基础语法 | 独钓寒江雪</title>
   
 
   <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
@@ -173,7 +173,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-number">1.</span> <span class="nav-text">环境搭建</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NSIS-%E8%84%9A%E6%9C%AC%E7%BB%93%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">NSIS 脚本结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E7%A8%8B%E5%BA%8F%E5%B1%9E%E6%80%A7"><span class="nav-number">2.1.</span> <span class="nav-text">安装程序属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E7%9A%84%E5%AE%89%E8%A3%85%E7%A8%8B%E5%BA%8F%E5%B1%9E%E6%80%A7"><span class="nav-number">2.2.</span> <span class="nav-text">完整的安装程序属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B5%E9%9D%A2"><span class="nav-number">2.3.</span> <span class="nav-text">页面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E7%BD%AE%E5%90%91%E5%AF%BC%E9%A1%B5%E9%9D%A2%EF%BC%9A"><span class="nav-number">2.3.1.</span> <span class="nav-text">内置向导页面：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E9%A1%B5%E9%9D%A2"><span class="nav-number">2.3.2.</span> <span class="nav-text">自定义页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B5%E9%9D%A2%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0"><span class="nav-number">2.3.3.</span> <span class="nav-text">页面回调函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%BA%E6%AE%B5%EF%BC%88Section%EF%BC%89"><span class="nav-number">2.4.</span> <span class="nav-text">区段（Section）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NSIS-%E8%AF%AD%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">NSIS 语法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95%E6%A6%82%E8%BF%B0"><span class="nav-number">3.1.</span> <span class="nav-text">语法概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E9%87%8F%E5%92%8C%E5%8F%98%E9%87%8F"><span class="nav-number">3.2.</span> <span class="nav-text">常量和变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0"><span class="nav-number">3.3.</span> <span class="nav-text">函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89"><span class="nav-number">3.3.1.</span> <span class="nav-text">函数定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8"><span class="nav-number">3.3.2.</span> <span class="nav-text">函数调用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8F"><span class="nav-number">3.4.</span> <span class="nav-text">宏</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-1-%E5%AE%8F%E5%AE%9A%E4%B9%89"><span class="nav-number">3.4.1.</span> <span class="nav-text">3.4.1 宏定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-2-%E5%AE%8F%E8%B0%83%E7%94%A8"><span class="nav-number">3.4.2.</span> <span class="nav-text">3.4.2 宏调用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4"><span class="nav-number">3.5.</span> <span class="nav-text">指令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NSIS-%E7%95%8C%E9%9D%A2"><span class="nav-number">4.</span> <span class="nav-text">NSIS 界面</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%A0%E7%BB%9F%E7%95%8C%E9%9D%A2"><span class="nav-number">4.1.</span> <span class="nav-text">传统界面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%B0%E4%BB%A3%E7%95%8C%E9%9D%A2"><span class="nav-number">4.2.</span> <span class="nav-text">现代界面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%95%8C%E9%9D%A2"><span class="nav-number">4.3.</span> <span class="nav-text">自定义界面</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-number">1.</span> <span class="nav-text">环境搭建</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NSIS-%E8%84%9A%E6%9C%AC%E7%BB%93%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">NSIS 脚本结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E7%A8%8B%E5%BA%8F%E5%B1%9E%E6%80%A7"><span class="nav-number">2.1.</span> <span class="nav-text">安装程序属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B5%E9%9D%A2"><span class="nav-number">2.2.</span> <span class="nav-text">页面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E7%BD%AE%E5%90%91%E5%AF%BC%E9%A1%B5%E9%9D%A2%EF%BC%9A"><span class="nav-number">2.2.1.</span> <span class="nav-text">内置向导页面：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E9%A1%B5%E9%9D%A2"><span class="nav-number">2.2.2.</span> <span class="nav-text">自定义页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B5%E9%9D%A2%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0"><span class="nav-number">2.2.3.</span> <span class="nav-text">页面回调函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8C%BA%E6%AE%B5%EF%BC%88Section%EF%BC%89"><span class="nav-number">2.3.</span> <span class="nav-text">区段（Section）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NSIS-%E8%AF%AD%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">NSIS 语法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%AD%E6%B3%95%E6%A6%82%E8%BF%B0"><span class="nav-number">3.1.</span> <span class="nav-text">语法概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E9%87%8F%E5%92%8C%E5%8F%98%E9%87%8F"><span class="nav-number">3.2.</span> <span class="nav-text">常量和变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%BD%E6%95%B0"><span class="nav-number">3.3.</span> <span class="nav-text">函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%8F"><span class="nav-number">3.4.</span> <span class="nav-text">宏</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4"><span class="nav-number">3.5.</span> <span class="nav-text">指令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#NSIS-%E7%95%8C%E9%9D%A2"><span class="nav-number">4.</span> <span class="nav-text">NSIS 界面</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%A0%E7%BB%9F%E7%95%8C%E9%9D%A2"><span class="nav-number">4.1.</span> <span class="nav-text">传统界面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%B0%E4%BB%A3%E7%95%8C%E9%9D%A2"><span class="nav-number">4.2.</span> <span class="nav-text">现代界面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%95%8C%E9%9D%A2"><span class="nav-number">4.3.</span> <span class="nav-text">自定义界面</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9D%99%E9%BB%98%E5%AE%89%E8%A3%85"><span class="nav-number">5.</span> <span class="nav-text">静默安装</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BD%93%E5%89%8D%E6%98%AF%E5%90%A6%E9%9D%99%E9%BB%98%E8%BF%90%E8%A1%8C"><span class="nav-number">5.1.</span> <span class="nav-text">当前是否静默运行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%BB%98%E8%AE%A4%E5%BA%94%E7%AD%94"><span class="nav-number">5.2.</span> <span class="nav-text">默认应答</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E5%8F%82%E6%95%B0%E8%A7%A3%E6%9E%90"><span class="nav-number">5.3.</span> <span class="nav-text">启动参数解析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MUI-%E8%B7%B3%E8%BF%87%E6%8C%87%E5%AE%9A%E5%AE%89%E8%A3%85%E6%AD%A5%E9%AA%A4"><span class="nav-number">6.</span> <span class="nav-text">MUI 跳过指定安装步骤</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -186,7 +186,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">167</span>
+          <span class="site-state-item-count">153</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -197,7 +197,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">23</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -293,12 +293,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="NSIS教程(1)-基础语法 | 独钓寒江雪">
+      <meta itemprop="name" content="NSIS基础语法 | 独钓寒江雪">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          NSIS教程(1)-基础语法
+          NSIS基础语法
         </h1>
 
         <div class="post-meta-container">
@@ -316,7 +316,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-12-09 11:08:37" itemprop="dateModified" datetime="2025-12-09T11:08:37+08:00">2025-12-09</time>
+      <time title="修改时间：2025-12-29 21:39:48" itemprop="dateModified" datetime="2025-12-29T21:39:48+08:00">2025-12-29</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -350,7 +350,7 @@
 <p>makensisw.exe 只提供编译脚本的功能，不能对脚本进行调试，调试脚本全靠错误提示和经验。</p>
 </blockquote>
 <h1 id="NSIS-脚本结构"><a href="#NSIS-脚本结构" class="headerlink" title="NSIS 脚本结构"></a>NSIS 脚本结构</h1><p>一个 NSIS 脚本可以包括：安装程序属性、页面、区段等。</p>
-<p>对于一个最简单的 NSIS 脚本，只有 OutFile属性和区段（一个或多个）是必须的，OutFile 属性用于指定 NSIS 编译生成安装包的路径。</p>
+<p>对于一个最简单的 NSIS 脚本，只有 OutFile 属性和区段（一个或多个）是必须的，OutFile 属性用于指定 NSIS 编译生成安装包的路径。</p>
 <figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">OutFile</span> <span class="string">&quot;Simple.exe&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">Section</span> <span class="string">&quot;Installer Section&quot;</span></span><br><span class="line"><span class="keyword">SectionEnd</span></span><br></pre></td></tr></table></figure>
 
 <p>保存上面脚本到任意 .nsi 文件，并使用 makensisw.exe 打开改脚本进行编译，出现下图表示编译成功，成功之后会在脚本当前目录看到输出的 Simple.exe 文件。</p>
@@ -362,7 +362,7 @@
 <h2 id="安装程序属性"><a href="#安装程序属性" class="headerlink" title="安装程序属性"></a>安装程序属性</h2><p>安装程序的属性用于控制安装程序的外观，比如指定哪些页面出现在安装程序里，在每个页面的每个部分显示什么文本，安装程序的名称（如上面脚本中的 OutFile），使用什么样的图标，默认安装目录等等。</p>
 <p><strong>安装程序属性可以在除了区段和函数以外的任何地方设置。</strong></p>
 <p><strong>可以理解为安装程序属性是设置给 NSIS 编译器看的，这些属性的值在编译时都已经确定了</strong>，所以除了 InstallDir 以外，其他安装程序属性都不允许使用变量（除了<code>$\r</code>和<code>$\n</code>）。</p>
-<h2 id="完整的安装程序属性"><a href="#完整的安装程序属性" class="headerlink" title="完整的安装程序属性"></a>完整的安装程序属性</h2><p>见 <a href="/post/1923360270.html" title="NSIS教程(2)-完整属性">NSIS教程(2)-完整属性</a></p>
+<p>完整的安装程序属性可以查阅 NSIS 中文帮助文档。</p>
 <h2 id="页面"><a href="#页面" class="headerlink" title="页面"></a>页面</h2><p>页面分为<code>NSIS内置的向导页面</code>和<code>用户自定义页面</code>。</p>
 <p>一个非静默安装程序需要页面来指导用户运行安装程序，可以通过<code>Page</code>命令或<code>PageEx</code>（PageEx 提供了更多高级的设置）命令来设定哪个页面显示。</p>
 <p>页面实际的显示顺序和它在 NSIS 脚本中定义的顺序是一致的。</p>
@@ -383,6 +383,7 @@
 
 <h3 id="自定义页面"><a href="#自定义页面" class="headerlink" title="自定义页面"></a>自定义页面</h3><p>创建自定义页面语法：</p>
 <figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">page</span> <span class="literal">custom</span> [创建函数] [离开函数] [标题]</span><br></pre></td></tr></table></figure>
+
 <p><span style="color:#FFFFFF">&lt;原文出自: jiangxueqiao.com，请尊重原创&gt;</span><br>自定义页面只有两个回调函数（创建函数和离开函数），创建函数在需要创建页面时被调用，离开函数在用户按下”下一页”按钮之后并且在页面离开之前被直接调用。</p>
 <h3 id="页面回调函数"><a href="#页面回调函数" class="headerlink" title="页面回调函数"></a>页面回调函数</h3><p>每个内建的页面都有三个回调函数：一个预置函数、一个显示创建函数和一个离开函数。</p>
 <p>预置函数在页面被创建之前被直接的调用，显示函数在页面被创建后且在显示之前被直接调用，离开函数在用户按下下一页按钮之后并且在页面离开之前被直接调用。</p>
@@ -407,7 +408,7 @@
 <li>NSIS 脚本用行尾的反斜杠”&quot;表示下一行和当前行逻辑上是同一行。</li>
 </ul>
 <h2 id="常量和变量"><a href="#常量和变量" class="headerlink" title="常量和变量"></a>常量和变量</h2><p>NSIS 的变量和常量都是<strong>全局的</strong>，且大小写敏感的，NSIS 中变量和常量都是<strong>弱类型</strong>的。</p>
-<p>常用和变量的引用方式都是<code>$&#123;VAR_NAME&#125;</code>或<code>$VAR_NAME</code>。</p>
+<p>常用和变量的引用方式都是<code>${VAR_NAME}</code>或<code>$VAR_NAME</code>。</p>
 <p>使用<code>!define</code>方式定义常量，如：<code>!define PRODUCT_NAME &quot;网易云音乐&quot;</code></p>
 <p>使用<code>Var</code>方式定义变量，如：<code>Var a</code></p>
 <p>NSIS 内置了 20 个已注册的变量：<code>$0</code> ~ <code>$9</code> 和 <code>$R0</code> ~ <code>$R9</code>，这些变量不需要声明就可以使用，一般用于参数传递等。</p>
@@ -415,18 +416,22 @@
 <p>关于变量的赋值，NSIS 中不能直接使用<code>=</code>来赋值，需要借助<code>StrCpy</code>来实现，如：</p>
 <figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">StrCpy</span> <span class="variable">$0</span> <span class="string">&quot;hello&quot;</span></span><br><span class="line"><span class="keyword">StrCpy</span> <span class="variable">$0</span> <span class="number">123</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><h3 id="函数定义"><a href="#函数定义" class="headerlink" title="函数定义"></a>函数定义</h3><figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Function</span> 函数名</span><br><span class="line"></span><br><span class="line"><span class="keyword">FunctionEnd</span></span><br></pre></td></tr></table></figure>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>使用如下方式声明函数：</p>
+<figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Function</span> 函数名</span><br><span class="line"></span><br><span class="line"><span class="keyword">FunctionEnd</span></span><br></pre></td></tr></table></figure>
 
 <p>函数名以“.”开头的(例如 “.Whatever”)一般作为回调函数保留。<br>函数名以“un.”开头的函数将会被创建在卸载程序里。因此，普通安装区段和函数不能调用卸载函数，而卸载区段和卸载函数也不能调用普通函数。<br><strong>NSIS 函数声明中不支持参数定义</strong>，如果需要传递参数，可以使用内置的 20 个变量或者堆栈的方式。</p>
-<h3 id="函数调用"><a href="#函数调用" class="headerlink" title="函数调用"></a>函数调用</h3><figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Call</span> 函数名</span><br></pre></td></tr></table></figure>
+<p>使用如下方式调用函数：</p>
+<figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Call</span> 函数名</span><br></pre></td></tr></table></figure>
 
 <h2 id="宏"><a href="#宏" class="headerlink" title="宏"></a>宏</h2><p>除了函数之外，NSIS 还支持定义<code>宏</code>，NSIS 中的宏支持定义参数。</p>
-<h3 id="3-4-1-宏定义"><a href="#3-4-1-宏定义" class="headerlink" title="3.4.1 宏定义"></a>3.4.1 宏定义</h3><figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">!macro</span> 宏名 [参数<span class="number">1</span>] [参数n]</span><br><span class="line"></span><br><span class="line"><span class="keyword">!macro</span>end</span><br></pre></td></tr></table></figure>
+<p>使用如下方式定义宏：</p>
+<figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">!macro</span> 宏名 [参数<span class="number">1</span>] [参数n]</span><br><span class="line"></span><br><span class="line"><span class="keyword">!macro</span>end</span><br></pre></td></tr></table></figure>
 
-<h3 id="3-4-2-宏调用"><a href="#3-4-2-宏调用" class="headerlink" title="3.4.2 宏调用"></a>3.4.2 宏调用</h3><figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">!insertmacro</span> 宏名 [参数<span class="number">1</span>] [参数n]</span><br></pre></td></tr></table></figure>
+<p>使用如下方式调用宏：</p>
+<figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">!insertmacro</span> 宏名 [参数<span class="number">1</span>] [参数n]</span><br></pre></td></tr></table></figure>
 
 <h2 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h2><p>NSIS 内置了很多指令，这些指令提供了安装包常用了功能，如果这些指令无法满足需求，用户也可以自己开发插件。</p>
-<p>NSIS 支持的指令列表见：<a href="/post/2673115526.html" title="NSIS教程(3)-完整指令">NSIS教程(3)-完整指令</a></p>
+<p>NSIS 支持的完整指令可以查阅 NSIS 中文帮助文档。</p>
 <p>NSIS 指令使用中比较特别的在于<strong>跳转</strong>，比如执行失败跳转到哪里，成功跳转到哪里。<br>以<code>MessageBox</code>指令为例（<code>[]</code>为可选项）：</p>
 <figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">MessageBox</span> 消息框选项列表 消息框文本 [/SD 返回] [检测返回值 跳转到] [检测返回值<span class="number">2</span> 跳转到<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
 
@@ -437,6 +442,35 @@
 <h2 id="传统界面"><a href="#传统界面" class="headerlink" title="传统界面"></a>传统界面</h2><p><img data-src="/images/blog/nsis-jichuyufa-2.png"></p>
 <h2 id="现代界面"><a href="#现代界面" class="headerlink" title="现代界面"></a>现代界面</h2><p><img data-src="/images/blog/nsis-jichuyufa-3.png"></p>
 <h2 id="自定义界面"><a href="#自定义界面" class="headerlink" title="自定义界面"></a>自定义界面</h2><p>我们可以使用第三方界面库（如 duilib, Qt）自己绘制安装包的界面，这样灵活度更大，可以开发出类似 QQ 那样的安装界面。<br>在此之前需要掌握 NSIS 的插件开发技巧。</p>
+<h1 id="静默安装"><a href="#静默安装" class="headerlink" title="静默安装"></a>静默安装</h1><p>静默安装&#x2F;卸载是一种安装&#x2F;卸载形式，用户打开安装包后不显示任何安装界面，直接开始安装。</p>
+<p>静默安装支持使用命令行参数指定安装路径等参数。</p>
+<p>常用的静默安装有两种：</p>
+<ol>
+<li>在脚本中加入 SilentInstall 和 SilentUninstall 命令</li>
+<li>在程序启动参数里加 &#x2F;S 参数(区分大小写)</li>
+</ol>
+<h2 id="当前是否静默运行"><a href="#当前是否静默运行" class="headerlink" title="当前是否静默运行"></a>当前是否静默运行</h2><p>在脚本中判断安装、卸载程序是否为静默运行，可以使用 <code>IfSilent</code>：</p>
+<figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装操作开始前.</span></span><br><span class="line"><span class="keyword">Function</span> <span class="title function_">.onInit</span></span><br><span class="line">    <span class="keyword">IfSilent</span> +<span class="number">2</span> +<span class="number">1</span></span><br><span class="line">    <span class="keyword">MessageBox</span> <span class="params">MB_ICONQUESTION</span>|<span class="params">MB_OK</span> <span class="string">&quot;欢迎使用&quot;</span></span><br><span class="line"><span class="keyword">FunctionEnd</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="默认应答"><a href="#默认应答" class="headerlink" title="默认应答"></a>默认应答</h2><p>对于有些命令需要为静默安装指定默认的回答，如<code>MessageBox</code>需要加入&#x2F;SD 开关来指定默认回答。<br><span style="color:#FFFFFF">&lt;原文出自: jiangxueqiao.com，请尊重原创&gt;</span></p>
+<figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 卸载操作开始前.</span></span><br><span class="line"><span class="keyword">Function</span> <span class="title function_">un</span>.onInit</span><br><span class="line">    <span class="keyword">MessageBox</span> <span class="params">MB_ICONQUESTION</span>|<span class="params">MB_YESNO</span> <span class="string">&quot;确定要卸载吗?&quot;</span> /SD <span class="params">IDYES</span> <span class="params">IDYES</span> +<span class="number">2</span> <span class="params">IDNO</span> +<span class="number">1</span></span><br><span class="line">    <span class="keyword">Abort</span></span><br><span class="line"><span class="keyword">FunctionEnd</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="启动参数解析"><a href="#启动参数解析" class="headerlink" title="启动参数解析"></a>启动参数解析</h2><p>如果需要为静默安装指定其他的参数，如用户名等，可以使用程序启动参数指定，并在<code>.onInit</code> 函数里进行解析：</p>
+<figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#使用插件FileFunc中的2个宏</span></span><br><span class="line"><span class="keyword">!include</span> <span class="string">&quot;FileFunc.nsh&quot;</span></span><br><span class="line"><span class="keyword">!insertmacro</span> GetParameters</span><br><span class="line"><span class="keyword">!insertmacro</span> GetOptions</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义全局变量</span></span><br><span class="line"><span class="keyword">Var</span> <span class="variable">paramInstllDir</span>      <span class="comment"># 启动参数-安装目录</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 自定义宏ParseParameters，在.onInit函数中调用即可</span></span><br><span class="line"><span class="keyword">!macro</span> ParseParameters</span><br><span class="line">    <span class="variable">$&#123;GetParameters&#125;</span> <span class="variable">$R0</span></span><br><span class="line">    <span class="variable">$&#123;GetOptions&#125;</span> <span class="variable">$R0</span> <span class="string">&#x27;/installdir&#x27;</span> <span class="variable">$R1</span></span><br><span class="line">    <span class="keyword">StrCpy</span> <span class="variable">$paramInstllDir</span> <span class="variable">$R1</span></span><br><span class="line">    <span class="keyword">IfSilent</span> +<span class="number">1</span> +<span class="number">2</span></span><br><span class="line">    <span class="keyword">StrCpy</span> <span class="variable">$INSTDIR</span> <span class="variable">$paramInstllDir</span></span><br><span class="line"><span class="keyword">!macro</span>end</span><br></pre></td></tr></table></figure>
+
+<h1 id="MUI-跳过指定安装步骤"><a href="#MUI-跳过指定安装步骤" class="headerlink" title="MUI 跳过指定安装步骤"></a>MUI 跳过指定安装步骤</h1><p>在正常情况下安装包会有“欢迎界面”、“安装目录选择界面”等等，有时我们需要安装包自动跳过这 2 个界面，如安装包通过命令行参数传入“安装目录”（如<code>setup.exe /installdir F:\test</code>），本节讲述如何使安装包跳过指定的界面。</p>
+<p>在页面插入宏之前通过<code>MUI_PAGE_CUSTOMFUNCTION_PRE</code>来指定 pre 处理函数，在该函数中来判断是否需要跳过：</p>
+<figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装程序欢迎页面</span></span><br><span class="line"><span class="keyword">!define</span> MUI_PAGE_CUSTOMFUNCTION_PRE SkipPage</span><br><span class="line"><span class="keyword">!insertmacro</span> MUI_PAGE_WELCOME</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装程序显示安装目录选择页面</span></span><br><span class="line"><span class="keyword">!define</span> MUI_PAGE_CUSTOMFUNCTION_PRE SkipPage</span><br><span class="line"><span class="keyword">!insertmacro</span> MUI_PAGE_DIRECTORY</span><br></pre></td></tr></table></figure>
+
+<p><code>SkipPage</code>函数定义如下：</p>
+<figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Function</span> <span class="title function_">SkipPage</span></span><br><span class="line">  <span class="keyword">StrLen</span> <span class="variable">$R1</span> <span class="variable">$paramInstllDir</span></span><br><span class="line">  <span class="variable">$&#123;If&#125;</span> <span class="variable">$R1</span> &gt; <span class="number">0</span></span><br><span class="line">	<span class="keyword">Abort</span></span><br><span class="line">  <span class="variable">$&#123;EndIf&#125;</span></span><br><span class="line"><span class="keyword">FunctionEnd</span></span><br></pre></td></tr></table></figure>
+
+<p>获取命令行参数存入<code>$paramInstllDir</code>变量，并解析命令行参数：</p>
+<figure class="highlight nsis"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">!macro</span> ParseParameters</span><br><span class="line">    <span class="variable">$&#123;GetParameters&#125;</span> <span class="variable">$R0</span></span><br><span class="line">    <span class="variable">$&#123;GetOptions&#125;</span> <span class="variable">$R0</span> <span class="string">&#x27;/installdir&#x27;</span> <span class="variable">$R1</span></span><br><span class="line">    <span class="keyword">StrCpy</span> <span class="variable">$paramInstllDir</span> <span class="variable">$R1</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">StrLen</span> <span class="variable">$R1</span> <span class="variable">$paramInstllDir</span></span><br><span class="line">    <span class="variable">$&#123;If&#125;</span> <span class="variable">$R1</span> &gt; <span class="number">0</span></span><br><span class="line">    	<span class="keyword">StrCpy</span> <span class="variable">$INSTDIR</span> <span class="variable">$paramInstllDir</span></span><br><span class="line">	<span class="variable">$&#123;EndIf&#125;</span></span><br><span class="line"><span class="keyword">!macro</span>end</span><br></pre></td></tr></table></figure>
 
     </div>
 
@@ -472,7 +506,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://jiangxueqiao.com/post/409779091.html" title="NSIS教程(1)-基础语法">https://jiangxueqiao.com/post/409779091.html</a>
+      <a href="https://jiangxueqiao.com/post/409779091.html" title="NSIS基础语法">https://jiangxueqiao.com/post/409779091.html</a>
   </li>
   <li class="post-copyright-license">
       <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -493,8 +527,8 @@
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/post/1923360270.html" rel="next" title="NSIS教程(2)-完整属性">
-                  NSIS教程(2)-完整属性 <i class="fa fa-angle-right"></i>
+                <a href="/post/275632694.html" rel="next" title="NSIS的传统界面示例">
+                  NSIS的传统界面示例 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
