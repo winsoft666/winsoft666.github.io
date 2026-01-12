@@ -2,6 +2,193 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://jiangxueqiao.com/post/657651408.html</loc>
+    
+    <lastmod>2026-01-12T16:51:56.589Z</lastmod>
+    
+    <date>1765015858000</date>
+    <title>突破抓包限制：Hook实战解密HTTPS流量与SSL双向认证 | 独钓寒江雪</title>
+    
+    <desc></desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/about/index.html</loc>
+    
+    <lastmod>2026-01-12T16:46:29.017Z</lastmod>
+    
+    <date>1763199134000</date>
+    <title>关于 | 独钓寒江雪</title>
+    
+    <desc></desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/3573459553.html</loc>
+    
+    <lastmod>2026-01-12T16:33:41.057Z</lastmod>
+    
+    <date>1763903462000</date>
+    <title>代码的隐形战场：Windows进程注入与API Hook完全指南 | 独钓寒江雪</title>
+    
+    <desc>在数字时代的攻防战场上，Windows 注入与 Hook 技术如影随形，它们始终是开发者与安全研究员的“终极兵器库”。无论是逆向工程师通过动态调试破解加密算法，还是恶意软件通过进程注入窃取敏感信息，这项技术始终游走在合法与非法的灰色边缘。它既是系统底层机制的“潘多拉魔盒”，也是守护软件安全的“达摩克利斯之剑”——掌握它，你既能修复高危漏洞，也可能成为攻击者的帮凶。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/326824759.html</loc>
+    
+    <lastmod>2026-01-12T16:30:24.965Z</lastmod>
+    
+    <date>1513330738000</date>
+    <title>Windows套接字I/O模型(5)-完成端口模型 | 独钓寒江雪</title>
+    
+    <desc>前面的文章已经介绍了套接字 I&#x2F;O 的同步模型、WSAAsyncSelect模型、WSAEventSelect模型，到目前为止套接字I&#x2F;O还剩下2个模型没有介绍：重叠模型，完成端口模型。 如果程序对性能和并发要求不高，可以使用前面介绍的WSAEventSelect模型；如果对性能和并发有要求，可以使用本文介绍的完成端口模型。 因为完成端口模型是基于重叠模型的，且在易用性、可伸缩</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/2544551173.html</loc>
+    
+    <lastmod>2026-01-12T16:30:22.419Z</lastmod>
+    
+    <date>1513066464000</date>
+    <title>Windows套接字I/O模型(3)-WSAAsyncSelect模型 | 独钓寒江雪</title>
+    
+    <desc>利用 WSAAsyncSelect 模型结合 Windows 窗口消息循环，应用程序可以在一个套接字上接收以 Windows 消息为基础的网络事件通知。 在使用 WSAAsyncSelect 模型之前，首先需要创建一个 Windows 窗口，并为该窗口提供一个窗口过程支持函数（WndProc）。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/2236960039.html</loc>
+    
+    <lastmod>2026-01-12T16:30:19.677Z</lastmod>
+    
+    <date>1692057635000</date>
+    <title>Windows音频环回录制 | 独钓寒江雪</title>
+    
+    <desc>所谓音频环回录制就是录制扬声器播放的声音。播放到扬声器的声音已经过混合，Windows 提供了 WASAPI 来获取这种混合的音频信号。 本文将录制到原始音频样本数据写入到文件，可以使用Audacity导入原始数据试听。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/235943795.html</loc>
+    
+    <lastmod>2026-01-12T16:30:16.961Z</lastmod>
+    
+    <date>1709357214000</date>
+    <title>Node插件开发(2)-调用方式 | 独钓寒江雪</title>
+    
+    <desc>本文主要介绍如何在 Node-API 中实现不同类型的接口，主要有下面几种类型： 同步调用 基于 Napi::AsyncWorker 的异步调用，通过回调函数返回 异步调用，返回 Promise 基于 Napi::ThreadSafeFunction 的异步调用，通过回调函数返回</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/819381949.html</loc>
+    
+    <lastmod>2026-01-12T16:30:13.899Z</lastmod>
+    
+    <date>1709049294000</date>
+    <title>Node插件开发(1)-快速入门 | 独钓寒江雪</title>
+    
+    <desc>在使用 Electron 开发客户端时，如果现有 Node 模块所提供的功能无法满足需要，我们可以使用 C++ 开发自定义的 Node 模块，也称插件（addon）。 Node.js 插件的扩展名为 .node，是二进制文件，其本质上是通过动态链接库（.dll 或 .so）重命名而来。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/29874871.html</loc>
+    
+    <lastmod>2026-01-12T16:29:53.718Z</lastmod>
+    
+    <date>1719381302000</date>
+    <title>玩转Qt 2D绘图之仪表盘实例 | 独钓寒江雪</title>
+    
+    <desc>在前面的《玩转 Qt 2D 绘图》系列文章中，已经介绍了 2D 绘图中常用的知识，本文主要通过一个汽车仪表盘的实例来综合应用前面所介绍知识点，并且还介绍了一些 Qt 绘图的常用技巧。 相关文章： 玩转Qt 2D绘图之坐标系 玩转Qt 2D绘图之画家的工具 玩转Qt 2D绘图之画家</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/1112470146.html</loc>
+    
+    <lastmod>2026-01-12T16:29:14.059Z</lastmod>
+    
+    <date>1764939302000</date>
+    <title>C++ Qt应用在macOS平台的编译与发布 | 独钓寒江雪</title>
+    
+    <desc>在 macOS 上分发 Qt 应用，开发者常被多架构编译、代码签名、公证流程所困扰。本文基于 Qt6.9.2 实战经验，系统梳理了从编译配置到最终分发的完整路径。你将了解如何通过 CMake 管理多架构构建，使用 macdeployqt 打包依赖，配置正确的 entitlements 文件，并完成 Apple 强制要求的签名与公证。更提供自动化脚本示例，助你告别重复操作，确保应用在 Intel 和</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/4168021185.html</loc>
+    
+    <lastmod>2026-01-10T16:08:37.017Z</lastmod>
+    
+    <date>1642773181000</date>
+    <title>从汇编的角度分析函数调用过程 | 独钓寒江雪</title>
+    
+    <desc>本文从汇编的视角分析了函数的调用方式，掌握该知识对使用 OllyDbg&#x2F;x64dbg 等调试工具会大有裨益。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/50218900.html</loc>
+    
+    <lastmod>2026-01-10T15:54:29.758Z</lastmod>
+    
+    <date>1619583632000</date>
+    <title>了解DPI缩放 | 独钓寒江雪</title>
+    
+    <desc>dpi 是“Dots Per Inch”的缩写，表示每英寸的像素点个数，也就是像素点的密集度。 dpi 不是用来表示屏幕分辨率的，也不是用来表示屏幕物理尺寸的。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/3247297083.html</loc>
+    
+    <lastmod>2026-01-10T15:52:19.175Z</lastmod>
+    
+    <date>1738075189000</date>
+    <title>调试软件使用速查手册 | 独钓寒江雪</title>
+    
+    <desc>虽然古话云“工欲善其事必先利其器”，但无论是 x64dbg 还是 IDA，他们都仅仅只是一个工具，还需要结合强大的内功，才能使其发挥更大的威力。 本文记录的快捷键、指令等内容可能适合我，但不适合你。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/3886809266.html</loc>
+    
+    <lastmod>2026-01-10T15:27:47.278Z</lastmod>
+    
+    <date>1520676658000</date>
+    <title>网络协议(1)--基础概念 | 独钓寒江雪</title>
+    
+    <desc></desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/470495318.html</loc>
+    
+    <lastmod>2026-01-10T15:18:54.935Z</lastmod>
+    
+    <date>1761121860000</date>
+    <title>x86架构常用寄存器及汇编指令 | 独钓寒江雪</title>
+    
+    <desc>x86 架构作为个人计算机和服务器领域的主流计算架构，其汇编语言是理解计算机底层运行机制、进行逆向工程、性能优化及嵌入式开发的核心基础。本文将系统梳理 x86 架构中的常用寄存器 ​ 和常用汇编指令 ​，并结合实际应用场景说明其作用。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/2801991199.html</loc>
+    
+    <lastmod>2026-01-10T14:50:50.758Z</lastmod>
+    
+    <date>1596641710000</date>
+    <title>CEF的那点事 | 独钓寒江雪</title>
+    
+    <desc></desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/3654006375.html</loc>
+    
+    <lastmod>2026-01-04T14:42:07.545Z</lastmod>
+    
+    <date>1521088200000</date>
+    <title>网络协议(7)--HTTP与HTTPS协议 | 独钓寒江雪</title>
+    
+    <desc>HTTP 是Hyper Text Transfer Protocol（超文本传输协议）的缩写。HTTP 协议位于 TCP&#x2F;IP 协议栈的应用层。</desc>
+  </url>
+  
+  <url>
     <loc>https://jiangxueqiao.com/post/1914794883.html</loc>
     
     <lastmod>2025-12-29T14:21:00.450Z</lastmod>
@@ -10,39 +197,6 @@
     <title>从C++11开始新增的常用关键字 | 独钓寒江雪</title>
     
     <desc>从 C++11 开始，一系列新关键字的引入，为我们提供了更优的语法选择，它们逐渐取代了许多传统的 C++98&#x2F;03 惯用法。这不仅是语法的更新，更是理念的升级：用 nullptr 替代 NULL 以获得类型安全，用范围 for 替代手动迭代以提升可读性，用 constexpr 宣告编译期计算以追求极致性能。本文旨在梳理这些自 C++11 起新增的常用关键字，揭示它们如何让我们的代码变得更</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/470495318.html</loc>
-    
-    <lastmod>2025-12-29T14:18:55.910Z</lastmod>
-    
-    <date>1761121860000</date>
-    <title>x86架构常用寄存器及汇编指令 | 独钓寒江雪</title>
-    
-    <desc>x86架构作为个人计算机和服务器领域的主流计算架构，其汇编语言是理解计算机底层运行机制、进行逆向工程、性能优化及嵌入式开发的核心基础。本文将系统梳理x86架构中的常用寄存器​和常用汇编指令​，并结合实际应用场景说明其作用。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/4168021185.html</loc>
-    
-    <lastmod>2025-12-29T14:18:47.405Z</lastmod>
-    
-    <date>1642773181000</date>
-    <title>从汇编的角度分析函数调用过程 | 独钓寒江雪</title>
-    
-    <desc>本文从汇编的视角分析了函数的调用方式，掌握该知识对使用 OllyDbg 等动态调试工具会大有裨益。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/3573459553.html</loc>
-    
-    <lastmod>2025-12-29T14:18:31.538Z</lastmod>
-    
-    <date>1763903462000</date>
-    <title>代码的隐形战场：Windows进程注入与API Hook完全指南 | 独钓寒江雪</title>
-    
-    <desc>在数字时代的攻防战场上，Windows 注入与 Hook 技术如影随形，它们始终是开发者与安全研究员的“终极兵器库”。无论是逆向工程师通过动态调试破解加密算法，还是恶意软件通过进程注入窃取敏感信息，这项技术始终游走在合法与非法的灰色边缘。它既是系统底层机制的“潘多拉魔盒”，也是守护软件安全的“达摩克利斯之剑”——掌握它，你既能修复高危漏洞，也可能成为攻击者的帮凶。</desc>
   </url>
   
   <url>
@@ -211,17 +365,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/966041457.html</loc>
-    
-    <lastmod>2025-12-28T12:54:27.364Z</lastmod>
-    
-    <date>1758541189000</date>
-    <title>Visual Studio 断点使用手册 | 独钓寒江雪</title>
-    
-    <desc>Visual Studio 的断点系统远不止”在代码行上点击左侧边栏”那么简单。掌握其高级功能可以彻底改变你的调试体验，让你能精准定位问题，而不是在无尽的代码执行中盲目搜索。本文将带你全面了解 Visual Studio 断点系统的各项高级功能。</desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/2819651546.html</loc>
     
     <lastmod>2025-12-28T12:45:21.526Z</lastmod>
@@ -244,17 +387,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/2544551173.html</loc>
-    
-    <lastmod>2025-12-28T12:44:53.950Z</lastmod>
-    
-    <date>1513066464000</date>
-    <title>Windows套接字I/O模型(3)-WSAAsyncSelect模型 | 独钓寒江雪</title>
-    
-    <desc>利用 WSAAsyncSelect 模型结合 Windows 窗口消息循环，应用程序可以在一个套接字上接收以 Windows 消息为基础的网络事件通知。 在使用 WSAAsyncSelect 模型之前，首先需要创建一个 Windows 窗口，并为该窗口提供一个窗口过程支持函数（WndProc）。</desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/640627104.html</loc>
     
     <lastmod>2025-12-28T12:44:51.106Z</lastmod>
@@ -263,17 +395,6 @@
     <title>Windows套接字I/O模型(2)-Select模型 | 独钓寒江雪</title>
     
     <desc>套接字Select模型的中心思想是利用 select 函数实现对I&#x2F;O的管理。 可以利用select函数判断一个或多个套接字上是否存在待接收数据，或者能否向一个或多个套接字发送数据。 select函数是同步的，也会阻塞，但和阻塞模型不同的是，Select模型可以同时管理多个套接字。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/326824759.html</loc>
-    
-    <lastmod>2025-12-28T12:44:37.448Z</lastmod>
-    
-    <date>1513330738000</date>
-    <title>Windows套接字I/O模型(5)-完成端口模型 | 独钓寒江雪</title>
-    
-    <desc>前面的文章已经介绍了套接字 I&#x2F;O 的同步模型、WSAAsyncSelect模型、WSAEventSelect模型，到目前为止套接字I&#x2F;O还剩下2个模型没有介绍：重叠模型，完成端口模型。 如果程序对性能和并发要求不高，可以使用前面介绍的WSAEventSelect模型；如果对性能和并发有要求，可以使用本文介绍的完成端口模型。 因为完成端口模型是基于重叠模型的，且在易用性、可伸缩</desc>
   </url>
   
   <url>
@@ -296,28 +417,6 @@
     <title>最不像干货的33条干货（转载） | 独钓寒江雪</title>
     
     <desc>成功的唯一秘诀就是钻空子。钻职场人际关系的空子、钻市场监管的空子、钻信息不对称的空子，钻你发现的一切空子的空子。当然，坚持、努力、选择这些因素，对于成功也很重要，但算不上秘诀。只有钻空子才是唯一的秘诀。 不要做永远正确的穷人。少跟人争辩，你觉得对就去做，做成了自然别人就闭嘴了。说服别人并没有实际的意义，浪费口舌和时间。当然，利益相关的事情，有人冤枉你的情况除外。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/3654006375.html</loc>
-    
-    <lastmod>2025-12-28T12:43:39.967Z</lastmod>
-    
-    <date>1521088200000</date>
-    <title>网络协议(7)--HTTP与HTTPS协议 | 独钓寒江雪</title>
-    
-    <desc>HTTP 是Hyper Text Transfer Protocol（超文本传输协议）的缩写。HTTP 协议位于 TCP&#x2F;IP 协议栈的应用层。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/3886809266.html</loc>
-    
-    <lastmod>2025-12-28T12:41:16.609Z</lastmod>
-    
-    <date>1520676658000</date>
-    <title>网络协议(1)--基础概念 | 独钓寒江雪</title>
-    
-    <desc></desc>
   </url>
   
   <url>
@@ -486,17 +585,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/3247297083.html</loc>
-    
-    <lastmod>2025-12-23T06:45:48.360Z</lastmod>
-    
-    <date>1738075189000</date>
-    <title>IDA Pro速查手册 | 独钓寒江雪</title>
-    
-    <desc>IDA Pro 是顶级的静态反汇编与逆向工程平台。其核心功能包括强大的自动代码分析、生成交互式流程图、跨处理器架构支持，以及将汇编代码反编译为高级语言伪代码（Hex-Rays 反编译器）。它允许用户深度分析二进制文件结构、识别函数与逻辑、进行漏洞研究，并通过脚本和插件系统实现功能扩展。</desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/2711697202.html</loc>
     
     <lastmod>2025-12-23T06:45:43.373Z</lastmod>
@@ -505,50 +593,6 @@
     <title>Windbg调试速查手册 | 独钓寒江雪</title>
     
     <desc>Windbg 是 Microsoft 公司推出的免费的、带 GUI 的调试器，支持 Source 和 Assembly 两种模式的调试。 Windbg 不仅可以调试应用程序，还可以进行系统内核调试，Windbg 支持的平台包括 X86、IA64、AMD64。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/2358498140.html</loc>
-    
-    <lastmod>2025-12-23T06:45:35.899Z</lastmod>
-    
-    <date>1735396789000</date>
-    <title>x64dbg速查手册 | 独钓寒江雪</title>
-    
-    <desc>x64dbg 是一款开源的 x64&#x2F;x32 位 Windows 动态调试工具。它集成了反汇编、内存查看、断点管理等多种功能，界面直观，插件架构灵活。作为 OllyDbg 的现代继承者，它以其强大的动态分析能力、活跃的社区支持和对逆向工程师的友好性，成为软件分析、漏洞研究和安全调试领域的常用利器。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/714268304.html</loc>
-    
-    <lastmod>2025-12-23T05:31:46.683Z</lastmod>
-    
-    <date>1766757181000</date>
-    <title>游戏加速器的原理及实现 | 独钓寒江雪</title>
-    
-    <desc>文章还未公开，请输入密码查看</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/1112470146.html</loc>
-    
-    <lastmod>2025-12-16T08:22:25.218Z</lastmod>
-    
-    <date>1764939302000</date>
-    <title>C++ Qt应用在macOS平台的编译与发布 | 独钓寒江雪</title>
-    
-    <desc>在 macOS 上分发 Qt 应用，开发者常被多架构编译、代码签名、公证流程所困扰。本文基于 Qt6.9.2 实战经验，系统梳理了从编译配置到最终分发的完整路径。你将了解如何通过 CMake 管理多架构构建，使用 macdeployqt 打包依赖，配置正确的 entitlements 文件，并完成 Apple 强制要求的签名与公证。更提供自动化脚本示例，助你告别重复操作，确保应用在 Intel 和</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/679969051.html</loc>
-    
-    <lastmod>2025-12-15T05:43:27.256Z</lastmod>
-    
-    <date>1763471462000</date>
-    <title>软件开发中常用的数值：藏在代码里的数字密码 | 独钓寒江雪</title>
-    
-    <desc>文章还未公开，请输入密码查看</desc>
   </url>
   
   <url>
@@ -563,17 +607,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/about/index.html</loc>
-    
-    <lastmod>2025-12-10T09:22:42.778Z</lastmod>
-    
-    <date>1763199134000</date>
-    <title>关于 | 独钓寒江雪</title>
-    
-    <desc></desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/3801212176.html</loc>
     
     <lastmod>2025-12-09T08:25:35.051Z</lastmod>
@@ -582,17 +615,6 @@
     <title>Windows批处理杂记 | 独钓寒江雪</title>
     
     <desc>exit命令exit命令用于退出当前的批处理脚本，并返回一个退出代码ExitCode（即返回值）。退出代码通常是一个整数，用于指示脚本执行的状态，例如成功（0）或失败（非零值）。 exit命令的语法为： 1exit [/b] [exitCode] 其中 /b 选项表示仅退出当前批处理脚本的执行，而不会影响调用脚本的父进程。如果不使用 /b 选项，则 exit 命令会终止当前整个的命令处理器进程（C</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/657651408.html</loc>
-    
-    <lastmod>2025-12-09T03:39:00.832Z</lastmod>
-    
-    <date>1765015858000</date>
-    <title>从入门到洞察：网络抓包基础与核心工具实战指南 | 独钓寒江雪</title>
-    
-    <desc></desc>
   </url>
   
   <url>
@@ -640,28 +662,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/235943795.html</loc>
-    
-    <lastmod>2025-12-09T03:07:22.510Z</lastmod>
-    
-    <date>1709357214000</date>
-    <title>Node插件开发(2)-调用方式 | 独钓寒江雪</title>
-    
-    <desc>本文主要介绍如何在 Node-API 中实现不同类型的接口，主要有下面几种类型： 同步调用 基于 Napi::AsyncWorker 的异步调用，通过回调函数返回 异步调用，返回 Promise 基于 Napi::ThreadSafeFunction 的异步调用，通过回调函数返回</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/819381949.html</loc>
-    
-    <lastmod>2025-12-09T03:07:07.169Z</lastmod>
-    
-    <date>1709049294000</date>
-    <title>Node插件开发(1)-快速入门 | 独钓寒江雪</title>
-    
-    <desc>在使用 Electron 开发客户端时，如果现有 Node 模块所提供的功能无法满足需要，我们可以使用 C++ 开发自定义的 Node 模块，也称插件（addon）。 Node.js 插件的扩展名为 .node，是二进制文件，其本质上是通过动态链接库（.dll 或 .so）重命名而来。</desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/749849405.html</loc>
     
     <lastmod>2025-12-09T03:06:42.870Z</lastmod>
@@ -681,17 +681,6 @@
     <title>玩转Qt 2D绘图之坐标系 | 独钓寒江雪</title>
     
     <desc>Qt 中提供了强大的 2D 绘图系统，可以使用相同的 API 在屏幕和绘图设备上进行绘制，主要基于 QPainter、QPaintDevice 和 QPaintEngine 这三个类实现，其中： QPainter 执行具体的绘图操作，QPainter 类提供了大量的 GUI 编程所需的函数，如 drawLine、drawImage 等。 QPaintDevice 是一个基类，提供绘图设备的抽象接口</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/29874871.html</loc>
-    
-    <lastmod>2025-12-09T03:06:08.661Z</lastmod>
-    
-    <date>1719381302000</date>
-    <title>玩转Qt 2D绘图之仪表盘实例 | 独钓寒江雪</title>
-    
-    <desc>在前面的《玩转 Qt 2D 绘图》系列文章中，已经介绍了 2D 绘图中常用的知识，本文主要通过一个汽车仪表盘的实例来综合应用前面所介绍知识点，并且还介绍了一些 Qt 绘图的常用技巧。 相关文章： 玩转Qt 2D绘图之坐标系 玩转Qt 2D绘图之画家的工具 玩转Qt 2D绘图之画家</desc>
   </url>
   
   <url>
@@ -882,28 +871,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/50218900.html</loc>
-    
-    <lastmod>2025-12-09T03:00:05.499Z</lastmod>
-    
-    <date>1619583632000</date>
-    <title>了解DPI缩放 | 独钓寒江雪</title>
-    
-    <desc>dpi 是“Dots Per Inch”的缩写，表示每英寸的像素点个数，也就是像素点的密集度。 dpi不是用来表示屏幕分辨率的，也不是用来表示屏幕物理尺寸的。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/2236960039.html</loc>
-    
-    <lastmod>2025-12-09T03:00:05.486Z</lastmod>
-    
-    <date>1692057635000</date>
-    <title>Windows音频环回录制 | 独钓寒江雪</title>
-    
-    <desc>所谓音频环回录制就是录制扬声器播放的声音。播放到扬声器的声音已经过混合，Windows 提供了 WASAPI 来获取这种混合的音频信号。 本文将录制到原始音频样本数据写入到文件，可以使用Audacity导入原始数据试听。</desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/2065788833.html</loc>
     
     <lastmod>2025-12-09T03:00:05.486Z</lastmod>
@@ -937,17 +904,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/3102005562.html</loc>
-    
-    <lastmod>2025-12-05T06:36:57.634Z</lastmod>
-    
-    <date>1642768855000</date>
-    <title>Windows程序如何删除自身 | 独钓寒江雪</title>
-    
-    <desc>本文介绍几种实现在程序退出后，从磁盘删除自身 exe 文件的方式。该技术通常应用于安装包卸载程序中。</desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/3832058229.html</loc>
     
     <lastmod>2025-12-05T06:36:57.634Z</lastmod>
@@ -956,6 +912,17 @@
     <title>为什么SetParent会失败 | 独钓寒江雪</title>
     
     <desc>SetParent是Windows提供的设置窗口父窗体的API，函数原型比较简单： 1234HWND SetParent( [in] HWND hWndChild, [in, optional] HWND hWndNewParent);</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/3102005562.html</loc>
+    
+    <lastmod>2025-12-05T06:36:57.634Z</lastmod>
+    
+    <date>1642768855000</date>
+    <title>Windows程序如何删除自身 | 独钓寒江雪</title>
+    
+    <desc>本文介绍几种实现在程序退出后，从磁盘删除自身 exe 文件的方式。该技术通常应用于安装包卸载程序中。</desc>
   </url>
   
   <url>
@@ -1058,6 +1025,17 @@
   </url>
   
   <url>
+    <loc>https://jiangxueqiao.com/post/44844734.html</loc>
+    
+    <lastmod>2025-12-05T06:36:11.156Z</lastmod>
+    
+    <date>1692338100000</date>
+    <title>Redis常见异常及处理方案 | 独钓寒江雪</title>
+    
+    <desc>Redis 是高性能内存键值数据库，支持字符串、哈希等多结构，兼具缓存与持久化能力，广泛用于实时数据处理场景。本文主要介绍 Redis 常见的异常及处理方案。</desc>
+  </url>
+  
+  <url>
     <loc>https://jiangxueqiao.com/post/2824175441.html</loc>
     
     <lastmod>2025-12-05T06:36:11.156Z</lastmod>
@@ -1077,17 +1055,6 @@
     <title>CentOS7申请免费LetsEncrypt证书并续期 | 独钓寒江雪</title>
     
     <desc>本文介绍在 CentOS7 环境下，使用 Certbot 申请免费的 Lets Encrypt SSL 证书，并自动续期。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/44844734.html</loc>
-    
-    <lastmod>2025-12-05T06:36:11.156Z</lastmod>
-    
-    <date>1692338100000</date>
-    <title>Redis常见异常及处理方案 | 独钓寒江雪</title>
-    
-    <desc>Redis 是高性能内存键值数据库，支持字符串、哈希等多结构，兼具缓存与持久化能力，广泛用于实时数据处理场景。本文主要介绍 Redis 常见的异常及处理方案。</desc>
   </url>
   
   <url>
@@ -1157,17 +1124,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/3773107387.html</loc>
-    
-    <lastmod>2025-12-05T06:34:54.383Z</lastmod>
-    
-    <date>1573560134000</date>
-    <title>Janus的编译部署及配置 | 独钓寒江雪</title>
-    
-    <desc>Janus是一个开源的 WebRTC SFU 服务器，可以作为 WebRTC 的一个端将其收到的数据进行转发，同时提供了一些的控制能力。Janus 是基于插件架构的，其功能都是通过一个个插件来提供，我们可以为 Janus 开发插件，来扩展其功能。</desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/2441416675.html</loc>
     
     <lastmod>2025-12-05T06:34:54.383Z</lastmod>
@@ -1176,6 +1132,17 @@
     <title>P2P及NAT穿透技术介绍 | 独钓寒江雪</title>
     
     <desc>P2PP2P（peer to peer）是一个“点对点传输技术”，也就是两台计算机之间不需要第三台机器作为服务端就能实现数据的传输，每台计算机即是客户端又是服务端。 如果每台计算机都有自己的独立的公网 IP，那么 P2P 技术就比较好实现了，但是现实中由于 NAT（Network Address Translation） 的存在，使得 P2P 技术最大的难点就在于穿越 NAT 的限制，俗称“打洞”</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/2172509399.html</loc>
+    
+    <lastmod>2025-12-05T06:34:54.383Z</lastmod>
+    
+    <date>1524038403000</date>
+    <title>SDP格式解析 | 独钓寒江雪</title>
+    
+    <desc>会话描述协议（Session Description Protocol 或简写 SDP）描述的是流媒体的初始化参数。此协议由 IETF 发表为 RFC 2327。 SDP 完全是一种会话描述格式，它不属于传输协议。 SDP 用于描述多媒体通信会话，包括会话建立、会话请求和参数协商。SDP 不用于传输媒体数据，只能用于两个通信终端的参数协商，包括媒体类型、格式以及所有其他和会话相关的属性。SDP 以</desc>
   </url>
   
   <url>
@@ -1190,14 +1157,14 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/2172509399.html</loc>
+    <loc>https://jiangxueqiao.com/post/3773107387.html</loc>
     
     <lastmod>2025-12-05T06:34:54.383Z</lastmod>
     
-    <date>1524038403000</date>
-    <title>SDP格式解析 | 独钓寒江雪</title>
+    <date>1573560134000</date>
+    <title>Janus的编译部署及配置 | 独钓寒江雪</title>
     
-    <desc>会话描述协议（Session Description Protocol 或简写 SDP）描述的是流媒体的初始化参数。此协议由 IETF 发表为 RFC 2327。 SDP 完全是一种会话描述格式，它不属于传输协议。 SDP 用于描述多媒体通信会话，包括会话建立、会话请求和参数协商。SDP 不用于传输媒体数据，只能用于两个通信终端的参数协商，包括媒体类型、格式以及所有其他和会话相关的属性。SDP 以</desc>
+    <desc>Janus是一个开源的 WebRTC SFU 服务器，可以作为 WebRTC 的一个端将其收到的数据进行转发，同时提供了一些的控制能力。Janus 是基于插件架构的，其功能都是通过一个个插件来提供，我们可以为 Janus 开发插件，来扩展其功能。</desc>
   </url>
   
   <url>
@@ -1223,17 +1190,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/2910781705.html</loc>
-    
-    <lastmod>2025-12-05T06:34:54.378Z</lastmod>
-    
-    <date>1560996106000</date>
-    <title>Windows平台编译WebRTC源码 | 独钓寒江雪</title>
-    
-    <desc>写作本文时使用的 webrtc 版本为：branch heads/67 准备工作请确保可以访问国外网站系统语言切换到英文系统 Windows 7&#x2F;10 都可以，在“控制面板”–&gt;”区域和语言”–&gt;”管理”–&gt;”更改系统区域设置”中切换到“英语（美国）”，然后重启系统。</desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/2114040426.html</loc>
     
     <lastmod>2025-12-05T06:34:54.378Z</lastmod>
@@ -1242,6 +1198,17 @@
     <title>WebRTC的三种架构 | 独钓寒江雪</title>
     
     <desc>WebRTC 是基于 P2P 的实时通信技术，（如果 P2P 打洞失败，则会使用 TURN 服务器进行数据转发），在有 2 台客户端参与的情况下，网络拓扑结构如图：</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/2910781705.html</loc>
+    
+    <lastmod>2025-12-05T06:34:54.378Z</lastmod>
+    
+    <date>1560996106000</date>
+    <title>Windows平台编译WebRTC源码 | 独钓寒江雪</title>
+    
+    <desc>写作本文时使用的 webrtc 版本为：branch heads/67 准备工作请确保可以访问国外网站系统语言切换到英文系统 Windows 7&#x2F;10 都可以，在“控制面板”–&gt;”区域和语言”–&gt;”管理”–&gt;”更改系统区域设置”中切换到“英语（美国）”，然后重启系统。</desc>
   </url>
   
   <url>
@@ -1300,14 +1267,14 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/1162897275.html</loc>
+    <loc>https://jiangxueqiao.com/post/2248228478.html</loc>
     
     <lastmod>2025-12-05T06:34:11.680Z</lastmod>
     
-    <date>1669639273000</date>
-    <title>前后端常用概念扫盲 | 独钓寒江雪</title>
+    <date>1666968607000</date>
+    <title>写给C++程序员的Typescript语法基础 | 独钓寒江雪</title>
     
-    <desc>本文主要介绍前后端及客户端开发中遇到的一些常用的技术概念，本文不会涉及太深奥的技术细节。</desc>
+    <desc>TypeScript 是 JavaScript 的一个超集，支持 ES6 的语法规范，并在此基础上进行了增强，二者最大的不同在于：TypeScript 是强类型语言，而 JavaScript 是弱类型的语言。</desc>
   </url>
   
   <url>
@@ -1322,14 +1289,14 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/2248228478.html</loc>
+    <loc>https://jiangxueqiao.com/post/1162897275.html</loc>
     
     <lastmod>2025-12-05T06:34:11.680Z</lastmod>
     
-    <date>1666968607000</date>
-    <title>写给C++程序员的Typescript语法基础 | 独钓寒江雪</title>
+    <date>1669639273000</date>
+    <title>前后端常用概念扫盲 | 独钓寒江雪</title>
     
-    <desc>TypeScript 是 JavaScript 的一个超集，支持 ES6 的语法规范，并在此基础上进行了增强，二者最大的不同在于：TypeScript 是强类型语言，而 JavaScript 是弱类型的语言。</desc>
+    <desc>本文主要介绍前后端及客户端开发中遇到的一些常用的技术概念，本文不会涉及太深奥的技术细节。</desc>
   </url>
   
   <url>
@@ -1531,17 +1498,6 @@
   </url>
   
   <url>
-    <loc>https://jiangxueqiao.com/post/581068365.html</loc>
-    
-    <lastmod>2025-12-05T06:14:54.761Z</lastmod>
-    
-    <date>1665674683000</date>
-    <title>C++内存池实现 | 独钓寒江雪</title>
-    
-    <desc>本文从实际需求出发，介绍了内存池的实现原理，并且提供了具体的实现方案。 为什么需要使用内存池在 C&#x2F;C++ 中我们通常使用 malloc、free或new、delete 来动态分配内存。一方面，因为这些函数涉及到了系统调用，所以频繁的调用必然会导致程序性能的损耗； 另一方面，频繁的分配和释放小块内存会导致大量的内存碎片的产生，当碎片积累到一定的量之后，将无法分配到连续的内存空间，系统不得</desc>
-  </url>
-  
-  <url>
     <loc>https://jiangxueqiao.com/post/487899896.html</loc>
     
     <lastmod>2025-12-05T06:14:54.761Z</lastmod>
@@ -1553,6 +1509,17 @@
   </url>
   
   <url>
+    <loc>https://jiangxueqiao.com/post/581068365.html</loc>
+    
+    <lastmod>2025-12-05T06:14:54.761Z</lastmod>
+    
+    <date>1665674683000</date>
+    <title>C++内存池实现 | 独钓寒江雪</title>
+    
+    <desc>本文从实际需求出发，介绍了内存池的实现原理，并且提供了具体的实现方案。 为什么需要使用内存池在 C&#x2F;C++ 中我们通常使用 malloc、free或new、delete 来动态分配内存。一方面，因为这些函数涉及到了系统调用，所以频繁的调用必然会导致程序性能的损耗； 另一方面，频繁的分配和释放小块内存会导致大量的内存碎片的产生，当碎片积累到一定的量之后，将无法分配到连续的内存空间，系统不得</desc>
+  </url>
+  
+  <url>
     <loc>https://jiangxueqiao.com/post/2042033077.html</loc>
     
     <lastmod>2025-12-05T06:14:54.761Z</lastmod>
@@ -1561,17 +1528,6 @@
     <title>Git杂记 | 独钓寒江雪</title>
     
     <desc>本文记录 Git 使用中的一些零碎知识，方便自己查阅，亦希望成人之美。</desc>
-  </url>
-  
-  <url>
-    <loc>https://jiangxueqiao.com/post/3756556672.html</loc>
-    
-    <lastmod>2025-12-05T06:14:54.760Z</lastmod>
-    
-    <date>1670674793000</date>
-    <title>C++生成条形码 | 独钓寒江雪</title>
-    
-    <desc>条形码(barcode)是将宽度不等的多个黑条和空白，按照一定的编码规则排列，用以表达一组信息的图形标识符。常见的条形码是由反射率相差很大的黑条（简称条）和白条（简称空）排成的平行线图案。</desc>
   </url>
   
   <url>
@@ -1594,6 +1550,17 @@
     <title>LLVM-Obfuscator代码混淆 | 独钓寒江雪</title>
     
     <desc>LLVM-Obfuscator 可用于混淆程序的代码逻辑，本文介绍如何使用 LLVM-Obfuscator 进行代码逻辑的混淆。</desc>
+  </url>
+  
+  <url>
+    <loc>https://jiangxueqiao.com/post/3756556672.html</loc>
+    
+    <lastmod>2025-12-05T06:14:54.760Z</lastmod>
+    
+    <date>1670674793000</date>
+    <title>C++生成条形码 | 独钓寒江雪</title>
+    
+    <desc>条形码(barcode)是将宽度不等的多个黑条和空白，按照一定的编码规则排列，用以表达一组信息的图形标识符。常见的条形码是由反射率相差很大的黑条（简称条）和白条（简称空）排成的平行线图案。</desc>
   </url>
   
   <url>

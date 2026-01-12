@@ -27,7 +27,7 @@
 <meta property="og:description" content="本文主要介绍如何在 Node-API 中实现不同类型的接口，主要有下面几种类型：  同步调用 基于 Napi::AsyncWorker 的异步调用，通过回调函数返回 异步调用，返回 Promise 基于 Napi::ThreadSafeFunction 的异步调用，通过回调函数返回">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-02T05:26:54.000Z">
-<meta property="article:modified_time" content="2025-12-09T03:07:22.510Z">
+<meta property="article:modified_time" content="2026-01-12T16:30:16.961Z">
 <meta property="article:author" content="jiangxueqiao.com">
 <meta property="article:tag" content="Electron">
 <meta name="twitter:card" content="summary">
@@ -182,7 +182,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">153</span>
+          <span class="site-state-item-count">150</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -223,39 +223,6 @@
         <ul class="links-of-blogroll-list">
             <li class="links-of-blogroll-item">
               <a href="https://jiangxueqiao.com/online-tools" title="https:&#x2F;&#x2F;jiangxueqiao.com&#x2F;online-tools">在线工具</a>
-            </li>
-            <li class="links-of-blogroll-item">
-              <a href="https://github.com/winsoft666/zoe" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;zoe" rel="noopener" target="_blank">跨平台文件下载库</a>
-            </li>
-            <li class="links-of-blogroll-item">
-              <a href="https://github.com/winsoft666/veigar" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;veigar" rel="noopener" target="_blank">跨平台RPC库</a>
-            </li>
-            <li class="links-of-blogroll-item">
-              <a href="https://github.com/winsoft666/QWebView" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;QWebView" rel="noopener" target="_blank">多浏览器内核Qt组件</a>
-            </li>
-            <li class="links-of-blogroll-item">
-              <a href="https://github.com/winsoft666/vlc-qt2" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;vlc-qt2" rel="noopener" target="_blank">VLC内核Qt播放器组件</a>
-            </li>
-            <li class="links-of-blogroll-item">
-              <a href="https://github.com/winsoft666/1key.run" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;1key.run" rel="noopener" target="_blank">仿Mac平台Alfred软件</a>
-            </li>
-            <li class="links-of-blogroll-item">
-              <a href="https://github.com/winsoft666/qss-editor" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;qss-editor" rel="noopener" target="_blank">QSS编辑预览工具</a>
-            </li>
-            <li class="links-of-blogroll-item">
-              <a href="https://github.com/winsoft666/WinSpyPlus" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;WinSpyPlus" rel="noopener" target="_blank">Spy++加强版</a>
-            </li>
-            <li class="links-of-blogroll-item">
-              <a href="https://github.com/winsoft666/PortableStarter" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;PortableStarter" rel="noopener" target="_blank">便携式应用启动工具</a>
-            </li>
-            <li class="links-of-blogroll-item">
-              <a href="https://github.com/winsoft666/electron-vue3-boilerplate" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;electron-vue3-boilerplate" rel="noopener" target="_blank">产品级的Electron模板</a>
-            </li>
-            <li class="links-of-blogroll-item">
-              <a href="https://github.com/winsoft666/NSIS-UI-Plugin" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;NSIS-UI-Plugin" rel="noopener" target="_blank">NSIS界面插件</a>
-            </li>
-            <li class="links-of-blogroll-item">
-              <a href="https://github.com/winsoft666/epub-image-localizer" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;epub-image-localizer" rel="noopener" target="_blank">本地化EPUB在线图片</a>
             </li>
         </ul>
       </div>
@@ -312,7 +279,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-12-09 11:07:22" itemprop="dateModified" datetime="2025-12-09T11:07:22+08:00">2025-12-09</time>
+      <time title="修改时间：2026-01-13 00:30:16" itemprop="dateModified" datetime="2026-01-13T00:30:16+08:00">2026-01-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -364,15 +331,27 @@
 <p>下面示例演示了在系统子线程中计算正整数 N 的 30 次方，并通过回调方式返回计算结果。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">GetPower30</span><span class="params">(<span class="type">const</span> Napi::CallbackInfo&amp; info)</span> </span>&#123;</span><br><span class="line">    Napi::Env env = info.<span class="built_in">Env</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (info.<span class="built_in">Length</span>() != <span class="number">2</span>)</span><br><span class="line">        <span class="keyword">throw</span> Napi::TypeError::<span class="built_in">New</span>(env, <span class="string">&quot;Wrong number of arguments&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!info[<span class="number">0</span>].<span class="built_in">IsNumber</span>() || !info[<span class="number">1</span>].<span class="built_in">IsFunction</span>())</span><br><span class="line">        <span class="keyword">throw</span> Napi::TypeError::<span class="built_in">New</span>(env, <span class="string">&quot;Wrong arguments&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="type">int32_t</span> n = info[<span class="number">0</span>].<span class="built_in">ToNumber</span>().<span class="built_in">Int32Value</span>();</span><br><span class="line">    Napi::Function callback = info[<span class="number">1</span>].<span class="built_in">As</span>&lt;Napi::Function&gt;();</span><br><span class="line"></span><br><span class="line">    std::thread* nativeThread = <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line">    Napi::ThreadSafeFunction tsfn = Napi::ThreadSafeFunction::<span class="built_in">New</span>(</span><br><span class="line">        env,</span><br><span class="line">        callback,</span><br><span class="line">        <span class="string">&quot;Resource Name&quot;</span>,             <span class="comment">// Name</span></span><br><span class="line">        <span class="number">0</span>,                           <span class="comment">// Unlimited queue</span></span><br><span class="line">        <span class="number">1</span>,                           <span class="comment">// Only one thread will use this initially</span></span><br><span class="line">        [nativeThread](Napi::Env) &#123;  <span class="comment">// Finalizer used to clean threads up</span></span><br><span class="line">            <span class="keyword">if</span> (nativeThread &amp;&amp; nativeThread-&gt;<span class="built_in">joinable</span>()) &#123;</span><br><span class="line">                nativeThread-&gt;<span class="built_in">join</span>();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">    nativeThread = <span class="keyword">new</span> std::<span class="built_in">thread</span>([n, tsfn]() &#123;</span><br><span class="line">        <span class="keyword">struct</span> CallParam &#123;</span><br><span class="line">            std::string error;</span><br><span class="line">            <span class="type">int32_t</span> result = <span class="number">0</span>;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        CallParam* param = <span class="keyword">new</span> <span class="built_in">CallParam</span>();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (n &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            param-&gt;result = <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">30</span>; i++) &#123;</span><br><span class="line">                param-&gt;result *= n;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            param-&gt;error = <span class="string">&quot;N must larger than 0&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">auto</span> callback = [](Napi::Env env, Napi::Function jsCallback, CallParam* param) &#123;</span><br><span class="line">            <span class="keyword">if</span> (jsCallback &amp;&amp; param) &#123;</span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    <span class="keyword">if</span> (param-&gt;error.<span class="built_in">empty</span>()) &#123;</span><br><span class="line">                        jsCallback.<span class="built_in">Call</span>(&#123;env.<span class="built_in">Null</span>(), Napi::Number::<span class="built_in">New</span>(env, param-&gt;result)&#125;);</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="keyword">else</span> &#123;</span><br><span class="line">                        Napi::Error err = Napi::Error::<span class="built_in">New</span>(env, param-&gt;error);</span><br><span class="line">                        jsCallback.<span class="built_in">Call</span>(&#123;err.<span class="built_in">Value</span>(), env.<span class="built_in">Null</span>()&#125;);</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125; <span class="built_in">catch</span> (std::exception&amp; e) &#123;</span><br><span class="line"><span class="meta">#<span class="keyword">if</span> (defined _WIN32 || defined WIN32)</span></span><br><span class="line">                    <span class="built_in">OutputDebugStringA</span>(e.<span class="built_in">what</span>());</span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (param) &#123;</span><br><span class="line">                <span class="keyword">delete</span> param;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        napi_status status = tsfn.<span class="built_in">BlockingCall</span>(param, callback);</span><br><span class="line">        <span class="keyword">if</span> (status != napi_ok) &#123;</span><br><span class="line">            <span class="comment">// TODO How to handle error</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        tsfn.<span class="built_in">Release</span>();</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><strong>📌限于篇幅，不在此提供完整的示例代码，如需获取完整的示例代码，可以<a href="/about">联系我</a></strong></p>
-
     </div>
 
     
     
     
 
-    <footer class="post-footer">
+    <footer class="post-footer"><div style="
+    background-color: #ffffff; 
+    border: 1px solid #e1e4e8; 
+    padding: 24px; 
+    margin: 28px 0; 
+    border-radius: 12px;
+    text-align: left;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    font-size: 1.1em;
+    font-weight: 600;
+">
+  <p style="margin: 0; color: #2c3e50; line-height: 1.6;">
+    限于篇幅等原因，文中可能只展示了关键代码片段。如果您希望获取完整的、开箱即用的解决方案，可以随时联系我。
+  </p>
+</div>
           <div class="reward-container">
   <div>请我一杯咖啡吧！</div>
   <button>
@@ -380,12 +359,8 @@
   </button>
   <div class="post-reward">
       <div>
-        <img src="/images/buycoffie.png" alt="jiangxueqiao.com 微信">
+        <img src="/images/coffie_wechat.png" alt="jiangxueqiao.com 微信">
         <span>微信</span>
-      </div>
-      <div>
-        <img src="/images/buycoffie.png" alt="jiangxueqiao.com 支付宝">
-        <span>支付宝</span>
       </div>
 
   </div>
@@ -446,7 +421,7 @@
   </div>
   <div class="copyright">
     &copy; 2017 – 
-    <span itemprop="copyrightYear">2025</span>
+    <span itemprop="copyrightYear">2026</span>
     <span class="with-love">
       <i class="fa fa-rocket"></i>
     </span>

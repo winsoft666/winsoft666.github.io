@@ -19,27 +19,37 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"jiangxueqiao.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"right","width_expanded":260,"width_dual_column":260,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"vs2015"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":true,"height":300},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":false,"async":true,"duration":200,"transition":{"menu_item":null,"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":null}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="文章还未公开，请输入密码查看">
+    <meta name="description" content="传统的抓包工具（如 Fiddler、Wireshark）在面对愈发严格的安全措施时，如 HTTPS 双向认证（mTLS）、内存加载证书、证书绑定等，它们往往显得力不从心。本文旨在带你超越传统抓包的边界，不仅会回顾抓包工具的核心原理，更将深入 Hook 注入技术，实战演示如何通过拦截关键函数，动态获取 SSL 证书、解密 HTTPS 明文流量。 这可能是全网最具深度的关于抓包文章。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="从入门到洞察：网络抓包基础与核心工具实战指南">
+<meta property="og:title" content="突破抓包限制：Hook实战解密HTTPS流量与SSL双向认证">
 <meta property="og:url" content="https://jiangxueqiao.com/post/657651408.html">
 <meta property="og:site_name" content="独钓寒江雪">
-<meta property="og:description" content="文章还未公开，请输入密码查看">
+<meta property="og:description" content="传统的抓包工具（如 Fiddler、Wireshark）在面对愈发严格的安全措施时，如 HTTPS 双向认证（mTLS）、内存加载证书、证书绑定等，它们往往显得力不从心。本文旨在带你超越传统抓包的边界，不仅会回顾抓包工具的核心原理，更将深入 Hook 注入技术，实战演示如何通过拦截关键函数，动态获取 SSL 证书、解密 HTTPS 明文流量。 这可能是全网最具深度的关于抓包文章。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://jiangxueqiao.com/images/blog/K3hNBYQZxE.png">
+<meta property="og:image" content="https://jiangxueqiao.com/images/blog/Pa6dW664Az.png">
+<meta property="og:image" content="https://jiangxueqiao.com/images/blog/tnd0t4rwiS.png">
+<meta property="og:image" content="https://jiangxueqiao.com/images/blog/JYXVy7kPnJ.png">
+<meta property="og:image" content="https://jiangxueqiao.com/images/blog/j2zIkpvlEM.png">
+<meta property="og:image" content="https://jiangxueqiao.com/images/blog/ssl_read.png">
 <meta property="article:published_time" content="2025-12-06T10:10:58.000Z">
-<meta property="article:modified_time" content="2025-12-09T03:39:00.832Z">
+<meta property="article:modified_time" content="2026-01-12T16:51:56.589Z">
 <meta property="article:author" content="jiangxueqiao.com">
-<meta property="article:tag" content="网络协议">
+<meta property="article:tag" content="Fiddler">
+<meta property="article:tag" content="HTTPS">
+<meta property="article:tag" content="Hook">
+<meta property="article:tag" content="注入">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://jiangxueqiao.com/images/blog/K3hNBYQZxE.png">
 
 
 <link rel="canonical" href="https://jiangxueqiao.com/post/657651408.html">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jiangxueqiao.com/post/657651408.html","path":"post/657651408.html","title":"从入门到洞察：网络抓包基础与核心工具实战指南"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jiangxueqiao.com/post/657651408.html","path":"post/657651408.html","title":"突破抓包限制：Hook实战解密HTTPS流量与SSL双向认证"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>从入门到洞察：网络抓包基础与核心工具实战指南 | 独钓寒江雪</title>
+<title>突破抓包限制：Hook实战解密HTTPS流量与SSL双向认证 | 独钓寒江雪</title>
   
 
   <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
@@ -156,7 +166,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -169,6 +179,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%8A%93%E5%8C%85%E5%B7%A5%E5%85%B7"><span class="nav-number">1.</span> <span class="nav-text">抓包工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Fildder-%E5%8E%9F%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">Fildder 原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Proxifier-%E5%8E%9F%E7%90%86"><span class="nav-number">1.2.</span> <span class="nav-text">Proxifier 原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Wireshark-%E5%8E%9F%E7%90%86"><span class="nav-number">1.3.</span> <span class="nav-text">Wireshark 原理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B5%8F%E8%A7%88%E5%99%A8-HTTP-%E6%8A%93%E5%8C%85"><span class="nav-number">2.</span> <span class="nav-text">浏览器 HTTP 抓包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E-libcurl-%E7%9A%84-HTTP-%E6%8A%93%E5%8C%85"><span class="nav-number">3.</span> <span class="nav-text">基于 libcurl 的 HTTP 抓包</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTPS-%E5%8F%8C%E5%90%91%E8%AE%A4%E8%AF%81"><span class="nav-number">3.1.</span> <span class="nav-text">HTTPS 双向认证</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%A0%A1%E9%AA%8C%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%AF%81%E4%B9%A6"><span class="nav-number">3.1.1.</span> <span class="nav-text">客户端校验服务器证书</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%A0%A1%E9%AA%8C%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%AF%81%E4%B9%A6"><span class="nav-number">3.1.2.</span> <span class="nav-text">服务器校验客户端证书</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E8%AF%81%E4%B9%A6%E5%8F%8A%E7%A7%81%E9%92%A5"><span class="nav-number">3.1.3.</span> <span class="nav-text">创建证书及私钥</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%95%E8%BF%87%E5%AF%B9%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%AF%81%E4%B9%A6%E7%9A%84%E6%A0%A1%E9%AA%8C"><span class="nav-number">3.1.4.</span> <span class="nav-text">绕过对服务器证书的校验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#libcurl-%E4%B8%8E-Schannel"><span class="nav-number">3.1.5.</span> <span class="nav-text">libcurl 与 Schannel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%95%E8%BF%87%E5%AF%B9%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%AF%81%E4%B9%A6%E7%9A%84%E6%A0%A1%E9%AA%8C"><span class="nav-number">3.1.6.</span> <span class="nav-text">绕过对客户端证书的校验</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hook-libcurl-%E8%8E%B7%E5%8F%96%E8%AF%81%E4%B9%A6%E4%BF%A1%E6%81%AF"><span class="nav-number">3.2.</span> <span class="nav-text">Hook libcurl 获取证书信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hook-OpenSSL-%E8%8E%B7%E5%8F%96%E6%98%8E%E6%96%87"><span class="nav-number">3.3.</span> <span class="nav-text">Hook OpenSSL 获取明文</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#WinHTTP"><span class="nav-number">4.</span> <span class="nav-text">WinHTTP</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Electron-HTTP-%E6%8A%93%E5%8C%85"><span class="nav-number">5.</span> <span class="nav-text">Electron HTTP 抓包</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CEF-HTTP-%E6%8A%93%E5%8C%85"><span class="nav-number">6.</span> <span class="nav-text">CEF HTTP 抓包</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B0%83%E8%AF%95%E7%AB%AF%E5%8F%A3%E5%B1%8F%E8%94%BD%E4%B8%8E%E5%8F%8D%E5%B1%8F%E8%94%BD"><span class="nav-number">6.1.</span> <span class="nav-text">调试端口屏蔽与反屏蔽</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hook-BoringSSL"><span class="nav-number">6.2.</span> <span class="nav-text">Hook BoringSSL</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -181,7 +192,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">153</span>
+          <span class="site-state-item-count">150</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -223,39 +234,6 @@
             <li class="links-of-blogroll-item">
               <a href="https://jiangxueqiao.com/online-tools" title="https:&#x2F;&#x2F;jiangxueqiao.com&#x2F;online-tools">在线工具</a>
             </li>
-            <li class="links-of-blogroll-item">
-              <a href="https://github.com/winsoft666/zoe" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;zoe" rel="noopener" target="_blank">跨平台文件下载库</a>
-            </li>
-            <li class="links-of-blogroll-item">
-              <a href="https://github.com/winsoft666/veigar" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;veigar" rel="noopener" target="_blank">跨平台RPC库</a>
-            </li>
-            <li class="links-of-blogroll-item">
-              <a href="https://github.com/winsoft666/QWebView" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;QWebView" rel="noopener" target="_blank">多浏览器内核Qt组件</a>
-            </li>
-            <li class="links-of-blogroll-item">
-              <a href="https://github.com/winsoft666/vlc-qt2" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;vlc-qt2" rel="noopener" target="_blank">VLC内核Qt播放器组件</a>
-            </li>
-            <li class="links-of-blogroll-item">
-              <a href="https://github.com/winsoft666/1key.run" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;1key.run" rel="noopener" target="_blank">仿Mac平台Alfred软件</a>
-            </li>
-            <li class="links-of-blogroll-item">
-              <a href="https://github.com/winsoft666/qss-editor" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;qss-editor" rel="noopener" target="_blank">QSS编辑预览工具</a>
-            </li>
-            <li class="links-of-blogroll-item">
-              <a href="https://github.com/winsoft666/WinSpyPlus" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;WinSpyPlus" rel="noopener" target="_blank">Spy++加强版</a>
-            </li>
-            <li class="links-of-blogroll-item">
-              <a href="https://github.com/winsoft666/PortableStarter" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;PortableStarter" rel="noopener" target="_blank">便携式应用启动工具</a>
-            </li>
-            <li class="links-of-blogroll-item">
-              <a href="https://github.com/winsoft666/electron-vue3-boilerplate" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;electron-vue3-boilerplate" rel="noopener" target="_blank">产品级的Electron模板</a>
-            </li>
-            <li class="links-of-blogroll-item">
-              <a href="https://github.com/winsoft666/NSIS-UI-Plugin" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;NSIS-UI-Plugin" rel="noopener" target="_blank">NSIS界面插件</a>
-            </li>
-            <li class="links-of-blogroll-item">
-              <a href="https://github.com/winsoft666/epub-image-localizer" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;epub-image-localizer" rel="noopener" target="_blank">本地化EPUB在线图片</a>
-            </li>
         </ul>
       </div>
     </div>
@@ -288,12 +266,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="从入门到洞察：网络抓包基础与核心工具实战指南 | 独钓寒江雪">
+      <meta itemprop="name" content="突破抓包限制：Hook实战解密HTTPS流量与SSL双向认证 | 独钓寒江雪">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          从入门到洞察：网络抓包基础与核心工具实战指南
+          突破抓包限制：Hook实战解密HTTPS流量与SSL双向认证
         </h1>
 
         <div class="post-meta-container">
@@ -311,7 +289,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-12-09 11:39:00" itemprop="dateModified" datetime="2025-12-09T11:39:00+08:00">2025-12-09</time>
+      <time title="修改时间：2026-01-13 00:51:56" itemprop="dateModified" datetime="2026-01-13T00:51:56+08:00">2026-01-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -332,25 +310,236 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="密码错误，请联系作者获取密码" data-whm="哈希校验失败">
-  <script id="hbeData" type="hbeData" data-hmacdigest="3524a188c371a07df416ea0af1053a00e7caebb47563f48b35bbe062fb12be62">0c2e8fc22e23fc6a95492c4a31d13ed2a8992ce16f749d3a8a5296b50a931eeef7f968d8fd6530f189cf2ba2d61c0449129fe176abd95a8e5d264fa36bb8662736da8b3290aa5b53fbb762b925e52fe7932bb2ebd404623874a577980c340996ff14f6208a8341ac6941794503754914f524d23289dec3c8b9272fd989e8684644e6adb3ee672d41ca2ebd7df449e66e1becb5e3ceb97214be082a5ffd8e9bcb5b0ac624177b9500cfd7155bdc98e52c15ae00235f0df1f61653ff961bb706f8104727e7b1920967053b461b359295f2a729dc4e64093570670aacd5448cbfd8e126b77e2de3fd4fc220eefe178e537e526cfae03230fc43015a0523b102f3f283a411b2bb14bbaa6c5ebc0522751320b68aea034e99a3f743af747b262bd8b6abc536e92ebf6d8c7aff2bf45ea4750076b8bc97f5db763e378bd30fcecc50cd548cac914601b5e3ab731ecfbb202ba55ead96bb22192f24422e380ac1cf63e3d0de5d5e143de67b960cdfac3a5eab49e07bdd5e25cf0869b7bc49e2f9b26185d3e8c65459936b075cfcf9ba6ad0657d0b006cad6847bc78f9d4fc4f5f11bfcd6c0ece457863fb268c18247dd8bcbce7bdaf3fcf41fcb34efeebcd5648bd7ee49cab8fa6f2fceb1f7360f6939680d7cd564eabedf99eb1d31d7f747566a24a490acbe5060083b54c4d6525c5f15a758ad14d2fa0f470915cb2956528cf3e643f42baf2d8e1ba7ac1776aabb3e2f694ec600e0a6631043251d41cf075b93b591509e29dc6e7270d0a4e8172e4ddd2e2ef154a4381c44c56dd12eacef02e2248fec7490a5a0aed5aabb138e82415889c0dad4b7141502e07c69cc2624725ed8d3dadffb04c88c6a8f109206708f72e167c52210ed67c1b309924019199221ab5d1289ade704ad99ae7234f0bed132c8833c3eff11f43949c44e322109ad38a8b8f38f510c8e39f9aa7caaec90bac695f12a4bf82052dcddb45c4f52b4ab13c95e3</script>
-  <div class="hbe hbe-content">
-    <div class="hbe hbe-input hbe-input-default">
-      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
-      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
-        <span class="hbe hbe-input-label-content hbe-input-label-content-default">请输入密码</span>
-      </label>
+    <div class="post-body" itemprop="articleBody"><p>传统的抓包工具（如 Fiddler、Wireshark）在面对愈发严格的安全措施时，如 HTTPS 双向认证（mTLS）、内存加载证书、证书绑定等，它们往往显得力不从心。本文旨在带你超越传统抓包的边界，不仅会回顾抓包工具的核心原理，更将深入 Hook 注入技术，实战演示如何通过拦截关键函数，动态获取 SSL 证书、解密 HTTPS 明文流量。</p>
+<p>这可能是全网最具深度的关于抓包文章。</p>
+<span id="more"></span>
+
+<h1 id="抓包工具"><a href="#抓包工具" class="headerlink" title="抓包工具"></a>抓包工具</h1><h2 id="Fildder-原理"><a href="#Fildder-原理" class="headerlink" title="Fildder 原理"></a>Fildder 原理</h2><p>Fiddler 通过扮演中间人的角色（对客户端扮演服务器，对服务器扮演客户端）来实现 HTTP 抓包和 HTTPS 流量解密的功能。</p>
+<p>Fiddler 在启动后，会自动在本地建立一个代理服务器（端口默认为 8888），并通过调用 Windows 的 WinHttpSetDefaultProxyConfiguration 等函数，将自己设置为系统默认的 HTTP&#x2F;HTTPS 代理。许多应用程序（如浏览器）默认会遵循系统的这个代理设置，因此它们发出的网络请求都会首先被发送到 Fiddler。</p>
+<blockquote>
+<p>可以在系统的“设置” -&gt; “网络和 Internet” -&gt; “代理”中看到“使用代理服务器”的选项被自动开启，并且代理 IP 为：<br>http&#x3D;127.0.0.1:8888;https&#x3D;127.0.0.1:8888;</p>
+</blockquote>
+<p>当 Fiddler 收到 HTTP 请求时，因为不涉及数据包解密，Fiddler 直接进行转发即可。</p>
+<p>当需要解密 HTTPS 请求时，Fiddler 会在本地生成一个自签名的根证书（Fiddler Root Certificate），并将这个根证书安装到操作系统的“受信任的根证书颁发机构”存储中。</p>
+<div style="text-aligin:center;"><img data-src="../images/blog/K3hNBYQZxE.png" width="430px" /></div>
+
+<p>以请求 <a target="_blank" rel="noopener" href="https://sample.com/">https://sample.com</a> 为例，Fiddler 会使用自签名的根证书私钥来为 sample.com 域名动态的伪造一张证书，并返回给浏览器（因为对于浏览器而言，它的服务器是 Fildder），浏览器使用这个假证书来进行 SSL 加密，然后将加密数据包发送给 Fiddler，Fiddler 使用假证书的私钥来解密数据包进行显示、修改等，然后 Fiddler 从 sample.com 服务器请求真正的证书，并使用真证书对数据包再次加密，然后发送给 sample.com 服务器；</p>
+<p>sample.com 服务器将响应发送给 Fiddler（因为对 sample.com 服务器而言，发起请求的客户端是 Fildder），Fiddler 使用真证书来解密数据包进行展示，然后使用假证书来再次加密数据包，最后转发给浏览器。</p>
+<div style="text-aligin:center;"><img data-src="../images/blog/Pa6dW664Az.png" width="550px" /></div>
+
+<h2 id="Proxifier-原理"><a href="#Proxifier-原理" class="headerlink" title="Proxifier 原理"></a>Proxifier 原理</h2><p>Proxifier 在 Windows 系统中主要使用 LSP（Layered Service Provider，分层服务提供程序）​ 技术实现对网络流量的拦截，属于应用层的流量拦截，无需安装驱动，大多数游戏加速器也会使用该项目技术。</p>
+<p>Proxifier 是透明流量转发，不负责解密 HTTPS 流量，解密操作由后续的软件进行。通常使用 Proxifier 将指定进程的流量转发到 Fildder 或 Charles，然后再使用这些工具进行解包分析。</p>
+<p>通常还需要将 Proxifier 的“名称解析”-&gt;“DNS 设置”修改为“通过代理解析主机名称”。</p>
+<div style="text-aligin:center;"><img data-src="../images/blog/tnd0t4rwiS.png" width="450px" /></div>
+
+<p>下面来解释为什么要这样设置。</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">应用程序 -&gt; Proxifier -&gt; Fiddler</span><br></pre></td></tr></table></figure>
+
+<p>若没有将 DNS 设置为“通过代理解析主机名称”，当本地 DNS 缓存中存在 baidu.com 域名解析条目时，会直接将 baidu.com 域名解析为对应的 IP，从而将 TSL 握手请求包中的域名修改为 IP 后再转发给 Fiddler。Fiddler 在动态伪造证书时是需要知道域名的，如果不知道，Fiddler 就不知道要伪造哪个证书，无法伪造证书。</p>
+<div style="text-aligin:center;"><img data-src="../images/blog/JYXVy7kPnJ.png" width="500px" /></div>
+
+<h2 id="Wireshark-原理"><a href="#Wireshark-原理" class="headerlink" title="Wireshark 原理"></a>Wireshark 原理</h2><p>Wireshark 的工作流程始于捕获，当选择一个网络接口（如 Wi-Fi 或以太网网卡）开始抓包时，Wireshark 会通过底层驱动（如 Npcap 或 WinPcap）将网卡设置为混杂模式。在此模式下，网卡会捕获所有流经它的网络数据包。</p>
+<p>捕获到的原始数据是二进制比特流，Wireshark 的内置的协议解析器会按照网络协议栈（如 Ethernet → IP → TCP → HTTP）逐层解码这些二进制数据，将晦涩的代码转换为人类可读的协议字段和含义。因此要熟练掌握 Wireshark 的使用，需要先了解网络协议栈，可以参考：<a href="/post/3886809266.html" title="网络协议(1)--基础概念">网络协议(1)--基础概念</a>。</p>
+<p>Wireshark 还提供了一个分为三部分的界面供我们深入检查数据包：数据包列表、数据包详情和数据包字节流。通常会需要结合显示过滤器（如 http.request.method &#x3D;&#x3D; “GET”）来精准筛选流量，或通过“Follow TCP Stream”功能重构完整的会话内容。</p>
+<p>关于 Wireshark 的过滤器规则，可以参考：<a href="/post/556603567.html" title="Wireshark过滤器速查手册">Wireshark过滤器速查手册</a>。</p>
+<p>虽然 Wireshark 也可以捕获和分析 HTTP(s)流量，但在这方面还是不如 Fiddler 等工具专业，所以我们通常只使用其来捕获除 HTTP(s)以外的流量。</p>
+<h1 id="浏览器-HTTP-抓包"><a href="#浏览器-HTTP-抓包" class="headerlink" title="浏览器 HTTP 抓包"></a>浏览器 HTTP 抓包</h1><p>先来一个开胃前菜。网页抓包是调试前端 API 接口最基础的技能，浏览器内置的开发者工具是完成这项任务的首选利器。</p>
+<p>以主流的 Chrome 浏览器为例，按 F12 或 Ctrl+Shift+I 就可以打开开发者工具，其“Network（网络）面板”中记录了所有由浏览器发起的网络请求，包括 HTML、CSS、JS、图片、XHR&#x2F;Fetch（API 接口）等。</p>
+<p>但有些网页会禁用浏览器的调试工具，防止用户进行抓包和调试，它们通常采用包括但不限于下面的方式：</p>
+<ul>
+<li>使用 addEventListener 来拦截 F12、 Ctrl+Shift+I 等快捷键以及右键菜单事件</li>
+<li>因为只有在打开调试工具的情况下，<code>debugger</code>语句才会生效。根据这个机制，可以通过 debugger 上下语句执行的时间差来判断调试器是否打开。</li>
+<li>也可以通过无限执行<code>debugger</code>语句来干扰调试。</li>
+</ul>
+<p>目前已经有开源组件 <a target="_blank" rel="noopener" href="https://github.com/theajack/disable-devtool">disable-devtool</a> 可以快速搞定禁用调试工具，这个组件使用的检测&#x2F;禁用手段也更加多样化。</p>
+<p>遇到这种禁用调试工具的网站时，如果只需要抓包，使用 <a target="_blank" rel="noopener" href="https://www.telerik.com/download/fiddler">Fildder</a> 或 Charles 无意是最简单的方法。</p>
+<h1 id="基于-libcurl-的-HTTP-抓包"><a href="#基于-libcurl-的-HTTP-抓包" class="headerlink" title="基于 libcurl 的 HTTP 抓包"></a>基于 libcurl 的 HTTP 抓包</h1><p>许多命令行工具和应用程序使用 libcurl 库进行网络通信。默认情况下，libcurl 并不会自动遵循系统代理设置，除非在代码中显式指定。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">curl_easy_setopt</span>(pCURL, CURLOPT_PROXY, <span class="string">&quot;127.0.0.1:8888&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>对于一些支持设置 HTTP 代理的软件，我们可以尝试将代理设置为本地的 Fildder 代理端口（如 127.0.0.1:8888），然后使用 Fiddler 进行抓包分析。</p>
+<p>而对于大多数不支持代理设置的软件，通常需要使用 <a target="_blank" rel="noopener" href="https://www.proxifier.com/">Proxifier</a> 将该软件进程的流量转发到 Fiddler 代理端口，然后使用 Fildder 进行抓包分析。</p>
+<h2 id="HTTPS-双向认证"><a href="#HTTPS-双向认证" class="headerlink" title="HTTPS 双向认证"></a>HTTPS 双向认证</h2><p>根据之前的文章 <a href="/post/3654006375.html" title="网络协议(7)--HTTP与HTTPS协议">《网络协议(7)--HTTP与HTTPS协议》</a> 所介绍的 SSL&#x2F;TSL 握手的过程可以知道，在握手过程中，不仅客户端可以校验服务器的证书，服务器也可以校验客户端的证书，这个叫 HTTPS 双向认证（mutual TLS），简称 mTLS。libcurl 作为一个成熟的网络库，对 mTLS 提供了很好的支持。</p>
+<h3 id="客户端校验服务器证书"><a href="#客户端校验服务器证书" class="headerlink" title="客户端校验服务器证书"></a>客户端校验服务器证书</h3><p>通过如下代码可以开启 libcurl 客户端对服务器证书的校验：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">curl_easy_setopt</span>(pCURL, CURLOPT_SSL_VERIFYPEER, <span class="number">1L</span>);</span><br><span class="line"><span class="built_in">curl_easy_setopt</span>(pCURL, CURLOPT_SSL_VERIFYHOST, <span class="number">1L</span>);</span><br></pre></td></tr></table></figure>
+
+<p>在开启服务器证书校验后，还需要指定 CA 包（Certificate Authority bundle，包含多个信任的根证书，用于验证服务器证书链）才能正常请求。有两种方式指定 CA 包，一种是通过 CURLOPT_CAINFO 选项来从本地文件路径加载：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">curl_easy_setopt</span>(pCURL, CURLOPT_CAINFO, <span class="string">&quot;D:\\certs\\ca.crt&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>另一种是通过 CURLOPT_CAINFO_BLOB 选项来从内存加载：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">  <span class="type">const</span> <span class="type">char</span>* strCA = <span class="string">R&quot;(</span></span><br><span class="line"><span class="string">-----BEGIN CERTIFICATE-----</span></span><br><span class="line"><span class="string">.......</span></span><br><span class="line"><span class="string">-----END CERTIFICATE-----</span></span><br><span class="line"><span class="string">)&quot;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">struct</span> <span class="title class_">curl_blob</span> blob;</span><br><span class="line">  blob.data = (<span class="type">void</span>*)strCA;</span><br><span class="line">  blob.len = <span class="built_in">strlen</span>(strCA);</span><br><span class="line">  blob.flags = CURL_BLOB_COPY;</span><br><span class="line">  <span class="built_in">curl_easy_setopt</span>(pCURL, CURLOPT_CAINFO_BLOB, &amp;blob);</span><br></pre></td></tr></table></figure>
+
+<h3 id="服务器校验客户端证书"><a href="#服务器校验客户端证书" class="headerlink" title="服务器校验客户端证书"></a>服务器校验客户端证书</h3><p>像网银、企业内部服务等这些对安全级别要求较高的应用，服务器通常需要校验客户端的证书，即 TLS 握手的 ServerHello 响应中包含“客户端证书请求”，此时客户端就需要发送相应的证书给服务器。</p>
+<p>libcurl 通过 CURLOPT_SSLCERT 和 CURLOPT_SSLKEY 选项指定客户端证书和私钥的本地路径（如果通过内存加载则分别对应 CURLOPT_SSLCERT_BLOB 和 CURLOPT_SSLKEY_BLOB 选项），还是可以使用 CURLOPT_SSLCERTTYPE 选项指定证书类型（默认为 PEM 类型）以及 CURLOPT_KEYPASSWD 选项指定私钥的密码（可选）。</p>
+<p>libcurl 在收到服务器的“客户端证书请求”后，会自动将相应的信息发送给服务器。</p>
+<h3 id="创建证书及私钥"><a href="#创建证书及私钥" class="headerlink" title="创建证书及私钥"></a>创建证书及私钥</h3><p>如何来创建双向证书所需的证书呢？在创建证书及私钥之前，需要先弄清除，公钥、私钥、CA 和证书的关系（详见 <a href="/post/3654006375.html" title="网络协议(7)--HTTP与HTTPS协议">《网络协议(7)--HTTP与HTTPS协议》</a> 中的“证书的申请”章节）。</p>
+<ul>
+<li>公钥和私钥是非对称加密中的概念，私钥保密，公钥公开。</li>
+<li>证书里面会包含公钥，证书也是公开的，但证书对应的私钥需要保密。所以在我的文章中一般将证书等同于公钥。</li>
+<li>CA &#x3D; Certificate Authority，直译为证书机构。使用 CA 证书的私钥来签发证书，然后用 CA 证书来验证所签发的证书。</li>
+</ul>
+<p>回到本节的双向校验过程中来，客户端验证服务器的证书也就是使用 CA 证书来验证服务器的证书，服务器验证客户端证书也就是使用 CA 证书来验证客户端的证书，因为客户端和服务器的证书都是通过 CA 证书私钥来签发的。</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CA私钥 ---签发--&gt; (服务器证书 + 私钥)</span><br><span class="line">CA私钥 ---签发--&gt; (客户端证书 + 私钥)</span><br><span class="line"></span><br><span class="line">CA公钥 ---验证--&gt; 服务器证书</span><br><span class="line">CA公钥 ---验证--&gt; 客户端证书</span><br></pre></td></tr></table></figure>
+
+<p>我们可以使用 openssl 来生成上述证书，大致步骤如下。</p>
+<ol>
+<li>创建 CA 的私钥和证书。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># CA私钥</span></span><br><span class="line">openssl genrsa -out ca.key 4096</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用私钥 ca.key 生成一个自签名的根证书 ca.crt，有效期为10年</span></span><br><span class="line"><span class="comment"># -nodes 不加密私钥（no DES）</span></span><br><span class="line"><span class="comment"># /C=CN 国家=中国 /ST=Beijing 省份=北京 /L=Beijing 城市=北京 /O=Test CA 组织=Test CA /OU=IT 部门=IT /CN=Test Root CA 通用名称=Test Root CA</span></span><br><span class="line"><span class="comment"># CA:true 表示这是一个CA证书</span></span><br><span class="line"><span class="comment"># 允许该证书用于签发其他证书（keyCertSign）和签发证书吊销列表（cRLSign）</span></span><br><span class="line">openssl req -x509 -new -nodes -key ca.key -sha256 -days 3650 -out ca.crt ^</span><br><span class="line">  -subj <span class="string">&quot;/C=CN/ST=Beijing/L=Beijing/O=Test CA/OU=IT/CN=Test Root CA&quot;</span> ^</span><br><span class="line">  -addext <span class="string">&quot;basicConstraints=critical,CA:true&quot;</span> ^</span><br><span class="line">  -addext <span class="string">&quot;keyUsage=critical,keyCertSign,cRLSign&quot;</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>创建服务器的私钥和证书。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 私钥</span></span><br><span class="line">openssl genrsa -out server.key 2048</span><br><span class="line"></span><br><span class="line"><span class="comment"># 生成服务端 CSR（请求证书），设置主题与常用用途</span></span><br><span class="line"><span class="comment"># CN=localhost 表示服务器域名为localhost，但现在已被废弃，优先使用下面的subjectAltName</span></span><br><span class="line">openssl req -new -key server.key -out server.csr ^</span><br><span class="line">  -subj <span class="string">&quot;/C=CN/ST=Beijing/L=Beijing/O=Test Server/OU=IT/CN=localhost&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建扩展文件server.ext</span></span><br><span class="line"><span class="comment"># extendedKeyUsage为serverAuth表示这是一个用于服务器验证的证书</span></span><br><span class="line"><span class="comment"># 由于是本地测试，所以ip和域名为localhost、127.0.0.1、IP:::1</span></span><br><span class="line"><span class="comment"># 这里的DNS不是域名解析服务器，而是指域名</span></span><br><span class="line">(</span><br><span class="line"><span class="built_in">echo</span> authorityKeyIdentifier=keyid,issuer</span><br><span class="line"><span class="built_in">echo</span> basicConstraints=CA:FALSE</span><br><span class="line"><span class="built_in">echo</span> keyUsage=digitalSignature, keyEncipherment</span><br><span class="line"><span class="built_in">echo</span> extendedKeyUsage=serverAuth</span><br><span class="line"><span class="built_in">echo</span> subjectAltName=DNS:localhost,IP:127.0.0.1,IP:::1</span><br><span class="line">) &gt; server.ext</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用CA签发一个自签名的证书</span></span><br><span class="line">openssl x509 -req -<span class="keyword">in</span> server.csr -CA ca.crt -CAkey ca.key -CAcreateserial ^</span><br><span class="line">  -out server.crt -days 365 -sha256 -extfile server.ext</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>创建客户端的私钥和证书。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">openssl genrsa -out client.key 2048</span><br><span class="line"></span><br><span class="line"><span class="comment"># 客户端 CSR</span></span><br><span class="line"><span class="comment"># extendedKeyUsage为clientAuth</span></span><br><span class="line">openssl req -new -key client.key -out client.csr ^</span><br><span class="line">  -subj <span class="string">&quot;/C=CN/ST=Beijing/L=Beijing/O=Test Client/OU=IT/CN=test-user&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建扩展文件client.ext</span></span><br><span class="line"><span class="comment"># extendedKeyUsage=clientAuth表示这是一个用于客户端验证的证书</span></span><br><span class="line">(</span><br><span class="line"><span class="built_in">echo</span> authorityKeyIdentifier=keyid,issuer</span><br><span class="line"><span class="built_in">echo</span> basicConstraints=CA:FALSE</span><br><span class="line"><span class="built_in">echo</span> keyUsage=digitalSignature, keyEncipherment</span><br><span class="line"><span class="built_in">echo</span> extendedKeyUsage=clientAuth</span><br><span class="line">) &gt; client.ext</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用CA签发一个自签名的证书</span></span><br><span class="line">openssl x509 -req -<span class="keyword">in</span> client.csr -CA ca.crt -CAkey ca.key -CAcreateserial ^</span><br><span class="line">  -out client.crt -days 365 -sha256 -extfile client.ext</span><br></pre></td></tr></table></figure>
+
+<h3 id="绕过对服务器证书的校验"><a href="#绕过对服务器证书的校验" class="headerlink" title="绕过对服务器证书的校验"></a>绕过对服务器证书的校验</h3><p>在抓取 libcurl 的 HTTPS 包时，如果提示如下的错误，说明 libcurl 开启了对服务器证书的校验，并且证书校验失败。</p>
+<div style="text-aligin:center;"><img data-src="../images/blog/j2zIkpvlEM.png" width="500px" /></div>
+
+<p>要解决 Fiddler 解密失败的问题，我们需要理解两种场景下证书校验的差异：</p>
+<ol>
+<li><p>没有 Fiddler 的情况。</p>
+<p>客户端（libcurl）向服务器发起 TLS 握手请求，其中包含 ClientHello 消息。服务器返回 ServerHello、证书（以及其它消息）。客户端收到证书后，会使用自定义的 CA 证书包来验证服务器证书。如果验证通过（即服务器证书是由自定义 CA 证书包中的某个根证书签名的），则握手继续；否则，握手失败。</p>
+</li>
+<li><p>有 Fiddler 的情况（且 Fiddler 作为中间人代理）。</p>
+<p>客户端实际上是与 Fiddler 建立 TLS 连接，而不是直接与目标服务器建立连接。因此，客户端会向 Fiddler 请求证书（因为 Fiddler 此时扮演服务器的角色）。Fiddler 会动态生成一个目标服务器域名的证书，并用 Fiddler 自己的根证书签名。客户端收到这个证书后，同样会用自定义的 CA 包来验证。如果自定义 CA 包中包含了 Fiddler 的根证书，则验证通过；否则，验证失败。</p>
+</li>
+</ol>
+<p><strong>如果 libcurl 是通过文件路径方式来指定的 CA 包</strong>，我们可以找到该文件，通过将 Fiddler 根证书添加到该文件中的方式，来使程序再次信任 Fiddler 的根证书。大致步骤如下：</p>
+<ol>
+<li><p>导出 Fiddler 的根证书（打开 Fiddler → Tools​ → Options​ → HTTPS​ → Actions​ → Export Root Certificate to Desktop）</p>
+</li>
+<li><p>把证书转成与 libcurl 程序所指定证书一样的格式，如转成 pem 格式。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -<span class="keyword">in</span> FiddlerRoot.cer -out FiddlerRoot.pem -outform PEM</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>将 pem 内容添加到原有的 CA 包尾部（或者完全替换原有 CA 包的内容）。</p>
+</li>
+</ol>
+<p>如果在 Fiddler 之前使用了 Proxifier 转发流量，不要忘记在 Proxifier 中将 DNS 设置“通过代理解析主机名称”。</p>
+<p><strong>如果 libcurl 是通过内存加载的 CA 包</strong>，可以采用注入 + Hook 的方式将 CA 包重定向到我们指定的文件，见下面的章节。</p>
+<h3 id="libcurl-与-Schannel"><a href="#libcurl-与-Schannel" class="headerlink" title="libcurl 与 Schannel"></a>libcurl 与 Schannel</h3><p>libcurl 中的 Schannel 和 OpenSSL 都是用于处理 HTTPS (SSL&#x2F;TLS) 连接的底层安全库，它们的主要区别在于：OpenSSL 跨平台的第三方加密库；而 Schannel (Security Support Provider Interface) 是 Windows 平台自带的微软实现，原生集成。可以在编译 libcurl 时选择以何种方式支持 HTTPS。</p>
+<p>当使用 OpenSSL 作为底层安全库时，可以使用上面介绍的方法来抓取 HTTPS 流量。</p>
+<p>但是，当使用 Schannel 作为底层安全库时，默认会验证证书的吊销状态，而 Fiddler 生成的证书没有有效的吊销信息，会导致返回<code>CERT_TRUST_REVOCATION_STATUS_UNKNOWN</code>错误。</p>
+<p>使用如下命令查看 Fiddler 导出的证书的吊销状态：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">certutil -verify FiddlerRoot.cer</span><br></pre></td></tr></table></figure>
+
+<p>通常会输出如下结果：</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">证书是一个 CA 证书</span><br><span class="line">无法检查分支证书吊销状态</span><br></pre></td></tr></table></figure>
+
+<p>如果能修改 libcurl 程序的代码，可以禁用吊销状态检查：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">curl_easy_setopt</span>(curl, CURLOPT_SSL_OPTIONS, CURLSSLOPT_NO_REVOKE);</span><br></pre></td></tr></table></figure>
+
+<p>当然大多数情况下，都无法修改程序的代码，那么如何跳过吊销状态检查呢？嘿嘿</p>
+<h3 id="绕过对客户端证书的校验"><a href="#绕过对客户端证书的校验" class="headerlink" title="绕过对客户端证书的校验"></a>绕过对客户端证书的校验</h3><p>找到客户端使用的证书和私钥文件（如果私钥有密码，还要先想办法获取到密码），通过如下命令来生成 pfx 文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl pkcs12 -<span class="built_in">export</span> -out client.pfx -inkey client.key -<span class="keyword">in</span> client.crt</span><br></pre></td></tr></table></figure>
+
+<p>双击 pfx 文件，导入到系统中（理论上是不需要该步骤了，但可能是因为 Schannel 存在 bug 的缘故，如果不将 pfx 导入到系统，fiddler 会解析证书失败）。</p>
+<p>编辑 Fiddler 的 Rules，在 OnBeforeRequest 函数中添加类似如下内容：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (oSession.<span class="title function_">uriContains</span>(<span class="string">&quot;localhost&quot;</span>)) &#123;</span><br><span class="line">  oSession[<span class="string">&quot;https-Client-Certificate&quot;</span>] = <span class="string">&quot;D:\\certs\\client.pfx&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>如果 libcurl 是通过内存加载的客户端证书、私钥</strong>，可以采用注入 + Hook 的方式将获取到这些信息，见下面的章节。</p>
+<h2 id="Hook-libcurl-获取证书信息"><a href="#Hook-libcurl-获取证书信息" class="headerlink" title="Hook libcurl 获取证书信息"></a>Hook libcurl 获取证书信息</h2><p>当目标程序通过内存（BLOB）方式加载证书和私钥时，我们无法直接修改文件。此时，Hook（钩子）​ 技术便成为关键手段。通过拦截程序对 libcurl API 的调用，我们可以动态读取、修改甚至替换这些敏感信息。</p>
+<p>涉及到的 libcurl 选项如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CURLOPT_CAINFO_BLOB</span><br><span class="line">CURLOPT_SSLCERT_BLOB</span><br><span class="line">CURLOPT_SSLKEY_BLOB</span><br><span class="line">CURLOPT_KEYPASSWD</span><br></pre></td></tr></table></figure>
+
+<p>通过分析 libcurl（8.13.0 版本）的代码，发现 curl_easy_setopt 调用路径如下：</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CURLcode curl_easy_setopt(CURL *d, CURLoption tag, ...)</span><br><span class="line"></span><br><span class="line">CURLcode Curl_vsetopt(struct Curl_easy *data, CURLoption option, va_list param)</span><br><span class="line"></span><br><span class="line">CURLcode setopt_blob(struct Curl_easy *data, CURLoption option, struct curl_blob *blob)</span><br><span class="line">或</span><br><span class="line">CURLcode setopt_cptr(struct Curl_easy *data, CURLoption option, char *ptr)</span><br></pre></td></tr></table></figure>
+
+<p>Hook Curl_vsetopt 一个函数就可以截获和修改我们所需要的信息。</p>
+<p>libcurl 没有导出 Curl_vsetopt 函数，所以需要通过特征码来搜索函数地址。使用 IDA Pro 分析 32 位 libcurl.dll 发现，可以通过函数的前几个指令作为特征码来搜索函数地址，因此 函数特征码为 0x8B, 0x4C, 0x24, 0x08, 0x81, 0xF9, 0x10, 0x27, 0x00, 0x00。</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">8B4C24 08                | mov ecx,dword ptr ss:[esp+8]            | _Curl_vsetopt</span><br><span class="line">81F9 10270000            | cmp ecx,2710                            |</span><br></pre></td></tr></table></figure>
+
+<p>编写 DLL，在 DLL 中通过特征码查找函数地址，然后使用 MinHook 库来 Hook 该函数。</p>
+<p>在查找函数特征码时，需要区分动态链接和静态链接 libcurl 库的情况。动态链接时，直接从 libcurl.dll 模块查找；静态链接时，从主模块中查找。</p>
+<p>查找 Curl_vsetopt 函数地址的代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">PVOID dllBase = <span class="literal">NULL</span>;</span><br><span class="line">ULONG sizeOfImage = <span class="number">0L</span>;</span><br><span class="line">PFN_Curl_vsetopt pfnCurlVSetOpt = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">PVOID processBase = <span class="literal">NULL</span>;</span><br><span class="line">ULONG sizeOfProcessImage = <span class="number">0L</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 从LDR中查找libcurl.dll模块的基地址</span></span><br><span class="line"><span class="comment">// 若查找不到，可能是静态链接，从主模块查找</span></span><br><span class="line">PPEB peb = <span class="built_in">NtCurrentTeb</span>()-&gt;ProcessEnvironmentBlock;</span><br><span class="line">PPEB_LDR_DATA ldr = peb-&gt;Ldr;</span><br><span class="line">PLIST_ENTRY pListHead = &amp;ldr-&gt;InLoadOrderModuleList;</span><br><span class="line"><span class="keyword">for</span> (PLIST_ENTRY pListEntry = pListHead-&gt;Flink; pListEntry != pListHead; pListEntry = pListEntry-&gt;Flink) &#123;</span><br><span class="line">	PLDR_DATA_TABLE_ENTRY pEntry = <span class="built_in">CONTAINING_RECORD</span>(pListEntry, LDR_DATA_TABLE_ENTRY, InLoadOrderLinks);</span><br><span class="line">	<span class="keyword">if</span> (!processBase) &#123;</span><br><span class="line">		processBase = pEntry-&gt;DllBase;</span><br><span class="line">		sizeOfProcessImage = pEntry-&gt;SizeOfImage;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function">std::wstring <span class="title">moduleName</span><span class="params">(pEntry-&gt;BaseDllName.Buffer, pEntry-&gt;BaseDllName.Length / <span class="number">2</span>)</span></span>;</span><br><span class="line">	<span class="keyword">if</span> (<span class="built_in">StrIsEqual</span>(moduleName, <span class="string">L&quot;libcurl.dll&quot;</span>, <span class="literal">true</span>)) &#123;</span><br><span class="line">		dllBase = pEntry-&gt;DllBase;</span><br><span class="line">		sizeOfImage = pEntry-&gt;SizeOfImage;</span><br><span class="line">		<span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (dllBase == <span class="literal">NULL</span> || sizeOfImage == <span class="number">0</span>) &#123;</span><br><span class="line">	dllBase = processBase;</span><br><span class="line">	sizeOfImage = sizeOfProcessImage;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">TraceW</span>(<span class="string">L&quot;[CurlHook] Cannot find libcurl.dll module, try to search the whole process image(ImageBase: 0x%p, Size: %u).\n&quot;</span>, dllBase, sizeOfImage);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">const</span> <span class="type">size_t</span> patternSize = <span class="built_in">sizeof</span>(pattern);</span><br><span class="line">BYTE* foundAddr = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">SearchPattern</span>((BYTE*)dllBase, sizeOfImage, pattern, patternMask, (BYTE**)&amp;pfnCurlVSetOpt);</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (!pfnCurlVSetOpt) &#123;</span><br><span class="line">	<span class="built_in">TraceW</span>(<span class="string">L&quot;[CurlHook] Cannot find Curl_vsetopt function.\n&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">TraceW</span>(<span class="string">L&quot;[CurlHook] Found pattern at address: 0x%p\n&quot;</span>, pfnCurlVSetOpt);</span><br></pre></td></tr></table></figure>
+
+<p>使用 MinHook 库 Hook 查找到的函数，代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">MH_STATUS mhStatus = <span class="built_in">MH_Initialize</span>();</span><br><span class="line"><span class="keyword">if</span> (mhStatus != MH_OK) &#123;</span><br><span class="line">	<span class="built_in">TraceW</span>(<span class="string">L&quot;[CurlHook] MH_Initialize failed: %d\n&quot;</span>, mhStatus);</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">mhStatus = <span class="built_in">MH_CreateHook</span>(pfnCurlVSetOpt, My_Curl_vsetopt, (LPVOID*)&amp;pfnCurlVsetoptTrampoline);</span><br><span class="line"><span class="keyword">if</span> (mhStatus != MH_OK) &#123;</span><br><span class="line">	<span class="built_in">TraceW</span>(<span class="string">L&quot;[CurlHook] MH_CreateHook failed: %d\n&quot;</span>, mhStatus);</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">mhStatus = <span class="built_in">MH_EnableHook</span>(pfnCurlVSetOpt);</span><br><span class="line"><span class="keyword">if</span> (mhStatus != MH_OK) &#123;</span><br><span class="line">	<span class="built_in">TraceW</span>(<span class="string">L&quot;[CurlHook] MH_EnableHook failed: %d\n&quot;</span>, mhStatus);</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">TraceW</span>(<span class="string">L&quot;[CurlHook] Hook succeeded.\n&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>最后，在我们的 detour 函数中根据 option 来做相应的处理：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">CURLcode <span class="title">My_Curl_vsetopt</span><span class="params">(<span class="keyword">struct</span> Curl_easy* data, <span class="type">int</span> option, va_list param)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (option == <span class="number">40309</span>) &#123; <span class="comment">// CURLOPT_CAINFO_BLOB</span></span><br><span class="line">		<span class="comment">// 附加Fiddler的CA到末尾，然后返回</span></span><br><span class="line">		<span class="function">File <span class="title">file</span><span class="params">(PathJoin(GetCurrentExeDirectoryW(), <span class="string">L&quot;FiddlerCA.pem&quot;</span>))</span></span>;</span><br><span class="line">		<span class="keyword">if</span> (file.<span class="built_in">open</span>(<span class="string">L&quot;rb&quot;</span>)) &#123;</span><br><span class="line">			std::string strFiddlerCA = file.<span class="built_in">readAll</span>();</span><br><span class="line">			file.<span class="built_in">close</span>();</span><br><span class="line"></span><br><span class="line">			<span class="built_in">TraceA</span>(<span class="string">&quot;[CurlHook] FiddlerCA.pem %s\n&quot;</span>, strFiddlerCA.<span class="built_in">c_str</span>());</span><br><span class="line"></span><br><span class="line">			curl_blob* blob = <span class="built_in">va_arg</span>(param, <span class="keyword">struct</span> curl_blob*);</span><br><span class="line">			std::string newCA = std::<span class="built_in">string</span>((<span class="type">const</span> <span class="type">char</span>*)blob-&gt;data, blob-&gt;len) + <span class="string">&quot;\n&quot;</span> + strFiddlerCA;</span><br><span class="line"></span><br><span class="line">			gBuffer = <span class="built_in">malloc</span>(newCA.<span class="built_in">length</span>());</span><br><span class="line">			<span class="keyword">if</span> (gBuffer) &#123;</span><br><span class="line">				<span class="built_in">memset</span>(gBuffer, <span class="number">0</span>, newCA.<span class="built_in">length</span>());</span><br><span class="line">				<span class="built_in">memcpy</span>(gBuffer, newCA.<span class="built_in">c_str</span>(), newCA.<span class="built_in">length</span>());</span><br><span class="line"></span><br><span class="line">				<span class="keyword">struct</span> <span class="title class_">curl_blob</span> myBlob;</span><br><span class="line">				myBlob.data = gBuffer;</span><br><span class="line">				myBlob.len = newCA.<span class="built_in">length</span>();</span><br><span class="line">				myBlob.flags = blob-&gt;flags;</span><br><span class="line"></span><br><span class="line">				<span class="built_in">TraceW</span>(<span class="string">L&quot;[CurlHook] Append CA success.\n&quot;</span>);</span><br><span class="line">				<span class="keyword">return</span> <span class="built_in">Wrapped_Curl_vsetopt</span>(data, option, &amp;myBlob);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">pfnCurlVsetoptTrampoline</span>(data, option, param);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (option == <span class="number">40291</span> || option == <span class="number">40292</span>) &#123;</span><br><span class="line">		<span class="comment">// 转存到文件</span></span><br><span class="line">		curl_blob* blob = *((<span class="keyword">struct</span> curl_blob**)param);</span><br><span class="line">		std::wstring filePath;</span><br><span class="line">		<span class="keyword">if</span> (option == <span class="number">40291</span>) <span class="comment">// CURLOPT_SSLCERT_BLOB</span></span><br><span class="line">			filePath = <span class="built_in">PathJoin</span>(<span class="built_in">GetCurrentExeDirectoryW</span>(), <span class="string">L&quot;DumpClient.cert&quot;</span>);</span><br><span class="line">		<span class="keyword">else</span> <span class="keyword">if</span> (option == <span class="number">40292</span>) <span class="comment">// CURLOPT_SSLKEY_BLOB</span></span><br><span class="line">			filePath = <span class="built_in">PathJoin</span>(<span class="built_in">GetCurrentExeDirectoryW</span>(), <span class="string">L&quot;DumpClient.key&quot;</span>);</span><br><span class="line"></span><br><span class="line">		<span class="function">File <span class="title">file</span><span class="params">(filePath)</span></span>;</span><br><span class="line">		<span class="keyword">if</span> (file.<span class="built_in">open</span>(<span class="string">L&quot;w&quot;</span>)) &#123;</span><br><span class="line">			file.<span class="built_in">writeFrom</span>(blob-&gt;data, blob-&gt;len);</span><br><span class="line">			file.<span class="built_in">close</span>();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">pfnCurlVsetoptTrampoline</span>(data, option, param);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (option == <span class="number">10026</span>) &#123; <span class="comment">// CURLOPT_KEYPASSWD</span></span><br><span class="line">		<span class="type">char</span>* pwd = *((<span class="type">char</span>**)param);</span><br><span class="line">		<span class="built_in">TraceA</span>(<span class="string">&quot;[CurlHook] CURLOPT_KEYPASSWD: %s\n&quot;</span>, pwd);</span><br><span class="line">		<span class="keyword">return</span> <span class="built_in">pfnCurlVsetoptTrampoline</span>(data, option, param);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">pfnCurlVsetoptTrampoline</span>(data, option, param);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">static</span> CURLcode <span class="title">Wrapped_Curl_vsetopt</span><span class="params">(<span class="keyword">struct</span> Curl_easy* data, <span class="type">int</span> option, ...)</span> </span>&#123;</span><br><span class="line">	va_list args;</span><br><span class="line">	<span class="built_in">va_start</span>(args, option);</span><br><span class="line">	CURLcode result = <span class="built_in">pfnCurlVsetoptTrampoline</span>(data, option, args);</span><br><span class="line">	<span class="built_in">va_end</span>(args);</span><br><span class="line">	<span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Hook-OpenSSL-获取明文"><a href="#Hook-OpenSSL-获取明文" class="headerlink" title="Hook OpenSSL 获取明文"></a>Hook OpenSSL 获取明文</h2><p>libcurl 通过 OpenSSL 提供对 SSL 和 TLS 协议的支持，因此我们可以 Hook OpenSSL 库的函数来截获加密前的请求明文以及解密后的响应明文。</p>
+<p>写一个简单的 OpenSSL 示例程序，单步调试后可以发现，OpenSSL 内部会分别调用 SSL_write 函数写入待加密的报文数据，SSL_read 函数读取解密后的报文数据。</p>
+<p>因此我们只需要 Hook 这两个函数就可以截获请求和响应的明文，而且这两个函数都是 OpenSSL 的导出函数，在程序使用动态链接 OpenSSL 库的情况下，我们只需要查找 IAT 就可以获取函数地址。</p>
+<p>本节以静态链接 OpenSSL 库为例，通过特征码来查找这两个函数的地址。</p>
+<p>从 OpenSSL 3.5.0 版本中查看 SSL_read 和 SSL_write 函数的定义如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">SSL_read</span><span class="params">(SSL *s, <span class="type">void</span> *buf, <span class="type">int</span> num)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> ret;</span><br><span class="line">    <span class="type">size_t</span> readbytes;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (num &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">ERR_raise</span>(ERR_LIB_SSL, SSL_R_BAD_LENGTH);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ret = <span class="built_in">ssl_read_internal</span>(s, buf, (<span class="type">size_t</span>)num, &amp;readbytes);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * The cast is safe here because ret should be &lt;= INT_MAX because num is</span></span><br><span class="line"><span class="comment">     * &lt;= INT_MAX</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">if</span> (ret &gt; <span class="number">0</span>)</span><br><span class="line">        ret = (<span class="type">int</span>)readbytes;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">SSL_write</span><span class="params">(SSL *s, <span class="type">const</span> <span class="type">void</span> *buf, <span class="type">int</span> num)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> ret;</span><br><span class="line">    <span class="type">size_t</span> written;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (num &lt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">ERR_raise</span>(ERR_LIB_SSL, SSL_R_BAD_LENGTH);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ret = <span class="built_in">ssl_write_internal</span>(s, buf, (<span class="type">size_t</span>)num, <span class="number">0</span>, &amp;written);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * The cast is safe here because ret should be &lt;= INT_MAX because num is</span></span><br><span class="line"><span class="comment">     * &lt;= INT_MAX</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">if</span> (ret &gt; <span class="number">0</span>)</span><br><span class="line">        ret = (<span class="type">int</span>)written;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>SSL_read 与 SSL_write 函数的定义非常类似，而且在 OpenSSL 源码中还有很多类似的函数，因此不能简单的使用前几个指令作为特征码进行搜索。</p>
+<p>进一步分析 ERR_raise 宏，其定义如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># <span class="keyword">define</span> ERR_raise(lib, reason) ERR_raise_data((lib),(reason),NULL)</span></span><br><span class="line"><span class="meta"># <span class="keyword">define</span> ERR_raise_data                                         \</span></span><br><span class="line"><span class="meta">    (ERR_new(),                                                 \</span></span><br><span class="line"><span class="meta">     ERR_set_debug(OPENSSL_FILE,OPENSSL_LINE,OPENSSL_FUNC),     \</span></span><br><span class="line"><span class="meta">     ERR_set_error)</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">ERR_set_debug</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *file, <span class="type">int</span> line, <span class="type">const</span> <span class="type">char</span> *func)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>其中，ERR_set_debug 函数的参数分别是源文件路径、代码所在行、函数名称，代码行是一个整数常量，可以很方便地作为特征码来使用，也就是下面汇编代码中的 push 94Bh。</p>
+<div style="text-aligin:center;"><img data-src="../images/blog/ssl_read.png" width="460px" /></div>
+
+<p>因此 SSL_read 与 SSL_write 函数的特征码分别如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="type">static</span> BYTE sslReadPattern[] = &#123;</span><br><span class="line">    <span class="number">0x8B</span>, <span class="number">0x44</span>, <span class="number">0x24</span>, <span class="number">0x0C</span>,        <span class="comment">// mov     eax, [esp+arg_8]</span></span><br><span class="line">    <span class="number">0x85</span>, <span class="number">0xC0</span>,                    <span class="comment">// test    eax, eax</span></span><br><span class="line">    <span class="number">0x79</span>, <span class="number">0x00</span>,                    <span class="comment">// jns     short loc_6343D6</span></span><br><span class="line">    <span class="number">0xE8</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>,  <span class="comment">// call    sub_454800</span></span><br><span class="line">    <span class="number">0x68</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>,  <span class="comment">// push    offset aSslRead</span></span><br><span class="line">    <span class="number">0x68</span>, <span class="number">0x4B</span>, <span class="number">0x09</span>, <span class="number">0x00</span>, <span class="number">0x00</span>,  <span class="comment">// push    94Bh</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="type">static</span> <span class="type">char</span> sslReadPatternMask[] = <span class="string">u8R&quot;(xxxxxxx?x????x????xxxxx)&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">static</span> BYTE sslWritePattern[] = &#123;</span><br><span class="line">    <span class="number">0x8B</span>, <span class="number">0x44</span>, <span class="number">0x24</span>, <span class="number">0x0C</span>,        <span class="comment">// mov     eax, [esp+arg_8]</span></span><br><span class="line">    <span class="number">0x85</span>, <span class="number">0xC0</span>,                    <span class="comment">// test    eax, eax</span></span><br><span class="line">    <span class="number">0x79</span>, <span class="number">0x00</span>,                    <span class="comment">// jns     short loc_6343D6</span></span><br><span class="line">    <span class="number">0xE8</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>,  <span class="comment">// call    xxx</span></span><br><span class="line">    <span class="number">0x68</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>, <span class="number">0x00</span>,  <span class="comment">// push    offset aSslWrite</span></span><br><span class="line">    <span class="number">0x68</span>, <span class="number">0x71</span>, <span class="number">0x0A</span>, <span class="number">0x00</span>, <span class="number">0x00</span>,  <span class="comment">// push    0A71h</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="type">static</span> <span class="type">char</span> sslWritePatternMask[] = <span class="string">u8R&quot;(xxxxxxx?x????x????xxxxx)&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>在找到函数地址之后，同样使用 MinHook 库进行 Hook，将截获到的请求和响应内容写入到日志文件：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">MySSLRead</span><span class="params">(<span class="type">void</span>* s, <span class="type">void</span>* buf, <span class="type">int</span> num)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> readbytes = <span class="built_in">pfnSSLReadTrampoline</span>(s, buf, num);</span><br><span class="line">    <span class="keyword">if</span> (readbytes &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        logFile.<span class="built_in">writeFrom</span>(buf, readbytes);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> readbytes;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">MySSLWrite</span><span class="params">(<span class="type">void</span>* s, <span class="type">void</span>* buf, <span class="type">int</span> num)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> written = <span class="built_in">pfnSSLWriteTrampoline</span>(s, buf, num);</span><br><span class="line">    <span class="keyword">if</span> (written &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        logFile.<span class="built_in">writeFrom</span>(buf, written);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> written;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="WinHTTP"><a href="#WinHTTP" class="headerlink" title="WinHTTP"></a>WinHTTP</h1><p>Fiddler 可以抓取使用 WinINET API 接口发送的流量，但是无法抓 WinHTTP API 接口发送流量。尝试了各种办法依然无法抓取，最后只好使用 Proxifier 来将流量转发到 Fiddler。</p>
+<p>同样别忘记在 Proxifier 中将 DNS 设置“通过代理解析主机名称”。</p>
+<h1 id="Electron-HTTP-抓包"><a href="#Electron-HTTP-抓包" class="headerlink" title="Electron HTTP 抓包"></a>Electron HTTP 抓包</h1><p>Electron 应用默认不走系统代理，所以使用 Fiddler 无法直接抓包。使用 Electron 程序内置的调试工具进行抓包非常直观，而且不用考虑 HTTPS 双向认证的问题，可以优先尝试打开调试工具。</p>
+<p><strong>方法 1</strong></p>
+<p>如果能直接打开调试工具（如快捷键 Ctrl+Shift+I 或 F12 等），这是最简单的方式。</p>
+<p><strong>方法 2</strong></p>
+<p>如需抓取渲染进程的包，则使用 <code>--remote-debugging-port=9222 --remote-allow-origins=*</code> 命令行启动 Electron 程序，然后在浏览器中通过 <a target="_blank" rel="noopener" href="http://localhost:9222/">http://localhost:9222</a> 访问调试工具。</p>
+<p>如需抓取主进程的包，则使用<code>--inspect=9222</code>命令行启动 Electron 程序，并进行相应配置，详见 <a href="/post/2191045165.html" title="Electron启动和禁用调试工具的方法">Electron启动和禁用调试工具的方法</a></p>
+<p><strong>方法 3</strong></p>
+<p>使用 asar 命令解压 app.asar 资源包，并在 js 代码中查找 <code>new BrowserWindow</code>，针对需要抓包的 BrowserWindow 对象启动 devTools 并调用 openDevTools 函数打开调试工具（也粗暴一点就把所有的都加上），然后再使用 asar 命令重新打包资源包。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mainWindow = <span class="keyword">new</span> <span class="title class_">BrowserWindow</span>(&#123;</span><br><span class="line">  <span class="attr">width</span>: <span class="number">800</span>,</span><br><span class="line">  <span class="attr">height</span>: <span class="number">600</span>,</span><br><span class="line">  <span class="attr">webPreferences</span>: &#123;</span><br><span class="line">    <span class="attr">devTools</span>: <span class="literal">true</span>, <span class="comment">// 启动devTools</span></span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 打开调试工具</span></span><br><span class="line">mainWindow.<span class="property">webContents</span>.<span class="title function_">openDevTools</span>(&#123; <span class="attr">mode</span>: <span class="string">&quot;detach&quot;</span> &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>有的 Electron 应用会校验 asar 资源包的哈希值（如 WeMod），防止被修改之后重新打包，此时需要使用 IDA Pro 屏蔽掉该逻辑。</p>
+<p><strong>方法 4</strong></p>
+<p>虽然大多数情况下都可以打开调试工具的，除非方法不到位，但如果实在无法打开，还可以使用 Proxifier 将流量转发到 Filddler，然后使用 Fiddler 抓包分析。按照这种方法，如果遇到了 HTTPS 双向认证，则需要从资源文件和源码中获取到证书、私钥等信息。</p>
+<h1 id="CEF-HTTP-抓包"><a href="#CEF-HTTP-抓包" class="headerlink" title="CEF HTTP 抓包"></a>CEF HTTP 抓包</h1><p>CEF 应用可以通过设置远程调试端口来进行调试，也就是使用下面的命令行来启动 CEF 应用（指定一个 1024~65535 之间的端口号），然后在浏览器中通过 <a target="_blank" rel="noopener" href="http://localhost:34444/">http://localhost:34444</a> 访问调试工具。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cef_app.exe -remote-debugging-port=34444</span><br></pre></td></tr></table></figure>
+
+<h2 id="调试端口屏蔽与反屏蔽"><a href="#调试端口屏蔽与反屏蔽" class="headerlink" title="调试端口屏蔽与反屏蔽"></a>调试端口屏蔽与反屏蔽</h2><p>但开发者也可以在代码中屏蔽远程调试命令行参数，下面介绍几种屏蔽调试参数的方法，同时也介绍了对于逆向分析人员如何绕过该屏蔽方法的手段。</p>
+<p><strong>方法 1：不提供 devtools_resources.pak 文件。</strong></p>
+<p>这种情况只需要从 <a target="_blank" rel="noopener" href="https://cef-builds.spotifycdn.com/index.html">cef 官网</a>下载对应版本的 devtools_resources.pak 文件放到 libcef.dll 同级目录即可。</p>
+<p><strong>方法 2：禁用命令行参数解析。</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CefSettings settings;</span><br><span class="line">settings.command_line_args_disabled = <span class="number">1</span>;</span><br><span class="line"><span class="built_in">CefInitialize</span>(args, settings, application, windows_sandbox_info);</span><br></pre></td></tr></table></figure>
+
+<p>CefInitialize 函数的调用路径如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">libcef_dll_wrapper.dll!<span class="function"><span class="type">bool</span> <span class="title">CefInitialize</span><span class="params">(<span class="type">const</span> CefMainArgs&amp; args, <span class="type">const</span> CefSettings&amp; settings, CefRefPtr&lt;CefApp&gt; application, <span class="type">void</span>* windows_sandbox_info)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function">libcef.dll!<span class="type">int</span> <span class="title">cef_initialize</span><span class="params">(<span class="type">const</span> <span class="keyword">struct</span> <span class="type">_cef_main_args_t</span>* args, <span class="type">const</span> <span class="keyword">struct</span> <span class="type">_cef_settings_t</span>* settings, <span class="type">cef_app_t</span>* application, <span class="type">void</span>* windows_sandbox_info)</span></span></span><br></pre></td></tr></table></figure>
+
+<p>cef_initialize 函数是 libcef.dll 的导出函数，所以我们只需要 Hook 该函数，并将 CefSettings.command_line_args_disabled 修改为 0 即可绕过该禁用。</p>
+<p><strong>方法 3：在 OnBeforeCommandLineProcessing 回调函数移除命令行参数中的 remote-debugging-port。</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 移除remote-debugging-port参数</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">ClientAppBrowser::OnBeforeCommandLineProcessing</span><span class="params">(</span></span></span><br><span class="line"><span class="params"><span class="function">	<span class="type">const</span> CefString&amp; process_type,</span></span></span><br><span class="line"><span class="params"><span class="function">	CefRefPtr&lt;CefCommandLine&gt; command_line)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (command_line-&gt;<span class="built_in">HasSwitch</span>(<span class="string">&quot;remote-debugging-port&quot;</span>)) &#123;</span><br><span class="line">	<span class="comment">// remove remote-debugging-port</span></span><br><span class="line">	<span class="comment">// ......</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>OnBeforeCommandLineProcessing 函数由 libcef_dll 项目中的 app_on_before_command_line_processing 函数所调用，但由于 app_on_before_command_line_processing 函数不是导出函数，因此查找该函数的地址可能会费点功夫。</p>
+<h2 id="Hook-BoringSSL"><a href="#Hook-BoringSSL" class="headerlink" title="Hook BoringSSL"></a>Hook BoringSSL</h2><p>上述方法虽然可以在大部分情况下打开调试工具，但有些情况下还是可能无法打开调试功能，比如开发者对 CEF 进行魔改。在无法打开调试工具时，使用 Proxifier + Fiddler 的组合就可以轻易的抓取 HTTP 数据包。</p>
+<p>如果需要抓取 HTTPS 数据包，可以使用 Hook BoringSSL 的方式。</p>
+<p>因为 CEF 使用了 OpenSSL 的 BoringSSL 分支，因此在抓取 HTTPS 数据包时，可以通过 Hook BoringSSL 的 SSL_read 和 SSL_write 函数来截获发送和接收的数据包，具体方法与上面小节介绍的 Hook OpenSSL 的 SSL_read 和 SSL_write 函数的方法类似。</p>
+
     </div>
-  </div>
+
+    
+    
+    
+
+    <footer class="post-footer"><div style="
+    background-color: #ffffff; 
+    border: 1px solid #e1e4e8; 
+    padding: 24px; 
+    margin: 28px 0; 
+    border-radius: 12px;
+    text-align: left;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    font-size: 1.1em;
+    font-weight: 600;
+">
+  <p style="margin: 0; color: #2c3e50; line-height: 1.6;">
+    限于篇幅等原因，文中可能只展示了关键代码片段。如果您希望获取完整的、开箱即用的解决方案，可以随时联系我。
+  </p>
 </div>
-<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
           <div class="reward-container">
   <div>请我一杯咖啡吧！</div>
   <button>
@@ -358,12 +547,8 @@
   </button>
   <div class="post-reward">
       <div>
-        <img src="/images/buycoffie.png" alt="jiangxueqiao.com 微信">
+        <img src="/images/coffie_wechat.png" alt="jiangxueqiao.com 微信">
         <span>微信</span>
-      </div>
-      <div>
-        <img src="/images/buycoffie.png" alt="jiangxueqiao.com 支付宝">
-        <span>支付宝</span>
       </div>
 
   </div>
@@ -378,7 +563,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://jiangxueqiao.com/post/657651408.html" title="从入门到洞察：网络抓包基础与核心工具实战指南">https://jiangxueqiao.com/post/657651408.html</a>
+      <a href="https://jiangxueqiao.com/post/657651408.html" title="突破抓包限制：Hook实战解密HTTPS流量与SSL双向认证">https://jiangxueqiao.com/post/657651408.html</a>
   </li>
   <li class="post-copyright-license">
       <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -387,7 +572,10 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE/" rel="tag"># 网络协议</a>
+              <a href="/tags/Hook/" rel="tag"># Hook</a>
+              <a href="/tags/%E6%B3%A8%E5%85%A5/" rel="tag"># 注入</a>
+              <a href="/tags/HTTPS/" rel="tag"># HTTPS</a>
+              <a href="/tags/Fiddler/" rel="tag"># Fiddler</a>
           </div>
 
         
@@ -399,9 +587,6 @@
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/post/714268304.html" rel="next" title="游戏加速器的原理及实现">
-                  游戏加速器的原理及实现 <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>
@@ -424,7 +609,7 @@
   </div>
   <div class="copyright">
     &copy; 2017 – 
-    <span itemprop="copyrightYear">2025</span>
+    <span itemprop="copyrightYear">2026</span>
     <span class="with-love">
       <i class="fa fa-rocket"></i>
     </span>

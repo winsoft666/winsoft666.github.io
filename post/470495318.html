@@ -19,16 +19,17 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"jiangxueqiao.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"right","width_expanded":260,"width_dual_column":260,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"vs2015"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":true,"height":300},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":false,"async":true,"duration":200,"transition":{"menu_item":null,"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":null}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="x86架构作为个人计算机和服务器领域的主流计算架构，其汇编语言是理解计算机底层运行机制、进行逆向工程、性能优化及嵌入式开发的核心基础。本文将系统梳理x86架构中的常用寄存器​和常用汇编指令​，并结合实际应用场景说明其作用。">
+    <meta name="description" content="x86 架构作为个人计算机和服务器领域的主流计算架构，其汇编语言是理解计算机底层运行机制、进行逆向工程、性能优化及嵌入式开发的核心基础。本文将系统梳理 x86 架构中的常用寄存器 ​ 和常用汇编指令 ​，并结合实际应用场景说明其作用。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="x86架构常用寄存器及汇编指令">
 <meta property="og:url" content="https://jiangxueqiao.com/post/470495318.html">
 <meta property="og:site_name" content="独钓寒江雪">
-<meta property="og:description" content="x86架构作为个人计算机和服务器领域的主流计算架构，其汇编语言是理解计算机底层运行机制、进行逆向工程、性能优化及嵌入式开发的核心基础。本文将系统梳理x86架构中的常用寄存器​和常用汇编指令​，并结合实际应用场景说明其作用。">
+<meta property="og:description" content="x86 架构作为个人计算机和服务器领域的主流计算架构，其汇编语言是理解计算机底层运行机制、进行逆向工程、性能优化及嵌入式开发的核心基础。本文将系统梳理 x86 架构中的常用寄存器 ​ 和常用汇编指令 ​，并结合实际应用场景说明其作用。">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://jiangxueqiao.com/images/blog/huibian-flags-register.png">
+<meta property="og:image" content="https://jiangxueqiao.com/images/blog/dr-reg.png">
 <meta property="article:published_time" content="2025-10-22T08:31:00.000Z">
-<meta property="article:modified_time" content="2025-12-29T14:18:55.910Z">
+<meta property="article:modified_time" content="2026-01-10T15:18:54.935Z">
 <meta property="article:author" content="jiangxueqiao.com">
 <meta property="article:tag" content="汇编">
 <meta name="twitter:card" content="summary">
@@ -171,7 +172,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#x86%E5%B8%B8%E7%94%A8%E5%AF%84%E5%AD%98%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">x86常用寄存器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E7%94%A8%E5%AF%84%E5%AD%98%E5%99%A8"><span class="nav-number">1.1.</span> <span class="nav-text">通用寄存器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#32%E4%BD%8D%E9%80%9A%E7%94%A8%E5%AF%84%E5%AD%98%E5%99%A8"><span class="nav-number">1.1.1.</span> <span class="nav-text">32位通用寄存器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#64%E4%BD%8D%E9%80%9A%E7%94%A8%E5%AF%84%E5%AD%98%E5%99%A8"><span class="nav-number">1.1.2.</span> <span class="nav-text">64位通用寄存器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AE%B5%E5%AF%84%E5%AD%98%E5%99%A8"><span class="nav-number">1.2.</span> <span class="nav-text">段寄存器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.2.1.</span> <span class="nav-text">实模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F-%E9%95%BF%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.2.2.</span> <span class="nav-text">保护模式&#x2F;长模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8"><span class="nav-number">1.3.</span> <span class="nav-text">标志寄存器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4%E6%8C%87%E9%92%88%E5%AF%84%E5%AD%98%E5%99%A8"><span class="nav-number">1.4.</span> <span class="nav-text">指令指针寄存器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#x86%E5%B8%B8%E7%94%A8%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4"><span class="nav-number">2.</span> <span class="nav-text">x86常用汇编指令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E6%8C%87%E4%BB%A4"><span class="nav-number">2.1.</span> <span class="nav-text">数据传输指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97%E6%8C%87%E4%BB%A4"><span class="nav-number">2.2.</span> <span class="nav-text">算术运算指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E6%93%8D%E4%BD%9C%E6%8C%87%E4%BB%A4"><span class="nav-number">2.3.</span> <span class="nav-text">逻辑操作指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%BB%E4%BD%8D%E4%B8%8E%E5%BE%AA%E7%8E%AF%E7%A7%BB%E4%BD%8D%E6%8C%87%E4%BB%A4"><span class="nav-number">2.4.</span> <span class="nav-text">移位与循环移位指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AF%94%E8%BE%83%E4%B8%8E%E6%9D%A1%E4%BB%B6%E8%B7%B3%E8%BD%AC%E6%8C%87%E4%BB%A4"><span class="nav-number">2.5.</span> <span class="nav-text">比较与条件跳转指令</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#x86-%E5%B8%B8%E7%94%A8%E5%AF%84%E5%AD%98%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">x86 常用寄存器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E7%94%A8%E5%AF%84%E5%AD%98%E5%99%A8"><span class="nav-number">1.1.</span> <span class="nav-text">通用寄存器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#32-%E4%BD%8D%E9%80%9A%E7%94%A8%E5%AF%84%E5%AD%98%E5%99%A8"><span class="nav-number">1.1.1.</span> <span class="nav-text">32 位通用寄存器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#64-%E4%BD%8D%E9%80%9A%E7%94%A8%E5%AF%84%E5%AD%98%E5%99%A8"><span class="nav-number">1.1.2.</span> <span class="nav-text">64 位通用寄存器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AE%B5%E5%AF%84%E5%AD%98%E5%99%A8"><span class="nav-number">1.2.</span> <span class="nav-text">段寄存器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.2.1.</span> <span class="nav-text">实模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F-%E9%95%BF%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.2.2.</span> <span class="nav-text">保护模式&#x2F;长模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8"><span class="nav-number">1.3.</span> <span class="nav-text">标志寄存器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4%E6%8C%87%E9%92%88%E5%AF%84%E5%AD%98%E5%99%A8"><span class="nav-number">1.4.</span> <span class="nav-text">指令指针寄存器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B0%83%E8%AF%95%E5%AF%84%E5%AD%98%E5%99%A8"><span class="nav-number">1.5.</span> <span class="nav-text">调试寄存器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#x86-%E5%B8%B8%E7%94%A8%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4"><span class="nav-number">2.</span> <span class="nav-text">x86 常用汇编指令</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E6%8C%87%E4%BB%A4"><span class="nav-number">2.1.</span> <span class="nav-text">数据传输指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97%E6%8C%87%E4%BB%A4"><span class="nav-number">2.2.</span> <span class="nav-text">算术运算指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E6%93%8D%E4%BD%9C%E6%8C%87%E4%BB%A4"><span class="nav-number">2.3.</span> <span class="nav-text">逻辑操作指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A7%BB%E4%BD%8D%E4%B8%8E%E5%BE%AA%E7%8E%AF%E7%A7%BB%E4%BD%8D%E6%8C%87%E4%BB%A4"><span class="nav-number">2.4.</span> <span class="nav-text">移位与循环移位指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AF%94%E8%BE%83%E4%B8%8E%E6%9D%A1%E4%BB%B6%E8%B7%B3%E8%BD%AC%E6%8C%87%E4%BB%A4"><span class="nav-number">2.5.</span> <span class="nav-text">比较与条件跳转指令</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -184,7 +185,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">153</span>
+          <span class="site-state-item-count">150</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -225,39 +226,6 @@
         <ul class="links-of-blogroll-list">
             <li class="links-of-blogroll-item">
               <a href="https://jiangxueqiao.com/online-tools" title="https:&#x2F;&#x2F;jiangxueqiao.com&#x2F;online-tools">在线工具</a>
-            </li>
-            <li class="links-of-blogroll-item">
-              <a href="https://github.com/winsoft666/zoe" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;zoe" rel="noopener" target="_blank">跨平台文件下载库</a>
-            </li>
-            <li class="links-of-blogroll-item">
-              <a href="https://github.com/winsoft666/veigar" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;veigar" rel="noopener" target="_blank">跨平台RPC库</a>
-            </li>
-            <li class="links-of-blogroll-item">
-              <a href="https://github.com/winsoft666/QWebView" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;QWebView" rel="noopener" target="_blank">多浏览器内核Qt组件</a>
-            </li>
-            <li class="links-of-blogroll-item">
-              <a href="https://github.com/winsoft666/vlc-qt2" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;vlc-qt2" rel="noopener" target="_blank">VLC内核Qt播放器组件</a>
-            </li>
-            <li class="links-of-blogroll-item">
-              <a href="https://github.com/winsoft666/1key.run" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;1key.run" rel="noopener" target="_blank">仿Mac平台Alfred软件</a>
-            </li>
-            <li class="links-of-blogroll-item">
-              <a href="https://github.com/winsoft666/qss-editor" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;qss-editor" rel="noopener" target="_blank">QSS编辑预览工具</a>
-            </li>
-            <li class="links-of-blogroll-item">
-              <a href="https://github.com/winsoft666/WinSpyPlus" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;WinSpyPlus" rel="noopener" target="_blank">Spy++加强版</a>
-            </li>
-            <li class="links-of-blogroll-item">
-              <a href="https://github.com/winsoft666/PortableStarter" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;PortableStarter" rel="noopener" target="_blank">便携式应用启动工具</a>
-            </li>
-            <li class="links-of-blogroll-item">
-              <a href="https://github.com/winsoft666/electron-vue3-boilerplate" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;electron-vue3-boilerplate" rel="noopener" target="_blank">产品级的Electron模板</a>
-            </li>
-            <li class="links-of-blogroll-item">
-              <a href="https://github.com/winsoft666/NSIS-UI-Plugin" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;NSIS-UI-Plugin" rel="noopener" target="_blank">NSIS界面插件</a>
-            </li>
-            <li class="links-of-blogroll-item">
-              <a href="https://github.com/winsoft666/epub-image-localizer" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;epub-image-localizer" rel="noopener" target="_blank">本地化EPUB在线图片</a>
             </li>
         </ul>
       </div>
@@ -314,7 +282,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-12-29 22:18:55" itemprop="dateModified" datetime="2025-12-29T22:18:55+08:00">2025-12-29</time>
+      <time title="修改时间：2026-01-10 23:18:54" itemprop="dateModified" datetime="2026-01-10T23:18:54+08:00">2026-01-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -335,62 +303,14 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>x86架构作为个人计算机和服务器领域的主流计算架构，其汇编语言是理解计算机底层运行机制、进行逆向工程、性能优化及嵌入式开发的核心基础。本文将系统梳理x86架构中的常用寄存器​和常用汇编指令​，并结合实际应用场景说明其作用。</p>
+    <div class="post-body" itemprop="articleBody"><p>x86 架构作为个人计算机和服务器领域的主流计算架构，其汇编语言是理解计算机底层运行机制、进行逆向工程、性能优化及嵌入式开发的核心基础。本文将系统梳理 x86 架构中的常用寄存器 ​ 和常用汇编指令 ​，并结合实际应用场景说明其作用。</p>
 <span id="more"></span>
 
-<h1 id="x86常用寄存器"><a href="#x86常用寄存器" class="headerlink" title="x86常用寄存器"></a>x86常用寄存器</h1><p>寄存器是CPU内部的高速存储单元，用于临时存放数据、地址或控制信息。x86寄存器按功能可分为通用寄存器、段寄存器、标志寄存器、指令指针、控制寄存器、调试寄存器及浮点&#x2F;SIMD寄存器等类别。</p>
-<h2 id="通用寄存器"><a href="#通用寄存器" class="headerlink" title="通用寄存器"></a>通用寄存器</h2><p>（General-Purpose Registers, GPRs）<br>通用寄存器是最常用的寄存器，支持数据存储、算术运算、内存寻址及栈操作等功能。根据架构位宽（16&#x2F;32&#x2F;64位）扩展，以下为核心寄存器：</p>
-<h3 id="32位通用寄存器"><a href="#32位通用寄存器" class="headerlink" title="32位通用寄存器"></a>32位通用寄存器</h3><table>
-<thead>
-<tr>
-<th>缩写</th>
-<th>英文全程</th>
-<th>功能描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>EAX</td>
-<td>Extended Accumulator Reister</td>
-<td>累加器，用于算术运算（如ADD、MUL）、<strong>函数返回值存储</strong>；高16位为AX，低8位AL，高8位AH。</td>
-</tr>
-<tr>
-<td>EBX</td>
-<td>Extended Base Register</td>
-<td>基址寄存器，常用作内存访问的基地址（如数组索引），支持相对寻址（[ebx+offset]）；高16位BX，低8位BL，高8位BH。</td>
-</tr>
-<tr>
-<td>ECX</td>
-<td>Extended Counter Register</td>
-<td>计数器，用于循环计数（如LOOP指令自动递减ECX）或字符串操作重复次数（REP MOVSB）；高16位CX，低8位CL（位移量常用）。</td>
-</tr>
-<tr>
-<td>EDX</td>
-<td>Extended Data Register</td>
-<td>数据寄存器，与EAX配合完成大数运算（如32位MUL EDX:EAX得64位结果）；高16位DX，低8位DL，高8位DH。</td>
-</tr>
-<tr>
-<td>ESI</td>
-<td>Extended Source Index Register</td>
-<td>源变址寄存器</td>
-</tr>
-<tr>
-<td>EDI</td>
-<td>Extended Distination Index Register</td>
-<td>目的变址寄存器</td>
-</tr>
-<tr>
-<td>EBP</td>
-<td>Extended Base Pointer Register</td>
-<td>基指针寄存器，指向当前栈帧基地址（[ebp+8]访问函数第一个参数）；高16位BP，无8位模式。</td>
-</tr>
-<tr>
-<td>ESP</td>
-<td>Extended Stack Pointer Register</td>
-<td>栈指针寄存器，指向当前栈顶地址，随PUSH&#x2F;POP&#x2F;CALL自动调整；高16位SP，无8位模式。</td>
-</tr>
-</tbody></table>
+<h1 id="x86-常用寄存器"><a href="#x86-常用寄存器" class="headerlink" title="x86 常用寄存器"></a>x86 常用寄存器</h1><p>寄存器是 CPU 内部的高速存储单元，用于临时存放数据、地址或控制信息。x86 寄存器按功能可分为通用寄存器、段寄存器、标志寄存器、指令指针、控制寄存器、调试寄存器及浮点&#x2F;SIMD 寄存器等类别。</p>
+<h2 id="通用寄存器"><a href="#通用寄存器" class="headerlink" title="通用寄存器"></a>通用寄存器</h2><p>（General-Purpose Registers, GPRs）<br>通用寄存器是最常用的寄存器，支持数据存储、算术运算、内存寻址及栈操作等功能。根据架构位宽（16&#x2F;32&#x2F;64 位）扩展，以下为核心寄存器：</p>
+<h3 id="32-位通用寄存器"><a href="#32-位通用寄存器" class="headerlink" title="32 位通用寄存器"></a>32 位通用寄存器</h3><p>| 缩写 | 英文全程                            | 功能描述                                                                                                                   |<br>| —- | ———————————– | ————————————————————————————————————————– | ————————————————————————————————————– |<br>| EAX  | Extended Accumulator Reister        | 累加器，用于算术运算（如 ADD、MUL）、<strong>函数返回值存储</strong>；高 16 位为 AX，低 8 位 AL，高 8 位 AH。                           |<br>| EBX  | Extended Base Register              | 基址寄存器，常用作内存访问的基地址（如数组索引），支持相对寻址（[ebx+offset]）；高 16 位 BX，低 8 位 BL，高 8 位 BH。      |<br>| ECX  | Extended Counter Register           | 计数器，用于循环计数（如 LOOP 指令自动递减 ECX）或字符串操作重复次数（REP MOVSB）；高 16 位 CX，低 8 位 CL（位移量常用）。 |<br>| EDX  | Extended Data Register              | 数据寄存器，与 EAX 配合完成大数运算（如 32 位 MUL EDX:EAX 得 64 位结果）；高 16 位 DX，低 8 位 DL，高 8 位 DH。            |<br>| ESI  | Extended Source Index Register      | 源变址寄存器                                                                                                               | 源变址寄存器，用于字符串&#x2F;数组操作的源地址指针（如 MOVS 指令自动递增 ESI）；高 16 位 SI，无 8 位模式。          |<br>| EDI  | Extended Distination Index Register | 目的变址寄存器                                                                                                             | 目的变址寄存器，用于字符串&#x2F;数组操作的目标地址指针（如 MOVS 指令自动递增&#x2F;递减 EDI）；高 16 位 DI，无 8 位模式。 |<br>| EBP  | Extended Base Pointer Register      | 基指针寄存器，指向当前栈帧基地址（[ebp+8]访问函数第一个参数）；高 16 位 BP，无 8 位模式。                                  |<br>| ESP  | Extended Stack Pointer Register     | 栈指针寄存器，指向当前栈顶地址，随 PUSH&#x2F;POP&#x2F;CALL 自动调整；高 16 位 SP，无 8 位模式。                                      |</p>
 <p><span style="color:#FFFFFF">&lt;原文出自: jiangxueqiao.com，请尊重原创&gt;</span></p>
-<h3 id="64位通用寄存器"><a href="#64位通用寄存器" class="headerlink" title="64位通用寄存器"></a>64位通用寄存器</h3><p>x86-64（AMD64）扩展了8个64位寄存器（RAX-RDI）及新增8个（R8-R15），低32位兼容32位寄存器：</p>
+<h3 id="64-位通用寄存器"><a href="#64-位通用寄存器" class="headerlink" title="64 位通用寄存器"></a>64 位通用寄存器</h3><p>x86-64（AMD64）扩展了 8 个 64 位寄存器（RAX-RDI）及新增 8 个（R8-R15），低 32 位兼容 32 位寄存器：</p>
 <table>
 <thead>
 <tr>
@@ -400,16 +320,16 @@
 </thead>
 <tbody><tr>
 <td>RAX ~ RDI</td>
-<td>64位版本，低32位为EAX-EDI，用于64位运算或存储更大范围数据。</td>
+<td>64 位版本，低 32 位为 EAX-EDI，用于 64 位运算或存储更大范围数据。</td>
 </tr>
 <tr>
 <td>R8 ~ R15</td>
-<td>新增寄存器，低32位为R8D-R15D，常用于64位模式函数参数传递（如Win64位前4个整数&#x2F;指针参数用RCX、RDX、R8、R9传递，后面的参数再从右向左压栈）</td>
+<td>新增寄存器，低 32 位为 R8D-R15D，常用于 64 位模式函数参数传递（如 Win64 位前 4 个整数&#x2F;指针参数用 RCX、RDX、R8、R9 传递，后面的参数再从右向左压栈）</td>
 </tr>
 </tbody></table>
 <h2 id="段寄存器"><a href="#段寄存器" class="headerlink" title="段寄存器"></a>段寄存器</h2><p>（Segment Registers）<br>段寄存器存储内存段的基地址或选择子，在实模式和保护模式下作用不同：</p>
-<h3 id="实模式"><a href="#实模式" class="headerlink" title="实模式"></a>实模式</h3><p>通过“段地址×16 + 偏移地址”计算20位物理地址：</p>
-<h3 id="保护模式-长模式"><a href="#保护模式-长模式" class="headerlink" title="保护模式&#x2F;长模式"></a>保护模式&#x2F;长模式</h3><p>存储段选择子（16位），指向全局描述符表（GDT）&#x2F;局部描述符表（LDT）中的段描述符：</p>
+<h3 id="实模式"><a href="#实模式" class="headerlink" title="实模式"></a>实模式</h3><p>通过“段地址 ×16 + 偏移地址”计算 20 位物理地址：</p>
+<h3 id="保护模式-长模式"><a href="#保护模式-长模式" class="headerlink" title="保护模式&#x2F;长模式"></a>保护模式&#x2F;长模式</h3><p>存储段选择子（16 位），指向全局描述符表（GDT）&#x2F;局部描述符表（LDT）中的段描述符：</p>
 <table>
 <thead>
 <tr>
@@ -441,16 +361,17 @@
 <tr>
 <td>FS</td>
 <td>无严格全称</td>
-<td>用户模式下，32位进程可以通过 FS 获取 TEB 和 PEB指针<br/>32位Windows内核模式下，通过FS获取KPCR指针</td>
+<td>用户模式下，32 位进程可以通过 FS 获取 TEB 和 PEB 指针<br/>32 位 Windows 内核模式下，通过 FS 获取 KPCR 指针</td>
 </tr>
 <tr>
 <td>GS</td>
 <td>无严格全称</td>
-<td>用户模式下，64位进程可以通过 GS 获取 TEB和 PEB指针<br/>64位Windows内核模式下，通过GS获取KPCR指针</td>
+<td>用户模式下，64 位进程可以通过 GS 获取 TEB 和 PEB 指针<br/>64 位 Windows 内核模式下，通过 GS 获取 KPCR 指针</td>
 </tr>
 </tbody></table>
-<h2 id="标志寄存器"><a href="#标志寄存器" class="headerlink" title="标志寄存器"></a>标志寄存器</h2><p>记录运算状态或控制CPU行为，32位为EFLAGS，64位为RFLAGS（低32位兼容EFLAGS）。</p>
-<p><img data-src="/images/blog/huibian-flags-register.png"></p>
+<h2 id="标志寄存器"><a href="#标志寄存器" class="headerlink" title="标志寄存器"></a>标志寄存器</h2><p>记录运算状态或控制 CPU 行为，32 位为 EFLAGS，64 位为 RFLAGS（低 32 位兼容 EFLAGS）。</p>
+<div style="text-aligin:center;"><img data-src="../images/blog/huibian-flags-register.png" width="360px" /></div>
+
 <table>
 <thead>
 <tr>
@@ -467,7 +388,7 @@
 <tr>
 <td>PF</td>
 <td>Parity Flag</td>
-<td>奇偶标志，结果低8位中1的个数为偶数时置1（用于校验）</td>
+<td>奇偶标志，结果低 8 位中 1 的个数为偶数时置 1（用于校验）</td>
 </tr>
 <tr>
 <td>AF</td>
@@ -477,32 +398,32 @@
 <tr>
 <td>ZF</td>
 <td>Zero Flag</td>
-<td>运算结果为0时置1（如CMP EAX, EBX后ZF&#x3D;1，表示EAX&#x3D;&#x3D;EBX）</td>
+<td>运算结果为 0 时置 1（如 CMP EAX, EBX 后 ZF&#x3D;1，表示 EAX&#x3D;&#x3D;EBX）</td>
 </tr>
 <tr>
 <td>SF</td>
 <td>Sign Flag</td>
-<td>结果最高位（符号位）为1时置1（表示负数）</td>
+<td>结果最高位（符号位）为 1 时置 1（表示负数）</td>
 </tr>
 <tr>
 <td>TF</td>
 <td>Trap Flag</td>
-<td>置1时CPU进入单步调试模式（每条指令后触发中断）</td>
+<td>置 1 时 CPU 进入单步调试模式（每条指令后触发中断）</td>
 </tr>
 <tr>
 <td>IF</td>
 <td>Interrupt Enable Flag</td>
-<td>置1时允许外部可屏蔽中断（INTR）</td>
+<td>置 1 时允许外部可屏蔽中断（INTR）</td>
 </tr>
 <tr>
 <td>DF</td>
 <td>Direction Flag</td>
-<td>控制字符串操作指针增减（CLD清零→递增；STD置1→递减）</td>
+<td>控制字符串操作指针增减（CLD 清零 → 递增；STD 置 1→ 递减）</td>
 </tr>
 <tr>
 <td>OF</td>
 <td>Overflow Flag</td>
-<td>有符号运算溢出（如8位加法结果超-128~127）</td>
+<td>有符号运算溢出（如 8 位加法结果超-128~127）</td>
 </tr>
 </tbody></table>
 <h2 id="指令指针寄存器"><a href="#指令指针寄存器" class="headerlink" title="指令指针寄存器"></a>指令指针寄存器</h2><table>
@@ -516,16 +437,215 @@
 <tbody><tr>
 <td>EIP</td>
 <td>Extended Instruction Pointer</td>
-<td>32位指令指针，存储下一条要执行的指令地址</td>
+<td>32 位指令指针，存储下一条要执行的指令地址</td>
 </tr>
 <tr>
 <td>RIP</td>
 <td>Instruction Pointer (64-bit)</td>
-<td>64位指令指针，存储下一条要执行的指令地址</td>
+<td>64 位指令指针，存储下一条要执行的指令地址</td>
 </tr>
 </tbody></table>
-<h1 id="x86常用汇编指令"><a href="#x86常用汇编指令" class="headerlink" title="x86常用汇编指令"></a>x86常用汇编指令</h1><p>指令按功能分为数据传输、算术运算、逻辑操作、移位、比较与跳转等类别。多数指令会修改标志寄存器（如CF、ZF），少数例外（如PUSHF）。</p>
-<h2 id="数据传输指令"><a href="#数据传输指令" class="headerlink" title="数据传输指令"></a>数据传输指令</h2><p>功能​：寄存器、内存或I&#x2F;O端口间数据移动，​通常不影响标志寄存器。</p>
+<h2 id="调试寄存器"><a href="#调试寄存器" class="headerlink" title="调试寄存器"></a>调试寄存器</h2><p>（Debug Registers）</p>
+<p>调试寄存器（Debug Registers）用于硬件级调试，支持设置硬件断点、监控内存访问和执行流程。这些寄存器包括<code>DR0 ~ DR7</code>，共 8 个，其中<code>DR0 ~ DR3</code>用于存储断点地址，<code>DR4 ~ DR5</code>保留，DR6 用于记录调试状态，DR7 用于控制调试行为。以下是详细介绍和表格列表。</p>
+<blockquote>
+<p>在x64架构中，<code>DR0 ~ DR3</code>扩展为64位，其他寄存器保持不变，仍为32位。</p>
+</blockquote>
+<div style="text-aligin:center;"><img data-src="../images/blog/dr-reg.png" width="360px" /></div>
+
+<table>
+<thead>
+<tr>
+<th>缩写</th>
+<th>功能描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>DR0</td>
+<td>设置断点0的线性地址</td>
+</tr>
+<tr>
+<td>DR1</td>
+<td>设置断点1的线性地址</td>
+</tr>
+<tr>
+<td>DR2</td>
+<td>设置断点2的线性地址</td>
+</tr>
+<tr>
+<td>DR3</td>
+<td>设置断点3的线性地址</td>
+</tr>
+<tr>
+<td>DR4</td>
+<td>保留</td>
+</tr>
+<tr>
+<td>DR5</td>
+<td>保留</td>
+</tr>
+<tr>
+<td>DR6</td>
+<td>调试状态寄存器，记录调试异常触发条件</td>
+</tr>
+<tr>
+<td>DR7</td>
+<td>调试控制寄存器，配置断点启用、类型和长度</td>
+</tr>
+</tbody></table>
+<p>DR7始终是32位寄存器，它的各位控制断点行为和启用状态，下表列出关键位（保留位通常置0，未列出）。</p>
+<table>
+<thead>
+<tr>
+<th>位范围</th>
+<th>位名</th>
+<th>作用描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>L0</td>
+<td>局部断点0启用（当前任务有效）</td>
+</tr>
+<tr>
+<td>1</td>
+<td>G0</td>
+<td>全局断点0启用（所有任务有效）</td>
+</tr>
+<tr>
+<td>2</td>
+<td>L1</td>
+<td>局部断点1启用</td>
+</tr>
+<tr>
+<td>3</td>
+<td>G1</td>
+<td>全局断点1启用</td>
+</tr>
+<tr>
+<td>4</td>
+<td>L2</td>
+<td>局部断点2启用</td>
+</tr>
+<tr>
+<td>5</td>
+<td>G2</td>
+<td>全局断点2启用</td>
+</tr>
+<tr>
+<td>6</td>
+<td>L3</td>
+<td>局部断点3启用</td>
+</tr>
+<tr>
+<td>7</td>
+<td>G3</td>
+<td>全局断点3启用</td>
+</tr>
+<tr>
+<td>8</td>
+<td>LE</td>
+<td>局部精确断点启用（历史功能，现代x86中保留）</td>
+</tr>
+<tr>
+<td>9</td>
+<td>GE</td>
+<td>全局精确断点启用（历史功能，现代x86中保留）</td>
+</tr>
+<tr>
+<td>13</td>
+<td>GD</td>
+<td>调试寄存器访问检测启用：1&#x3D;启用，访问调试寄存器触发异常</td>
+</tr>
+<tr>
+<td>16-17</td>
+<td>RW0</td>
+<td>断点0类型：00&#x3D;指令执行，01&#x3D;数据写入，11&#x3D;数据读取&#x2F;写入，10&#x3D;未定义</td>
+</tr>
+<tr>
+<td>18-19</td>
+<td>LEN0</td>
+<td>断点0长度：00&#x3D;1字节，01&#x3D;2字节，10&#x3D;8字节，11&#x3D;4字节</td>
+</tr>
+<tr>
+<td>20-21</td>
+<td>RW1</td>
+<td>断点1类型（编码同RW0）</td>
+</tr>
+<tr>
+<td>22-23</td>
+<td>LEN1</td>
+<td>断点1长度（编码同LEN0）</td>
+</tr>
+<tr>
+<td>24-25</td>
+<td>RW2</td>
+<td>断点2类型（编码同RW0）</td>
+</tr>
+<tr>
+<td>26-27</td>
+<td>LEN2</td>
+<td>断点2长度（编码同LEN0）</td>
+</tr>
+<tr>
+<td>28-29</td>
+<td>RW3</td>
+<td>断点3类型（编码同RW0）</td>
+</tr>
+<tr>
+<td>30-31</td>
+<td>LEN3</td>
+<td>断点3长度（编码同LEN0）</td>
+</tr>
+</tbody></table>
+<p><strong>注意</strong>：位10-12、14-15等为保留位。对于执行断点，其断点长度通常设为1字节。</p>
+<p>DR6是32位调试状态寄存器，当调试异常发生时，硬件自动设置相应位。下表列出关键位（保留位通常为0，未列出）。</p>
+<table>
+<thead>
+<tr>
+<th>位</th>
+<th>位名</th>
+<th>作用描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>B0</td>
+<td>断点0触发：当DR0断点条件满足时置1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>B1</td>
+<td>断点1触发：当DR1断点条件满足时置1</td>
+</tr>
+<tr>
+<td>2</td>
+<td>B2</td>
+<td>断点2触发：当DR2断点条件满足时置1</td>
+</tr>
+<tr>
+<td>3</td>
+<td>B3</td>
+<td>断点3触发：当DR3断点条件满足时置1</td>
+</tr>
+<tr>
+<td>13</td>
+<td>BD</td>
+<td>调试寄存器访问检测触发：当DR7.GD&#x3D;1且访问调试寄存器时置1</td>
+</tr>
+<tr>
+<td>14</td>
+<td>BS</td>
+<td>单步异常触发：由EFLAGS.TF标志触发单步异常时置1</td>
+</tr>
+<tr>
+<td>15</td>
+<td>BT</td>
+<td>任务切换触发：当任务切换且新任务TSS的T位为1时置1</td>
+</tr>
+</tbody></table>
+<p><strong>注意</strong>：位4-12、16-31为保留位，通常为0。DR6位在调试异常处理程序中需软件清零（通常写1清零）。</p>
+<h1 id="x86-常用汇编指令"><a href="#x86-常用汇编指令" class="headerlink" title="x86 常用汇编指令"></a>x86 常用汇编指令</h1><p>指令按功能分为数据传输、算术运算、逻辑操作、移位、比较与跳转等类别。多数指令会修改标志寄存器（如 CF、ZF），少数例外（如 PUSHF）。</p>
+<h2 id="数据传输指令"><a href="#数据传输指令" class="headerlink" title="数据传输指令"></a>数据传输指令</h2><p>功能 ​：寄存器、内存或 I&#x2F;O 端口间数据移动，​ 通常不影响标志寄存器。</p>
 <table>
 <thead>
 <tr>
@@ -550,13 +670,13 @@
 <tr>
 <td>PUSH</td>
 <td>Push</td>
-<td>操作数压入栈（ESP&#x2F;SP递减，如<code>PUSH EAX</code>）。</td>
+<td>操作数压入栈（ESP&#x2F;SP 递减，如<code>PUSH EAX</code>）。</td>
 <td>无（除非操作数是标志寄存器）</td>
 </tr>
 <tr>
 <td>POP</td>
 <td>Pop</td>
-<td>从栈顶弹出数据到操作数（ESP&#x2F;SP递增，如<code>POP EBX</code>）。</td>
+<td>从栈顶弹出数据到操作数（ESP&#x2F;SP 递增，如<code>POP EBX</code>）。</td>
 <td>无（除非操作数是标志寄存器）</td>
 </tr>
 <tr>
@@ -578,7 +698,7 @@
 <td>修改所有标志</td>
 </tr>
 </tbody></table>
-<h2 id="算术运算指令"><a href="#算术运算指令" class="headerlink" title="算术运算指令"></a>算术运算指令</h2><p>功能：加减乘除或带进位运算，<strong>显著修改状态标志</strong>（CF、ZF、OF等）。</p>
+<h2 id="算术运算指令"><a href="#算术运算指令" class="headerlink" title="算术运算指令"></a>算术运算指令</h2><p>功能：加减乘除或带进位运算，<strong>显著修改状态标志</strong>（CF、ZF、OF 等）。</p>
 <table>
 <thead>
 <tr>
@@ -598,34 +718,34 @@
 <td>SUB</td>
 <td>Subtract</td>
 <td>减法（dst &#x3D; dst - src，如<code>SUB ECX, 10</code>）。</td>
-<td>同ADD</td>
+<td>同 ADD</td>
 </tr>
 <tr>
 <td>ADC</td>
 <td>Add with Carry</td>
 <td>带进位加法（dst &#x3D; dst + src + CF，如<code>ADC EDX, EAX</code>）。</td>
-<td>同ADD</td>
+<td>同 ADD</td>
 </tr>
 <tr>
 <td>INC</td>
 <td>Increment</td>
-<td>加1（dst &#x3D; dst + 1，如<code>INC ESI</code>）。</td>
-<td>ZF、OF、SF、PF（<strong>不影响CF</strong>）</td>
+<td>加 1（dst &#x3D; dst + 1，如<code>INC ESI</code>）。</td>
+<td>ZF、OF、SF、PF（<strong>不影响 CF</strong>）</td>
 </tr>
 <tr>
 <td>MUL</td>
 <td>Unsigned Multiply</td>
 <td>无符号乘法（AL<em>r&#x2F;m8→AX；EAX</em>r&#x2F;m32→EDX:EAX）。</td>
-<td>CF&#x3D;1或OF&#x3D;1（结果超寄存器宽度时置1，否则清零）；其他标志无定义</td>
+<td>CF&#x3D;1 或 OF&#x3D;1（结果超寄存器宽度时置 1，否则清零）；其他标志无定义</td>
 </tr>
 <tr>
 <td>DIV</td>
 <td>Unsigned Divide</td>
-<td>无符号除法（被除数在AX&#x2F;EDX:EAX，商→AL&#x2F;EAX，余数→AH&#x2F;EDX）。</td>
-<td>除数为0或商溢出时触发#DE异常；标志无定义</td>
+<td>无符号除法（被除数在 AX&#x2F;EDX:EAX，商 →AL&#x2F;EAX，余数 →AH&#x2F;EDX）。</td>
+<td>除数为 0 或商溢出时触发#DE 异常；标志无定义</td>
 </tr>
 </tbody></table>
-<h2 id="逻辑操作指令"><a href="#逻辑操作指令" class="headerlink" title="逻辑操作指令"></a>逻辑操作指令</h2><p>功能：按位与、或、异或等操作，<strong>影响ZF、SF、PF，清除CF&#x2F;OF</strong>。</p>
+<h2 id="逻辑操作指令"><a href="#逻辑操作指令" class="headerlink" title="逻辑操作指令"></a>逻辑操作指令</h2><p>功能：按位与、或、异或等操作，<strong>影响 ZF、SF、PF，清除 CF&#x2F;OF</strong>。</p>
 <table>
 <thead>
 <tr>
@@ -645,22 +765,22 @@
 <td>OR</td>
 <td>Or</td>
 <td>按位或（dst &#x3D; dst | src，如<code>OR EAX, 1</code>）。</td>
-<td>同AND</td>
+<td>同 AND</td>
 </tr>
 <tr>
 <td>XOR</td>
 <td>Exclusive Or</td>
-<td>按位异或（dst &#x3D; dst ^ src，如<code>XOR ECX, ECX</code>清零ECX）。</td>
-<td>同AND</td>
+<td>按位异或（dst &#x3D; dst ^ src，如<code>XOR ECX, ECX</code>清零 ECX）。</td>
+<td>同 AND</td>
 </tr>
 <tr>
 <td>TEST</td>
 <td>Test</td>
 <td>测试位（dst &amp; src，不保存结果，如<code>TEST EAX, 0x80</code>检查最高位）。</td>
-<td>同AND</td>
+<td>同 AND</td>
 </tr>
 </tbody></table>
-<h2 id="移位与循环移位指令"><a href="#移位与循环移位指令" class="headerlink" title="移位与循环移位指令"></a>移位与循环移位指令</h2><p>功能：左移、右移或循环移位，<strong>影响CF、OF（单次移位）或ZF、SF、PF（多次移位）</strong>。</p>
+<h2 id="移位与循环移位指令"><a href="#移位与循环移位指令" class="headerlink" title="移位与循环移位指令"></a>移位与循环移位指令</h2><p>功能：左移、右移或循环移位，<strong>影响 CF、OF（单次移位）或 ZF、SF、PF（多次移位）</strong>。</p>
 <table>
 <thead>
 <tr>
@@ -673,32 +793,32 @@
 <tbody><tr>
 <td>SHL</td>
 <td>Shift Left Logical</td>
-<td>逻辑左移（高位丢弃，低位补0，如<code>SHL EAX, 1</code>）。</td>
-<td>单次：CF&#x3D;移出的最高位；ZF&#x2F;SF&#x2F;PF；OF&#x3D;符号位是否改变<br/>多次：CF&#x3D;最后移出的位；OF无定义</td>
+<td>逻辑左移（高位丢弃，低位补 0，如<code>SHL EAX, 1</code>）。</td>
+<td>单次：CF&#x3D;移出的最高位；ZF&#x2F;SF&#x2F;PF；OF&#x3D;符号位是否改变<br/>多次：CF&#x3D;最后移出的位；OF 无定义</td>
 </tr>
 <tr>
 <td>SHR</td>
 <td>Shift Right Logical</td>
-<td>逻辑右移（低位丢弃，高位补0，如<code>SHR EBX, 2</code>）。</td>
-<td>同SHL</td>
+<td>逻辑右移（低位丢弃，高位补 0，如<code>SHR EBX, 2</code>）。</td>
+<td>同 SHL</td>
 </tr>
 <tr>
 <td>SAR</td>
 <td>Shift Right Arithmetic</td>
 <td>算术右移（低位丢弃，高位补符号位，如<code>SAR ECX, 1</code>保持符号）。</td>
-<td>同SHL</td>
+<td>同 SHL</td>
 </tr>
 <tr>
 <td>ROL</td>
 <td>Rotate Left</td>
 <td>循环左移（高位移到低位，如<code>ROL EDX, 3</code>）。</td>
-<td>单次：CF&#x3D;移出的最高位；<br/>多次：CF&#x3D;最后移出的位；OF无定义</td>
+<td>单次：CF&#x3D;移出的最高位；<br/>多次：CF&#x3D;最后移出的位；OF 无定义</td>
 </tr>
 <tr>
 <td>RCL</td>
 <td>Rotate Left with Carry</td>
-<td>带进位循环左移（CF参与，最高位→CF→最低位，如<code>RCL EAX, 1</code>）。</td>
-<td>单次：CF&#x3D;移出的最高位；<br/>多次：CF&#x3D;最后移出的位；OF无定义</td>
+<td>带进位循环左移（CF 参与，最高位 →CF→ 最低位，如<code>RCL EAX, 1</code>）。</td>
+<td>单次：CF&#x3D;移出的最高位；<br/>多次：CF&#x3D;最后移出的位；OF 无定义</td>
 </tr>
 </tbody></table>
 <h2 id="比较与条件跳转指令"><a href="#比较与条件跳转指令" class="headerlink" title="比较与条件跳转指令"></a>比较与条件跳转指令</h2><p><code>CMP</code>和<code>TEST</code>通过隐含减法&#x2F;与操作设置标志，供条件跳转判断。</p>
@@ -715,18 +835,18 @@
 <td>CMP</td>
 <td>Compare</td>
 <td>比较（dst - src，如<code>CMP EAX, EBX</code>），<br/>等价于 SUB dst, src（不保存结果），<br/>通过设置标志寄存器反映大小关系。</td>
-<td>dst &#x3D;&#x3D; src时，​ZF&#x3D;1 <br/> dst &gt; src时，ZF&#x3D;0 CF&#x3D;0 SF&#x3D;0 <br/> dst &lt; src时，ZF&#x3D;0 CF&#x3D;1 SF&#x3D;1</td>
+<td>dst &#x3D;&#x3D; src 时，​ZF&#x3D;1 <br/> dst &gt; src 时，ZF&#x3D;0 CF&#x3D;0 SF&#x3D;0 <br/> dst &lt; src 时，ZF&#x3D;0 CF&#x3D;1 SF&#x3D;1</td>
 </tr>
 <tr>
 <td>JE&#x2F;JZ</td>
 <td>Jump if Equal&#x2F;Zero</td>
-<td>ZF&#x3D;1（<code>dst == src</code>，或运算结果为0）</td>
+<td>ZF&#x3D;1（<code>dst == src</code>，或运算结果为 0）</td>
 <td>相等&#x2F;为零时跳转（如 <code>CMP EAX, EBX</code> 后 <code>JE Label</code> 表示 EAX&#x3D;EBX 时跳转）</td>
 </tr>
 <tr>
 <td>JNE&#x2F;JNZ</td>
 <td>Jump if Not Equal&#x2F;Not Zero</td>
-<td>ZF&#x3D;0（<code>dst != src</code>，或运算结果非0）</td>
+<td>ZF&#x3D;0（<code>dst != src</code>，或运算结果非 0）</td>
 <td>不相等&#x2F;非零时跳转</td>
 </tr>
 <tr>
@@ -794,7 +914,21 @@
     
     
 
-    <footer class="post-footer">
+    <footer class="post-footer"><div style="
+    background-color: #ffffff; 
+    border: 1px solid #e1e4e8; 
+    padding: 24px; 
+    margin: 28px 0; 
+    border-radius: 12px;
+    text-align: left;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    font-size: 1.1em;
+    font-weight: 600;
+">
+  <p style="margin: 0; color: #2c3e50; line-height: 1.6;">
+    限于篇幅等原因，文中可能只展示了关键代码片段。如果您希望获取完整的、开箱即用的解决方案，可以随时联系我。
+  </p>
+</div>
           <div class="reward-container">
   <div>请我一杯咖啡吧！</div>
   <button>
@@ -802,12 +936,8 @@
   </button>
   <div class="post-reward">
       <div>
-        <img src="/images/buycoffie.png" alt="jiangxueqiao.com 微信">
+        <img src="/images/coffie_wechat.png" alt="jiangxueqiao.com 微信">
         <span>微信</span>
-      </div>
-      <div>
-        <img src="/images/buycoffie.png" alt="jiangxueqiao.com 支付宝">
-        <span>支付宝</span>
       </div>
 
   </div>
@@ -838,13 +968,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/post/966041457.html" rel="prev" title="Visual Studio 断点使用手册">
-                  <i class="fa fa-angle-left"></i> Visual Studio 断点使用手册
+                <a href="/post/2963045346.html" rel="prev" title="给进程伪造一个父亲">
+                  <i class="fa fa-angle-left"></i> 给进程伪造一个父亲
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/post/679969051.html" rel="next" title="软件开发中常用的数值：藏在代码里的数字密码">
-                  软件开发中常用的数值：藏在代码里的数字密码 <i class="fa fa-angle-right"></i>
+                <a href="/post/3573459553.html" rel="next" title="代码的隐形战场：Windows进程注入与API Hook完全指南">
+                  代码的隐形战场：Windows进程注入与API Hook完全指南 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
@@ -868,7 +998,7 @@
   </div>
   <div class="copyright">
     &copy; 2017 – 
-    <span itemprop="copyrightYear">2025</span>
+    <span itemprop="copyrightYear">2026</span>
     <span class="with-love">
       <i class="fa fa-rocket"></i>
     </span>

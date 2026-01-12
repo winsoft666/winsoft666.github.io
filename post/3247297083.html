@@ -19,17 +19,16 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"jiangxueqiao.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"right","width_expanded":260,"width_dual_column":260,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"vs2015"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":true,"height":300},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":false,"async":true,"duration":200,"transition":{"menu_item":null,"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":null}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="IDA Pro 是顶级的静态反汇编与逆向工程平台。其核心功能包括强大的自动代码分析、生成交互式流程图、跨处理器架构支持，以及将汇编代码反编译为高级语言伪代码（Hex-Rays 反编译器）。它允许用户深度分析二进制文件结构、识别函数与逻辑、进行漏洞研究，并通过脚本和插件系统实现功能扩展。">
+    <meta name="description" content="虽然古话云“工欲善其事必先利其器”，但无论是 x64dbg 还是 IDA，他们都仅仅只是一个工具，还需要结合强大的内功，才能使其发挥更大的威力。 本文记录的快捷键、指令等内容可能适合我，但不适合你。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="IDA Pro速查手册">
+<meta property="og:title" content="调试软件使用速查手册">
 <meta property="og:url" content="https://jiangxueqiao.com/post/3247297083.html">
 <meta property="og:site_name" content="独钓寒江雪">
-<meta property="og:description" content="IDA Pro 是顶级的静态反汇编与逆向工程平台。其核心功能包括强大的自动代码分析、生成交互式流程图、跨处理器架构支持，以及将汇编代码反编译为高级语言伪代码（Hex-Rays 反编译器）。它允许用户深度分析二进制文件结构、识别函数与逻辑、进行漏洞研究，并通过脚本和插件系统实现功能扩展。">
+<meta property="og:description" content="虽然古话云“工欲善其事必先利其器”，但无论是 x64dbg 还是 IDA，他们都仅仅只是一个工具，还需要结合强大的内功，才能使其发挥更大的威力。 本文记录的快捷键、指令等内容可能适合我，但不适合你。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-01-28T14:39:49.000Z">
-<meta property="article:modified_time" content="2025-12-23T06:45:48.360Z">
+<meta property="article:modified_time" content="2026-01-10T15:52:19.175Z">
 <meta property="article:author" content="jiangxueqiao.com">
-<meta property="article:tag" content="IDA">
 <meta property="article:tag" content="软件调试">
 <meta property="article:tag" content="速查手册">
 <meta name="twitter:card" content="summary">
@@ -38,10 +37,10 @@
 <link rel="canonical" href="https://jiangxueqiao.com/post/3247297083.html">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jiangxueqiao.com/post/3247297083.html","path":"post/3247297083.html","title":"IDA Pro速查手册"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://jiangxueqiao.com/post/3247297083.html","path":"post/3247297083.html","title":"调试软件使用速查手册"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>IDA Pro速查手册 | 独钓寒江雪</title>
+<title>调试软件使用速查手册 | 独钓寒江雪</title>
   
 
   <script src="/js/third-party/analytics/baidu-analytics.js" defer></script>
@@ -171,7 +170,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="nav-number">1.</span> <span class="nav-text">常用快捷键</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">2.</span> <span class="nav-text">常用命令</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#IDA-Pro-%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="nav-number">1.</span> <span class="nav-text">IDA Pro 快捷键</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#x64dbg%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="nav-number">2.</span> <span class="nav-text">x64dbg快捷键</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Visual-Studio%E6%96%AD%E7%82%B9%E8%AF%AD%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">Visual Studio断点语法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%A1%E4%BB%B6%E6%96%AD%E7%82%B9"><span class="nav-number">3.1.</span> <span class="nav-text">条件断点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%AD%E7%82%B9%E7%AD%9B%E9%80%89%E5%99%A8"><span class="nav-number">3.2.</span> <span class="nav-text">断点筛选器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%9F%E8%B8%AA%E5%99%A8"><span class="nav-number">3.3.</span> <span class="nav-text">跟踪器</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -184,7 +183,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">153</span>
+          <span class="site-state-item-count">150</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -226,39 +225,6 @@
             <li class="links-of-blogroll-item">
               <a href="https://jiangxueqiao.com/online-tools" title="https:&#x2F;&#x2F;jiangxueqiao.com&#x2F;online-tools">在线工具</a>
             </li>
-            <li class="links-of-blogroll-item">
-              <a href="https://github.com/winsoft666/zoe" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;zoe" rel="noopener" target="_blank">跨平台文件下载库</a>
-            </li>
-            <li class="links-of-blogroll-item">
-              <a href="https://github.com/winsoft666/veigar" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;veigar" rel="noopener" target="_blank">跨平台RPC库</a>
-            </li>
-            <li class="links-of-blogroll-item">
-              <a href="https://github.com/winsoft666/QWebView" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;QWebView" rel="noopener" target="_blank">多浏览器内核Qt组件</a>
-            </li>
-            <li class="links-of-blogroll-item">
-              <a href="https://github.com/winsoft666/vlc-qt2" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;vlc-qt2" rel="noopener" target="_blank">VLC内核Qt播放器组件</a>
-            </li>
-            <li class="links-of-blogroll-item">
-              <a href="https://github.com/winsoft666/1key.run" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;1key.run" rel="noopener" target="_blank">仿Mac平台Alfred软件</a>
-            </li>
-            <li class="links-of-blogroll-item">
-              <a href="https://github.com/winsoft666/qss-editor" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;qss-editor" rel="noopener" target="_blank">QSS编辑预览工具</a>
-            </li>
-            <li class="links-of-blogroll-item">
-              <a href="https://github.com/winsoft666/WinSpyPlus" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;WinSpyPlus" rel="noopener" target="_blank">Spy++加强版</a>
-            </li>
-            <li class="links-of-blogroll-item">
-              <a href="https://github.com/winsoft666/PortableStarter" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;PortableStarter" rel="noopener" target="_blank">便携式应用启动工具</a>
-            </li>
-            <li class="links-of-blogroll-item">
-              <a href="https://github.com/winsoft666/electron-vue3-boilerplate" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;electron-vue3-boilerplate" rel="noopener" target="_blank">产品级的Electron模板</a>
-            </li>
-            <li class="links-of-blogroll-item">
-              <a href="https://github.com/winsoft666/NSIS-UI-Plugin" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;NSIS-UI-Plugin" rel="noopener" target="_blank">NSIS界面插件</a>
-            </li>
-            <li class="links-of-blogroll-item">
-              <a href="https://github.com/winsoft666/epub-image-localizer" title="https:&#x2F;&#x2F;github.com&#x2F;winsoft666&#x2F;epub-image-localizer" rel="noopener" target="_blank">本地化EPUB在线图片</a>
-            </li>
         </ul>
       </div>
     </div>
@@ -291,12 +257,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="IDA Pro速查手册 | 独钓寒江雪">
+      <meta itemprop="name" content="调试软件使用速查手册 | 独钓寒江雪">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          IDA Pro速查手册
+          调试软件使用速查手册
         </h1>
 
         <div class="post-meta-container">
@@ -314,7 +280,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-12-23 14:45:48" itemprop="dateModified" datetime="2025-12-23T14:45:48+08:00">2025-12-23</time>
+      <time title="修改时间：2026-01-10 23:52:19" itemprop="dateModified" datetime="2026-01-10T23:52:19+08:00">2026-01-10</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -335,10 +301,11 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>IDA Pro 是顶级的静态反汇编与逆向工程平台。其核心功能包括强大的自动代码分析、生成交互式流程图、跨处理器架构支持，以及将汇编代码反编译为高级语言伪代码（Hex-Rays 反编译器）。它允许用户深度分析二进制文件结构、识别函数与逻辑、进行漏洞研究，并通过脚本和插件系统实现功能扩展。</p>
+    <div class="post-body" itemprop="articleBody"><p>虽然古话云“工欲善其事必先利其器”，但无论是 x64dbg 还是 IDA，他们都仅仅只是一个工具，还需要结合强大的内功，才能使其发挥更大的威力。</p>
+<p>本文记录的快捷键、指令等内容可能适合我，但不适合你。</p>
 <span id="more"></span>
 
-<h2 id="常用快捷键"><a href="#常用快捷键" class="headerlink" title="常用快捷键"></a>常用快捷键</h2><p>下面列举的快捷键很多不是必须记住的，在 UI 界面上通过鼠标点击、右键菜单等，可以实现同样的效果。</p>
+<h2 id="IDA-Pro-快捷键"><a href="#IDA-Pro-快捷键" class="headerlink" title="IDA Pro 快捷键"></a>IDA Pro 快捷键</h2><p>下面列举的快捷键很多不是必须的，在 UI 界面上通过鼠标点击、右键菜单等，可以实现同样的效果。</p>
 <table>
 <thead>
 <tr>
@@ -415,14 +382,192 @@
 <td>?</td>
 </tr>
 </tbody></table>
-<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2>
+<h2 id="x64dbg快捷键"><a href="#x64dbg快捷键" class="headerlink" title="x64dbg快捷键"></a>x64dbg快捷键</h2><p>下面列举的快捷键很多不是必须的，在 UI 界面上通过鼠标点击、右键菜单等，可以实现同样的效果。</p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>快捷键</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>打开文件</td>
+<td>F3</td>
+</tr>
+<tr>
+<td>附加进程</td>
+<td>Alt + A</td>
+</tr>
+<tr>
+<td>重新运行</td>
+<td>Ctrl + F2</td>
+</tr>
+<tr>
+<td>跳转到上一个位置</td>
+<td>-</td>
+</tr>
+<tr>
+<td>跳转到下一个位置</td>
+<td>+</td>
+</tr>
+<tr>
+<td>添加断点</td>
+<td>F2</td>
+</tr>
+<tr>
+<td>启用&#x2F;禁用断点(断点视图)</td>
+<td>Space</td>
+</tr>
+<tr>
+<td>继续运行</td>
+<td>F9</td>
+</tr>
+<tr>
+<td>单步步过</td>
+<td>F8</td>
+</tr>
+<tr>
+<td>单步步进</td>
+<td>F7</td>
+</tr>
+<tr>
+<td>暂停运行</td>
+<td>F12</td>
+</tr>
+<tr>
+<td>结束运行</td>
+<td>Alt + F2</td>
+</tr>
+<tr>
+<td>运行到函数返回</td>
+<td>Ctrl + F9</td>
+</tr>
+<tr>
+<td>运行到用户代码</td>
+<td>Alt + F9</td>
+</tr>
+<tr>
+<td>搜索汇编指令(当前区域)</td>
+<td>Ctrl + F</td>
+</tr>
+<tr>
+<td>搜索机器码(当前区域)</td>
+<td>Ctrl + B</td>
+</tr>
+<tr>
+<td>搜索字符串(当前模块)</td>
+<td>Shift + D</td>
+</tr>
+<tr>
+<td>搜索对当前地址的引用</td>
+<td>Ctrl + R</td>
+</tr>
+<tr>
+<td>修改汇编指令</td>
+<td>Space</td>
+</tr>
+<tr>
+<td>复制机器码</td>
+<td>Shift + C</td>
+</tr>
+<tr>
+<td>粘贴机器码</td>
+<td>Shift + V</td>
+</tr>
+<tr>
+<td>恢复对选区的操作</td>
+<td>Ctrl + BackSpace</td>
+</tr>
+<tr>
+<td>添加注释</td>
+<td>;</td>
+</tr>
+<tr>
+<td>切换到流程图</td>
+<td>G</td>
+</tr>
+<tr>
+<td>CPU 视图</td>
+<td>Alt + C</td>
+</tr>
+<tr>
+<td>断点视图</td>
+<td>Alt + B</td>
+</tr>
+<tr>
+<td>内存布局视图</td>
+<td>Alt + M</td>
+</tr>
+<tr>
+<td>调用堆栈视图</td>
+<td>Alt + K</td>
+</tr>
+<tr>
+<td>模块视图</td>
+<td>Alt + E</td>
+</tr>
+<tr>
+<td>线程视图</td>
+<td>Alt + T</td>
+</tr>
+<tr>
+<td>计算器</td>
+<td>?</td>
+</tr>
+</tbody></table>
+<h1 id="Visual-Studio断点语法"><a href="#Visual-Studio断点语法" class="headerlink" title="Visual Studio断点语法"></a>Visual Studio断点语法</h1><p>Visual Studio 的断点系统远不止”在代码行上点击左侧边栏”那么简单。掌握其高级功能可以彻底改变你的调试体验，让你能精准定位问题，而不是在无尽的代码执行中盲目搜索。本文将带你全面了解 Visual Studio 断点系统的各项高级功能。</p>
+<h2 id="条件断点"><a href="#条件断点" class="headerlink" title="条件断点"></a>条件断点</h2><p>条件断点允许你设置特定条件，只有满足这些条件时调试器才会暂停。支持如下格式的表达式：</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 基本条件</span><br><span class="line">i &gt; 100</span><br><span class="line">name == &quot;admin&quot;</span><br><span class="line"></span><br><span class="line">// 复合条件</span><br><span class="line">x &gt; 50 &amp;&amp; y &lt; 20 &amp;&amp; isValid == true</span><br><span class="line"></span><br><span class="line">// 字符串操作（C++）</span><br><span class="line">strcmp(filename, &quot;config.xml&quot;) == 0</span><br><span class="line">strlen(buffer) &gt; 255</span><br></pre></td></tr></table></figure>
+
+<p>支持的内置函数如下：</p>
+<ul>
+<li>strlen(str)：获取字符串长度</li>
+<li>strcmp(str1, str2)：比较两个字符串</li>
+<li>strncmp(str1, str2, n)：比较前n个字符</li>
+<li>strstr(haystack, needle)：查找子字符串</li>
+<li>GetLastError()：获取系统错误代码</li>
+</ul>
+<h2 id="断点筛选器"><a href="#断点筛选器" class="headerlink" title="断点筛选器"></a>断点筛选器</h2><p>当调试多线程或分布式应用时，筛选器能确保断点只在特定环境中触发。支持如下筛选字段：</p>
+<ul>
+<li>MachineName</li>
+<li>ProcessId</li>
+<li>ProcessName</li>
+<li>ThreadId</li>
+<li>ThreadName</li>
+</ul>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ThreadId = 1234</span><br><span class="line">ProcessName = &quot;MyApp.exe&quot;</span><br><span class="line">MachineName = &quot;Development-PC&quot;</span><br><span class="line">ThreadName = &quot;WorkerThread&quot;</span><br></pre></td></tr></table></figure>
+<p><span style="color:#FFFFFF">&lt;原文出自: jiangxueqiao.com，请尊重原创&gt;</span><br>筛选器的逻辑运算与条件断点有些不一样，逻辑等号使用<code>=</code>，逻辑与使用<code>&amp;</code>，逻辑或使用<code>||</code>，逻辑非使用<code>!</code>，没有不等号。</p>
+<p>示例：</p>
+<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">MachineName = &quot;MyPC&quot;</span><br><span class="line">ProcessId = 1234</span><br><span class="line">ThreadId = 1234 &amp; MachineName = &quot;DevPC&quot;</span><br><span class="line">ThreadId = 1234 || ProcessId = 4</span><br><span class="line">!ThreadId = 5678</span><br></pre></td></tr></table></figure>
+
+<h2 id="跟踪器"><a href="#跟踪器" class="headerlink" title="跟踪器"></a>跟踪器</h2><p>跟踪器用于在触发时输出相关调试信息。在“断点”中选择“操作”，输入跟踪指令即可。通常，为了不影响程序执行流，建议同时勾选 ​​“继续执行”​，这样程序运行到此处时就不会中断，而是直接输出信息后继续运行。支持如下格式的指令：</p>
+<ul>
+<li>直接输入字符串，例如 “循环到了这里”。</li>
+<li>使用变量名，用大括号 {} 括起来，例如 “当前 i 的值为: {i}”。输出时，{i}会被替换为变量 i的实际值。</li>
+<li>使用一些预定义的关键字​（以 $开头），例如：<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ADDRESS 当前指令地址</span><br><span class="line">$CALLER 调用当前函数的函数名称</span><br><span class="line">$FUNCTION 当前函数名称</span><br><span class="line">$TID 当前线程 ID</span><br><span class="line">$PID 当前进程 ID</span><br></pre></td></tr></table></figure></li>
+</ul>
+
     </div>
 
     
     
     
 
-    <footer class="post-footer">
+    <footer class="post-footer"><div style="
+    background-color: #ffffff; 
+    border: 1px solid #e1e4e8; 
+    padding: 24px; 
+    margin: 28px 0; 
+    border-radius: 12px;
+    text-align: left;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    font-size: 1.1em;
+    font-weight: 600;
+">
+  <p style="margin: 0; color: #2c3e50; line-height: 1.6;">
+    限于篇幅等原因，文中可能只展示了关键代码片段。如果您希望获取完整的、开箱即用的解决方案，可以随时联系我。
+  </p>
+</div>
           <div class="reward-container">
   <div>请我一杯咖啡吧！</div>
   <button>
@@ -430,12 +575,8 @@
   </button>
   <div class="post-reward">
       <div>
-        <img src="/images/buycoffie.png" alt="jiangxueqiao.com 微信">
+        <img src="/images/coffie_wechat.png" alt="jiangxueqiao.com 微信">
         <span>微信</span>
-      </div>
-      <div>
-        <img src="/images/buycoffie.png" alt="jiangxueqiao.com 支付宝">
-        <span>支付宝</span>
       </div>
 
   </div>
@@ -450,7 +591,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://jiangxueqiao.com/post/3247297083.html" title="IDA Pro速查手册">https://jiangxueqiao.com/post/3247297083.html</a>
+      <a href="https://jiangxueqiao.com/post/3247297083.html" title="调试软件使用速查手册">https://jiangxueqiao.com/post/3247297083.html</a>
   </li>
   <li class="post-copyright-license">
       <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -460,7 +601,6 @@
 
           <div class="post-tags">
               <a href="/tags/%E8%BD%AF%E4%BB%B6%E8%B0%83%E8%AF%95/" rel="tag"># 软件调试</a>
-              <a href="/tags/IDA/" rel="tag"># IDA</a>
               <a href="/tags/%E9%80%9F%E6%9F%A5%E6%89%8B%E5%86%8C/" rel="tag"># 速查手册</a>
           </div>
 
@@ -468,8 +608,8 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/post/2358498140.html" rel="prev" title="x64dbg速查手册">
-                  <i class="fa fa-angle-left"></i> x64dbg速查手册
+                <a href="/post/2306363290.html" rel="prev" title="Windows系统各版本占比对技术选型的影响">
+                  <i class="fa fa-angle-left"></i> Windows系统各版本占比对技术选型的影响
                 </a>
             </div>
             <div class="post-nav-item">
@@ -498,7 +638,7 @@
   </div>
   <div class="copyright">
     &copy; 2017 – 
-    <span itemprop="copyrightYear">2025</span>
+    <span itemprop="copyrightYear">2026</span>
     <span class="with-love">
       <i class="fa fa-rocket"></i>
     </span>
