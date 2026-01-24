@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"jiangxueqiao.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"right","width_expanded":260,"width_dual_column":260,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"vs2015"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":true,"height":300},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":false,"async":true,"duration":200,"transition":{"menu_item":null,"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":null}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="在前面的《玩转 Qt 2D 绘图》系列文章中，已经介绍了 2D 绘图中常用的知识，本文主要通过一个汽车仪表盘的实例来综合应用前面所介绍知识点，并且还介绍了一些 Qt 绘图的常用技巧。 相关文章：  玩转Qt 2D绘图之坐标系 玩转Qt 2D绘图之画家的工具 玩转Qt 2D绘图之画家">
+    <meta name="description" content="在前面的《玩转 Qt 2D 绘图》系列文章中，已经介绍了 2D 绘图中常用的知识，本文主要通过一个汽车仪表盘的实例来综合应用前面所介绍知识点，并且还介绍了一些 Qt 绘图的常用技巧。 相关文章：  Qt&#x2F;玩转Qt-2D绘图之坐标系  Qt&#x2F;玩转Qt-2D绘图之画家的工具  Qt&#x2F;玩转Qt-2D绘图之画家">
 <meta property="og:type" content="article">
 <meta property="og:title" content="玩转Qt 2D绘图之仪表盘实例">
 <meta property="og:url" content="https://jiangxueqiao.com/post/29874871.html">
 <meta property="og:site_name" content="独钓寒江雪">
-<meta property="og:description" content="在前面的《玩转 Qt 2D 绘图》系列文章中，已经介绍了 2D 绘图中常用的知识，本文主要通过一个汽车仪表盘的实例来综合应用前面所介绍知识点，并且还介绍了一些 Qt 绘图的常用技巧。 相关文章：  玩转Qt 2D绘图之坐标系 玩转Qt 2D绘图之画家的工具 玩转Qt 2D绘图之画家">
+<meta property="og:description" content="在前面的《玩转 Qt 2D 绘图》系列文章中，已经介绍了 2D 绘图中常用的知识，本文主要通过一个汽车仪表盘的实例来综合应用前面所介绍知识点，并且还介绍了一些 Qt 绘图的常用技巧。 相关文章：  Qt&#x2F;玩转Qt-2D绘图之坐标系  Qt&#x2F;玩转Qt-2D绘图之画家的工具  Qt&#x2F;玩转Qt-2D绘图之画家">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://jiangxueqiao.com/images/blog/Sample_E8gfEIPtUV.gif">
 <meta property="og:image" content="https://jiangxueqiao.com/images/blog/XXcXz2Xl7D-TinyTu.png">
@@ -38,7 +38,7 @@
 <meta property="og:image" content="https://jiangxueqiao.com/images/blog/1aLsEMb30H-TinyTu.png">
 <meta property="og:image" content="https://jiangxueqiao.com/images/blog/c4Hmp4lcrz-TinyTu.png">
 <meta property="article:published_time" content="2024-06-26T05:55:02.000Z">
-<meta property="article:modified_time" content="2026-01-12T16:29:53.718Z">
+<meta property="article:modified_time" content="2026-01-24T09:02:40.146Z">
 <meta property="article:author" content="jiangxueqiao.com">
 <meta property="article:tag" content="C++">
 <meta property="article:tag" content="Kernel">
@@ -196,18 +196,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">150</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -293,7 +293,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-01-13 00:29:53" itemprop="dateModified" datetime="2026-01-13T00:29:53+08:00">2026-01-13</time>
+      <time title="修改时间：2026-01-24 17:02:40" itemprop="dateModified" datetime="2026-01-24T17:02:40+08:00">2026-01-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -317,9 +317,9 @@
     <div class="post-body" itemprop="articleBody"><p>在前面的《玩转 Qt 2D 绘图》系列文章中，已经介绍了 2D 绘图中常用的知识，本文主要通过一个汽车仪表盘的实例来综合应用前面所介绍知识点，并且还介绍了一些 Qt 绘图的常用技巧。</p>
 <p>相关文章：</p>
 <ul>
-<li><a href="/post/847642761.html" title="玩转Qt 2D绘图之坐标系">玩转Qt 2D绘图之坐标系</a></li>
-<li><a href="/post/1336811290.html" title="玩转Qt 2D绘图之画家的工具">玩转Qt 2D绘图之画家的工具</a></li>
-<li><a href="/post/1967189103.html" title="玩转Qt 2D绘图之画家">玩转Qt 2D绘图之画家</a></li>
+<li>Qt&#x2F;玩转Qt-2D绘图之坐标系 </li>
+<li>Qt&#x2F;玩转Qt-2D绘图之画家的工具 </li>
+<li>Qt&#x2F;玩转Qt-2D绘图之画家</li>
 </ul>
 <span id="more"></span>
 
@@ -451,13 +451,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/post/3924191794.html" rel="prev" title="互联网的黑话">
-                  <i class="fa fa-angle-left"></i> 互联网的黑话
+                <a href="/post/1967189103.html" rel="prev" title="玩转Qt 2D绘图之画家">
+                  <i class="fa fa-angle-left"></i> 玩转Qt 2D绘图之画家
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/post/3462229631.html" rel="next" title="了解数字证书">
-                  了解数字证书 <i class="fa fa-angle-right"></i>
+                <a href="/post/3678619994.html" rel="next" title="Modern CMake 简明教程（上）">
+                  Modern CMake 简明教程（上） <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>

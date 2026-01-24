@@ -19,15 +19,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"jiangxueqiao.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"right","width_expanded":260,"width_dual_column":260,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"vs2015"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":true,"height":300},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":false,"async":true,"duration":200,"transition":{"menu_item":null,"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":null}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="CMake 是一个开源、跨平台的构建系统生成器（Build-system Generator）。 本文是 Modern CMake 简明教程系列的中篇，上篇请移步 《Modern CMake 简明教程（上）》 本教程默认 CMake 最低版本为 3.16，即 cmake_minimum_required(VERSION 3.16)。">
+    <meta name="description" content="CMake 是一个开源、跨平台的构建系统生成器（Build-system Generator）。 本文是 Modern CMake 简明教程系列的中篇，上篇请移步   Modern-CMake简明教程-上 ‘《Modern CMake 简明教程（上）》’  本教程默认 CMake 最低版本为 3.16，即 cmake_minimum_required(VERSION 3.16)。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Modern CMake 简明教程（中）">
 <meta property="og:url" content="https://jiangxueqiao.com/post/2304457467.html">
 <meta property="og:site_name" content="独钓寒江雪">
-<meta property="og:description" content="CMake 是一个开源、跨平台的构建系统生成器（Build-system Generator）。 本文是 Modern CMake 简明教程系列的中篇，上篇请移步 《Modern CMake 简明教程（上）》 本教程默认 CMake 最低版本为 3.16，即 cmake_minimum_required(VERSION 3.16)。">
+<meta property="og:description" content="CMake 是一个开源、跨平台的构建系统生成器（Build-system Generator）。 本文是 Modern CMake 简明教程系列的中篇，上篇请移步   Modern-CMake简明教程-上 ‘《Modern CMake 简明教程（上）》’  本教程默认 CMake 最低版本为 3.16，即 cmake_minimum_required(VERSION 3.16)。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-10-11T09:34:36.000Z">
-<meta property="article:modified_time" content="2025-12-28T12:59:59.303Z">
+<meta property="article:modified_time" content="2026-01-24T09:02:40.140Z">
 <meta property="article:author" content="jiangxueqiao.com">
 <meta property="article:tag" content="CMake">
 <meta name="twitter:card" content="summary">
@@ -182,18 +182,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">150</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -279,7 +279,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-12-28 20:59:59" itemprop="dateModified" datetime="2025-12-28T20:59:59+08:00">2025-12-28</time>
+      <time title="修改时间：2026-01-24 17:02:40" itemprop="dateModified" datetime="2026-01-24T17:02:40+08:00">2026-01-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -301,7 +301,7 @@
     
     
     <div class="post-body" itemprop="articleBody"><p><a target="_blank" rel="noopener" href="https://cmake.org/">CMake</a> 是一个开源、跨平台的构建系统生成器（Build-system Generator）。</p>
-<p>本文是 Modern CMake 简明教程系列的中篇，上篇请移步 <a href="/post/3678619994.html" title="Modern CMake 简明教程（上）">《Modern CMake 简明教程（上）》</a></p>
+<p>本文是 Modern CMake 简明教程系列的中篇，上篇请移步   Modern-CMake简明教程-上 ‘《Modern CMake 简明教程（上）》’ </p>
 <p>本教程默认 CMake 最低版本为 3.16，即 <code>cmake_minimum_required(VERSION 3.16)</code>。</p>
 <span id="more"></span>
 <h1 id="生成器表达式"><a href="#生成器表达式" class="headerlink" title="生成器表达式"></a>生成器表达式</h1><p>不知你是否思考过这样一个问题：我们在编译项目时，通常有不同的配置，如 Debug 和 Release，如何在不同的配置中定义不同的预编译宏、包含不同的目录、依赖不同的库呢？</p>
@@ -328,7 +328,7 @@
 
 <h2 id="-2"><a href="#-2" class="headerlink" title="$&lt;BOOL:string&gt;"></a>$&lt;BOOL:string&gt;</h2><p>前面 2 种形式的 condition 都只允许为 0 或 1，这种限制未免有些呆板，如果 ENABLE_JSONCPP 的值不是 1 ，而是 ON 时，该怎么办呢？</p>
 <p>此时可以使用 <code>$&lt;BOOL:string&gt;</code> 将其转换成 0 或 1。</p>
-<p>何时转换成 0，何时转换成 1？可以参考前面的<a href="/post/3678619994.html" title="Modern CMake 简明教程（上）">《Modern CMake 简明教程（上）》</a> 的“条件判断”章节，在该章节中介绍的所有为假的情况都会转换成 0，其他情况则转换成 1。<br><span style="color:#FFFFFF">&lt;原文出自: jiangxueqiao.com，请尊重原创&gt;</span><br>该表达式的作用注定了其单独使用意义不大，通常都是和其他表达式一起使用，如将上面示例中的 ENABLE_JSONCPP 设置为 ON：</p>
+<p>何时转换成 0，何时转换成 1？可以参考前面的  Modern-CMake简明教程-上 ‘《Modern CMake 简明教程（上）》’  的“条件判断”章节，在该章节中介绍的所有为假的情况都会转换成 0，其他情况则转换成 1。<br><span style="color:#FFFFFF">&lt;原文出自: jiangxueqiao.com，请尊重原创&gt;</span><br>该表达式的作用注定了其单独使用意义不大，通常都是和其他表达式一起使用，如将上面示例中的 ENABLE_JSONCPP 设置为 ON：</p>
 <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">set</span>(ENABLE_JSONCPP <span class="keyword">ON</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">target_include_directories</span>(</span><br><span class="line">    my_lib PUBLIC </span><br><span class="line">    $&lt;<span class="keyword">IF</span>:$&lt;BOOL:<span class="variable">$&#123;ENABLE_JSONCPP&#125;</span>&gt;,<span class="variable">$&#123;CMAKE_SOURCE_DIR&#125;</span>/jsoncpp/<span class="keyword">include</span>,<span class="variable">$&#123;CMAKE_SOURCE_DIR&#125;</span>/rapidjson/<span class="keyword">include</span>&gt;  </span><br><span class="line">)</span><br></pre></td></tr></table></figure>
 
 <h2 id="逻辑运算"><a href="#逻辑运算" class="headerlink" title="逻辑运算"></a>逻辑运算</h2><p>运算符表达式也支持与、或、非三种逻辑运算，语法如下：</p>
@@ -350,7 +350,7 @@
 <p>“指定位置”，顾名思义，我们可以指定一个安装位置。CMake 会从 <a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/latest/variable/CMAKE_INSTALL_PREFIX.html">CMAKE_INSTALL_PREFIX</a> 变量中读取安装位置，该变量有默认值，我们也可以修改该变量来改变安装位置。</p>
 <p>在不同的操作系统上，CMAKE_INSTALL_PREFIX 的默认值不同：</p>
 <ul>
-<li>Windows 系统：<code>C:/Program Files/$&#123;PROJECT_NAME&#125;</code><br>写入该目录需要管理员权限，因此如果安装失败，请检查是否具有管理员权限。</li>
+<li>Windows 系统：<code>C:/Program Files/${PROJECT_NAME}</code><br>写入该目录需要管理员权限，因此如果安装失败，请检查是否具有管理员权限。</li>
 <li>UNIX 系统：<code>/usr/local</code></li>
 </ul>
 <p>CMAKE_INSTALL_PREFIX 指定的位置是安装目录的根目录，不同类型的输出品会存放在其不同的子目录中，如 .lib 文件存放在 lib 目录，.dll 和 .exe 文件存放在 bin 目录，头文件存放在 include 目录，这些子目录的具体名称可以通过 <a target="_blank" rel="noopener" href="https://cmake.org/cmake/help/latest/module/GNUInstallDirs.html">GNUInstallDirs</a> 提供的若干变量来获取，如 <code>CMAKE_INSTALL_BINDIR</code>、<code>CMAKE_INSTALL_LIBDIR</code>、<code>CMAKE_INSTALL_INCLUDEDIR</code> 等。</p>
@@ -430,7 +430,7 @@
 <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">configure_file</span>(&lt;input&gt; &lt;output&gt;</span><br><span class="line">               [NO_SOURCE_PERMISSIONS | USE_SOURCE_PERMISSIONS |</span><br><span class="line">                FILE_PERMISSIONS &lt;permissions&gt;...]</span><br><span class="line">               [COPYONLY] [ESCAPE_QUOTES] [@ONLY]</span><br><span class="line">               [NEWLINE_STYLE [UNIX|DOS|WIN32|LF|CRLF] ])</span><br></pre></td></tr></table></figure>
 
 <p>我们首先需要通过 <code>&lt;input&gt;</code> 选项来指定一个模板文件，虽然模板文件可以是任意的后缀名，但我们通常使用 <code>.in</code> 后缀名，例如我们需要通过模板文件生成 version.h 文件，则模板文件名为 <code>version.h.in</code>。</p>
-<p>configure_file 指令会将 <code>&lt;input&gt;</code> 模板文件中的诸如 <code>@VAR@</code>、<code>$&#123;VAR&#125;</code>、<code>$CACHE&#123;VAR&#125;</code>、<code>$ENV&#123;VAR&#125;</code> 形式的变量都替换为对应变量的值，如果变量没有被定义，则替换为空字符串。</p>
+<p>configure_file 指令会将 <code>&lt;input&gt;</code> 模板文件中的诸如 <code>@VAR@</code>、<code>${VAR}</code>、<code>$CACHE{VAR}</code>、<code>$ENV{VAR}</code> 形式的变量都替换为对应变量的值，如果变量没有被定义，则替换为空字符串。</p>
 <p>我们通常还会指定 <code>@ONLY</code> 选项，指定该选项后，就只有 <code>@VAR@</code> 形式的变量会被替换，而其他形式的变量会保留不变，这种方式虽然在生成 .h 文件时没有什么用途，但谁又说 configure_file 只能生成 .h 文件了？如果是生成 .cmake 文件，是不是就有作用了咧。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// version.h.in</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> VERSION_MAJOR @VERSION_MAJOR@</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> VERSION_MINOR @VERSION_MINOR@</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> VERSION_PATCH @VERSION_PATCH@</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> BUILD_TIMESTAMP <span class="string">&quot;@BUILD_TIMESTAMP@&quot;</span></span></span><br></pre></td></tr></table></figure>
 

@@ -19,18 +19,18 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"jiangxueqiao.com","root":"/","images":"/images","scheme":"Mist","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"right","width_expanded":260,"width_dual_column":260,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"vs2015"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":true,"height":300},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":"gitalk","storage":true,"lazyload":true,"nav":null,"activeClass":"gitalk"},"stickytabs":false,"motion":{"enable":false,"async":true,"duration":200,"transition":{"menu_item":null,"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":null}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.json","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":true}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="CMake 是一个开源、跨平台的构建系统生成器（Build-system Generator）。 本文是 Modern CMake 简明教程系列的下篇，上篇请移步至 《Modern CMake 简明教程（上）》，中篇请移步至 《Modern CMake 简明教程（中）》。 本教程默认 CMake 最低版本为 3.16，即 cmake_minimum_required(VERSION 3.16)。">
+    <meta name="description" content="CMake 是一个开源、跨平台的构建系统生成器（Build-system Generator）。 本文是 Modern CMake 简明教程系列的下篇，上篇请移步至   Modern-CMake简明教程-上 ‘《Modern CMake 简明教程（上）》’ ，中篇请移步至   Modern-CMake简明教程-中 ‘《Modern CMake 简明教程（中）》’ 。 本教程默认 CMake 最低版">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Modern CMake 简明教程（下）">
 <meta property="og:url" content="https://jiangxueqiao.com/post/201509401.html">
 <meta property="og:site_name" content="独钓寒江雪">
-<meta property="og:description" content="CMake 是一个开源、跨平台的构建系统生成器（Build-system Generator）。 本文是 Modern CMake 简明教程系列的下篇，上篇请移步至 《Modern CMake 简明教程（上）》，中篇请移步至 《Modern CMake 简明教程（中）》。 本教程默认 CMake 最低版本为 3.16，即 cmake_minimum_required(VERSION 3.16)。">
+<meta property="og:description" content="CMake 是一个开源、跨平台的构建系统生成器（Build-system Generator）。 本文是 Modern CMake 简明教程系列的下篇，上篇请移步至   Modern-CMake简明教程-上 ‘《Modern CMake 简明教程（上）》’ ，中篇请移步至   Modern-CMake简明教程-中 ‘《Modern CMake 简明教程（中）》’ 。 本教程默认 CMake 最低版">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://jiangxueqiao.com/images/blog/XPxCxaXyn9-TinyTu.png">
 <meta property="og:image" content="https://jiangxueqiao.com/images/blog/BkDqAJGTBd-TinyTu.png">
 <meta property="og:image" content="https://jiangxueqiao.com/images/blog/J0bRwZPcTf-TinyTu.png">
 <meta property="article:published_time" content="2024-10-18T02:34:36.000Z">
-<meta property="article:modified_time" content="2025-12-28T12:26:50.142Z">
+<meta property="article:modified_time" content="2026-01-24T09:02:40.140Z">
 <meta property="article:author" content="jiangxueqiao.com">
 <meta property="article:tag" content="CMake">
 <meta name="twitter:card" content="summary">
@@ -186,18 +186,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">150</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -283,7 +283,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-12-28 20:26:50" itemprop="dateModified" datetime="2025-12-28T20:26:50+08:00">2025-12-28</time>
+      <time title="修改时间：2026-01-24 17:02:40" itemprop="dateModified" datetime="2026-01-24T17:02:40+08:00">2026-01-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -305,7 +305,7 @@
     
     
     <div class="post-body" itemprop="articleBody"><p><a target="_blank" rel="noopener" href="https://cmake.org/">CMake</a> 是一个开源、跨平台的构建系统生成器（Build-system Generator）。</p>
-<p>本文是 Modern CMake 简明教程系列的下篇，上篇请移步至 <a href="/post/3678619994.html" title="Modern CMake 简明教程（上）">《Modern CMake 简明教程（上）》</a>，中篇请移步至 <a href="/post/2304457467.html" title="Modern CMake 简明教程（中）">《Modern CMake 简明教程（中）》</a>。</p>
+<p>本文是 Modern CMake 简明教程系列的下篇，上篇请移步至   Modern-CMake简明教程-上 ‘《Modern CMake 简明教程（上）》’ ，中篇请移步至   Modern-CMake简明教程-中 ‘《Modern CMake 简明教程（中）》’ 。</p>
 <p>本教程默认 CMake 最低版本为 3.16，即 <code>cmake_minimum_required(VERSION 3.16)</code>。</p>
 <span id="more"></span>
 <h1 id="集成第三方库"><a href="#集成第三方库" class="headerlink" title="集成第三方库"></a>集成第三方库</h1><p>在项目中集成第三方库是一种非常常见的需求，CMake 提供了两种方式来集成第三方库。</p>
@@ -363,7 +363,7 @@
 <li>CMAKE_MODULE_PATH<br> 该变量也是以分号分隔的列表，默认为空，由用户设置。</li>
 </ul>
 <p><strong>Find&lt;PackageName&gt;.cmake 文件从何而来？</strong></p>
-<p>如果你是库的开发者，你是不需要提供 <code>Find&lt;PackageName&gt;.cmake</code> 文件的，你只需要按照文章 <a href="/post/2304457467.html" title="Modern CMake 简明教程（中）">Modern CMake 简明教程（中）</a> “安装导出依赖项”章节介绍的那样，在安装时生成 <code>&lt;PackageName&gt;Config.cmake</code>（或 <code>&lt;lowercasePackageName&gt;-config.cmake</code> 文件）即可，该文件可以用于 find_package 的 Config 模式查找。</p>
+<p>如果你是库的开发者，你是不需要提供 <code>Find&lt;PackageName&gt;.cmake</code> 文件的，你只需要按照文章 《  Modern-CMake简明教程-中 》“安装导出依赖项”章节介绍的那样，在安装时生成 <code>&lt;PackageName&gt;Config.cmake</code>（或 <code>&lt;lowercasePackageName&gt;-config.cmake</code> 文件）即可，该文件可以用于 find_package 的 Config 模式查找。</p>
 <p>对于那些没有按照规范提供上述 Config 文件的库，才需要使用者来编写 <code>Find&lt;PackageName&gt;.cmake</code>，辅助查找包的安装路径。</p>
 <h4 id="Config-模式"><a href="#Config-模式" class="headerlink" title="Config 模式"></a>Config 模式</h4><p>find_package 指令在大多情况下都是通过 Config 模式来查找到包的具体位置的。</p>
 <p>find_package 使用 Config 模式查找包就是查找 <code>&lt;PackageName&gt;Config.cmake</code>或 <code>&lt;lowercasePackageName&gt;-config.cmake</code> 文件的过程。</p>
@@ -456,13 +456,13 @@
 <p>CMakeLists.txt 内容如下：</p>
 <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cmake_minimum_required</span>(VERSION <span class="number">3.16</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">project</span>(hello_qt)</span><br><span class="line"></span><br><span class="line"><span class="keyword">set</span>(CMAKE_AUTOUIC <span class="keyword">ON</span>)</span><br><span class="line"><span class="keyword">set</span>(CMAKE_AUTOMOC <span class="keyword">ON</span>)</span><br><span class="line"><span class="keyword">set</span>(CMAKE_AUTORCC <span class="keyword">ON</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">find_package</span>(Qt5 REQUIRED COMPONENTS Widgets)</span><br><span class="line"></span><br><span class="line"><span class="keyword">add_executable</span>(hello_qt</span><br><span class="line">    main.cpp</span><br><span class="line">    mainwindow.cpp</span><br><span class="line">    mainwindow.h</span><br><span class="line">    mainwindow.ui</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">target_link_libraries</span>(hello_qt PRIVATE Qt5::Widgets)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(MSVC)</span><br><span class="line">    <span class="keyword">target_compile_options</span>(hello_qt PRIVATE /execution-charset:utf-<span class="number">8</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">set_target_properties</span>(hello_qt PROPERTIES</span><br><span class="line">        WIN32_EXECUTABLE <span class="keyword">TRUE</span></span><br><span class="line">        VS_DEBUGGER_ENVIRONMENT <span class="string">&quot;PATH=$&#123;Qt5_DIR&#125;/../../../bin;%PATH%&quot;</span></span><br><span class="line">    )</span><br><span class="line"><span class="keyword">endif</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">install</span>(TARGETS hello_qt)</span><br></pre></td></tr></table></figure>
 
-<p>在上面示例中，设置了可执行字符集为 utf-8，这种方式可以防止 Qt 在 MSVC 环境下出现中文乱码，详见之前的文章 <a href="/post/2720283852.html" title="拨开字符编码的迷雾">拨开字符编码的迷雾</a>。</p>
+<p>在上面示例中，设置了可执行字符集为 utf-8，这种方式可以防止 Qt 在 MSVC 环境下出现中文乱码，详见之前的文章   编程基础&#x2F;拨开字符编码的迷雾 。</p>
 <p>设置 WIN32_EXECUTABLE 属性是为了让链接器使用 <code>/SUBSYSTEM:WINDOWS</code> 子系统，如下图所示：</p>
 <p><img data-src="/images/blog/XPxCxaXyn9-TinyTu.png"></p>
 <p>而设置 VS_DEBUGGER_ENVIRONMENT 属性是为了设置 Visual Studio 的调试环境（如下图所示），确保在调试时能找到 Qt 的相关 dll 文件。</p>
 <p><img data-src="/images/blog/BkDqAJGTBd-TinyTu.png"></p>
 <blockquote>
-<p>在之前的 <a href="/post/3678619994.html" title="Modern CMake 简明教程（上）">Modern CMake 简明教程（上）</a> 中已经介绍了目标属性的设置。</p>
+<p>在之前的   Modern-CMake简明教程-上  中已经介绍了目标属性的设置。</p>
 </blockquote>
 <h1 id="MSVC"><a href="#MSVC" class="headerlink" title="MSVC"></a>MSVC</h1><h2 id="设置-MSVC-运行库"><a href="#设置-MSVC-运行库" class="headerlink" title="设置 MSVC 运行库"></a>设置 MSVC 运行库</h2><p>MSVC 的运行库有 MD &#x2F; MDd 和 MT &#x2F; MTd 之分，下图是 Visual Studio 中设置运行库的界面。</p>
 <p><img data-src="/images/blog/J0bRwZPcTf-TinyTu.png"></p>
@@ -559,8 +559,8 @@
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/post/2306363290.html" rel="next" title="Windows系统各版本占比对技术选型的影响">
-                  Windows系统各版本占比对技术选型的影响 <i class="fa fa-angle-right"></i>
+                <a href="/post/3573459553.html" rel="next" title="代码的隐形战场：Windows进程注入与API Hook完全指南">
+                  代码的隐形战场：Windows进程注入与API Hook完全指南 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>

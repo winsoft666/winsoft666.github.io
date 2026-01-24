@@ -72,7 +72,7 @@
 
   
 
-  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
 <script src="/js/third-party/math/mathjax.js" defer></script>
 
 
@@ -179,18 +179,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">150</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -239,7 +239,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jiangxueqiao.com/post/201509401.html">
+    <link itemprop="mainEntityOfPage" href="https://jiangxueqiao.com/post/235943795.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -257,7 +257,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/post/201509401.html" class="post-title-link" itemprop="url">Modern CMake 简明教程（下）</a>
+          <a href="/post/235943795.html" class="post-title-link" itemprop="url">Node插件开发(2)-调用方式</a>
         </h2>
 
         <div class="post-meta-container">
@@ -268,14 +268,14 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2024-10-18 10:34:36" itemprop="dateCreated datePublished" datetime="2024-10-18T10:34:36+08:00">2024-10-18</time>
+      <time title="创建时间：2024-03-02 13:26:54" itemprop="dateCreated datePublished" datetime="2024-03-02T13:26:54+08:00">2024-03-02</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-12-28 20:26:50" itemprop="dateModified" datetime="2025-12-28T20:26:50+08:00">2025-12-28</time>
+      <time title="修改时间：2026-01-13 00:30:16" itemprop="dateModified" datetime="2026-01-13T00:30:16+08:00">2026-01-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -283,7 +283,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E2%91%A1%E8%B7%A8%E5%B9%B3%E5%8F%B0%E7%BC%96%E8%AF%91%E4%B8%8E%E9%83%A8%E7%BD%B2/" itemprop="url" rel="index"><span itemprop="name">②跨平台编译与部署</span></a>
+          <a href="/categories/%E2%91%A6%E7%8E%B0%E4%BB%A3Web%E4%B8%8EElectron%E6%A1%8C%E9%9D%A2%E5%BA%94%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">⑦现代Web与Electron桌面应用</span></a>
         </span>
     </span>
 
@@ -297,674 +297,16 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p><a target="_blank" rel="noopener" href="https://cmake.org/">CMake</a> 是一个开源、跨平台的构建系统生成器（Build-system Generator）。</p>
-<p>本文是 Modern CMake 简明教程系列的下篇，上篇请移步至 <a href="/post/3678619994.html" title="Modern CMake 简明教程（上）">《Modern CMake 简明教程（上）》</a>，中篇请移步至 <a href="/post/2304457467.html" title="Modern CMake 简明教程（中）">《Modern CMake 简明教程（中）》</a>。</p>
-<p>本教程默认 CMake 最低版本为 3.16，即 <code>cmake_minimum_required(VERSION 3.16)</code>。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/post/201509401.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jiangxueqiao.com/post/2304457467.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="jiangxueqiao.com">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="独钓寒江雪">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 独钓寒江雪">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/post/2304457467.html" class="post-title-link" itemprop="url">Modern CMake 简明教程（中）</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-10-11 17:34:36" itemprop="dateCreated datePublished" datetime="2024-10-11T17:34:36+08:00">2024-10-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-12-28 20:59:59" itemprop="dateModified" datetime="2025-12-28T20:59:59+08:00">2025-12-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E2%91%A1%E8%B7%A8%E5%B9%B3%E5%8F%B0%E7%BC%96%E8%AF%91%E4%B8%8E%E9%83%A8%E7%BD%B2/" itemprop="url" rel="index"><span itemprop="name">②跨平台编译与部署</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><a target="_blank" rel="noopener" href="https://cmake.org/">CMake</a> 是一个开源、跨平台的构建系统生成器（Build-system Generator）。</p>
-<p>本文是 Modern CMake 简明教程系列的中篇，上篇请移步 <a href="/post/3678619994.html" title="Modern CMake 简明教程（上）">《Modern CMake 简明教程（上）》</a></p>
-<p>本教程默认 CMake 最低版本为 3.16，即 <code>cmake_minimum_required(VERSION 3.16)</code>。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/post/2304457467.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jiangxueqiao.com/post/3678619994.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="jiangxueqiao.com">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="独钓寒江雪">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 独钓寒江雪">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/post/3678619994.html" class="post-title-link" itemprop="url">Modern CMake 简明教程（上）</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-10-08 17:30:36" itemprop="dateCreated datePublished" datetime="2024-10-08T17:30:36+08:00">2024-10-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-12-28 20:27:24" itemprop="dateModified" datetime="2025-12-28T20:27:24+08:00">2025-12-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E2%91%A1%E8%B7%A8%E5%B9%B3%E5%8F%B0%E7%BC%96%E8%AF%91%E4%B8%8E%E9%83%A8%E7%BD%B2/" itemprop="url" rel="index"><span itemprop="name">②跨平台编译与部署</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><a target="_blank" rel="noopener" href="https://cmake.org/">CMake</a> 是一个开源、跨平台的构建系统生成器（Build-system Generator）。</p>
-<p>CMake 是构建系统生成器，而不是构建系统，CMake 支持生成不同构建系统所支持的工程文件，如 Visual Studio，XCode，Makefile 等。</p>
-<p>本教程作为 CMake 的简明教程，不会事无巨细的讲述 CMake 的每一个语法，而是以实用为目的，介绍 CMake 的基础语法和常用指令。</p>
-<p>虽然只是简明教程，但通过本教程，你仍然可以掌握 CMake 的脉络，熟练应用 CMake 于项目中。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/post/3678619994.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jiangxueqiao.com/post/3832899600.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="jiangxueqiao.com">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="独钓寒江雪">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 独钓寒江雪">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/post/3832899600.html" class="post-title-link" itemprop="url">绘制Windows的界面：探索窗口、GDI与GDI+的图形世界</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-09-21 12:20:32" itemprop="dateCreated datePublished" datetime="2024-09-21T12:20:32+08:00">2024-09-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-12-28 20:57:39" itemprop="dateModified" datetime="2025-12-28T20:57:39+08:00">2025-12-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E2%91%A4Windows%E5%BC%80%E5%8F%91%E4%B8%8E%E8%B0%83%E8%AF%95%E7%A7%98%E7%B1%8D/" itemprop="url" rel="index"><span itemprop="name">⑤Windows开发与调试秘籍</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>当你点击桌面图标，一个窗口缓缓展开；滚动网页时，文字与图片在屏幕上丝滑游走；打开绘图软件，笔触落下的瞬间，色彩便在虚拟画布上晕染开来——这些习以为常的界面交互，构成了我们与数字世界对话的桥梁。但你是否想过：这些“理所当然”的视觉体验，究竟是如何从代码的海洋里“生长”出来的？窗口的轮廓如何被精准勾勒？色彩与线条怎样穿越硬件与系统的边界，最终跃入人眼？</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/post/3832899600.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jiangxueqiao.com/post/3353203242.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="jiangxueqiao.com">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="独钓寒江雪">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 独钓寒江雪">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/post/3353203242.html" class="post-title-link" itemprop="url">开源库jerryscript使用备忘</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-09-09 12:48:55" itemprop="dateCreated datePublished" datetime="2024-09-09T12:48:55+08:00">2024-09-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-12-09 11:01:42" itemprop="dateModified" datetime="2025-12-09T11:01:42+08:00">2025-12-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E2%91%A0%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">①编程基础</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><img data-src="/images/blog/jerryscript-LOGO.png"></p>
-<p>以前嵌入脚本首选Lua，但有些年头没有用Lua了，语法也快忘记光了，这些年倒是对 JavaScript 语法愈发熟悉了，于是想看看有没有小巧的 JavaScript 引擎，可以嵌入到 C++程序中使用。嘿，还真有。花时间研究了下 JerryScript 库，也顺手给 JerryScript 提交了几个 PR 被采纳了，有幸成为顶级项目的 Contributor（就是玩儿 ^_^）。</p>
-<p><img data-src="/images/blog/3udYdv0Ten.png"></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/jerryscript-project/jerryscript">JerryScript</a> 是一个轻量级的 JavaScript 引擎，资源占用极少，它可以运行在资源受限制的设备上，如：</p>
+          <p>本文主要介绍如何在 Node-API 中实现不同类型的接口，主要有下面几种类型：</p>
 <ul>
-<li>只有几 KB RAM 能运行引擎的设备（&lt;64 KB RAM）</li>
-<li>只能为代码引擎提供有限 ROM 空间的设备（&lt;200 KB ROM）</li>
-</ul>
-<p>JerryScript 使用 C 语言开发，跨平台。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/post/3353203242.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jiangxueqiao.com/post/4077884774.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="jiangxueqiao.com">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="独钓寒江雪">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 独钓寒江雪">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/post/4077884774.html" class="post-title-link" itemprop="url">禁用F12作为调试热键</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-08-26 13:08:03" itemprop="dateCreated datePublished" datetime="2024-08-26T13:08:03+08:00">2024-08-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-12-05 14:36:57" itemprop="dateModified" datetime="2025-12-05T14:36:57+08:00">2025-12-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E2%91%A4Windows%E5%BC%80%E5%8F%91%E4%B8%8E%E8%B0%83%E8%AF%95%E7%A7%98%E7%B1%8D/" itemprop="url" rel="index"><span itemprop="name">⑤Windows开发与调试秘籍</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>在Windows系统中，F12永远为调试器所预留，不能被用来注册为快捷键，如我们通常使用F12打开浏览器的调试工具。即便当前未调试应用程序，如果内核模式调试器或实时调试器有驻留，F12也会被预留。</p>
-<p>详见：<br><a target="_blank" rel="noopener" href="https://msdn.microsoft.com/en-us/library/windows/desktop/ms646309.aspx">https://msdn.microsoft.com/en-us/library/windows/desktop/ms646309.aspx</a></p>
-<p>可以通过修改注册表来指定其他的按键作为调试器预留快捷键：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\AeDebug] UserDebuggerHotKey=dword:00000000</span><br></pre></td></tr></table></figure>
-
-<p>比如<code>0x13</code> (Pause键)。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jiangxueqiao.com/post/2984623496.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="jiangxueqiao.com">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="独钓寒江雪">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 独钓寒江雪">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/post/2984623496.html" class="post-title-link" itemprop="url">C99柔性数组</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-07-21 16:00:03" itemprop="dateCreated datePublished" datetime="2024-07-21T16:00:03+08:00">2024-07-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-12-05 14:14:54" itemprop="dateModified" datetime="2025-12-05T14:14:54+08:00">2025-12-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E2%91%A0%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">①编程基础</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>在讲述柔性数组（Flexible Array）之前，首先要介绍一下不完整类型 (Incomplete Type)。不完全类型是暂时没有完全定义好的类型，缺乏足够的信息（例如长度、类型）去描述一个完整的类型。在C&#x2F;C++中不完全类型有三种不同形式：void、未指定长度的数组以及具有非指定内容的结构和类。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/post/2984623496.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jiangxueqiao.com/post/3462229631.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="jiangxueqiao.com">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="独钓寒江雪">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 独钓寒江雪">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/post/3462229631.html" class="post-title-link" itemprop="url">了解数字证书</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-07-17 15:35:10" itemprop="dateCreated datePublished" datetime="2024-07-17T15:35:10+08:00">2024-07-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-12-28 21:01:46" itemprop="dateModified" datetime="2025-12-28T21:01:46+08:00">2025-12-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E2%91%A4Windows%E5%BC%80%E5%8F%91%E4%B8%8E%E8%B0%83%E8%AF%95%E7%A7%98%E7%B1%8D/" itemprop="url" rel="index"><span itemprop="name">⑤Windows开发与调试秘籍</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>打开任何一个数字证书售卖网站都可以看到它们通常将数字证书分为两个大类：SSL证书和数字签名证书。</p>
-<p>SSL证书的主要作用是对网站进行身份验证和传输数据加密；</p>
-<p>数字签名主要用于验证信息的真实性和完整性，根据使用场景的不同大致分为如下几类：</p>
-<ul>
-<li>对客户端程序（.exe、.dll、.sys等文件）签名的代码签名证书。</li>
-<li>对PDF等文档签名的文档签名证书。</li>
-<li>对电子邮件及其附件签名和加密的邮件安全证书。</li>
+<li>同步调用</li>
+<li>基于 Napi::AsyncWorker 的异步调用，通过回调函数返回</li>
+<li>异步调用，返回 Promise</li>
+<li>基于 Napi::ThreadSafeFunction 的异步调用，通过回调函数返回</li>
 </ul>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/post/3462229631.html#more" rel="contents">
+              <a class="btn" href="/post/235943795.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -995,7 +337,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jiangxueqiao.com/post/29874871.html">
+    <link itemprop="mainEntityOfPage" href="https://jiangxueqiao.com/post/819381949.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1013,7 +355,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/post/29874871.html" class="post-title-link" itemprop="url">玩转Qt 2D绘图之仪表盘实例</a>
+          <a href="/post/819381949.html" class="post-title-link" itemprop="url">Node插件开发(1)-快速入门</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1024,14 +366,107 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2024-06-26 13:55:02" itemprop="dateCreated datePublished" datetime="2024-06-26T13:55:02+08:00">2024-06-26</time>
+      <time title="创建时间：2024-02-27 23:54:54" itemprop="dateCreated datePublished" datetime="2024-02-27T23:54:54+08:00">2024-02-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-01-13 00:29:53" itemprop="dateModified" datetime="2026-01-13T00:29:53+08:00">2026-01-13</time>
+      <time title="修改时间：2026-01-13 00:30:13" itemprop="dateModified" datetime="2026-01-13T00:30:13+08:00">2026-01-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E2%91%A6%E7%8E%B0%E4%BB%A3Web%E4%B8%8EElectron%E6%A1%8C%E9%9D%A2%E5%BA%94%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">⑦现代Web与Electron桌面应用</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>在使用 Electron 开发客户端时，如果现有 Node 模块所提供的功能无法满足需要，我们可以使用 C++ 开发自定义的 Node 模块，也称插件（addon）。</p>
+<p>Node.js 插件的扩展名为 <code>.node</code>，是二进制文件，其本质上是通过动态链接库（.dll 或 .so）重命名而来。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/post/819381949.html#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://jiangxueqiao.com/post/2402568381.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="jiangxueqiao.com">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="独钓寒江雪">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | 独钓寒江雪">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/post/2402568381.html" class="post-title-link" itemprop="url">基于Qt的无边框窗体实现</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2023-09-06 08:00:00" itemprop="dateCreated datePublished" datetime="2023-09-06T08:00:00+08:00">2023-09-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-12-05 14:33:28" itemprop="dateModified" datetime="2025-12-05T14:33:28+08:00">2025-12-05</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1053,109 +488,20 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>在前面的《玩转 Qt 2D 绘图》系列文章中，已经介绍了 2D 绘图中常用的知识，本文主要通过一个汽车仪表盘的实例来综合应用前面所介绍知识点，并且还介绍了一些 Qt 绘图的常用技巧。</p>
-<p>相关文章：</p>
-<ul>
-<li><a href="/post/847642761.html" title="玩转Qt 2D绘图之坐标系">玩转Qt 2D绘图之坐标系</a></li>
-<li><a href="/post/1336811290.html" title="玩转Qt 2D绘图之画家的工具">玩转Qt 2D绘图之画家的工具</a></li>
-<li><a href="/post/1967189103.html" title="玩转Qt 2D绘图之画家">玩转Qt 2D绘图之画家</a></li>
-</ul>
+          <p>Qt 虽然提供了诸如 Qt::FramelessWindowHint 之类的属性可以移除窗体的边框，但是移除边框之后，窗体的一些默认行为同时也被移除了，如鼠标拖动改变大小、双击标题栏最大化等，这些行为需要开发者自己来实现。</p>
+<p>本文主要介绍实现无边框窗体的几种方案，并在最后分享了作者实现的方案。</p>
+<p>笔者认为，一个完美的无边框窗体解决方案需要支持如下功能：</p>
+<ol>
+<li>支持通过使用鼠标拖拽来改变窗体位置和大小；</li>
+<li>支持双击标题栏最大化窗体和还原窗体；</li>
+<li>支持 Windows Areo Snap 特性；</li>
+<li>支持系统阴影；</li>
+<li>支持跨不同 DPI 的屏幕拖拽；</li>
+<li>适应分辨率和 DPI 改变；</li>
+</ol>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/post/29874871.html#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://jiangxueqiao.com/post/3924191794.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="jiangxueqiao.com">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="独钓寒江雪">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | 独钓寒江雪">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/post/3924191794.html" class="post-title-link" itemprop="url">互联网的黑话</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2024-06-20 09:25:38" itemprop="dateCreated datePublished" datetime="2024-06-20T09:25:38+08:00">2024-06-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-12-28 20:27:51" itemprop="dateModified" datetime="2025-12-28T20:27:51+08:00">2025-12-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E2%91%A8%E6%97%A5%E5%B8%B8%E6%8A%80%E8%83%BD%E4%B8%8E%E7%90%90%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">⑨日常技能与琐记</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>对于黑话我是拒绝的，但在这个圈子混，又不得不懂一些黑话，以防产生沟通障碍。关键时候说一两句黑话似乎还能显得有B格。</p>
-<p>下面是在网上收集的一些黑话，进行了稍许整理，仅供娱乐，请勿当真。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/post/3924191794.html#more" rel="contents">
+              <a class="btn" href="/post/2402568381.html#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1179,7 +525,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
   </nav>
 
 </div>
